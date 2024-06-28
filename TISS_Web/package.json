@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "ckeditor5": "^42.0.0",
+    "ckeditor5-premium-features": "^42.0.0"
+  }
+}

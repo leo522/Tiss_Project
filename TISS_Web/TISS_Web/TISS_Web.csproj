@@ -1,0 +1,554 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TISS_Web</RootNamespace>
+    <AssemblyName>TISS_Web</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44390</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TissController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permissions.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RolePermissions.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TissModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TissModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TissModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TissModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TissModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserRoles.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Users.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bootstrap\css\bootstrap-grid.css" />
+    <Content Include="bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="bootstrap\css\bootstrap.css" />
+    <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="bootstrap\js\bootstrap.esm.js" />
+    <Content Include="bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="bootstrap\js\bootstrap.js" />
+    <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-grid.rtl.css" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-utilities.css" />
+    <Content Include="Content\bootstrap-utilities.min.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Img\0427GOGOSportTech3.jpg" />
+    <Content Include="Img\2025_World_Masters_Games_logo.jpg" />
+    <Content Include="Img\3E1A5528_0.jpg" />
+    <Content Include="Img\about_banner_1.jpg" />
+    <Content Include="Img\links_logo.b6ae967e.svg" />
+    <Content Include="Img\logo.1fec0909.svg" />
+    <Content Include="Img\logo.svg" />
+    <Content Include="Img\Objectives_img.jpg" />
+    <Content Include="Img\recruit_img.d15a2d7a.jpg" />
+    <Content Include="Img\title_icon.64a1ea61.svg" />
+    <Content Include="Img\中心公告圖片\20240223003384.jpeg" />
+    <Content Include="Img\中心公告圖片\20240321003675.jpg" />
+    <Content Include="Img\中心公告圖片\422654673_122127099404122461_2280383131498637614_n.jpeg" />
+    <Content Include="Img\中心公告圖片\banner_announcement.1b73bdab.jpg" />
+    <Content Include="Img\中心公告圖片\bg_img.22d9a60c.jpg" />
+    <Content Include="Img\中心公告圖片\MOU簽署-合作學校.png" />
+    <Content Include="Img\中心公告圖片\news_banner.856d4a80.jpg" />
+    <Content Include="Img\中心公告圖片\recruit_img.d15a2d7a.jpg" />
+    <Content Include="Img\中心公告圖片\S__27959338.jpg" />
+    <Content Include="Img\公開資訊圖片\banner_public.jpg" />
+    <Content Include="Img\公開資訊圖片\banner_public_m.jpg" />
+    <Content Include="Img\影音專區\1-項老師.jpg" />
+    <Content Include="Img\影音專區\2-謝博士.jpg" />
+    <Content Include="Img\影音專區\3-黃經理.jpg" />
+    <Content Include="Img\影音專區\4-黃老師.jpg" />
+    <Content Include="Img\影音專區\5-連老師.jpg" />
+    <Content Include="Img\影音專區\6-朱老師.jpg" />
+    <Content Include="Img\影音專區\banner_video.c7a8c59f.jpg" />
+    <Content Include="Img\影音專區\banner_video.jpg" />
+    <Content Include="Img\影音專區\video_banner.1e11babb.jpg" />
+    <Content Include="Img\影音專區\video_banner.jpg" />
+    <Content Include="Img\影音專區\執行長.jpg" />
+    <Content Include="Img\影音專區\影片花絮.jpg" />
+    <Content Include="Img\影音專區\董事長人物專訪.jpg" />
+    <Content Include="Img\科普專欄圖片\banner_research.jpg" />
+    <Content Include="Img\科普專欄圖片\banner_research_m.jpg" />
+    <Content Include="Img\科普專欄圖片\保腹感指數%28FSI%29.jpg" />
+    <Content Include="Img\科普專欄圖片\從不動到行動.jpg" />
+    <Content Include="Img\科普專欄圖片\探索運動與電腦視覺.jpg" />
+    <Content Include="Img\科普專欄圖片\新世代來臨.jpg" />
+    <Content Include="Img\科普專欄圖片\智慧場館介紹.jpg" />
+    <Content Include="Img\科普專欄圖片\淺談運動大數據.jpg" />
+    <Content Include="Img\科普專欄圖片\睡覺也是一種訓練.jpg" />
+    <Content Include="Img\科普專欄圖片\運動科學短評.jpg" />
+    <Content Include="Models\TissModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TissModel.edmx</DependentUpon>
+      <LastGenOutput>TissModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TissModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TissModel.edmx</DependentUpon>
+      <LastGenOutput>TissModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="site\img\banner_announcement.1b73bdab.jpg" />
+    <Content Include="site\img\banner_public.db4e1f02.jpg" />
+    <Content Include="site\css\app.5338f982.css" />
+    <Content Include="site\css\chunk-vendors.25d98017.css" />
+    <Content Include="site\css\IndexStyle.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Img\about_img_1.jpg" />
+    <Content Include="Img\banner_announcement.jpg" />
+    <Content Include="Img\banner_home.jpg" />
+    <Content Include="Img\favicon.ico" />
+    <Content Include="Img\favicon.svg" />
+    <Content Include="Img\HomeLogo.svg" />
+    <Content Include="Img\logoTitle.svg" />
+    <Content Include="Img\news_banner.jpg" />
+    <Content Include="Img\title_icon.svg" />
+    <Content Include="Img\title_icon_white.svg" />
+    <Content Include="Kit\loader.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap.css.map" />
+    <Content Include="bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="bootstrap\js\bootstrap.js.map" />
+    <Content Include="bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="zh-TW\sdk.js" />
+    <Content Include="en_US\sdk.jshash=da7322dc85a354a2a48a528f6a49c748" />
+    <EntityDeploy Include="Models\TissModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TissModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TissModel.edmx.diagram">
+      <DependentUpon>TissModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="site\img\about_banner_1.cb027849.jpg" />
+    <Content Include="site\img\about_img_1.3170f29f.jpg" />
+    <Content Include="site\img\banner_home.e4676130.jpg" />
+    <Content Include="site\img\banner_public_m.8febbec3.jpg" />
+    <Content Include="site\img\banner_research.25875290.jpg" />
+    <Content Include="site\img\banner_research_m.3413fe57.jpg" />
+    <Content Include="site\img\banner_video.c7a8c59f.jpg" />
+    <Content Include="site\img\bg_img.22d9a60c.jpg" />
+    <Content Include="site\img\bg_white.9bd4594e.svg" />
+    <Content Include="site\img\dev_img.c85b6705.jpg" />
+    <Content Include="site\img\dev_img_m.50943982.jpg" />
+    <Content Include="site\img\ic_dev.80ecfb6c.svg" />
+    <Content Include="site\img\ic_medicine.3800055c.svg" />
+    <Content Include="site\img\ic_science.303725fc.svg" />
+    <Content Include="site\img\line_icon_black.2c46b360.svg" />
+    <Content Include="site\img\links_logo.b6ae967e.svg" />
+    <Content Include="site\img\logo.1fec0909.svg" />
+    <Content Include="site\img\medicine_img.82ed33c3.jpg" />
+    <Content Include="site\img\medicine_img_m.78b3f113.jpg" />
+    <Content Include="site\img\nav_shape.b0b43bc4.svg" />
+    <Content Include="site\img\news_banner.856d4a80.jpg" />
+    <Content Include="site\img\Objectives_img.fb276b91.jpg" />
+    <Content Include="site\img\recruit_img.d15a2d7a.jpg" />
+    <Content Include="site\img\science_img.b213cd61.jpg" />
+    <Content Include="site\img\science_img_m.bdbb5fd4.jpg" />
+    <Content Include="site\img\title_icon.64a1ea61.svg" />
+    <Content Include="site\img\title_icon_white.5e98ec4e.svg" />
+    <Content Include="site\img\video_banner.1e11babb.jpg" />
+    <Content Include="site\js\app.b46826e3.js" />
+    <Content Include="site\js\chunk-vendors.dce39aec.js" />
+    <Content Include="storage\media\0427GOGOSportTech3.jpg" />
+    <Content Include="storage\media\1211-2.jpg" />
+    <Content Include="storage\media\MOU簽署-合作學校.png" />
+    <Content Include="storage\media\storage\media\1.首頁圖-free%281%29.jpg" />
+    <Content Include="storage\media\storage\media\20240223003384.jpeg" />
+    <Content Include="storage\media\storage\media\20240321003675.jpg" />
+    <Content Include="storage\media\storage\media\2024運動科技論壇暨科技展示-影像分析應用於運動科技\422654673_122127099404122461_2280383131498637614_n.jpeg" />
+    <Content Include="storage\media\2025_World_Masters_Games_logo.jpg" />
+    <Content Include="storage\media\3E1A5528_0.jpg" />
+    <Content Include="storage\media\storage\media\MOU簽署-合作學校.png" />
+    <Content Include="storage\media\storage\media\S__27959338.jpg" />
+    <Content Include="storage\media\storage\media\呼吸肌訓練.jpg" />
+    <Content Include="storage\media\storage\media\國家運動科學中心支援巴黎奧運整備情形\射箭隊支援計劃1.jpeg" />
+    <Content Include="storage\media\storage\media\成大與國家運動科學中心攜手培育運動科\0110-2.jpeg" />
+    <Content Include="storage\media\storage\media\資訊導入.png" />
+    <Content Include="storage\media\storage\media\運動科學訓練-運動負荷監測系統\排球運動負荷監測2.jpeg" />
+    <Content Include="storage\media\storage\media\首頁圖-腸道圖-國家衛生研究院圖片%281%29%281%29.png" />
+    <Content Include="storage\media\storage\media\高科技導入運動科學\高科技導入運動科學.jpg" />
+    <Content Include="storage\media\影音專區\1-項老師.png" />
+    <Content Include="storage\media\影音專區\2-謝博士.png" />
+    <Content Include="storage\media\影音專區\3-黃經理.png" />
+    <Content Include="storage\media\影音專區\4-黃老師.png" />
+    <Content Include="storage\media\影音專區\5-連老師.png" />
+    <Content Include="storage\media\影音專區\6-朱老師.png" />
+    <Content Include="storage\media\影音專區\FB1.jpg" />
+    <Content Include="storage\media\影音專區\影片花絮.png" />
+    <Content Include="storage\media\影音專區\董事長人物專訪.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\原靜旻1-封面照.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\李淑玲2-首頁圖.png" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\李淑玲4-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\林泰祐2-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\林泰祐3-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\楊明蓁2-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\章芝儀2-首頁圖%281%29.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\蘇靖雅2-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\陶衍勳2-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\陸康豪3-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\黃鈴雯3-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科學研究處\黃香萍2-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\2楊清方-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\2邱永興-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\姜雅薰1-首頁圖.jpg" />
+    <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\楊清方3-首頁圖.png" />
+    <Content Include="Vue.js\vue.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Tiss\announcement.cshtml" />
+    <Content Include="Views\Home\OnInit.cshtml" />
+    <Content Include="Views\Tiss\video.cshtml" />
+    <Content Include="Views\Tiss\about.cshtml" />
+    <Content Include="Views\Tiss\research.cshtml" />
+    <Content Include="Views\Shared\_TissMaster.cshtml" />
+    <Content Include="Views\Tiss\Home.cshtml" />
+    <Content Include="Views\Tiss\public_info.cshtml" />
+    <Content Include="storage\media\attachments\1國家運動科學中心設置條例.pdf" />
+    <Content Include="storage\media\attachments\2國家運動科學中心組織章程.pdf" />
+    <Content Include="storage\media\attachments\4國家運動科學中心會計制度規章.pdf" />
+    <Content Include="storage\media\attachments\5國家運動科學中心內部控制作業規章-教育部核定%281121215臺教授體字第1120051831號函%29.pdf" />
+    <Content Include="storage\media\attachments\6國家運動科學中心稽核作業規章-教育部核定%281121215臺教授體字第1120051744%29.pdf" />
+    <Content Include="storage\media\attachments\7國家運動科學中心董事會議事規範.pdf" />
+    <Content Include="storage\media\attachments\8國家運動科學中心自主財源收支管理規章.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心人事管理規章_1130513.pdf" />
+    <Content Include="Views\Tiss\Objectives.cshtml" />
+    <Content Include="Views\Tiss\mission.cshtml" />
+    <Content Include="Views\Tiss\Organization.cshtml" />
+    <Content Include="Views\Tiss\BOD.cshtml" />
+    <Content Include="Views\Tiss\Units.cshtml" />
+    <Content Include="Views\Tiss\CEO.cshtml" />
+    <Content Include="Views\Tiss\press.cshtml" />
+    <Content Include="Views\Tiss\institute.cshtml" />
+    <Content Include="Views\Tiss\recruit.cshtml" />
+    <Content Include="Views\Tiss\sportScience.cshtml" />
+    <Content Include="Views\Tiss\sportTech.cshtml" />
+    <Content Include="Views\Tiss\sportMedicine.cshtml" />
+    <Content Include="Views\Tiss\researchProject.cshtml" />
+    <Content Include="Views\Tiss\GovernmentWebsite.cshtml" />
+    <Content Include="Views\Tiss\GenderEquality.cshtml" />
+    <Content Include="Views\Tiss\procedure.cshtml" />
+    <Content Include="Views\Tiss\regulation.cshtml" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫作業要點.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫研究人力約用注意事項.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫經費處理原則%282%29.pdf" />
+    <Content Include="Views\Tiss\plan.cshtml" />
+    <Content Include="storage\media\attachments\國家運動科學中心112年業務計畫.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心113年業務計畫.pdf" />
+    <Content Include="storage\media\attachments\行政法人國家運動科學中心發展目標及計畫%28112-116年%29%28113年1月16日臺教授體字第1130000298號函核定%29%281%29.pdf" />
+    <Content Include="storage\media\attachments\行政法人國家運動科學中心設置規劃報告.pdf" />
+    <Content Include="Views\Tiss\budget.cshtml" />
+    <Content Include="storage\media\attachments\國家運動科學中心112年度決算.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心112年度預算.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心113年度預算.pdf" />
+    <Content Include="Views\Tiss\download.cshtml" />
+    <Content Include="storage\media\attachments\附件二、國家運動科學中心委託研究計畫主持人資格說明.pdf" />
+    <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
+    <Content Include="Views\Tiss\purchase.cshtml" />
+    <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
+    <Content Include="Views\Tiss\other.cshtml" />
+    <Content Include="Views\Tiss\Login.cshtml" />
+    <Content Include="Views\Tiss\editPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="DownLoad\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\bootstrap.rtl.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\bootstrap-utilities.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.esm.min.js.map" />
+    <Content Include="Scripts\bootstrap.esm.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56229</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44390/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.4.5\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

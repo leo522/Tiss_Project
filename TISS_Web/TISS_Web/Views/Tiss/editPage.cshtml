@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_TissMaster.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+</head>
+<body>
+    <textarea id="Content" name="Content"></textarea>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
+
+  
+</body>
+</html>
+
+@*<form action="/Tiss/Logout" method="post">
+    <button type="submit" class="btn btn-primary btn-block">登出</button>
+</form>*@

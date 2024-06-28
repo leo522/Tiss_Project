@@ -1,0 +1,124 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\views\\tiss\\editpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\views\\tiss\\editpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\views\\tiss\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\views\\tiss\\home.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\views\\tiss\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\views\\tiss\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\controllers\\tisscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\controllers\\tisscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\tiss_web\\views\\shared\\_tissmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CD7FD68E-018E-4FBD-8EAB-DBA57ADFCA37}|TISS_Web\\TISS_Web.csproj|solutionrelative:tiss_web\\views\\shared\\_tissmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_TissMaster.cshtml",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Shared\\_TissMaster.cshtml",
+              "RelativeDocumentMoniker": "TISS_Web\\Views\\Shared\\_TissMaster.cshtml",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Shared\\_TissMaster.cshtml",
+              "RelativeToolTip": "TISS_Web\\Views\\Shared\\_TissMaster.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABgAAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-21T07:28:41.079Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TissController.cs",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Controllers\\TissController.cs",
+              "RelativeDocumentMoniker": "TISS_Web\\Controllers\\TissController.cs",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Controllers\\TissController.cs",
+              "RelativeToolTip": "TISS_Web\\Controllers\\TissController.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAArwDAAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-24T09:00:02.743Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Home.cshtml",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\Home.cshtml",
+              "RelativeDocumentMoniker": "TISS_Web\\Views\\Tiss\\Home.cshtml",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\Home.cshtml",
+              "RelativeToolTip": "TISS_Web\\Views\\Tiss\\Home.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-28T07:30:32.585Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "TISS_Web\\Models\\UserModel.cs",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Models\\UserModel.cs",
+              "RelativeToolTip": "TISS_Web\\Models\\UserModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T06:50:38.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "editPage.cshtml",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\editPage.cshtml",
+              "RelativeDocumentMoniker": "TISS_Web\\Views\\Tiss\\editPage.cshtml",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\editPage.cshtml",
+              "RelativeToolTip": "TISS_Web\\Views\\Tiss\\editPage.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-28T04:26:55.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\Login.cshtml",
+              "RelativeDocumentMoniker": "TISS_Web\\Views\\Tiss\\Login.cshtml",
+              "ToolTip": "D:\\\u904B\u79D1\u4E2D\u5FC3\u7DB2\u9801\u5C08\u6848\\TISS_Web\\TISS_Web\\Views\\Tiss\\Login.cshtml",
+              "RelativeToolTip": "TISS_Web\\Views\\Tiss\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-28T04:26:09.337Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
