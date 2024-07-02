@@ -1,5 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
+    //bool isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
 }
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
     </noscript>
     <div id="fb-root">
     </div>
-    <div id="app" data-v-app="">
+    <div id="app" data-v-app="" class="text-content">
         <div data-v-339da53a="" class="layout">
             <header data-v-ffd846e6="" data-v-339da53a="">
                 <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
@@ -22,9 +23,10 @@
                         <nav data-v-e61ebf00="" class="d-lg-flex d-none">
                             <ul data-v-e61ebf00="" class="ToolList">
                                 <li data-v-e61ebf00="">
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn">小</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn">中</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn">大</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small">小</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium">中</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large">大</button>
+
                                 </li>
                                 <li data-v-e61ebf00="">
                                     <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn" aria-label="btn">
@@ -37,8 +39,13 @@
                                         </span>
                                     </button>
                                 </li>
-                                <li>
-                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain  is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                <li id="loginBtn">
+                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                </li>
+                                <li id="logoutBtn" style="display: none;">
+                                    <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                    </form>
                                 </li>
                             </ul>
                         </nav>
@@ -72,6 +79,14 @@
                                                 </span>
                                             </button>
                                         </li>
+                                        @*<li id="loginBtn">
+                                            <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain  is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                        </li>
+                                        <li id="logoutBtn" style="display: none;">
+                                            <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                                <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                            </form>
+                                        </li>*@
                                     </ul>
                                     <div data-v-71bab962="" class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
                                     </div>
@@ -324,7 +339,7 @@
                                             <p class="SubIntro">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</p>
                                         </div>
                                         <div style="width: 225px;">
-                                            <a href="/about" class="">
+                                            <a href="/Tiss/about" class="">
                                                 <button aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
                                                     <span class="">
                                                         了解更多
@@ -358,7 +373,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="/announcement/gcnu9eixoou1z2xum5js" class="">
+                                    <a href="/Tiss/researchProject" class="">
                                         <div class="NewsItemBox headline">
                                             <div class="NewsItemImg">
                                                 <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
@@ -977,12 +992,12 @@
                             </div>
                             <ul class="SocialList d-none d-lg-flex">
                                 <li>
-                                    <div class="SocialLink">
+                                    <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
                                         <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
                                             </path>
                                         </svg>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -1067,6 +1082,9 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                    <a href="/Tiss/GenderEquality" class="MenuTitle">性別平等專區</a>
+                                </div>
                             </div>
                             <ul class="SocialList d-block d-lg-none">
                                 <li>
@@ -1090,5 +1108,65 @@
             </footer>
         </div>
     </div>
+
+    <script>
+
+            $(document).ready(function () {
+                var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+
+                if (isLoggedIn) {
+                    $('#logoutBtn').show(); // 顯示登出按鈕
+                } else {
+                    $('#loginBtn').show(); // 顯示登入按鈕
+                }
+            });
+        @*  $(document).ready(function () {
+// 取得前端網頁A的內容
+$.ajax({
+    url: '@Url.Action("about", "Tiss")',
+    type: 'GET',
+    success: function (data) {
+        // 解析前端網頁A的HTML內容
+        var $data = $(data);
+        var intro = $data.find('.Intro').text();
+        var subIntro = $data.find('.SubIntro').text();
+        var objectivesImgSrc = $data.find('.ObjectivesImg').attr('src');
+
+        // 將取得的內容預填到CKEditor的編輯器中
+        CKEDITOR.instances['editor1'].setData('<div>\n' +
+            '    <div class="Intro">' + intro + '</div>\n' +
+            '    <div class="SubIntro">' + subIntro + '</div>\n' +
+            '</div>\n' +
+            '<img class="ObjectivesImg" src="' + objectivesImgSrc + '" alt="">');
+    }
+});
+
+CKEDITOR.replace('editor1');
+});
+
+        document.getElementById('saveBtn').addEventListener('click', function() {
+    // 獲取編輯器中的內容
+    var editorContent = CKEDITOR.instances['editor1'].getData();
+
+    // 發送 AJAX 請求至後端保存數據
+    $.ajax({
+        url: '@Url.Action("SavePageData", "Tiss")',
+        type: 'POST',
+        data: { editorContent: editorContent },
+        success: function (data) {
+            console.log(data);
+            if (data.success) {
+                alert('資料已成功保存!');
+            } else {
+                alert('保存資料時發生錯誤: ' + data.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('發生錯誤, 請稍後再試.');
+        }
+    });
+});*@
+    </script>
+
 </body>
 </html>

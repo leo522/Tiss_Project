@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TISS_WebModelStoreContainer" CdmEntityContainer="TISS_WebEntities">
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="TISS_WebModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EID" ColumnName="EID" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
+          <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
+          <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+          <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permissions">
+      <EntityTypeMapping TypeName="TISS_WebModel.Permissions">
+        <MappingFragment StoreEntitySet="Permissions">
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+          <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolePermissions">
+      <EntityTypeMapping TypeName="TISS_WebModel.RolePermissions">
+        <MappingFragment StoreEntitySet="RolePermissions">
+          <ScalarProperty Name="RolePermissionID" ColumnName="RolePermissionID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="TISS_WebModel.Roles">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="TISS_WebModel.UserRoles">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="TISS_WebModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AboutPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.AboutPageContent">
+        <MappingFragment StoreEntitySet="AboutPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AnnouncementPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.AnnouncementPageContent">
+        <MappingFragment StoreEntitySet="AnnouncementPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BODPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.BODPageContent">
+        <MappingFragment StoreEntitySet="BODPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BudgetPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.BudgetPageContent">
+        <MappingFragment StoreEntitySet="BudgetPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CEOPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.CEOPageContent">
+        <MappingFragment StoreEntitySet="CEOPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DownloadPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.DownloadPageContent">
+        <MappingFragment StoreEntitySet="DownloadPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenderEqualityPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.GenderEqualityPageContent">
+        <MappingFragment StoreEntitySet="GenderEqualityPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GovernmentWebsitePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.GovernmentWebsitePageContent">
+        <MappingFragment StoreEntitySet="GovernmentWebsitePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HomePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.HomePageContent">
+        <MappingFragment StoreEntitySet="HomePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InstitutePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.InstitutePageContent">
+        <MappingFragment StoreEntitySet="InstitutePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MissionPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.MissionPageContent">
+        <MappingFragment StoreEntitySet="MissionPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObjectivesPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.ObjectivesPageContent">
+        <MappingFragment StoreEntitySet="ObjectivesPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.OrganizationPageContent">
+        <MappingFragment StoreEntitySet="OrganizationPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OtherPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.OtherPageContent">
+        <MappingFragment StoreEntitySet="OtherPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlanPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.PlanPageContent">
+        <MappingFragment StoreEntitySet="PlanPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PressPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.PressPageContent">
+        <MappingFragment StoreEntitySet="PressPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcedurePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.ProcedurePageContent">
+        <MappingFragment StoreEntitySet="ProcedurePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Public_InfoPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.Public_InfoPageContent">
+        <MappingFragment StoreEntitySet="Public_InfoPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchasePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.PurchasePageContent">
+        <MappingFragment StoreEntitySet="PurchasePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecruitPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.RecruitPageContent">
+        <MappingFragment StoreEntitySet="RecruitPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RegulationPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.RegulationPageContent">
+        <MappingFragment StoreEntitySet="RegulationPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResearchPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.ResearchPageContent">
+        <MappingFragment StoreEntitySet="ResearchPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResearchProjectPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.ResearchProjectPageContent">
+        <MappingFragment StoreEntitySet="ResearchProjectPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportMedicinePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportMedicinePageContent">
+        <MappingFragment StoreEntitySet="SportMedicinePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportSciencePageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportSciencePageContent">
+        <MappingFragment StoreEntitySet="SportSciencePageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportTechPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportTechPageContent">
+        <MappingFragment StoreEntitySet="SportTechPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.UnitsPageContent">
+        <MappingFragment StoreEntitySet="UnitsPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VideoPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.VideoPageContent">
+        <MappingFragment StoreEntitySet="VideoPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

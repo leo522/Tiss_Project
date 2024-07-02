@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_TissMaster.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <h2>新增檔案</h2>
+    <form action="/Tiss/UploadContent" method="post" enctype="multipart/form-data">
+        <div>
+            <label for="TextContent">文字內容:</label>
+            <input type="text" id="TextContent" name="TextContent" />
+        </div>
+        <div>
+            <label for="imageFile">圖片:</label>
+            <input type="file" id="imageFile" name="imageFile" />
+        </div>
+        <div>
+            <label for="UserAccount">使用者帳號:</label>
+            <input type="text" id="UserAccount" name="UserAccount" />
+        </div>
+        <div>
+            <button type="submit">上傳</button>
+        </div>
+    </form>
+</body>
+</html>

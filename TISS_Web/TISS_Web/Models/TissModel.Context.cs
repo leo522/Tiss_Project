@@ -31,5 +31,33 @@ namespace TISS_Web.Models
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<AboutPageContent> AboutPageContent { get; set; }
+        public virtual DbSet<AnnouncementPageContent> AnnouncementPageContent { get; set; }
+        public virtual DbSet<BODPageContent> BODPageContent { get; set; }
+        public virtual DbSet<BudgetPageContent> BudgetPageContent { get; set; }
+        public virtual DbSet<CEOPageContent> CEOPageContent { get; set; }
+        public virtual DbSet<DownloadPageContent> DownloadPageContent { get; set; }
+        public virtual DbSet<GenderEqualityPageContent> GenderEqualityPageContent { get; set; }
+        public virtual DbSet<GovernmentWebsitePageContent> GovernmentWebsitePageContent { get; set; }
+        public virtual DbSet<HomePageContent> HomePageContent { get; set; }
+        public virtual DbSet<InstitutePageContent> InstitutePageContent { get; set; }
+        public virtual DbSet<MissionPageContent> MissionPageContent { get; set; }
+        public virtual DbSet<ObjectivesPageContent> ObjectivesPageContent { get; set; }
+        public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
+        public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
+        public virtual DbSet<PlanPageContent> PlanPageContent { get; set; }
+        public virtual DbSet<PressPageContent> PressPageContent { get; set; }
+        public virtual DbSet<ProcedurePageContent> ProcedurePageContent { get; set; }
+        public virtual DbSet<Public_InfoPageContent> Public_InfoPageContent { get; set; }
+        public virtual DbSet<PurchasePageContent> PurchasePageContent { get; set; }
+        public virtual DbSet<RecruitPageContent> RecruitPageContent { get; set; }
+        public virtual DbSet<RegulationPageContent> RegulationPageContent { get; set; }
+        public virtual DbSet<ResearchPageContent> ResearchPageContent { get; set; }
+        public virtual DbSet<ResearchProjectPageContent> ResearchProjectPageContent { get; set; }
+        public virtual DbSet<SportMedicinePageContent> SportMedicinePageContent { get; set; }
+        public virtual DbSet<SportSciencePageContent> SportSciencePageContent { get; set; }
+        public virtual DbSet<SportTechPageContent> SportTechPageContent { get; set; }
+        public virtual DbSet<UnitsPageContent> UnitsPageContent { get; set; }
+        public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
     }
 }

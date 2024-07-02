@@ -21,11 +21,15 @@
     <meta name="twitter:image" content="http://tiss.org.tw/site/images/og_img_s.jpg" />
     <meta property="og:image:width" content="612" />
     <meta property="og:image:height" content="689" />
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link rel="icon" href="~/Img/favicon.svg" />
     <title>國家運動科學中心</title>
     <script src="~/en_US/sdk.js" async="" crossorigin="anonymous"></script>
     <script src="~/zh-TW/sdk.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    @*<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>*@
     <script async defer="defer" crossorigin="anonymous" src="/Kit/loader.min.js"></script>
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-2MG0059F20"></script>
     <script>
@@ -34,6 +38,17 @@
         gtag('js', new Date());
         gtag('config', 'G-2MG0059G20');
     </script>
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    @*<script defer="defer" src="~/site/js/chunk-vendors-legacy.a3444ae0.js" nomodule=""></script>
+        <script defer="defer" src="~/site/js/app-legacy.0b133c5e.js" nomodule=""></script>*@
+    @*<script defer="defer" src="~/site/js/666.js" nomodule=""></script>
+        <script defer="defer" src="~/site/js/777.js" nomodule=""></script>*@
+    @*<script defer="defer" src="/site/js/chunk-vendors.dce39aec.js" type="module"></script>
+        <script defer="defer" src="/site/js/app.b46826e3.js" type="module"></script>*@
+
+    @*<script src="~/site/js/app.js"></script>*@
+    <link href="/site/css/chunk-vendors.25d98017.css" rel="stylesheet">
+    <link href="/site/css/app.5338f982.css" rel="stylesheet">
 
     @*<script defer="defer" src="/site/js/chunk-vendors.dce39aec.js" type="module"></script>
         <script defer="defer" src="/site/js/app.b46826e3.js" type="module"></script>*@
@@ -48,25 +63,96 @@
 
     @********************這些JS要另外處理****************************@
 
-    <link href="/site/css/chunk-vendors.25d98017.css" rel="stylesheet" />
-    <link href="/site/css/app.5338f982.css" rel="stylesheet" />
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script src="/bootstrap/js/bootstrap.js"></script>
 
+    @*<link href="/bootstrap/css/bootstrap.css" rel="stylesheet" />*@
+    @*<script src="/bootstrap/js/bootstrap.js"></script>*@
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
+    @*<script src="~/Scripts/jquery-3.7.0.js"></script>*@
 </head>
 <body>
     <div>
         @RenderBody()
-
     </div>
     <script>
 
-        // 點擊按鈕時回到頂端
-        document.querySelector('.GoTop').addEventListener('click', function () {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+        //// 點擊按鈕時回到頂端
+        //document.querySelector('.GoTop').addEventListener('click', function () {
+        //    document.body.scrollTop = 0;
+        //    document.documentElement.scrollTop = 0;
+        //});
+
+        //網頁字體大小控制function
+        document.querySelectorAll('.FontSizeBtn').forEach(button => {
+            button.addEventListener('click', function () {
+                const size = this.getAttribute('data-size');
+                changeFontSize(size, this);
+            });
         });
+
+        function changeFontSize(size, element) {
+            const htmlElement = document.querySelector('html');
+            if (size === 'small') {
+                htmlElement.style.fontSize = '14px';
+            } else if (size === 'medium') {
+                htmlElement.style.fontSize = '16px';
+            } else if (size === 'large') {
+                htmlElement.style.fontSize = '18px';
+            }
+
+            // 移除所有按鈕的 active 樣式
+            const buttons = document.querySelectorAll('.FontSizeBtn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // 為當前按鈕添加 active 樣式
+            element.classList.add('active');
+        }
+             
+        $(document).ready(function () {
+// 取得前端網頁A的內容
+@*$.ajax({
+    url: '@Url.Action("about", "Tiss")',
+    type: 'GET',
+    success: function (data) {
+        // 解析前端網頁A的HTML內容
+        var $data = $(data);
+        var intro = $data.find('.Intro').text();
+        var subIntro = $data.find('.SubIntro').text();
+        var objectivesImgSrc = $data.find('.ObjectivesImg').attr('src');
+
+        // 將取得的內容預填到CKEditor的編輯器中
+        CKEDITOR.instances['editor1'].setData('<div>\n' +
+            '    <div class="Intro">' + intro + '</div>\n' +
+            '    <div class="SubIntro">' + subIntro + '</div>\n' +
+            '</div>\n' +
+            '<img class="ObjectivesImg" src="' + objectivesImgSrc + '" alt="">');
+    }
+});
+
+CKEDITOR.replace('editor1');
+});
+
+        document.getElementById('saveBtn').addEventListener('click', function() {
+    // 獲取編輯器中的內容
+    var editorContent = CKEDITOR.instances['editor1'].getData();
+
+    // 發送 AJAX 請求至後端保存數據
+    $.ajax({
+        url: '@Url.Action("SavePageData", "Tiss")',
+        type: 'POST',
+        data: { editorContent: editorContent },
+        success: function (data) {
+            console.log(data);
+            if (data.success) {
+                alert('資料已成功保存!');
+            } else {
+                alert('保存資料時發生錯誤: ' + data.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('發生錯誤, 請稍後再試.');
+        }
+    });
+        });*@
     </script>
 </body>
-
 </html>

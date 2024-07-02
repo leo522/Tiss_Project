@@ -129,21 +129,108 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CKEditorControl.ascx.cs">
+      <DependentUpon>CKEditorControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CKEditorControl.ascx.designer.cs">
+      <DependentUpon>CKEditorControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TissController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AboutPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnnouncementPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BODPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BudgetPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CEOPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ContentService.cs" />
+    <Compile Include="Models\DownloadPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenderEqualityPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GovernmentWebsitePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HomePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InstitutePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IWebContent.cs" />
+    <Compile Include="Models\MissionPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ObjectivesPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganizationPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OtherPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Permissions.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PressPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProcedurePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Public_InfoPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PurchasePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecruitPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegulationPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResearchPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResearchProjectPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolePermissions.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportMedicinePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportSciencePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportTechPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TissModel.Context.cs">
@@ -161,6 +248,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TissModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\UnitsPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserRoles.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
@@ -168,6 +258,10 @@
     <Compile Include="Models\Users.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VideoPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebContentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +287,7 @@
     <Content Include="bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="CKEditorControl.ascx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -243,6 +338,14 @@
     <Content Include="Img\影音專區\執行長.jpg" />
     <Content Include="Img\影音專區\影片花絮.jpg" />
     <Content Include="Img\影音專區\董事長人物專訪.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_01.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_02.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_03.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_03_1.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_04.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_05.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_06.jpg" />
+    <Content Include="Img\性別平等圖片\Equality_07.jpg" />
     <Content Include="Img\科普專欄圖片\banner_research.jpg" />
     <Content Include="Img\科普專欄圖片\banner_research_m.jpg" />
     <Content Include="Img\科普專欄圖片\保腹感指數%28FSI%29.jpg" />
@@ -310,6 +413,9 @@
     <Content Include="bootstrap\js\bootstrap.esm.min.js.map" />
     <Content Include="bootstrap\js\bootstrap.js.map" />
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="site\js\123.js" />
+    <Content Include="site\js\666.js" />
+    <Content Include="site\js\777.js" />
     <Content Include="zh-TW\sdk.js" />
     <Content Include="en_US\sdk.jshash=da7322dc85a354a2a48a528f6a49c748" />
     <EntityDeploy Include="Models\TissModel.edmx">
@@ -472,6 +578,7 @@
     <Content Include="Views\Tiss\other.cshtml" />
     <Content Include="Views\Tiss\Login.cshtml" />
     <Content Include="Views\Tiss\editPage.cshtml" />
+    <Content Include="Views\Tiss\webContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

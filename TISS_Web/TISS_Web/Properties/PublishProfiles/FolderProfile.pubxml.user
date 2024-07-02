@@ -1,0 +1,1171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\中心網頁</_PublishTargetUrl>
+    <History>True|2024-07-01T05:42:57.6989307Z||;True|2024-07-01T13:41:52.4684489+08:00||;True|2024-07-01T13:29:35.1155429+08:00||;True|2024-07-01T13:24:42.1148503+08:00||;True|2024-07-01T13:23:02.0834164+08:00||;True|2024-07-01T13:14:42.7147000+08:00||;True|2024-07-01T12:34:00.4972793+08:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/23/2017 13:15:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/11/2022 19:09:46</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/08/2023 07:09:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>08/08/2018 12:18:12</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>08/08/2018 12:18:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>08/08/2018 12:09:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>12/05/2017 09:36:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>12/05/2017 09:36:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>08/08/2018 12:09:42</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
+      <publishTime>11/05/2016 18:55:32</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>11/05/2016 18:55:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>05/16/2018 03:29:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>11/05/2016 18:55:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>11/05/2016 18:55:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>11/05/2016 18:55:56</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>11/05/2016 18:55:52</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Globalization.Calendars.dll">
+      <publishTime>11/05/2016 18:56:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.ZipFile.dll">
+      <publishTime>11/05/2016 18:56:04</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>11/05/2016 18:56:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Http.dll">
+      <publishTime>11/05/2016 18:56:30</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Net.Sockets.dll">
+      <publishTime>11/05/2016 18:56:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>05/16/2018 03:29:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Runtime.InteropServices.RuntimeInformation.dll">
+      <publishTime>11/05/2016 18:57:00</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>11/05/2016 18:57:14</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>11/05/2016 18:57:08</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>11/05/2016 18:57:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>11/05/2016 18:57:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>11/05/2016 18:57:20</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Tasks.Extensions.dll">
+      <publishTime>11/05/2016 18:57:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>11/05/2016 18:57:30</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>11/05/2016 18:57:36</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>11/05/2016 18:57:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>11/05/2016 18:57:40</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>11/05/2016 18:57:34</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>08/08/2018 12:18:18</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>08/08/2018 12:09:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>08/08/2018 05:38:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>08/08/2018 12:18:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>05/27/2022 23:41:54</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>05/27/2022 23:42:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>05/27/2022 23:42:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>05/27/2022 23:42:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>05/27/2022 23:42:16</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>05/27/2022 23:42:50</publishTime>
+    </File>
+    <File Include="bin/TISS_Web.dll">
+      <publishTime>07/01/2024 12:33:49</publishTime>
+    </File>
+    <File Include="bin/TISS_Web.pdb">
+      <publishTime>07/01/2024 12:33:49</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>01/23/2014 13:57:34</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/EntityFramework.resources.dll">
+      <publishTime>10/23/2017 21:15:32</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/EntityFramework.SqlServer.resources.dll">
+      <publishTime>10/23/2017 21:15:32</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Helpers.resources.dll">
+      <publishTime>05/28/2022 07:34:04</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Mvc.resources.dll">
+      <publishTime>05/28/2022 07:34:58</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Optimization.resources.dll">
+      <publishTime>02/11/2014 23:28:40</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.Razor.resources.dll">
+      <publishTime>05/28/2022 07:34:34</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>05/28/2022 07:34:14</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>05/28/2022 07:35:06</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Web.WebPages.resources.dll">
+      <publishTime>05/28/2022 07:34:14</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.rtl.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.rtl.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.rtl.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-grid.rtl.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.rtl.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.rtl.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.rtl.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.rtl.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.rtl.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.rtl.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.min.css">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.min.css.map">
+      <publishTime>06/18/2024 15:58:11</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.rtl.css">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.rtl.css.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.rtl.min.css">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/css/bootstrap.rtl.min.css.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.bundle.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.bundle.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.bundle.min.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.bundle.min.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.esm.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.esm.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.esm.min.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.esm.min.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.min.js">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="bootstrap/js/bootstrap.min.js.map">
+      <publishTime>06/18/2024 15:58:12</publishTime>
+    </File>
+    <File Include="CKEditorControl.ascx">
+      <publishTime>07/01/2024 09:28:31</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.rtl.min.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.min.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.rtl.min.css.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="en_US/sdk.jshash=da7322dc85a354a2a48a528f6a49c748">
+      <publishTime>06/27/2024 13:26:20</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Img/0427GOGOSportTech3.jpg">
+      <publishTime>06/21/2024 11:42:38</publishTime>
+    </File>
+    <File Include="Img/2025_World_Masters_Games_logo.jpg">
+      <publishTime>06/21/2024 11:40:42</publishTime>
+    </File>
+    <File Include="Img/3E1A5528_0.jpg">
+      <publishTime>06/21/2024 11:39:01</publishTime>
+    </File>
+    <File Include="Img/about_banner_1.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/about_img_1.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/banner_announcement.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/banner_home.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/favicon.ico">
+      <publishTime>02/27/2024 12:50:53</publishTime>
+    </File>
+    <File Include="Img/favicon.svg">
+      <publishTime>02/27/2024 12:50:53</publishTime>
+    </File>
+    <File Include="Img/HomeLogo.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/links_logo.b6ae967e.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/logo.1fec0909.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/logo.svg">
+      <publishTime>06/28/2024 13:49:53</publishTime>
+    </File>
+    <File Include="Img/logoTitle.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/news_banner.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/Objectives_img.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/recruit_img.d15a2d7a.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/title_icon.64a1ea61.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/title_icon.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/title_icon_white.svg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/20240223003384.jpeg">
+      <publishTime>06/24/2024 16:04:34</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/20240321003675.jpg">
+      <publishTime>06/24/2024 16:04:40</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/422654673_122127099404122461_2280383131498637614_n.jpeg">
+      <publishTime>06/24/2024 16:05:19</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/banner_announcement.1b73bdab.jpg">
+      <publishTime>06/24/2024 16:03:27</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/bg_img.22d9a60c.jpg">
+      <publishTime>06/24/2024 16:03:37</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/MOU簽署-合作學校.png">
+      <publishTime>06/24/2024 16:04:25</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/news_banner.856d4a80.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/recruit_img.d15a2d7a.jpg">
+      <publishTime>06/24/2024 16:04:08</publishTime>
+    </File>
+    <File Include="Img/中心公告圖片/S__27959338.jpg">
+      <publishTime>06/24/2024 16:04:46</publishTime>
+    </File>
+    <File Include="Img/公開資訊圖片/banner_public.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/公開資訊圖片/banner_public_m.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/影音專區/1-項老師.jpg">
+      <publishTime>06/24/2024 15:37:29</publishTime>
+    </File>
+    <File Include="Img/影音專區/2-謝博士.jpg">
+      <publishTime>06/24/2024 15:37:52</publishTime>
+    </File>
+    <File Include="Img/影音專區/3-黃經理.jpg">
+      <publishTime>06/24/2024 15:38:10</publishTime>
+    </File>
+    <File Include="Img/影音專區/4-黃老師.jpg">
+      <publishTime>06/24/2024 15:38:16</publishTime>
+    </File>
+    <File Include="Img/影音專區/5-連老師.jpg">
+      <publishTime>06/24/2024 15:38:24</publishTime>
+    </File>
+    <File Include="Img/影音專區/6-朱老師.jpg">
+      <publishTime>06/24/2024 15:38:31</publishTime>
+    </File>
+    <File Include="Img/影音專區/banner_video.c7a8c59f.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/影音專區/banner_video.jpg">
+      <publishTime>03/04/2024 10:37:07</publishTime>
+    </File>
+    <File Include="Img/影音專區/video_banner.1e11babb.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/影音專區/video_banner.jpg">
+      <publishTime>02/27/2024 12:50:54</publishTime>
+    </File>
+    <File Include="Img/影音專區/執行長.jpg">
+      <publishTime>06/24/2024 15:38:39</publishTime>
+    </File>
+    <File Include="Img/影音專區/影片花絮.jpg">
+      <publishTime>06/24/2024 15:38:48</publishTime>
+    </File>
+    <File Include="Img/影音專區/董事長人物專訪.jpg">
+      <publishTime>06/24/2024 15:38:57</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_01.jpg">
+      <publishTime>06/30/2024 14:55:35</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_02.jpg">
+      <publishTime>06/30/2024 14:56:04</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_03.jpg">
+      <publishTime>06/30/2024 14:56:18</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_03_1.jpg">
+      <publishTime>07/01/2024 08:26:45</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_04.jpg">
+      <publishTime>06/30/2024 14:56:40</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_05.jpg">
+      <publishTime>06/30/2024 14:56:54</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_06.jpg">
+      <publishTime>06/30/2024 14:57:39</publishTime>
+    </File>
+    <File Include="Img/性別平等圖片/Equality_07.jpg">
+      <publishTime>06/30/2024 15:02:34</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/banner_research.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/banner_research_m.jpg">
+      <publishTime>03/15/2024 15:33:54</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/保腹感指數%28FSI%29.jpg">
+      <publishTime>06/24/2024 08:27:08</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/從不動到行動.jpg">
+      <publishTime>06/24/2024 08:27:34</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/探索運動與電腦視覺.jpg">
+      <publishTime>06/24/2024 08:27:15</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/新世代來臨.jpg">
+      <publishTime>06/24/2024 08:27:22</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/智慧場館介紹.jpg">
+      <publishTime>06/24/2024 08:22:24</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/淺談運動大數據.jpg">
+      <publishTime>06/24/2024 08:23:27</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/睡覺也是一種訓練.jpg">
+      <publishTime>06/24/2024 08:26:59</publishTime>
+    </File>
+    <File Include="Img/科普專欄圖片/運動科學短評.jpg">
+      <publishTime>06/24/2024 08:27:29</publishTime>
+    </File>
+    <File Include="Kit/loader.min.js">
+      <publishTime>06/20/2024 08:23:17</publishTime>
+    </File>
+    <File Include="Models/TissModel.edmx.diagram">
+      <publishTime>06/29/2024 13:54:57</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.bundle.min.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.esm.min.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js.map">
+      <publishTime>06/18/2024 15:07:43</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.js">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.min.js">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.min.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.js">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.min.js">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.7.0.slim.min.map">
+      <publishTime>06/18/2024 15:07:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>06/18/2024 15:07:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>06/18/2024 15:07:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>06/18/2024 15:07:47</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>06/18/2024 15:07:47</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>06/18/2024 15:07:46</publishTime>
+    </File>
+    <File Include="site/css/app.5338f982.css">
+      <publishTime>06/25/2024 08:09:23</publishTime>
+    </File>
+    <File Include="site/css/chunk-vendors.25d98017.css">
+      <publishTime>06/25/2024 08:09:32</publishTime>
+    </File>
+    <File Include="site/css/IndexStyle.css">
+      <publishTime>07/01/2024 13:42:48</publishTime>
+    </File>
+    <File Include="site/img/about_banner_1.cb027849.jpg">
+      <publishTime>06/25/2024 09:21:46</publishTime>
+    </File>
+    <File Include="site/img/about_img_1.3170f29f.jpg">
+      <publishTime>06/25/2024 09:21:51</publishTime>
+    </File>
+    <File Include="site/img/banner_announcement.1b73bdab.jpg">
+      <publishTime>06/25/2024 12:56:54</publishTime>
+    </File>
+    <File Include="site/img/banner_home.e4676130.jpg">
+      <publishTime>06/25/2024 09:21:54</publishTime>
+    </File>
+    <File Include="site/img/banner_public.db4e1f02.jpg">
+      <publishTime>06/25/2024 11:47:00</publishTime>
+    </File>
+    <File Include="site/img/banner_public_m.8febbec3.jpg">
+      <publishTime>06/25/2024 11:48:33</publishTime>
+    </File>
+    <File Include="site/img/banner_research.25875290.jpg">
+      <publishTime>06/25/2024 09:21:56</publishTime>
+    </File>
+    <File Include="site/img/banner_research_m.3413fe57.jpg">
+      <publishTime>06/25/2024 09:21:59</publishTime>
+    </File>
+    <File Include="site/img/banner_video.c7a8c59f.jpg">
+      <publishTime>06/25/2024 11:24:37</publishTime>
+    </File>
+    <File Include="site/img/bg_img.22d9a60c.jpg">
+      <publishTime>06/25/2024 11:24:40</publishTime>
+    </File>
+    <File Include="site/img/bg_white.9bd4594e.svg">
+      <publishTime>06/25/2024 09:22:07</publishTime>
+    </File>
+    <File Include="site/img/dev_img.c85b6705.jpg">
+      <publishTime>06/26/2024 11:11:23</publishTime>
+    </File>
+    <File Include="site/img/dev_img_m.50943982.jpg">
+      <publishTime>06/26/2024 11:11:25</publishTime>
+    </File>
+    <File Include="site/img/ic_dev.80ecfb6c.svg">
+      <publishTime>06/26/2024 11:11:19</publishTime>
+    </File>
+    <File Include="site/img/ic_medicine.3800055c.svg">
+      <publishTime>06/26/2024 11:11:40</publishTime>
+    </File>
+    <File Include="site/img/ic_science.303725fc.svg">
+      <publishTime>06/26/2024 11:11:48</publishTime>
+    </File>
+    <File Include="site/img/line_icon_black.2c46b360.svg">
+      <publishTime>06/27/2024 13:01:16</publishTime>
+    </File>
+    <File Include="site/img/links_logo.b6ae967e.svg">
+      <publishTime>06/25/2024 09:22:10</publishTime>
+    </File>
+    <File Include="site/img/logo.1fec0909.svg">
+      <publishTime>06/25/2024 09:22:13</publishTime>
+    </File>
+    <File Include="site/img/medicine_img.82ed33c3.jpg">
+      <publishTime>06/26/2024 11:12:00</publishTime>
+    </File>
+    <File Include="site/img/medicine_img_m.78b3f113.jpg">
+      <publishTime>06/26/2024 11:12:03</publishTime>
+    </File>
+    <File Include="site/img/nav_shape.b0b43bc4.svg">
+      <publishTime>06/25/2024 09:22:17</publishTime>
+    </File>
+    <File Include="site/img/news_banner.856d4a80.jpg">
+      <publishTime>06/25/2024 12:56:52</publishTime>
+    </File>
+    <File Include="site/img/Objectives_img.fb276b91.jpg">
+      <publishTime>06/25/2024 09:21:22</publishTime>
+    </File>
+    <File Include="site/img/recruit_img.d15a2d7a.jpg">
+      <publishTime>06/25/2024 09:22:15</publishTime>
+    </File>
+    <File Include="site/img/science_img.b213cd61.jpg">
+      <publishTime>06/26/2024 11:12:14</publishTime>
+    </File>
+    <File Include="site/img/science_img_m.bdbb5fd4.jpg">
+      <publishTime>06/26/2024 11:12:20</publishTime>
+    </File>
+    <File Include="site/img/title_icon.64a1ea61.svg">
+      <publishTime>06/25/2024 09:22:21</publishTime>
+    </File>
+    <File Include="site/img/title_icon_white.5e98ec4e.svg">
+      <publishTime>06/25/2024 09:22:23</publishTime>
+    </File>
+    <File Include="site/img/video_banner.1e11babb.jpg">
+      <publishTime>06/25/2024 11:24:49</publishTime>
+    </File>
+    <File Include="site/js/app.b46826e3.js">
+      <publishTime>06/25/2024 14:31:45</publishTime>
+    </File>
+    <File Include="site/js/chunk-vendors.dce39aec.js">
+      <publishTime>06/25/2024 14:31:52</publishTime>
+    </File>
+    <File Include="storage/media/0427GOGOSportTech3.jpg">
+      <publishTime>06/25/2024 09:06:24</publishTime>
+    </File>
+    <File Include="storage/media/1211-2.jpg">
+      <publishTime>06/26/2024 16:25:13</publishTime>
+    </File>
+    <File Include="storage/media/2025_World_Masters_Games_logo.jpg">
+      <publishTime>06/25/2024 09:06:32</publishTime>
+    </File>
+    <File Include="storage/media/3E1A5528_0.jpg">
+      <publishTime>06/25/2024 09:06:12</publishTime>
+    </File>
+    <File Include="storage/media/attachments/114年國家運動科學中心委託研究計畫主題說明.pdf">
+      <publishTime>06/28/2024 09:53:53</publishTime>
+    </File>
+    <File Include="storage/media/attachments/1國家運動科學中心設置條例.pdf">
+      <publishTime>06/25/2024 11:50:56</publishTime>
+    </File>
+    <File Include="storage/media/attachments/2國家運動科學中心組織章程.pdf">
+      <publishTime>06/25/2024 11:51:23</publishTime>
+    </File>
+    <File Include="storage/media/attachments/4國家運動科學中心會計制度規章.pdf">
+      <publishTime>06/25/2024 11:51:44</publishTime>
+    </File>
+    <File Include="storage/media/attachments/5國家運動科學中心內部控制作業規章-教育部核定%281121215臺教授體字第1120051831號函%29.pdf">
+      <publishTime>06/25/2024 11:51:55</publishTime>
+    </File>
+    <File Include="storage/media/attachments/6國家運動科學中心稽核作業規章-教育部核定%281121215臺教授體字第1120051744%29.pdf">
+      <publishTime>06/25/2024 11:52:04</publishTime>
+    </File>
+    <File Include="storage/media/attachments/7國家運動科學中心董事會議事規範.pdf">
+      <publishTime>06/25/2024 11:52:18</publishTime>
+    </File>
+    <File Include="storage/media/attachments/8國家運動科學中心自主財源收支管理規章.pdf">
+      <publishTime>06/25/2024 11:52:27</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心112年度決算.pdf">
+      <publishTime>06/28/2024 09:40:06</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心112年度預算.pdf">
+      <publishTime>06/28/2024 09:40:10</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心112年業務計畫.pdf">
+      <publishTime>06/28/2024 09:24:53</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心113年度預算.pdf">
+      <publishTime>06/28/2024 09:39:49</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心113年業務計畫.pdf">
+      <publishTime>06/28/2024 09:24:50</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心人事管理規章_1130513.pdf">
+      <publishTime>06/25/2024 11:51:35</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心委託研究計畫作業要點.pdf">
+      <publishTime>06/28/2024 08:17:56</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心委託研究計畫申請書.doc">
+      <publishTime>06/28/2024 09:53:58</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心委託研究計畫研究人力約用注意事項.pdf">
+      <publishTime>06/28/2024 08:18:08</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心委託研究計畫經費處理原則%282%29.pdf">
+      <publishTime>06/28/2024 08:18:00</publishTime>
+    </File>
+    <File Include="storage/media/attachments/國家運動科學中心採購作業實施規章.pdf">
+      <publishTime>06/28/2024 10:03:34</publishTime>
+    </File>
+    <File Include="storage/media/attachments/行政法人國家運動科學中心發展目標及計畫%28112-116年%29%28113年1月16日臺教授體字第1130000298號函核定%29%281%29.pdf">
+      <publishTime>06/28/2024 09:24:47</publishTime>
+    </File>
+    <File Include="storage/media/attachments/行政法人國家運動科學中心設置規劃報告.pdf">
+      <publishTime>06/28/2024 09:24:55</publishTime>
+    </File>
+    <File Include="storage/media/attachments/附件二、國家運動科學中心委託研究計畫主持人資格說明.pdf">
+      <publishTime>06/28/2024 09:53:55</publishTime>
+    </File>
+    <File Include="storage/media/MOU簽署-合作學校.png">
+      <publishTime>06/25/2024 13:32:50</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/1.首頁圖-free%281%29.jpg">
+      <publishTime>06/27/2024 12:22:11</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/20240223003384.jpeg">
+      <publishTime>06/25/2024 12:47:42</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/20240321003675.jpg">
+      <publishTime>06/25/2024 12:47:45</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/2024運動科技論壇暨科技展示-影像分析應用於運動科技/422654673_122127099404122461_2280383131498637614_n.jpeg">
+      <publishTime>06/25/2024 12:47:58</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/MOU簽署-合作學校.png">
+      <publishTime>06/25/2024 12:47:36</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/S__27959338.jpg">
+      <publishTime>06/25/2024 12:47:47</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/呼吸肌訓練.jpg">
+      <publishTime>06/27/2024 12:22:19</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/國家運動科學中心支援巴黎奧運整備情形/射箭隊支援計劃1.jpeg">
+      <publishTime>06/26/2024 16:47:44</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/成大與國家運動科學中心攜手培育運動科/0110-2.jpeg">
+      <publishTime>06/26/2024 16:25:34</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/資訊導入.png">
+      <publishTime>06/27/2024 11:59:22</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/運動科學訓練-運動負荷監測系統/排球運動負荷監測2.jpeg">
+      <publishTime>06/26/2024 16:47:02</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/首頁圖-腸道圖-國家衛生研究院圖片%281%29%281%29.png">
+      <publishTime>06/27/2024 12:22:31</publishTime>
+    </File>
+    <File Include="storage/media/storage/media/高科技導入運動科學/高科技導入運動科學.jpg">
+      <publishTime>06/27/2024 11:59:11</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/1-項老師.png">
+      <publishTime>06/25/2024 11:13:07</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/2-謝博士.png">
+      <publishTime>06/25/2024 11:12:46</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/3-黃經理.png">
+      <publishTime>06/25/2024 11:12:49</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/4-黃老師.png">
+      <publishTime>06/25/2024 11:12:51</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/5-連老師.png">
+      <publishTime>06/25/2024 11:12:54</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/6-朱老師.png">
+      <publishTime>06/25/2024 11:12:56</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/FB1.jpg">
+      <publishTime>06/25/2024 11:12:58</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/影片花絮.png">
+      <publishTime>06/25/2024 11:13:01</publishTime>
+    </File>
+    <File Include="storage/media/影音專區/董事長人物專訪.jpg">
+      <publishTime>06/25/2024 11:13:03</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/原靜旻1-封面照.jpg">
+      <publishTime>06/25/2024 11:34:33</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/李淑玲2-首頁圖.png">
+      <publishTime>06/27/2024 12:22:50</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/李淑玲4-首頁圖.jpg">
+      <publishTime>06/25/2024 11:34:36</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/林泰祐2-首頁圖.jpg">
+      <publishTime>06/27/2024 11:43:10</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/林泰祐3-首頁圖.jpg">
+      <publishTime>06/25/2024 11:34:38</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/楊明蓁2-首頁圖.jpg">
+      <publishTime>06/27/2024 11:41:32</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/章芝儀2-首頁圖%281%29.jpg">
+      <publishTime>06/25/2024 11:34:40</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/蘇靖雅2-首頁圖.jpg">
+      <publishTime>06/25/2024 11:34:42</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/陶衍勳2-首頁圖.jpg">
+      <publishTime>06/27/2024 11:41:27</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/陸康豪3-首頁圖.jpg">
+      <publishTime>06/27/2024 11:41:21</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/黃鈴雯3-首頁圖.jpg">
+      <publishTime>06/25/2024 11:34:44</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科學研究處/黃香萍2-首頁圖.jpg">
+      <publishTime>06/27/2024 11:41:12</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科技與資訊開發/2楊清方-首頁圖.jpg">
+      <publishTime>06/27/2024 11:59:48</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科技與資訊開發/2邱永興-首頁圖.jpg">
+      <publishTime>06/27/2024 11:59:55</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科技與資訊開發/姜雅薰1-首頁圖.jpg">
+      <publishTime>06/25/2024 11:35:53</publishTime>
+    </File>
+    <File Include="storage/media/科普專欄照片/運動科技與資訊開發/楊清方3-首頁圖.png">
+      <publishTime>06/25/2024 11:35:48</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/Home/OnInit.cshtml">
+      <publishTime>06/24/2024 15:05:12</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/Shared/_TissMaster.cshtml">
+      <publishTime>07/01/2024 11:43:15</publishTime>
+    </File>
+    <File Include="Views/Tiss/about.cshtml">
+      <publishTime>07/01/2024 13:29:05</publishTime>
+    </File>
+    <File Include="Views/Tiss/announcement.cshtml">
+      <publishTime>07/01/2024 13:17:58</publishTime>
+    </File>
+    <File Include="Views/Tiss/BOD.cshtml">
+      <publishTime>07/01/2024 13:18:11</publishTime>
+    </File>
+    <File Include="Views/Tiss/budget.cshtml">
+      <publishTime>07/01/2024 13:18:23</publishTime>
+    </File>
+    <File Include="Views/Tiss/CEO.cshtml">
+      <publishTime>07/01/2024 13:18:35</publishTime>
+    </File>
+    <File Include="Views/Tiss/download.cshtml">
+      <publishTime>07/01/2024 13:08:45</publishTime>
+    </File>
+    <File Include="Views/Tiss/editPage.cshtml">
+      <publishTime>07/01/2024 11:04:53</publishTime>
+    </File>
+    <File Include="Views/Tiss/GenderEquality.cshtml">
+      <publishTime>07/01/2024 13:18:55</publishTime>
+    </File>
+    <File Include="Views/Tiss/GovernmentWebsite.cshtml">
+      <publishTime>07/01/2024 13:19:07</publishTime>
+    </File>
+    <File Include="Views/Tiss/Home.cshtml">
+      <publishTime>07/01/2024 13:24:36</publishTime>
+    </File>
+    <File Include="Views/Tiss/institute.cshtml">
+      <publishTime>07/01/2024 13:19:32</publishTime>
+    </File>
+    <File Include="Views/Tiss/Login.cshtml">
+      <publishTime>06/29/2024 11:10:42</publishTime>
+    </File>
+    <File Include="Views/Tiss/mission.cshtml">
+      <publishTime>07/01/2024 13:19:41</publishTime>
+    </File>
+    <File Include="Views/Tiss/Objectives.cshtml">
+      <publishTime>07/01/2024 13:19:52</publishTime>
+    </File>
+    <File Include="Views/Tiss/Organization.cshtml">
+      <publishTime>07/01/2024 13:20:10</publishTime>
+    </File>
+    <File Include="Views/Tiss/other.cshtml">
+      <publishTime>07/01/2024 13:20:21</publishTime>
+    </File>
+    <File Include="Views/Tiss/plan.cshtml">
+      <publishTime>07/01/2024 13:20:29</publishTime>
+    </File>
+    <File Include="Views/Tiss/press.cshtml">
+      <publishTime>07/01/2024 13:20:41</publishTime>
+    </File>
+    <File Include="Views/Tiss/procedure.cshtml">
+      <publishTime>07/01/2024 13:20:52</publishTime>
+    </File>
+    <File Include="Views/Tiss/public_info.cshtml">
+      <publishTime>07/01/2024 13:21:02</publishTime>
+    </File>
+    <File Include="Views/Tiss/purchase.cshtml">
+      <publishTime>07/01/2024 13:21:14</publishTime>
+    </File>
+    <File Include="Views/Tiss/recruit.cshtml">
+      <publishTime>07/01/2024 13:21:29</publishTime>
+    </File>
+    <File Include="Views/Tiss/regulation.cshtml">
+      <publishTime>07/01/2024 13:21:40</publishTime>
+    </File>
+    <File Include="Views/Tiss/research.cshtml">
+      <publishTime>07/01/2024 13:22:01</publishTime>
+    </File>
+    <File Include="Views/Tiss/researchProject.cshtml">
+      <publishTime>07/01/2024 13:23:01</publishTime>
+    </File>
+    <File Include="Views/Tiss/sportMedicine.cshtml">
+      <publishTime>07/01/2024 13:22:11</publishTime>
+    </File>
+    <File Include="Views/Tiss/sportScience.cshtml">
+      <publishTime>07/01/2024 13:12:23</publishTime>
+    </File>
+    <File Include="Views/Tiss/sportTech.cshtml">
+      <publishTime>07/01/2024 13:22:34</publishTime>
+    </File>
+    <File Include="Views/Tiss/Units.cshtml">
+      <publishTime>07/01/2024 13:22:44</publishTime>
+    </File>
+    <File Include="Views/Tiss/video.cshtml">
+      <publishTime>07/01/2024 13:22:53</publishTime>
+    </File>
+    <File Include="Views/Tiss/webContent.cshtml">
+      <publishTime>07/01/2024 13:13:03</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>06/18/2024 15:07:39</publishTime>
+    </File>
+    <File Include="Vue.js/vue.js">
+      <publishTime>06/18/2024 15:58:56</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/01/2024 12:33:50</publishTime>
+    </File>
+    <File Include="zh-TW/sdk.js">
+      <publishTime>06/27/2024 13:19:34</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

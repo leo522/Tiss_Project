@@ -37,6 +37,14 @@
                                         </span>
                                     </button>
                                 </li>
+                                <li id="loginBtn">
+                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                </li>
+                                <li id="logoutBtn" style="display: none;">
+                                    <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                    </form>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -266,7 +274,7 @@
                                 <div class="container">
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                         <span class="el-breadcrumb__item">
-                                            <a class="el-breadcrumb__inner is-link" role="link" href="https://tiss.org.tw/?lang=zh-Hant">首頁</a>
+                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -316,7 +324,7 @@
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner is-link" role="link" href="https://tiss.org.tw/?lang=zh-Hant">首頁</a>
+                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -340,103 +348,208 @@
                             <div class="CEO">
                                 <span id="CEO" class="anchor">
                                 </span>
-                                <div class="content">
-                                    <div class="Profile">
-                                        <div class="SubTitle">
-                                            <span>執行長</span>
-                                            <span class="primary">CEO</span>
-                                            <span class="Name">黃啟煌</span>
-                                        </div>
-                                        <div class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
-                                        </div>
-                                        <div class="EduExp">
-                                            <div class="Edu">
-                                                <table style="width: 100%; border-collapse: collapse;" border="0">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td style="width: 50%;">
-                                                                <h5 class="title" style="text-align: left;">
-                                                                    <strong>學歷</strong>
-                                                                </h5>
-                                                                <p>
-                                                                    美國印地安那大學
-                                                                    <br>體育系體育博士
-                                                                </p>
-                                                                <p>
-                                                                    美國印地安那大學
-                                                                    <br>體育系運動傷害防護碩士
-                                                                </p>
-                                                                <p>
-                                                                    美國春田學院
-                                                                    <br>體育系運動行政管理碩士
-                                                                </p>
-                                                                <p>
-                                                                    輔仁大學
-                                                                    <br>體育系文學士
-                                                                </p>
-                                                                <p> </p>
-                                                            </td>
-                                                            <td style="width: 50%;">
-                                                                <br>
-                                                                <h5 class="title">
-                                                                    <strong>經歷</strong>
-                                                                </h5>
-                                                                <p>
-                                                                    國立體育大學
-                                                                    <br>副校長
-                                                                </p>
-                                                                <p>
-                                                                    行政院體育委員會
-                                                                    <br>副主任委員
-                                                                </p>
-                                                                <p>
-                                                                    台灣運動傷害防護學會
-                                                                    <br>理事長
-                                                                </p>
-                                                                <p>
-                                                                    2009 高雄世界運動會
-                                                                    <br>運動總監
-                                                                </p>
-                                                                <p>
-                                                                    國家運動選手訓練中心
-                                                                    <br>主任
-                                                                </p>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="Contact">
-                                        <div class="el-row" style="margin-left: -30px; margin-right: -30px;">
-                                            <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
+                                @{ if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                    {
+                                        <div class="content" id="ceo" contenteditable="true">
+                                            <div class="Profile">
                                                 <div class="SubTitle">
-                                                    <span>聯絡窗口</span>
-                                                    <span class="primary">Contact</span>
+                                                    <span>執行長</span>
+                                                    <span class="primary">CEO</span>
+                                                    <span class="Name">黃啟煌</span>
+                                                </div>
+                                                <div class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
+                                                </div>
+                                                <div class="EduExp">
+                                                    <div class="Edu">
+                                                        <table style="width: 100%; border-collapse: collapse;" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 50%;">
+                                                                        <h5 class="title" style="text-align: left;">
+                                                                            <strong>學歷</strong>
+                                                                        </h5>
+                                                                        <p>
+                                                                            美國印地安那大學
+                                                                            <br>體育系體育博士
+                                                                        </p>
+                                                                        <p>
+                                                                            美國印地安那大學
+                                                                            <br>體育系運動傷害防護碩士
+                                                                        </p>
+                                                                        <p>
+                                                                            美國春田學院
+                                                                            <br>體育系運動行政管理碩士
+                                                                        </p>
+                                                                        <p>
+                                                                            輔仁大學
+                                                                            <br>體育系文學士
+                                                                        </p>
+                                                                        <p> </p>
+                                                                    </td>
+                                                                    <td style="width: 50%;">
+                                                                        <br>
+                                                                        <h5 class="title">
+                                                                            <strong>經歷</strong>
+                                                                        </h5>
+                                                                        <p>
+                                                                            國立體育大學
+                                                                            <br>副校長
+                                                                        </p>
+                                                                        <p>
+                                                                            行政院體育委員會
+                                                                            <br>副主任委員
+                                                                        </p>
+                                                                        <p>
+                                                                            台灣運動傷害防護學會
+                                                                            <br>理事長
+                                                                        </p>
+                                                                        <p>
+                                                                            2009 高雄世界運動會
+                                                                            <br>運動總監
+                                                                        </p>
+                                                                        <p>
+                                                                            國家運動選手訓練中心
+                                                                            <br>主任
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
-                                                <ul class="list">
-                                                    <li>
-                                                        <span class="label">秘書</span>
-                                                        <span class="primary">楊偉琪</span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="label">電話</span>
-                                                        <span class="primary">07-5861193</span>
-                                                    </li>
-                                                    <li>
-                                                        <span class="label">電子信箱</span>
-                                                        <a href="mailto:00017@tiss.org.tw">
-                                                            <span class="primary">00017@tiss.org.tw</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                            <div class="Contact">
+                                                <div class="el-row" style="margin-left: -30px; margin-right: -30px;">
+                                                    <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
+                                                        <div class="SubTitle">
+                                                            <span>聯絡窗口</span>
+                                                            <span class="primary">Contact</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
+                                                        <ul class="list">
+                                                            <li>
+                                                                <span class="label">秘書</span>
+                                                                <span class="primary">楊偉琪</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="label">電話</span>
+                                                                <span class="primary">07-5861193</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="label">電子信箱</span>
+                                                                <a href="mailto:00017@tiss.org.tw">
+                                                                    <span class="primary">00017@tiss.org.tw</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="content">
+                                            <div class="Profile">
+                                                <div class="SubTitle">
+                                                    <span>執行長</span>
+                                                    <span class="primary">CEO</span>
+                                                    <span class="Name">黃啟煌</span>
+                                                </div>
+                                                <div class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
+                                                </div>
+                                                <div class="EduExp">
+                                                    <div class="Edu">
+                                                        <table style="width: 100%; border-collapse: collapse;" border="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="width: 50%;">
+                                                                        <h5 class="title" style="text-align: left;">
+                                                                            <strong>學歷</strong>
+                                                                        </h5>
+                                                                        <p>
+                                                                            美國印地安那大學
+                                                                            <br>體育系體育博士
+                                                                        </p>
+                                                                        <p>
+                                                                            美國印地安那大學
+                                                                            <br>體育系運動傷害防護碩士
+                                                                        </p>
+                                                                        <p>
+                                                                            美國春田學院
+                                                                            <br>體育系運動行政管理碩士
+                                                                        </p>
+                                                                        <p>
+                                                                            輔仁大學
+                                                                            <br>體育系文學士
+                                                                        </p>
+                                                                        <p> </p>
+                                                                    </td>
+                                                                    <td style="width: 50%;">
+                                                                        <br>
+                                                                        <h5 class="title">
+                                                                            <strong>經歷</strong>
+                                                                        </h5>
+                                                                        <p>
+                                                                            國立體育大學
+                                                                            <br>副校長
+                                                                        </p>
+                                                                        <p>
+                                                                            行政院體育委員會
+                                                                            <br>副主任委員
+                                                                        </p>
+                                                                        <p>
+                                                                            台灣運動傷害防護學會
+                                                                            <br>理事長
+                                                                        </p>
+                                                                        <p>
+                                                                            2009 高雄世界運動會
+                                                                            <br>運動總監
+                                                                        </p>
+                                                                        <p>
+                                                                            國家運動選手訓練中心
+                                                                            <br>主任
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Contact">
+                                                <div class="el-row" style="margin-left: -30px; margin-right: -30px;">
+                                                    <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
+                                                        <div class="SubTitle">
+                                                            <span>聯絡窗口</span>
+                                                            <span class="primary">Contact</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="el-col el-col-24 el-col-xs-24 el-col-lg-12 is-guttered" style="padding-right: 30px; padding-left: 30px;">
+                                                        <ul class="list">
+                                                            <li>
+                                                                <span class="label">秘書</span>
+                                                                <span class="primary">楊偉琪</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="label">電話</span>
+                                                                <span class="primary">07-5861193</span>
+                                                            </li>
+                                                            <li>
+                                                                <span class="label">電子信箱</span>
+                                                                <a href="mailto:00017@tiss.org.tw">
+                                                                    <span class="primary">00017@tiss.org.tw</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
                             </div>
                         </main>
                     </section>
@@ -473,12 +586,12 @@
                             </div>
                             <ul class="SocialList d-none d-lg-flex">
                                 <li>
-                                    <div class="SocialLink">
+                                    <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
                                         <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
                                             </path>
                                         </svg>
-                                    </div>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -558,6 +671,9 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                    <a href="/Tiss/GenderEquality" class="MenuTitle">性別平等專區</a>
+                                </div>
                             </div>
                             <ul class="SocialList d-block d-lg-none">
                                 <li>
@@ -587,5 +703,19 @@
             </div>
         </div>
     </div>
+    <script>
+            //登出按鈕顯示功能
+    $(document).ready(function () {
+var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+        }
+        loadContent(); //加載已儲存的內容
+    });
+    //登出按鈕顯示功能
+    </script>
 </body>
 </html>

@@ -5,23 +5,67 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 </head>
 <body>
-    <textarea id="Content" name="Content"></textarea>
+    <form method="post" action="/Tiss/editPage">
+        <textarea name="editorContent" id="editor1">
+            @Html.Raw(Model)
+        </textarea>
+    </form>
+    <button id="saveBtn" class="btn btn-primary btn-block">保存修改</button>
+    <form action="/Tiss/Logout" method="post">
+        <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+    </form>
+
     <script>
-        ClassicEditor
-            .create(document.querySelector('#Content'))
-            .catch(error => {
-                console.error(error);
-            });
+        $(document).ready(function () {
+        // 取得前端網頁A的內容
+        $.ajax({
+            url: '@Url.Action("about", "Tiss")',
+            type: 'GET',
+            success: function (data) {
+                // 解析前端網頁A的HTML內容
+                var $data = $(data);
+                var intro = $data.find('.Intro').text();
+                var subIntro = $data.find('.SubIntro').text();
+                var objectivesImgSrc = $data.find('.ObjectivesImg').attr('src');
+
+                // 將取得的內容預填到CKEditor的編輯器中
+                CKEDITOR.instances['editor1'].setData('<div>\n' +
+                    '    <div class="Intro">' + intro + '</div>\n' +
+                    '    <div class="SubIntro">' + subIntro + '</div>\n' +
+                    '</div>\n' +
+                    '<img class="ObjectivesImg" src="' + objectivesImgSrc + '" alt="">');
+            }
+        });
+
+        //CKEDITOR.replace('editor1');
+        //});
+
+        document.getElementById('saveBtn').addEventListener('click', function() {
+    // 獲取編輯器中的內容
+    var editorContent = CKEDITOR.instances['editor1'].getData();
+
+    // 發送 AJAX 請求至後端保存數據
+    $.ajax({
+        url: '@Url.Action("SavePageData", "Tiss")',
+        type: 'POST',
+        data: { editorContent: editorContent },
+        success: function (data) {
+            console.log(data);
+            if (data.success) {
+                alert('資料已成功保存!');
+            } else {
+                alert('保存資料時發生錯誤: ' + data.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            alert('發生錯誤, 請稍後再試.');
+        }
+    });
+});
     </script>
-
-
-  
 </body>
 </html>
-
-@*<form action="/Tiss/Logout" method="post">
-    <button type="submit" class="btn btn-primary btn-block">登出</button>
-</form>*@
