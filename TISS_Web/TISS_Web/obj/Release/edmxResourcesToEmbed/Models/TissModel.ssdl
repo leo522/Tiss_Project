@@ -5,6 +5,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" Nullable="false" />
     <Property Name="TextContent" Type="nvarchar(max)" />
     <Property Name="ImageContent" Type="varbinary(max)" />
     <Property Name="FileUploadTime" Type="datetime" />
@@ -16,7 +17,6 @@
     <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
     <Property Name="VideoUpdateTime" Type="datetime" />
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
-    <Property Name="FileNo" Type="int" />
   </EntityType>
   <EntityType Name="AnnouncementPageContent">
     <Key>
@@ -74,6 +74,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
     <Property Name="TextContent" Type="nvarchar(max)" />
     <Property Name="ImageContent" Type="varbinary(max)" />
     <Property Name="FileUploadTime" Type="datetime" />
@@ -202,12 +203,14 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" />
   </EntityType>
   <EntityType Name="ObjectivesPageContent">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" Nullable="false" />
     <Property Name="TextContent" Type="nvarchar(max)" />
     <Property Name="ImageContent" Type="varbinary(max)" />
     <Property Name="FileUploadTime" Type="datetime" />
@@ -513,7 +516,7 @@
     </Key>
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="LastLoginDate" Type="datetime" />

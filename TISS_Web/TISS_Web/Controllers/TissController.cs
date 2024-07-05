@@ -10,15 +10,19 @@ using System.Web.Mvc;
 using System.Web.Security;
 using TISS_Web.Models;
 using System.Net.NetworkInformation;
+using System.Web.UI.WebControls;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TISS_Web.Controllers
 {
     public class TissController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
-        private readonly ContentService _contentService;
+        //private readonly TISS_WebEntities _db;
+        //private readonly ContentService _contentService;
 
-        #region 登入&編輯
+        #region 登入
         public ActionResult Login()
         {
             return View();
@@ -55,6 +59,9 @@ namespace TISS_Web.Controllers
                 return View();
             }
         }
+        #endregion
+
+        #region 登出
         public ActionResult Logout()
         {
             // 清除所有的 Session 資訊
@@ -71,17 +78,136 @@ namespace TISS_Web.Controllers
             return Redirect(returnUrl);
             // 重定向到 Home 頁面
         }
+        #endregion
+
+        #region 註冊帳號
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(string UserName, string pwd, string Email)
+        {
+            if (pwd.Length < 6)
+            {
+                ViewBag.ErrorMessage = "密碼長度至少要6位數";
+                return View();
+            }
+
+            if (_db.Users.Any(u => u.UserName == UserName))
+            {
+                ViewBag.ErrorMessage = "該帳號已存在";
+                return View();
+            }
+
+            var Pwd = ComputeSha256Hash(pwd);
+            var newUser = new Users
+            {
+                UserName = UserName,
+                Password = Pwd,
+                Email = Email,
+                CreatedDate = DateTime.Now,
+                LastLoginDate = DateTime.Now,
+                IsActive = true
+            };
+
+            _db.Users.Add(newUser);
+            _db.SaveChanges();
+
+            return RedirectToAction("Login");
+        }
+        #endregion
+
+        #region 密碼加密
+        private static string ComputeSha256Hash(string rawData)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+        #endregion
+
+
+        #region 修改密碼-待修改為生成重設連結並發送電子郵件
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            // 檢查用戶是否已登入，如果未登入則重定向到登入頁面
+            if (Session["LoggedIn"] == null || !(bool)Session["LoggedIn"])
+            {
+                return RedirectToAction("Login");
+            }
+
+            // 獲取當前登入用戶的資料
+            string userName = Session["UserName"] as string;
+            var user = _db.Users.FirstOrDefault(u => u.UserName == userName);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "無法找到當前用戶";
+                return View();
+            }
+
+            ViewData["UserName"] = userName;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string userName, string oldPwd, string newPwd)
+        {
+            try
+            {
+                // 驗證舊密碼是否正確
+                var user = _db.Users.FirstOrDefault(u => u.UserName == userName);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "無法找到當前用戶";
+                    return View();
+                }
+
+                if (user.Password != ComputeSha256Hash(oldPwd))
+                {
+                    ViewBag.ErrorMessage = "舊密碼輸入錯誤";
+                    ViewBag.UserName = userName;
+                    return View();
+                }
+
+                // 更新新密碼
+                user.Password = ComputeSha256Hash(newPwd);
+
+                try
+                {
+                    _db.SaveChanges();
+                    ViewBag.SuccessMessage = "密碼修改成功";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = "修改密碼時發生錯誤：" + ex.Message;
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
 
         public ActionResult editPage()
         {
             try
             {
-                var dto = _db.AboutPageContent.FirstOrDefault();
-
-                if (dto != null)
-                {
-                    return View((object)dto.TextContent);
-                }
                 return View();
             }
             catch (Exception ex)
@@ -92,26 +218,55 @@ namespace TISS_Web.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public JsonResult SavePageData(string editorContent)
+        public JsonResult SavePageData(string textContent, string imagePath)
         {
             try
             {
-                var aboutPageContent = _db.AboutPageContent.FirstOrDefault();
+                var userName = Session["UserName"] as string;
 
-                // 更新 AboutPageContent 的 TextContent
-                aboutPageContent.TextContent = editorContent;
-                aboutPageContent.TextUpdateTime = DateTime.Now;
-                // 保存更改到數據庫
+                byte[] imageData = null;
+
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    // 解析圖片數據
+                    byte[] binaryData = Convert.FromBase64String(imagePath);
+                    imageData = binaryData;
+                }
+
+                // 計算新的 FileNo
+                int newFileNo = 1;
+                var lastNo = _db.AnnouncementPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
+                if (lastNo != null)
+                {
+                    newFileNo = lastNo.FileNo.GetValueOrDefault() + 1;
+                }
+
+                // 創建新的 AnnouncementPageContent 物件並設置屬性值
+                var newContent = new AnnouncementPageContent
+                {
+                    //UserAccount = userName,
+                    UserAccount = "00048",
+                    TextContent = textContent,
+                    TextUpdateTime = DateTime.Now,
+                    ImageContent = imageData,
+                    ImageUpdateTime = DateTime.Now,
+                    FileNo = newFileNo
+                };
+
+                // 將新的 AnnouncementPageContent 物件添加到資料庫並保存變更
+                _db.AnnouncementPageContent.Add(newContent);
                 _db.SaveChanges();
 
-                return Json(new { success = true });
+                // 返回成功的 JSON 響應並包含圖片數據（可選）
+                string imageBase64 = imageData != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(imageData)}" : null;
+                return Json(new { success = true, image = imageBase64 });
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, error = ex.Message });
             }
         }
-        #endregion
+        
 
         #region 首頁
         /// <summary>
@@ -184,6 +339,19 @@ namespace TISS_Web.Controllers
         public ActionResult researchProject()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+            int newsItemId = 1;
+            var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == newsItemId);
+            if (item != null)
+            {
+                // 傳遞點擊數給前端
+                ViewBag.ClickCount = item.ClickCount;
+            }
+            else
+            {
+                // 如果找不到對應的新聞項目，點擊數為 0
+                ViewBag.ClickCount = 0;
+            }
+
             return View();
         }
 
@@ -213,16 +381,12 @@ namespace TISS_Web.Controllers
         public ActionResult about()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            //var dto = _db.AboutPageContent.FirstOrDefault();
-            //var ba64Img = Convert.ToBase64String(dto.ImageContent);
-            //ViewBag.ImgSrc = $"data:image/jpeg;base64,{ba64Img}";
-            //return View(dto);
             return View();
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult SaveContent(string textContent, string ImageSrc)
+        public ActionResult aboutSaveContent(string textContent, string ImageSrc)
         {
             try
             {
@@ -264,7 +428,7 @@ namespace TISS_Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetContent()
+        public ActionResult aboutGetContent()
         {
             try
             {
@@ -274,9 +438,9 @@ namespace TISS_Web.Controllers
 
                 if (content != null)
                 {
-                    string imagePath = content.ImageContent != null
-                ? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}"
-                : string.Empty;
+                    // 去除多餘的空格和斷行符號
+                    string textContent = System.Text.RegularExpressions.Regex.Replace(content.TextContent, @"\s+", " ").Trim();
+                    string imagePath = content.ImageContent != null? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}": string.Empty;
 
                     return Json(new
                     {
@@ -347,9 +511,100 @@ namespace TISS_Web.Controllers
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult CeoSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string; //從Session中獲取已登錄的帳號
 
+                byte[] imageBytes = null; // 將圖片數據轉換成byte[]
+                if (!string.IsNullOrEmpty(ImageSrc))
+                {
+                    string ba64 = ImageSrc.Split(',')[1];
+                    imageBytes = Convert.FromBase64String(ba64);
+                }
+                // 計算新的 FileNo
+                int newFileNo = 1;
+                var lastNo = _db.CEOPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
+                if (lastNo != null && lastNo.FileNo.HasValue)
+                {
+                    newFileNo = lastNo.FileNo.Value + 1;
+                }
+
+                var dtos = new CEOPageContent()
+                {
+                    UserAccount = userName,
+                    TextContent = textContent,
+                    TextUpdateTime = DateTime.Now,
+                    ImageContent = imageBytes,
+                    ImageUpdateTime = DateTime.Now,
+                    FileNo = newFileNo
+                };
+                _db.CEOPageContent.Add(dtos);
+                _db.SaveChanges();
+
+
+            //    var dto = _db.CEOPageContent.OrderByDescending(c => c.FileNo).FirstOrDefault();
+            //    if (dto == null)
+            //    {
+            //        dto = new CEOPageContent();
+            //        _db.CEOPageContent.Add(dto);
+            //    }
+            //    dto.UserAccount = userName;
+            //    dto.TextContent = textContent;
+            //    dto.TextUpdateTime = DateTime.Now;
+            //    dto.ImageContent = imageBytes;
+            //    dto.ImageUpdateTime = DateTime.Now;
+            //    _db.SaveChanges();
+                string imagePath = dtos.ImageContent != null
+            ? $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}"
+            : string.Empty;
+                //return Json(new { success = true, imagePath = imagePath });
+                //string imagePath = $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}";
+                return Json(new { success = true, imagePath = imagePath });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CeoGetContent()
+        {
+            try
+            {
+                var content = _db.CEOPageContent
+                        .OrderByDescending(c => c.FileNo)
+                        .FirstOrDefault();
+
+                if (content != null)
+                {
+                    string imagePath = content.ImageContent != null
+                ? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}"
+                : string.Empty;
+
+                    return Json(new
+                    {
+                        success = true,
+                        textContent = content.TextContent,
+                        imagePath = imagePath
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { success = false, error = "讀取錯誤" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
         /// <summary>
-        /// 執行長
+        /// 單位介紹
         /// </summary>
         /// <returns></returns>
         public ActionResult Units()
@@ -373,7 +628,7 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 運動科學研究
+        /// 運動科學
         /// </summary>
         /// <returns></returns>
         public ActionResult sportScience()
@@ -383,7 +638,7 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 運動科技與資訊開發
+        /// 運動科技
         /// </summary>
         /// <returns></returns>
         public ActionResult sportTech()
@@ -393,7 +648,7 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 運動醫學研究
+        /// 運動醫學
         /// </summary>
         /// <returns></returns>
         public ActionResult sportMedicine()
@@ -402,6 +657,41 @@ namespace TISS_Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 運動生理
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult sportsPhysiology()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 運動心理
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult sportsPsychology() 
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 體能訓練
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult physicalTraining() 
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 運動營養
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult sportsNutrition() 
+        {
+            return View();
+        }
         #endregion
 
         #region 公開資訊
@@ -540,11 +830,12 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 通用
-        public TissController()
-        {
-            var db = new TISS_WebEntities();
-            _contentService = new ContentService(db);
-        }
+        //public TissController()
+        //{
+        //    //var db = new TISS_WebEntities();
+        //    _db = new TISS_WebEntities();
+        //    _contentService = new ContentService(_db);
+        //}
 
         /// <summary>
         /// 中心介紹_存檔
@@ -552,12 +843,12 @@ namespace TISS_Web.Controllers
         /// <param name="textContent"></param>
         /// <param name="imageSrc"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult SaveAboutPageContent(string textContent, string imageSrc)
-        {
-            return _contentService.SaveContent<AboutPageContentModel>(textContent, imageSrc, () => new AboutPageContentModel());
-        }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult SaveAboutPageContent(string textContent, string imageSrc)
+        //{
+        //    return _contentService.SaveContent<AboutPageContentModel>(textContent, imageSrc, () => new AboutPageContentModel());
+        //}
 
         /// <summary>
         /// 使命願景_存檔
@@ -565,12 +856,12 @@ namespace TISS_Web.Controllers
         /// <param name="textContent"></param>
         /// <param name="imageSrc"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult SaveObjectivesPageContent(string textContent, string imageSrc)
-        {
-            return _contentService.SaveContent<ObjectivesPageContentModel>(textContent, imageSrc, () => new ObjectivesPageContentModel());
-        }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult SaveObjectivesPageContent(string textContent, string imageSrc)
+        //{
+        //    return _contentService.SaveContent<ObjectivesPageContentModel>(textContent, imageSrc, () => new ObjectivesPageContentModel());
+        //}
 
         /// <summary>
         /// 中心任務_存檔
@@ -578,41 +869,188 @@ namespace TISS_Web.Controllers
         /// <param name="textContent"></param>
         /// <param name="imageSrc"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult SaveMissionPageContent(string textContent, string imageSrc)
-        {
-            return _contentService.SaveContent<MissionPageContentModel>(textContent, imageSrc, () => new MissionPageContentModel());
-        }
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult SaveMissionPageContent(string textContent, string imageSrc)
+        //{
+        //    return _contentService.SaveContent<MissionPageContentModel>(textContent, imageSrc, () => new MissionPageContentModel());
+        //}
 
         /// <summary>
         /// 中心介紹
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetAboutPageContent()
-        {
-            return _contentService.GetContent<AboutPageContentModel>();
-        }
+        //[HttpGet]
+        //public ActionResult GetAboutPageContent()
+        //{
+        //    return _contentService.GetContent<AboutPageContentModel>();
+        //}
 
         /// <summary>
         /// 使命願景
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetObjectivesPageContent()
-        {
-            return _contentService.GetContent<ObjectivesPageContentModel>();
-        }
+        //[HttpGet]
+        //public ActionResult GetObjectivesPageContent()
+        //{
+        //    return _contentService.GetContent<ObjectivesPageContentModel>();
+        //}
 
         /// <summary>
         /// 中心任務
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetMissionPageContent()
+        //[HttpGet]
+        //public ActionResult GetMissionPageContent()
+        //{
+        //    return _contentService.GetContent<MissionPageContentModel>();
+        //}
+
+
+        /// <summary>
+        /// CEO
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        //public ActionResult GetCEOPageContent()
+        //{
+        //    return _contentService.GetContent<CEOPageContentModel>();
+        //}
+
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult SaveCEOPageContent(string textContent, string imageSrc)
+        //{
+        //    return _contentService.SaveContent<CEOPageContentModel>(textContent, imageSrc ,() => new CEOPageContentModel());
+        //}
+
+        #endregion
+
+        #region 點擊率測試
+        [HttpPost]
+        public ActionResult IncreaseClickCount(int id)
         {
-            return _contentService.GetContent<MissionPageContentModel>();
+            var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == id);
+            if (item != null)
+            {
+                // 增加點擊數
+                item.ClickCount++;
+
+                // 更新資料庫
+                item.UserLoginTime = DateTime.Now;
+                _db.SaveChanges();
+
+                // 回傳更新後的點擊數，供前端顯示
+                return Json(new { clickCount = item.ClickCount });
+            }
+            else
+            {
+                return Json(new { error = "Item not found" });
+            }
+        }
+        #endregion
+
+        #region 測試點擊數
+        /// <summary>
+        /// // 獲取文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ViewArticle(int id)
+        {
+            var dto = _db.Article.Find(id);
+
+            if (dto == null || !dto.IsActive || (dto.UnpublishDate.HasValue && dto.UnpublishDate.Value <= DateTime.Now))
+            {
+                return HttpNotFound();
+            }
+
+            IncrementClickCount(id);
+
+            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id)?.ClickCount ?? 0;
+            ViewBag.ClickCount = clickCount;
+
+            return View(dto);
+        }
+
+        /// <summary>
+        /// 更新點擊次
+        /// </summary>
+        /// <param name="id"></param>
+        private void IncrementClickCount(int id)
+        {
+            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id);
+
+            if (clickCount == null)
+            {
+                clickCount = new ArticleClickCount
+                {
+                    ArticleClickID = id,
+                    ClickCount = 1,
+                    LastResetDate = DateTime.Now
+                };
+                _db.ArticleClickCount.Add(clickCount);
+            }
+            else
+            {
+                clickCount.ClickCount++;
+            }
+            _db.SaveChanges();
+        }
+
+        /// <summary>
+        /// 重設點擊次數
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult ResetClickCount(int id)
+        {
+            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id);
+
+            if (clickCount != null)
+            {
+                clickCount.ClickCount = 0;
+                clickCount.LastResetDate = DateTime.Now;
+                _db.SaveChanges();
+            }
+            return RedirectToAction("ViewArticle", new { id });
+        }
+
+        /// <summary>
+        /// 新文章上架
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult PublishArticle(int id)
+        {
+            var article = _db.Article.Find(id);
+
+            if (article != null)
+            {
+                article.IsActive = true;
+                article.PublishDate = DateTime.Now;
+                article.UnpublishDate = null;
+                _db.SaveChanges();
+            }
+            return RedirectToAction("ViewArticle", new { id });
+        }
+
+        /// <summary>
+        /// 文章下架
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult UnpublishArticle(int id)
+        {
+            var article = _db.Article.Find(id);
+            if (article != null)
+            {
+                article.IsActive = false;
+                article.UnpublishDate = DateTime.Now;
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("ViewArticle", new { id });
         }
         #endregion
     }

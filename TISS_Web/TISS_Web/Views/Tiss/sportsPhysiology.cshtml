@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_TissMaster.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script>
+    $(documnet).reday(function () {
+        function toggleDropdown(dropdownId) {
+            var dropdownToggle = document.getElementById(dropdownId);
+            var dropdownMenu = dropdownToggle.nextElementSibling;
+
+            if (dropdownMenu.classList.contains('show')) {
+                dropdownMenu.classList.remove('show');
+            } else {
+                dropdownMenu.classList.add('show');
+            }
+        }
+    });
+    </script>
+</body>
+</html>

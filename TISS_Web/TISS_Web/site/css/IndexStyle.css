@@ -11,6 +11,8 @@
     --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
 }
 
+
+
 svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
     overflow: visible;
     box-sizing: content-box;
@@ -825,15 +827,15 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 }
 
     .FontSizeBtn.active {
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .FontSizeBtn.large {
-        font-size: 22px;
+        font-size: 24px;
     }
 
 .text-content {
-    font-size: 16px;  預設為中字體 
+    font-size: 20px;  預設為中字體 
 }
 網頁字體尺寸
 
@@ -873,6 +875,10 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
         .ChildrenList .container-lg .el-col {
             padding: 8px 16px;
         }
+.cke_notifications_area {
+    display: none;
+}
+
 /*:root, :host {
     --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
     --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Regular";

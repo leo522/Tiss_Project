@@ -142,6 +142,7 @@
     <EntitySetMapping Name="CEOPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.CEOPageContent">
         <MappingFragment StoreEntitySet="CEOPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -250,6 +251,7 @@
     <EntitySetMapping Name="MissionPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.MissionPageContent">
         <MappingFragment StoreEntitySet="MissionPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -268,6 +270,7 @@
     <EntitySetMapping Name="ObjectivesPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.ObjectivesPageContent">
         <MappingFragment StoreEntitySet="ObjectivesPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />

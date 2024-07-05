@@ -37,6 +37,14 @@
                                         </span>
                                     </button>
                                 </li>
+                                <li id="loginBtn">
+                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                </li>
+                                <li id="logoutBtn" style="display: none;">
+                                    <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                        <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                    </form>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -340,7 +348,7 @@
                             <div class="CEO">
                                 <span id="CEO" class="anchor">
                                 </span>
-                                <div class="content">
+                                <div class="content" id="ceo">
                                     <div class="Profile">
                                         <div class="SubTitle">
                                             <span>執行長</span>
@@ -437,6 +445,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                @{ if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                    {
+                                        <div class="btn-container">
+                                            <button class="btn btn-outline-success" onclick="saveContent()">儲存</button>
+                                        </div>
+                                    } }
                             </div>
                         </main>
                     </section>
@@ -590,5 +604,65 @@
             </div>
         </div>
     </div>
+    <script>
+
+    $(document).ready(function ()
+    {
+        var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+        if (isLoggedIn) {
+            $('#ceo').attr('contenteditable', 'true');
+            $('#logoutBtn').show(); //顯示登出按鈕
+        } else {
+            $('#ceo').attr('contenteditable', 'false');
+            $('#loginBtn').show(); //顯示登入按鈕
+        }
+    });
+        //圖片及文字存檔功能
+        function saveContent()
+        {
+            var textContent = document.getElementById('ceo').innerHTML; // 修改為 innerHTML
+
+            $.ajax({
+                url: 'CeoSaveContent',
+                method: 'POST',
+                data: {
+                    TextContent: textContent,
+                },
+                success: function (response) {
+                    alert('內容已儲存');
+                },
+                error: function (err) {
+                    console.error('儲存失敗', err);
+                }
+            });
+        }
+
+        //載入已儲存的內容
+        function loadContent()
+        {
+            $.ajax(
+                {
+                    url: 'CeoGetContent',
+                    method: 'GET',
+                    success: function (response)
+                    {
+                        if (response.success)
+                        {
+                            document.getElementById('ceo').innerHTML = response.textContent; // 修改為 innerHTML
+                        }
+                        else
+                        {
+                            console.error('載入失敗: ' + response.error);
+                        }
+                    },
+                    error: function (err)
+                    {
+                        console.error('載入失敗', err);
+                    }
+                });
+        }
+        loadContent(); // 修正位置：確保這行程式碼在頁面完全加載後執行
+
+    </script>
 </body>
 </html>

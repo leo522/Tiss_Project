@@ -147,6 +147,13 @@
     <Compile Include="Models\AnnouncementPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Article.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArticleClickCount.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArticleModel.cs" />
     <Compile Include="Models\BODPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -191,6 +198,9 @@
     <Compile Include="Models\Permissions.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PhysicalTrainingPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PlanPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -228,6 +238,15 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SportSciencePageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportsNutritionPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportsPhysiologyPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SportsPsychologyPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SportTechPageContent.cs">
@@ -579,10 +598,16 @@
     <Content Include="Views\Tiss\Login.cshtml" />
     <Content Include="Views\Tiss\editPage.cshtml" />
     <Content Include="Views\Tiss\webContent.cshtml" />
+    <Content Include="Views\Tiss\Register.cshtml" />
+    <Content Include="Views\Tiss\ChangePassword.cshtml" />
+    <Content Include="Views\Tiss\sportsPhysiology.cshtml" />
+    <Content Include="Views\Tiss\sportsPsychology.cshtml" />
+    <Content Include="Views\Tiss\physicalTraining.cshtml" />
+    <Content Include="Views\Tiss\sportsNutrition.cshtml" />
+    <Content Include="Views\Home\Navbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DownLoad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

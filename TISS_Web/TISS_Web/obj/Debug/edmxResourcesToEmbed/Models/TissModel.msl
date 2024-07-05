@@ -88,6 +88,7 @@
     <EntitySetMapping Name="AnnouncementPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.AnnouncementPageContent">
         <MappingFragment StoreEntitySet="AnnouncementPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -142,6 +143,7 @@
     <EntitySetMapping Name="CEOPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.CEOPageContent">
         <MappingFragment StoreEntitySet="CEOPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -468,6 +470,8 @@
     <EntitySetMapping Name="ResearchProjectPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.ResearchProjectPageContent">
         <MappingFragment StoreEntitySet="ResearchProjectPageContent">
+          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
           <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -570,6 +574,104 @@
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="TextContent" ColumnName="TextContent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhysicalTrainingPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.PhysicalTrainingPageContent">
+        <MappingFragment StoreEntitySet="PhysicalTrainingPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportsNutritionPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportsNutritionPageContent">
+        <MappingFragment StoreEntitySet="SportsNutritionPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportsPhysiologyPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportsPhysiologyPageContent">
+        <MappingFragment StoreEntitySet="SportsPhysiologyPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SportsPsychologyPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.SportsPsychologyPageContent">
+        <MappingFragment StoreEntitySet="SportsPsychologyPageContent">
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Article">
+      <EntityTypeMapping TypeName="TISS_WebModel.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="UnpublishDate" ColumnName="UnpublishDate" />
+          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleClickCount">
+      <EntityTypeMapping TypeName="TISS_WebModel.ArticleClickCount">
+        <MappingFragment StoreEntitySet="ArticleClickCount">
+          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+          <ScalarProperty Name="LastResetDate" ColumnName="LastResetDate" />
+          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+          <ScalarProperty Name="ArticleClickID" ColumnName="ArticleClickID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

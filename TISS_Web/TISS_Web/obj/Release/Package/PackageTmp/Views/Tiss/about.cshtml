@@ -1,6 +1,5 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
-    //bool isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
 }
 
 <!DOCTYPE html>
@@ -14,8 +13,6 @@
             visibility: hidden;
         }
     </style>
-    <script src="~/Scripts/jquery-3.7.0.js"></script>
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 </head>
 <body>
     <noscript>
@@ -50,7 +47,7 @@
                                     </button>
                                 </li>
                                 <li id="loginBtn">
-                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain  is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                    <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
                                 </li>
                                 <li id="logoutBtn" style="display: none;">
                                     <form id="logoutForm" action="/Tiss/Logout" method="post">
@@ -433,14 +430,38 @@
                                                 <span>使命、願景</span>
                                                 <span class="primary">Objectives</span>
                                             </div>
-                                            <div>
-                                                <div class="Intro">推動運動科學研究及應用，提升國際運動競爭力</div>
-                                                <div class="SubIntro">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</div>
-                                            </div>
+                                            @{
+                                                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                                {
+                                                    <div>
+                                                        <div class="Intro" id="intro" contenteditable="true">推動運動科學研究及應用，提升國際運動競爭力</div>
+                                                        <div class="SubIntro" id="subIntro" contenteditable="true">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div>
+                                                        <div class="Intro" id="intro">推動運動科學研究及應用，提升國際運動競爭力</div>
+                                                        <div class="SubIntro" id="subIntro">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</div>
+                                                    </div>
+                                                }
+                                            }
+
                                         </div>
-                                        <img class="ObjectivesImg" src="/site/img/Objectives_img.fb276b91.jpg" alt="">
+                                        <img class="ObjectivesImg" id="mainImage" alt="">
                                     </div>
                                 </div>
+                                @{
+                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                    {
+                                        <div class="btn-container">
+                                            <input type="file" id="uploadImageInput" style="display:none;" accept="image/*">
+                                            <button class="btn btn-outline-primary" onclick="changeImg()">新增圖片</button>
+                                            @*<button class="btn btn-danger" onclick="removeImg()">移除圖片</button>*@
+                                            <button class="btn btn-outline-success" onclick="saveContent()">儲存</button>
+                                        </div>
+                                    }
+                                }
                                 <div class="Mission">
                                     <span id="Mission" class="anchor">
                                     </span>
@@ -726,65 +747,95 @@
         </div>
     </div>
 
-    <form method="post" action="/Tiss/about">
-        <textarea name="editorContent" id="editor1">
-                    @Html.Raw(Model)
-                </textarea>
-        <button id="saveBtn" class="btn btn-outline-primary btn-block">保存修改</button>
-    </form>
-    <form action="/Tiss/Logout" method="post">
-        <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
-    </form>
-
+    @*ckeditor功能*@
+    @*@{
+            if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+            {
+                <form id="editForm" method="post" action="/Tiss/SaveContent">
+                    <textarea name="editorContent" id="editor1"></textarea>
+                    <button id="saveBtn" class="btn btn-outline-primary btn-block">保存修改</button>
+                </form>
+            }
+        }*@
+    @*ckeditor功能*@
 
     <script>
-
+        //登出按鈕顯示功能
         $(document).ready(function () {
-// 取得前端網頁A的內容
-$.ajax({
-    url: '@Url.Action("about", "Tiss")',
-    type: 'GET',
-    success: function (data) {
-        // 解析前端網頁A的HTML內容
-        var $data = $(data);
-        var intro = $data.find('.Intro').text();
-        var subIntro = $data.find('.SubIntro').text();
-        var objectivesImgSrc = $data.find('.ObjectivesImg').attr('src');
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-        // 將取得的內容預填到CKEditor的編輯器中
-        CKEDITOR.instances['editor1'].setData('<div>\n' +
-            '    <div class="Intro">' + intro + '</div>\n' +
-            '    <div class="SubIntro">' + subIntro + '</div>\n' +
-            '</div>\n' +
-            '<img class="ObjectivesImg" src="' + objectivesImgSrc + '" alt="">');
-    }
-});
-
-CKEDITOR.replace('editor1');
-});
-
-        document.getElementById('saveBtn').addEventListener('click', function() {
-    // 獲取編輯器中的內容
-    var editorContent = CKEDITOR.instances['editor1'].getData();
-
-    // 發送 AJAX 請求至後端保存數據
-    $.ajax({
-        url: '@Url.Action("SavePageData", "Tiss")',
-        type: 'POST',
-        data: { editorContent: editorContent },
-        success: function (data) {
-            console.log(data);
-            if (data.success) {
-                alert('資料已成功保存!');
-            } else {
-                alert('保存資料時發生錯誤: ' + data.error);
+    if (isLoggedIn) {
+        $('#logoutBtn').show(); //顯示登出按鈕
+    } else {
+        $('#loginBtn').show(); //顯示登入按鈕
             }
-        },
-        error: function (xhr, status, error) {
-            alert('發生錯誤, 請稍後再試.');
+            loadContent(); //加載已儲存的內容
+        });
+        //登出按鈕顯示功能
+
+        //載入已儲存的內容
+        function loadContent() {
+            $.ajax({
+                url: 'aboutGetContent',
+                method: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        document.getElementById('intro').innerText = response.textContent;
+                        document.getElementById('mainImage').src = response.imagePath;
+                    } else {
+                        console.error('載入失敗: ' + response.error);
+                    }
+                },
+                error: function (err) {
+                    console.error('載入失敗', err);
+                }
+            });
         }
-    });
-});
+        
+        //增刪圖片功能
+        function changeImg() {
+            document.getElementById('uploadImageInput').click();
+        }
+
+        document.getElementById('uploadImageInput').addEventListener('change', function () {
+            var file = this.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    document.getElementById('mainImage').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function removeImg() {
+            document.getElementById('mainImage').src = '';
+        }
+        //增刪圖片功能
+
+        //圖片及文字存檔功能
+        function saveContent() {
+            var textContent = document.getElementById('intro').innerText;
+            var imageSrc = document.getElementById('mainImage').src;
+
+            $.ajax({
+                url: 'aboutSaveContent',
+                method: 'POST',
+                data: {
+                    TextContent: textContent,
+                    ImageSrc: imageSrc
+                },
+                success: function (response) {
+                    document.getElementById('mainImage').src = response.imagePath;
+                    debugger;
+                    alert('內容已儲存');
+                },
+                error: function (err) {
+                    console.error('儲存失敗', err);
+                }
+            });
+        }
+        //圖片及文字存檔功能
     </script>
 </body>
 </html>

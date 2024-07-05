@@ -54,12 +54,12 @@
                 <div data-v-71bab962="" class="menuNav">
                     <div data-v-71bab962="" class="container-lg">
                         <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
-                            <button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" value="toggler">
+                            @*<button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" value="toggler">
                                 <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
                                     </path>
                                 </svg>
-                            </button>
+                            </button>*@
                             <div data-v-71bab962="" class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div data-v-71bab962="" class="d-block d-lg-none">
                                     <ul data-v-71bab962="" class="ToolList">
@@ -79,21 +79,21 @@
                                                 </span>
                                             </button>
                                         </li>
-                                        @*<li id="loginBtn">
+                                        <li id="loginBtn">
                                             <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain  is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
                                         </li>
                                         <li id="logoutBtn" style="display: none;">
                                             <form id="logoutForm" action="/Tiss/Logout" method="post">
                                                 <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
                                             </form>
-                                        </li>*@
+                                        </li>
                                     </ul>
                                     <div data-v-71bab962="" class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
                                     </div>
-                                    <div data-v-71bab962="" class="el-row" style="margin-left: -17.5px; margin-right: -17.5px;">
+                                    <div data-v-71bab962="" class="el-row collapse navbar-collapse" style="margin-left: -17.5px; margin-right: -17.5px;">
                                         <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
                                             <a data-v-71bab962="" href="/Tiss/announcement" class="MenuTitle">最新消息</a>
-                                            <ul data-v-71bab962="" class="MenuList">
+                                            <ul data-v-71bab962="" class="MenuList navbar-nav">
                                                 <li data-v-71bab962="">
                                                     <a data-v-71bab962="" href="/Tiss/announcement">中心公告</a>
                                                 </li>
@@ -373,7 +373,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="/announcement/gcnu9eixoou1z2xum5js" class="">
+                                    <a href="/Tiss/researchProject" class="">
                                         <div class="NewsItemBox headline">
                                             <div class="NewsItemImg">
                                                 <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
@@ -1112,7 +1112,6 @@
     <script>
 
             $(document).ready(function () {
-                // 假設 isLoggedIn 是一個表示是否已登入的變數，true 表示已登入，false 表示未登入
                 var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
                 if (isLoggedIn) {
@@ -1121,9 +1120,9 @@
                     $('#loginBtn').show(); // 顯示登入按鈕
                 }
             });
-   $(document).ready(function () {
+        @*  $(document).ready(function () {
 // 取得前端網頁A的內容
-@*$.ajax({
+$.ajax({
     url: '@Url.Action("about", "Tiss")',
     type: 'GET',
     success: function (data) {
@@ -1168,6 +1167,5 @@ CKEDITOR.replace('editor1');
     });
 });*@
     </script>
-
 </body>
 </html>

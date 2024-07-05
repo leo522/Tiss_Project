@@ -39,6 +39,31 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
+          <Property Name="FileNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PublishDate" Type="datetime" Nullable="false" />
+          <Property Name="UnpublishDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'TISS_Web.dbo.ArticleClickCount' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="ArticleClickCount">
+          <Key>
+            <PropertyRef Name="ClickCount" />
+            <PropertyRef Name="LastResetDate" />
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleClickID" Type="int" />
+          <Property Name="ClickCount" Type="int" Nullable="false" />
+          <Property Name="LastResetDate" Type="datetime" Nullable="false" />
+          <Property Name="ArticleID" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -79,6 +104,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
           <Property Name="TextContent" Type="nvarchar(max)" />
           <Property Name="ImageContent" Type="varbinary(max)" />
           <Property Name="FileUploadTime" Type="datetime" />
@@ -269,6 +295,24 @@
           <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="PhysicalTrainingPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
+          <Property Name="TextContent" Type="nvarchar(max)" />
+          <Property Name="ImageContent" Type="varbinary(max)" />
+          <Property Name="FileUploadTime" Type="datetime" />
+          <Property Name="TextUpdateTime" Type="datetime" />
+          <Property Name="ImageUpdateTime" Type="datetime" />
+          <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="VideoUpdateTime" Type="datetime" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="PlanPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -410,6 +454,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
           <Property Name="TextContent" Type="nvarchar(max)" />
           <Property Name="ImageContent" Type="varbinary(max)" />
           <Property Name="FileUploadTime" Type="datetime" />
@@ -421,6 +466,7 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
+          <Property Name="ClickCount" Type="int" />
         </EntityType>
         <EntityType Name="RolePermissions">
           <Key>
@@ -460,6 +506,60 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TextContent" Type="nvarchar(max)" />
+          <Property Name="ImageContent" Type="varbinary(max)" />
+          <Property Name="FileUploadTime" Type="datetime" />
+          <Property Name="TextUpdateTime" Type="datetime" />
+          <Property Name="ImageUpdateTime" Type="datetime" />
+          <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="VideoUpdateTime" Type="datetime" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SportsNutritionPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
+          <Property Name="TextContent" Type="nvarchar(max)" />
+          <Property Name="ImageContent" Type="varbinary(max)" />
+          <Property Name="FileUploadTime" Type="datetime" />
+          <Property Name="TextUpdateTime" Type="datetime" />
+          <Property Name="ImageUpdateTime" Type="datetime" />
+          <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="VideoUpdateTime" Type="datetime" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SportsPhysiologyPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
+          <Property Name="TextContent" Type="nvarchar(max)" />
+          <Property Name="ImageContent" Type="varbinary(max)" />
+          <Property Name="FileUploadTime" Type="datetime" />
+          <Property Name="TextUpdateTime" Type="datetime" />
+          <Property Name="ImageUpdateTime" Type="datetime" />
+          <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="VideoUpdateTime" Type="datetime" />
+          <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+          <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SportsPsychologyPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileNo" Type="int" />
           <Property Name="TextContent" Type="nvarchar(max)" />
           <Property Name="ImageContent" Type="varbinary(max)" />
           <Property Name="FileUploadTime" Type="datetime" />
@@ -520,7 +620,7 @@
           </Key>
           <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="LastLoginDate" Type="datetime" />
@@ -543,6 +643,18 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <Association Name="FK__ArticleCl__Artic__662B2B3B">
+          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+          <End Role="ArticleClickCount" Type="Self.ArticleClickCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="ArticleID" />
+            </Principal>
+            <Dependent Role="ArticleClickCount">
+              <PropertyRef Name="ArticleClickID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
           <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -594,6 +706,7 @@
         <EntityContainer Name="TISS_WebModelStoreContainer">
           <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BODPageContent" EntityType="Self.BODPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
@@ -608,6 +721,7 @@
           <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanPageContent" EntityType="Self.PlanPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PressPageContent" EntityType="Self.PressPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcedurePageContent" EntityType="Self.ProcedurePageContent" Schema="dbo" store:Type="Tables" />
@@ -621,11 +735,26 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SportMedicinePageContent" EntityType="Self.SportMedicinePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SportSciencePageContent" EntityType="Self.SportSciencePageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SportsNutritionPageContent" EntityType="Self.SportsNutritionPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SportsPhysiologyPageContent" EntityType="Self.SportsPhysiologyPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SportsPsychologyPageContent" EntityType="Self.SportsPsychologyPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SportTechPageContent" EntityType="Self.SportTechPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitsPageContent" EntityType="Self.UnitsPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleClickCount" EntityType="Self.ArticleClickCount" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArticleClickCount].[ArticleClickID] AS [ArticleClickID], 
+    [ArticleClickCount].[ClickCount] AS [ClickCount], 
+    [ArticleClickCount].[LastResetDate] AS [LastResetDate], 
+    [ArticleClickCount].[ArticleID] AS [ArticleID]
+    FROM [dbo].[ArticleClickCount] AS [ArticleClickCount]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="Self.FK__ArticleCl__Artic__662B2B3B">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
+          </AssociationSet>
           <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="RolePermissions" EntitySet="RolePermissions" />
@@ -707,7 +836,7 @@
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
@@ -813,7 +942,17 @@
           <EntitySet Name="SportTechPageContent" EntityType="TISS_WebModel.SportTechPageContent" />
           <EntitySet Name="UnitsPageContent" EntityType="TISS_WebModel.UnitsPageContent" />
           <EntitySet Name="VideoPageContent" EntityType="TISS_WebModel.VideoPageContent" />
-        </EntityContainer>
+          <EntitySet Name="PhysicalTrainingPageContent" EntityType="TISS_WebModel.PhysicalTrainingPageContent" />
+          <EntitySet Name="SportsNutritionPageContent" EntityType="TISS_WebModel.SportsNutritionPageContent" />
+          <EntitySet Name="SportsPhysiologyPageContent" EntityType="TISS_WebModel.SportsPhysiologyPageContent" />
+          <EntitySet Name="SportsPsychologyPageContent" EntityType="TISS_WebModel.SportsPsychologyPageContent" />
+          <EntitySet Name="Article" EntityType="TISS_WebModel.Article" />
+          <EntitySet Name="ArticleClickCount" EntityType="TISS_WebModel.ArticleClickCount" />
+          <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -848,6 +987,7 @@
           <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="FileNo" Type="Int32" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -899,6 +1039,7 @@
           <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="FileNo" Type="Int32" />
         </EntityType>
         <EntityType Name="DownloadPageContent">
           <Key>
@@ -1207,6 +1348,8 @@
           <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="FileNo" Type="Int32" />
+          <Property Name="ClickCount" Type="Int32" />
         </EntityType>
         <EntityType Name="SportMedicinePageContent">
           <Key>
@@ -1293,7 +1436,115 @@
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
         </EntityType>
-      </Schema>
+        <EntityType Name="PhysicalTrainingPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNo" Type="Int32" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SportsNutritionPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNo" Type="Int32" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SportsPhysiologyPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNo" Type="Int32" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SportsPsychologyPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileNo" Type="Int32" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UnpublishDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArticleClickCount" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="Article" ToRole="ArticleClickCount" />
+        </EntityType>
+        <EntityType Name="ArticleClickCount">
+          <Key>
+            <PropertyRef Name="ClickCount" />
+            <PropertyRef Name="LastResetDate" />
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleClickID" Type="Int32" />
+          <Property Name="ClickCount" Type="Int32" Nullable="false" />
+          <Property Name="LastResetDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Article" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="ArticleClickCount" ToRole="Article" />
+          <Property Name="ArticleID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__ArticleCl__Artic__662B2B3B">
+          <End Type="TISS_WebModel.Article" Role="Article" Multiplicity="0..1" />
+          <End Type="TISS_WebModel.ArticleClickCount" Role="ArticleClickCount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="ArticleID" />
+            </Principal>
+            <Dependent Role="ArticleClickCount">
+              <PropertyRef Name="ArticleClickID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1386,6 +1637,7 @@
           <EntitySetMapping Name="AnnouncementPageContent">
             <EntityTypeMapping TypeName="TISS_WebModel.AnnouncementPageContent">
               <MappingFragment StoreEntitySet="AnnouncementPageContent">
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
                 <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
                 <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
                 <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -1440,6 +1692,7 @@
           <EntitySetMapping Name="CEOPageContent">
             <EntityTypeMapping TypeName="TISS_WebModel.CEOPageContent">
               <MappingFragment StoreEntitySet="CEOPageContent">
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
                 <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
                 <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
                 <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -1766,6 +2019,8 @@
           <EntitySetMapping Name="ResearchProjectPageContent">
             <EntityTypeMapping TypeName="TISS_WebModel.ResearchProjectPageContent">
               <MappingFragment StoreEntitySet="ResearchProjectPageContent">
+                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
                 <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
                 <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
                 <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
@@ -1868,6 +2123,104 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhysicalTrainingPageContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.PhysicalTrainingPageContent">
+              <MappingFragment StoreEntitySet="PhysicalTrainingPageContent">
+                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SportsNutritionPageContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.SportsNutritionPageContent">
+              <MappingFragment StoreEntitySet="SportsNutritionPageContent">
+                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SportsPhysiologyPageContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.SportsPhysiologyPageContent">
+              <MappingFragment StoreEntitySet="SportsPhysiologyPageContent">
+                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SportsPsychologyPageContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.SportsPsychologyPageContent">
+              <MappingFragment StoreEntitySet="SportsPsychologyPageContent">
+                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Article">
+            <EntityTypeMapping TypeName="TISS_WebModel.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UnpublishDate" ColumnName="UnpublishDate" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleClickCount">
+            <EntityTypeMapping TypeName="TISS_WebModel.ArticleClickCount">
+              <MappingFragment StoreEntitySet="ArticleClickCount">
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+                <ScalarProperty Name="LastResetDate" ColumnName="LastResetDate" />
+                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+                <ScalarProperty Name="ArticleClickID" ColumnName="ArticleClickID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

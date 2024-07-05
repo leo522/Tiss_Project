@@ -59,5 +59,11 @@ namespace TISS_Web.Models
         public virtual DbSet<SportTechPageContent> SportTechPageContent { get; set; }
         public virtual DbSet<UnitsPageContent> UnitsPageContent { get; set; }
         public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
+        public virtual DbSet<PhysicalTrainingPageContent> PhysicalTrainingPageContent { get; set; }
+        public virtual DbSet<SportsNutritionPageContent> SportsNutritionPageContent { get; set; }
+        public virtual DbSet<SportsPhysiologyPageContent> SportsPhysiologyPageContent { get; set; }
+        public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
+        public virtual DbSet<Article> Article { get; set; }
+        public virtual DbSet<ArticleClickCount> ArticleClickCount { get; set; }
     }
 }

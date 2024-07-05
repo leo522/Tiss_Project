@@ -43,18 +43,78 @@
                 <label for="Password">密碼</label>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="請輸入密碼" required>
             </div>
-            <div class="form-group form-check">
+            @*<div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="RememberMe" name="RememberMe">
                 <label class="form-check-label" for="RememberMe">記住帳號</label>
-            </div>
+            </div>*@
             <button type="submit" class="btn btn-primary btn-block">登入</button>
         </form>
+        <div class="text-center mt-3">
+            <a href="/Tiss/Register">註冊帳號</a>
+        </div>
         @if (ViewBag.ErrorMessage != null)
         {
             <div class="alert alert-danger" role="alert">
                 @ViewBag.ErrorMessage
             </div>
         }
+        @*<hr>
+        <div class="text-center">
+            <a href="/Tiss/ChangePassword" class="btn btn-link">修改密碼</a>
+        </div>*@
     </div>
+
+    @*<script>
+        var loginForm = document.getElementById('loginForm');
+        var rememberMeCheckbox = document.getElementById('RememberMe');
+
+        // 加載頁面時，檢查 Cookie 中是否有存儲的帳號名稱
+        window.onload = function () {
+            var rememberedUsername = getCookie('rememberedUsername');
+            if (rememberedUsername) {
+                document.getElementById('Username').value = rememberedUsername;
+                rememberMeCheckbox.checked = true;
+            }
+        };
+
+        // 提交表單前處理，根據是否勾選記住帳號來設置 Cookie
+        loginForm.onsubmit = function () {
+            if (rememberMeCheckbox.checked) {
+                var username = document.getElementById('Username').value;
+                setCookie('rememberedUsername', username, 30); // Cookie 保存 30 天
+            } else {
+                deleteCookie('rememberedUsername');
+            }
+            return true;
+        };
+
+        // 函數：設置 Cookie
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // 函數：獲取 Cookie
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // 函數：刪除 Cookie
+        function deleteCookie(name) {
+            document.cookie = name + '=; Max-Age=-99999999;';
+        }
+    </script>*@
 </body>
 </html>

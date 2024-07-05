@@ -1,329 +1,301 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
-<body>
-    <noscript>
-        <strong>We're sorry but 國家運動科學中心 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="fb-root" class=" fb_reset">
-        <div style="position: absolute; top: -10000px; width: 0px; height: 0px;">
-            <div>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    </style>
+</head>
+    <body>
+        <noscript>
+            <strong>We're sorry but 國家運動科學中心 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div id="fb-root" class=" fb_reset">
+            <div style="position: absolute; top: -10000px; width: 0px; height: 0px;">
+                <div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="app" data-v-app="">
-        <div data-v-339da53a="" class="layout">
-            <header data-v-ffd846e6="" data-v-339da53a="">
-                <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
-                    <div data-v-e61ebf00="" class="container">
-                        <a data-v-e61ebf00="" href="/" class="mainLogo">
-                            <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo">
-                        </a>
-                        <nav data-v-e61ebf00="" class="d-lg-flex d-none">
-                            <ul data-v-e61ebf00="" class="ToolList">
-                                <li data-v-e61ebf00="">
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">小</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active">中</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">大</button>
-                                </li>
-                                <li data-v-e61ebf00="">
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
-                                        <span class="">
-                                            <svg data-v-e61ebf00="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
-                                                </path>
-                                            </svg>
-                                            <span data-v-e61ebf00="">En</span>
-                                        </span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div data-v-71bab962="" class="menuNav">
-                    <div data-v-71bab962="" class="container-lg">
-                        <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
-                            <button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" value="toggler">
-                                <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
-                                    <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
-                                    </path>
-                                </svg>
-                            </button>
-                            <div data-v-71bab962="" class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <div data-v-71bab962="" class="d-block d-lg-none">
-                                    <ul data-v-71bab962="" class="ToolList">
-                                        <li data-v-71bab962="">
-                                            <span data-v-71bab962="">
-                                                <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">小</button>
-                                                <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active">中</button>
-                                                <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">大</button>
+        <div id="app" data-v-app="">
+            <div data-v-339da53a="" class="layout">
+                <header data-v-ffd846e6="" data-v-339da53a="">
+                    <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
+                        <div data-v-e61ebf00="" class="container">
+                            <a data-v-e61ebf00="" href="/" class="mainLogo">
+                                <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo">
+                            </a>
+                            <nav data-v-e61ebf00="" class="d-lg-flex d-none">
+                                <ul data-v-e61ebf00="" class="ToolList">
+                                    <li data-v-e61ebf00="">
+                                        <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small">小</button>
+                                        <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium">中</button>
+                                        <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large">大</button>
+                                    </li>
+                                    <li data-v-e61ebf00="">
+                                        <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
+                                            <span class="">
+                                                <svg data-v-e61ebf00="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
+                                                    </path>
+                                                </svg>
+                                                <span data-v-e61ebf00="">En</span>
                                             </span>
-                                            <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
-                                                <span class="">
-                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                        <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
+                                        </button>
+                                    </li>
+                                    <li id="loginBtn">
+                                        <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                                    </li>
+                                    <li id="logoutBtn" style="display: none;">
+                                        <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                            <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div data-v-71bab962="" class="menuNav">
+                        <div data-v-71bab962="" class="container-lg">
+                            <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
+                                <button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" value="toggler">
+                                    <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <div data-v-71bab962="" class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <div data-v-71bab962="" class="d-block d-lg-none">
+                                        <ul data-v-71bab962="" class="ToolList">
+                                            <li data-v-71bab962="">
+                                                <span data-v-71bab962="">
+                                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">小</button>
+                                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active">中</button>
+                                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">大</button>
+                                                </span>
+                                                <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
+                                                    <span class="">
+                                                        <svg data-v-71bab962="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                            <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
+                                                            </path>
+                                                        </svg>
+                                                        <span data-v-71bab962="">En</span>
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                        <div data-v-71bab962="" class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
+                                        </div>
+                                        <div data-v-71bab962="" class="el-row" style="margin-left: -17.5px; margin-right: -17.5px;">
+                                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
+                                                <a data-v-71bab962="" href="/Tiss/announcement" class="MenuTitle">最新消息</a>
+                                                <ul data-v-71bab962="" class="MenuList">
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/announcement">中心公告</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/video">影音專區</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
+                                                <a data-v-71bab962="" href="/Tiss/about" class="MenuTitle">中心介紹</a>
+                                                <ul data-v-71bab962="" class="MenuList">
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/Objectives#Objectives">使命、願景</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/mission">中心任務</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/Organization">組織概況</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/BOD">第１屆 董監事</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/CEO">執行長</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/Units">單位介紹</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
+                                                <a data-v-71bab962="" href="/Tiss/research" class="MenuTitle">科普專欄</a>
+                                                <ul data-v-71bab962="" class="MenuList">
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/sportScience#sportScience">運動科學研究</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/sportTech#sportTech">運動科技與資訊開發</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/sportMedicine#sportMedicine">運動醫學研究</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
+                                                <a data-v-71bab962="" href="/Tiss/public-info#regulation" class="MenuTitle">公開資訊</a>
+                                                <ul data-v-71bab962="" class="MenuList">
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/regulation#regulation">法規</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/procedure#procedure">辦法及要點</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/plan#plan">計畫</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/budget#budget">預算與決算</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/download#download">下載專區</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/purchase#purchase">採購作業實施規章</a>
+                                                    </li>
+                                                    <li data-v-71bab962="">
+                                                        <a data-v-71bab962="" href="/Tiss/other#other">其他</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
+                                                <a data-v-71bab962="" aria-current="page" href="/announcement/gcnu9eixoou1z2xum5js" class="router-link-active router-link-exact-active MenuTitle">服務信箱</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex">
+                                        <li data-v-71bab962="" class="nav-item dropdown">
+                                            @*新修改位置*@
+                                            <a data-v-71bab962="" href="/Tiss/announcement" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown1" aria-current="page" role="button" aria-expanded="false">
+                                                最新消息
+                                                <span data-v-71bab962="">
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
                                                         </path>
                                                     </svg>
-                                                    <span data-v-71bab962="">En</span>
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                        </path>
+                                                    </svg>
                                                 </span>
-                                            </button>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/announcement">中心公告</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/video">影音專區</a></li>
+                                            </ul>
+                                        </li>
+                                        <li data-v-71bab962="" class="nav-item dropdown">
+                                            <a data-v-71bab962="" href="/Tiss/about" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown2" aria-current="page" role="button" aria-expanded="false">
+                                                中心介紹
+                                                <span data-v-71bab962="">
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Objectives">使命、願景</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/mission">中心任務</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Organization">組織概況</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/BOD">第１屆 董監事</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/CEO">執行長</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Units">單位介紹</a></li>
+                                            </ul>
+                                        </li>
+                                        <li data-v-71bab962="" class="nav-item dropdown">
+                                            <a data-v-71bab962="" href="/Tiss/research" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown3" aria-current="page" role="button" aria-expanded="false">
+                                                科普專欄
+                                                <span data-v-71bab962="">
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportMedicine">運動醫學</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportTech">運動科技</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportScience">運動科學</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPhysiology">運動生理</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPsychology">運動心理</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/physicalTraining">體能訓練</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsNutrition">運動營養</a></li>
+                                            </ul>
+                                        </li>
+                                        <li data-v-71bab962="" class="nav-item dropdown">
+                                            <a data-v-71bab962="" href="/Tiss/public_info" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown4" aria-current="page" role="button" aria-expanded="false">
+                                                公開資訊
+                                                <span data-v-71bab962="">
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                        </path>
+                                                    </svg>
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                        <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/regulation">法規</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/procedure">辦法及要點</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/plan">計畫</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/budget">預算與決算</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/download">下載專區</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">採購作業實施規章</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality">性別平等專區</a></li>
+                                                <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/other">其他</a></li>
+                                            </ul>
+                                        </li>
+                                        <li data-v-71bab962="" class="nav-item">
+                                            <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link">服務信箱</a>
                                         </li>
                                     </ul>
-                                    <div data-v-71bab962="" class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;">
-                                    </div>
-                                    <div data-v-71bab962="" class="el-row" style="margin-left: -17.5px; margin-right: -17.5px;">
-                                        <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                            <a data-v-71bab962="" href="/Tiss/announcement" class="MenuTitle">最新消息</a>
-                                            <ul data-v-71bab962="" class="MenuList">
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/announcement">中心公告</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/video">影音專區</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                            <a data-v-71bab962="" href="/Tiss/about" class="MenuTitle">中心介紹</a>
-                                            <ul data-v-71bab962="" class="MenuList">
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/Objectives#Objectives">使命、願景</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/mission">中心任務</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/Organization">組織概況</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/BOD">第１屆 董監事</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/CEO">執行長</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/Units">單位介紹</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                            <a data-v-71bab962="" href="/Tiss/research" class="MenuTitle">科普專欄</a>
-                                            <ul data-v-71bab962="" class="MenuList">
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/sportScience#sportScience">運動科學研究</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/sportTech#sportTech">運動科技與資訊開發</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/sportMedicine#sportMedicine">運動醫學研究</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                            <a data-v-71bab962="" href="/Tiss/public-info#regulation" class="MenuTitle">公開資訊</a>
-                                            <ul data-v-71bab962="" class="MenuList">
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/regulation#regulation">法規</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/procedure#procedure">辦法及要點</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/plan#plan">計畫</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/budget#budget">預算與決算</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/download#download">下載專區</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/purchase#purchase">採購作業實施規章</a>
-                                                </li>
-                                                <li data-v-71bab962="">
-                                                    <a data-v-71bab962="" href="/Tiss/other#other">其他</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                            <a data-v-71bab962="" aria-current="page" href="/announcement/gcnu9eixoou1z2xum5js" class="router-link-active router-link-exact-active MenuTitle">服務信箱</a>
-                                        </div>
-                                    </div>
                                 </div>
-                                <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex">
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/announcement" class="nav-link">
-                                            最新消息
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/about" class="nav-link">
-                                            中心介紹
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/research" class="nav-link">
-                                            科普專欄
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/public_info" class="nav-link">
-                                            公開資訊
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/GenderEquality" class="nav-link">
-                                            性別平等專區
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link">服務信箱</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
-                <div data-v-71bab962="" class="ChildrenList d-none d-lg-block">
-                    <div data-v-71bab962="" class="container-lg">
-                        <ul data-v-71bab962="" class="List">
-                        </ul>
-                    </div>
-                </div>
-            </header>
-            <div data-v-339da53a="" class="container-fluid px-0 mt-header">
-                <div data-v-339da53a-s="" class="BasePageLayout">
-                    <div class="BasePageBanner">
-                        <div class="Mask">
-                        </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="">
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="">
-                        <div class="container">
+                            </nav>
                         </div>
                     </div>
-                    <section class="el-container">
-                        <aside class="el-aside">
-                            <div class="BaseBreadcrumb d-block d-lg-none">
-                                <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
-                                        <span class="el-breadcrumb__item">
-                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
-                                            <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </span>
-                                        <span class="el-breadcrumb__item">
-                                            <span class="el-breadcrumb__inner" role="link">最新消息</span>
-                                            <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </span>
-                                        <span class="el-breadcrumb__item">
-                                            <span class="el-breadcrumb__inner" role="link">中心公告</span>
-                                            <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </span>
-                                        <span class="el-breadcrumb__item" aria-current="page">
-                                            <span class="el-breadcrumb__inner" role="link">國家運動科學中心「114年度委託研究計畫」徵求公告</span>
-                                            <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </span>
-                                    </div>
-                                </div>
+                    <div data-v-71bab962="" class="ChildrenList d-none d-lg-block">
+                        <div data-v-71bab962="" class="container-lg">
+                            <ul data-v-71bab962="" class="List">
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+                <div data-v-339da53a="" class="container-fluid px-0 mt-header">
+                    <div data-v-339da53a-s="" class="BasePageLayout">
+                        <div class="BasePageBanner">
+                            <div class="Mask">
                             </div>
-                            <div class="content">
-                                <div class="Title">中心公告</div>
-                                <ul class="Menu">
-                                    <li span="3">
-                                        <a class="MenuLink active" href="/Tiss/announcement#announcement">全部文章</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/press#press">新聞發佈</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/institute#institute">中心訊息</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/recruit#recruit">徵才招募</a>
-                                    </li>
-                                </ul>
+                            <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="">
+                            <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="">
+                            <div class="container">
                             </div>
-                        </aside>
-                        <main class="el-main">
-                            <div class="MainContainer">
-                                <div class="BaseBreadcrumb d-none d-lg-block">
+                        </div>
+                        <section class="el-container">
+                            <aside class="el-aside">
+                                <div class="BaseBreadcrumb d-block d-lg-none">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
                                                 <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -332,7 +304,7 @@
                                             <span class="el-breadcrumb__item">
                                                 <span class="el-breadcrumb__inner" role="link">最新消息</span>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -341,7 +313,7 @@
                                             <span class="el-breadcrumb__item">
                                                 <span class="el-breadcrumb__inner" role="link">中心公告</span>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -350,7 +322,7 @@
                                             <span class="el-breadcrumb__item" aria-current="page">
                                                 <span class="el-breadcrumb__inner" role="link">國家運動科學中心「114年度委託研究計畫」徵求公告</span>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -359,405 +331,504 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="MainContainer">
-                                <div class="NewsPage">
-                                    <div class="HeadInfo">
-                                        <div class="HeadInfoItem">2024/06/14</div>
-                                        <div class="HeadInfoItem">
-                                            <span class="el-tag el-tag--light">
-                                                <span class="el-tag__content">中心訊息</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="NewsTitle">國家運動科學中心「114年度委託研究計畫」徵求公告</div>
-                                    <div class="NewsToolBar">
-                                        <div class="NewsTagList">
-                                            <span>文章標籤：</span>
-                                            <span class="el-tag el-tag--plain is-round">
-                                                <span class="el-tag__content">委託研究計畫</span>
-                                            </span>
-                                        </div>
-                                        <div class="NewsParams">
-                                            <div class="NewsParamsItem">
-                                                <span>
-                                                    <svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
-                                                        <path class="" fill="currentColor" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z">
-                                                        </path>
-                                                    </svg>
+                                <div class="content">
+                                    <div class="Title">中心公告</div>
+                                    <ul class="Menu">
+                                        <li span="3">
+                                            <a class="MenuLink active" href="/Tiss/announcement#announcement">全部文章</a>
+                                        </li>
+                                        <li span="3">
+                                            <a class="MenuLink" href="/Tiss/press#press">新聞發佈</a>
+                                        </li>
+                                        <li span="3">
+                                            <a class="MenuLink" href="/Tiss/institute#institute">中心訊息</a>
+                                        </li>
+                                        <li span="3">
+                                            <a class="MenuLink" href="/Tiss/recruit#recruit">徵才招募</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </aside>
+                            <main class="el-main">
+                                <div class="MainContainer">
+                                    <div class="BaseBreadcrumb d-none d-lg-block">
+                                        <div class="container">
+                                            <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                                <span class="el-breadcrumb__item">
+                                                    <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
+                                                    <i class="el-icon el-breadcrumb__separator">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
                                                 </span>
-                                                <span>1546</span>
+                                                <span class="el-breadcrumb__item">
+                                                    <span class="el-breadcrumb__inner" role="link">最新消息</span>
+                                                    <i class="el-icon el-breadcrumb__separator">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
+                                                </span>
+                                                <span class="el-breadcrumb__item">
+                                                    <span class="el-breadcrumb__inner" role="link">中心公告</span>
+                                                    <i class="el-icon el-breadcrumb__separator">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
+                                                </span>
+                                                <span class="el-breadcrumb__item" aria-current="page">
+                                                    <span class="el-breadcrumb__inner" role="link">國家運動科學中心「114年度委託研究計畫」徵求公告</span>
+                                                    <i class="el-icon el-breadcrumb__separator">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                                                            </path>
+                                                        </svg>
+                                                    </i>
+                                                </span>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="NewsContent">
-                                        <div class="ContentBox">
-                                            <div>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.5rem;">
-                                                        <strong>壹、背景說明</strong>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">因應運動科學研究日益興盛的國際潮流，國家運動科學中心(以下稱本中心)於112年成立以來，致力於推動運動科學研究、進行運動科技之研發，增加我國運動科學軟實力，提升國際運動競爭力，以「推動運動科學研究及應用，提升國際運動競爭力」為使命願景，為持續推動運動科學研究、提升國內相關研究學術量能，本中心爰此公開徵求「114年度委託研究計畫」，鼓勵公私立學術研究機構、大專院校及醫療院所共同投入研究，促進我國運動科學相關研究之發展。</span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.5rem;">
-                                                        <strong>貳、徵求計畫主題</strong>
-                                                        <strong>(</strong>
-                                                        <strong>提案必須符合下列五大研究主題之一</strong>
-                                                        <strong>)</strong>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.25rem;">一、警消族群之科學化戰術體能訓練</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.25rem;">二、運動員訓練負荷監控追蹤</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.25rem;">三、運動恢復策略</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.25rem;">四、傷後回場監控機制與指引</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.25rem;">伍、學生區域運動聯賽戰力排名分數之訂定</span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">各大主題之詳細說明，請見「114年國家運動科學中心委託研究計畫主題說明」，研究計畫符合本中心訂定主題與否，為本次委託計畫審核重點。</span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.5rem;">
-                                                        <strong>參、計畫徵求公告及申請期間：</strong>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">一、計畫徵求公告期間：113年6月14日起至113年7月14日止。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">
-                                                        二、
-                                                        <span style="color: #ff0000;">計畫申請期間：113年7月15日起至113年8月15日止。</span>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem; color: #000000;">
-                                                        <span style="font-size: 1.5rem;">
-                                                            <strong>
-                                                                肆、
-                                                                <span style="font-size: 1.5rem;">申請資格及辦法</span>：
-                                                            </strong>
-                                                        </span>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">一、申請人資格：請參照「國家運動科學中心委託研究計畫主持人資格說明」。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">二、申請方式：</span>
-                                                </p>
-                                                <ol style="text-align: justify;">
-                                                    <li>
-                                                        <span style="font-size: 1.125rem;">計畫申請須繳交計畫書，計畫書撰寫格式請見「國家運動科學中心委託研究計畫申請書」。</span>
-                                                    </li>
-                                                    <li>
-                                                        <span style="font-size: 1.125rem;">計畫書繳交方式：計畫主持人須於「國家運動科學中心計畫管理系統」，進行帳號註冊申請，帳號註冊審核完成後，依管理系統程序上傳計畫申請書。</span>
-                                                    </li>
-                                                    <li>
-                                                        <span style="font-size: 1.125rem;">「國家運動科學中心計畫管理系統」開放時間預計為113年7月15日起至113年8月15日止（計畫管理系統網址預計於113年7月15日發布於中心官網，如有異動請依網站公告時間為主）。</span>
-                                                    </li>
-                                                </ol>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">三、計畫期程以一年為原則 (計畫執行為114年1月1日至114年12月31日)，計畫經費編列依「國家運動科學中心委託研究計畫經費處理原則」辦理。</span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.5rem;">
-                                                        <strong>伍、其他注意事項：</strong>
-                                                    </span>
-                                                </p>
-                                                <p>
-                                                    <span style="font-size: 1.125rem;">一、受託單位於辦理委託研究計畫時，應遵守「國家運動科學中心委託研究計畫作業要點」、「國家運動科學中心委託研究計畫研究人力約用注意事項」之相關規定。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">二、同一計畫如已向其他機關申請並獲補助者，本中心得撤銷其委託計畫，亦得追回已撥付之委託款項。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">三、同一計畫主持人原則上僅委託一案，如有申請複數提案，除非經審議後有通過複數提案之必要性，否則本中心僅擇一委託計畫申請。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">四、委託研究計畫申請書頁數（含參考文獻及圖表）最少10頁，至多為30頁。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">五、受委託單位於辦理採購、核銷時，應遵守「國家運動科學中心委託研究計畫經費處理原則」之相關規定。計畫成效考核結果列為未來是否繼續委託計畫之參考。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">六、計畫主持人如未依規定繳交結案報告者，未來三年內得不再核給計畫之委託計畫申請。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">七、本案未盡事宜得依國家運動科學中心相關規定辦理。</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">
-                                                        八、「國家運動科學中心委託研究計畫作業要點」、「國家運動科學中心委託研究計畫經費處理原則」、「國家運動科學中心委託研究計畫研究人力約用注意事項」，請參照中心官網公開資訊之
-                                                        <a href="https://tiss.org.tw/public-info#procedure" target="_blank" rel="noopener">辦法及要點</a>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">
-                                                        九、「114年國家運動科學中心委託研究計畫主題說明」、「國家運動科學中心委託研究計畫主持人資格說明」、「國家運動科學中心委託研究計畫申請書」，請參照中心官網公開資訊之
-                                                        <a href="https://tiss.org.tw/public-info#download" target="_blank" rel="noopener">下載專區</a>。
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;"> </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.5rem;">
-                                                        <strong>陸、聯絡人資訊：</strong>
-                                                    </span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">國家運動科學中心</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">計畫行政專員　張簡郁宸</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">電子郵件：00036@tiss.org.tw</span>
-                                                </p>
-                                                <p style="text-align: justify;">
-                                                    <span style="font-size: 1.125rem;">電話：07-5861207</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="ShareToolBar">
-                                            <div class="ShareToolBarTitle">Share On</div>
-                                            <ul class="SocialList">
-                                                <li>
-                                                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-fb">
-                                                        <span class="">
-                                                            <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
-                                                                <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                                                </path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
-                                                        <span class="">
-                                                            <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                                <li>
-                                                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
-                                                        <span class="">
-                                                            <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                                <path class="" fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z">
-                                                                </path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="NewsToolBar d-none d-lg-block">
-                                        <div class="NewsTagList">
-                                            <span class="el-tag el-tag--plain is-round">
-                                                <span class="el-tag__content">委託研究計畫</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="NewsControlBar">
-                                        <a aria-current="page" href="/Tiss/researchProject" class="router-link-active router-link-exact-active">
-                                            <button aria-disabled="false" type="button" class="el-button is-text">
-                                                <span class="">
-                                                    <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                                        </path>
-                                                    </svg>
-                                                    <span class="ms-2">上一篇文章</span>
-                                                </span>
-                                            </button>
-                                        </a>
-                                        <a href="/announcement/qzakxqotjf44eod9kuwu" class="">
-                                            <button aria-disabled="false" type="button" class="el-button is-text">
-                                                <span class="">
-                                                    <span class="me-2">下一篇文章</span>
-                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <div class="CommentBoard">
-                                        <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop" data-href="https://tiss.org.tw/" data-lazy="true" data-width="" data-numposts="5" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=802247691807176&container_width=0&height=100&href=https%3A%2F%2Ftiss.org.tw%2F&lazy=true&locale=en_US&numposts=5&sdk=joey&version=v19.0&width=550">
-                                            <span style="vertical-align: bottom; width: 550px; height: 250px;">
-                                                <iframe name="f0f5c94e0e0d2190d" width="550px" height="100px" data-testid="fb:comments Facebook Social Plugin" title="fb:comments Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" loading="lazy" src="https://www.facebook.com/v19.0/plugins/comments.php?app_id=802247691807176&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Dfb704dc530ef6e1cd%26domain%3Dtiss.org.tw%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Ftiss.org.tw%252Ffb36a5c44b4e7bd1b%26relation%3Dparent.parent&container_width=0&height=100&href=https%3A%2F%2Ftiss.org.tw%2F&lazy=true&locale=en_US&numposts=5&sdk=joey&version=v19.0&width=550" style="border: none; width: 550px; height: 250px; visibility: visible;" class="">
-                                                </iframe>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </main>
-                    </section>
+                                <div class="MainContainer">
+                                    <div class="NewsPage">
+                                        <div class="HeadInfo" id="articleContent">
+                                            <div class="HeadInfoItem">2024/06/14</div>
+                                            <div class="HeadInfoItem">
+                                                <span class="el-tag el-tag--light">
+                                                    <span class="el-tag__content">中心訊息</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="NewsTitle">國家運動科學中心「114年度委託研究計畫」徵求公告</div>
+                                        <div class="NewsToolBar">
+                                            <div class="NewsTagList">
+                                                <span>文章標籤：</span>
+                                                <span class="el-tag el-tag--plain is-round">
+                                                    <span class="el-tag__content">委託研究計畫</span>
+                                                </span>
+                                            </div>
+                                            <div class="NewsParams">
+                                                <div class="NewsParamsItem">
+                                                    <span>
+                                                        <svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                            <path class="" fill="currentColor" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                    @*<span id="clickCount">1546</span>*@
+                                                    <span id="clickCount">@ViewBag.ClickCount</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="NewsContent">
+                                            <div class="ContentBox">
+                                                <div>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.5rem;">
+                                                            <strong>壹、背景說明</strong>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">因應運動科學研究日益興盛的國際潮流，國家運動科學中心(以下稱本中心)於112年成立以來，致力於推動運動科學研究、進行運動科技之研發，增加我國運動科學軟實力，提升國際運動競爭力，以「推動運動科學研究及應用，提升國際運動競爭力」為使命願景，為持續推動運動科學研究、提升國內相關研究學術量能，本中心爰此公開徵求「114年度委託研究計畫」，鼓勵公私立學術研究機構、大專院校及醫療院所共同投入研究，促進我國運動科學相關研究之發展。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.5rem;">
+                                                            <strong>貳、徵求計畫主題</strong>
+                                                            <strong>(</strong>
+                                                            <strong>提案必須符合下列五大研究主題之一</strong>
+                                                            <strong>)</strong>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.25rem;">一、警消族群之科學化戰術體能訓練</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.25rem;">二、運動員訓練負荷監控追蹤</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.25rem;">三、運動恢復策略</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.25rem;">四、傷後回場監控機制與指引</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.25rem;">伍、學生區域運動聯賽戰力排名分數之訂定</span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">各大主題之詳細說明，請見「114年國家運動科學中心委託研究計畫主題說明」，研究計畫符合本中心訂定主題與否，為本次委託計畫審核重點。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.5rem;">
+                                                            <strong>參、計畫徵求公告及申請期間：</strong>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">一、計畫徵求公告期間：113年6月14日起至113年7月14日止。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">
+                                                            二、
+                                                            <span style="color: #ff0000;">計畫申請期間：113年7月15日起至113年8月15日止。</span>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem; color: #000000;">
+                                                            <span style="font-size: 1.5rem;">
+                                                                <strong>
+                                                                    肆、
+                                                                    <span style="font-size: 1.5rem;">申請資格及辦法</span>：
+                                                                </strong>
+                                                            </span>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">一、申請人資格：請參照「國家運動科學中心委託研究計畫主持人資格說明」。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">二、申請方式：</span>
+                                                    </p>
+                                                    <ol style="text-align: justify;">
+                                                        <li>
+                                                            <span style="font-size: 1.125rem;">計畫申請須繳交計畫書，計畫書撰寫格式請見「國家運動科學中心委託研究計畫申請書」。</span>
+                                                        </li>
+                                                        <li>
+                                                            <span style="font-size: 1.125rem;">計畫書繳交方式：計畫主持人須於「國家運動科學中心計畫管理系統」，進行帳號註冊申請，帳號註冊審核完成後，依管理系統程序上傳計畫申請書。</span>
+                                                        </li>
+                                                        <li>
+                                                            <span style="font-size: 1.125rem;">「國家運動科學中心計畫管理系統」開放時間預計為113年7月15日起至113年8月15日止（計畫管理系統網址預計於113年7月15日發布於中心官網，如有異動請依網站公告時間為主）。</span>
+                                                        </li>
+                                                    </ol>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">三、計畫期程以一年為原則 (計畫執行為114年1月1日至114年12月31日)，計畫經費編列依「國家運動科學中心委託研究計畫經費處理原則」辦理。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.5rem;">
+                                                            <strong>伍、其他注意事項：</strong>
+                                                        </span>
+                                                    </p>
+                                                    <p>
+                                                        <span style="font-size: 1.125rem;">一、受託單位於辦理委託研究計畫時，應遵守「國家運動科學中心委託研究計畫作業要點」、「國家運動科學中心委託研究計畫研究人力約用注意事項」之相關規定。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">二、同一計畫如已向其他機關申請並獲補助者，本中心得撤銷其委託計畫，亦得追回已撥付之委託款項。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">三、同一計畫主持人原則上僅委託一案，如有申請複數提案，除非經審議後有通過複數提案之必要性，否則本中心僅擇一委託計畫申請。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">四、委託研究計畫申請書頁數（含參考文獻及圖表）最少10頁，至多為30頁。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">五、受委託單位於辦理採購、核銷時，應遵守「國家運動科學中心委託研究計畫經費處理原則」之相關規定。計畫成效考核結果列為未來是否繼續委託計畫之參考。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">六、計畫主持人如未依規定繳交結案報告者，未來三年內得不再核給計畫之委託計畫申請。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">七、本案未盡事宜得依國家運動科學中心相關規定辦理。</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">
+                                                            八、「國家運動科學中心委託研究計畫作業要點」、「國家運動科學中心委託研究計畫經費處理原則」、「國家運動科學中心委託研究計畫研究人力約用注意事項」，請參照中心官網公開資訊之
+                                                            <a href="https://tiss.org.tw/public-info#procedure" target="_blank" rel="noopener">辦法及要點</a>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">
+                                                            九、「114年國家運動科學中心委託研究計畫主題說明」、「國家運動科學中心委託研究計畫主持人資格說明」、「國家運動科學中心委託研究計畫申請書」，請參照中心官網公開資訊之
+                                                            <a href="https://tiss.org.tw/public-info#download" target="_blank" rel="noopener">下載專區</a>。
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;"> </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.5rem;">
+                                                            <strong>陸、聯絡人資訊：</strong>
+                                                        </span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">國家運動科學中心</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">計畫行政專員　張簡郁宸</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">電子郵件：00036@tiss.org.tw</span>
+                                                    </p>
+                                                    <p style="text-align: justify;">
+                                                        <span style="font-size: 1.125rem;">電話：07-5861207</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="ShareToolBar">
+                                                <div class="ShareToolBarTitle">Share On</div>
+                                                <ul class="SocialList">
+                                                    <li>
+                                                        <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-fb">
+                                                            <span class="">
+                                                                <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                                    <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
+                                                            <span class="">
+                                                                <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
+                                                            </span>
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
+                                                            <span class="">
+                                                                <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                                    <path class="" fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="NewsToolBar d-none d-lg-block">
+                                            <div class="NewsTagList">
+                                                <span class="el-tag el-tag--plain is-round">
+                                                    <span class="el-tag__content">委託研究計畫</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="NewsControlBar">
+                                            <a aria-current="page" href="/Tiss/researchProject" class="router-link-active router-link-exact-active">
+                                                <button aria-disabled="false" type="button" class="el-button is-text">
+                                                    <span class="">
+                                                        <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
+                                                            </path>
+                                                        </svg>
+                                                        <span class="ms-2">上一篇文章</span>
+                                                    </span>
+                                                </button>
+                                            </a>
+                                            <a href="/announcement/qzakxqotjf44eod9kuwu" class="">
+                                                <button aria-disabled="false" type="button" class="el-button is-text">
+                                                    <span class="">
+                                                        <span class="me-2">下一篇文章</span>
+                                                        <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="CommentBoard">
+                                            <div class="fb-comments fb_iframe_widget fb_iframe_widget_fluid_desktop" data-href="https://tiss.org.tw/" data-lazy="true" data-width="" data-numposts="5" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=802247691807176&container_width=0&height=100&href=https%3A%2F%2Ftiss.org.tw%2F&lazy=true&locale=en_US&numposts=5&sdk=joey&version=v19.0&width=550">
+                                                <span style="vertical-align: bottom; width: 550px; height: 250px;">
+                                                    <iframe name="f0f5c94e0e0d2190d" width="550px" height="100px" data-testid="fb:comments Facebook Social Plugin" title="fb:comments Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" loading="lazy" src="https://www.facebook.com/v19.0/plugins/comments.php?app_id=802247691807176&channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Dfb704dc530ef6e1cd%26domain%3Dtiss.org.tw%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Ftiss.org.tw%252Ffb36a5c44b4e7bd1b%26relation%3Dparent.parent&container_width=0&height=100&href=https%3A%2F%2Ftiss.org.tw%2F&lazy=true&locale=en_US&numposts=5&sdk=joey&version=v19.0&width=550" style="border: none; width: 550px; height: 250px; visibility: visible;" class="">
+                                                    </iframe>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </main>
+                        </section>
+                    </div>
                 </div>
-            </div>
-            <footer data-v-339da53a="">
-                <div class="FooterDecoration">
-                </div>
-                <div class="container">
-                    <div class="FooterContent">
-                        <div class="LeftFooterContent">
-                            <div class="Info">
-                                <img class="logo" src="/site/img/logo.1fec0909.svg" alt="">
-                                <ul class="InfoList">
+                <footer data-v-339da53a="">
+                    <div class="FooterDecoration">
+                    </div>
+                    <div class="container">
+                        <div class="FooterContent">
+                            <div class="LeftFooterContent">
+                                <div class="Info">
+                                    <img class="logo" src="/site/img/logo.1fec0909.svg" alt="">
+                                    <ul class="InfoList">
+                                        <li>
+                                            <span class="label">地址</span>
+                                            <span>813高雄市左營區世運大道399號</span>
+                                        </li>
+                                        <li>
+                                            <span class="label">服務電話</span>
+                                            <span>07-586-1193</span>
+                                        </li>
+                                        <li>
+                                            <span class="label">服務時間</span>
+                                            <span>週一至週五08:30~17:30</span>
+                                        </li>
+                                        <li>
+                                            <span class="label">服務信箱</span>
+                                            <span>
+                                                <a href="mailto:service@tiss.org.tw">國家運動科學中心服務信箱</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="SocialList d-none d-lg-flex">
                                     <li>
-                                        <span class="label">地址</span>
-                                        <span>813高雄市左營區世運大道399號</span>
-                                    </li>
-                                    <li>
-                                        <span class="label">服務電話</span>
-                                        <span>07-586-1193</span>
-                                    </li>
-                                    <li>
-                                        <span class="label">服務時間</span>
-                                        <span>週一至週五08:30~17:30</span>
-                                    </li>
-                                    <li>
-                                        <span class="label">服務信箱</span>
-                                        <span>
-                                            <a href="mailto:service@tiss.org.tw">國家運動科學中心服務信箱</a>
-                                        </span>
+                                        <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
+                                            <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                                </path>
+                                            </svg>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="SocialList d-none d-lg-flex">
-                                <li>
-                                    <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
-                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
-                                            <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                            </path>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="RightFooterContent">
-                            <div class="el-row" style="margin-left: -7.5px; margin-right: -7.5px; width: 100%;">
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/Tiss/announcement" class="MenuTitle">最新消息</a>
-                                    <ul class="MenuList">
-                                        <li>
-                                            <a href="/Tiss/announcement">中心公告</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/video">影音專區</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/Tiss/about" class="MenuTitle">中心介紹</a>
-                                    <ul class="MenuList">
-                                        <li>
-                                            <a href="/Tiss/Objectives#Objectives">使命、願景</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/mission#mission">中心任務</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/Organization#Organization">組織概況</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/BOD#BOD">第１屆 董監事</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/CEO#CEO">執行長</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/Units#Units">單位介紹</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/Tiss/research" class="MenuTitle">科普專欄</a>
-                                    <ul class="MenuList">
-                                        <li>
-                                            <a href="/Tiss/sportScience#sportScience">運動科學研究</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/sportTech#sportTech">運動科技與資訊開發</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/sportMedicine#sportMedicine">運動醫學研究</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/public-info#regulation" class="MenuTitle">公開資訊</a>
-                                    <ul class="MenuList">
-                                        <li>
-                                            <a href="/Tiss/regulation#regulation">法規</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/procedure#procedure">辦法及要點</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/plan#plan">計畫</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/budget#budget">預算與決算</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/download#download">下載專區</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/purchase#purchase">採購作業實施規章</a>
-                                        </li>
-                                        <li>
-                                            <a href="/Tiss/other#other">其他</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/Tiss/GenderEquality" class="MenuTitle">性別平等專區</a>
-                                </div>
-                            </div>
-                            <ul class="SocialList d-block d-lg-none">
-                                <li>
-                                    <div class="SocialLink">
-                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
-                                            <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                            </path>
-                                        </svg>
+                            <div class="RightFooterContent">
+                                <div class="el-row" style="margin-left: -7.5px; margin-right: -7.5px; width: 100%;">
+                                    <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                        <a href="/Tiss/announcement" class="MenuTitle">最新消息</a>
+                                        <ul class="MenuList">
+                                            <li>
+                                                <a href="/Tiss/announcement">中心公告</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/video">影音專區</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </li>
-                            </ul>
-                            <div class="d-flex w-100">
-                                <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+                                    <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                        <a href="/Tiss/about" class="MenuTitle">中心介紹</a>
+                                        <ul class="MenuList">
+                                            <li>
+                                                <a href="/Tiss/Objectives#Objectives">使命、願景</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/mission#mission">中心任務</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/Organization#Organization">組織概況</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/BOD#BOD">第１屆 董監事</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/CEO#CEO">執行長</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/Units#Units">單位介紹</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                        <a href="/Tiss/research" class="MenuTitle">科普專欄</a>
+                                        <ul class="MenuList">
+                                            <li>
+                                                <a href="/Tiss/sportScience#sportScience">運動科學研究</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/sportTech#sportTech">運動科技與資訊開發</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/sportMedicine#sportMedicine">運動醫學研究</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                                        <a href="/public-info#regulation" class="MenuTitle">公開資訊</a>
+                                        <ul class="MenuList">
+                                            <li>
+                                                <a href="/Tiss/regulation#regulation">法規</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/procedure#procedure">辦法及要點</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/plan#plan">計畫</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/budget#budget">預算與決算</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/download#download">下載專區</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/purchase#purchase">採購作業實施規章</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/GenderEquality">性別平等專區</a>
+                                            </li>
+                                            <li>
+                                                <a href="/Tiss/other#other">其他</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <ul class="SocialList d-block d-lg-none">
+                                    <li>
+                                        <div class="SocialLink">
+                                            <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="d-flex w-100">
+                                    <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="copyright">
+                        <div class="container">Copyright © 國家運動科學中心 All Rights Reserved.</div>
+                    </div>
+                </footer>
+                <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
+                    <svg data-v-339da53a="" class="svg-inline--fa fa-chevron-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                        </path>
+                    </svg>
                 </div>
-                <div class="copyright">
-                    <div class="container">Copyright © 國家運動科學中心 All Rights Reserved.</div>
-                </div>
-            </footer>
-            <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
-                <svg data-v-339da53a="" class="svg-inline--fa fa-chevron-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                    </path>
-                </svg>
             </div>
         </div>
-    </div>
-</body>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                function toggleDropdown(dropdownId) {
+                    var dropdownToggle = document.getElementById(dropdownId);
+                    var dropdownMenu = dropdownToggle.nextElementSibling;
+
+                    if (dropdownMenu.classList.contains('show')) {
+                        dropdownMenu.classList.remove('show');
+                    } else {
+                        dropdownMenu.classList.add('show');
+                    }
+                }
+
+                function getArticleIdFromPath() {
+                    var path = window.location.pathname;
+                    var segments = path.split('/');
+                    return segments[segments.length - 1]; // 獲取最後一段作為文章ID
+                }
+
+                var articleId = getArticleIdFromPath();
+
+                if (articleId) {
+                    // 載入文章內容和點擊次數
+                    $.get('/Tiss/ViewArticle', { id: articleId }, function (data) {
+                        $('#articleContent').html(data.Article.Content);
+
+                        // 獲取並顯示點擊次數
+                        var clickCount = data.ClickCount;
+                        $('#clickCount').text(clickCount);
+                    });
+                } else {
+                    console.error('Article ID is missing in the URL');
+                }
+            });
+        </script>
+    </body>
+</html>

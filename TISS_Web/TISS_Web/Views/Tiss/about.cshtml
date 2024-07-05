@@ -1,7 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +11,16 @@
             top: -500px; /* 根據實際情況調整 */
             visibility: hidden;
         }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <noscript>
         <strong>We're sorry but 國家運動科學中心 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="fb-root">
-    </div>
+    <div id="fb-root"></div>
     <div id="app" data-v-app="">
         <div data-v-339da53a="" class="layout">
             <header data-v-ffd846e6="" data-v-339da53a="">
@@ -31,14 +32,14 @@
                         <nav data-v-e61ebf00="" class="d-lg-flex d-none">
                             <ul data-v-e61ebf00="" class="ToolList">
                                 <li data-v-e61ebf00="">
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">小</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active">中</button>
-                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn">大</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small">小</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium">中</button>
+                                    <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large">大</button>
                                 </li>
                                 <li data-v-e61ebf00="">
                                     <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
                                         <span class="">
-                                            <svg data-v-e61ebf00="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                                            <svg data-v-e61ebf00="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                 <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
                                                 </path>
                                             </svg>
@@ -62,7 +63,7 @@
                     <div data-v-71bab962="" class="container-lg">
                         <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
                             <button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" value="toggler">
-                                <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
+                                <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z">
                                     </path>
                                 </svg>
@@ -78,7 +79,7 @@
                                             </span>
                                             <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn">
                                                 <span class="">
-                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
+                                                    <svg data-v-71bab962="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                         <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
                                                         </path>
                                                     </svg>
@@ -170,69 +171,10 @@
                                     </div>
                                 </div>
                                 <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex">
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/announcement" class="nav-link">
+                                    <li data-v-71bab962="" class="nav-item dropdown">
+                                        @*新修改位置*@
+                                        <a data-v-71bab962="" href="/Tiss/announcement" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown1" aria-current="page" role="button" aria-expanded="false">
                                             最新消息
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/about" class="router-link-active router-link-exact-active nav-link" aria-current="page">
-                                            中心介紹
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/research" class="nav-link">
-                                            科普專欄
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/public_info" class="nav-link">
-                                            公開資訊
-                                            <span data-v-71bab962="">
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                    </path>
-                                                </svg>
-                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                    </path>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li data-v-71bab962="" class="nav-item">
-                                        <a data-v-71bab962="" href="/Tiss/GenderEquality" class="nav-link">
-                                            性別平等專區
                                             <span data-v-71bab962="">
                                                 <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                     <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
@@ -244,6 +186,82 @@
                                                 </svg>
                                             </span>
                                         </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/announcement">中心公告</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/video">影音專區</a></li>
+                                        </ul>
+                                    </li>
+                                    <li data-v-71bab962="" class="nav-item dropdown">
+                                        <a data-v-71bab962="" href="/Tiss/about" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown2" aria-current="page" role="button" aria-expanded="false">
+                                            中心介紹
+                                            <span data-v-71bab962="">
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                    </path>
+                                                </svg>
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Objectives">使命、願景</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/mission">中心任務</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Organization">組織概況</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/BOD">第１屆 董監事</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/CEO">執行長</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/Units">單位介紹</a></li>
+                                        </ul>
+                                    </li>
+                                    <li data-v-71bab962="" class="nav-item dropdown">
+                                        <a data-v-71bab962="" href="/Tiss/research" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown3" aria-current="page" role="button" aria-expanded="false">
+                                            科普專欄
+                                            <span data-v-71bab962="">
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                    </path>
+                                                </svg>
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportMedicine">運動醫學</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportTech">運動科技</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportScience">運動科學</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPhysiology">運動生理</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPsychology">運動心理</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/physicalTraining">體能訓練</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsNutrition">運動營養</a></li>
+                                        </ul>
+                                    </li>
+                                    <li data-v-71bab962="" class="nav-item dropdown">
+                                        <a data-v-71bab962="" href="/Tiss/public_info" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown4" aria-current="page" role="button" aria-expanded="false">
+                                            公開資訊
+                                            <span data-v-71bab962="">
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                    </path>
+                                                </svg>
+                                                <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/regulation">法規</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/procedure">辦法及要點</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/plan">計畫</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/budget">預算與決算</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/download">下載專區</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">採購作業實施規章</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality">性別平等專區</a></li>
+                                            <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/other">其他</a></li>
+                                        </ul>
                                     </li>
                                     <li data-v-71bab962="" class="nav-item">
                                         <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link">服務信箱</a>
@@ -260,7 +278,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/Objectives">
                                     使命、願景
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -271,7 +289,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/mission">
                                     中心任務
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -282,7 +300,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/Organization">
                                     組織概況
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -293,7 +311,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/BOD">
                                     第１屆 董監事
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -304,7 +322,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/CEO">
                                     執行長
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -315,7 +333,7 @@
                                 <a data-v-71bab962="" class="ItemLink" href="/Tiss/Units">
                                     單位介紹
                                     <span data-v-71bab962="" class="ItemLinkIcon">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
                                             </path>
                                         </svg>
@@ -351,7 +369,7 @@
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                     </path>
                                                 </svg>
@@ -360,7 +378,7 @@
                                         <span class="el-breadcrumb__item" aria-current="page">
                                             <span class="el-breadcrumb__inner" role="link">中心介紹</span>
                                             <i class="el-icon el-breadcrumb__separator">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                     </path>
                                                 </svg>
@@ -401,7 +419,7 @@
                                             <span class="el-breadcrumb__item">
                                                 <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -410,7 +428,7 @@
                                             <span class="el-breadcrumb__item" aria-current="page">
                                                 <span class="el-breadcrumb__inner" role="link">中心介紹</span>
                                                 <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 1024 1024">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
                                                     </svg>
@@ -505,7 +523,7 @@
                                             </li>
                                             <li class="MissionItem last">
                                                 <div class="MissionItemNumber text-center">
-                                                    <svg class="svg-inline--fa fa-flag" aria-hidden="true" focusable="false" data-prefix="far" data-icon="flag" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
+                                                    <svg class="svg-inline--fa fa-flag" aria-hidden="true" focusable="false" data-prefix="far" data-icon="flag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                                         <path class="" fill="currentColor" d="M48 24C48 10.7 37.3 0 24 0S0 10.7 0 24V64 350.5 400v88c0 13.3 10.7 24 24 24s24-10.7 24-24V388l80.3-20.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L48 52V24zm0 77.5l96.6-24.2c27-6.7 55.5-3.6 80.4 8.8c54.9 27.4 118.7 29.7 175 6.8V334.7l-24.4 9.1c-33.7 12.6-71.2 10.7-103.4-5.4c-48.2-24.1-103.3-30.1-155.6-17.1L48 338.5v-237z">
                                                         </path>
                                                     </svg>
@@ -636,7 +654,7 @@
                             <ul class="SocialList d-none d-lg-flex">
                                 <li>
                                     <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
-                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
                                             </path>
                                         </svg>
@@ -698,36 +716,36 @@
                                     <a href="/Tiss/public_info" class="MenuTitle">公開資訊</a>
                                     <ul class="MenuList">
                                         <li>
-                                            <a href="/Tiss/regulation#regulation">法規</a>
+                                            <a href="/Tiss/regulation">法規</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/procedure#procedure">辦法及要點</a>
+                                            <a href="/Tiss/procedure">辦法及要點</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/plan#plan">計畫</a>
+                                            <a href="/Tiss/plan">計畫</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/budget#budget">預算與決算</a>
+                                            <a href="/Tiss/budget">預算與決算</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/download#download">下載專區</a>
+                                            <a href="/Tiss/download">下載專區</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/purchase#purchase">採購作業實施規章</a>
+                                            <a href="/Tiss/purchase">採購作業實施規章</a>
                                         </li>
                                         <li>
-                                            <a href="/Tiss/other#other">其他</a>
+                                            <a href="/Tiss/GenderEquality">性別平等專區</a>
+                                        </li>
+                                        <li>
+                                            <a href="/Tiss/other">其他</a>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                    <a href="/Tiss/GenderEquality" class="MenuTitle">性別平等專區</a>
                                 </div>
                             </div>
                             <ul class="SocialList d-block d-lg-none">
                                 <li>
                                     <div class="SocialLink">
-                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                             <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
                                             </path>
                                         </svg>
@@ -747,18 +765,6 @@
         </div>
     </div>
 
-    @*ckeditor功能*@
-    @*@{
-            if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-            {
-                <form id="editForm" method="post" action="/Tiss/SaveContent">
-                    <textarea name="editorContent" id="editor1"></textarea>
-                    <button id="saveBtn" class="btn btn-outline-primary btn-block">保存修改</button>
-                </form>
-            }
-        }*@
-    @*ckeditor功能*@
-
     <script>
         //登出按鈕顯示功能
         $(document).ready(function () {
@@ -776,7 +782,7 @@
         //載入已儲存的內容
         function loadContent() {
             $.ajax({
-                url: 'GetContent',
+                url: 'aboutGetContent',
                 method: 'GET',
                 success: function (response) {
                     if (response.success) {
@@ -815,11 +821,12 @@
 
         //圖片及文字存檔功能
         function saveContent() {
-            var textContent = document.getElementById('intro').innerText;
+            /*var textContent = document.getElementById('intro').innerText;*/
+            var textContent = document.getElementById('intro').innerHTML;
             var imageSrc = document.getElementById('mainImage').src;
 
             $.ajax({
-                url: 'SaveContent',
+                url: 'aboutSaveContent',
                 method: 'POST',
                 data: {
                     TextContent: textContent,
@@ -836,6 +843,17 @@
             });
         }
         //圖片及文字存檔功能
+
+        function toggleDropdown(dropdownId) {
+            var dropdownToggle = document.getElementById(dropdownId);
+            var dropdownMenu = dropdownToggle.nextElementSibling;
+
+            if (dropdownMenu.classList.contains('show')) {
+                dropdownMenu.classList.remove('show');
+            } else {
+                dropdownMenu.classList.add('show');
+            }
+        }
     </script>
 </body>
 </html>

@@ -29,12 +29,13 @@ namespace TISS_Web.Models
                 }
 
                 // 計算新的 FileNo
-                int newFileNo = 1;
-                var lastContent = _db.Set<T>().OrderByDescending(c => c.FileNo).FirstOrDefault();
-                if (lastContent != null)
-                {
-                    newFileNo = lastContent.FileNo + 1;
-                }
+                //int newFileNo = 1;
+                //var lastContent = _db.Set<T>().OrderByDescending(c => c.FileNo).FirstOrDefault();
+
+                //if (lastContent != null)
+                //{
+                //    newFileNo = lastContent.FileNo + 1;
+                //}
 
                 var entity = createNewEntity();
                 entity.UserAccount = userName;
@@ -42,7 +43,7 @@ namespace TISS_Web.Models
                 entity.TextUpdateTime = DateTime.Now;
                 entity.ImageContent = imageBytes;
                 entity.ImageUpdateTime = DateTime.Now;
-                entity.FileNo = newFileNo;
+                //entity.FileNo = newFileNo;
 
                 _db.Set<T>().Add(entity);
                 _db.SaveChanges();

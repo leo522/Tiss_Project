@@ -1,6 +1,7 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,76 +9,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="/favicon.svg">
-    @*<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>*@
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>國家運動科學中心</title>
+
 </head>
 <body>
-    <div>
-        <div>
-            <div class="Intro" id="introText" contenteditable="true">推動運動科學研究及應用，提升國際運動競爭力</div>
-            <div class="SubIntro" id="subIntroText" contenteditable="true">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</div>
-        </div>
-        <img class="ObjectivesImg" id="mainImage" src="/site/img/Objectives_img.fb276b91.jpg" alt="">
-        <div class="btn-container">
-            <input type="file" id="uploadImageInput" style="display:none;" accept="image/*">
-            <button class="btn btn-primary" onclick="changeImg()">新增圖片</button>
-            <button class="btn btn-danger" onclick="removeImg()">移除圖片</button>
-        </div>
-    </div>
-    <script>
-        function changeImg() {
-            document.getElementById('uploadImageInput').click();
+    <div class="container">
+        <h2>公告頁面內容</h2>
+        <hr />
+
+        @foreach (var item in Model)
+        {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@item.TextContent</h5>
+                    @if (item.ImageContent != null)
+                    {
+                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(item.ImageContent))" class="card-img-top" alt="...">
+                    }
+                    <!-- 其他欄位的顯示 -->
+                </div>
+            </div>
         }
 
-        document.getElementById('uploadImageInput').addEventListener('change', function () {
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (event) {
-                    document.getElementById('mainImage').src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        function removeImg() {
-            document.getElementById('mainImage').src = '';
-        }
-    </script>
-    @*<form id="editForm" method="post" action="/Tiss/SaveContent">
-            <textarea name="editorContent" id="editor1"></textarea>
-            <button id="saveBtn" class="btn btn-outline-primary btn-block">保存修改</button>
-        </form>
-        <ul>
-            <li id="loginBtn">
-                <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
-            </li>
-            <li id="logoutBtn" style="display: none;">
-                <form id="logoutForm" action="/Tiss/Logout" method="post">
-                    <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
-                </form>
-            </li>
-        </ul>
-        <script>
-
-            $(document).ready(function () {
-                // 假設 isLoggedIn 是一個表示是否已登入的變數，true 表示已登入，false 表示未登入
-                var isLoggedIn = '@Session["LoggedIn"]' == 'True';
-
-                if (isLoggedIn) {
-                    $('#logoutBtn').show(); // 顯示登出按鈕
-                } else {
-                    $('#loginBtn').show(); // 顯示登入按鈕
+        <!-- 分頁控制 -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="javascript:void(0);" onclick="loadPage(@i, @ViewBag.PageSize)">@i</a>
+                    </li>
                 }
-            });
-            // 初始化 CKEditor
-            CKEDITOR.replace('editor1');
+            </ul>
+        </nav>
+    </div>
 
-            // 在表單提交時，確保 CKEditor 的內容被提交
-            document.getElementById('editForm').onsubmit = function () {
-                CKEDITOR.instances.editor1.updateElement();
-            };
-        </script>*@
+    <script>
+        // JavaScript 函式來加載特定分頁的資料
+        function loadPage(page, pageSize) {
+        var url = window.location.href.split('?')[0]; // 獲取當前 URL，去掉 query string 部分
+        window.location.href = url + '?page=' + page + '&pageSize=' + pageSize;
+    }
+    </script>
 </body>
 </html>
