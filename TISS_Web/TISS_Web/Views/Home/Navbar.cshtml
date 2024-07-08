@@ -1,111 +1,61 @@
-﻿@{
-    Layout = "~/Views/Shared/_TissMaster.cshtml";
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <script src="~/Scripts/jquery-3.7.0.js"></script>
-    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <style>
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-    </style>
+    <title>TinyMCE Online Editor</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin" />
+
+    <script src="~/TinyMCE/vender/jquery.min.js"></script>
+    <link href="~/TinyMCE/vender/semantic.min.css" rel="stylesheet" />
+    <script src="~/TinyMCE/vender/semantic.min.js"></script>
+    <link href="~/TinyMCE/style.css" rel="stylesheet" />
+    <link href="~/TinyMCE/vender/font-awesome.css" rel="stylesheet" />
+    <script src="~/TinyMCE/vender/clipboard.min.js"></script>
+    <script src="~/TinyMCE/vender/puli-util.clipboard.js"></script>
+    <script src="~/TinyMCE/copy-init.js"></script>
+    <link href="~/TinyMCE/images/favicon-16x16.png" rel="icon" sizes="16x16" />
+    <link href="~/TinyMCE/images/favicon-32x32.png" rel="icon" sizes="32x32" />
+    <link href="~/TinyMCE/images/favicon-48x48.png" rel="icon" sizes="48x48" />
+    <link href="~/TinyMCE/images/favicon-96x96.png" rel="icon" sizes="96x96" />
+    <script src="~/TinyMCE/string-utils.js"></script>
+    <script src="~/TinyMCE/vender/FileSaver.js"></script>
+    <script src="~/TinyMCE/input-file-loader.js"></script>
+    <script src="~/TinyMCE/url-parameter-utils.js"></script>
+    <script src="~/TinyMCE/script.js"></script>
+    <script src="~/TinyMCE/vender/tinymce-4/tinymce.min.js"></script>
+
 </head>
 <body>
-    <div data-v-71bab962="" class="menuNav">
-        <div data-v-71bab962="" class="container-lg">
-            <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
-                <button data-v-71bab962="" aria-label="Toggler" data-bs-toggle="collapse" class="navbar-toggler" type="button" data-bs-target="#navbarSupportedContent">
-                    <svg data-v-71bab962="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 448 512">
-                        <path class="" fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"></path>
-                    </svg>
+    <form class="ui form">
+        <textarea id="file_content">Content</textarea>
+        <div class="ui four column grid">
+            <div class="four wide column">
+                <button type="button" class="fluid ui labeled icon button" id="preview_button">
+                    <i class="video play outline icon"></i>
+                    PREVIEW
                 </button>
-                <div data-v-71bab962="" class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div data-v-71bab962="" class="d-block d-lg-none">
-                        <ul data-v-71bab962="" class="ToolList">
-                            <li data-v-71bab962="">
-                                <span data-v-71bab962="">
-                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn">小</button>
-                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn">中</button>
-                                    <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn">大</button>
-                                </span>
-                                <button data-v-71bab962="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn" aria-label="btn">
-                                    <span class="">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z"></path>
-                                        </svg>
-                                        <span data-v-71bab962="">En</span>
-                                    </span>
-                                </button>
-                            </li>
-                        </ul>
-                        <div data-v-71bab962="" class="el-divider el-divider--horizontal" role="separator" style="--el-border-style: solid;"></div>
-                        <div data-v-71bab962="" class="el-row collapse navbar-collapse" style="margin-left: -17.5px; margin-right: -17.5px;">
-                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                <a data-v-71bab962="" href="/announcement" class="router-link-active router-link-exact-active MenuTitle" aria-current="page">最新消息</a>
-                                <ul data-v-71bab962="" class="MenuList">
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/announcement">中心公告</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/video">影音專區</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div data-v-71bab962="" class="el-col el-col-12 is-guttered" style="padding-right: 17.5px; padding-left: 17.5px;">
-                                <a data-v-71bab962="" href="/about" class="MenuTitle">中心介紹</a>
-                                <ul data-v-71bab962="" class="MenuList">
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#Objectives">使命、願景</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#mission">中心任務</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#Organization">組織概況</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#BOD">第１屆 董監事</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#CEO">執行長</a>
-                                    </li>
-                                    <li data-v-71bab962="">
-                                        <a data-v-71bab962="" href="/about#Units">單位介紹</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+            </div>
+            <div class="seven wide column">
+                <div class="ui action input">
+                    <select class="ui compact selection dropdown file-format" id="file_format">
+                        <option value="html" selected="">HTML (.html)</option>
+                        <option value="odt">OpenDocument (.odt)</option>
+                    </select>
+                    <div type="submit" class="ui right labeled icon button" id="save_button">
+                        SAVE
+                        <i class="save icon"></i>
                     </div>
-                    <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex">
-                        <li data-v-71bab962="" class="nav-item dropdown position-static">
-                            <a data-v-71bab962="" href="/announcement" class="router-link-active router-link-exact-active nav-link dropdown-toggle" aria-current="page" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                最新消息
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/announcement">中心公告</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/video">影音專區</a></li>
-                            </ul>
-                        </li>
-                        <li data-v-71bab962="" class="nav-item dropdown position-static">
-                            <a data-v-71bab962="" href="/about" class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                中心介紹
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#Objectives">使命、願景</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#mission">中心任務</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#Organization">組織概況</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#BOD">第１屆 董監事</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#CEO">執行長</a></li>
-                                <li><a data-v-71bab962="" class="dropdown-item" href="/about#Units">單位介紹</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
-            </nav>
+            </div>
         </div>
-    </div>
+    </form>
+
+    <script>
+        tinymce.init({
+            selector: '#file_content'
+        });
+    </script>
 </body>
 </html>

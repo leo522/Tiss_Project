@@ -19,8 +19,6 @@ namespace TISS_Web.Controllers
     public class TissController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
-        //private readonly TISS_WebEntities _db;
-        //private readonly ContentService _contentService;
 
         #region 登入
         public ActionResult Login()
@@ -31,6 +29,8 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult Login(string UserName, string pwd)
         {
+            // 將使用者輸入的密碼進行SHA256加密
+            string hashedPwd = ComputeSha256Hash(pwd);
             var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == pwd);
 
             if (dto != null)
