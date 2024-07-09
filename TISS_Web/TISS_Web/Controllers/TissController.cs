@@ -204,6 +204,8 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
+        #region 自己上傳檔案使用
+
         public ActionResult editPage()
         {
             try
@@ -235,14 +237,15 @@ namespace TISS_Web.Controllers
 
                 // 計算新的 FileNo
                 int newFileNo = 1;
-                var lastNo = _db.AnnouncementPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
+                var lastNo = _db.PressPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
                 if (lastNo != null)
                 {
-                    newFileNo = lastNo.FileNo.GetValueOrDefault() + 1;
+                    //newFileNo = lastNo.FileNo.GetValueOrDefault() + 1;
+                    newFileNo = lastNo.FileNo + 1;
                 }
 
-                // 創建新的 AnnouncementPageContent 物件並設置屬性值
-                var newContent = new AnnouncementPageContent
+                // 創建新的 db 物件並設置屬性值
+                var newContent = new PressPageContent
                 {
                     //UserAccount = userName,
                     UserAccount = "00048",
@@ -254,7 +257,7 @@ namespace TISS_Web.Controllers
                 };
 
                 // 將新的 AnnouncementPageContent 物件添加到資料庫並保存變更
-                _db.AnnouncementPageContent.Add(newContent);
+                _db.PressPageContent.Add(newContent);
                 _db.SaveChanges();
 
                 // 返回成功的 JSON 響應並包含圖片數據（可選）
@@ -266,7 +269,7 @@ namespace TISS_Web.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
-        
+        #endregion
 
         #region 首頁
         /// <summary>
@@ -288,16 +291,7 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult announcement()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
-        }
 
-        /// <summary>
-        /// 影音專區
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult video()
-        {
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
@@ -373,6 +367,44 @@ namespace TISS_Web.Controllers
 
         #endregion
 
+        #region 影音專區
+        /// <summary>
+        /// 影音專區
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult video()
+        {
+            Session["ReturnUrl"] = Request.Url.ToString();
+            return View();
+        }
+
+        /// <summary>
+        /// 中心成果
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult achievement()
+        { 
+            return View();
+        }
+
+        /// <summary>
+        /// 新聞影音
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult news()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 活動紀錄
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult activityRecord() 
+        {
+            return View();
+        }
+        #endregion
         #region 中心介紹
         /// <summary>
         /// 中心介紹
@@ -384,6 +416,12 @@ namespace TISS_Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 儲存網頁新增的圖片
+        /// </summary>
+        /// <param name="textContent"></param>
+        /// <param name="ImageSrc"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult aboutSaveContent(string textContent, string ImageSrc)
@@ -393,11 +431,33 @@ namespace TISS_Web.Controllers
                 var userName = Session["UserName"] as string; //從Session中獲取已登錄的帳號
 
                 byte[] imageBytes = null; // 將圖片數據轉換成byte[]
+
                 if (!string.IsNullOrEmpty(ImageSrc))
                 {
-                    string ba64 = ImageSrc.Split(',')[1];
-                    imageBytes = Convert.FromBase64String(ba64);
+                    string[] ba64 = ImageSrc.Split(',');
+
+                    if (ba64.Length == 2) 
+                    {
+                        string mimeType = ba64[0].Split(':')[1].Split(';')[0];
+                        string dto = ba64[1];
+
+                        if (mimeType == "image/jpeg" || mimeType == "image/jpg" || mimeType == "image/png")
+                        {
+                            imageBytes = Convert.FromBase64String(dto);
+
+                            // 檢查文件大小，確保小於等於2MB
+                            if (imageBytes.Length > 2 * 1024 * 1024)
+                            {
+                                return Json(new { success = false, error = "圖片大小不能超過2MB" });
+                            }
+                        }
+                        else
+                        {
+                            return Json(new { success = false, error = "只允許上傳jpg、jpeg或png格式的圖片" });
+                        }
+                    }
                 }
+
                 // 計算新的 FileNo
                 int newFileNo = 1;
                 var lastNo = _db.AboutPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
@@ -426,6 +486,7 @@ namespace TISS_Web.Controllers
                 return Json(new { success = false, error = ex.Message });
             }
         }
+
 
         [HttpGet]
         public ActionResult aboutGetContent()
@@ -469,8 +530,6 @@ namespace TISS_Web.Controllers
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
-
-
 
         /// <summary>
         /// 任務
@@ -791,12 +850,13 @@ namespace TISS_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadContent(AboutPageContentModel model, HttpPostedFileBase imageFile)
+        public ActionResult UploadContent(PressPageContentModel model, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
-                var aboutPageContent = new AboutPageContent
+                var dto = new PressPageContent
                 {
+                    FileNo = model.FileNo,
                     TextContent = model.TextContent,
                     FileUploadTime = DateTime.Now,
                     TextUpdateTime = DateTime.Now,
@@ -814,12 +874,12 @@ namespace TISS_Web.Controllers
                 {
                     using (var reader = new System.IO.BinaryReader(imageFile.InputStream))
                     {
-                        aboutPageContent.ImageContent = reader.ReadBytes(imageFile.ContentLength);
+                        dto.ImageContent = reader.ReadBytes(imageFile.ContentLength);
                     }
-                    aboutPageContent.ImageUpdateTime = DateTime.Now;
+                    dto.ImageUpdateTime = DateTime.Now;
                 }
 
-                _db.AboutPageContent.Add(aboutPageContent);
+                _db.PressPageContent.Add(dto);
                 _db.SaveChanges();
 
                 return RedirectToAction("WebContent");

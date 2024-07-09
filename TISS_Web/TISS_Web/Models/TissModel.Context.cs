@@ -46,7 +46,6 @@ namespace TISS_Web.Models
         public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
         public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
         public virtual DbSet<PlanPageContent> PlanPageContent { get; set; }
-        public virtual DbSet<PressPageContent> PressPageContent { get; set; }
         public virtual DbSet<ProcedurePageContent> ProcedurePageContent { get; set; }
         public virtual DbSet<Public_InfoPageContent> Public_InfoPageContent { get; set; }
         public virtual DbSet<PurchasePageContent> PurchasePageContent { get; set; }
@@ -65,5 +64,6 @@ namespace TISS_Web.Models
         public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
         public virtual DbSet<Article> Article { get; set; }
         public virtual DbSet<ArticleClickCount> ArticleClickCount { get; set; }
+        public virtual DbSet<PressPageContent> PressPageContent { get; set; }
     }
 }

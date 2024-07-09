@@ -26,5 +26,6 @@ namespace TISS_Web.Models
         public Nullable<System.DateTime> WebsiteURLUpdateTime { get; set; }
         public string UserAccount { get; set; }
         public Nullable<System.DateTime> UserLoginTime { get; set; }
+        public int FileNo { get; set; }
     }
 }

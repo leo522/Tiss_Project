@@ -1,0 +1,14 @@
+﻿.all-category-btn {
+    font-size: 1.3rem;
+    padding: 0 40px;
+    border-radius: 50px;
+    height: 50px;
+    border-color: rgba(65, 105, 225);
+    background-color: transparent;
+    color: #000;
+}
+
+    .all-category-btn.active {
+        background-color: #5A5AAD;
+        color: #fff;
+    }

@@ -30,7 +30,6 @@
         <EntityTypeShape EntityType="TISS_WebModel.OrganizationPageContent" Width="1.5" PointX="9.75" PointY="12.75" />
         <EntityTypeShape EntityType="TISS_WebModel.OtherPageContent" Width="1.5" PointX="11.75" PointY="12.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PlanPageContent" Width="1.5" PointX="2.75" PointY="13.75" />
-        <EntityTypeShape EntityType="TISS_WebModel.PressPageContent" Width="1.5" PointX="13.75" PointY="4.75" />
         <EntityTypeShape EntityType="TISS_WebModel.ProcedurePageContent" Width="1.5" PointX="4.75" PointY="13.75" />
         <EntityTypeShape EntityType="TISS_WebModel.Public_InfoPageContent" Width="1.5" PointX="6.75" PointY="13.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PurchasePageContent" Width="1.5" PointX="13.75" PointY="8.75" />
@@ -50,6 +49,7 @@
         <EntityTypeShape EntityType="TISS_WebModel.Article" Width="1.5" PointX="18.375" PointY="5" />
         <EntityTypeShape EntityType="TISS_WebModel.ArticleClickCount" Width="1.5" PointX="20.625" PointY="5.25" />
         <AssociationConnector Association="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" />
+        <EntityTypeShape EntityType="TISS_WebModel.PressPageContent" Width="1.5" PointX="18.375" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

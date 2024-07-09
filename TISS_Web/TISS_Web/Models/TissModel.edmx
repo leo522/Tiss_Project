@@ -346,6 +346,7 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
+          <Property Name="FileNo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProcedurePageContent">
           <Key>
@@ -929,7 +930,6 @@
           <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
           <EntitySet Name="OtherPageContent" EntityType="TISS_WebModel.OtherPageContent" />
           <EntitySet Name="PlanPageContent" EntityType="TISS_WebModel.PlanPageContent" />
-          <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
           <EntitySet Name="ProcedurePageContent" EntityType="TISS_WebModel.ProcedurePageContent" />
           <EntitySet Name="Public_InfoPageContent" EntityType="TISS_WebModel.Public_InfoPageContent" />
           <EntitySet Name="PurchasePageContent" EntityType="TISS_WebModel.PurchasePageContent" />
@@ -952,6 +952,7 @@
             <End Role="Article" EntitySet="Article" />
             <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
           </AssociationSet>
+          <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1197,23 +1198,6 @@
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PlanPageContent">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="PressPageContent">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -1544,6 +1528,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PressPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+          <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+          <Property Name="FileNo" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1890,24 +1892,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PressPageContent">
-            <EntityTypeMapping TypeName="TISS_WebModel.PressPageContent">
-              <MappingFragment StoreEntitySet="PressPageContent">
-                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
-                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
-                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
-                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
-                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
-                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
-                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
-                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
-                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
-                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
-                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProcedurePageContent">
             <EntityTypeMapping TypeName="TISS_WebModel.ProcedurePageContent">
               <MappingFragment StoreEntitySet="ProcedurePageContent">
@@ -2221,6 +2205,25 @@
                 <ScalarProperty Name="LastResetDate" ColumnName="LastResetDate" />
                 <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
                 <ScalarProperty Name="ArticleClickID" ColumnName="ArticleClickID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PressPageContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.PressPageContent">
+              <MappingFragment StoreEntitySet="PressPageContent">
+                <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+                <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+                <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+                <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+                <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

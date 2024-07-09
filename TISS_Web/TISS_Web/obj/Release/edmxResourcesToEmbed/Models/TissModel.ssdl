@@ -34,6 +34,31 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" />
+  </EntityType>
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ArticleID" />
+    </Key>
+    <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PublishDate" Type="datetime" Nullable="false" />
+    <Property Name="UnpublishDate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'TISS_Web.dbo.ArticleClickCount' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="ArticleClickCount">
+    <Key>
+      <PropertyRef Name="ClickCount" />
+      <PropertyRef Name="LastResetDate" />
+      <PropertyRef Name="ArticleID" />
+    </Key>
+    <Property Name="ArticleClickID" Type="int" />
+    <Property Name="ClickCount" Type="int" Nullable="false" />
+    <Property Name="LastResetDate" Type="datetime" Nullable="false" />
+    <Property Name="ArticleID" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>
@@ -265,6 +290,24 @@
     <Property Name="PermissionName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="PhysicalTrainingPageContent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
+    <Property Name="TextContent" Type="nvarchar(max)" />
+    <Property Name="ImageContent" Type="varbinary(max)" />
+    <Property Name="FileUploadTime" Type="datetime" />
+    <Property Name="TextUpdateTime" Type="datetime" />
+    <Property Name="ImageUpdateTime" Type="datetime" />
+    <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="VideoUpdateTime" Type="datetime" />
+    <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserLoginTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="PlanPageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -298,6 +341,7 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProcedurePageContent">
     <Key>
@@ -406,6 +450,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
     <Property Name="TextContent" Type="nvarchar(max)" />
     <Property Name="ImageContent" Type="varbinary(max)" />
     <Property Name="FileUploadTime" Type="datetime" />
@@ -417,6 +462,7 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="ClickCount" Type="int" />
   </EntityType>
   <EntityType Name="RolePermissions">
     <Key>
@@ -456,6 +502,60 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TextContent" Type="nvarchar(max)" />
+    <Property Name="ImageContent" Type="varbinary(max)" />
+    <Property Name="FileUploadTime" Type="datetime" />
+    <Property Name="TextUpdateTime" Type="datetime" />
+    <Property Name="ImageUpdateTime" Type="datetime" />
+    <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="VideoUpdateTime" Type="datetime" />
+    <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserLoginTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SportsNutritionPageContent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
+    <Property Name="TextContent" Type="nvarchar(max)" />
+    <Property Name="ImageContent" Type="varbinary(max)" />
+    <Property Name="FileUploadTime" Type="datetime" />
+    <Property Name="TextUpdateTime" Type="datetime" />
+    <Property Name="ImageUpdateTime" Type="datetime" />
+    <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="VideoUpdateTime" Type="datetime" />
+    <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserLoginTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SportsPhysiologyPageContent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
+    <Property Name="TextContent" Type="nvarchar(max)" />
+    <Property Name="ImageContent" Type="varbinary(max)" />
+    <Property Name="FileUploadTime" Type="datetime" />
+    <Property Name="TextUpdateTime" Type="datetime" />
+    <Property Name="ImageUpdateTime" Type="datetime" />
+    <Property Name="VideoURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="VideoUpdateTime" Type="datetime" />
+    <Property Name="WebsiteURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="WebsiteURLUpdateTime" Type="datetime" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserLoginTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SportsPsychologyPageContent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileNo" Type="int" />
     <Property Name="TextContent" Type="nvarchar(max)" />
     <Property Name="ImageContent" Type="varbinary(max)" />
     <Property Name="FileUploadTime" Type="datetime" />
@@ -539,6 +639,18 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <Association Name="FK__ArticleCl__Artic__662B2B3B">
+    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
+    <End Role="ArticleClickCount" Type="Self.ArticleClickCount" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Article">
+        <PropertyRef Name="ArticleID" />
+      </Principal>
+      <Dependent Role="ArticleClickCount">
+        <PropertyRef Name="ArticleClickID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -590,6 +702,7 @@
   <EntityContainer Name="TISS_WebModelStoreContainer">
     <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BODPageContent" EntityType="Self.BODPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
@@ -604,6 +717,7 @@
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PlanPageContent" EntityType="Self.PlanPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PressPageContent" EntityType="Self.PressPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcedurePageContent" EntityType="Self.ProcedurePageContent" Schema="dbo" store:Type="Tables" />
@@ -617,11 +731,26 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SportMedicinePageContent" EntityType="Self.SportMedicinePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SportSciencePageContent" EntityType="Self.SportSciencePageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SportsNutritionPageContent" EntityType="Self.SportsNutritionPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SportsPhysiologyPageContent" EntityType="Self.SportsPhysiologyPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SportsPsychologyPageContent" EntityType="Self.SportsPsychologyPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SportTechPageContent" EntityType="Self.SportTechPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnitsPageContent" EntityType="Self.UnitsPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleClickCount" EntityType="Self.ArticleClickCount" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ArticleClickCount].[ArticleClickID] AS [ArticleClickID], 
+    [ArticleClickCount].[ClickCount] AS [ClickCount], 
+    [ArticleClickCount].[LastResetDate] AS [LastResetDate], 
+    [ArticleClickCount].[ArticleID] AS [ArticleID]
+    FROM [dbo].[ArticleClickCount] AS [ArticleClickCount]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="Self.FK__ArticleCl__Artic__662B2B3B">
+      <End Role="Article" EntitySet="Article" />
+      <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
+    </AssociationSet>
     <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
       <End Role="Permissions" EntitySet="Permissions" />
       <End Role="RolePermissions" EntitySet="RolePermissions" />

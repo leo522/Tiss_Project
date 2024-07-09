@@ -341,6 +341,7 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProcedurePageContent">
     <Key>
