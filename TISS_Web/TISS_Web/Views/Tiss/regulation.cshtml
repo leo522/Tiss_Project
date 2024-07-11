@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
+@model PagedList.IPagedList<TISS_Web.Models.RegulationDocumentModel>
+@using PagedList.Mvc;
 <!DOCTYPE html>
 <html>
 <head>
@@ -352,7 +354,7 @@
                             </div>
                         </nav>
                     </div>
-                </div>               
+                </div>
             </header>
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
                 <div data-v-339da53a-s="" class="BasePageLayout">
@@ -490,242 +492,92 @@
                                         法規
                                         <span class="primary">Regulation</span>
                                     </div>
-                                    <div class="infoList">
-                                        <div class="d-none d-lg-block" style="height: 550px;">
-                                            <div class="el-auto-resizer" style="width: 100%; height: 100%;">
-                                                <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
-                                                    <div role="table" class="el-table-v2__table el-table-v2__main">
-                                                        <div class="el-vl__wrapper el-table-v2__body" role="rowgroup">
-                                                            <div class="" style="position: relative; overflow: hidden; will-change: transform; direction: ltr; height: 500px; width: 870px;">
-                                                                <div style="height: 512px; width: 870px;">
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 0px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto;
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心設置條例">國家運動科學中心設置條例</div>
+                                </div>
+                                <div class="infoList">
+                                    <div class="d-none d-lg-block">
+                                        <div class="el-auto-resizer" style="width: 100%; height: 100%;">
+                                            <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
+                                                <div role="table" class="el-table-v2__table el-table-v2__main">
+                                                    <div class="el-vl__wrapper el-table-v2__body" role="rowgroup">
+                                                        <div class="" style="position: relative; overflow: hidden; will-change: transform; direction: ltr; height: 500px; width: 870px;">
+                                                            <div class="el-table-v2__header-wrapper" role="rowgroup">
+                                                                <div class="el-table-v2__header" style="height: 50px;">
+                                                                    <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row" style="height: 50px;">
+                                                                        <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="width: 480px;">
+                                                                            <div class="el-table-v2__header-cell-text" title="名稱">名稱</div>
                                                                         </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
+                                                                        <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="width: 240px;">
+                                                                            <div class="el-table-v2__header-cell-text" title="發布日期">發布日期</div>
                                                                         </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/1國家運動科學中心設置條例.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 64px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心組織章程">國家運動科學中心組織章程</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/2國家運動科學中心組織章程.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 128px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心人事管理規章">國家運動科學中心人事管理規章</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/國家運動科學中心人事管理規章_1130513.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 192px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心會計制度規章">國家運動科學中心會計制度規章</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/4國家運動科學中心會計制度規章.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 256px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心內部控制作業規章">國家運動科學中心內部控制作業規章</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/5國家運動科學中心內部控制作業規章-教育部核定(1121215臺教授體字第1120051831號函).pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 320px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心稽核作業規章">國家運動科學中心稽核作業規章</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/6國家運動科學中心稽核作業規章-教育部核定(1121215臺教授體字第1120051744).pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 384px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心董事會議事規範">國家運動科學中心董事會議事規範</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/7國家運動科學中心董事會議事規範.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 448px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心自主財源收支管理規章">國家運動科學中心自主財源收支管理規章</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/01/01</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/8國家運動科學中心自主財源收支管理規章.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
+                                                                        <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="width: 280px;">
+                                                                            <div class="el-table-v2__header-cell-text" title="附件">附件</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div role="presentation" class="el-virtual-scrollbar el-vl__horizontal" style="position: absolute; height: 6px; left: 2px; right: 2px; bottom: 2px; border-radius: 4px; width: 862px;">
-                                                                <div class="el-scrollbar__thumb" style="display: none;">
-                                                                </div>
-                                                            </div>
-                                                            <div role="presentation" class="el-virtual-scrollbar el-vl__vertical" style="position: absolute; width: 6px; top: 2px; right: 2px; bottom: 2px; border-radius: 4px; height: 492px;">
-                                                                <div class="el-scrollbar__thumb" style="height: 488.281px; transform: translateY(0px); width: 100%;">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="el-table-v2__header-wrapper" role="rowgroup" style="width: 870px; height: 50px;">
-                                                            <div class="el-table-v2__header" style="width: 864px; height: 50px;">
-                                                                <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row" role="row" style="width: 100%; height: 50px;">
-                                                                    <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="flex: 0 1 auto; width: 480px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="名稱">名稱</div>
+                                                            <div class="form-group" style="height: 450px; overflow-y: auto; font-size:16px;">
+                                                                @foreach (var file in Model)
+                                                                {
+                                                                    <div class="el-table-v2__row TableRow" style="margin-bottom: 20px; padding: 5px;">
+                                                                        <div class="el-table-v2__row-cell" style="width: 480px;">
+                                                                            <div class="el-table-v2__cell-text">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                                        </div>
+                                                                        <div class="el-table-v2__row-cell" style="width: 240px;">
+                                                                            <div>@file.UploadTime.ToString("yyyy/MM/dd")</div>
+                                                                        </div>
+                                                                        <div class="el-table-v2__row-cell" style="width: 280px;">
+                                                                            <div class="BaseTagList download">
+                                                                                <span>
+                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank">
+                                                                                        <span class="el-tag el-tag--light is-round">
+                                                                                            <span class="el-tag__content">@file.DocumentType</span>
+                                                                                        </span>
+                                                                                    </a>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="flex: 0 1 auto; width: 240px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="發布日期">發布日期</div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="flex: 0 1 auto; width: 280px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="附件">附件</div>
-                                                                    </div>
-                                                                </div>
+                                                                }
+                                                                <nav aria-label="Page navigation">
+                                                                    <ul class="pagination justify-content-center">
+                                                                        @Html.PagedListPager(Model, page => Url.Action("regulation", new { page }),
+    new PagedListRenderOptions
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToIndividualPages = true,
+        LinkToFirstPageFormat = "<< 第一頁",
+        LinkToPreviousPageFormat = "< 前一頁",
+        LinkToNextPageFormat = "後一頁 >",
+        LinkToLastPageFormat = "最末頁 >>",
+        DisplayPageCountAndCurrentLocation = true,
+        PageCountAndCurrentLocationFormat = "第{0}頁/共 {1}頁",
+        DisplayItemSliceAndTotal = true,
+        ItemSliceAndTotalFormat = "顯示項目：{0}~{1},共{2}項"
+    })
+                                                                    </ul>
+                                                                </nav>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <ul class="DataList d-block d-lg-none">
-                                        </ul>
-                                        <div class="Pagination">
-                                            <div class="container">
-                                                <div class="content">
-                                                    <div class="BasePagination center" total="0">
-                                                        <button aria-disabled="true" disabled type="button" class="el-button is-disabled BtnTool" aria-label="head-page">
-                                                            <span class="">
-                                                                <svg class="svg-inline--fa fa-angles-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                    <path class="" fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                        <button aria-disabled="true" disabled type="button" class="el-button is-disabled BtnTool" aria-label="prev-page">
-                                                            <span class="">
-                                                                <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                    <path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                        <div class="el-pagination el-pagination--small">
-                                                            <ul class="el-pager is-first">
-                                                                <li class="is-active number" aria-current="true" aria-label="page 1" tabindex="0">1</li>
-                                                            </ul>
+                                            @{
+                                                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                                {
+                                                    using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    {
+                                                        <label for="file" class="control-label col-md-2">選擇檔案</label>
+                                                        <div class="col-md-10">
+                                                            <input type="file" name="file" />
+                                                            <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
                                                         </div>
-                                                        <button aria-disabled="false" type="button" class="el-button BtnTool" aria-label="next-page">
-                                                            <span class="">
-                                                                <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                    <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                        <button aria-disabled="false" type="button" class="el-button BtnTool" aria-label="tail-page">
-                                                            <span class="">
-                                                                <svg class="svg-inline--fa fa-angles-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                    <path class="" fill="currentColor" d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z">
-                                                                    </path>
-                                                                </svg>
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                    }
+                                                }
+                                            }
+
                                         </div>
                                     </div>
                                 </div>
@@ -743,18 +595,19 @@
         </div>
     </div>
     <script>
-    $(documnet).reday(function () {
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        //登出按鈕顯示功能
+$(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
-            }
-        }
-    });
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
+        //登出按鈕顯示功能
+
     </script>
 </body>
 </html>

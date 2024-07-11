@@ -65,5 +65,13 @@ namespace TISS_Web.Models
         public virtual DbSet<Article> Article { get; set; }
         public virtual DbSet<ArticleClickCount> ArticleClickCount { get; set; }
         public virtual DbSet<PressPageContent> PressPageContent { get; set; }
+        public virtual DbSet<FileDocument> FileDocument { get; set; }
+        public virtual DbSet<RegulationDocument> RegulationDocument { get; set; }
+        public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
+        public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
+        public virtual DbSet<OutherDocument> OutherDocument { get; set; }
+        public virtual DbSet<PlanDocument> PlanDocument { get; set; }
+        public virtual DbSet<ProcedureDocument> ProcedureDocument { get; set; }
+        public virtual DbSet<PurchaseDocument> PurchaseDocument { get; set; }
     }
 }

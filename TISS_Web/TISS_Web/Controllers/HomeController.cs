@@ -64,7 +64,15 @@ namespace TISS_Web.Controllers
 
         public ActionResult Navbar() 
         {
+            ViewBag.Documents = GetFile();
             return View();
+        }
+        public List<string> GetFile() 
+        {
+            var dto =(from f in _db.FileDocument select f.DocumentName).ToList();
+
+            var dtos = dto.Select(f => System.IO.Path.GetFileNameWithoutExtension(f)).ToList();
+            return dtos;
         }
     }
 }

@@ -1,61 +1,29 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>TinyMCE Online Editor</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin" />
-
-    <script src="~/TinyMCE/vender/jquery.min.js"></script>
-    <link href="~/TinyMCE/vender/semantic.min.css" rel="stylesheet" />
-    <script src="~/TinyMCE/vender/semantic.min.js"></script>
-    <link href="~/TinyMCE/style.css" rel="stylesheet" />
-    <link href="~/TinyMCE/vender/font-awesome.css" rel="stylesheet" />
-    <script src="~/TinyMCE/vender/clipboard.min.js"></script>
-    <script src="~/TinyMCE/vender/puli-util.clipboard.js"></script>
-    <script src="~/TinyMCE/copy-init.js"></script>
-    <link href="~/TinyMCE/images/favicon-16x16.png" rel="icon" sizes="16x16" />
-    <link href="~/TinyMCE/images/favicon-32x32.png" rel="icon" sizes="32x32" />
-    <link href="~/TinyMCE/images/favicon-48x48.png" rel="icon" sizes="48x48" />
-    <link href="~/TinyMCE/images/favicon-96x96.png" rel="icon" sizes="96x96" />
-    <script src="~/TinyMCE/string-utils.js"></script>
-    <script src="~/TinyMCE/vender/FileSaver.js"></script>
-    <script src="~/TinyMCE/input-file-loader.js"></script>
-    <script src="~/TinyMCE/url-parameter-utils.js"></script>
-    <script src="~/TinyMCE/script.js"></script>
-    <script src="~/TinyMCE/vender/tinymce-4/tinymce.min.js"></script>
-
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <form class="ui form">
-        <textarea id="file_content">Content</textarea>
-        <div class="ui four column grid">
-            <div class="four wide column">
-                <button type="button" class="fluid ui labeled icon button" id="preview_button">
-                    <i class="video play outline icon"></i>
-                    PREVIEW
-                </button>
-            </div>
-            <div class="seven wide column">
-                <div class="ui action input">
-                    <select class="ui compact selection dropdown file-format" id="file_format">
-                        <option value="html" selected="">HTML (.html)</option>
-                        <option value="odt">OpenDocument (.odt)</option>
-                    </select>
-                    <div type="submit" class="ui right labeled icon button" id="save_button">
-                        SAVE
-                        <i class="save icon"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
+    <div class="container mt-5">
+        <h2>選擇文件</h2>
+        <select class="form-control" id="documentSelect">
+            <option value="">請選擇文件</option>
+            @foreach (var item in ViewBag.Documents)
+            {
+                <option>@item</option>
+            }
+        </select>
+        <nav aria-label="">
+            <ul class="pagination">
 
-    <script>
-        tinymce.init({
-            selector: '#file_content'
-        });
-    </script>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+            </ul>
+        </nav>
+    </div>
 </body>
 </html>

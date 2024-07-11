@@ -150,4 +150,108 @@ namespace TISS_Web.Models
     public class VideoPageContentModel : WebContentModel
     {
     }
+
+    public class FileDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime LastModifiedTime { get; set; }
+        public int DownloadCount { get; set; }
+    }
+
+    public class RegulationDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class ProcedureDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class PlanDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class BudgetDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class DownloadDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class PurchaseDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
+
+    public class OtherDocumentModel
+    {
+        public int ID { get; set; }
+        public int PId { get; set; }
+        public string DocumentName { get; set; }
+        public DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public string DocumentType { get; set; }
+        public int FileSize { get; set; }
+        public DateTime ModifiedTime { get; set; }
+        public bool IsActive { get; set; }
+    }
 }

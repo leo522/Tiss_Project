@@ -90,3 +90,7 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\EntityFramework.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\EntityFramework.SqlServer.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\zh-Hant\EntityFramework.resources.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.Mvc.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.Mvc.xml

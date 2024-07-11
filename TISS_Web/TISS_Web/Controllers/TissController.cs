@@ -13,6 +13,7 @@ using System.Net.NetworkInformation;
 using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 using System.Text;
+using PagedList;
 
 namespace TISS_Web.Controllers
 {
@@ -31,7 +32,7 @@ namespace TISS_Web.Controllers
         {
             // 將使用者輸入的密碼進行SHA256加密
             string hashedPwd = ComputeSha256Hash(pwd);
-            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == pwd);
+            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
 
             if (dto != null)
             {
@@ -65,9 +66,9 @@ namespace TISS_Web.Controllers
         public ActionResult Logout()
         {
             // 清除所有的 Session 資訊
-            Session.Clear();
-            Session.Abandon();
-
+            //Session.Clear();
+            //Session.Abandon();
+            Session.Remove("LoggedIn");
             // 清除所有的 Forms 認證 Cookies
             FormsAuthentication.SignOut();
 
@@ -204,7 +205,7 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 自己上傳檔案使用
+        #region 自己上傳圖片和文字使用
 
         public ActionResult editPage()
         {
@@ -268,6 +269,95 @@ namespace TISS_Web.Controllers
             {
                 return Json(new { success = false, error = ex.Message });
             }
+        }
+        #endregion
+
+        #region 上傳"法規"文件檔案
+        public ActionResult UploadDocument()
+        {
+            var uploadedFiles = _db.RegulationDocument
+                           .Select(d => new RegulationDocumentModel
+                           {
+                               ID = d.ID,
+                               PId = d.PId,
+                               DocumentName = d.DocumentName,
+                               UploadTime = d.UploadTime.GetValueOrDefault(),
+                               Creator = d.Creator,
+                               DocumentType = d.DocumentType,
+                               FileSize = d.FileSize.GetValueOrDefault(),
+                               ModifiedTime = d.ModifiedTime.GetValueOrDefault(),
+                               IsActive = d.IsActive,
+                           })
+                           .ToList();
+
+            return View(uploadedFiles);
+        }
+
+        [HttpPost]
+        public ActionResult UploadDocument(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToLower();
+
+                    // 檢查文件類型是否符合要求
+                    if (fileExtension == ".pdf" || fileExtension == ".doc" ||
+                        fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".xls" || fileExtension == ".xlsx")
+                    {
+                        string filePath = Path.Combine(Server.MapPath("~/storage/media/attachments"), fileName);
+
+                        file.SaveAs(filePath);
+
+                        // 查詢當前DB中最大的 PId，並生成新的 PId
+                        int maxPId = _db.RegulationDocument.Max(d => (int?)d.PId) ?? 0;
+                        int newPId = maxPId + 1;
+
+                        string UserId = Session["UserName"].ToString();
+
+                        RegulationDocument document = new RegulationDocument
+                        {
+                            PId = newPId,
+                            DocumentName = fileName,
+                            UploadTime = DateTime.Now,
+                            Creator = UserId,
+                            DocumentType = fileExtension,
+                            FileSize = file.ContentLength,
+                            IsActive = true
+                        };
+
+                        _db.RegulationDocument.Add(document);
+                        _db.SaveChanges();
+
+                        ViewBag.Message = "文件上傳成功！";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "上傳文件時出錯： " + ex.Message;
+                }
+            }
+            else
+            {
+                ViewBag.Message = "請選擇要上傳的文件。";
+            }
+
+            var uploadedFiles = _db.RegulationDocument
+                            .OrderByDescending(d => d.UploadTime)  // 根據 UploadTime 降序排序
+                            .Select(d => new RegulationDocumentModel
+                            {
+                                DocumentName = d.DocumentName,
+                                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                                Creator = d.Creator,
+                                DocumentType = d.DocumentType,
+                                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                                IsActive = d.IsActive,
+                            })
+                            .ToList();
+
+            return View("regulation", uploadedFiles);
         }
         #endregion
 
@@ -383,7 +473,7 @@ namespace TISS_Web.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult achievement()
-        { 
+        {
             return View();
         }
 
@@ -400,11 +490,12 @@ namespace TISS_Web.Controllers
         /// 活動紀錄
         /// </summary>
         /// <returns></returns>
-        public ActionResult activityRecord() 
+        public ActionResult activityRecord()
         {
             return View();
         }
         #endregion
+
         #region 中心介紹
         /// <summary>
         /// 中心介紹
@@ -436,7 +527,7 @@ namespace TISS_Web.Controllers
                 {
                     string[] ba64 = ImageSrc.Split(',');
 
-                    if (ba64.Length == 2) 
+                    if (ba64.Length == 2)
                     {
                         string mimeType = ba64[0].Split(':')[1].Split(';')[0];
                         string dto = ba64[1];
@@ -501,7 +592,7 @@ namespace TISS_Web.Controllers
                 {
                     // 去除多餘的空格和斷行符號
                     string textContent = System.Text.RegularExpressions.Regex.Replace(content.TextContent, @"\s+", " ").Trim();
-                    string imagePath = content.ImageContent != null? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}": string.Empty;
+                    string imagePath = content.ImageContent != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}" : string.Empty;
 
                     return Json(new
                     {
@@ -605,18 +696,18 @@ namespace TISS_Web.Controllers
                 _db.SaveChanges();
 
 
-            //    var dto = _db.CEOPageContent.OrderByDescending(c => c.FileNo).FirstOrDefault();
-            //    if (dto == null)
-            //    {
-            //        dto = new CEOPageContent();
-            //        _db.CEOPageContent.Add(dto);
-            //    }
-            //    dto.UserAccount = userName;
-            //    dto.TextContent = textContent;
-            //    dto.TextUpdateTime = DateTime.Now;
-            //    dto.ImageContent = imageBytes;
-            //    dto.ImageUpdateTime = DateTime.Now;
-            //    _db.SaveChanges();
+                //    var dto = _db.CEOPageContent.OrderByDescending(c => c.FileNo).FirstOrDefault();
+                //    if (dto == null)
+                //    {
+                //        dto = new CEOPageContent();
+                //        _db.CEOPageContent.Add(dto);
+                //    }
+                //    dto.UserAccount = userName;
+                //    dto.TextContent = textContent;
+                //    dto.TextUpdateTime = DateTime.Now;
+                //    dto.ImageContent = imageBytes;
+                //    dto.ImageUpdateTime = DateTime.Now;
+                //    _db.SaveChanges();
                 string imagePath = dtos.ImageContent != null
             ? $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}"
             : string.Empty;
@@ -729,7 +820,7 @@ namespace TISS_Web.Controllers
         /// 運動心理
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportsPsychology() 
+        public ActionResult sportsPsychology()
         {
             return View();
         }
@@ -738,7 +829,7 @@ namespace TISS_Web.Controllers
         /// 體能訓練
         /// </summary>
         /// <returns></returns>
-        public ActionResult physicalTraining() 
+        public ActionResult physicalTraining()
         {
             return View();
         }
@@ -747,13 +838,14 @@ namespace TISS_Web.Controllers
         /// 運動營養
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportsNutrition() 
+        public ActionResult sportsNutrition()
         {
             return View();
         }
         #endregion
 
         #region 公開資訊
+
         /// <summary>
         /// 公開資訊
         /// </summary>
@@ -761,6 +853,7 @@ namespace TISS_Web.Controllers
         public ActionResult public_info()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+
             return View();
         }
 
@@ -768,10 +861,21 @@ namespace TISS_Web.Controllers
         /// 法規
         /// </summary>
         /// <returns></returns>
-        public ActionResult regulation()
+        public ActionResult regulation(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.RegulationDocument
+                        .OrderByDescending(d => d.UploadTime)
+                        .Select(d => new RegulationDocumentModel
+                       {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
