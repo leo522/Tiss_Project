@@ -43,7 +43,6 @@ namespace TISS_Web.Models
         public virtual DbSet<InstitutePageContent> InstitutePageContent { get; set; }
         public virtual DbSet<MissionPageContent> MissionPageContent { get; set; }
         public virtual DbSet<ObjectivesPageContent> ObjectivesPageContent { get; set; }
-        public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
         public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
         public virtual DbSet<PlanPageContent> PlanPageContent { get; set; }
         public virtual DbSet<ProcedurePageContent> ProcedurePageContent { get; set; }
@@ -73,5 +72,7 @@ namespace TISS_Web.Models
         public virtual DbSet<ProcedureDocument> ProcedureDocument { get; set; }
         public virtual DbSet<PurchaseDocument> PurchaseDocument { get; set; }
         public virtual DbSet<OtherDocument> OtherDocument { get; set; }
+        public virtual DbSet<Language> Language { get; set; }
+        public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
     }
 }

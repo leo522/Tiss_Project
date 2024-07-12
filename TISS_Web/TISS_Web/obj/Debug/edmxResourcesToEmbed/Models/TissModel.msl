@@ -287,24 +287,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrganizationPageContent">
-      <EntityTypeMapping TypeName="TISS_WebModel.OrganizationPageContent">
-        <MappingFragment StoreEntitySet="OrganizationPageContent">
-          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
-          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
-          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
-          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
-          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
-          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
-          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
-          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
-          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
-          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
-          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="OtherPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.OtherPageContent">
         <MappingFragment StoreEntitySet="OtherPageContent">
@@ -791,6 +773,34 @@
           <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
           <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
           <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Language">
+      <EntityTypeMapping TypeName="TISS_WebModel.Language">
+        <MappingFragment StoreEntitySet="Language">
+          <ScalarProperty Name="Lang_enUS" ColumnName="Lang_enUS" />
+          <ScalarProperty Name="Lang_zhTW" ColumnName="Lang_zhTW" />
+          <ScalarProperty Name="Lang_Key" ColumnName="Lang_Key" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrganizationPageContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.OrganizationPageContent">
+        <MappingFragment StoreEntitySet="OrganizationPageContent">
+          <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+          <ScalarProperty Name="UserLoginTime" ColumnName="UserLoginTime" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="WebsiteURLUpdateTime" ColumnName="WebsiteURLUpdateTime" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="VideoUpdateTime" ColumnName="VideoUpdateTime" />
+          <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+          <ScalarProperty Name="ImageUpdateTime" ColumnName="ImageUpdateTime" />
+          <ScalarProperty Name="TextUpdateTime" ColumnName="TextUpdateTime" />
+          <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="TextContent" ColumnName="TextContent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

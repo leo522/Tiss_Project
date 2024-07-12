@@ -38,7 +38,10 @@ namespace TISS_Web
                 }
             }
 
-            int newFileNo = (_context.Set<T>().Max(d => (int?)d.GetType().GetProperty("FileNo").GetValue(d)) ?? 0) + 1;
+            //int newFileNo = (_context.Set<T>().Max(d => (int?)d.GetType().GetProperty("FileNo").GetValue(d)) ?? 0) + 1;
+            var allEntities = _context.Set<T>().ToList();
+            int newFileNo = (allEntities.Any() ? allEntities.Max(d => (int?)d.GetType().GetProperty("FileNo").GetValue(d)) ?? 0 : 0) + 1;
+
 
             var entity = createEntity();
             entity.GetType().GetProperty("UserAccount").SetValue(entity, userName);

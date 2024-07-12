@@ -254,4 +254,5 @@ namespace TISS_Web.Models
         public DateTime ModifiedTime { get; set; }
         public bool IsActive { get; set; }
     }
+
 }

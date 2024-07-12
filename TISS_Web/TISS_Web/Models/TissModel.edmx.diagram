@@ -27,7 +27,6 @@
         <EntityTypeShape EntityType="TISS_WebModel.InstitutePageContent" Width="1.5" PointX="11.75" PointY="4.75" />
         <EntityTypeShape EntityType="TISS_WebModel.MissionPageContent" Width="1.5" PointX="11.75" PointY="8.75" />
         <EntityTypeShape EntityType="TISS_WebModel.ObjectivesPageContent" Width="1.5" PointX="12.75" PointY="0.75" />
-        <EntityTypeShape EntityType="TISS_WebModel.OrganizationPageContent" Width="1.5" PointX="9.75" PointY="12.75" />
         <EntityTypeShape EntityType="TISS_WebModel.OtherPageContent" Width="1.5" PointX="11.75" PointY="12.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PlanPageContent" Width="1.5" PointX="2.75" PointY="13.75" />
         <EntityTypeShape EntityType="TISS_WebModel.ProcedurePageContent" Width="1.5" PointX="4.75" PointY="13.75" />
@@ -58,6 +57,8 @@
         <EntityTypeShape EntityType="TISS_WebModel.ProcedureDocument" Width="1.5" PointX="11.375" PointY="20.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PurchaseDocument" Width="1.5" PointX="20.375" PointY="12.75" />
         <EntityTypeShape EntityType="TISS_WebModel.OtherDocument" Width="1.5" PointX="20.375" PointY="8.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.Language" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.OrganizationPageContent" Width="1.5" PointX="20.375" PointY="16.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

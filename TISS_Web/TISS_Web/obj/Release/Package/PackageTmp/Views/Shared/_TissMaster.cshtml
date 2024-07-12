@@ -47,6 +47,9 @@
     <script src="~/bootstrap/js/bootstrap.js"></script>
     <script src="~/Scripts/4.5.2.bootstrap.min.js"></script>
     @*輪播圖要使用*@
+
+    <script src="~/fontawesome/js/all.js"></script>
+
     <link href="/site/css/chunk-vendors.25d98017.css" rel="stylesheet">
     <link href="/site/css/app.5338f982.css" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
@@ -55,15 +58,170 @@
         <script defer="defer" src="~/site/js/app-legacy.0b133c5e.js" nomodule=""></script>*@
     @*<script defer="defer" src="/site/js/chunk-vendors.dce39aec.js" type="module"></script>
         <script defer="defer" src="/site/js/app.b46826e3.js" type="module"></script>*@
-
+    <link href="~/fontawesome/css/all.css" rel="stylesheet" />
 
     @*<script defer="defer" src="/site/js/chunk-vendors.dce39aec.js" type="module"></script>*@
     @*<script defer="defer" src="/site/js/app.b46826e3.js" type="module"></script>*@
 </head>
 <body>
+    <noscript>
+        <strong>We're sorry but 國家運動科學中心 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
     <div>
         @RenderBody()
     </div>
+    <footer data-v-339da53a="">
+        <div class="FooterDecoration">
+        </div>
+        <div class="container">
+            <div class="FooterContent">
+                <div class="LeftFooterContent">
+                    <div class="Info">
+                        <img class="logo" src="/site/img/logo.1fec0909.svg" alt="">
+                        <ul class="InfoList">
+                            <li>
+                                <span class="label">地址</span>
+                                <span>813高雄市左營區世運大道399號</span>
+                            </li>
+                            <li>
+                                <span class="label">服務電話</span>
+                                <span>07-586-1193</span>
+                            </li>
+                            <li>
+                                <span class="label">服務時間</span>
+                                <span>週一至週五08:30~17:30</span>
+                            </li>
+                            <li>
+                                <span class="label">服務信箱</span>
+                                <span>
+                                    <a href="mailto:service@tiss.org.tw">國家運動科學中心服務信箱</a>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="SocialList d-none d-lg-flex">
+                        <li>
+                            <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147">
+                                <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="RightFooterContent">
+                    <div class="el-row" style="margin-left: -7.5px; margin-right: -7.5px; width: 100%;">
+                        <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                            <a href="/Tiss/announcement" class="MenuTitle">最新消息</a>
+                            <ul class="MenuList">
+                                <li>
+                                    <a href="/Tiss/announcement">中心公告</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/video">影音專區</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                            <a href="/Tiss/about" class="MenuTitle">中心介紹</a>
+                            <ul class="MenuList">
+                                <li>
+                                    <a href="/Tiss/Objectives#Objectives">使命、願景</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/mission#mission">中心任務</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/Organization#Organization">組織概況</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/BOD#BOD">第１屆 董監事</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/CEO#CEO">執行長</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/Units#Units">單位介紹</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                            <a href="/Tiss/research" class="MenuTitle">科普專欄</a>
+                            <ul class="MenuList">
+                                <li>
+                                    <a href="/Tiss/sportMedicine">運動醫學</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/sportTech">運動科技</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/sportScience">運動科學</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/sportsPhysiology">運動生理</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/sportsPsychology">運動心理</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/physicalTraining">體能訓練</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/sportsNutrition">運動營養</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                            <a href="/Tiss/public_info#regulation" class="MenuTitle">公開資訊</a>
+                            <ul class="MenuList">
+                                <li>
+                                    <a href="/Tiss/regulation">法規</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/procedure">辦法及要點</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/plan">計畫</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/budget">預算與決算</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/download">下載專區</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/purchase">採購作業實施規章</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/GenderEquality">性別平等專區</a>
+                                </li>
+                                <li>
+                                    <a href="/Tiss/other#other">其他</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="SocialList d-block d-lg-none">
+                        <li>
+                            <div class="SocialLink">
+                                <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="d-flex w-100">
+                        <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="container">Copyright © 國家運動科學中心 All Rights Reserved.</div>
+        </div>
+    </footer>
     <script>
 
         //網頁字體大小控制function

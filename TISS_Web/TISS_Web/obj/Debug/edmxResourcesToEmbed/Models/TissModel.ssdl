@@ -253,6 +253,14 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Lang_Key" />
+    </Key>
+    <Property Name="Lang_Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lang_zhTW" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lang_enUS" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="MissionPageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -305,6 +313,7 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" />
   </EntityType>
   <EntityType Name="OtherDocument">
     <Key>
@@ -826,6 +835,7 @@
     <EntitySet Name="GovernmentWebsitePageContent" EntityType="Self.GovernmentWebsitePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />

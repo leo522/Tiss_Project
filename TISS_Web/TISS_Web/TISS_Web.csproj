@@ -208,6 +208,9 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IWebContent.cs" />
+    <Compile Include="Models\Language.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MissionPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
