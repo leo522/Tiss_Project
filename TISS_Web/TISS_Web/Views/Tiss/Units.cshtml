@@ -614,6 +614,47 @@
                 }
             });
         });
+
+        //圖片及文字存檔功能
+        function saveContent() {
+            var textContent = document.getElementById('intro').innerHTML;
+            var imageSrc = document.getElementById('mainImage').src;
+
+            $.ajax({
+                url: 'unitsSaveContent',
+                method: 'POST',
+                data: {
+                    TextContent: textContent,
+                    ImageSrc: imageSrc
+                },
+                success: function (response) {
+                    document.getElementById('mainImage').src = response.imagePath;
+                    debugger;
+                    alert('內容已儲存');
+                },
+                error: function (err) {
+                    console.error('儲存失敗', err);
+                }
+            });
+        }
+
+        function loadContent() {
+            $.ajax({
+                url: 'unitsGetContent',
+                method: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        document.getElementById('intro').innerText = response.textContent;
+                        document.getElementById('mainImage').src = response.imagePath;
+                    } else {
+                        console.error('載入失敗: ' + response.error);
+                    }
+                },
+                error: function (err) {
+                    console.error('載入失敗', err);
+                }
+            });
+        }
     </script>
 </body>
 </html>

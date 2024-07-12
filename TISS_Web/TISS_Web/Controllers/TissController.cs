@@ -22,11 +22,19 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
 
+        #region 檔案上傳共用服務
+
         private readonly FileUploadService _fileUploadService;
         public TissController()
         {
             _fileUploadService = new FileUploadService(new TISS_WebEntities());
+            _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
         }
+        #endregion
+
+        #region 網頁內容存檔共用服務
+        private readonly WebContentService _contentService;
+        #endregion
 
         #region 登入
         public ActionResult Login()
@@ -39,7 +47,7 @@ namespace TISS_Web.Controllers
         {
             // 將使用者輸入的密碼進行SHA256加密
             string hashedPwd = ComputeSha256Hash(pwd);
-            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == pwd);
+            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
 
             if (dto != null)
             {
@@ -485,7 +493,7 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 儲存網頁新增的圖片
+        /// 儲存
         /// </summary>
         /// <param name="textContent"></param>
         /// <param name="ImageSrc"></param>
@@ -496,58 +504,8 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                var userName = Session["UserName"] as string; //從Session中獲取已登錄的帳號
-
-                byte[] imageBytes = null; // 將圖片數據轉換成byte[]
-
-                if (!string.IsNullOrEmpty(ImageSrc))
-                {
-                    string[] ba64 = ImageSrc.Split(',');
-
-                    if (ba64.Length == 2)
-                    {
-                        string mimeType = ba64[0].Split(':')[1].Split(';')[0];
-                        string dto = ba64[1];
-
-                        if (mimeType == "image/jpeg" || mimeType == "image/jpg" || mimeType == "image/png")
-                        {
-                            imageBytes = Convert.FromBase64String(dto);
-
-                            // 檢查文件大小，確保小於等於2MB
-                            if (imageBytes.Length > 2 * 1024 * 1024)
-                            {
-                                return Json(new { success = false, error = "圖片大小不能超過2MB" });
-                            }
-                        }
-                        else
-                        {
-                            return Json(new { success = false, error = "只允許上傳jpg、jpeg或png格式的圖片" });
-                        }
-                    }
-                }
-
-                // 計算新的 FileNo
-                int newFileNo = 1;
-                var lastNo = _db.AboutPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
-                if (lastNo != null)
-                {
-                    newFileNo = lastNo.FileNo + 1;
-                }
-
-                var dtos = new AboutPageContent() //中心介紹
-                {
-                    UserAccount = userName,
-                    TextContent = textContent,
-                    TextUpdateTime = DateTime.Now,
-                    ImageContent = imageBytes,
-                    ImageUpdateTime = DateTime.Now,
-                    FileNo = newFileNo
-                };
-                _db.AboutPageContent.Add(dtos);
-                _db.SaveChanges();
-
-                string imagePath = $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}";
-                return Json(new { success = true, imagePath = imagePath });
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new AboutPageContent());
             }
             catch (Exception ex)
             {
@@ -555,33 +513,16 @@ namespace TISS_Web.Controllers
             }
         }
 
-
+        /// <summary>
+        /// 讀取
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult aboutGetContent()
         {
             try
             {
-                var content = _db.AboutPageContent
-                        .OrderByDescending(c => c.FileNo)
-                        .FirstOrDefault();
-
-                if (content != null)
-                {
-                    // 去除多餘的空格和斷行符號
-                    string textContent = System.Text.RegularExpressions.Regex.Replace(content.TextContent, @"\s+", " ").Trim();
-                    string imagePath = content.ImageContent != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}" : string.Empty;
-
-                    return Json(new
-                    {
-                        success = true,
-                        textContent = content.TextContent,
-                        imagePath = imagePath
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new { success = false, error = "讀取錯誤" }, JsonRequestBehavior.AllowGet);
-                }
+                return _contentService.GetContent<AboutPageContent>();
             }
             catch (Exception ex)
             {
@@ -598,6 +539,32 @@ namespace TISS_Web.Controllers
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult objectivesSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new ObjectivesPageContent());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public ActionResult objectivesGetContent()
+        {
+            try
+            {
+                return _contentService.GetContent<ObjectivesPageContent>();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         /// <summary>
         /// 任務
@@ -607,6 +574,32 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult missionSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new MissionPageContent());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public ActionResult missionGetContent()
+        {
+            try
+            {
+                return _contentService.GetContent<MissionPageContent>();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
@@ -618,6 +611,32 @@ namespace TISS_Web.Controllers
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult organizationSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new OrganizationPageContent());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public ActionResult organizationGetContent()
+        {
+            try
+            {
+                return _contentService.GetContent<OrganizationPageContent>();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         /// <summary>
         /// 董監事
@@ -627,6 +646,32 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult BODSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new BODPageContent());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public ActionResult BODGetContent()
+        {
+            try
+            {
+                return _contentService.GetContent<BODPageContent>();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
@@ -644,92 +689,27 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                var userName = Session["UserName"] as string; //從Session中獲取已登錄的帳號
-
-                byte[] imageBytes = null; // 將圖片數據轉換成byte[]
-                if (!string.IsNullOrEmpty(ImageSrc))
-                {
-                    string ba64 = ImageSrc.Split(',')[1];
-                    imageBytes = Convert.FromBase64String(ba64);
-                }
-                // 計算新的 FileNo
-                int newFileNo = 1;
-                var lastNo = _db.CEOPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
-                if (lastNo != null && lastNo.FileNo.HasValue)
-                {
-                    newFileNo = lastNo.FileNo.Value + 1;
-                }
-
-                var dtos = new CEOPageContent()
-                {
-                    UserAccount = userName,
-                    TextContent = textContent,
-                    TextUpdateTime = DateTime.Now,
-                    ImageContent = imageBytes,
-                    ImageUpdateTime = DateTime.Now,
-                    FileNo = newFileNo
-                };
-                _db.CEOPageContent.Add(dtos);
-                _db.SaveChanges();
-
-
-                //    var dto = _db.CEOPageContent.OrderByDescending(c => c.FileNo).FirstOrDefault();
-                //    if (dto == null)
-                //    {
-                //        dto = new CEOPageContent();
-                //        _db.CEOPageContent.Add(dto);
-                //    }
-                //    dto.UserAccount = userName;
-                //    dto.TextContent = textContent;
-                //    dto.TextUpdateTime = DateTime.Now;
-                //    dto.ImageContent = imageBytes;
-                //    dto.ImageUpdateTime = DateTime.Now;
-                //    _db.SaveChanges();
-                string imagePath = dtos.ImageContent != null
-            ? $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}"
-            : string.Empty;
-                //return Json(new { success = true, imagePath = imagePath });
-                //string imagePath = $"data:image/jpeg;base64,{Convert.ToBase64String(dtos.ImageContent)}";
-                return Json(new { success = true, imagePath = imagePath });
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new CEOPageContent());
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, error = ex.Message });
             }
         }
-
         [HttpGet]
         public ActionResult CeoGetContent()
         {
             try
             {
-                var content = _db.CEOPageContent
-                        .OrderByDescending(c => c.FileNo)
-                        .FirstOrDefault();
-
-                if (content != null)
-                {
-                    string imagePath = content.ImageContent != null
-                ? $"data:image/jpeg;base64,{Convert.ToBase64String(content.ImageContent)}"
-                : string.Empty;
-
-                    return Json(new
-                    {
-                        success = true,
-                        textContent = content.TextContent,
-                        imagePath = imagePath
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new { success = false, error = "讀取錯誤" }, JsonRequestBehavior.AllowGet);
-                }
+                return _contentService.GetContent<CEOPageContent>();
             }
             catch (Exception ex)
             {
                 return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+       
         /// <summary>
         /// 單位介紹
         /// </summary>
@@ -739,7 +719,32 @@ namespace TISS_Web.Controllers
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
         }
-
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult unitsSaveContent(string textContent, string ImageSrc)
+        {
+            try
+            {
+                var userName = Session["UserName"] as string;
+                return _contentService.SaveContent(userName, textContent, ImageSrc, () => new UnitsPageContent());
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message });
+            }
+        }
+        [HttpGet]
+        public ActionResult unitsGetContent()
+        {
+            try
+            {
+                return _contentService.GetContent<UnitsPageContent>();
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, error = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
         #endregion
 
         #region 科普專欄

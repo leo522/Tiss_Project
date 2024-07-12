@@ -322,6 +322,7 @@
     </Compile>
     <Compile Include="Models\WebContentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebContentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap-grid.css" />
@@ -2562,6 +2563,8 @@
     <Content Include="site\js\123.js" />
     <Content Include="site\js\666.js" />
     <Content Include="site\js\777.js" />
+    <Content Include="storage\media\商品照.jpg" />
+    <Content Include="storage\media\商品照1.jpg" />
     <Content Include="TinyMCE\copy-init.js" />
     <Content Include="TinyMCE\images\favicon-16x16.png" />
     <Content Include="TinyMCE\images\favicon-32x32.png" />
@@ -3075,13 +3078,6 @@
     <Content Include="Views\Shared\_TissMaster.cshtml" />
     <Content Include="Views\Tiss\Home.cshtml" />
     <Content Include="Views\Tiss\public_info.cshtml" />
-    <Content Include="storage\media\attachments\1國家運動科學中心設置條例.pdf" />
-    <Content Include="storage\media\attachments\2國家運動科學中心組織章程.pdf" />
-    <Content Include="storage\media\attachments\4國家運動科學中心會計制度規章.pdf" />
-    <Content Include="storage\media\attachments\5國家運動科學中心內部控制作業規章-教育部核定%281121215臺教授體字第1120051831號函%29.pdf" />
-    <Content Include="storage\media\attachments\6國家運動科學中心稽核作業規章-教育部核定%281121215臺教授體字第1120051744%29.pdf" />
-    <Content Include="storage\media\attachments\7國家運動科學中心董事會議事規範.pdf" />
-    <Content Include="storage\media\attachments\8國家運動科學中心自主財源收支管理規章.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心人事管理規章_1130513.pdf" />
     <Content Include="Views\Tiss\Objectives.cshtml" />
     <Content Include="Views\Tiss\mission.cshtml" />
@@ -3102,18 +3098,15 @@
     <Content Include="Views\Tiss\regulation.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫作業要點.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫研究人力約用注意事項.pdf" />
-    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫經費處理原則%282%29.pdf" />
     <Content Include="Views\Tiss\plan.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心112年業務計畫.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心113年業務計畫.pdf" />
-    <Content Include="storage\media\attachments\行政法人國家運動科學中心發展目標及計畫%28112-116年%29%28113年1月16日臺教授體字第1130000298號函核定%29%281%29.pdf" />
     <Content Include="storage\media\attachments\行政法人國家運動科學中心設置規劃報告.pdf" />
     <Content Include="Views\Tiss\budget.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心112年度決算.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心112年度預算.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心113年度預算.pdf" />
     <Content Include="Views\Tiss\download.cshtml" />
-    <Content Include="storage\media\attachments\附件二、國家運動科學中心委託研究計畫主持人資格說明.pdf" />
     <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
     <Content Include="Views\Tiss\purchase.cshtml" />
@@ -3149,6 +3142,16 @@
     <Content Include="Views\Tiss\news.cshtml" />
     <Content Include="Views\Tiss\activityRecord.cshtml" />
     <Content Include="Views\Tiss\UploadDocument.cshtml" />
+    <Content Include="storage\media\attachments\行政法人國家運動科學中心發展目標及計畫%28112-116年%29.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫主持人資格說明.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫經費處理原則.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心內部控制作業規章.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心自主財源收支管理規章.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心會計制度規章.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心稽核作業規章.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心組織章程.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心董事會議事規範.pdf" />
+    <Content Include="storage\media\attachments\國家運動科學中心設置條例.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

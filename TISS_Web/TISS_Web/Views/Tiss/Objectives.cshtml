@@ -767,7 +767,7 @@
     //載入已儲存的內容
     function loadContent() {
         $.ajax({
-            url: 'aboutGetContent',
+            url: 'objectivesGetContent',
             method: 'GET',
             success: function (response) {
                 if (response.success) {
@@ -810,7 +810,7 @@
         var imageSrc = document.getElementById('mainImage').src;
 
         $.ajax({
-            url: 'SaveContent',
+            url: 'objectivesSaveContent',
             method: 'POST',
             data: {
                 TextContent: textContent,

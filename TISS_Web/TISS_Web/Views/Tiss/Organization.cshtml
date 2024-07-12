@@ -735,7 +735,7 @@ if (isLoggedIn) {
 //載入已儲存的內容
 function loadContent() {
     $.ajax({
-        url: 'aboutGetContent',
+        url: 'organizationGetContent',
         method: 'GET',
         success: function (response) {
             if (response.success) {
@@ -761,25 +761,28 @@ function loadContent() {
                     dropdownMenu.classList.add('show');
                 }
             }
+        //圖片及文字存檔功能
+        function saveContent() {
+            var textContent = document.getElementById('intro').innerHTML;
+            var imageSrc = document.getElementById('mainImage').src;
 
-        //document.addEventListener('DOMContentLoaded', function () {
-        //    const links = document.querySelectorAll('a[href^="#"]');
-
-        //    for (const link of links) {
-        //        link.addEventListener('click', function (event) {
-        //            event.preventDefault();
-
-        //            const targetID = this.getAttribute('href').substring(1);
-        //            const targetElement = document.getElementById(targetID);
-
-        //            if (targetElement) {
-        //                window.scrollTo({
-        //                    top: targetElement.getBoundingClientRect().top + window.scrollY - 0, // 根據CSS中的top值調整
-        //                    behavior: 'smooth'
-        //                });
-        //            }
-        //        });
-        //    }
+            $.ajax({
+                url: 'organizationSaveContent',
+                method: 'POST',
+                data: {
+                    TextContent: textContent,
+                    ImageSrc: imageSrc
+                },
+                success: function (response) {
+                    document.getElementById('mainImage').src = response.imagePath;
+                    debugger;
+                    alert('內容已儲存');
+                },
+                error: function (err) {
+                    console.error('儲存失敗', err);
+                }
+            });
+        }
     </script>
 </body>
 </html>

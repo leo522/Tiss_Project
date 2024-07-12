@@ -783,21 +783,21 @@ if (isLoggedIn) {
     });
         //登出按鈕顯示功能
 
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        //function toggleDropdown(dropdownId) {
+        //    var dropdownToggle = document.getElementById(dropdownId);
+        //    var dropdownMenu = dropdownToggle.nextElementSibling;
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
-            }
-        }
+        //    if (dropdownMenu.classList.contains('show')) {
+        //        dropdownMenu.classList.remove('show');
+        //    } else {
+        //        dropdownMenu.classList.add('show');
+        //    }
+        //}
 
     //載入已儲存的內容
     function loadContent() {
         $.ajax({
-            url: 'aboutGetContent',
+            url: 'missionGetContent',
             method: 'GET',
             success: function (response) {
                 if (response.success) {
@@ -817,18 +817,6 @@ if (isLoggedIn) {
     function changeImg() {
         document.getElementById('uploadImageInput').click();
     }
-
-    //document.getElementById('uploadImageInput').addEventListener('change', function () {
-    //    var file = this.files[0];
-    //    if (file) {
-    //        var reader = new FileReader();
-    //        reader.onload = function (event) {
-    //            document.getElementById('mainImage').src = event.target.result;
-    //        };
-    //        reader.readAsDataURL(file);
-    //    }
-    //});
-
     function removeImg() {
         document.getElementById('mainImage').src = '';
     }
@@ -840,7 +828,7 @@ if (isLoggedIn) {
         var imageSrc = document.getElementById('mainImage').src;
 
         $.ajax({
-            url: 'SaveContent',
+            url: 'missionSaveContent',
             method: 'POST',
             data: {
                 TextContent: textContent,
