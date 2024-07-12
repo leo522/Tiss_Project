@@ -567,7 +567,7 @@
                                             @{
                                                 if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                                 {
-                                                    using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
                                                         <label for="file" class="control-label col-md-2">選擇檔案</label>
                                                         <div class="col-md-10">
@@ -606,8 +606,6 @@ if (isLoggedIn) {
     }
         loadContent(); //加載已儲存的內容
 });
-        //登出按鈕顯示功能
-
     </script>
 </body>
 </html>

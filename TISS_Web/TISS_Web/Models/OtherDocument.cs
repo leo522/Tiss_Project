@@ -12,7 +12,7 @@ namespace TISS_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OutherDocument
+    public partial class OtherDocument
     {
         public int ID { get; set; }
         public int PId { get; set; }

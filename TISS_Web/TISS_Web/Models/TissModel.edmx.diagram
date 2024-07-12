@@ -54,10 +54,10 @@
         <EntityTypeShape EntityType="TISS_WebModel.RegulationDocument" Width="1.5" PointX="18.375" PointY="17.75" />
         <EntityTypeShape EntityType="TISS_WebModel.BudgetDocument" Width="1.5" PointX="19.375" PointY="0.75" />
         <EntityTypeShape EntityType="TISS_WebModel.DownloadDocument" Width="1.5" PointX="7.375" PointY="20.75" />
-        <EntityTypeShape EntityType="TISS_WebModel.OutherDocument" Width="1.5" PointX="20.375" PointY="8.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PlanDocument" Width="1.5" PointX="9.375" PointY="20.75" />
         <EntityTypeShape EntityType="TISS_WebModel.ProcedureDocument" Width="1.5" PointX="11.375" PointY="20.75" />
         <EntityTypeShape EntityType="TISS_WebModel.PurchaseDocument" Width="1.5" PointX="20.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.OtherDocument" Width="1.5" PointX="20.375" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

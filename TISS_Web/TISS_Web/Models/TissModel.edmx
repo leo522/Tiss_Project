@@ -311,6 +311,20 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="OtherDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PId" Type="int" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UploadTime" Type="datetime" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="10" />
+          <Property Name="DocumentType" Type="nvarchar" MaxLength="10" />
+          <Property Name="FileSize" Type="int" />
+          <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="OtherPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -327,20 +341,6 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="OutherDocument">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PId" Type="int" Nullable="false" />
-          <Property Name="DocumentName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UploadTime" Type="datetime" />
-          <Property Name="Creator" Type="nvarchar" MaxLength="10" />
-          <Property Name="DocumentType" Type="nvarchar" MaxLength="10" />
-          <Property Name="FileSize" Type="int" />
-          <Property Name="ModifiedTime" Type="datetime" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Permissions">
           <Key>
@@ -834,8 +834,8 @@
           <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherDocument" EntityType="Self.OtherDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OutherDocument" EntityType="Self.OutherDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanDocument" EntityType="Self.PlanDocument" Schema="dbo" store:Type="Tables" />
@@ -1076,10 +1076,10 @@
           <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
           <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
           <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
-          <EntitySet Name="OutherDocument" EntityType="TISS_WebModel.OutherDocument" />
           <EntitySet Name="PlanDocument" EntityType="TISS_WebModel.PlanDocument" />
           <EntitySet Name="ProcedureDocument" EntityType="TISS_WebModel.ProcedureDocument" />
           <EntitySet Name="PurchaseDocument" EntityType="TISS_WebModel.PurchaseDocument" />
+          <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1728,20 +1728,6 @@
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="OutherDocument">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PId" Type="Int32" Nullable="false" />
-          <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UploadTime" Type="DateTime" Precision="3" />
-          <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="FileSize" Type="Int32" />
-          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="PlanDocument">
           <Key>
             <PropertyRef Name="ID" />
@@ -1771,6 +1757,20 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchaseDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UploadTime" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtherDocument">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -2524,21 +2524,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="OutherDocument">
-            <EntityTypeMapping TypeName="TISS_WebModel.OutherDocument">
-              <MappingFragment StoreEntitySet="OutherDocument">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-                <ScalarProperty Name="Creator" ColumnName="Creator" />
-                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-                <ScalarProperty Name="PId" ColumnName="PId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PlanDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.PlanDocument">
               <MappingFragment StoreEntitySet="PlanDocument">
@@ -2572,6 +2557,21 @@
           <EntitySetMapping Name="PurchaseDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.PurchaseDocument">
               <MappingFragment StoreEntitySet="PurchaseDocument">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherDocument">
+            <EntityTypeMapping TypeName="TISS_WebModel.OtherDocument">
+              <MappingFragment StoreEntitySet="OtherDocument">
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />

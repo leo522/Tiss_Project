@@ -94,3 +94,8 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.Mvc.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\PagedList.Mvc.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Threading.Tasks.Extensions.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\WebActivatorEx.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Threading.Tasks.Extensions.xml

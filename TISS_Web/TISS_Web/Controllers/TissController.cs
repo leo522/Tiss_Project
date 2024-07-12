@@ -14,12 +14,19 @@ using System.Web.UI.WebControls;
 using System.Security.Cryptography;
 using System.Text;
 using PagedList;
+using System.Web.UI;
 
 namespace TISS_Web.Controllers
 {
     public class TissController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
+
+        private readonly FileUploadService _fileUploadService;
+        public TissController()
+        {
+            _fileUploadService = new FileUploadService(new TISS_WebEntities());
+        }
 
         #region 登入
         public ActionResult Login()
@@ -32,7 +39,7 @@ namespace TISS_Web.Controllers
         {
             // 將使用者輸入的密碼進行SHA256加密
             string hashedPwd = ComputeSha256Hash(pwd);
-            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
+            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == pwd);
 
             if (dto != null)
             {
@@ -272,92 +279,62 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 上傳"法規"文件檔案
-        public ActionResult UploadDocument()
-        {
-            var uploadedFiles = _db.RegulationDocument
-                           .Select(d => new RegulationDocumentModel
-                           {
-                               ID = d.ID,
-                               PId = d.PId,
-                               DocumentName = d.DocumentName,
-                               UploadTime = d.UploadTime.GetValueOrDefault(),
-                               Creator = d.Creator,
-                               DocumentType = d.DocumentType,
-                               FileSize = d.FileSize.GetValueOrDefault(),
-                               ModifiedTime = d.ModifiedTime.GetValueOrDefault(),
-                               IsActive = d.IsActive,
-                           })
-                           .ToList();
+        #region 上傳文件檔案
 
-            return View(uploadedFiles);
+        // 上傳計畫文件
+        [HttpPost]
+        public ActionResult UploadPlanDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "PlanDocument");
+            return RedirectToAction("Plan", new { page });
         }
 
+        //上傳法規文件
         [HttpPost]
-        public ActionResult UploadDocument(HttpPostedFileBase file)
+        public ActionResult UploadRegulationDocument(HttpPostedFileBase file, int? page)
         {
-            if (file != null && file.ContentLength > 0)
-            {
-                try
-                {
-                    string fileName = Path.GetFileName(file.FileName);
-                    string fileExtension = Path.GetExtension(fileName).ToLower();
+            _fileUploadService.UploadFile(file, "RegulationDocument");
+            return RedirectToAction("Regulation", new { page });
+        }
 
-                    // 檢查文件類型是否符合要求
-                    if (fileExtension == ".pdf" || fileExtension == ".doc" ||
-                        fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".xls" || fileExtension == ".xlsx")
-                    {
-                        string filePath = Path.Combine(Server.MapPath("~/storage/media/attachments"), fileName);
+        //上傳辦法及要點文件
+        [HttpPost]
+        public ActionResult UploadProcedureDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "ProcedureDocument");
+            return RedirectToAction("Procedure", new { page });
+        }
 
-                        file.SaveAs(filePath);
+        // 上傳下載專區文件
+        [HttpPost]
+        public ActionResult UploadDownloadDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "DownloadDocument");
+            return RedirectToAction("download", new { page });
+        }
 
-                        // 查詢當前DB中最大的 PId，並生成新的 PId
-                        int maxPId = _db.RegulationDocument.Max(d => (int?)d.PId) ?? 0;
-                        int newPId = maxPId + 1;
+        // 上傳預算與決算文件
+        [HttpPost]
+        public ActionResult UploadBudgetDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "BudgetDocument");
+            return RedirectToAction("budget", new { page });
+        }
 
-                        string UserId = Session["UserName"].ToString();
+        // 上傳其他文件
+        [HttpPost]
+        public ActionResult UploadOtherDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "OtherDocument");
+            return RedirectToAction("other", new { page });
+        }
 
-                        RegulationDocument document = new RegulationDocument
-                        {
-                            PId = newPId,
-                            DocumentName = fileName,
-                            UploadTime = DateTime.Now,
-                            Creator = UserId,
-                            DocumentType = fileExtension,
-                            FileSize = file.ContentLength,
-                            IsActive = true
-                        };
-
-                        _db.RegulationDocument.Add(document);
-                        _db.SaveChanges();
-
-                        ViewBag.Message = "文件上傳成功！";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "上傳文件時出錯： " + ex.Message;
-                }
-            }
-            else
-            {
-                ViewBag.Message = "請選擇要上傳的文件。";
-            }
-
-            var uploadedFiles = _db.RegulationDocument
-                            .OrderByDescending(d => d.UploadTime)  // 根據 UploadTime 降序排序
-                            .Select(d => new RegulationDocumentModel
-                            {
-                                DocumentName = d.DocumentName,
-                                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                                Creator = d.Creator,
-                                DocumentType = d.DocumentType,
-                                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                                IsActive = d.IsActive,
-                            })
-                            .ToList();
-
-            return View("regulation", uploadedFiles);
+        // 上傳採購作業實施規章文件
+        [HttpPost]
+        public ActionResult UploadPurchaseDocument(HttpPostedFileBase file, int? page)
+        {
+            _fileUploadService.UploadFile(file, "PurchaseDocument");
+            return RedirectToAction("purchase", new { page });
         }
         #endregion
 
@@ -844,6 +821,39 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
+        #region 取得文件檔案
+        /// <summary>
+        /// 取得各文件檔案
+        /// </summary>
+        /// <returns></returns>
+        private List<string> GetFile()
+        {
+            var dt = (from f in _db.FileDocument select f.DocumentName).ToList();
+
+            return dt;
+        }
+        public string GetFilePath(string fileName)
+        {
+            var file = (from f in _db.FileDocument
+                        where f.DocumentName == fileName
+                        select f).FirstOrDefault();
+
+            if (file != null)
+            {
+                return Url.Content($"~/storage/media/attachments/{file.DocumentName}");
+            }
+
+            return "#";
+        }
+        [HttpGet]
+        public JsonResult GetFilePathApi(string fileName)
+        {
+            var filePath = GetFilePath(fileName);
+
+            return Json(filePath, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         #region 公開資訊
 
         /// <summary>
@@ -868,11 +878,15 @@ namespace TISS_Web.Controllers
 
             Session["ReturnUrl"] = Request.Url.ToString();
             var uploadedFiles = _db.RegulationDocument
-                        .OrderByDescending(d => d.UploadTime)
+                        .OrderBy(d => d.UploadTime)
                         .Select(d => new RegulationDocumentModel
-                       {
+                        {
                             DocumentName = d.DocumentName,
                             DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
                         }).ToPagedList(pageNumber, pageSize);
 
             return View(uploadedFiles);
@@ -882,60 +896,150 @@ namespace TISS_Web.Controllers
         /// 辦法及要點
         /// </summary>
         /// <returns></returns>
-        public ActionResult procedure()
+        public ActionResult procedure(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.ProcedureDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new ProcedureDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
         /// 計畫
         /// </summary>
         /// <returns></returns>
-        public ActionResult plan()
+        public ActionResult plan(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.PlanDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new PlanDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
         /// 預算與決算
         /// </summary>
         /// <returns></returns>
-        public ActionResult budget()
+        public ActionResult budget(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.BudgetDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new BudgetDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
         /// 下載專區
         /// </summary>
         /// <returns></returns>
-        public ActionResult download()
+        public ActionResult download(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.DownloadDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new DownloadDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
         /// 採購作業實施規章
         /// </summary>
         /// <returns></returns>
-        public ActionResult purchase()
+        public ActionResult purchase(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.PurchaseDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new PurchaseDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
 
         /// <summary>
         /// 其他
         /// </summary>
         /// <returns></returns>
-        public ActionResult other()
+        public ActionResult other(int? page)
         {
+            int pageSize = 5; // 每頁顯示的項目數量
+            int pageNumber = (page ?? 1);
+
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var uploadedFiles = _db.OtherDocument
+                        .OrderBy(d => d.UploadTime)
+                        .Select(d => new OtherDocumentModel
+                        {
+                            DocumentName = d.DocumentName,
+                            DocumentType = d.DocumentType,
+                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                            Creator = d.Creator,
+                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                            IsActive = d.IsActive,
+                        }).ToPagedList(pageNumber, pageSize);
+
+            return View(uploadedFiles);
         }
         #endregion
 

@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
+@model PagedList.IPagedList<TISS_Web.Models.ProcedureDocumentModel>
+@using PagedList.Mvc;
 <!DOCTYPE html>
 <html>
 <head>
@@ -563,150 +565,89 @@
                                         <span class="primary">Procedure</span>
                                     </div>
                                     <div class="infoList">
-                                        <div class="d-none d-lg-block" style="height: 550px;">
+                                        <div class="d-none d-lg-block">
                                             <div class="el-auto-resizer" style="width: 100%; height: 100%;">
                                                 <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
                                                     <div role="table" class="el-table-v2__table el-table-v2__main">
                                                         <div class="el-vl__wrapper el-table-v2__body" role="rowgroup">
                                                             <div class="" style="position: relative; overflow: hidden; will-change: transform; direction: ltr; height: 500px; width: 870px;">
-                                                                <div style="height: 192px; width: 870px;">
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 0px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心委託研究計畫作業要點">國家運動科學中心委託研究計畫作業要點</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/06/04</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="/storage/media/attachments/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83%E5%A7%94%E8%A8%97%E7%A0%94%E7%A9%B6%E8%A8%88%E7%95%AB%E4%BD%9C%E6%A5%AD%E8%A6%81%E9%BB%9E.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
+                                                                <div class="el-table-v2__header-wrapper" role="rowgroup">
+                                                                    <div class="el-table-v2__header" style="height: 50px;">
+                                                                        <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row" style="height: 50px;">
+                                                                            <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="width: 480px;">
+                                                                                <div class="el-table-v2__header-cell-text" title="名稱">名稱</div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 64px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心委託研究計畫經費處理原則">國家運動科學中心委託研究計畫經費處理原則</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/06/04</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="/storage/media/attachments/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83%E5%A7%94%E8%A8%97%E7%A0%94%E7%A9%B6%E8%A8%88%E7%95%AB%E7%B6%93%E8%B2%BB%E8%99%95%E7%90%86%E5%8E%9F%E5%89%87(2).pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
+                                                                            <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="width: 240px;">
+                                                                                <div class="el-table-v2__header-cell-text" title="發布日期">發布日期</div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row TableRow" role="row" style="position: absolute; left: 0px; top: 128px; height: 64px; width: 870px;">
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="國家運動科學中心委託研究計畫研究人力約用注意事項">國家運動科學中心委託研究計畫研究人力約用注意事項</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 240px;">
-                                                                            <div>2024/06/04</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" role="cell" style="flex: 0 1 auto; width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="/storage/media/attachments/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83%E5%A7%94%E8%A8%97%E7%A0%94%E7%A9%B6%E8%A8%88%E7%95%AB%E7%A0%94%E7%A9%B6%E4%BA%BA%E5%8A%9B%E7%B4%84%E7%94%A8%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85.pdf" target="_blank">
-                                                                                        <span class="el-tag el-tag--light is-round pdf">
-                                                                                            <span class="el-tag__content">pdf</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
+                                                                            <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="width: 280px;">
+                                                                                <div class="el-table-v2__header-cell-text" title="附件">附件</div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div role="presentation" class="el-virtual-scrollbar el-vl__horizontal" style="position: absolute; height: 6px; left: 2px; right: 2px; bottom: 2px; border-radius: 4px; width: 862px;">
-                                                                <div class="el-scrollbar__thumb" style="display: none;">
-                                                                </div>
-                                                            </div>
-                                                            <div role="presentation" class="el-virtual-scrollbar el-vl__vertical" style="position: absolute; width: 6px; top: 2px; right: 2px; bottom: 2px; border-radius: 4px; height: 492px;">
-                                                                <div class="el-scrollbar__thumb" style="display: none;">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="el-table-v2__header-wrapper" role="rowgroup" style="width: 870px; height: 50px;">
-                                                            <div class="el-table-v2__header" style="width: 864px; height: 50px;">
-                                                                <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row" role="row" style="width: 100%; height: 50px;">
-                                                                    <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="flex: 0 1 auto; width: 480px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="名稱">名稱</div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="flex: 0 1 auto; width: 240px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="發布日期">發布日期</div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="flex: 0 1 auto; width: 280px;">
-                                                                        <div class="el-table-v2__header-cell-text" title="附件">附件</div>
-                                                                    </div>
+                                                                <div class="form-group" style="height: 450px; overflow-y: auto; font-size:16px;">
+                                                                    @foreach (var file in Model)
+                                                                    {
+                                                                        <div class="el-table-v2__row TableRow" style="margin-bottom: 20px; padding: 5px;">
+                                                                            <div class="el-table-v2__row-cell" style="width: 480px;">
+                                                                                <div class="el-table-v2__cell-text">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                                            </div>
+                                                                            <div class="el-table-v2__row-cell" style="width: 240px;">
+                                                                                <div>@file.UploadTime.ToString("yyyy/MM/dd")</div>
+                                                                            </div>
+                                                                            <div class="el-table-v2__row-cell" style="width: 280px;">
+                                                                                <div class="BaseTagList download">
+                                                                                    <span>
+                                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank">
+                                                                                            <span class="el-tag el-tag--light is-round">
+                                                                                                <span class="el-tag__content">@file.DocumentType</span>
+                                                                                            </span>
+                                                                                        </a>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    }
+                                                                    <nav aria-label="Page navigation">
+                                                                        <ul class="pagination justify-content-center">
+                                                                            @Html.PagedListPager(Model, page => Url.Action("procedure", new { page }),
+        new PagedListRenderOptions
+        {
+            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+            DisplayLinkToIndividualPages = true,
+            LinkToFirstPageFormat = "<< 第一頁",
+            LinkToPreviousPageFormat = "< 前一頁",
+            LinkToNextPageFormat = "後一頁 >",
+            LinkToLastPageFormat = "最末頁 >>",
+            DisplayPageCountAndCurrentLocation = true,
+            PageCountAndCurrentLocationFormat = "第{0}頁/共 {1}頁",
+            DisplayItemSliceAndTotal = true,
+            ItemSliceAndTotalFormat = "顯示項目：{0}~{1},共{2}項"
+        })
+                                                                        </ul>
+                                                                    </nav>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <ul class="DataList d-block d-lg-none">
-                                        </ul>
-                                        <div class="Pagination">
-                                            <div class="container">
-                                                <nav aria-label="Page navigation">
-                                                    <ul class="pagination justify-content-center">
-                                                        <li class="page-item disabled">
-                                                            <button class="page-link" aria-disabled="true" disabled aria-label="First">
-                                                                <span aria-hidden="true">
-                                                                    <svg class="svg-inline--fa fa-angles-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                        <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </button>
-                                                        </li>
-                                                        <li class="page-item disabled">
-                                                            <button class="page-link" aria-disabled="true" disabled aria-label="Previous">
-                                                                <span aria-hidden="true">
-                                                                    <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                        <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </button>
-                                                        </li>
-                                                        <li class="page-item active" aria-current="page">
-                                                            <button class="page-link">1</button>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <button class="page-link">2</button>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <button class="page-link" aria-label="Next">
-                                                                <span aria-hidden="true">
-                                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                        <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </button>
-                                                        </li>
-                                                        <li class="page-item">
-                                                            <button class="page-link" aria-label="Last">
-                                                                <span aria-hidden="true">
-                                                                    <svg class="svg-inline--fa fa-angles-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                        <path fill="currentColor" d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"></path>
-                                                                    </svg>
-                                                                </span>
-                                                            </button>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
+                                                @{
+                                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                                    {
+                                                        using (Html.BeginForm("UploadProcedureDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            <label for="file" class="control-label col-md-2">選擇檔案</label>
+                                                            <div class="col-md-10">
+                                                                <input type="file" name="file" />
+                                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -725,18 +666,16 @@
         </div>
     </div>
     <script>
-    $(documnet).reday(function () {
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        $(documnet).reday(function () {
+            var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
-            }
+        if (isLoggedIn) {
+                $('#logoutBtn').show(); //顯示登出按鈕
+        }else {
+                $('#loginBtn').show(); //顯示登入按鈕
         }
-    });
+            loadContent(); //加載已儲存的內容
+        });
     </script>
 </body>
 </html>

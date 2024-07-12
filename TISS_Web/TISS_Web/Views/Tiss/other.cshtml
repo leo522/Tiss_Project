@@ -1,6 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
+@model PagedList.IPagedList<TISS_Web.Models.OtherDocumentModel>
+@using PagedList.Mvc;
 <!DOCTYPE html>
 <html>
 <head>
@@ -533,18 +535,18 @@
         </div>
     </div>
     <script>
-    $(documnet).reday(function () {
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        $(documnet).reday(function () {
+            function toggleDropdown(dropdownId) {
+                var dropdownToggle = document.getElementById(dropdownId);
+                var dropdownMenu = dropdownToggle.nextElementSibling;
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                } else {
+                    dropdownMenu.classList.add('show');
+                }
             }
-        }
-    });
+        });
     </script>
 </body>
 </html>

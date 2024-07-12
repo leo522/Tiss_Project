@@ -735,21 +735,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OutherDocument">
-      <EntityTypeMapping TypeName="TISS_WebModel.OutherDocument">
-        <MappingFragment StoreEntitySet="OutherDocument">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="PId" ColumnName="PId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PlanDocument">
       <EntityTypeMapping TypeName="TISS_WebModel.PlanDocument">
         <MappingFragment StoreEntitySet="PlanDocument">
@@ -783,6 +768,21 @@
     <EntitySetMapping Name="PurchaseDocument">
       <EntityTypeMapping TypeName="TISS_WebModel.PurchaseDocument">
         <MappingFragment StoreEntitySet="PurchaseDocument">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OtherDocument">
+      <EntityTypeMapping TypeName="TISS_WebModel.OtherDocument">
+        <MappingFragment StoreEntitySet="OtherDocument">
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
           <ScalarProperty Name="FileSize" ColumnName="FileSize" />

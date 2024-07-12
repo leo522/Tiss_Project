@@ -180,10 +180,10 @@
     <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
     <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
     <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
-    <EntitySet Name="OutherDocument" EntityType="TISS_WebModel.OutherDocument" />
     <EntitySet Name="PlanDocument" EntityType="TISS_WebModel.PlanDocument" />
     <EntitySet Name="ProcedureDocument" EntityType="TISS_WebModel.ProcedureDocument" />
     <EntitySet Name="PurchaseDocument" EntityType="TISS_WebModel.PurchaseDocument" />
+    <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -832,20 +832,6 @@
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="OutherDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-  </EntityType>
   <EntityType Name="PlanDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -875,6 +861,20 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="PurchaseDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PId" Type="Int32" Nullable="false" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OtherDocument">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
