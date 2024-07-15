@@ -12,13 +12,9 @@ namespace TISS_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ArticleClickCount
+    public partial class ArticleCategory
     {
-        public Nullable<int> ArticleClickID { get; set; }
-        public int ClickCount { get; set; }
-        public System.DateTime LastResetDate { get; set; }
-        public string ArticleID { get; set; }
-    
-        public virtual Article Article { get; set; }
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
     }
 }

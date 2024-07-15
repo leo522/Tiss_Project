@@ -617,28 +617,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Article">
-      <EntityTypeMapping TypeName="TISS_WebModel.Article">
-        <MappingFragment StoreEntitySet="Article">
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="UnpublishDate" ColumnName="UnpublishDate" />
-          <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ArticleClickCount">
-      <EntityTypeMapping TypeName="TISS_WebModel.ArticleClickCount">
-        <MappingFragment StoreEntitySet="ArticleClickCount">
-          <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-          <ScalarProperty Name="LastResetDate" ColumnName="LastResetDate" />
-          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
-          <ScalarProperty Name="ArticleClickID" ColumnName="ArticleClickID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PressPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.PressPageContent">
         <MappingFragment StoreEntitySet="PressPageContent">
@@ -802,6 +780,43 @@
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="TextContent" ColumnName="TextContent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hashtag">
+      <EntityTypeMapping TypeName="TISS_WebModel.Hashtag">
+        <MappingFragment StoreEntitySet="Hashtag">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleCategory">
+      <EntityTypeMapping TypeName="TISS_WebModel.ArticleCategory">
+        <MappingFragment StoreEntitySet="ArticleCategory">
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleContent">
+      <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
+        <MappingFragment StoreEntitySet="ArticleContent">
+          <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
+          <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+          <ScalarProperty Name="EncryptedUrl" ColumnName="EncryptedUrl" />
+          <ScalarProperty Name="TargetView" ColumnName="TargetView" />
+          <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+          <ScalarProperty Name="Hashtags" ColumnName="Hashtags" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+          <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="ContentBody" ColumnName="ContentBody" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

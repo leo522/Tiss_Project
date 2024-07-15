@@ -41,29 +41,32 @@
           <Property Name="UserLoginTime" Type="datetime" />
           <Property Name="FileNo" Type="int" />
         </EntityType>
-        <EntityType Name="Article">
+        <EntityType Name="ArticleCategory">
           <Key>
-            <PropertyRef Name="ArticleID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PublishDate" Type="datetime" Nullable="false" />
-          <Property Name="UnpublishDate" Type="datetime" />
-          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'TISS_Web.dbo.ArticleClickCount' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
-        <EntityType Name="ArticleClickCount">
+        <EntityType Name="ArticleContent">
           <Key>
-            <PropertyRef Name="ClickCount" />
-            <PropertyRef Name="LastResetDate" />
-            <PropertyRef Name="ArticleID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ArticleClickID" Type="int" />
-          <Property Name="ClickCount" Type="int" Nullable="false" />
-          <Property Name="LastResetDate" Type="datetime" Nullable="false" />
-          <Property Name="ArticleID" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="ContentBody" Type="nvarchar(max)" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="10" />
+          <Property Name="ImageContent" Type="varbinary(max)" />
+          <Property Name="PublishedDate" Type="datetime" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="IsPublished" Type="bit" />
+          <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsNew" Type="bit" />
+          <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
+          <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClickCount" Type="int" />
+          <Property Name="ContentTypeId" Type="int" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -223,6 +226,13 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Hashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="HomePageContent">
           <Key>
@@ -764,18 +774,6 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
-        <Association Name="FK__ArticleCl__Artic__662B2B3B">
-          <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
-          <End Role="ArticleClickCount" Type="Self.ArticleClickCount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Article">
-              <PropertyRef Name="ArticleID" />
-            </Principal>
-            <Dependent Role="ArticleClickCount">
-              <PropertyRef Name="ArticleClickID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
           <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -827,7 +825,8 @@
         <EntityContainer Name="TISS_WebModelStoreContainer">
           <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleCategory" EntityType="Self.ArticleCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticleContent" EntityType="Self.ArticleContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BODPageContent" EntityType="Self.BODPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
@@ -838,6 +837,7 @@
           <EntitySet Name="FileDocument" EntityType="Self.FileDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenderEqualityPageContent" EntityType="Self.GenderEqualityPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GovernmentWebsitePageContent" EntityType="Self.GovernmentWebsitePageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hashtag" EntityType="Self.Hashtag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -873,18 +873,6 @@
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ArticleClickCount" EntityType="Self.ArticleClickCount" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ArticleClickCount].[ArticleClickID] AS [ArticleClickID], 
-    [ArticleClickCount].[ClickCount] AS [ClickCount], 
-    [ArticleClickCount].[LastResetDate] AS [LastResetDate], 
-    [ArticleClickCount].[ArticleID] AS [ArticleID]
-    FROM [dbo].[ArticleClickCount] AS [ArticleClickCount]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="Self.FK__ArticleCl__Artic__662B2B3B">
-            <End Role="Article" EntitySet="Article" />
-            <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
-          </AssociationSet>
           <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="RolePermissions" EntitySet="RolePermissions" />
@@ -1074,12 +1062,6 @@
           <EntitySet Name="SportsNutritionPageContent" EntityType="TISS_WebModel.SportsNutritionPageContent" />
           <EntitySet Name="SportsPhysiologyPageContent" EntityType="TISS_WebModel.SportsPhysiologyPageContent" />
           <EntitySet Name="SportsPsychologyPageContent" EntityType="TISS_WebModel.SportsPsychologyPageContent" />
-          <EntitySet Name="Article" EntityType="TISS_WebModel.Article" />
-          <EntitySet Name="ArticleClickCount" EntityType="TISS_WebModel.ArticleClickCount" />
-          <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B">
-            <End Role="Article" EntitySet="Article" />
-            <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
-          </AssociationSet>
           <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
           <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
           <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
@@ -1091,6 +1073,9 @@
           <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
           <EntitySet Name="Language" EntityType="TISS_WebModel.Language" />
           <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
+          <EntitySet Name="Hashtag" EntityType="TISS_WebModel.Hashtag" />
+          <EntitySet Name="ArticleCategory" EntityType="TISS_WebModel.ArticleCategory" />
+          <EntitySet Name="ArticleContent" EntityType="TISS_WebModel.ArticleContent" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1613,42 +1598,6 @@
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="Article">
-          <Key>
-            <PropertyRef Name="ArticleID" />
-          </Key>
-          <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UnpublishDate" Type="DateTime" Precision="3" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ArticleClickCount" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="Article" ToRole="ArticleClickCount" />
-        </EntityType>
-        <EntityType Name="ArticleClickCount">
-          <Key>
-            <PropertyRef Name="ClickCount" />
-            <PropertyRef Name="LastResetDate" />
-            <PropertyRef Name="ArticleID" />
-          </Key>
-          <Property Name="ArticleClickID" Type="Int32" />
-          <Property Name="ClickCount" Type="Int32" Nullable="false" />
-          <Property Name="LastResetDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Article" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="ArticleClickCount" ToRole="Article" />
-          <Property Name="ArticleID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK__ArticleCl__Artic__662B2B3B">
-          <End Type="TISS_WebModel.Article" Role="Article" Multiplicity="0..1" />
-          <End Type="TISS_WebModel.ArticleClickCount" Role="ArticleClickCount" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Article">
-              <PropertyRef Name="ArticleID" />
-            </Principal>
-            <Dependent Role="ArticleClickCount">
-              <PropertyRef Name="ArticleClickID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PressPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -1803,6 +1752,40 @@
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
           <Property Name="FileNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Hashtag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ArticleCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ArticleContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ContentBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="IsPublished" Type="Boolean" />
+          <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsNew" Type="Boolean" />
+          <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ClickCount" Type="Int32" />
+          <Property Name="ContentTypeId" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2426,28 +2409,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Article">
-            <EntityTypeMapping TypeName="TISS_WebModel.Article">
-              <MappingFragment StoreEntitySet="Article">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="UnpublishDate" ColumnName="UnpublishDate" />
-                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ArticleClickCount">
-            <EntityTypeMapping TypeName="TISS_WebModel.ArticleClickCount">
-              <MappingFragment StoreEntitySet="ArticleClickCount">
-                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
-                <ScalarProperty Name="LastResetDate" ColumnName="LastResetDate" />
-                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
-                <ScalarProperty Name="ArticleClickID" ColumnName="ArticleClickID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PressPageContent">
             <EntityTypeMapping TypeName="TISS_WebModel.PressPageContent">
               <MappingFragment StoreEntitySet="PressPageContent">
@@ -2611,6 +2572,43 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hashtag">
+            <EntityTypeMapping TypeName="TISS_WebModel.Hashtag">
+              <MappingFragment StoreEntitySet="Hashtag">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleCategory">
+            <EntityTypeMapping TypeName="TISS_WebModel.ArticleCategory">
+              <MappingFragment StoreEntitySet="ArticleCategory">
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleContent">
+            <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
+              <MappingFragment StoreEntitySet="ArticleContent">
+                <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
+                <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
+                <ScalarProperty Name="EncryptedUrl" ColumnName="EncryptedUrl" />
+                <ScalarProperty Name="TargetView" ColumnName="TargetView" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="Hashtags" ColumnName="Hashtags" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+                <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ContentBody" ColumnName="ContentBody" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

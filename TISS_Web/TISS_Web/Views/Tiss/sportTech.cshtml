@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
+@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
 <!DOCTYPE html>
@@ -80,6 +81,14 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/sportsNutrition">運動營養</a>
                                     </li>
+                                    @{
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                        {
+                                            <li span="3">
+                                                <a class="MenuLink" href="/Tiss/ArticleCreate">新增文章</a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </aside>
@@ -113,176 +122,32 @@
                             <div class="MainContainer">
                                 <div class="NewsVideoList">
                                     <div class="container">
-                                        <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/8nfmh009j4kjr97xl4hw" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E6%8A%80%E8%88%87%E8%B3%87%E8%A8%8A%E9%96%8B%E7%99%BC/%E6%A5%8A%E6%B8%85%E6%96%B93-%E9%A6%96%E9%A0%81%E5%9C%96.png" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
+                                        <div class="row">
+                                            @foreach (var article in Model)
+                                            {
+                                                <div class="col-md-4 mb-4">
+                                                    <a href="@Url.Action("sportTech", "Tiss", new { id = article.EncryptedUrl })" class="">
+                                                        <div class="NewsItemBox">
+                                                            <div class="NewsItemImg">
+                                                                @if (article.ImageContent != null)
+                                                                {
+                                                                    string base64Image = Convert.ToBase64String(article.ImageContent);
+                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                }
+                                                                <div class="tag">@article.ContentType</div>
+                                                                <div class="Mask">閱讀更多</div>
+                                                            </div>
+                                                            <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                                                            <div class="NewsItemContent">
+                                                                <span class="el-text is-line-clamp">@article.BodyContent</span>
+                                                            </div>
+                                                            <div class="el-tag el-tag--plain is-round">
+                                                                <div class="el-tag__content">@article.Hashtags</div>
+                                                            </div>
                                                         </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">淺談運動大數據</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">淺談運動大數據</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/21</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/1pxhabyceiiottc8zbfo" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E7%A0%94%E7%A9%B6%E8%99%95/%E8%98%87%E9%9D%96%E9%9B%852-%E9%A6%96%E9%A0%81%E5%9C%96.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">新世代來臨，科學與科技提升運動觀賞與運動參與體驗!</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">新世代來臨，科學與科技提升運動觀賞與運動參與體驗!</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/14</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/gz8rtxuewqsafhar7fi8" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E7%A0%94%E7%A9%B6%E8%99%95/%E7%AB%A0%E8%8A%9D%E5%84%802-%E9%A6%96%E9%A0%81%E5%9C%96(1).jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">探索運動與電腦視覺的奇妙結合</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">探索運動與電腦視覺的奇妙結合</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/11</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/9ida47kcl3gbkbwvtuwb" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E6%8A%80%E8%88%87%E8%B3%87%E8%A8%8A%E9%96%8B%E7%99%BC/%E5%A7%9C%E9%9B%85%E8%96%B01-%E9%A6%96%E9%A0%81%E5%9C%96.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">智慧場館介紹-SoFi Stadium</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">1姜雅薰-智慧場館實例介紹-SoFi Stadium</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/05</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/kz5ultwdibgeivwedjk0" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E6%8A%80%E8%88%87%E8%B3%87%E8%A8%8A%E9%96%8B%E7%99%BC/2%E6%A5%8A%E6%B8%85%E6%96%B9-%E9%A6%96%E9%A0%81%E5%9C%96.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">科技對個人運動習慣的影響</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">楊清方1</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/05/07</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/egnat3nmsyonowx3ceks" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/%E7%A7%91%E6%99%AE%E5%B0%88%E6%AC%84%E7%85%A7%E7%89%87/%E9%81%8B%E5%8B%95%E7%A7%91%E6%8A%80%E8%88%87%E8%B3%87%E8%A8%8A%E9%96%8B%E7%99%BC/2%E9%82%B1%E6%B0%B8%E8%88%88-%E9%A6%96%E9%A0%81%E5%9C%96.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">澳洲國家運動員資料庫AMS簡介</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">邱永興2-澳洲國家運動員資料庫AMS簡介</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/04/30</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/%E9%81%8B%E5%8B%95%E7%A7%91%E6%8A%80%E8%88%87%E8%B3%87%E8%A8%8A%E5%B0%8E%E5%85%A5%E9%A0%85%E7%9B%AE" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/storage/media/資訊導入.png" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">運動科技與資訊導入項目</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">運動科技與資訊導入項目</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/03/30</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/2jliawblp3oh4vfl9prl" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/storage/media/storage/media/%E9%AB%98%E7%A7%91%E6%8A%80%E5%B0%8E%E5%85%A5%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8/%E9%AB%98%E7%A7%91%E6%8A%80%E5%B0%8E%E5%85%A5%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">用科學強化運動 用運動壯大臺灣</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技與資訊開發處</span>
-                                                            </span>
-                                                            <span>2024/03/23</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -349,5 +214,18 @@
             </div>
         </div>
     </div>
+    <script>
+        //登出按鈕顯示功能
+$(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
+    </script>
 </body>
 </html>

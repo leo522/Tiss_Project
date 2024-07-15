@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -255,4 +256,43 @@ namespace TISS_Web.Models
         public bool IsActive { get; set; }
     }
 
+    public class ArticleContentModel
+    {
+        public int Id { get; set; }
+
+        public string Title { get; set; }
+
+        public string BodyContent { get; set; }
+
+        public byte[] ImageContent { get; set; }
+
+        public DateTime PublishedDate { get; set; }
+
+        public string EncryptedUrl { get; set; }
+
+        public int ClickCount { get; set; }
+
+        public int ContentTypeId { get; set; } 
+
+        public string ContentType { get; set; } 
+
+        public string CreateUser { get; set; }
+
+        public DateTime CreateDate { get; set; }
+
+        public string Hashtags { get; set; }
+    }
+
+    public class HashtagModle
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+
+    public class ArticleCategoryModel 
+    {
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
+    }
 }

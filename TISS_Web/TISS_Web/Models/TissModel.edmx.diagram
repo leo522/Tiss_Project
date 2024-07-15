@@ -45,9 +45,6 @@
         <EntityTypeShape EntityType="TISS_WebModel.SportsNutritionPageContent" Width="1.5" PointX="0.75" PointY="17.75" />
         <EntityTypeShape EntityType="TISS_WebModel.SportsPhysiologyPageContent" Width="1.5" PointX="2.75" PointY="17.75" />
         <EntityTypeShape EntityType="TISS_WebModel.SportsPsychologyPageContent" Width="1.5" PointX="4.75" PointY="17.75" />
-        <EntityTypeShape EntityType="TISS_WebModel.Article" Width="1.5" PointX="18.375" PointY="5" />
-        <EntityTypeShape EntityType="TISS_WebModel.ArticleClickCount" Width="1.5" PointX="20.625" PointY="5.25" />
-        <AssociationConnector Association="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" />
         <EntityTypeShape EntityType="TISS_WebModel.PressPageContent" Width="1.5" PointX="18.375" PointY="8.75" />
         <EntityTypeShape EntityType="TISS_WebModel.FileDocument" Width="1.5" PointX="18.375" PointY="13.75" />
         <EntityTypeShape EntityType="TISS_WebModel.RegulationDocument" Width="1.5" PointX="18.375" PointY="17.75" />
@@ -59,6 +56,9 @@
         <EntityTypeShape EntityType="TISS_WebModel.OtherDocument" Width="1.5" PointX="20.375" PointY="8.75" />
         <EntityTypeShape EntityType="TISS_WebModel.Language" Width="1.5" PointX="3.375" PointY="6.75" />
         <EntityTypeShape EntityType="TISS_WebModel.OrganizationPageContent" Width="1.5" PointX="20.375" PointY="16.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.Hashtag" Width="1.5" PointX="20.375" PointY="4.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.ArticleCategory" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.ArticleContent" Width="1.5" PointX="13.375" PointY="21.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

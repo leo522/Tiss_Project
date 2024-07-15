@@ -13,40 +13,33 @@
     <script src="~/Scripts/jquery-3.7.0.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/tiny/tinymce.min.js"></script>
+    @*<script src="~/tiny/js/tinymce/tinymce.min.js"></script>*@
     <title>國家運動科學中心</title>
 
 </head>
 <body>
-    <div>
-        <div>
-            @using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
+    <!-- Place the first <script> tag in your HTML's <head> -->
+    @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
 
-                <div class="form-group">
-                    <label for="file" class="control-label col-md-2">選擇檔案</label>
-                    <div class="col-md-10">
-                        <input type="file"id="fileInput" />
-                        <button type="button" id="del_btn" class="btn btn-secondary">清除選擇</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="上傳檔案" class="btn btn-primary" />
-                    </div>
-                </div>
-            }
-            <div>
-                @ViewBag.Message
-            </div>
-        </div>
-    </div>
+    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('del_btn').addEventListener('click', function () {
-                document.getElementById('fileInput').value = '';
-            });
+        tinymce.init({
+            selector: 'textarea',
+            language: 'zh_TW',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
         });
     </script>
+<textarea>
+  Welcome to TinyMCE!
+</textarea>
 </body>
 </html>

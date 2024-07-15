@@ -154,7 +154,7 @@ namespace TISS_Web.Controllers
         #endregion
 
 
-        #region 修改密碼-待修改為生成重設連結並發送電子郵件
+        #region 修改密碼-待修改為生成重設連結並發送電子郵件-尚未開始做
         [HttpGet]
         public ActionResult ChangePassword()
         {
@@ -766,7 +766,19 @@ namespace TISS_Web.Controllers
         public ActionResult sportScience()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科學").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -776,7 +788,19 @@ namespace TISS_Web.Controllers
         public ActionResult sportTech()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -786,7 +810,19 @@ namespace TISS_Web.Controllers
         public ActionResult sportMedicine()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動醫學").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -795,7 +831,20 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsPhysiology()
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動生理").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -804,7 +853,20 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsPsychology()
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動心理").ToList();
+            //var list = _db.ArticleContent.ToList();
+
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -813,7 +875,21 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult physicalTraining()
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "體能訓練").ToList();
+
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -822,7 +898,21 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsNutrition()
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            //var list = _db.ArticleContent.ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動營養").ToList();
+
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
         #endregion
 
@@ -1199,131 +1289,106 @@ namespace TISS_Web.Controllers
 
         #endregion
 
-        #region 點擊率測試
-        [HttpPost]
-        public ActionResult IncreaseClickCount(int id)
+        #region 發佈文章
+
+        public ActionResult ArticleCreate()
         {
-            var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == id);
-            if (item != null)
-            {
-                // 增加點擊數
-                item.ClickCount++;
-
-                // 更新資料庫
-                item.UserLoginTime = DateTime.Now;
-                _db.SaveChanges();
-
-                // 回傳更新後的點擊數，供前端顯示
-                return Json(new { clickCount = item.ClickCount });
-            }
-            else
-            {
-                return Json(new { error = "Item not found" });
-            }
+            ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
+            ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
+            return View();
         }
-        #endregion
 
-        #region 測試點擊數
-        /// <summary>
-        /// // 獲取文章
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult ViewArticle(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string tag, string contentType)
         {
-            var dto = _db.Article.Find(id);
-
-            if (dto == null || !dto.IsActive || (dto.UnpublishDate.HasValue && dto.UnpublishDate.Value <= DateTime.Now))
+            if (ModelState.IsValid)
             {
-                return HttpNotFound();
+                try
+                {
+                    if (imageFile != null && imageFile.ContentLength > 0)
+                    {
+                        using (var binaryReader = new System.IO.BinaryReader(imageFile.InputStream))
+                        {
+                            dto.ImageContent = binaryReader.ReadBytes(imageFile.ContentLength);
+                        }
+                    }
+                    var userName = Session["UserName"] as string;
+                    dto.CreateUser = userName;
+                    dto.PublishedDate = DateTime.Now;
+                    dto.EncryptedUrl = EncryptUrl(dto.Title);
+                    dto.ClickCount = 0;
+                    dto.Hashtags = tag;
+                    dto.ContentType = contentType;
+
+                    if (!string.IsNullOrEmpty(tag))
+                    {
+                        var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == tag);
+                        if (existingHashtag == null)
+                        {
+                            // 如果 hashtag 不存在，則新增
+                            var newHashtag = new Hashtag { Name = tag };
+                            _db.Hashtag.Add(newHashtag);
+                        }
+                    }
+
+                    int categoryId;
+                    if (int.TryParse(dto.ContentType, out categoryId))
+                    {
+                        var category = _db.ArticleCategory.FirstOrDefault(c => c.Id == categoryId);
+                        dto.ContentType = category?.CategoryName; // 存入 CategoryName
+                    }
+
+                    _db.ArticleContent.Add(dto);
+                    _db.SaveChanges();
+
+                    // 根據 ContentType 進行重定向
+                    string redirectAction = GetRedirectAction(dto.Hashtags);
+
+                    return RedirectToAction(redirectAction, "Tiss");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "發生錯誤，請稍後再試。");
+                }
             }
-
-            IncrementClickCount(id);
-
-            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id)?.ClickCount ?? 0;
-            ViewBag.ClickCount = clickCount;
+            // 確保返回正確的 ViewBag.Hashtags
+            //ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
+            ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
 
             return View(dto);
         }
 
-        /// <summary>
-        /// 更新點擊次
-        /// </summary>
-        /// <param name="id"></param>
-        private void IncrementClickCount(int id)
+        //重定向邏輯
+        private string GetRedirectAction(string contentType)
         {
-            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id);
-
-            if (clickCount == null)
+            switch (contentType)
             {
-                clickCount = new ArticleClickCount
-                {
-                    ArticleClickID = id,
-                    ClickCount = 1,
-                    LastResetDate = DateTime.Now
-                };
-                _db.ArticleClickCount.Add(clickCount);
+                case "運動醫學": return "sportMedicine";
+                case "運動科學": return "sportScience";
+                case "運動科技": return "sportTech";
+                case "運動營養": return "sportsNutrition";
+                case "運動生理": return "sportsPhysiology";
+                case "運動心理": return "sportsPsychology";
+                case "行政管理處人資組": return "administrationHR";
+                case "委託研究計劃": return "commissionedResearch";
+                case "MOU簽署": return "MOU";
+                case "運動資訊": return "sportsInfo";
+                default: return "Home";
             }
-            else
-            {
-                clickCount.ClickCount++;
-            }
-            _db.SaveChanges();
         }
-
-        /// <summary>
-        /// 重設點擊次數
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult ResetClickCount(int id)
+        
+        //URL加密
+        private string EncryptUrl(string input)
         {
-            var clickCount = _db.ArticleClickCount.SingleOrDefault(c => c.ArticleClickID == id);
+            // 使用 Guid 和 Base64 生成唯一加密 URL
+            var guid = Guid.NewGuid();
+            var base64 = Convert.ToBase64String(guid.ToByteArray());
 
-            if (clickCount != null)
-            {
-                clickCount.ClickCount = 0;
-                clickCount.LastResetDate = DateTime.Now;
-                _db.SaveChanges();
-            }
-            return RedirectToAction("ViewArticle", new { id });
-        }
+            // 移除 Base64 字符串中的特殊字符
+            base64 = base64.Replace("/", "-").Replace("+", "_").Replace("=", "");
 
-        /// <summary>
-        /// 新文章上架
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult PublishArticle(int id)
-        {
-            var article = _db.Article.Find(id);
-
-            if (article != null)
-            {
-                article.IsActive = true;
-                article.PublishDate = DateTime.Now;
-                article.UnpublishDate = null;
-                _db.SaveChanges();
-            }
-            return RedirectToAction("ViewArticle", new { id });
-        }
-
-        /// <summary>
-        /// 文章下架
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public ActionResult UnpublishArticle(int id)
-        {
-            var article = _db.Article.Find(id);
-            if (article != null)
-            {
-                article.IsActive = false;
-                article.UnpublishDate = DateTime.Now;
-                _db.SaveChanges();
-            }
-
-            return RedirectToAction("ViewArticle", new { id });
+            return base64;
         }
         #endregion
     }

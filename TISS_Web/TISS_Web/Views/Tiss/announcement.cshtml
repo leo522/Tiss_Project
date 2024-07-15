@@ -77,7 +77,15 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/recruit">徵才招募</a>
                                     </li>
-                                </ul>
+                                    @{
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                        {
+                                            <li span="3">
+                                                <a class="MenuLink" href="/Tiss/recruit">消息維護</a>
+                                            </li>
+                                            }
+                                        }
+                                    </ul>
                             </div>
                         </aside>
                         <main class="el-main bg-white">

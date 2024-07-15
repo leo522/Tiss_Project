@@ -61,8 +61,6 @@ namespace TISS_Web.Models
         public virtual DbSet<SportsNutritionPageContent> SportsNutritionPageContent { get; set; }
         public virtual DbSet<SportsPhysiologyPageContent> SportsPhysiologyPageContent { get; set; }
         public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
-        public virtual DbSet<Article> Article { get; set; }
-        public virtual DbSet<ArticleClickCount> ArticleClickCount { get; set; }
         public virtual DbSet<PressPageContent> PressPageContent { get; set; }
         public virtual DbSet<FileDocument> FileDocument { get; set; }
         public virtual DbSet<RegulationDocument> RegulationDocument { get; set; }
@@ -74,5 +72,8 @@ namespace TISS_Web.Models
         public virtual DbSet<OtherDocument> OtherDocument { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
+        public virtual DbSet<Hashtag> Hashtag { get; set; }
+        public virtual DbSet<ArticleCategory> ArticleCategory { get; set; }
+        public virtual DbSet<ArticleContent> ArticleContent { get; set; }
     }
 }
