@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace TISS_Web.Models
 {
@@ -262,6 +263,7 @@ namespace TISS_Web.Models
 
         public string Title { get; set; }
 
+        [AllowHtml]
         public string BodyContent { get; set; }
 
         public byte[] ImageContent { get; set; }
@@ -281,6 +283,10 @@ namespace TISS_Web.Models
         public DateTime CreateDate { get; set; }
 
         public string Hashtags { get; set; }
+
+        public DateTime UpdateDate { get; set; }
+
+        public string UpdatedUser { get; set; }
     }
 
     public class HashtagModle

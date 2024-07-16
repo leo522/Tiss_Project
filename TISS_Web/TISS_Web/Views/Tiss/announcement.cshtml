@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
+@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
 <!DOCTYPE html>
@@ -66,7 +67,7 @@
                                 <div class="Title">中心公告</div>
                                 <ul class="Menu">
                                     <li span="3">
-                                        <a class="MenuLink active" href="/Tiss/announcement">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/announcement">全部文章</a>
                                     </li>
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/press">新聞發佈</a>
@@ -77,15 +78,15 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/recruit">徵才招募</a>
                                     </li>
-                                    @{
+                                    @*@{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
                                             <li span="3">
-                                                <a class="MenuLink" href="/Tiss/recruit">消息維護</a>
+                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
                                             </li>
-                                            }
                                         }
-                                    </ul>
+                                    }*@
+                                </ul>
                             </div>
                         </aside>
                         <main class="el-main bg-white">
@@ -128,237 +129,32 @@
                             <div class="MainContainer">
                                 <div class="AnnouncementList" id="AnnList">
                                     <div class="container">
-                                        <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/Tiss/researchProject">
-                                                    <div class="NewsItemBox" id="News1">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                            <div class="tag">中心訊息</div>
-                                                            <div class="Mask">閱讀更多</div>
+                                        <div class="row">
+                                            @foreach (var article in Model)
+                                            {
+                                                <div class="col-md-4 mb-4">
+                                                    <a href="@Url.Action("announcement", "Tiss", new { id = article.EncryptedUrl })" class="">
+                                                        <div class="NewsItemBox">
+                                                            <div class="NewsItemImg">
+                                                                @if (article.ImageContent != null)
+                                                                {
+                                                                    string base64Image = Convert.ToBase64String(article.ImageContent);
+                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                }
+                                                                <div class="tag">@article.ContentType</div>
+                                                                <div class="Mask">閱讀更多</div>
+                                                            </div>
+                                                            <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                                                            <div class="NewsItemContent">
+                                                                <span class="el-text is-line-clamp">@article.BodyContent</span>
+                                                            </div>
+                                                            <div class="el-tag el-tag--plain is-round">
+                                                                <div class="el-tag__content">@article.Hashtags</div>
+                                                            </div>
                                                         </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">國家運動科學中心「114年度委託研究計畫」徵求公告</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">國家運動科學中心「114年度委託研究計畫」徵求公告</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">委託研究計畫</span>
-                                                            </span>
-                                                            <span>2024/06/14</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News1">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News1">儲存</button>
+                                                    </a>
                                                 </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/國家運動科學中心mou簽署學校" class="">
-                                                    <div class="NewsItemBox" id="News2">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/MOU簽署-合作學校.png" alt="">
-                                                            <div class="tag">中心訊息</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">國家運動科學中心MOU簽署學校</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">國家運動科學中心MOU簽署學校</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">MOU簽署</span>
-                                                            </span>
-                                                            <span>2024/04/01</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News2">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News2">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/qzakxqotjf44eod9kuwu" class="">
-                                                    <div class="NewsItemBox" id="News3">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                            <div class="tag">中心訊息</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">政府網站服務管理規範</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動資訊</span>
-                                                            </span>
-                                                            <span>2024/04/01</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News3">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News3">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/r7oxxjc83fadzdw9x5ck" class="">
-                                                    <div class="NewsItemBox" id="News4">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/storage/media/S__27959338.jpg" alt="">
-                                                            <div class="tag">新聞發佈</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">國家運動科學中心備戰巴黎奧運 邀義大利籍教授傳授射擊心法</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科學研究處</span>
-                                                            </span>
-                                                            <span>2024/03/25</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News4">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News4">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/eorhctiv2lum7qkzhnam" class="">
-                                                    <div class="NewsItemBox" id="News5">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                            <div class="tag">徵才招募</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">總務行政組組長</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">行政管理處人資組</span>
-                                                            </span>
-                                                            <span>2024/03/22</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News5">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News5">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/f9nvoovngrnkfberpc2p" class="">
-                                                    <div class="NewsItemBox" id="News6">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                            <div class="tag">徵才招募</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">計畫行政專員</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">行政管理處人資組</span>
-                                                            </span>
-                                                            <span>2024/03/22</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News6">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News6">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/%E6%89%93%E9%80%A0%E5%9C%8B%E6%B0%91%E5%81%A5%E5%BA%B7%E8%B3%87%E6%96%99%E5%BA%AB%20%E5%9C%8B%E5%AE%B6%E9%81%8B%E7%A7%91%E4%B8%AD%E5%BF%83%E8%87%BA%E9%AB%94%E5%A4%A7%E7%B0%BD%E7%BD%B2%E5%90%88%E4%BD%9C%E5%82%99%E5%BF%98%E9%8C%84" class="">
-                                                    <div class="NewsItemBox" id="News7">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/storage/media/20240321003675.jpg" alt="">
-                                                            <div class="tag">新聞發佈</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">打造國民健康資料庫 國家運科中心臺體大簽署合作備忘錄</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">MOU簽署4-打造國民健康資料庫 國家運科中心臺體大簽署合作備忘錄</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">MOU簽署</span>
-                                                            </span>
-                                                            <span>2024/03/21</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News7">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News7">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/ipk7o9lzbgwhuowmhqou" class="">
-                                                    <div class="NewsItemBox" id="News8">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/storage/media/2024運動科技論壇暨科技展示-影像分析應用於運動科技/422654673_122127099404122461_2280383131498637614_n.jpeg" alt="">
-                                                            <div class="tag">中心訊息</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">2024運動科技論壇暨科技展示-影像分析應用於運動科技</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                            </span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科學研究處</span>
-                                                            </span>
-                                                            <span>2024/03/15</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News8">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News8">儲存</button>
-                                                </div>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/%E5%8C%97%E5%B8%82%E5%A4%A7%E8%88%87%E5%9C%8B%E5%AE%B6%E9%81%8B%E7%A7%91%E4%B8%AD%E5%BF%83%E7%B0%BD%E7%BD%B2%E5%90%88%E4%BD%9C%E5%8D%94%E8%AD%B0%E6%9B%B8%20%E7%A9%8D%E6%A5%B5%E6%8E%A8%E5%8B%95%E9%81%8B%E7%A7%91%E7%99%BC%E5%B1%95" class="">
-                                                    <div class="NewsItemBox" id="News9">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/storage/media/20240223003384.jpeg" alt="">
-                                                            <div class="tag">新聞發佈</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">北市大與國家運科中心簽署合作協議書 積極推動運科發展</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">MOU簽署3-北市大與國家運科中心簽署合作協議書 積極推動運科發展</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">MOU簽署</span>
-                                                            </span>
-                                                            <span>2024/02/23</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div class="btn-container">
-                                                    <button class="btn btn-outline-primary news-btns" data-newsid="News9">新增圖片</button>
-                                                    <button class="btn btn-outline-success news-btns" data-newsid="News9">儲存</button>
-                                                </div>
-                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -384,7 +180,7 @@
                                                         </span>
                                                     </button>
                                                 </li>
-                                                <li class="page-item active" aria-current="page">
+                                                <li class="page-item" aria-current="page">
                                                     <button class="page-link">1</button>
                                                 </li>
                                                 <li class="page-item">
@@ -427,56 +223,18 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            var isLoggedIn = '@Session["LoggedIn"]' == 'True';
-            $('#AnnList a').on('click', function (e) {
-                e.preventDefault(); // 阻止點擊的預設行為
-                return false; // 防止事件繼續
-            });
-            //CKEDITOR.inline('News1'); // 初始化 CKEditor
+    //登出按鈕顯示功能
+$(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-            if (isLoggedIn) {
-                $('.NewsItemBox').attr('contenteditable', 'true').addClass('editable');
-                $('.btn-container').show(); // 顯示按鈕容器
-
-                // 事件委託，監聽所有 news-btns 按鈕的點擊事件
-                $(document).on('click', '.news-btns', function () {
-                    var newsId = $(this).data('newsid');
-                    var action = $(this).text(); // 取得按鈕的動作類型
-
-                    switch (action) {
-                        case '新增圖片':
-                            changeImg(newsId);
-                            break;
-                        case '儲存':
-                            saveContent(newsId);
-                            break;
-                        default:
-                            break;
-                    }
-                });
-
-                $('#logoutBtn').show(); // 顯示登出按鈕
-            } else {
-                $('.NewsItemBox').attr('contenteditable', 'false').removeClass('editable');
-                $('.btn-container').hide(); // 隱藏按鈕容器
-                $('#AnnList a').off('click');
-                $('#NewsBox').attr('contenteditable', 'false');
-                //$('#loginBtn').show(); // 顯示登入按鈕
-            }
-
-            function toggleDropdown(dropdownId) {
-                var dropdownToggle = document.getElementById(dropdownId);
-                var dropdownMenu = dropdownToggle.nextElementSibling;
-
-                if (dropdownMenu.classList.contains('show')) {
-                    dropdownMenu.classList.remove('show');
-                } else {
-                    dropdownMenu.classList.add('show');
-                }
-            }
-        });
-
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
+//登出按鈕顯示功能
     </script>
 </body>
 </html>

@@ -36,29 +36,32 @@
     <Property Name="UserLoginTime" Type="datetime" />
     <Property Name="FileNo" Type="int" />
   </EntityType>
-  <EntityType Name="Article">
+  <EntityType Name="ArticleCategory">
     <Key>
-      <PropertyRef Name="ArticleID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PublishDate" Type="datetime" Nullable="false" />
-    <Property Name="UnpublishDate" Type="datetime" />
-    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="10" />
   </EntityType>
-  <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'TISS_Web.dbo.ArticleClickCount' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
-  <EntityType Name="ArticleClickCount">
+  <EntityType Name="ArticleContent">
     <Key>
-      <PropertyRef Name="ClickCount" />
-      <PropertyRef Name="LastResetDate" />
-      <PropertyRef Name="ArticleID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ArticleClickID" Type="int" />
-    <Property Name="ClickCount" Type="int" Nullable="false" />
-    <Property Name="LastResetDate" Type="datetime" Nullable="false" />
-    <Property Name="ArticleID" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="80" Nullable="false" />
+    <Property Name="ContentBody" Type="nvarchar(max)" />
+    <Property Name="ContentType" Type="nvarchar" MaxLength="10" />
+    <Property Name="ImageContent" Type="varbinary(max)" />
+    <Property Name="PublishedDate" Type="datetime" />
+    <Property Name="CreateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="IsPublished" Type="bit" />
+    <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsNew" Type="bit" />
+    <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
+    <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ClickCount" Type="int" />
+    <Property Name="ContentTypeId" Type="int" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>
@@ -219,6 +222,13 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Hashtag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="20" />
+  </EntityType>
   <EntityType Name="HomePageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -252,6 +262,14 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Lang_Key" />
+    </Key>
+    <Property Name="Lang_Key" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lang_zhTW" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Lang_enUS" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="MissionPageContent">
     <Key>
@@ -305,6 +323,7 @@
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
+    <Property Name="FileNo" Type="int" />
   </EntityType>
   <EntityType Name="OtherDocument">
     <Key>
@@ -750,18 +769,6 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
-  <Association Name="FK__ArticleCl__Artic__662B2B3B">
-    <End Role="Article" Type="Self.Article" Multiplicity="0..1" />
-    <End Role="ArticleClickCount" Type="Self.ArticleClickCount" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Article">
-        <PropertyRef Name="ArticleID" />
-      </Principal>
-      <Dependent Role="ArticleClickCount">
-        <PropertyRef Name="ArticleClickID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -813,7 +820,8 @@
   <EntityContainer Name="TISS_WebModelStoreContainer">
     <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleCategory" EntityType="Self.ArticleCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticleContent" EntityType="Self.ArticleContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BODPageContent" EntityType="Self.BODPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
@@ -824,8 +832,10 @@
     <EntitySet Name="FileDocument" EntityType="Self.FileDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GenderEqualityPageContent" EntityType="Self.GenderEqualityPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GovernmentWebsitePageContent" EntityType="Self.GovernmentWebsitePageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hashtag" EntityType="Self.Hashtag" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
@@ -858,18 +868,6 @@
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ArticleClickCount" EntityType="Self.ArticleClickCount" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [ArticleClickCount].[ArticleClickID] AS [ArticleClickID], 
-    [ArticleClickCount].[ClickCount] AS [ClickCount], 
-    [ArticleClickCount].[LastResetDate] AS [LastResetDate], 
-    [ArticleClickCount].[ArticleID] AS [ArticleID]
-    FROM [dbo].[ArticleClickCount] AS [ArticleClickCount]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="Self.FK__ArticleCl__Artic__662B2B3B">
-      <End Role="Article" EntitySet="Article" />
-      <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
-    </AssociationSet>
     <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
       <End Role="Permissions" EntitySet="Permissions" />
       <End Role="RolePermissions" EntitySet="RolePermissions" />

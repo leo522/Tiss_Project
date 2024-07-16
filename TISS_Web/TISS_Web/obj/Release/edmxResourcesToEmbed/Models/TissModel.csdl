@@ -150,7 +150,6 @@
     <EntitySet Name="InstitutePageContent" EntityType="TISS_WebModel.InstitutePageContent" />
     <EntitySet Name="MissionPageContent" EntityType="TISS_WebModel.MissionPageContent" />
     <EntitySet Name="ObjectivesPageContent" EntityType="TISS_WebModel.ObjectivesPageContent" />
-    <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
     <EntitySet Name="OtherPageContent" EntityType="TISS_WebModel.OtherPageContent" />
     <EntitySet Name="PlanPageContent" EntityType="TISS_WebModel.PlanPageContent" />
     <EntitySet Name="ProcedurePageContent" EntityType="TISS_WebModel.ProcedurePageContent" />
@@ -169,12 +168,6 @@
     <EntitySet Name="SportsNutritionPageContent" EntityType="TISS_WebModel.SportsNutritionPageContent" />
     <EntitySet Name="SportsPhysiologyPageContent" EntityType="TISS_WebModel.SportsPhysiologyPageContent" />
     <EntitySet Name="SportsPsychologyPageContent" EntityType="TISS_WebModel.SportsPsychologyPageContent" />
-    <EntitySet Name="Article" EntityType="TISS_WebModel.Article" />
-    <EntitySet Name="ArticleClickCount" EntityType="TISS_WebModel.ArticleClickCount" />
-    <AssociationSet Name="FK__ArticleCl__Artic__662B2B3B" Association="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B">
-      <End Role="Article" EntitySet="Article" />
-      <End Role="ArticleClickCount" EntitySet="ArticleClickCount" />
-    </AssociationSet>
     <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
     <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
     <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
@@ -184,6 +177,11 @@
     <EntitySet Name="ProcedureDocument" EntityType="TISS_WebModel.ProcedureDocument" />
     <EntitySet Name="PurchaseDocument" EntityType="TISS_WebModel.PurchaseDocument" />
     <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
+    <EntitySet Name="Language" EntityType="TISS_WebModel.Language" />
+    <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
+    <EntitySet Name="Hashtag" EntityType="TISS_WebModel.Hashtag" />
+    <EntitySet Name="ArticleCategory" EntityType="TISS_WebModel.ArticleCategory" />
+    <EntitySet Name="ArticleContent" EntityType="TISS_WebModel.ArticleContent" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -393,23 +391,6 @@
     <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
     <Property Name="FileNo" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="OrganizationPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="OtherPageContent">
     <Key>
@@ -723,42 +704,6 @@
     <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="Article">
-    <Key>
-      <PropertyRef Name="ArticleID" />
-    </Key>
-    <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="PublishDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="UnpublishDate" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ArticleClickCount" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="Article" ToRole="ArticleClickCount" />
-  </EntityType>
-  <EntityType Name="ArticleClickCount">
-    <Key>
-      <PropertyRef Name="ClickCount" />
-      <PropertyRef Name="LastResetDate" />
-      <PropertyRef Name="ArticleID" />
-    </Key>
-    <Property Name="ArticleClickID" Type="Int32" />
-    <Property Name="ClickCount" Type="Int32" Nullable="false" />
-    <Property Name="LastResetDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Article" Relationship="TISS_WebModel.FK__ArticleCl__Artic__662B2B3B" FromRole="ArticleClickCount" ToRole="Article" />
-    <Property Name="ArticleID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK__ArticleCl__Artic__662B2B3B">
-    <End Type="TISS_WebModel.Article" Role="Article" Multiplicity="0..1" />
-    <End Type="TISS_WebModel.ArticleClickCount" Role="ArticleClickCount" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Article">
-        <PropertyRef Name="ArticleID" />
-      </Principal>
-      <Dependent Role="ArticleClickCount">
-        <PropertyRef Name="ArticleClickID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="PressPageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -887,5 +832,65 @@
     <Property Name="FileSize" Type="Int32" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Lang_Key" />
+    </Key>
+    <Property Name="Lang_Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lang_zhTW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Lang_enUS" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="OrganizationPageContent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
+    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
+    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
+    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
+    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+    <Property Name="FileNo" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Hashtag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ArticleCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ArticleContent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="ContentBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PublishedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="IsPublished" Type="Boolean" />
+    <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsNew" Type="Boolean" />
+    <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ClickCount" Type="Int32" />
+    <Property Name="ContentTypeId" Type="Int32" />
   </EntityType>
 </Schema>

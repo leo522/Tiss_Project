@@ -4,26 +4,22 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="~/Scripts/jquery-3.7.0.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>選擇文件</h2>
-        <select class="form-control" id="documentSelect">
-            <option value="">請選擇文件</option>
-            @foreach (var item in ViewBag.Documents)
-            {
-                <option>@item</option>
-            }
-        </select>
-        <nav aria-label="">
-            <ul class="pagination">
-
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-
-            </ul>
-        </nav>
+    <div>
+        <textarea id="tiny"></textarea>
     </div>
+    <script>
+        tinymce.init({
+            selector: 'textarea#tiny'
+        });
+
+        document.addEventListener('focusin', (e) => {
+            if (e.target.closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
+                e.stopImmediatePropagation();
+            }
+        });
+    </script>
 </body>
 </html>

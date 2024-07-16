@@ -15,6 +15,9 @@ using System.Security.Cryptography;
 using System.Text;
 using PagedList;
 using System.Web.UI;
+using System.Data.Entity;
+using static TISS_Web.Models.ArticleModel;
+using System.Collections;
 
 namespace TISS_Web.Controllers
 {
@@ -368,7 +371,17 @@ namespace TISS_Web.Controllers
         {
 
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -378,7 +391,17 @@ namespace TISS_Web.Controllers
         public ActionResult press()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var list = _db.ArticleContent.Where(a => a.ContentType == "新聞發佈").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -388,7 +411,17 @@ namespace TISS_Web.Controllers
         public ActionResult institute()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -398,7 +431,17 @@ namespace TISS_Web.Controllers
         public ActionResult recruit()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var list = _db.ArticleContent.Where(a => a.ContentType == "徵才招募").ToList();
+            var articles = list.Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            return View(articles);
         }
 
         /// <summary>
@@ -429,12 +472,6 @@ namespace TISS_Web.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult GovernmentWebsite()
-        {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
-        }
-
-        public ActionResult Shotting()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
             return View();
@@ -756,18 +793,6 @@ namespace TISS_Web.Controllers
         public ActionResult research()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
-        }
-
-        /// <summary>
-        /// 運動科學
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult sportScience()
-        {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科學").ToList();
             var articles = list.Select(s => new ArticleContentModel
             {
@@ -782,6 +807,44 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
+        /// 運動科學
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult sportScience(int page = 1, int pageSize = 5)
+        {
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科學").ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+
+            //var articles = list.Select(s => new ArticleContentModel
+            //{
+            //    Title = s.Title,
+            //    EncryptedUrl = EncryptUrl(s.Title),
+            //    ImageContent = s.ImageContent,
+            //    Hashtags = s.Hashtags,
+            //    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            //}).ToList();
+
+            return View(articles);
+        }
+
+        /// <summary>
         /// 運動科技
         /// </summary>
         /// <returns></returns>
@@ -789,7 +852,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技").ToList();
             var articles = list.Select(s => new ArticleContentModel
             {
@@ -811,7 +873,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動醫學").ToList();
             var articles = list.Select(s => new ArticleContentModel
             {
@@ -833,7 +894,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動生理").ToList();
             var articles = list.Select(s => new ArticleContentModel
             {
@@ -855,7 +915,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動心理").ToList();
-            //var list = _db.ArticleContent.ToList();
 
             var articles = list.Select(s => new ArticleContentModel
             {
@@ -877,7 +936,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "體能訓練").ToList();
 
             var articles = list.Select(s => new ArticleContentModel
@@ -900,7 +958,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var list = _db.ArticleContent.ToList();
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動營養").ToList();
 
             var articles = list.Select(s => new ArticleContentModel
@@ -1291,15 +1348,35 @@ namespace TISS_Web.Controllers
 
         #region 發佈文章
 
-        public ActionResult ArticleCreate()
+        public ActionResult ArticleCreate(int? id)
         {
-            ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
-            ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
-            return View();
+            try
+            {
+                ArticleContent article = null;
+
+                if (id.HasValue)
+                {
+                    article = _db.ArticleContent.FirstOrDefault(a => a.Id == id.Value);
+
+                    if (article == null)
+                    {
+                        return HttpNotFound();
+                    }
+                }
+
+                ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
+                ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
+                return View(article);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string tag, string contentType)
         {
             if (ModelState.IsValid)
@@ -1324,6 +1401,7 @@ namespace TISS_Web.Controllers
                     if (!string.IsNullOrEmpty(tag))
                     {
                         var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == tag);
+
                         if (existingHashtag == null)
                         {
                             // 如果 hashtag 不存在，則新增
@@ -1339,8 +1417,31 @@ namespace TISS_Web.Controllers
                         dto.ContentType = category?.CategoryName; // 存入 CategoryName
                     }
 
+                    //if (dto.Id > 0)
+                    //{
+                    //    var exist = _db.ArticleContent.Find(dto.Id);
+
+                    //    if (exist != null)
+                    //    {
+                    //        exist.ContentBody = dto.ContentBody; //文章內容
+                    //        exist.ContentType = dto.ContentType; //文章類型
+                    //        exist.ImageContent = dto.ImageContent; //圖片內容
+                    //        exist.Hashtags = dto.Hashtags; //文章標籤
+                    //        exist.PublishedDate = dto.PublishedDate; //發佈時間
+                    //        exist.UpdatedDate = dto.UpdatedDate; //更新時間
+                    //        exist.UpdatedUser = dto.UpdatedUser; //更新人員
+                    //    }
+                    //}
+                    //else 
+                    //{
+                    //    _db.ArticleContent.Add(dto);
+                    //}
                     _db.ArticleContent.Add(dto);
                     _db.SaveChanges();
+
+                    //dto.EncryptedUrl = EncryptUrl(dto.Id.ToString());
+                    //_db.Entry(dto).State = EntityState.Modified; // 設定為已修改狀態
+                    //_db.SaveChanges(); // 更新加密 URL
 
                     // 根據 ContentType 進行重定向
                     string redirectAction = GetRedirectAction(dto.Hashtags);
@@ -1352,9 +1453,9 @@ namespace TISS_Web.Controllers
                     ModelState.AddModelError("", "發生錯誤，請稍後再試。");
                 }
             }
-            // 確保返回正確的 ViewBag.Hashtags
-            //ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
-            ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
+                // 確保返回正確的 ViewBag.Hashtags
+                ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
+                ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
 
             return View(dto);
         }
@@ -1374,6 +1475,10 @@ namespace TISS_Web.Controllers
                 case "委託研究計劃": return "commissionedResearch";
                 case "MOU簽署": return "MOU";
                 case "運動資訊": return "sportsInfo";
+                case "全部文章": return "announcement";
+                case "新聞發佈": return "press";
+                case "中心訊息": return "institute";
+                case "徵才招募": return "recruit";                
                 default: return "Home";
             }
         }
@@ -1381,14 +1486,71 @@ namespace TISS_Web.Controllers
         //URL加密
         private string EncryptUrl(string input)
         {
-            // 使用 Guid 和 Base64 生成唯一加密 URL
-            var guid = Guid.NewGuid();
-            var base64 = Convert.ToBase64String(guid.ToByteArray());
-
-            // 移除 Base64 字符串中的特殊字符
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            var base64 = Convert.ToBase64String(bytes);
             base64 = base64.Replace("/", "-").Replace("+", "_").Replace("=", "");
 
             return base64;
+        }
+
+        //文章內容
+        //[ValidateAntiForgeryToken]
+        //[ValidateInput(false)]
+        public ActionResult ViewArticle(string encryptedUrl)
+        {
+            try
+            {
+                //Session["ReturnUrl"] = Request.Url.ToString();
+
+                var article = _db.ArticleContent.FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
+                if (article == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // 增加點閱率次數
+                article.ClickCount += 1;
+                _db.SaveChanges();
+                return View(article);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult ViewArticle(ArticleContent dto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var exist = _db.ArticleContent.Find(dto.Id);
+
+                    if (exist != null)
+                    {
+                        exist.ContentBody = dto.ContentBody; //文章內容
+                        //exist.ContentType = dto.ContentType; //文章類型
+                        //exist.ImageContent = dto.ImageContent; //圖片內容
+                        //exist.Hashtags = dto.Hashtags; //文章標籤
+                        exist.PublishedDate = dto.PublishedDate; //發佈時間
+                        exist.UpdatedDate = DateTime.Now; //更新時間
+                        exist.UpdatedUser = Session["UserName"] as string; //更新人員
+
+                        _db.SaveChanges();
+
+                        return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+                    }
+                }
+                return View(dto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
     }

@@ -67,6 +67,8 @@
           <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ClickCount" Type="int" />
           <Property Name="ContentTypeId" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -1786,6 +1788,8 @@
           <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ClickCount" Type="Int32" />
           <Property Name="ContentTypeId" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2594,6 +2598,8 @@
           <EntitySetMapping Name="ArticleContent">
             <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
               <MappingFragment StoreEntitySet="ArticleContent">
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
                 <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
                 <ScalarProperty Name="EncryptedUrl" ColumnName="EncryptedUrl" />

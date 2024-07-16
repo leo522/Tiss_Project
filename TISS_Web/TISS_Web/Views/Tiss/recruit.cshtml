@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
+@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
 <!DOCTYPE html>
@@ -66,7 +67,7 @@
                                 <div class="Title">中心公告</div>
                                 <ul class="Menu">
                                     <li span="3">
-                                        <a class="MenuLink active" href="/Tiss/announcement">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/announcement">全部文章</a>
                                     </li>
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/press">新聞發佈</a>
@@ -77,6 +78,14 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/recruit">徵才招募</a>
                                     </li>
+                                    @{
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                        {
+                                            <li span="3">
+                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                         </aside>
@@ -119,107 +128,33 @@
                             <div class="MainContainer">
                                 <div class="AnnouncementList">
                                     <div class="container">
-                                        @{if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                        <div class="row">
+                                            @foreach (var article in Model)
                                             {
-                                                
-                                                <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
-                                                <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/eorhctiv2lum7qkzhnam" class="">
-                                                <div class="NewsItemBox">
-                                                <div class="NewsItemImg">
-                                                <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                <div class="tag">徵才招募</div>
-                                                <div class="Mask">閱讀更多</div>
-                                </div>
-                                                <textarea id="file_content">
-                                                <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">總務行政組組長</span>
-                                                </textarea>
-                                                <div class="NewsItemContent">
-                                                <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                    </span>
-                                </div>
-                                                <div class="NewsItemInfo">
-                                                <span class="el-tag el-tag--plain is-round">
-                                                <span class="el-tag__content">行政管理處人資組</span>
-                                    </span>
-                                                <span>2024/03/22</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                                                <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/announcement/f9nvoovngrnkfberpc2p" class="">
-                                                <div class="NewsItemBox">
-                                                <div class="NewsItemImg">
-                                                <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                <div class="tag">徵才招募</div>
-                                                <div class="Mask">閱讀更多</div>
-                                </div>
-                                                <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">計畫行政專員</span>
-                                                <div class="NewsItemContent">
-                                                <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                    </span>
-                                </div>
-                                                <div class="NewsItemInfo">
-                                                <span class="el-tag el-tag--plain is-round">
-                                                <span class="el-tag__content">行政管理處人資組</span>
-                                    </span>
-                                                <span>2024/03/22</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            
-                                            }
-                                            else
-                                            {
-                                                <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                    <a href="/announcement/eorhctiv2lum7qkzhnam" class="">
+                                                <div class="col-md-4 mb-4">
+                                                    <a href="@Url.Action("recruit", "Tiss", new { id = article.EncryptedUrl })" class="">
                                                         <div class="NewsItemBox">
                                                             <div class="NewsItemImg">
-                                                                <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                                <div class="tag">徵才招募</div>
+                                                                @if (article.ImageContent != null)
+                                                                {
+                                                                    string base64Image = Convert.ToBase64String(article.ImageContent);
+                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                }
+                                                                <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask">閱讀更多</div>
                                                             </div>
-                                                            <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">總務行政組組長</span>
+                                                            <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                             <div class="NewsItemContent">
-                                                                <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                                </span>
+                                                                <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="NewsItemInfo">
-                                                                <span class="el-tag el-tag--plain is-round">
-                                                                    <span class="el-tag__content">行政管理處人資組</span>
-                                                                </span>
-                                                                <span>2024/03/22</span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="el-col el-col-24 el-col-sm-24 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                    <a href="/announcement/f9nvoovngrnkfberpc2p" class="">
-                                                        <div class="NewsItemBox">
-                                                            <div class="NewsItemImg">
-                                                                <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                                <div class="tag">徵才招募</div>
-                                                                <div class="Mask">閱讀更多</div>
-                                                            </div>
-                                                            <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">計畫行政專員</span>
-                                                            <div class="NewsItemContent">
-                                                                <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">
-                                                                </span>
-                                                            </div>
-                                                            <div class="NewsItemInfo">
-                                                                <span class="el-tag el-tag--plain is-round">
-                                                                    <span class="el-tag__content">行政管理處人資組</span>
-                                                                </span>
-                                                                <span>2024/03/22</span>
+                                                            <div class="el-tag el-tag--plain is-round">
+                                                                <div class="el-tag__content">@article.Hashtags</div>
                                                             </div>
                                                         </div>
                                                     </a>
                                                 </div>
                                             }
-                                        }
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="Pagination">
@@ -244,7 +179,7 @@
                                                         </span>
                                                     </button>
                                                 </li>
-                                                <li class="page-item active" aria-current="page">
+                                                <li class="page-item" aria-current="page">
                                                     <button class="page-link">1</button>
                                                 </li>
                                                 <li class="page-item">
@@ -288,105 +223,18 @@
         </div>
     </div>
     <script>
-        //登出按鈕顯示功能
+    //登出按鈕顯示功能
 $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-        if (isLoggedIn) {
-            $('#logoutBtn').show(); //顯示登出按鈕
-        } else {
-            $('#loginBtn').show(); //顯示登入按鈕
-        }
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
         loadContent(); //加載已儲存的內容
-    //載入已儲存的內容
-    function loadContent() {
-        $.ajax({
-            url: 'aboutGetContent',
-            method: 'GET',
-            success: function (response) {
-                if (response.success) {
-                    document.getElementById('intro').innerText = response.textContent;
-                    document.getElementById('mainImage').src = response.imagePath;
-                } else {
-                    console.error('載入失敗: ' + response.error);
-                }
-            },
-            error: function (err) {
-                console.error('載入失敗', err);
-            }
-        });
-    }
-    tinymce.init({
-        selector: '#file_content',
-        language: 'zh_TW',
-        plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen textcolor colorpicker',
-            'insertdatetime media table contextmenu paste code hr pagebreak nonbreaking'
-        ],
-        toolbar: ['newdocument preview fullscreen code print searchreplace selectall | bold italic underline strikethrough superscript subscript removeformat forecolor backcolor | alignleft aligncenter alignright alignjustify',
-        ],
-    });
-
 });
-
-
-//增刪圖片功能
-//function changeImg() {
-//    document.getElementById('uploadImageInput').click();
-//}
-
-//document.getElementById('uploadImageInput').addEventListener('change', function () {
-//    var file = this.files[0];
-//    if (file) {
-//        var reader = new FileReader();
-//        reader.onload = function (event) {
-//            document.getElementById('mainImage').src = event.target.result;
-//        };
-//        reader.readAsDataURL(file);
-//    }
-//});
-
-//function removeImg() {
-//    document.getElementById('mainImage').src = '';
-//}
-////增刪圖片功能
-
-////圖片及文字存檔功能
-//function saveContent() {
-//    /*var textContent = document.getElementById('intro').innerText;*/
-//    var textContent = document.getElementById('intro').innerHTML;
-//    var imageSrc = document.getElementById('mainImage').src;
-
-//    $.ajax({
-//        url: 'aboutSaveContent',
-//        method: 'POST',
-//        data: {
-//            TextContent: textContent,
-//            ImageSrc: imageSrc
-//        },
-//        success: function (response) {
-//            document.getElementById('mainImage').src = response.imagePath;
-//            debugger;
-//            alert('內容已儲存');
-//        },
-//        error: function (err) {
-//            console.error('儲存失敗', err);
-//        }
-//    });
-//}
-////圖片及文字存檔功能
-
-function toggleDropdown(dropdownId) {
-    var dropdownToggle = document.getElementById(dropdownId);
-    var dropdownMenu = dropdownToggle.nextElementSibling;
-
-    if (dropdownMenu.classList.contains('show')) {
-        dropdownMenu.classList.remove('show');
-    } else {
-        dropdownMenu.classList.add('show');
-    }
-}
+//登出按鈕顯示功能
     </script>
 </body>
 </html>
