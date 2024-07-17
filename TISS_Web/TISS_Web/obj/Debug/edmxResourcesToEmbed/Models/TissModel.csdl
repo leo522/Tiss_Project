@@ -889,10 +889,11 @@
     <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IsNew" Type="Boolean" />
     <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ClickCount" Type="Int32" />
     <Property Name="ContentTypeId" Type="Int32" />
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>

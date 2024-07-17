@@ -2518,8 +2518,11 @@
     </Content>
     <Content Include="Scripts\4.5.2.bootstrap.min.js" />
     <Content Include="site\css\hashTagStyle.css" />
+    <Content Include="site\css\MenuLinkStyle.css" />
     <Content Include="site\css\NavMenuStyle.css" />
     <Content Include="site\css\SectionTitleStyle.css" />
+    <Content Include="site\css\ViewArticleBannerStyle.css" />
+    <Content Include="site\css\ViewArticleBtnStyle.css" />
     <Content Include="site\img\banner_announcement.1b73bdab.jpg" />
     <Content Include="site\img\banner_public.db4e1f02.jpg" />
     <Content Include="site\css\app.5338f982.css" />

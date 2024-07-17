@@ -31,5 +31,6 @@ namespace TISS_Web.Models
         public Nullable<int> ContentTypeId { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public string UpdatedUser { get; set; }
+        public bool IsEnabled { get; set; }
     }
 }

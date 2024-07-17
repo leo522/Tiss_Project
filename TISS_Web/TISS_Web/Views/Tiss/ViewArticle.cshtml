@@ -13,26 +13,85 @@
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
     <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticleBannerStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="BasePageBanner">
         <div class="Mask"></div>
-        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_research.25875290.jpg" alt="">
-        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_research_m.3413fe57.jpg" alt="">
+        <img class="PageBannerItemBg " src="/site/img/banner_research.25875290.jpg" alt="">
+        <img class="PageBannerItemBg" src="/site/img/banner_research_m.3413fe57.jpg" alt="">
     </div>
-    <div class="container mt-5">
+
+    <div style="display: flex; justify-content: flex-end;">
+        <div class="TitleTag">
+            <span class="el-breadcrumb__item">
+                <a class="el-breadcrumb__inner" role="link" style="color:black" href="/Tiss/Home">首頁</a>
+                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
+            </span>
+            @if (ViewBag.ParentDirectory != null)
+            {
+                <span class="el-breadcrumb__item">
+                    <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
+                    <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
+                </span>
+            }
+            <span class="el-breadcrumb__item current-page" aria-current="page">
+                <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>
+            </span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="Title">科普專欄</div>
+        <ul class="Menu">
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/research">全部文章</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportMedicine">運動醫學</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportTech">運動科技</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportScience">運動科學</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportsPhysiology">運動生理</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportsPsychology">運動心理</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/physicalTraining">體能訓練</a>
+            </li>
+            <li span="3">
+                <a class="MenuLink" href="/Tiss/sportsNutrition">運動營養</a>
+            @*</li>
+            @{
+                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                {
+                    <li span="3">
+                        <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                    </li>
+                }
+            }*@
+        </ul>
+    </div>
+    <div class="container mt-5 ResearchPage">
+
         @if (isLoggedIn)
         {
-        <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
-            @Html.AntiForgeryToken()
-            <input type="hidden" name="Id" value="@Model.Id" />
-            <div class="form-group">
-                <label for="ContentBody">內容:</label>
-                <textarea id="ContentBody" name="ContentBody" class="form-control">@Model.ContentBody</textarea>
-            </div>
-            <input type="hidden" name="Id" value="@Model.Id" />
-            <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-        </form>
+            <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="ContentBody">內容:</label>
+                    <textarea id="ContentBody" name="ContentBody" class="form-control">@Model.ContentBody</textarea>
+                </div>
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+            </form>
         }
         else
         {
@@ -42,11 +101,23 @@
         }
         <p>發佈日期: @Model.PublishedDate</p>
         <p>
-            <a href="@Url.Action("ViewArticle", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
                 <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
             </a>
         </p>
     </div>
+
+    <div class="navigation-buttons">
+        @if (ViewBag.PreviousArticle != null)
+        {
+            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
+        }
+        @if (ViewBag.NextArticle != null)
+        {
+            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
+        }
+    </div>
+
     <p>點閱次數: @Model.ClickCount</p>
     <div class="social-share">
         <h5>分享至:</h5>
@@ -79,7 +150,7 @@ if (isLoggedIn) {
                     selector: '#ContentBody',
                     language: 'zh_TW',
                     plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown preview',
-                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat| preview',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat|preview',
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
                     mergetags_list: [

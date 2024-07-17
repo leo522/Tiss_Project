@@ -29,7 +29,7 @@
             </div>
             <div class="form-group mb-4">
                 <label for="ContentType" style="font-size:25px">發佈類型</label>
-                @Html.DropDownList("contentType", (SelectList)ViewBag.Categories, "請選擇發佈類型", new { @class = "form-control"})
+                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇發佈類型", new { @class = "form-control"})
             </div>
             <div class="form-group mb-4">
                 <label for="Tag" style="font-size:25px">文章標籤</label>
@@ -48,8 +48,8 @@
             tinymce.init({
                 selector: '#ContentBody', // 特定的textarea選擇器
                 language: 'zh_TW',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown |',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | preview',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
                 mergetags_list: [

@@ -802,6 +802,7 @@
     <EntitySetMapping Name="ArticleContent">
       <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
         <MappingFragment StoreEntitySet="ArticleContent">
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
           <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />

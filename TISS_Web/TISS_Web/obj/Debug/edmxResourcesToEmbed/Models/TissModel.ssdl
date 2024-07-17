@@ -59,11 +59,12 @@
     <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
     <Property Name="IsNew" Type="bit" />
     <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
-    <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ClickCount" Type="int" />
     <Property Name="ContentTypeId" Type="int" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>

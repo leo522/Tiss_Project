@@ -287,6 +287,10 @@ namespace TISS_Web.Models
         public DateTime UpdateDate { get; set; }
 
         public string UpdatedUser { get; set; }
+
+        public bool IsEnabled { get; set; }
+
+        public Dictionary<string, List<string>> ParentDirectories { get; set; } // 字典來管理父目錄及其子目錄
     }
 
     public class HashtagModle

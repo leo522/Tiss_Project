@@ -64,11 +64,12 @@
           <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
           <Property Name="IsNew" Type="bit" />
           <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
-          <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ClickCount" Type="int" />
           <Property Name="ContentTypeId" Type="int" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -1785,11 +1786,12 @@
           <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IsNew" Type="Boolean" />
           <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ClickCount" Type="Int32" />
           <Property Name="ContentTypeId" Type="Int32" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2598,6 +2600,7 @@
           <EntitySetMapping Name="ArticleContent">
             <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
               <MappingFragment StoreEntitySet="ArticleContent">
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
                 <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
                 <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
