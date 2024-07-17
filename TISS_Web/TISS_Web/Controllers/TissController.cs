@@ -368,12 +368,32 @@ namespace TISS_Web.Controllers
         /// 中心公告
         /// </summary>
         /// <returns></returns>
-        public ActionResult announcement()
+        public ActionResult announcement(int page = 1, int pageSize = 5)
         {
 
             Session["ReturnUrl"] = Request.Url.ToString();
-            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息").ToList();
-            var articles = list.Select(s => new ArticleContentModel
+
+            var relatedHashtags = new List<string>
+            {
+                "新聞發佈",
+                "中心訊息",
+                "徵才招募",
+                "國家運動科學中心",
+                "委託研究計畫",
+                "運動科學研究處",
+                "MOU簽署",
+                "行政管理人資組",
+                "運動資訊"
+            };
+            // 查詢相關 hashtags 的文章
+            var list = _db.ArticleContent
+                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
                 Title = s.Title,
                 EncryptedUrl = EncryptUrl(s.Title),
@@ -381,6 +401,9 @@ namespace TISS_Web.Controllers
                 Hashtags = s.Hashtags,
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(articles);
         }
@@ -389,11 +412,16 @@ namespace TISS_Web.Controllers
         /// 新聞發布
         /// </summary>
         /// <returns></returns>
-        public ActionResult press()
+        public ActionResult press(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            var list = _db.ArticleContent.Where(a => a.ContentType == "新聞發佈").ToList();
-            var articles = list.Select(s => new ArticleContentModel
+
+            var list = _db.ArticleContent.Where(a => a.ContentType == "新聞發佈" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
                 Title = s.Title,
                 EncryptedUrl = EncryptUrl(s.Title),
@@ -401,6 +429,9 @@ namespace TISS_Web.Controllers
                 Hashtags = s.Hashtags,
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(articles);
         }
@@ -409,11 +440,15 @@ namespace TISS_Web.Controllers
         /// 中心訊息
         /// </summary>
         /// <returns></returns>
-        public ActionResult institute()
+        public ActionResult institute(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息").ToList();
-            var articles = list.Select(s => new ArticleContentModel
+            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
                 Title = s.Title,
                 EncryptedUrl = EncryptUrl(s.Title),
@@ -421,6 +456,9 @@ namespace TISS_Web.Controllers
                 Hashtags = s.Hashtags,
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(articles);
         }
@@ -429,11 +467,15 @@ namespace TISS_Web.Controllers
         /// 徵才招募
         /// </summary>
         /// <returns></returns>
-        public ActionResult recruit()
+        public ActionResult recruit(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            var list = _db.ArticleContent.Where(a => a.ContentType == "徵才招募").ToList();
-            var articles = list.Select(s => new ArticleContentModel
+            var list = _db.ArticleContent.Where(a => a.ContentType == "徵才招募" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
                 Title = s.Title,
                 EncryptedUrl = EncryptUrl(s.Title),
@@ -441,6 +483,9 @@ namespace TISS_Web.Controllers
                 Hashtags = s.Hashtags,
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
 
             return View(articles);
         }
@@ -485,37 +530,119 @@ namespace TISS_Web.Controllers
         /// 影音專區
         /// </summary>
         /// <returns></returns>
-        public ActionResult video()
+        public ActionResult video(int page = 1, int pageSize = 5)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            var relatedHashtags = new List<string>
+            {
+                "人物專訪",
+                "運動科技論壇",
+                "影音專區"
+            };
+            // 查詢相關 hashtags 的文章
+            var list = _db.ArticleContent
+                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(articles);
         }
 
         /// <summary>
         /// 中心成果
         /// </summary>
         /// <returns></returns>
-        public ActionResult achievement()
+        public ActionResult achievement(int page = 1, int pageSize = 5)
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "中心成果" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(articles);
         }
 
         /// <summary>
         /// 新聞影音
         /// </summary>
         /// <returns></returns>
-        public ActionResult news()
+        public ActionResult news(int page = 1, int pageSize = 5)
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "影音專區" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(articles);
         }
 
         /// <summary>
         /// 活動紀錄
         /// </summary>
         /// <returns></returns>
-        public ActionResult activityRecord()
+        public ActionResult activityRecord(int page = 1, int pageSize = 5)
         {
-            return View();
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技論壇" && a.IsEnabled).ToList();
+
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(articles);
         }
         #endregion
 
@@ -1074,175 +1201,203 @@ namespace TISS_Web.Controllers
         /// 法規
         /// </summary>
         /// <returns></returns>
-        public ActionResult regulation(int? page)
+        public ActionResult regulation(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.RegulationDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new RegulationDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.RegulationDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
         /// 辦法及要點
         /// </summary>
         /// <returns></returns>
-        public ActionResult procedure(int? page)
+        public ActionResult procedure(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.ProcedureDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new ProcedureDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.ProcedureDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new ProcedureDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
         /// 計畫
         /// </summary>
         /// <returns></returns>
-        public ActionResult plan(int? page)
+        public ActionResult plan(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.PlanDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new PlanDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.PlanDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PlanDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
         /// 預算與決算
         /// </summary>
         /// <returns></returns>
-        public ActionResult budget(int? page)
+        public ActionResult budget(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.BudgetDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new BudgetDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.BudgetDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new BudgetDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);  
         }
 
         /// <summary>
         /// 下載專區
         /// </summary>
         /// <returns></returns>
-        public ActionResult download(int? page)
+        public ActionResult download(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.DownloadDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new DownloadDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.DownloadDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DownloadDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
         /// 採購作業實施規章
         /// </summary>
         /// <returns></returns>
-        public ActionResult purchase(int? page)
+        public ActionResult purchase(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.PurchaseDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new PurchaseDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.PurchaseDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PurchaseDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
         /// 其他
         /// </summary>
         /// <returns></returns>
-        public ActionResult other(int? page)
+        public ActionResult other(int page = 1, int pageSize = 5)
         {
-            int pageSize = 5; // 每頁顯示的項目數量
-            int pageNumber = (page ?? 1);
-
             Session["ReturnUrl"] = Request.Url.ToString();
-            var uploadedFiles = _db.OtherDocument
-                        .OrderBy(d => d.UploadTime)
-                        .Select(d => new OtherDocumentModel
-                        {
-                            DocumentName = d.DocumentName,
-                            DocumentType = d.DocumentType,
-                            UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                            Creator = d.Creator,
-                            FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                            IsActive = d.IsActive,
-                        }).ToPagedList(pageNumber, pageSize);
 
-            return View(uploadedFiles);
+            var list = _db.OtherDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new OtherDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
         #endregion
 
@@ -1450,6 +1605,7 @@ namespace TISS_Web.Controllers
                     dto.Hashtags = tag;
                     dto.IsEnabled = true;
 
+                    //處理contentTypeID
                     var category = _db.ArticleCategory.FirstOrDefault(c => c.Id == contentTypeID);
                     if (category != null)
                     {
@@ -1501,14 +1657,17 @@ namespace TISS_Web.Controllers
                 case "運動營養": return "sportsNutrition";
                 case "運動生理": return "sportsPhysiology";
                 case "運動心理": return "sportsPsychology";
-                case "行政管理處人資組": return "administrationHR";
-                case "委託研究計劃": return "commissionedResearch";
-                case "MOU簽署": return "MOU";
+                case "行政管理處人資組": return "recruit";
+                case "委託研究計劃": return "announcement";
+                case "MOU簽署": return "announcement";
                 case "運動資訊": return "sportsInfo";
                 case "全部文章": return "announcement";
                 case "新聞發佈": return "press";
                 case "中心訊息": return "institute";
                 case "徵才招募": return "recruit";
+                case "中心成果": return "achievement";
+                case "新聞影音": return "news";
+                case "活動紀錄": return "activityRecord";
                 default: return "Home";
             }
         }
@@ -1560,7 +1719,7 @@ namespace TISS_Web.Controllers
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
                     { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學", "運動生理", "運動心理", "體能訓練", "運動營養" } },
-                    { "中心消息", new List<string> { "中心成果", "新聞影音", "活動紀錄" } }
+                    { "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
                 };
                 var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
@@ -1615,14 +1774,6 @@ namespace TISS_Web.Controllers
         {
             string actionName = GetRedirectAction(tag);
             return RedirectToAction(actionName, "Tiss");
-        }
-
-        private string GetParentDirectoryByContentTypeId(int contentTypeId)
-        {
-            if (contentTypeId == 1) return "科普專欄";
-            if (contentTypeId == 2) return "中心消息";
-
-            return "其他";
         }
         #endregion
     }
