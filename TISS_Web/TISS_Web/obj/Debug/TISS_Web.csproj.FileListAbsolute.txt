@@ -99,3 +99,17 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Threading.Tasks.Extensi
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\WebActivatorEx.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Threading.Tasks.Extensions.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.CodeDom.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.CodeDom.xml

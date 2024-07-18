@@ -75,5 +75,7 @@ namespace TISS_Web.Models
         public virtual DbSet<Hashtag> Hashtag { get; set; }
         public virtual DbSet<ArticleCategory> ArticleCategory { get; set; }
         public virtual DbSet<ArticleContent> ArticleContent { get; set; }
+        public virtual DbSet<MenuItems> MenuItems { get; set; }
+        public virtual DbSet<Menus> Menus { get; set; }
     }
 }

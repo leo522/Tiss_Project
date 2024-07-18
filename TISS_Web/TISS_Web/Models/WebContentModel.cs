@@ -308,9 +308,26 @@ namespace TISS_Web.Models
         public string CategoryName { get; set; }
     }
 
+    //首頁的部份視圖
     public class HomeViewModel
     {
         public ArticleContentModel LatestArticle { get; set; }
         public List<ArticleContentModel> OtherArticles { get; set; }
+    }
+
+    public class Menu
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public List<MenuItem> MenuItems { get; set; }
+    }
+
+    public class MenuItem
+    {
+        public int Id { get; set; }
+        public int MenuId { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public Menu Menu { get; set; }
     }
 }

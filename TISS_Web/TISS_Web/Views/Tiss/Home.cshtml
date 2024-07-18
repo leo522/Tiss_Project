@@ -78,7 +78,7 @@
                             <div class="el-row row-reverse">
                                 <div class="el-col el-col-24 el-col-sm-24 el-col-md-12">
                                     <div class="Content">
-                                        <div>
+                                        @*<div>
                                             <div class="Title">
                                                 <div class="SectionTitle">About TISS</div>
                                                 <div class="SectionSubTitle">
@@ -102,13 +102,13 @@
                                                     </span>
                                                 </button>
                                             </a>
-                                        </div>
+                                        </div>*@
                                     </div>
                                 </div>
 
-                                <div class="el-col el-col-24 el-col-sm-24 el-col-md-12 AboutImg">
+                                @*<div class="el-col el-col-24 el-col-sm-24 el-col-md-12 AboutImg">
                                     <img src="/site/img/about_img_1.3170f29f.jpg" id="HomePic" alt="about tiss">
-                                </div>
+                                </div>*@
                                 @{
                                     if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                     {
@@ -290,7 +290,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>204
+                                            </a>
+                                        </div>
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
@@ -363,8 +364,62 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="el-carousel__item" style="transform: translateX(0px) scale(1);">
+                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
+                                                <div class="VideoCarouselMobileContent">
+                                                    <div class="VideoCarouselMobileContentBox">
+                                                        <div class="Tag">
+                                                            <span>中心成果</span>
+                                                        </div>
+                                                        <div class="Title">人物專訪-國家運動科學中心吳誠文董事長</div>
+                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
+                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
+                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
+                                                        </span>
+                                                        <div class="Info">
+                                                            <span class="el-tag el-tag--plain is-round">
+                                                                <span class="el-tag__content">人物專訪</span>
+                                                            </span>
+                                                            <span>2024/05/20</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="VideoCarouselMobileVideo">
+                                                <div class="Video">
+                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="el-carousel__item" style="transform: translateX(0px) scale(1);">
+                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
+                                                <div class="VideoCarouselMobileContent">
+                                                    <div class="VideoCarouselMobileContentBox">
+                                                        <div class="Tag">
+                                                            <span>中心成果</span>
+                                                        </div>
+                                                        <div class="Title">人物專訪-國家運動科學中心吳誠文董事長</div>
+                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
+                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
+                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
+                                                        </span>
+                                                        <div class="Info">
+                                                            <span class="el-tag el-tag--plain is-round">
+                                                                <span class="el-tag__content">人物專訪</span>
+                                                            </span>
+                                                            <span>2024/05/20</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="VideoCarouselMobileVideo">
+                                                <div class="Video">
+                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    @*<ul class="el-carousel__indicators el-carousel__indicators--horizontal">
+                                    <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
                                         <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
                                             <button class="el-carousel__button" aria-label="btn"></button>
                                         </li>
@@ -374,9 +429,9 @@
                                         <li class="el-carousel__indicator el-carousel__indicator--horizontal">
                                             <button class="el-carousel__button" aria-label="btn"></button>
                                         </li>
-                                    </ul>*@
+                                    </ul>
                                 </div>
-                                @*<div class="el-row">
+                                <div class="el-row">
                                     <div class="el-col el-col-12">
                                         <a href="/Tiss/video" class="w-100" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
                                                 <span class="">
@@ -410,7 +465,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div>*@
+                                </div>
                             </div>
                         </div>
                     </div>

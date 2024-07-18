@@ -374,7 +374,7 @@ namespace TISS_Web.Controllers
             var latestArticle = dtos.FirstOrDefault();
             var otherArticles = dtos.Skip(1).ToList();
 
-            var viewModel = new HomeViewModel
+            var viewModel = new HomeViewModel //首頁的部份視圖
             {
                 LatestArticle = latestArticle,
                 OtherArticles = otherArticles
@@ -382,7 +382,7 @@ namespace TISS_Web.Controllers
             return View(viewModel);
         }
 
-        //Partial View使用
+        //首頁Partial View使用
         public ActionResult GetArticles(int? contentTypeId)
         {
             var query = _db.ArticleContent
@@ -1768,11 +1768,20 @@ namespace TISS_Web.Controllers
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
                     { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學", "運動生理", "運動心理", "體能訓練", "運動營養" } },
-                    { "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
                 };
-                var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
+                //var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
+                var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
                 ViewBag.ParentDirectory = parentDirectory;
+                
+                var menus = _db.Menus.ToList();
+                var menuItems = _db.MenuItems.ToList();
+                var parentMenu = menus.ToDictionary(m => m.Title,m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
+                ViewBag.Menus = menus;
+                ViewBag.ParentMenu = parentMenu;
 
                 _db.SaveChanges();
 
