@@ -1,24 +1,65 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery-3.7.0.js"></script>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div>
-        <textarea id="tiny"></textarea>
+        <button class="category-button" data-content-type-id="1">所有類別</button>
+        <button class="category-button" data-content-type-id="2">新聞發佈</button>
+        <button class="category-button" data-content-type-id="3">中心訊息</button>
+        <button class="category-button" data-content-type-id="4">徵才招募</button>
     </div>
-    <script>
-        tinymce.init({
-            selector: 'textarea#tiny'
-        });
 
-        document.addEventListener('focusin', (e) => {
-            if (e.target.closest(".tox-tinymce, .tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
-                e.stopImmediatePropagation();
-            }
+    <div class="row" id="articleContainer">
+        @foreach (var article in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
+                    <div class="NewsItemBox">
+                        <div class="NewsItemImg">
+                            @if (article.ImageContent != null)
+                            {
+                                string base64Image = Convert.ToBase64String(article.ImageContent);
+                                <img src="data:image/png;base64,@base64Image" alt="Image" />
+                            }
+                            <div class="tag">@article.ContentType</div>
+                            <div class="Mask">閱讀更多</div>
+                        </div>
+                        <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                        <div class="NewsItemContent">
+                            <span class="el-text is-line-clamp">@article.BodyContent</span>
+                        </div>
+                        <div class="el-tag el-tag--plain is-round">
+                            <div class="el-tag__content">@article.Hashtags</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.category-button').click(function() {
+                var contentTypeId = $(this).data('content-type-id');
+
+                $.ajax({
+                    url: '@Url.Action("GetArticles", "Home")', // 替換為你的控制器名稱
+                    type: 'GET',
+                    data: { contentTypeId: contentTypeId },
+                    success: function(data) {
+                        $('#articleContainer').empty(); // 清空現有內容
+                        $('#articleContainer').append(data); // 將返回的部分視圖插入
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("AJAX Error: " + status + error);
+                    }
+                });
+            });
         });
     </script>
 </body>

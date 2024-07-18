@@ -290,6 +290,8 @@ namespace TISS_Web.Models
 
         public bool IsEnabled { get; set; }
 
+        public bool IsPublished { get; set; }
+
         public Dictionary<string, List<string>> ParentDirectories { get; set; } // 字典來管理父目錄及其子目錄
     }
 
@@ -304,5 +306,11 @@ namespace TISS_Web.Models
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+    }
+
+    public class HomeViewModel
+    {
+        public ArticleContentModel LatestArticle { get; set; }
+        public List<ArticleContentModel> OtherArticles { get; set; }
     }
 }

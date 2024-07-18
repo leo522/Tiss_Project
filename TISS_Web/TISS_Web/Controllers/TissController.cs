@@ -157,7 +157,6 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-
         #region 修改密碼-待修改為生成重設連結並發送電子郵件-尚未開始做
         [HttpGet]
         public ActionResult ChangePassword()
@@ -358,8 +357,57 @@ namespace TISS_Web.Controllers
         public ActionResult Home()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+
+            var dtos = _db.ArticleContent
+                .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                .OrderByDescending(a => a.PublishedDate)
+                .Select(a => new ArticleContentModel
+                {
+                    Title = a.Title,
+                    ImageContent = a.ImageContent,
+                    ContentType = a.ContentType,
+                    Hashtags = a.Hashtags,
+                    EncryptedUrl = a.EncryptedUrl,
+                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue
+                }).Take(4).ToList();
+
+            var latestArticle = dtos.FirstOrDefault();
+            var otherArticles = dtos.Skip(1).ToList();
+
+            var viewModel = new HomeViewModel
+            {
+                LatestArticle = latestArticle,
+                OtherArticles = otherArticles
+            };
+            return View(viewModel);
         }
+
+        //Partial View使用
+        public ActionResult GetArticles(int? contentTypeId)
+        {
+            var query = _db.ArticleContent
+         .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true);
+
+            if (contentTypeId.HasValue && contentTypeId.Value > 0)
+            {
+                query = query.Where(a => a.ContentTypeId == contentTypeId.Value);
+            }
+
+            var dtos = query
+                .OrderByDescending(a => a.PublishedDate)
+                .Select(a => new ArticleContentModel
+                {
+                    Title = a.Title,
+                    ImageContent = a.ImageContent,
+                    ContentType = a.ContentType,
+                    Hashtags = a.Hashtags,
+                    EncryptedUrl = a.EncryptedUrl,
+                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue
+                }).Take(4).ToList();
+
+            return PartialView("_ArticleListPartial", dtos);
+        }   
+
         #endregion
 
         #region 最新消息-中心公告
@@ -1310,7 +1358,7 @@ namespace TISS_Web.Controllers
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
 
-            return View(dtos);  
+            return View(dtos);
         }
 
         /// <summary>
@@ -1604,6 +1652,7 @@ namespace TISS_Web.Controllers
                     dto.ClickCount = 0;
                     dto.Hashtags = tag;
                     dto.IsEnabled = true;
+                    dto.IsPublished = true;
 
                     //處理contentTypeID
                     var category = _db.ArticleCategory.FirstOrDefault(c => c.Id == contentTypeID);

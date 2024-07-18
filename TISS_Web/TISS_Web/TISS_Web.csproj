@@ -2931,6 +2931,7 @@
     <Content Include="storage\media\attachments\國家運動科學中心設置條例.pdf" />
     <Content Include="Views\Tiss\ArticleCreate.cshtml" />
     <Content Include="Views\Tiss\ViewArticle.cshtml" />
+    <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
