@@ -252,66 +252,47 @@
                                 </div>
                             </div>
                             <div class="d-none d-lg-block">
-                                <div class="VideoCarousel">
-                                    <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="btn">
-                                        <span class="">
-                                            <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                <path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" aria-label="btn">
-                                        <span class="">
-                                            <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </button>
+                                <div class="VideoCarousel">                              
                                     <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
-                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
-                                                <div class="VideoCarouselContent">
-                                                    <div class="VideoCarouselContentBox">
-                                                        <div class="Tag">
-                                                            <span>中心成果</span>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">人物專訪-國家運動科學中心吳誠文董事長</span>
-                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
-                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
-                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
-                                                        </span>
-                                                        <div class="Info">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">人物專訪</span>
-                                                            </span>
-                                                            <span>2024/05/20</span>
-                                                        </div>
+                                            <div class="carousel-article-column">
+                                                @for (var i = 0; i < Model.OtherArticles.Count; i++)
+                                                {
+                                                    <div class="carousel-item article-item" style="display: none;">
+                                                        <a href="/video/@Model.Videos[i].EncryptedUrl" class="carousel-article-link">
+                                                            <div class="VideoCarouselContent">
+                                                                <div class="VideoCarouselContentBox">
+                                                                    <div class="Tag">
+                                                                        <span>中心成果</span>
+                                                                    </div>
+                                                                    <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.Videos[i].Title</span>
+                                                                    <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.Videos[i].BodyContent</span>
+                                                                    <div class="Info">
+                                                                        <span class="el-tag el-tag--plain is-round">
+                                                                            <span class="el-tag__content">人物專訪</span>
+                                                                        </span>
+                                                                        <span>@Model.Videos[i].PublishedDate</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
                                                     </div>
-                                                </div>
-                                            </a>
+                                                }
+                                            </div>
                                         </div>
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
-                                                    <div class="Video">
-                                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+                                                    <div class="carousel-video-column">
+                                                        <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                                                            @foreach (var video in Model.Videos)
+                                                            {
+                                                                <div class="video-item" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/@video.EncryptedUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                                </div>
+                                                            }
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="VideoCarouselSpot">
-                                                    <ul class="SpotList">
-                                                        <li class="SpotItem">
-                                                            <button class="Spot active" aria-label="btn">
-                                                            </button>
-                                                        </li>
-                                                        <li class="SpotItem">
-                                                            <button class="Spot" aria-label="btn"></button>
-                                                        </li>
-                                                        <li class="SpotItem">
-                                                            <button class="Spot" aria-label="btn"></button>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -330,140 +311,6 @@
                                                     </span>
                                                 </span>  
                                         </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-block d-lg-none">
-                                <div class="el-carousel el-carousel--horizontal VideoCarouselMobile" style="margin-bottom: 30px;">
-                                    <div class="el-carousel__container" style="height: 520px;">
-                                        <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1);">
-                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
-                                                <div class="VideoCarouselMobileContent">
-                                                    <div class="VideoCarouselMobileContentBox">
-                                                        <div class="Tag">
-                                                            <span>中心成果</span>
-                                                        </div>
-                                                        <div class="Title">人物專訪-國家運動科學中心吳誠文董事長</div>
-                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
-                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
-                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
-                                                        </span>
-                                                        <div class="Info">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">人物專訪</span>
-                                                            </span>
-                                                            <span>2024/05/20</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="VideoCarouselMobileVideo">
-                                                <div class="Video">
-                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
-                                                    </iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-carousel__item" style="transform: translateX(0px) scale(1);">
-                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
-                                                <div class="VideoCarouselMobileContent">
-                                                    <div class="VideoCarouselMobileContentBox">
-                                                        <div class="Tag">
-                                                            <span>中心成果</span>
-                                                        </div>
-                                                        <div class="Title">人物專訪-國家運動科學中心吳誠文董事長</div>
-                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
-                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
-                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
-                                                        </span>
-                                                        <div class="Info">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">人物專訪</span>
-                                                            </span>
-                                                            <span>2024/05/20</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="VideoCarouselMobileVideo">
-                                                <div class="Video">
-                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="el-carousel__item" style="transform: translateX(0px) scale(1);">
-                                            <a href="/video/91aqylmyvbuzd53akmqk" class="">
-                                                <div class="VideoCarouselMobileContent">
-                                                    <div class="VideoCarouselMobileContentBox">
-                                                        <div class="Tag">
-                                                            <span>中心成果</span>
-                                                        </div>
-                                                        <div class="Title">人物專訪-國家運動科學中心吳誠文董事長</div>
-                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">
-                                                            「從運動科學到運動科技，是運動文化融入社會文明的演化進程」
-                                                            國家運動科學中心吳誠文董事長分享如何透過運動文化融入社會，促使國家運動科學中心來推動健康臺灣願景!
-                                                        </span>
-                                                        <div class="Info">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">人物專訪</span>
-                                                            </span>
-                                                            <span>2024/05/20</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                            <div class="VideoCarouselMobileVideo">
-                                                <div class="Video">
-                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/z81Zy5P_4Gk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
-                                        <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
-                                            <button class="el-carousel__button" aria-label="btn"></button>
-                                        </li>
-                                        <li class="el-carousel__indicator el-carousel__indicator--horizontal">
-                                            <button class="el-carousel__button" aria-label="btn"></button>
-                                        </li>
-                                        <li class="el-carousel__indicator el-carousel__indicator--horizontal">
-                                            <button class="el-carousel__button" aria-label="btn"></button>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="el-row">
-                                    <div class="el-col el-col-12">
-                                        <a href="/Tiss/video" class="w-100" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
-                                                <span class="">
-                                                    全部文章
-                                                    <span class="right-icon">
-                                                        <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                            <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </span>
-                                        </a>
-                                    </div>
-                                    <div class="el-col el-col-12">
-                                        <div class="VideoCarouselMobileArrowBtns">
-                                            <button aria-disabled="false" type="button" class="el-button" aria-label="btn">
-                                                <span class="">
-                                                    <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                            <button aria-disabled="false" type="button" class="el-button" aria-label="btn">
-                                                <span class="">
-                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -739,7 +586,34 @@ $('.category-button').click(function() {
                         console.error("讀取錯誤: " + status + error);
                     }
                 });
-            });
+});
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var videoItems = document.querySelectorAll('.carousel-video-column .video-item');
+            var articleItems = document.querySelectorAll('.carousel-article-column .article-item');
+            var currentIndex = 0;
+
+            function showItem(index) {
+                // Hide all items
+                videoItems.forEach(item => item.style.display = 'none');
+                articleItems.forEach(item => item.style.display = 'none');
+
+                // Show current items
+                if (videoItems[index]) videoItems[index].style.display = 'block';
+                if (articleItems[index]) articleItems[index].style.display = 'block';
+            }
+
+            function nextItem() {
+                currentIndex = (currentIndex + 1) % videoItems.length;
+                showItem(currentIndex);
+            }
+
+            //初始顯示第一個影片
+            showItem(currentIndex);
+
+            //影片文章輪播
+            setInterval(nextItem, 10000);
+        });
     </script>
 </body>
 </html>

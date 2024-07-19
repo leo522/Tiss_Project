@@ -2955,6 +2955,7 @@
     <Content Include="Views\Tiss\ViewArticle.cshtml" />
     <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Views\Home\ytVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

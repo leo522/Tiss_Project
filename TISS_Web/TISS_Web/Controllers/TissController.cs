@@ -19,12 +19,16 @@ using System.Data.Entity;
 using static TISS_Web.Models.ArticleModel;
 using System.Collections;
 using System.Net.Mime;
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using System.Threading.Tasks;
 
 namespace TISS_Web.Controllers
 {
     public class TissController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
+        private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
 
         #region 檔案上傳共用服務
 
@@ -354,10 +358,33 @@ namespace TISS_Web.Controllers
         /// 首頁
         /// </summary>
         /// <returns></returns>
-        public ActionResult Home()
+        public async Task<ActionResult> Home()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer
+            {
+                ApiKey = _apiKey,
+                ApplicationName = "Tiss"
+            });
+            var channelsListRequest = youtubeService.Channels.List("snippet,contentDetails,statistics");
+            channelsListRequest.Id = "UCfpGsfNSwowlOk3eiJeHSWA"; // yt頻道ID
+            var channelResponse = await channelsListRequest.ExecuteAsync();
+
+            var YTvideo = youtubeService.PlaylistItems.List("snippet,contentDetails");
+            YTvideo.PlaylistId = channelResponse.Items[0].ContentDetails.RelatedPlaylists.Uploads;
+            YTvideo.MaxResults = 20; //要取得的影片數量，上限50
+            var YTvideoResponse = await YTvideo.ExecuteAsync();
+
+            //YT影片內容
+            var videos = YTvideoResponse.Items.Select(item => new ArticleContentModel
+            {
+                Title = item.Snippet.Title,
+                EncryptedUrl = item.Snippet.ResourceId.VideoId,  //YouTube影片ID
+                BodyContent = item.Snippet.Description,
+            }).ToList();
+
+            //文章內容
             var dtos = _db.ArticleContent
                 .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                 .OrderByDescending(a => a.PublishedDate)
@@ -377,8 +404,10 @@ namespace TISS_Web.Controllers
             var viewModel = new HomeViewModel //首頁的部份視圖
             {
                 LatestArticle = latestArticle,
-                OtherArticles = otherArticles
+                OtherArticles = otherArticles,
+                Videos = videos
             };
+
             return View(viewModel);
         }
 

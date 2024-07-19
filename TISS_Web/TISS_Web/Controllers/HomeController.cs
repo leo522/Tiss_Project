@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -175,12 +177,34 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+
         public List<string> GetFile() 
         {
             var dto =(from f in _db.FileDocument select f.DocumentName).ToList();
 
             var dtos = dto.Select(f => System.IO.Path.GetFileNameWithoutExtension(f)).ToList();
             return dtos;
+        }
+
+        private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg";
+        public ActionResult ytVideo() 
+        {
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer
+            {
+                ApiKey = _apiKey,
+                ApplicationName = "Your App Name"
+            });
+
+            var channelsListRequest = youtubeService.Channels.List("snippet,contentDetails,statistics");
+            channelsListRequest.Id = "UCfpGsfNSwowlOk3eiJeHSWA"; // 替換成您要取得的頻道ID
+            var channelResponse = channelsListRequest.Execute();
+
+            var playlistItemsListRequest = youtubeService.PlaylistItems.List("snippet,contentDetails");
+            playlistItemsListRequest.PlaylistId = channelResponse.Items[0].ContentDetails.RelatedPlaylists.Uploads;
+            playlistItemsListRequest.MaxResults = 20; // 設定要取得的影片數量
+            var playlistItemsResponse = playlistItemsListRequest.Execute();
+
+            return View(playlistItemsResponse.Items);
         }
     }
 }

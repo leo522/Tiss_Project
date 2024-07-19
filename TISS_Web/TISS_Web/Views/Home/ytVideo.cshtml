@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Google.Apis.YouTube.v3.Data.PlaylistItem>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        @*@foreach (var item in Model)
+        {
+            <div>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/@item.Snippet.ResourceId.VideoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        }*@
+        <button class="btn btn-outline-primary">查詢</button>
+    </div>
+</body>
+</html>

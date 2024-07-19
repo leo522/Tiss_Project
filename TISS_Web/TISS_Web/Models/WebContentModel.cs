@@ -313,6 +313,7 @@ namespace TISS_Web.Models
     {
         public ArticleContentModel LatestArticle { get; set; }
         public List<ArticleContentModel> OtherArticles { get; set; }
+        public List<ArticleContentModel> Videos { get; set; }
     }
 
     public class Menu
