@@ -182,6 +182,12 @@
     <EntitySet Name="Hashtag" EntityType="TISS_WebModel.Hashtag" />
     <EntitySet Name="ArticleCategory" EntityType="TISS_WebModel.ArticleCategory" />
     <EntitySet Name="ArticleContent" EntityType="TISS_WebModel.ArticleContent" />
+    <EntitySet Name="MenuItems" EntityType="TISS_WebModel.MenuItems" />
+    <EntitySet Name="Menus" EntityType="TISS_WebModel.Menus" />
+    <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="TISS_WebModel.FK__MenuItems__MenuI__467D75B8">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="MenuItems" EntitySet="MenuItems" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -889,8 +895,41 @@
     <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IsNew" Type="Boolean" />
     <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ClickCount" Type="Int32" />
     <Property Name="ContentTypeId" Type="Int32" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
   </EntityType>
+  <EntityType Name="MenuItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MenuId" Type="Int32" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Menus" Relationship="TISS_WebModel.FK__MenuItems__MenuI__467D75B8" FromRole="MenuItems" ToRole="Menus" />
+  </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MenuItems" Relationship="TISS_WebModel.FK__MenuItems__MenuI__467D75B8" FromRole="Menus" ToRole="MenuItems" />
+  </EntityType>
+  <Association Name="FK__MenuItems__MenuI__467D75B8">
+    <End Type="TISS_WebModel.Menus" Role="Menus" Multiplicity="0..1" />
+    <End Type="TISS_WebModel.MenuItems" Role="MenuItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

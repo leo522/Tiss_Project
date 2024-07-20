@@ -802,6 +802,9 @@
     <EntitySetMapping Name="ArticleContent">
       <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
         <MappingFragment StoreEntitySet="ArticleContent">
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
           <ScalarProperty Name="ContentTypeId" ColumnName="ContentTypeId" />
           <ScalarProperty Name="ClickCount" ColumnName="ClickCount" />
           <ScalarProperty Name="EncryptedUrl" ColumnName="EncryptedUrl" />
@@ -815,6 +818,24 @@
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="ContentType" ColumnName="ContentType" />
           <ScalarProperty Name="ContentBody" ColumnName="ContentBody" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MenuItems">
+      <EntityTypeMapping TypeName="TISS_WebModel.MenuItems">
+        <MappingFragment StoreEntitySet="MenuItems">
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="TISS_WebModel.Menus">
+        <MappingFragment StoreEntitySet="Menus">
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

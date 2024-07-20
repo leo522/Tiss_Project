@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -251,17 +252,27 @@
         </div>
     </div>
     <script>
-        $(documnet).reday(function () {
-            function toggleDropdown(dropdownId) {
-                var dropdownToggle = document.getElementById(dropdownId);
-                var dropdownMenu = dropdownToggle.nextElementSibling;
+$(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-                if (dropdownMenu.classList.contains('show')) {
-                    dropdownMenu.classList.remove('show');
-                } else {
-                    dropdownMenu.classList.add('show');
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
+
+        //顯示當前被選擇的子目錄
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
                 }
-            }
+            });
         });
     </script>
 </body>

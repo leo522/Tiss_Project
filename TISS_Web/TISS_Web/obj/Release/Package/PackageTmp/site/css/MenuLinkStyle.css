@@ -1,0 +1,14 @@
+﻿.MenuLink.active {
+    background-color: #007bff !important; /* 修改背景顏色 */
+    color: white !important; /* 修改文字顏色 */
+    font-weight: bold !important; /* 使文字加粗 */
+}
+
+/*.Menu {
+    list-style-type: none;*/ /* 移除默認的項目符號 */
+    /*padding: 0;*/ /* 移除內邊距 */
+/*}*/
+
+    /*.Menu li {
+        margin-bottom: 10px;*/ /* 每個項目之間添加一些間距 */
+    /*}*/

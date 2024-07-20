@@ -1863,5 +1863,20 @@ namespace TISS_Web.Controllers
             return RedirectToAction(actionName, "Tiss");
         }
         #endregion
+
+        #region 切換語言
+        public ActionResult ChangeLanguage(string lang)
+        {
+            if (!string.IsNullOrEmpty(lang))
+            {
+                var langCookie = new HttpCookie("lang", lang)
+                {
+                    Expires = DateTime.Now.AddYears(1)
+                };
+                Response.Cookies.Add(langCookie);
+            }
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        #endregion
     }
 }

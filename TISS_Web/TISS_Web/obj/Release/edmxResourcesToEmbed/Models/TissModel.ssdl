@@ -59,9 +59,12 @@
     <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
     <Property Name="IsNew" Type="bit" />
     <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
-    <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ClickCount" Type="int" />
     <Property Name="ContentTypeId" Type="int" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="IsEnabled" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>
@@ -270,6 +273,22 @@
     <Property Name="Lang_Key" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Lang_zhTW" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Lang_enUS" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MenuItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MenuId" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="MissionPageContent">
     <Key>
@@ -769,6 +788,18 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <Association Name="FK__MenuItems__MenuI__467D75B8">
+    <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+    <End Role="MenuItems" Type="Self.MenuItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MenuItems">
+        <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -836,6 +867,8 @@
     <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
@@ -868,6 +901,10 @@
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="Self.FK__MenuItems__MenuI__467D75B8">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="MenuItems" EntitySet="MenuItems" />
+    </AssociationSet>
     <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
       <End Role="Permissions" EntitySet="Permissions" />
       <End Role="RolePermissions" EntitySet="RolePermissions" />

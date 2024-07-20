@@ -1,0 +1,63 @@
+﻿.navigation-buttons {
+    display: flex;
+    justify-content: space-around; /* 使按鈕兩側對齊 */
+    margin-top: 20px; /* 可以根據需要調整間距 */
+}
+
+.btnStyle,
+.btnStyle:focus {
+    position: relative;
+    min-width: 200px;
+    background: none;
+    border: none;
+    color: #58afd1;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 0 0 4px #58afd1;
+    transition: color 0.25s 0.0833333333s;
+    padding: 10px 20px;
+}
+
+    .btnStyle:before,
+    .btnStyle:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: 0;
+        right: 0;
+        border: 0 solid transparent;
+        box-sizing: border-box;
+    }
+
+    .btnStyle:before {
+        border-bottom-width: 4px;
+        border-left-width: 4px;
+    }
+
+    .btnStyle:after {
+        border-top-width: 4px;
+        border-right-width: 4px;
+    }
+
+    .btnStyle:hover {
+        color: #ffe593;
+    }
+
+        .btnStyle:hover:before,
+        .btnStyle:hover:after {
+            border-color: #ffe593;
+            transition: border-color 0s, width 0.25s, height 0.25s;
+            width: 100%;
+            height: 100%;
+        }
+
+        .btnStyle:hover:before {
+            transition-delay: 0s, 0s, 0.25s;
+        }
+
+        .btnStyle:hover:after {
+            transition-delay: 0s, 0.25s, 0s;
+        }

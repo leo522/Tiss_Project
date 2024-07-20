@@ -19,5 +19,19 @@ namespace TISS_Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            // 預設為繁體中文
+            string culture = "zh-TW";
+
+            if (Request.Cookies["lang"] != null)
+            {
+                culture = Request.Cookies["lang"].Value;
+            }
+
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+        }
     }
 }

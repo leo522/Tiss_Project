@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -121,196 +122,32 @@
                             <div class="MainContainer">
                                 <div class="NewsVideoList">
                                     <div class="container">
-                                        <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/qwv9pb6fhfvpmiv2ysay" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/林泰祐3-首頁圖.jpg" alt="">
-                                                            <div class="tag">運動科學研究</div>
-                                                            <div class="Mask">閱讀更多</div>
+                                        <div class="row">
+                                            @foreach (var article in Model)
+                                            {
+                                                <div class="col-md-4 mb-4">
+                                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
+                                                        <div class="NewsItemBox">
+                                                            <div class="NewsItemImg">
+                                                                @if (article.ImageContent != null)
+                                                                {
+                                                                    string base64Image = Convert.ToBase64String(article.ImageContent);
+                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                }
+                                                                <div class="tag">@article.ContentType</div>
+                                                                <div class="Mask">閱讀更多</div>
+                                                            </div>
+                                                            <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                                                            <div class="NewsItemContent">
+                                                                <span class="el-text is-line-clamp">@article.BodyContent</span>
+                                                            </div>
+                                                            <div class="el-tag el-tag--plain is-round">
+                                                                <div class="el-tag__content">@article.Hashtags</div>
+                                                            </div>
                                                         </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">1+1可能大於2， 混合性肌肉收縮下的大腦活化與肌肉代謝</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">1+1可能大於2， 混合性肌肉收縮下的大腦活化與肌肉代謝</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">體能訓練</span>
-                                                            </span>
-                                                            <span>2024/06/25</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/8nfmh009j4kjr97xl4hw" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科技與資訊開發/楊清方3-首頁圖.png" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">淺談運動大數據</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">淺談運動大數據</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/21</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/hmrgfrw2f1den9k7duyy" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="/site/img/recruit_img.d15a2d7a.jpg" alt="">
-                                                            <div class="tag">運動科學研究</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">熱環境中訓練的降溫策略</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">熱環境中訓練的降溫策略</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動生理</span>
-                                                            </span>
-                                                            <span>2024/06/20</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/jtartthikgqxw33yhu0j" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/李淑玲4-首頁圖.jpg" alt="">
-                                                            <div class="tag">運動醫學研究</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">飽腹感指數 (FSI)：發現最有飽腹感的食物</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">飽腹感指數 (FSI)：發現最有飽腹感的食物</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動營養</span>
-                                                            </span>
-                                                            <span>2024/06/18</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/1pxhabyceiiottc8zbfo" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/蘇靖雅2-首頁圖.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">新世代來臨，科學與科技提升運動觀賞與運動參與體驗!</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">新世代來臨，科學與科技提升運動觀賞與運動參與體驗!</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/14</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/mxbbns55untg1ihw2ibr" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/原靜旻1-封面照.jpg" alt="">
-                                                            <div class="tag">運動科學研究</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">睡覺也是一種訓練？</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">睡覺也是一種訓練？</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科學</span>
-                                                            </span>
-                                                            <span>2024/06/12</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/gz8rtxuewqsafhar7fi8" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/章芝儀2-首頁圖(1).jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">探索運動與電腦視覺的奇妙結合</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">探索運動與電腦視覺的奇妙結合</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/11</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/tflgq8dom6mw5frgbia8" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科學研究處/黃鈴雯3-首頁圖.jpg" alt="">
-                                                            <div class="tag">運動科學研究</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">從不動到行動：跨理論模式的運動奇蹟之旅！</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">黃鈴雯3-從不動到行動：跨理論模式的運動奇蹟之旅！</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動心理</span>
-                                                            </span>
-                                                            <span>2024/06/07</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="el-col el-col-24 el-col-sm-20 el-col-md-8 is-guttered NewsItem" style="padding-right: 12px; padding-left: 12px;">
-                                                <a href="/research/9ida47kcl3gbkbwvtuwb" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            <img src="~/storage/media/科普專欄照片/運動科技與資訊開發/姜雅薰1-首頁圖.jpg" alt="">
-                                                            <div class="tag">運動科技與資訊開發</div>
-                                                            <div class="Mask">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">智慧場館介紹-SoFi Stadium</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">1姜雅薰-智慧場館實例介紹-SoFi Stadium</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <span class="el-tag el-tag--plain is-round">
-                                                                <span class="el-tag__content">運動科技</span>
-                                                            </span>
-                                                            <span>2024/06/05</span>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                                    </a>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -318,47 +155,21 @@
                                     <div class="container">
                                         <nav aria-label="Page navigation">
                                             <ul class="pagination justify-content-center">
-                                                <li class="page-item disabled">
-                                                    <button class="page-link" aria-disabled="true" disabled aria-label="First">
-                                                        <span aria-hidden="true">
-                                                            <svg class="svg-inline--fa fa-angles-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160zm352-160l-160 160c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L301.3 256 438.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
+                                                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                {
+                                                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="@Url.Action("research", "Tiss", new { page = i })">@i</a>
+                                                    </li>
+                                                }
+                                                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                                                    <a class="page-link" href="@Url.Action("research", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
                                                 </li>
-                                                <li class="page-item disabled">
-                                                    <button class="page-link" aria-disabled="true" disabled aria-label="Previous">
-                                                        <span aria-hidden="true">
-                                                            <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                                <li class="page-item active" aria-current="page">
-                                                    <button class="page-link">1</button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class="page-link">2</button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class="page-link" aria-label="Next">
-                                                        <span aria-hidden="true">
-                                                            <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </li>
-                                                <li class="page-item">
-                                                    <button class="page-link" aria-label="Last">
-                                                        <span aria-hidden="true">
-                                                            <svg class="svg-inline--fa fa-angles-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angles-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                                <path fill="currentColor" d="M470.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 256 265.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160zm-352 160l160-160c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L210.7 256 73.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
+                                                <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                                                    <a class="page-link" href="@Url.Action("research", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </nav>
@@ -390,6 +201,18 @@
                     dropdownMenu.classList.add('show');
                 }
             }
+        });
+
+        //顯示當前選擇的子目錄
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
