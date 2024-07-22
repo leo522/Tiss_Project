@@ -9,6 +9,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
+    <File Include="App_GlobalResources/Language.en-US.resx">
+      <publishTime>07/20/2024 07:43:33</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
@@ -238,10 +241,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>07/19/2024 11:04:21</publishTime>
+      <publishTime>07/22/2024 14:44:58</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>07/19/2024 11:04:21</publishTime>
+      <publishTime>07/22/2024 14:44:58</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -8680,7 +8683,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/18/2024 15:49:50</publishTime>
     </File>
     <File Include="Views/Shared/_TissMaster.cshtml">
-      <publishTime>07/17/2024 11:20:40</publishTime>
+      <publishTime>07/22/2024 16:39:27</publishTime>
     </File>
     <File Include="Views/Tiss/about.cshtml">
       <publishTime>07/15/2024 10:17:00</publishTime>
@@ -8695,7 +8698,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/17/2024 14:30:47</publishTime>
     </File>
     <File Include="Views/Tiss/ArticleCreate.cshtml">
-      <publishTime>07/17/2024 13:06:32</publishTime>
+      <publishTime>07/22/2024 17:15:16</publishTime>
     </File>
     <File Include="Views/Tiss/BOD.cshtml">
       <publishTime>07/12/2024 16:17:58</publishTime>
@@ -8722,7 +8725,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/12/2024 16:18:27</publishTime>
     </File>
     <File Include="Views/Tiss/Home.cshtml">
-      <publishTime>07/19/2024 10:49:23</publishTime>
+      <publishTime>07/22/2024 16:30:09</publishTime>
     </File>
     <File Include="Views/Tiss/institute.cshtml">
       <publishTime>07/17/2024 14:31:01</publishTime>
@@ -8806,7 +8809,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/17/2024 14:32:50</publishTime>
     </File>
     <File Include="Views/Tiss/ViewArticle.cshtml">
-      <publishTime>07/18/2024 16:48:57</publishTime>
+      <publishTime>07/22/2024 16:38:59</publishTime>
     </File>
     <File Include="Views/Tiss/webContent.cshtml">
       <publishTime>07/15/2024 07:37:48</publishTime>

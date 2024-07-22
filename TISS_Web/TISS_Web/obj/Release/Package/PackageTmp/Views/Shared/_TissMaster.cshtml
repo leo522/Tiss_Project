@@ -21,9 +21,10 @@
     <meta name="twitter:image" content="http://tiss.org.tw/site/images/og_img_s.jpg" />
     <meta property="og:image:width" content="612" />
     <meta property="og:image:height" content="689" />
-    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> @*Ckeditor套件*@
-    <script src="~/TinyMCE/vender/tinymce-4/tinymce.min.js"></script> @*TinyMCE套件*@
-    <script src="~/TinyMCE/script.js"></script> @*TinyMCE套件*@
+    <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    @*<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>*@ @*Ckeditor套件*@
+    @*<script src="~/TinyMCE/vender/tinymce-4/tinymce.min.js"></script>*@ @*TinyMCE套件*@
+    @*<script src="~/TinyMCE/script.js"></script>*@ @*TinyMCE套件*@
     @*<script src="~/tiny/js/tinymce/tinymce.min.js"></script>*@
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
@@ -52,9 +53,6 @@
     <link href="~/fontawesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
-    @*<noscript>
-        <strong>We're sorry but 國家運動科學中心 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>*@
     <header data-v-ffd846e6="" data-v-339da53a="">
         <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
             <div data-v-e61ebf00="" class="container">
@@ -69,7 +67,7 @@
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large">大</button>
                         </li>
                         <li data-v-e61ebf00="">
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn" aria-label="btn">
+                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn" aria-label="btn" onclick="location.href='@Url.Action("ChangeLanguage", "Tiss", new { lang = "en-US" })'">
                                 <span class="">
                                     <svg data-v-e61ebf00="" class="svg-inline--fa fa-globe" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                         <path class="" fill="currentColor" d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64H348.7c2.2 20.4 3.3 41.8 3.3 64zm28.8-64H503.9c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32H376.7c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0H167.7c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0H18.6C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192H131.2c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64H8.1C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6H344.3c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352H135.3zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6H493.4z">
@@ -374,10 +372,10 @@
                                         </a>
                                     </li>
                                     @*<li>
-                                        <a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">
-                                            <img src="~/Img/favicon.svg" />採購作業實施規章
-                                        </a>
-                                    </li>*@
+                                            <a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">
+                                                <img src="~/Img/favicon.svg" />採購作業實施規章
+                                            </a>
+                                        </li>*@
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality">
                                             <img src="~/Img/favicon.svg" />性別平等專區
@@ -524,8 +522,8 @@
                                     <a href="/Tiss/download">下載專區</a>
                                 </li>
                                 @*<li>
-                                    <a href="/Tiss/purchase">採購作業實施規章</a>
-                                </li>*@
+                                        <a href="/Tiss/purchase">採購作業實施規章</a>
+                                    </li>*@
                                 <li>
                                     <a href="/Tiss/GenderEquality">性別平等專區</a>
                                 </li>
@@ -555,7 +553,7 @@
             <div class="container">Copyright © 國家運動科學中心 All Rights Reserved.</div>
         </div>
     </footer>
-    
+
     <script>
         //網頁字體大小控制function
         document.querySelectorAll('.FontSizeBtn').forEach(button => {
