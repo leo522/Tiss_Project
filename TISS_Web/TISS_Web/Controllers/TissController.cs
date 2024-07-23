@@ -22,6 +22,8 @@ using System.Net.Mime;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Data.Entity.Validation;
 
 namespace TISS_Web.Controllers
 {
@@ -126,6 +128,15 @@ namespace TISS_Web.Controllers
                 return View();
             }
 
+            //Email格式驗證
+            var emailRegex = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailRegex.IsMatch(Email))
+            {
+                ViewBag.ErrorMessage = "無效的Email格式";
+                return View();
+            }
+
+            // 密碼加密處理
             var Pwd = ComputeSha256Hash(pwd);
             var newUser = new Users
             {
@@ -134,7 +145,9 @@ namespace TISS_Web.Controllers
                 Email = Email,
                 CreatedDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
-                IsActive = true
+                IsActive = true,
+                UserAccount = UserName, // 假設 UserAccount 和 UserName 相同
+                changeDate = DateTime.Now
             };
 
             _db.Users.Add(newUser);
@@ -161,75 +174,172 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 修改密碼-待修改為生成重設連結並發送電子郵件-尚未開始做
-        [HttpGet]
-        public ActionResult ChangePassword()
+        #region 忘記密碼
+        public ActionResult ForgotPassword()
         {
-            // 檢查用戶是否已登入，如果未登入則重定向到登入頁面
-            if (Session["LoggedIn"] == null || !(bool)Session["LoggedIn"])
-            {
-                return RedirectToAction("Login");
-            }
+            return View();
+        }
 
-            // 獲取當前登入用戶的資料
-            string userName = Session["UserName"] as string;
-            var user = _db.Users.FirstOrDefault(u => u.UserName == userName);
+        // 發送重置密碼鏈接
+        [HttpPost]
+        public ActionResult SendResetLink(string Email)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.Email == Email);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = "無法找到當前用戶";
-                return View();
+                ViewBag.ErrorMessage = "此Email尚未註冊";
+                return View("ForgotPassword");
             }
 
-            ViewData["UserName"] = userName;
-            return View();
+            // 生成重置密碼令牌（這裡使用 Guid 作為示例）
+            var resetToken = Guid.NewGuid().ToString();
+
+            // 保存重置令牌和過期時間
+            var resetPW = new PasswordResetRequests
+            {
+                Email = Email,
+                Token = resetToken,
+                ExpiryDate = DateTime.Now.AddHours(1),
+                UserAccount = user.UserName,
+                changeDate = DateTime.Now
+            };
+            _db.PasswordResetRequests.Add(resetPW);
+            _db.SaveChanges();
+
+            // 發送重置密碼郵件
+            var resetLink = Url.Action("ResetPassword", "Tiss", new { token = resetToken }, Request.Url.Scheme);
+
+            var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}";
+
+            // 使用你喜歡的郵件服務來發送郵件
+            SendEmail(Email, "重置密碼", emailBody);
+
+            ViewBag.Message = "重置密碼連結已發送至您的郵箱";
+            return View("ForgotPassword");
         }
-        [HttpPost]
-        public ActionResult ChangePassword(string userName, string oldPwd, string newPwd)
+
+        //郵件發送方法
+        private void SendEmail(string toEmail, string subject, string body)
         {
+            var fromEmail = "00048@tiss.org.tw";
+            var fromPassword = "lctm hhfh bubx lwda";
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromEmail, fromPassword),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(fromEmail),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+
+            mailMessage.To.Add(toEmail);
+
             try
             {
-                // 驗證舊密碼是否正確
-                var user = _db.Users.FirstOrDefault(u => u.UserName == userName);
-
-                if (user == null)
-                {
-                    ViewBag.ErrorMessage = "無法找到當前用戶";
-                    return View();
-                }
-
-                if (user.Password != ComputeSha256Hash(oldPwd))
-                {
-                    ViewBag.ErrorMessage = "舊密碼輸入錯誤";
-                    ViewBag.UserName = userName;
-                    return View();
-                }
-
-                // 更新新密碼
-                user.Password = ComputeSha256Hash(newPwd);
-
-                try
-                {
-                    _db.SaveChanges();
-                    ViewBag.SuccessMessage = "密碼修改成功";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.ErrorMessage = "修改密碼時發生錯誤：" + ex.Message;
-                }
-
-                return View();
+                smtpClient.Send(mailMessage);
             }
             catch (Exception ex)
             {
-                throw ex;
+                // 處理發送郵件的錯誤
+                Console.WriteLine("郵件發送失敗: " + ex.Message);
             }
         }
-        #endregion
+
+        //重置密碼頁面
+        public ActionResult ResetPassword(string token)
+        {
+            // 驗證Token
+            var resetRequest = _db.PasswordResetRequests.SingleOrDefault(r => r.Token == token && r.ExpiryDate > DateTime.Now);
+
+            if (resetRequest == null)
+            {
+                ViewBag.ErrorMessage = "無效或過期的重置要求";
+                return View("Error");
+            }
+
+            return View(new PasswordResetRequest { Token = token });
+        }
+
+        // 處理重置密碼
+        [HttpPost]
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // 顯示驗證錯誤
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+                return View(model);
+            }
+
+            // 根據 Token 查找重置請求
+            var resetRequest = _db.PasswordResetRequests
+                .FirstOrDefault(r => r.Token == model.Token && r.ExpiryDate > DateTime.Now);
+
+            if (resetRequest == null)
+            {
+                ViewBag.ErrorMessage = "無效或過期的要求";
+                return View("Error");
+            }
+
+            // 根據 Email 查找用戶
+            var user = _db.Users
+                .FirstOrDefault(u => u.Email == resetRequest.Email);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "無效的帳號";
+                return View("Error");
+            }
+
+            // 更新用戶的密碼
+            user.Password = ComputeSha256Hash(model.NewPassword);
+            user.changeDate = DateTime.Now;
+
+            // 更新 PasswordResetRequest 表中的 UserAccount 和 ChangeDate
+            resetRequest.UserAccount = user.UserName;
+            resetRequest.changeDate = DateTime.Now;
+
+            // 刪除重置請求
+            _db.PasswordResetRequests.Remove(resetRequest);
+
+            try
+            {
+                // 儲存變更到資料庫
+                _db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        // 記錄錯誤信息
+                        Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
+                    }
+                }
+                throw;
+            }
+
+            ViewBag.Message = "您的密碼已成功重置";
+            return RedirectToAction("Login");
+        }
+    #endregion
 
         #region 自己上傳圖片和文字使用
 
-        public ActionResult editPage()
+    public ActionResult editPage()
         {
             try
             {

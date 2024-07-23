@@ -375,6 +375,17 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="PasswordResetRequests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Token" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="changeDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Permissions">
     <Key>
       <PropertyRef Name="PermissionID" />
@@ -770,6 +781,8 @@
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="LastLoginDate" Type="datetime" />
     <Property Name="IsActive" Type="bit" />
+    <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
+    <Property Name="changeDate" Type="datetime" />
   </EntityType>
   <EntityType Name="VideoPageContent">
     <Key>
@@ -874,6 +887,7 @@
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OtherDocument" EntityType="Self.OtherDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PlanDocument" EntityType="Self.PlanDocument" Schema="dbo" store:Type="Tables" />

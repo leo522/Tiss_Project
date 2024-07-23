@@ -256,6 +256,9 @@
     <Compile Include="Models\OtherPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PasswordResetRequests.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Permissions.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -2961,6 +2964,8 @@
     <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Home\ytVideo.cshtml" />
+    <Content Include="Views\Tiss\ForgotPassword.cshtml" />
+    <Content Include="Views\Tiss\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

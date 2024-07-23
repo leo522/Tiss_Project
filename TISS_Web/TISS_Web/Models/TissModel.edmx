@@ -380,6 +380,17 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="PasswordResetRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Token" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="changeDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Permissions">
           <Key>
             <PropertyRef Name="PermissionID" />
@@ -775,6 +786,8 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="LastLoginDate" Type="datetime" />
           <Property Name="IsActive" Type="bit" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
+          <Property Name="changeDate" Type="datetime" />
         </EntityType>
         <EntityType Name="VideoPageContent">
           <Key>
@@ -879,6 +892,7 @@
           <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherDocument" EntityType="Self.OtherDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlanDocument" EntityType="Self.PlanDocument" Schema="dbo" store:Type="Tables" />
@@ -997,6 +1011,8 @@
           <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
+          <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="changeDate" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -1119,6 +1135,7 @@
             <End Role="Menus" EntitySet="Menus" />
             <End Role="MenuItems" EntitySet="MenuItems" />
           </AssociationSet>
+          <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1863,6 +1880,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PasswordResetRequests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="changeDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1924,6 +1952,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TISS_WebModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="changeDate" ColumnName="changeDate" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -2705,6 +2735,18 @@
             <EntityTypeMapping TypeName="TISS_WebModel.Menus">
               <MappingFragment StoreEntitySet="Menus">
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PasswordResetRequests">
+            <EntityTypeMapping TypeName="TISS_WebModel.PasswordResetRequests">
+              <MappingFragment StoreEntitySet="PasswordResetRequests">
+                <ScalarProperty Name="changeDate" ColumnName="changeDate" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

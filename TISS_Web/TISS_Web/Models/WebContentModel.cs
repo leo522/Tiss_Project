@@ -331,4 +331,35 @@ namespace TISS_Web.Models
         public string Url { get; set; }
         public Menu Menu { get; set; }
     }
+
+    //忘記密碼
+    public class PasswordResetRequest
+    {
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Token { get; set; }
+        public DateTime ExpiryDate { get; set; }
+        public string UserAccount { get; set; }
+        public DateTime? ChangeDate { get; set; }
+    }
+
+    //重置密碼
+    public class ResetPasswordViewModel
+    {
+        public string Token { get; set; }
+        public string NewPassword { get; set; }
+    }
+
+    public class UsersModel
+    {
+        public int Id { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastLoginDate { get; set; }
+        public bool IsActive { get; set; }
+        public string UserAccount { get; set; }
+        public DateTime? changeDate { get; set; }
+    }
 }
