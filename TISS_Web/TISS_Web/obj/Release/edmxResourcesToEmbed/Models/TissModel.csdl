@@ -66,6 +66,8 @@
     <Property Name="LastLoginDate" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" />
     <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
+    <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="changeDate" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -188,6 +190,7 @@
       <End Role="Menus" EntitySet="Menus" />
       <End Role="MenuItems" EntitySet="MenuItems" />
     </AssociationSet>
+    <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -932,4 +935,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="PasswordResetRequests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Token" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="changeDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
 </Schema>

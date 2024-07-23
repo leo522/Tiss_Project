@@ -241,10 +241,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>07/22/2024 14:44:58</publishTime>
+      <publishTime>07/23/2024 09:23:53</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>07/22/2024 14:44:58</publishTime>
+      <publishTime>07/23/2024 09:23:53</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -7123,7 +7123,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/20/2024 08:23:17</publishTime>
     </File>
     <File Include="Models/TissModel.edmx.diagram">
-      <publishTime>07/18/2024 15:07:14</publishTime>
+      <publishTime>07/23/2024 09:04:20</publishTime>
     </File>
     <File Include="Scripts/4.5.2.bootstrap.min.js">
       <publishTime>07/08/2024 10:45:28</publishTime>
@@ -8718,6 +8718,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Views/Tiss/editPage.cshtml">
       <publishTime>07/12/2024 16:03:43</publishTime>
     </File>
+    <File Include="Views/Tiss/ForgotPassword.cshtml">
+      <publishTime>07/23/2024 08:25:19</publishTime>
+    </File>
     <File Include="Views/Tiss/GenderEquality.cshtml">
       <publishTime>07/12/2024 16:18:21</publishTime>
     </File>
@@ -8731,7 +8734,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/17/2024 14:31:01</publishTime>
     </File>
     <File Include="Views/Tiss/Login.cshtml">
-      <publishTime>07/05/2024 16:51:27</publishTime>
+      <publishTime>07/23/2024 07:58:16</publishTime>
     </File>
     <File Include="Views/Tiss/mission.cshtml">
       <publishTime>07/12/2024 16:18:43</publishTime>
@@ -8780,6 +8783,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Views/Tiss/researchProject.cshtml">
       <publishTime>07/12/2024 16:20:05</publishTime>
+    </File>
+    <File Include="Views/Tiss/ResetPassword.cshtml">
+      <publishTime>07/23/2024 08:19:51</publishTime>
     </File>
     <File Include="Views/Tiss/sportMedicine.cshtml">
       <publishTime>07/18/2024 12:42:09</publishTime>

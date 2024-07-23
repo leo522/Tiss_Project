@@ -200,7 +200,7 @@ namespace TISS_Web.Controllers
             {
                 Email = Email,
                 Token = resetToken,
-                ExpiryDate = DateTime.Now.AddHours(1),
+                ExpiryDate = DateTime.Now.AddMinutes(5), // 設定有效時間為5分鐘
                 UserAccount = user.UserName,
                 changeDate = DateTime.Now
             };
@@ -210,9 +210,8 @@ namespace TISS_Web.Controllers
             // 發送重置密碼郵件
             var resetLink = Url.Action("ResetPassword", "Tiss", new { token = resetToken }, Request.Url.Scheme);
 
-            var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}";
+            var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}，連結有效時間為5分鐘";
 
-            // 使用你喜歡的郵件服務來發送郵件
             SendEmail(Email, "重置密碼", emailBody);
 
             ViewBag.Message = "重置密碼連結已發送至您的郵箱";
@@ -223,7 +222,9 @@ namespace TISS_Web.Controllers
         private void SendEmail(string toEmail, string subject, string body)
         {
             var fromEmail = "00048@tiss.org.tw";
-            var fromPassword = "lctm hhfh bubx lwda";
+            var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
+            var displayName = "運科中心資訊組"; //顯示的發件人名稱
+
 
             var smtpClient = new SmtpClient("smtp.gmail.com")
             {
@@ -234,7 +235,7 @@ namespace TISS_Web.Controllers
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(fromEmail),
+                From = new MailAddress(fromEmail,displayName),
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true,
@@ -256,16 +257,22 @@ namespace TISS_Web.Controllers
         //重置密碼頁面
         public ActionResult ResetPassword(string token)
         {
-            // 驗證Token
+            // 查找重置請求
             var resetRequest = _db.PasswordResetRequests.SingleOrDefault(r => r.Token == token && r.ExpiryDate > DateTime.Now);
 
             if (resetRequest == null)
             {
-                ViewBag.ErrorMessage = "無效或過期的重置要求";
+                ViewBag.ErrorMessage = "無效或過期的要求";
                 return View("Error");
             }
 
-            return View(new PasswordResetRequest { Token = token });
+            // 初始化 ResetPasswordViewModel 並傳遞到視圖
+            var model = new ResetPasswordViewModel
+            {
+                Token = token
+            };
+
+            return View(model);
         }
 
         // 處理重置密碼
@@ -305,7 +312,7 @@ namespace TISS_Web.Controllers
 
             // 更新用戶的密碼
             user.Password = ComputeSha256Hash(model.NewPassword);
-            user.changeDate = DateTime.Now;
+            //user.changeDate = DateTime.Now;
 
             // 更新 PasswordResetRequest 表中的 UserAccount 和 ChangeDate
             resetRequest.UserAccount = user.UserName;

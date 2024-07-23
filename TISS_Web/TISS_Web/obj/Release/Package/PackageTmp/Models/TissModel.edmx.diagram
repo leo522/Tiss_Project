@@ -62,6 +62,7 @@
         <EntityTypeShape EntityType="TISS_WebModel.MenuItems" Width="1.5" PointX="17.625" PointY="21.875" />
         <EntityTypeShape EntityType="TISS_WebModel.Menus" Width="1.5" PointX="15.375" PointY="22.125" />
         <AssociationConnector Association="TISS_WebModel.FK__MenuItems__MenuI__467D75B8" />
+        <EntityTypeShape EntityType="TISS_WebModel.PasswordResetRequests" Width="1.5" PointX="20.375" PointY="21.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

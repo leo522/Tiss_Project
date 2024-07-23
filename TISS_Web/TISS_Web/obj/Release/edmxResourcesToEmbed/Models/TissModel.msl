@@ -56,6 +56,8 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="TISS_WebModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="changeDate" ColumnName="changeDate" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
@@ -837,6 +839,18 @@
       <EntityTypeMapping TypeName="TISS_WebModel.Menus">
         <MappingFragment StoreEntitySet="Menus">
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PasswordResetRequests">
+      <EntityTypeMapping TypeName="TISS_WebModel.PasswordResetRequests">
+        <MappingFragment StoreEntitySet="PasswordResetRequests">
+          <ScalarProperty Name="changeDate" ColumnName="changeDate" />
+          <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

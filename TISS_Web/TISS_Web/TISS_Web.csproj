@@ -2600,9 +2600,6 @@
     <Content Include="bootstrap\js\bootstrap.esm.min.js.map" />
     <Content Include="bootstrap\js\bootstrap.js.map" />
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
-    <Content Include="site\js\123.js" />
-    <Content Include="site\js\666.js" />
-    <Content Include="site\js\777.js" />
     <Content Include="storage\media\MOU簽署-合作學校%281%29.jpg" />
     <Content Include="storage\media\ORS%281%29.jpg" />
     <Content Include="storage\media\ORS.jpg" />
