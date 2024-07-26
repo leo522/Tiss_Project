@@ -241,6 +241,9 @@
     <Compile Include="Models\Menus.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageBoard.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MissionPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -419,6 +422,7 @@
     <Content Include="fontawesome\css\v4-shims.min.css" />
     <Content Include="fontawesome\css\v5-font-face.css" />
     <Content Include="fontawesome\css\v5-font-face.min.css" />
+    <Content Include="fontawesome\facebook_icon.ico" />
     <Content Include="fontawesome\js\all.js" />
     <Content Include="fontawesome\js\all.min.js" />
     <Content Include="fontawesome\js\brands.js" />
@@ -434,6 +438,7 @@
     <Content Include="fontawesome\js\v4-shims.js" />
     <Content Include="fontawesome\js\v4-shims.min.js" />
     <Content Include="fontawesome\LICENSE.txt" />
+    <Content Include="fontawesome\line_icon.ico" />
     <Content Include="fontawesome\sprites\brands.svg" />
     <Content Include="fontawesome\sprites\regular.svg" />
     <Content Include="fontawesome\sprites\solid.svg" />
@@ -2482,6 +2487,7 @@
     <Content Include="fontawesome\svgs\solid\yen-sign.svg" />
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
+    <Content Include="fontawesome\twitter_icon.ico" />
     <Content Include="Img\0427GOGOSportTech3.jpg" />
     <Content Include="Img\2025_World_Masters_Games_logo.jpg" />
     <Content Include="Img\3E1A5528_0.jpg" />
@@ -2963,6 +2969,7 @@
     <Content Include="Views\Home\ytVideo.cshtml" />
     <Content Include="Views\Tiss\ForgotPassword.cshtml" />
     <Content Include="Views\Tiss\ResetPassword.cshtml" />
+    <Content Include="Views\Tiss\_MessageBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

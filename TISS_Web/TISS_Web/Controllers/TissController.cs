@@ -24,6 +24,7 @@ using Google.Apis.YouTube.v3;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Data.Entity.Validation;
+using Google.Apis.YouTube.v3.Data;
 
 namespace TISS_Web.Controllers
 {
@@ -1993,6 +1994,33 @@ namespace TISS_Web.Controllers
                 Response.Cookies.Add(langCookie);
             }
             return Redirect(Request.UrlReferrer.ToString());
+        }
+        #endregion
+
+        #region 留言板功能
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostComment(int articleId, string userName, string commentText)
+        {
+            if (ModelState.IsValid)
+            {
+                var comment = new MessageBoard
+                {
+                    ArticleId = articleId,
+                    UserName = userName,
+                    CommentText = commentText,
+                    CommentDate = DateTime.Now,
+                    IsApproved = true // 根據需要設置審核狀態
+                };
+
+                _db.MessageBoard.Add(comment);
+                _db.SaveChanges();
+
+                return RedirectToAction("ViewArticle", new { id = articleId });
+            }
+
+            // 錯誤處理
+            return View("Error");
         }
         #endregion
     }

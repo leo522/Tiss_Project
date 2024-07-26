@@ -295,6 +295,17 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="MessageBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CommentDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="MissionPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -818,6 +829,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__MessageBo__Artic__51EF2864">
+          <End Role="ArticleContent" Type="Self.ArticleContent" Multiplicity="1" />
+          <End Role="MessageBoard" Type="Self.MessageBoard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageBoard">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
           <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -887,6 +910,7 @@
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
@@ -923,6 +947,10 @@
           <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="Self.FK__MenuItems__MenuI__467D75B8">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="MenuItems" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="Self.FK__MessageBo__Artic__51EF2864">
+            <End Role="ArticleContent" EntitySet="ArticleContent" />
+            <End Role="MessageBoard" EntitySet="MessageBoard" />
           </AssociationSet>
           <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
             <End Role="Permissions" EntitySet="Permissions" />
@@ -1136,6 +1164,11 @@
             <End Role="MenuItems" EntitySet="MenuItems" />
           </AssociationSet>
           <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
+          <EntitySet Name="MessageBoard" EntityType="TISS_WebModel.MessageBoard" />
+          <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864">
+            <End Role="ArticleContent" EntitySet="ArticleContent" />
+            <End Role="MessageBoard" EntitySet="MessageBoard" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1849,6 +1882,7 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
         </EntityType>
         <EntityType Name="MenuItems">
           <Key>
@@ -1891,6 +1925,30 @@
           <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="changeDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="MessageBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CommentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
+        </EntityType>
+        <Association Name="FK__MessageBo__Artic__51EF2864">
+          <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
+          <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticleContent">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MessageBoard">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2747,6 +2805,18 @@
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessageBoard">
+            <EntityTypeMapping TypeName="TISS_WebModel.MessageBoard">
+              <MappingFragment StoreEntitySet="MessageBoard">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+                <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

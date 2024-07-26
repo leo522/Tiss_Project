@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="content">
-                            @if (!string.IsNullOrEmpty(parentDirectory) )
+                            @if (!string.IsNullOrEmpty(parentDirectory))
                             {
                                 <div class="Title">@parentDirectory</div>
                                 <ul class="Menu">
@@ -125,6 +125,11 @@
             </div>
         </div>
     </div>
+    @{
+        var msg = Model.MessageBoard; // 確保這是留言的集合
+    }
+
+    @Html.Partial("_MessageBoard", msg)
 
     <div class="navigation-buttons">
         @if (ViewBag.PreviousArticle != null)
@@ -141,13 +146,13 @@
     <div class="social-share">
         <h5>分享至:</h5>
         <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
-            <i class="fa-brands fa-facebook"></i> Facebook
+           <img src="~/fontawesome/facebook_icon.ico" width="32"/>Facebook
         </a>
         <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
-            <i class="fa-brands fa-twitter"></i> Twitter
+            <img src="~/fontawesome/twitter_icon.ico" width="32"/> Twitter
         </a>
         <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
-            <i class="fa-brands fa-line"></i> Line
+            <img src="~/fontawesome/line_icon.ico" width="32"/> Line
         </a>
     </div>
     @if (isLoggedIn)

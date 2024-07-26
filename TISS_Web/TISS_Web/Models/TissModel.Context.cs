@@ -78,5 +78,6 @@ namespace TISS_Web.Models
         public virtual DbSet<MenuItems> MenuItems { get; set; }
         public virtual DbSet<Menus> Menus { get; set; }
         public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
+        public virtual DbSet<MessageBoard> MessageBoard { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Apis.YouTube.v3.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -293,6 +294,9 @@ namespace TISS_Web.Models
         public bool IsPublished { get; set; }
 
         public Dictionary<string, List<string>> ParentDirectories { get; set; } // 字典來管理父目錄及其子目錄
+
+        // 新增的導航屬性，用於存儲相關的留言
+        public ICollection<Messageboard> messageboards { get; set; }
     }
 
     public class HashtagModle
@@ -361,5 +365,18 @@ namespace TISS_Web.Models
         public bool IsActive { get; set; }
         public string UserAccount { get; set; }
         public DateTime? changeDate { get; set; }
+    }
+
+    public class Messageboard
+    {
+        public int Id { get; set; }
+        public int ArticleId { get; set; }  // 外鍵
+        public string UserName { get; set; }
+        public string CommentText { get; set; }
+        public DateTime CommentDate { get; set; }
+        public bool IsApproved { get; set; }
+
+        // 導航屬性，用於關聯到文章
+        public ArticleContentModel Article { get; set; }
     }
 }

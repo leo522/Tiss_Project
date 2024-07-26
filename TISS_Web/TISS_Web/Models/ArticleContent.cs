@@ -14,6 +14,12 @@ namespace TISS_Web.Models
     
     public partial class ArticleContent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ArticleContent()
+        {
+            this.MessageBoard = new HashSet<MessageBoard>();
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public string ContentBody { get; set; }
@@ -32,5 +38,8 @@ namespace TISS_Web.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public string UpdatedUser { get; set; }
         public bool IsEnabled { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MessageBoard> MessageBoard { get; set; }
     }
 }

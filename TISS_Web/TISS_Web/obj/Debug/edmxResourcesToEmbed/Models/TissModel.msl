@@ -855,5 +855,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MessageBoard">
+      <EntityTypeMapping TypeName="TISS_WebModel.MessageBoard">
+        <MappingFragment StoreEntitySet="MessageBoard">
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
