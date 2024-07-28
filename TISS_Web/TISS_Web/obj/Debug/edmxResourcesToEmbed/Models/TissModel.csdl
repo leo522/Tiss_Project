@@ -68,6 +68,7 @@
     <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
     <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="changeDate" Type="DateTime" Precision="3" />
+    <Property Name="IsApproved" Type="Boolean" />
   </EntityType>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -196,6 +197,7 @@
       <End Role="ArticleContent" EntitySet="ArticleContent" />
       <End Role="MessageBoard" EntitySet="MessageBoard" />
     </AssociationSet>
+    <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -976,4 +978,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="InternalEmployees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IsRegistered" Type="Boolean" />
+    <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

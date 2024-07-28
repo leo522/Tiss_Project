@@ -29,6 +29,7 @@ namespace TISS_Web.Models
         public Nullable<bool> IsActive { get; set; }
         public string UserAccount { get; set; }
         public Nullable<System.DateTime> changeDate { get; set; }
+        public Nullable<bool> IsApproved { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRoles> UserRoles { get; set; }

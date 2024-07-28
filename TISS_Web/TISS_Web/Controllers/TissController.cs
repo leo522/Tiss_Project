@@ -115,7 +115,7 @@ namespace TISS_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(string UserName, string pwd, string Email)
+        public ActionResult Register(string EmployeeID, string UserName, string pwd, string Email)
         {
             if (pwd.Length < 6)
             {
@@ -126,6 +126,14 @@ namespace TISS_Web.Controllers
             if (_db.Users.Any(u => u.UserName == UserName))
             {
                 ViewBag.ErrorMessage = "該帳號已存在";
+                return View();
+            }
+
+            // 驗證員工編號
+            var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmployeeID == EmployeeID && e.IsRegistered == false);
+            if (employee == null)
+            {
+                ViewBag.ErrorMessage = "無效的員工編號或該員工已經註冊";
                 return View();
             }
 
@@ -148,13 +156,56 @@ namespace TISS_Web.Controllers
                 LastLoginDate = DateTime.Now,
                 IsActive = true,
                 UserAccount = UserName, // 假設 UserAccount 和 UserName 相同
-                changeDate = DateTime.Now
+                changeDate = DateTime.Now,
+                IsApproved = false // 註冊後需要管理員審核
             };
 
             _db.Users.Add(newUser);
             _db.SaveChanges();
 
             return RedirectToAction("Login");
+        }
+        #endregion
+
+        #region 管理員審核
+        public ActionResult PendingRegistrations()
+        {
+            var pendingUsers = _db.Users
+                         .Where(u => !(u.IsApproved ?? false))
+                         .Select(u => new UserModel
+                         {
+                             UserName = u.UserName,
+                             Email = u.Email,
+                             CreatedDate = DateTime.Now
+                         })
+                         .ToList();
+
+            return View(pendingUsers);
+        }
+
+        [HttpPost]
+        public ActionResult ApproveUser(string userName)
+        {
+            var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
+            if (user != null)
+            {
+                user.IsApproved = true;
+                user.IsActive = true; // 審核帳號
+                _db.SaveChanges();
+            }
+            return RedirectToAction("PendingRegistrations");
+        }
+
+        [HttpPost]
+        public ActionResult RejectUser(string userName)
+        {
+            var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
+            if (user != null)
+            {
+                _db.Users.Remove(user);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("PendingRegistrations");
         }
         #endregion
 
@@ -1385,11 +1436,29 @@ namespace TISS_Web.Controllers
         /// 公開資訊
         /// </summary>
         /// <returns></returns>
-        public ActionResult public_info()
+        public ActionResult public_info(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            return View();
+            var list = _db.RegulationDocument.ToList();
+
+            var totalDocuments = list.Count();
+            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+            {
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                Creator = d.Creator,
+                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                IsActive = d.IsActive,
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(dtos);
         }
 
         /// <summary>
@@ -1908,27 +1977,32 @@ namespace TISS_Web.Controllers
                 var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
                 var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
 
+                ViewBag.ArticleId = article.Id;
+
                 ViewBag.PreviousArticle = previousArticle;
                 ViewBag.NextArticle = nextArticle;
 
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
-                {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學", "運動生理", "運動心理", "體能訓練", "運動營養" } },
-                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
-                };
+    {
+        { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學", "運動生理", "運動心理", "體能訓練", "運動營養" } },
+        { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+        { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+         //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+    };
                 //var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
                 var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
                 ViewBag.ParentDirectory = parentDirectory;
-                
+
                 var menus = _db.Menus.ToList();
                 var menuItems = _db.MenuItems.ToList();
-                var parentMenu = menus.ToDictionary(m => m.Title,m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
+                var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
                 ViewBag.Menus = menus;
                 ViewBag.ParentMenu = parentMenu;
+
+                var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
+                ViewBag.Comments = comments;
 
                 _db.SaveChanges();
 
@@ -2002,7 +2076,7 @@ namespace TISS_Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PostComment(int articleId, string userName, string commentText)
         {
-            if (ModelState.IsValid)
+            try
             {
                 var comment = new MessageBoard
                 {
@@ -2010,17 +2084,24 @@ namespace TISS_Web.Controllers
                     UserName = userName,
                     CommentText = commentText,
                     CommentDate = DateTime.Now,
-                    IsApproved = true // 根據需要設置審核狀態
+                    IsApproved = true
                 };
 
                 _db.MessageBoard.Add(comment);
                 _db.SaveChanges();
 
-                return RedirectToAction("ViewArticle", new { id = articleId });
+                // 只需重新導向到 ViewArticle，無需進行額外更新
+                var article = _db.ArticleContent.FirstOrDefault(a => a.Id == articleId);
+                if (article != null)
+                {
+                    return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
+                }
+                return RedirectToAction("Home");
             }
-
-            // 錯誤處理
-            return View("Error");
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
     }

@@ -271,6 +271,18 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'TISS_Web.dbo.InternalEmployees' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="InternalEmployees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+          <Property Name="Department" Type="nvarchar" MaxLength="30" />
+          <Property Name="IsRegistered" Type="bit" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="Lang_Key" />
@@ -799,6 +811,7 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
           <Property Name="changeDate" Type="datetime" />
+          <Property Name="IsApproved" Type="bit" />
         </EntityType>
         <EntityType Name="VideoPageContent">
           <Key>
@@ -944,6 +957,15 @@
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [InternalEmployees].[EmployeeID] AS [EmployeeID], 
+    [InternalEmployees].[Name] AS [Name], 
+    [InternalEmployees].[Department] AS [Department], 
+    [InternalEmployees].[IsRegistered] AS [IsRegistered], 
+    [InternalEmployees].[EmailAddress] AS [EmailAddress]
+    FROM [dbo].[InternalEmployees] AS [InternalEmployees]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="Self.FK__MenuItems__MenuI__467D75B8">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="MenuItems" EntitySet="MenuItems" />
@@ -1041,6 +1063,7 @@
           <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
           <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="changeDate" Type="DateTime" Precision="3" />
+          <Property Name="IsApproved" Type="Boolean" />
         </EntityType>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -1169,6 +1192,7 @@
             <End Role="ArticleContent" EntitySet="ArticleContent" />
             <End Role="MessageBoard" EntitySet="MessageBoard" />
           </AssociationSet>
+          <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1949,6 +1973,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InternalEmployees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IsRegistered" Type="Boolean" />
+          <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2010,6 +2044,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TISS_WebModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="changeDate" ColumnName="changeDate" />
                 <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -2818,6 +2853,17 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InternalEmployees">
+            <EntityTypeMapping TypeName="TISS_WebModel.InternalEmployees">
+              <MappingFragment StoreEntitySet="InternalEmployees">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

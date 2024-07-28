@@ -400,8 +400,18 @@
                 } else {
                     $('#loginBtn').show(); // 顯示登入按鈕
                 }
-            });
 
+                if (window.location.pathname === '/Tiss/Home') {
+                    $('#adminUser').hide(); // 隱藏管理者按鈕
+                }
+            });
+        document.addEventListener("DOMContentLoaded", function () {
+            // 檢查當前頁面是否為首頁
+            if (window.location.pathname === "/Home") {
+                // 隱藏元素
+                document.getElementById("adminUser").style.display = "none";
+            }
+        });
     //    function toggleDropdown(dropdownId) {
     //        var dropdownToggle = document.getElementById(dropdownId);
     //        var dropdownMenu = dropdownToggle.nextElementSibling;

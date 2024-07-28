@@ -77,14 +77,16 @@
                                 </span>
                             </button>
                         </li>
-                        <li id="loginBtn">
-                            <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
-                        </li>
-                        <li id="logoutBtn" style="display: none;">
-                            <form id="logoutForm" action="/Tiss/Logout" method="post">
-                                <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
-                            </form>
-                        </li>
+                        <from id="adminUser">
+                            <li id="loginBtn">
+                                <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn">網頁管理者</button>
+                            </li>
+                            <li id="logoutBtn" style="display: none;">
+                                <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                    <button type="submit" class="btn btn-outline-danger btn-block">登出</button>
+                                </form>
+                            </li>
+                        </from>
                     </ul>
                 </nav>
             </div>

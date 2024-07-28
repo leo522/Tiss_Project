@@ -231,6 +231,9 @@
     <Compile Include="Models\InstitutePageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InternalEmployees.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IWebContent.cs" />
     <Compile Include="Models\Language.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
@@ -2970,6 +2973,7 @@
     <Content Include="Views\Tiss\ForgotPassword.cshtml" />
     <Content Include="Views\Tiss\ResetPassword.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
+    <Content Include="Views\Tiss\PendingRegistrations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

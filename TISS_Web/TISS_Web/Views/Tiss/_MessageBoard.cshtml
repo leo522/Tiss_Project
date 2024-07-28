@@ -13,7 +13,8 @@
 
     <form asp-action="PostComment" method="post">
         @Html.AntiForgeryToken()
-        <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
+        <input name="Id" value="@ViewBag.ArticleId" />
+        <input name="articleId" value="@ViewBag.ArticleId" />
         <div class="form-group">
             <label for="userName">名稱:</label>
             <input type="text" class="form-control" name="userName" required />

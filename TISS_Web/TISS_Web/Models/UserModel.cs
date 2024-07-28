@@ -14,5 +14,6 @@ namespace TISS_Web.Models
         public DateTime CreatedDate { get; set; }
         public DateTime? LastLoginDate { get; set; }
         public bool IsActive { get; set; }
+        public bool IsApproved { get; set; }
     }
 }
