@@ -68,6 +68,7 @@
     <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
     <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="changeDate" Type="DateTime" Precision="3" />
+    <Property Name="IsApproved" Type="Boolean" />
   </EntityType>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -191,6 +192,12 @@
       <End Role="MenuItems" EntitySet="MenuItems" />
     </AssociationSet>
     <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
+    <EntitySet Name="MessageBoard" EntityType="TISS_WebModel.MessageBoard" />
+    <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864">
+      <End Role="ArticleContent" EntitySet="ArticleContent" />
+      <End Role="MessageBoard" EntitySet="MessageBoard" />
+    </AssociationSet>
+    <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -904,6 +911,7 @@
     <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
   </EntityType>
   <EntityType Name="MenuItems">
     <Key>
@@ -945,5 +953,39 @@
     <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UserAccount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="changeDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="MessageBoard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ArticleId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CommentText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
+  </EntityType>
+  <Association Name="FK__MessageBo__Artic__51EF2864">
+    <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
+    <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageBoard">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="InternalEmployees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IsRegistered" Type="Boolean" />
+    <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

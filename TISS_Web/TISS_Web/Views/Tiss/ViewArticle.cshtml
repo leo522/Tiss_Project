@@ -52,12 +52,24 @@
                             {
                                 <div class="Title">@parentDirectory</div>
                                 <ul class="Menu">
-                                    @foreach (var item in menuItems[parentDirectory])
+                                    @*@foreach (var item in menuItems[parentDirectory])
+        {
+            var url = ViewBag.MenuUrls.ContainsKey(item) ? ViewBag.MenuUrls[item] : "#"; // 根據 menuUrls 對應的 URL
+            <li span="3">
+                <a class="MenuLink" href="@url">@item</a>
+            </li>
+        }*@
+                                    @foreach (var item in ViewBag.MenuUrls)
                                     {
                                         <li span="3">
-                                            <a class="MenuLink" href="@Url.Action("ViewArticle", "Tiss", new { item = item })">@item</a>
+                                            <a class="MenuLink" href="@item.Value">@item.Key</a>
                                         </li>
                                     }
+                                    <!-- 顯示「全部文章」的連結 -->
+                                    @*<li span="3">
+                                        <a class="MenuLink" href="@ViewBag.AllArticlesUrl">全部文章</a>
+                                    </li>*@
+
                                     @if (isLoggedIn)
                                     {
                                         <li span="3">
@@ -113,11 +125,11 @@
                                     </div>
                                 }
                                 <p>發佈日期: @Model.PublishedDate</p>
-                                <p>
-                                    <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
-                                        <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
-                                    </a>
-                                </p>
+                                @*<p>
+                                        <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+                                            <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+                                        </a>
+                                    </p>*@
                             </div>
                         </div>
                         <div class="comments-section">
@@ -161,23 +173,29 @@
             <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
         }
     </div>
-
+    <div class="hashtags-link" style="text-align: right;">
+        <p>
+            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+            </a>
+        </p>
+    </div>
     <p>點閱次數: @Model.ClickCount</p>
     <div class="social-share">
         <h5>分享至:</h5>
         <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
-           <img src="~/fontawesome/facebook_icon.ico" width="32"/>Facebook
+            <img src="~/fontawesome/facebook_icon.ico" width="32" />Facebook
         </a>
         <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
-            <img src="~/fontawesome/twitter_icon.ico" width="32"/> Twitter
+            <img src="~/fontawesome/twitter_icon.ico" width="32" /> Twitter
         </a>
         <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
-            <img src="~/fontawesome/line_icon.ico" width="32"/> Line
+            <img src="~/fontawesome/line_icon.ico" width="32" /> Line
         </a>
     </div>
-@if (isLoggedIn)
-{
-<script>
+    @if (isLoggedIn)
+    {
+        <script>
             $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
@@ -217,7 +235,7 @@ if (isLoggedIn) {
                     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                 });
             });
-</script>
-}
+        </script>
+    }
 </body>
 </html>

@@ -287,7 +287,7 @@ namespace TISS_Web.Controllers
 
             var mailMessage = new MailMessage
             {
-                From = new MailAddress(fromEmail,displayName),
+                From = new MailAddress(fromEmail, displayName),
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = true,
@@ -394,11 +394,11 @@ namespace TISS_Web.Controllers
             ViewBag.Message = "您的密碼已成功重置";
             return RedirectToAction("Login");
         }
-    #endregion
+        #endregion
 
         #region 自己上傳圖片和文字使用
 
-    public ActionResult editPage()
+        public ActionResult editPage()
         {
             try
             {
@@ -604,7 +604,7 @@ namespace TISS_Web.Controllers
                 }).Take(4).ToList();
 
             return PartialView("_ArticleListPartial", dtos);
-        }   
+        }
 
         #endregion
 
@@ -1946,6 +1946,9 @@ namespace TISS_Web.Controllers
 
             return base64;
         }
+        #endregion
+
+        #region 文章內容顯示
 
         /// <summary>
         /// 文章內容顯示
@@ -1984,25 +1987,86 @@ namespace TISS_Web.Controllers
 
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
-    {
-        { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學", "運動生理", "運動心理", "體能訓練", "運動營養" } },
-        { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-        { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-         //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
-    };
+                {
+                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發" } },
+                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+                    //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+                };
+
                 //var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
                 var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
                 ViewBag.ParentDirectory = parentDirectory;
 
-                var menus = _db.Menus.ToList();
-                var menuItems = _db.MenuItems.ToList();
+                var menus = _db.Menus.ToList(); //主題目錄
+                var menuItems = _db.MenuItems.ToList(); //子主題目錄
                 var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
                 ViewBag.Menus = menus;
                 ViewBag.ParentMenu = parentMenu;
 
                 var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
                 ViewBag.Comments = comments;
+
+                var menuList = new Dictionary<string, string> //子主題連結
+                {
+                    { "運動醫學", "/Tiss/sportMedicine" },
+                    { "運動科技", "/Tiss/sportTech" },
+                    { "運動科學", "/Tiss/sportScience" },
+                    { "運動生理", "/Tiss/sportsPhysiology" },
+                    { "運動心理", "/Tiss/sportsPsychology" },
+                    { "體能訓練", "/Tiss/physicalTraining" },
+                    { "運動營養", "/Tiss/sportsNutrition" },
+                    { "新聞發佈", "/Tiss/press" },
+                    { "中心訊息", "/Tiss/institute" },
+                    { "徵才招募", "/Tiss/recruit" },
+                    { "中心成果", "/Tiss/achievement" },
+                    { "新聞影音", "/Tiss/news" },
+                    { "活動紀錄", "/Tiss/activityRecord" },
+                };
+                ViewBag.MenuUrls = menuList;
+
+                var currentParentDirectory = ViewBag.ParentDirectory as string;
+                var menuIdMapping = new Dictionary<string, int>
+        {
+            { "科普專欄", 1 },
+            { "中心公告", 2 },
+            { "影音專區", 3 }
+        };
+                // 根據當前主題獲取對應的 MenuId
+                int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
+
+
+
+                // 根據 MenuId 查找「全部文章」的連結
+                var menuUrls = menuItems
+             .Where(item => item.MenuId == menuId)
+             .GroupBy(item => item.Name)
+             .ToDictionary(
+                 group => group.Key,
+                 group => group.Last().Url // 選擇最後一個 URL
+             );
+                var allArticlesUrl = menuItems
+            .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
+            .Select(item => item.Url)
+            .FirstOrDefault();
+
+                ViewBag.MenuUrls = menuUrls;
+                ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
+                //ViewBag.MenuUrls = menuItems.ToDictionary(item => item.Name, item => item.Url);
+                //ViewBag.AllArticlesUrl = allArticlesUrl ?? "#"; // 預設連結為 "#"
+                //var allMenuList = new Dictionary<string, string>
+                //{
+                //    { "科普專欄", "/Tiss/research" },
+                //    { "中心公告", "/Tiss/announcement" },
+                //    { "影音專區", "/Tiss/video" },
+
+                //};
+                // 設定當前主題
+
+                // 根據當前主題設置對應的「全部文章」連結
+                //var allArticlesUrl = allMenuList.ContainsKey(currentParentDirectory) ? allMenuList[currentParentDirectory] : "#";
+                //ViewBag.AllArticlesUrl = allArticlesUrl;
 
                 _db.SaveChanges();
 

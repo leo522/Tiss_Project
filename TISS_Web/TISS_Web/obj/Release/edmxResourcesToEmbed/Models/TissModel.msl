@@ -56,6 +56,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="TISS_WebModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
           <ScalarProperty Name="changeDate" ColumnName="changeDate" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -852,6 +853,29 @@
           <ScalarProperty Name="Token" ColumnName="Token" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageBoard">
+      <EntityTypeMapping TypeName="TISS_WebModel.MessageBoard">
+        <MappingFragment StoreEntitySet="MessageBoard">
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InternalEmployees">
+      <EntityTypeMapping TypeName="TISS_WebModel.InternalEmployees">
+        <MappingFragment StoreEntitySet="InternalEmployees">
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="IsRegistered" ColumnName="IsRegistered" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

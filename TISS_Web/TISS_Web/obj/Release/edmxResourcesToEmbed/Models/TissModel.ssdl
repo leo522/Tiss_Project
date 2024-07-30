@@ -266,6 +266,18 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'TISS_Web.dbo.InternalEmployees' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+  <EntityType Name="InternalEmployees">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" />
+    <Property Name="Department" Type="nvarchar" MaxLength="30" />
+    <Property Name="IsRegistered" Type="bit" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
+  </EntityType>
   <EntityType Name="Language">
     <Key>
       <PropertyRef Name="Lang_Key" />
@@ -289,6 +301,17 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MessageBoard">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArticleId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CommentDate" Type="datetime" Nullable="false" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MissionPageContent">
     <Key>
@@ -783,6 +806,7 @@
     <Property Name="IsActive" Type="bit" />
     <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
     <Property Name="changeDate" Type="datetime" />
+    <Property Name="IsApproved" Type="bit" />
   </EntityType>
   <EntityType Name="VideoPageContent">
     <Key>
@@ -810,6 +834,18 @@
       </Principal>
       <Dependent Role="MenuItems">
         <PropertyRef Name="MenuId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MessageBo__Artic__51EF2864">
+    <End Role="ArticleContent" Type="Self.ArticleContent" Multiplicity="1" />
+    <End Role="MessageBoard" Type="Self.MessageBoard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MessageBoard">
+        <PropertyRef Name="ArticleId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -882,6 +918,7 @@
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MissionPageContent" EntityType="Self.MissionPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ObjectivesPageContent" EntityType="Self.ObjectivesPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
@@ -915,9 +952,22 @@
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [InternalEmployees].[EmployeeID] AS [EmployeeID], 
+    [InternalEmployees].[Name] AS [Name], 
+    [InternalEmployees].[Department] AS [Department], 
+    [InternalEmployees].[IsRegistered] AS [IsRegistered], 
+    [InternalEmployees].[EmailAddress] AS [EmailAddress]
+    FROM [dbo].[InternalEmployees] AS [InternalEmployees]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="Self.FK__MenuItems__MenuI__467D75B8">
       <End Role="Menus" EntitySet="Menus" />
       <End Role="MenuItems" EntitySet="MenuItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="Self.FK__MessageBo__Artic__51EF2864">
+      <End Role="ArticleContent" EntitySet="ArticleContent" />
+      <End Role="MessageBoard" EntitySet="MessageBoard" />
     </AssociationSet>
     <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
       <End Role="Permissions" EntitySet="Permissions" />

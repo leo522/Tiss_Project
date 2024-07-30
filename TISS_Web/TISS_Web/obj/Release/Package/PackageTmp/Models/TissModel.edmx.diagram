@@ -63,6 +63,9 @@
         <EntityTypeShape EntityType="TISS_WebModel.Menus" Width="1.5" PointX="15.375" PointY="22.125" />
         <AssociationConnector Association="TISS_WebModel.FK__MenuItems__MenuI__467D75B8" />
         <EntityTypeShape EntityType="TISS_WebModel.PasswordResetRequests" Width="1.5" PointX="20.375" PointY="21.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.MessageBoard" Width="1.5" PointX="15.625" PointY="24.875" />
+        <AssociationConnector Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864" />
+        <EntityTypeShape EntityType="TISS_WebModel.InternalEmployees" Width="1.5" PointX="0.75" PointY="22.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

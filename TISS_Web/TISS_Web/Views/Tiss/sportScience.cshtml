@@ -212,7 +212,17 @@ if (isLoggedIn) {
                 }
             });
         });
-//登出按鈕顯示功能
+        //顯示當前選擇的子項目
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
