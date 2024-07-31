@@ -57,34 +57,42 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult Login(string UserName, string pwd)
         {
-            // 將使用者輸入的密碼進行SHA256加密
-            string hashedPwd = ComputeSha256Hash(pwd);
-            var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
-
-            if (dto != null)
+            try
             {
-                // 驗證成功，更新最後登入時間
-                dto.LastLoginDate = DateTime.Now;
-                _db.SaveChanges();
+                // 將使用者輸入的密碼進行SHA256加密
+                string hashedPwd = ComputeSha256Hash(pwd);
+                var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
 
-                // 設定 Session 狀態為已登入
-                Session["LoggedIn"] = true;
-                Session["UserName"] = dto.UserName;
+                if (dto != null)
+                {
+                    // 驗證成功，更新最後登入時間
+                    dto.LastLoginDate = DateTime.Now;
+                    _db.SaveChanges();
 
-                // 檢查是否有記錄的返回頁面
-                string returnUrl = Session["ReturnUrl"] != null ? Session["ReturnUrl"].ToString() : Url.Action("Home", "Tiss");
+                    // 設定 Session 狀態為已登入
+                    Session["LoggedIn"] = true;
+                    Session["UserName"] = dto.UserName;
 
-                // 清除返回頁面的 Session 記錄
-                Session.Remove("ReturnUrl");
+                    // 檢查是否有記錄的返回頁面
+                    string returnUrl = Session["ReturnUrl"] != null ? Session["ReturnUrl"].ToString() : Url.Action("Home", "Tiss");
 
-                // 重定向到記錄的返回頁面
-                return Redirect(returnUrl);
+                    // 清除返回頁面的 Session 記錄
+                    Session.Remove("ReturnUrl");
+
+                    // 重定向到記錄的返回頁面
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    // 驗證失敗
+                    ViewBag.ErrorMessage = "帳號或密碼錯誤";
+                    return View();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // 驗證失敗
-                ViewBag.ErrorMessage = "帳號或密碼錯誤";
-                return View();
+                Console.WriteLine("其他錯誤: " + ex.Message);
+                return View("Error");
             }
         }
         #endregion
@@ -118,95 +126,127 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult Register(string EmployeeID, string UserName, string pwd, string Email)
         {
-            if (pwd.Length < 6)
+            try
             {
-                ViewBag.ErrorMessage = "密碼長度至少要6位數";
-                return View();
+                if (pwd.Length < 6)
+                {
+                    ViewBag.ErrorMessage = "密碼長度至少要6位數";
+                    return View();
+                }
+
+                if (_db.Users.Any(u => u.UserName == UserName))
+                {
+                    ViewBag.ErrorMessage = "該帳號已存在";
+                    return View();
+                }
+
+                // 驗證員工編號
+                var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmployeeID == EmployeeID && e.IsRegistered == false);
+                if (employee == null)
+                {
+                    ViewBag.ErrorMessage = "無效的員工編號或該員工已經註冊";
+                    return View();
+                }
+
+                //Email格式驗證
+                var emailRegex = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+                if (!emailRegex.IsMatch(Email))
+                {
+                    ViewBag.ErrorMessage = "無效的Email格式";
+                    return View();
+                }
+
+                // 密碼加密處理
+                var Pwd = ComputeSha256Hash(pwd);
+                var newUser = new Users
+                {
+                    UserName = UserName,
+                    Password = Pwd,
+                    Email = Email,
+                    CreatedDate = DateTime.Now,
+                    LastLoginDate = DateTime.Now,
+                    IsActive = true,
+                    UserAccount = UserName, // 假設 UserAccount 和 UserName 相同
+                    changeDate = DateTime.Now,
+                    IsApproved = false // 註冊後需要管理員審核
+                };
+
+                _db.Users.Add(newUser);
+                _db.SaveChanges();
+
+                return RedirectToAction("Login");
             }
-
-            if (_db.Users.Any(u => u.UserName == UserName))
+            catch (Exception ex)
             {
-                ViewBag.ErrorMessage = "該帳號已存在";
-                return View();
+                Console.WriteLine("其他錯誤: " + ex.Message);
             }
-
-            // 驗證員工編號
-            var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmployeeID == EmployeeID && e.IsRegistered == false);
-            if (employee == null)
-            {
-                ViewBag.ErrorMessage = "無效的員工編號或該員工已經註冊";
-                return View();
-            }
-
-            //Email格式驗證
-            var emailRegex = new System.Text.RegularExpressions.Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-            if (!emailRegex.IsMatch(Email))
-            {
-                ViewBag.ErrorMessage = "無效的Email格式";
-                return View();
-            }
-
-            // 密碼加密處理
-            var Pwd = ComputeSha256Hash(pwd);
-            var newUser = new Users
-            {
-                UserName = UserName,
-                Password = Pwd,
-                Email = Email,
-                CreatedDate = DateTime.Now,
-                LastLoginDate = DateTime.Now,
-                IsActive = true,
-                UserAccount = UserName, // 假設 UserAccount 和 UserName 相同
-                changeDate = DateTime.Now,
-                IsApproved = false // 註冊後需要管理員審核
-            };
-
-            _db.Users.Add(newUser);
-            _db.SaveChanges();
-
-            return RedirectToAction("Login");
+            return View();
         }
         #endregion
 
         #region 管理員審核
         public ActionResult PendingRegistrations()
         {
-            var pendingUsers = _db.Users
-                         .Where(u => !(u.IsApproved ?? false))
-                         .Select(u => new UserModel
-                         {
-                             UserName = u.UserName,
-                             Email = u.Email,
-                             CreatedDate = DateTime.Now
-                         })
-                         .ToList();
+            try
+            {
+                var pendingUsers = _db.Users
+                        .Where(u => !(u.IsApproved ?? false))
+                        .Select(u => new UserModel
+                        {
+                            UserName = u.UserName,
+                            Email = u.Email,
+                            CreatedDate = DateTime.Now
+                        })
+                        .ToList();
 
-            return View(pendingUsers);
+                return View(pendingUsers);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("其他錯誤: " + ex.Message);
+                return View("Error");
+            }
         }
 
         [HttpPost]
         public ActionResult ApproveUser(string userName)
         {
-            var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
-            if (user != null)
+            try
             {
-                user.IsApproved = true;
-                user.IsActive = true; // 審核帳號
-                _db.SaveChanges();
+                var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
+                if (user != null)
+                {
+                    user.IsApproved = true;
+                    user.IsActive = true; // 審核帳號
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("PendingRegistrations");
             }
-            return RedirectToAction("PendingRegistrations");
+            catch (Exception ex)
+            {
+                Console.WriteLine("其他錯誤: " + ex.Message);
+                return View("Error");
+            }
         }
 
         [HttpPost]
         public ActionResult RejectUser(string userName)
         {
-            var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
-            if (user != null)
+            try
             {
-                _db.Users.Remove(user);
-                _db.SaveChanges();
+                var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
+                if (user != null)
+                {
+                    _db.Users.Remove(user);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("PendingRegistrations");
             }
-            return RedirectToAction("PendingRegistrations");
+            catch (Exception ex)
+            {
+                Console.WriteLine("其他錯誤: " + ex.Message);
+                return View("Error");
+            }
         }
         #endregion
 
@@ -237,38 +277,46 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult SendResetLink(string Email)
         {
-            var user = _db.Users.FirstOrDefault(u => u.Email == Email);
-
-            if (user == null)
+            try
             {
-                ViewBag.ErrorMessage = "此Email尚未註冊";
+                var user = _db.Users.FirstOrDefault(u => u.Email == Email);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "此Email尚未註冊";
+                    return View("ForgotPassword");
+                }
+
+                // 生成重置密碼令牌（這裡使用 Guid 作為示例）
+                var resetToken = Guid.NewGuid().ToString();
+
+                // 保存重置令牌和過期時間
+                var resetPW = new PasswordResetRequests
+                {
+                    Email = Email,
+                    Token = resetToken,
+                    ExpiryDate = DateTime.Now.AddMinutes(5), // 設定有效時間為5分鐘
+                    UserAccount = user.UserName,
+                    changeDate = DateTime.Now
+                };
+                _db.PasswordResetRequests.Add(resetPW);
+                _db.SaveChanges();
+
+                // 發送重置密碼郵件
+                var resetLink = Url.Action("ResetPassword", "Tiss", new { token = resetToken }, Request.Url.Scheme);
+
+                var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}，連結有效時間為5分鐘";
+
+                SendEmail(Email, "重置密碼", emailBody);
+
+                ViewBag.Message = "重置密碼連結已發送至您的郵箱";
                 return View("ForgotPassword");
             }
-
-            // 生成重置密碼令牌（這裡使用 Guid 作為示例）
-            var resetToken = Guid.NewGuid().ToString();
-
-            // 保存重置令牌和過期時間
-            var resetPW = new PasswordResetRequests
+            catch (Exception ex)
             {
-                Email = Email,
-                Token = resetToken,
-                ExpiryDate = DateTime.Now.AddMinutes(5), // 設定有效時間為5分鐘
-                UserAccount = user.UserName,
-                changeDate = DateTime.Now
-            };
-            _db.PasswordResetRequests.Add(resetPW);
-            _db.SaveChanges();
-
-            // 發送重置密碼郵件
-            var resetLink = Url.Action("ResetPassword", "Tiss", new { token = resetToken }, Request.Url.Scheme);
-
-            var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}，連結有效時間為5分鐘";
-
-            SendEmail(Email, "重置密碼", emailBody);
-
-            ViewBag.Message = "重置密碼連結已發送至您的郵箱";
-            return View("ForgotPassword");
+                Console.WriteLine("其他錯誤: " + ex.Message);
+                return View("Error");
+            }
         }
 
         //郵件發送方法
@@ -310,69 +358,86 @@ namespace TISS_Web.Controllers
         //重置密碼頁面
         public ActionResult ResetPassword(string token)
         {
-            // 查找重置請求
-            var resetRequest = _db.PasswordResetRequests.SingleOrDefault(r => r.Token == token && r.ExpiryDate > DateTime.Now);
-
-            if (resetRequest == null)
+            try
             {
-                ViewBag.ErrorMessage = "無效或過期的要求";
+                // 查找重置請求
+                var resetRequest = _db.PasswordResetRequests.SingleOrDefault(r => r.Token == token && r.ExpiryDate > DateTime.Now);
+
+                if (resetRequest == null)
+                {
+                    ViewBag.ErrorMessage = "無效或過期的要求";
+                    return View("Error");
+                }
+
+                // 初始化 ResetPasswordViewModel 並傳遞到視圖
+                var model = new ResetPasswordViewModel
+                {
+                    Token = token
+                };
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("其他錯誤: " + ex.Message);
                 return View("Error");
             }
-
-            // 初始化 ResetPasswordViewModel 並傳遞到視圖
-            var model = new ResetPasswordViewModel
-            {
-                Token = token
-            };
-
-            return View(model);
+            
         }
 
         // 處理重置密碼
         [HttpPost]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                // 顯示驗證錯誤
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
+                if (!ModelState.IsValid)
                 {
-                    Console.WriteLine(error.ErrorMessage);
+                    // 顯示驗證錯誤
+                    var errors = ModelState.Values.SelectMany(v => v.Errors);
+                    foreach (var error in errors)
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                    return View(model);
                 }
-                return View(model);
+
+                // 根據 Token 查找重置請求
+                var resetRequest = _db.PasswordResetRequests
+                    .FirstOrDefault(r => r.Token == model.Token && r.ExpiryDate > DateTime.Now);
+
+                if (resetRequest == null)
+                {
+                    ViewBag.ErrorMessage = "無效或過期的要求";
+                    return View("Error");
+                }
+
+                // 根據 Email 查找用戶
+                var user = _db.Users
+                    .FirstOrDefault(u => u.Email == resetRequest.Email);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "無效的帳號";
+                    return View("Error");
+                }
+
+                // 更新用戶的密碼
+                user.Password = ComputeSha256Hash(model.NewPassword);
+                //user.changeDate = DateTime.Now;
+
+                // 更新 PasswordResetRequest 表中的 UserAccount 和 ChangeDate
+                resetRequest.UserAccount = user.UserName;
+                resetRequest.changeDate = DateTime.Now;
+
+                // 刪除重置請求
+                _db.PasswordResetRequests.Remove(resetRequest);
             }
-
-            // 根據 Token 查找重置請求
-            var resetRequest = _db.PasswordResetRequests
-                .FirstOrDefault(r => r.Token == model.Token && r.ExpiryDate > DateTime.Now);
-
-            if (resetRequest == null)
+            catch (Exception ex)
             {
-                ViewBag.ErrorMessage = "無效或過期的要求";
+                Console.WriteLine("其他錯誤: " + ex.Message);
                 return View("Error");
             }
-
-            // 根據 Email 查找用戶
-            var user = _db.Users
-                .FirstOrDefault(u => u.Email == resetRequest.Email);
-
-            if (user == null)
-            {
-                ViewBag.ErrorMessage = "無效的帳號";
-                return View("Error");
-            }
-
-            // 更新用戶的密碼
-            user.Password = ComputeSha256Hash(model.NewPassword);
-            //user.changeDate = DateTime.Now;
-
-            // 更新 PasswordResetRequest 表中的 UserAccount 和 ChangeDate
-            resetRequest.UserAccount = user.UserName;
-            resetRequest.changeDate = DateTime.Now;
-
-            // 刪除重置請求
-            _db.PasswordResetRequests.Remove(resetRequest);
 
             try
             {
@@ -620,6 +685,8 @@ namespace TISS_Web.Controllers
 
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var relatedHashtags = new List<string>
             {
                 "新聞發佈",
@@ -637,8 +704,11 @@ namespace TISS_Web.Controllers
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
                 .ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -663,10 +733,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.ContentType == "新聞發佈" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -690,10 +765,16 @@ namespace TISS_Web.Controllers
         public ActionResult institute(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -717,10 +798,16 @@ namespace TISS_Web.Controllers
         public ActionResult recruit(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.ContentType == "徵才招募" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -744,6 +831,8 @@ namespace TISS_Web.Controllers
         public ActionResult researchProject()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+
+
             int newsItemId = 1;
             var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == newsItemId);
             if (item != null)
@@ -779,6 +868,8 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult video(int page = 1, int pageSize = 5)
         {
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var relatedHashtags = new List<string>
             {
                 "人物專訪",
@@ -790,8 +881,11 @@ namespace TISS_Web.Controllers
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
                 .ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -816,10 +910,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "中心成果" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -844,10 +943,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "影音專區" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -872,10 +976,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技論壇" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1169,6 +1278,8 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var relatedHashtags = new List<string>
             {
                 "運動醫學",
@@ -1184,8 +1295,11 @@ namespace TISS_Web.Controllers
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
                 .ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1210,10 +1324,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科學" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1238,10 +1357,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1266,10 +1390,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動醫學" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1292,26 +1421,38 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsPhysiology(int page = 1, int pageSize = 5)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動生理" && a.IsEnabled).ToList();
-
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent.Where(a => a.Hashtags == "運動生理" && a.IsEnabled).ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1321,10 +1462,16 @@ namespace TISS_Web.Controllers
         public ActionResult sportsPsychology(int page = 1, int pageSize = 5)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動心理" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1349,10 +1496,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "體能訓練" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1377,10 +1529,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ArticleContent.Where(a => a.Hashtags == "運動營養" && a.IsEnabled).ToList();
 
+            //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -1441,10 +1598,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            var list = _db.RegulationDocument.ToList();
+            page = Math.Max(1, page); //確保頁碼至少為 1
 
+            var list = _db.RegulationDocument.ToList(); //獲取資料列表
+
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
             {
@@ -1470,10 +1632,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.RegulationDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
             {
@@ -1499,10 +1666,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.ProcedureDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new ProcedureDocumentModel
             {
@@ -1528,10 +1700,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.PlanDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PlanDocumentModel
             {
@@ -1557,10 +1734,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.BudgetDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new BudgetDocumentModel
             {
@@ -1586,10 +1768,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.DownloadDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DownloadDocumentModel
             {
@@ -1615,10 +1802,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.PurchaseDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PurchaseDocumentModel
             {
@@ -1644,10 +1836,15 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
             var list = _db.OtherDocument.ToList();
 
+            //計算總數和總頁數
             var totalDocuments = list.Count();
             var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
             var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new OtherDocumentModel
             {
