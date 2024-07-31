@@ -16,15 +16,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="">
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="">
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="中心公告封面圖片">
+                        @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="">*@
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle">
                                     Announcements
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="">中心公告
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="中心公告">中心公告
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                                                 @if (article.ImageContent != null)
                                                                 {
                                                                     string base64Image = Convert.ToBase64String(article.ImageContent);
-                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask">閱讀更多</div>

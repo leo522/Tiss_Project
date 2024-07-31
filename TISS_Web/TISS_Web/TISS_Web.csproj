@@ -2735,6 +2735,7 @@
     <Content Include="tiny\js\tinymce\themes\silver\theme.min.js" />
     <Content Include="tiny\js\tinymce\tinymce.min.js" />
     <Content Include="tiny\tinymce.min.js" />
+    <Content Include="Views\Tiss\purchase.cshtml" />
     <Content Include="zh-TW\sdk.js" />
     <Content Include="en_US\sdk.jshash=da7322dc85a354a2a48a528f6a49c748" />
     <EntityDeploy Include="Models\TissModel.edmx">
@@ -2935,7 +2936,6 @@
     <Content Include="Views\Tiss\download.cshtml" />
     <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
-    <Content Include="Views\Tiss\purchase.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
     <Content Include="Views\Tiss\other.cshtml" />
     <Content Include="Views\Tiss\Login.cshtml" />

@@ -5,37 +5,43 @@
 @*@{
         ViewBag.Title = "Pending Registrations";
     }*@
-
-<div class="container">
-    <h2>待審核的註冊用戶</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>用戶名</th>
-                <th>電子郵件</th>
-                <th>註冊日期</th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in Model)
-            {
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="container">
+        <h2>待審核的註冊用戶</h2>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@user.UserName</td>
-                    <td>@user.Email</td>
-                    <td>@user.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                    <td>
-                        <form action="@Url.Action("ApproveUser", "Tiss")" method="post" style="display:inline;">
-                            <input type="hidden" name="userName" value="@user.UserName" />
-                            <button type="submit" class="btn btn-success">批准</button>
-                        </form>
-                        <form action="@Url.Action("RejectUser", "Tiss")" method="post" style="display:inline;">
-                            <input type="hidden" name="userName" value="@user.UserName" />
-                            <button type="submit" class="btn btn-danger">拒絕</button>
-                        </form>
-                    </td>
+                    <th>用戶名</th>
+                    <th>電子郵件</th>
+                    <th>註冊日期</th>
+                    <th>操作</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>
+                            <form action="@Url.Action("ApproveUser", "Tiss")" method="post" style="display:inline;">
+                                <input type="hidden" name="userName" value="@user.UserName" />
+                                <button type="submit" class="btn btn-success">批准</button>
+                            </form>
+                            <form action="@Url.Action("RejectUser", "Tiss")" method="post" style="display:inline;">
+                                <input type="hidden" name="userName" value="@user.UserName" />
+                                <button type="submit" class="btn btn-danger">拒絕</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

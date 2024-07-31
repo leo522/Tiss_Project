@@ -1,28 +1,34 @@
 ﻿@model IEnumerable<TISS_Web.Models.MessageBoard>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <div class="comments-section">
+        <h3>留言區</h3>
+        @foreach (var Msg in Model)
+        {
+            <div class="comment">
+                <p><strong>@Msg.UserName</strong> 說：</p>
+                <p>@Msg.CommentText</p>
+                <p class="text-muted">@Msg.CommentDate</p>
+            </div>
+        }
 
-<div class="comments-section">
-    <h3>留言區</h3>
-    @foreach (var Msg in Model)
-    {
-        <div class="comment">
-            <p><strong>@Msg.UserName</strong> 說：</p>
-            <p>@Msg.CommentText</p>
-            <p class="text-muted">@Msg.CommentDate</p>
-        </div>
-    }
-
-    <form asp-action="PostComment" method="post">
-        @Html.AntiForgeryToken()
-        <input name="Id" value="@ViewBag.ArticleId" />
-        <input name="articleId" value="@ViewBag.ArticleId" />
-        <div class="form-group">
-            <label for="userName">名稱:</label>
-            <input type="text" class="form-control" name="userName" required />
-        </div>
-        <div class="form-group">
-            <label for="commentText">留言:</label>
-            <textarea class="form-control" name="commentText" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">提交留言</button>
-    </form>
-</div>
+        <form asp-action="PostComment" method="post" aria-labelledby="comment-form">
+            @Html.AntiForgeryToken()
+            <input name="Id" value="@ViewBag.ArticleId" />
+            <input name="articleId" value="@ViewBag.ArticleId" />
+            <div class="form-group">
+                <label for="userName">名稱:</label>
+                <input type="text" class="form-control" name="userName" aria-required="true" required />
+            </div>
+            <div class="form-group">
+                <label for="commentText">留言:</label>
+                <textarea class="form-control" name="commentText" aria-required="true" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">提交留言</button>
+        </form>
+    </div>
+</body>
+</html>
