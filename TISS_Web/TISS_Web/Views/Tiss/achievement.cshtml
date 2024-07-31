@@ -17,15 +17,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/video_banner.1e11babb.jpg" alt="">
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_video.c7a8c59f.jpg" alt="">
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/video_banner.1e11babb.jpg" alt="影音專區封面圖片">
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_video.c7a8c59f.jpg" alt="影音專區封面圖片">
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle">
                                     Video
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="">影音專區
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="影音專區文字">影音專區
                                 </div>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                                                                 @if (article.ImageContent != null)
                                                                 {
                                                                     string base64Image = Convert.ToBase64String(article.ImageContent);
-                                                                    <img src="data:image/png;base64,@base64Image" alt="Image" />
+                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask">閱讀更多</div>
@@ -213,62 +213,6 @@ if (isLoggedIn) {
                 }
             });
         });
-
-        ////載入已儲存的內容
-        //function loadContent() {
-        //    $.ajax({
-        //        url: 'aboutGetContent',
-        //        method: 'GET',
-        //        success: function (response) {
-        //            if (response.success) {
-        //                document.getElementById('intro').innerText = response.textContent;
-        //                document.getElementById('mainImage').src = response.imagePath;
-        //            } else {
-        //                console.error('載入失敗: ' + response.error);
-        //            }
-        //        },
-        //        error: function (err) {
-        //            console.error('載入失敗', err);
-        //        }
-        //    });
-        //}
-
-        ////圖片及文字存檔功能
-        //function saveContent() {
-        //    /*var textContent = document.getElementById('intro').innerText;*/
-        //    var textContent = document.getElementById('intro').innerHTML;
-        //    var imageSrc = document.getElementById('mainImage').src;
-
-        //    $.ajax({
-        //        url: 'aboutSaveContent',
-        //        method: 'POST',
-        //        data: {
-        //            TextContent: textContent,
-        //            ImageSrc: imageSrc
-        //        },
-        //        success: function (response) {
-        //            document.getElementById('mainImage').src = response.imagePath;
-        //            debugger;
-        //            alert('內容已儲存');
-        //        },
-        //        error: function (err) {
-        //            console.error('儲存失敗', err);
-        //        }
-        //    });
-        //}
-
-        ////導覽列
-        //function toggleDropdown(dropdownId) {
-        //    var dropdownToggle = document.getElementById(dropdownId);
-        //    var dropdownMenu = dropdownToggle.nextElementSibling;
-
-        //    if (dropdownMenu.classList.contains('show')) {
-        //        dropdownMenu.classList.remove('show');
-        //    } else {
-        //        dropdownMenu.classList.add('show');
-        //    }
-        //}
-        ////圖片及文字存檔功能
     </script>
 </body>
 </html>

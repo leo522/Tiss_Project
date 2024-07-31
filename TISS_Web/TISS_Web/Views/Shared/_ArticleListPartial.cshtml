@@ -10,7 +10,7 @@
                         @if (article.ImageContent != null)
                         {
                             string base64Image = Convert.ToBase64String(article.ImageContent);
-                            <img src="data:image/png;base64,@base64Image" alt="Image" />
+                            <img src="data:image/png;base64,@base64Image" alt="圖片" />
                         }
                         <div class="tag">@article.ContentType</div>
                         <div class="Mask">閱讀更多</div>

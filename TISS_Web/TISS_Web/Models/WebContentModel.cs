@@ -324,16 +324,23 @@ namespace TISS_Web.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<MenuItem> MenuItems { get; set; }
+        public virtual ICollection<MenuItemModel> MenuItems { get; set; }
     }
 
-    public class MenuItem
+    public class MenuModel
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public List<MenuItemModel> MenuItems { get; set; }
+    }
+
+    public class MenuItemModel
     {
         public int Id { get; set; }
         public int MenuId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public Menu Menu { get; set; }
+        public MenuModel Menu { get; set; }
     }
 
     //忘記密碼
