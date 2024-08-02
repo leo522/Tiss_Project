@@ -386,4 +386,11 @@ namespace TISS_Web.Models
         // 導航屬性，用於關聯到文章
         public ArticleContentModel Article { get; set; }
     }
+
+    public class LanguageModel
+    {
+        public string Lang_Key { get; set; }
+        public string Lang_zhTW { get; set; }
+        public string Lang_enUS { get; set; }
+    }
 }

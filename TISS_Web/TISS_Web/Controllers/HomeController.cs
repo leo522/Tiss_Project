@@ -66,20 +66,19 @@ namespace TISS_Web.Controllers
 
         public ActionResult Navbar() 
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
+            return View();
+        }
 
-            var dtos = _db.ArticleContent
-                .Where(a => a.IsPublished.HasValue && a.IsPublished.Value)
-                .OrderByDescending(a => a.PublishedDate)
-                .Select(a => new ArticleContentModel
-                {
-                    Title = a.Title,
-                    ImageContent = a.ImageContent,
-                    ContentType = a.ContentType,
-                    Hashtags = a.Hashtags,
-                    EncryptedUrl = a.EncryptedUrl,
-                }).Take(4).ToList();
-            return View(dtos);
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Navbar(string MyLanguage) 
+        {
+            HttpCookie objMyLanguage = new HttpCookie("MyLanguage");
+
+            objMyLanguage.Value = MyLanguage.Trim();
+            objMyLanguage.Expires.AddMinutes(30);
+            Response.Cookies.Add(objMyLanguage);
+
+            return Redirect(Url.Action("Navbar", "Home"));
         }
 
         public ActionResult GetArticles(int contentTypeId)

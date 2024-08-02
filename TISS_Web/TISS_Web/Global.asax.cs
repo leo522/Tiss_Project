@@ -22,16 +22,23 @@ namespace TISS_Web
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {
-            // 預設為繁體中文
-            string culture = "zh-TW";
+            HttpCookie objMyLanguage = Request.Cookies["MyLanguage"];
 
-            if (Request.Cookies["lang"] != null)
+            if (objMyLanguage != null) 
             {
-                culture = Request.Cookies["lang"].Value;
+                System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(objMyLanguage.Value);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(objMyLanguage.Value);
             }
+            //// 預設為繁體中文
+            //string culture = "zh-TW";
 
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
+            //if (Request.Cookies["lang"] != null)
+            //{
+            //    culture = Request.Cookies["lang"].Value;
+            //}
+
+            //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
         }
     }
 }

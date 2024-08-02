@@ -7,60 +7,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <div>
-        <button class="category-button" data-content-type-id="1">所有類別</button>
-        <button class="category-button" data-content-type-id="2">新聞發佈</button>
-        <button class="category-button" data-content-type-id="3">中心訊息</button>
-        <button class="category-button" data-content-type-id="4">徵才招募</button>
-    </div>
+    <p>@(Resources.Resource.ABOUT_TISS)</p>
 
-    <div class="row" id="articleContainer">
-        @foreach (var article in Model)
-        {
-            <div class="col-md-6 mb-4">
-                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
-                    <div class="NewsItemBox">
-                        <div class="NewsItemImg">
-                            @if (article.ImageContent != null)
-                            {
-                                string base64Image = Convert.ToBase64String(article.ImageContent);
-                                <img src="data:image/png;base64,@base64Image" alt="圖片" />
-                            }
-                            <div class="tag">@article.ContentType</div>
-                            <div class="Mask">閱讀更多</div>
-                        </div>
-                        <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
-                        <div class="NewsItemContent">
-                            <span class="el-text is-line-clamp">@article.BodyContent</span>
-                        </div>
-                        <div class="el-tag el-tag--plain is-round">
-                            <div class="el-tag__content">@article.Hashtags</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+    <p>
+        @using(Html.BeginForm("Navbar","Home"))
+        { 
+            @(Html.DropDownList("MyLanguage",
+            new List<SelectListItem>()
+            { 
+                new SelectListItem(){Text = "中文", Value ="zh-TW"},
+                new SelectListItem(){Text = "英文", Value ="en-US"},
+                new SelectListItem(){Text = "日文", Value ="ja-JP"}
+            })
+            )
+            <input type="submit" value="變更語系"/>
         }
-    </div>
-
-    <script>
-        $(document).ready(function() {
-            $('.category-button').click(function() {
-                var contentTypeId = $(this).data('content-type-id');
-
-                $.ajax({
-                    url: '@Url.Action("GetArticles", "Home")', // 替換為你的控制器名稱
-                    type: 'GET',
-                    data: { contentTypeId: contentTypeId },
-                    success: function(data) {
-                        $('#articleContainer').empty(); // 清空現有內容
-                        $('#articleContainer').append(data); // 將返回的部分視圖插入
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("AJAX Error: " + status + error);
-                    }
-                });
-            });
-        });
-    </script>
+    </p>
 </body>
 </html>

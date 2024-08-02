@@ -141,9 +141,9 @@
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="el-tag el-tag--plain is-round">
+                                                            <div class="el-tag__content">@article.Hashtags</div>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -190,20 +190,16 @@
     </div>
     <script>
         $(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-            function toggleDropdown(dropdownId) {
-                var dropdownToggle = document.getElementById(dropdownId);
-                var dropdownMenu = dropdownToggle.nextElementSibling;
-
-                if (dropdownMenu.classList.contains('show')) {
-                    dropdownMenu.classList.remove('show');
-                } else {
-                    dropdownMenu.classList.add('show');
-                }
-            }
-        });
-
-        //顯示當前選擇的子目錄
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
+        //顯示當前選擇的子項目
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');

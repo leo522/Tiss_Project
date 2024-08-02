@@ -79,14 +79,14 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/recruit">徵才招募</a>
                                     </li>
-                                    @*@{
+                                    @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
                                             <li span="3">
                                                 <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
                                             </li>
                                         }
-                                    }*@
+                                    }
                                 </ul>
                             </div>
                         </aside>
@@ -149,9 +149,9 @@
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="el-tag el-tag--plain is-round">
+                                                            <div class="el-tag__content">@article.Hashtags</div>
                                                         </div>
                                                     </a>
                                                 </div>
