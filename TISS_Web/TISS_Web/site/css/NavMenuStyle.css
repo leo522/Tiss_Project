@@ -1,7 +1,7 @@
 ﻿.dropdown:hover .dropdown-menu {
     display: block;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /*grid-template-columns: repeat(2, 1fr);*/
 }
 
 .navbar-nav.d-lg-flex {

@@ -1,0 +1,47 @@
+﻿.narrow-container {
+    max-width: 800px; /* 根據需要調整 */
+    margin: 0 auto; /* 讓容器居中 */
+    position: relative; /* 為了讓 .side-info 參考這個容器進行定位 */
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 讓項目對齊到頂部 */
+    position: relative; /* 讓內容容器參考這個容器進行定位 */
+}
+
+.article-content {
+    flex: 1;
+    max-width: 600px; /* 根據需要調整 */
+}
+
+.side-info {
+    position: absolute;
+    right: 0;
+    top: 100px; /* 根據需要調整 */
+    width: 200px; /* 根據需要調整 */
+}
+
+    .side-info p, .side-info .ShareToolBar {
+        margin-bottom: 1rem;
+    }
+
+.comments-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    display: flex;
+}
+
+.article-content {
+    flex: 3;
+}
+
+.btn-light {
+    background-color: transparent;
+    border: none;
+    color: #1352e7; /* 更改為所需顏色 */
+}

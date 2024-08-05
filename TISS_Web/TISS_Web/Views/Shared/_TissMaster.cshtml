@@ -28,6 +28,7 @@
     @*<script src="~/tiny/js/tinymce/tinymce.min.js"></script>*@
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
+    <link href="~/site/css/BackTop.css" rel="stylesheet" />
     <link rel="icon" href="~/Img/favicon.svg" />
     <title>國家運動科學中心</title>
     <script src="~/en_US/sdk.js" async="" crossorigin="anonymous"></script>
@@ -394,10 +395,10 @@
                                         </a>
                                     </li>
                                     @*<li>
-                    <a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">
-                        <img src="~/Img/favicon.svg" alt=""/>採購作業實施規章
-                    </a>
-                </li>*@
+                                            <a data-v-71bab962="" class="dropdown-item" href="/Tiss/purchase">
+                                                <img src="~/Img/favicon.svg" alt=""/>採購作業實施規章
+                                            </a>
+                                        </li>*@
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality">
                                             <img src="~/Img/favicon.svg" alt="" />性別平等專區
@@ -472,10 +473,7 @@
                     <ul class="SocialList d-none d-lg-flex">
                         <li>
                             <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147" title="Facebook">
-                                <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                    </path>
-                                </svg>
+                                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示" style="color: #1352e7;" />
                                 <span class="sr-only">Facebook</span>
                             </a>
                         </li>
@@ -589,28 +587,36 @@
                             </ul>
                         </div>
                     </div>
-                    <ul class="SocialList d-block d-lg-none">
-                        <li>
-                            <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147" title="Facebook">
-                                <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" aria-label="Facebook" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                    </path>
-                                </svg>
-                                <span class="sr-only">Facebook</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="d-flex w-100">
-                        <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+                    @*<ul class="SocialList d-block d-lg-none">
+                            <li>
+                                <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147" title="Facebook">
+                                    <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" aria-label="Facebook" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                        <path class="" fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                        </path>
+                                    </svg>
+                                    <span class="sr-only">Facebook</span>
+                                </a>
+                            </li>
+                        </ul>*@
+                    <div class="copyright">
+                        <div class="container">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>
                     </div>
+                    @*<div class="d-flex w-100">
+                            <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+                        </div>*@
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <div class="container">Copyright © 國家運動科學中心 All Rights Reserved.</div>
+        @*<div class="copyright">
+                <div class="container">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>
+            </div>*@
+        <div class="d-flex w-100">
+            <span>本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
         </div>
     </footer>
-
+    <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
+        <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;"></i>
+    </div>
     <script>
         //網頁字體大小控制function
         document.querySelectorAll('.FontSizeBtn').forEach(button => {
@@ -637,6 +643,27 @@
             // 為當前按鈕添加 active 樣式
             element.classList.add('active');
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var backTopButton = document.querySelector('.el-backtop');
+
+            // 顯示或隱藏按鈕
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 200) { // 滾動超過200px時顯示按鈕
+                    backTopButton.classList.add('show');
+                } else {
+                    backTopButton.classList.remove('show');
+                }
+            });
+
+            // 點擊按鈕時平滑滾動到頁面頂部
+            backTopButton.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
 </html>

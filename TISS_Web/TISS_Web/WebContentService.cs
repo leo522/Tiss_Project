@@ -29,12 +29,12 @@ namespace TISS_Web
                     string mimeType = ba64[0].Split(':')[1].Split(';')[0];
                     string dto = ba64[1];
 
-                    if (mimeType == "image/jpeg" || mimeType == "image/jpg" || mimeType == "image/png")
+                    if (mimeType == "image/jpeg" || mimeType == "image/jpg" || mimeType == "image/png" || mimeType == "image/gif")
                     {
                         imageBytes = Convert.FromBase64String(dto);
                         if (imageBytes.Length > 5 * 1024 * 1024) return new JsonResult { Data = new { success = false, error = "圖片大小不能超過5MB" } };
                     }
-                    else return new JsonResult { Data = new { success = false, error = "只允許上傳jpg、jpeg或png格式的圖片" } };
+                    else return new JsonResult { Data = new { success = false, error = "只允許上傳jpg、jpeg或png或gif格式的圖片" } };
                 }
             }
 

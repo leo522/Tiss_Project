@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Data.Entity.Validation;
 using Google.Apis.YouTube.v3.Data;
+using Newtonsoft.Json;
 
 
 namespace TISS_Web.Controllers
@@ -1274,7 +1275,7 @@ namespace TISS_Web.Controllers
         /// 科普專欄
         /// </summary>
         /// <returns></returns>
-        public ActionResult research(int page = 1, int pageSize = 5)
+        public ActionResult research(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1320,7 +1321,7 @@ namespace TISS_Web.Controllers
         /// 運動科學
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportScience(int page = 1, int pageSize = 5)
+        public ActionResult sportScience(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1353,7 +1354,7 @@ namespace TISS_Web.Controllers
         /// 運動科技
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportTech(int page = 1, int pageSize = 5)
+        public ActionResult sportTech(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1386,7 +1387,7 @@ namespace TISS_Web.Controllers
         /// 運動醫學
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportMedicine(int page = 1, int pageSize = 5)
+        public ActionResult sportMedicine(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1419,7 +1420,7 @@ namespace TISS_Web.Controllers
         /// 運動生理
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportsPhysiology(int page = 1, int pageSize = 5)
+        public ActionResult sportsPhysiology(int page = 1, int pageSize = 9)
         {
             try
             {
@@ -1459,7 +1460,7 @@ namespace TISS_Web.Controllers
         /// 運動心理
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportsPsychology(int page = 1, int pageSize = 5)
+        public ActionResult sportsPsychology(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1492,7 +1493,7 @@ namespace TISS_Web.Controllers
         /// 體能訓練
         /// </summary>
         /// <returns></returns>
-        public ActionResult physicalTraining(int page = 1, int pageSize = 5)
+        public ActionResult physicalTraining(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -1525,7 +1526,7 @@ namespace TISS_Web.Controllers
         /// 運動營養
         /// </summary>
         /// <returns></returns>
-        public ActionResult sportsNutrition(int page = 1, int pageSize = 5)
+        public ActionResult sportsNutrition(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -2180,6 +2181,11 @@ namespace TISS_Web.Controllers
 
                 ViewBag.ArticleId = article.Id;
 
+                //顯示留言數量
+                ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
+                ViewBag.CommentCount = ViewBag.Comments.Count;
+
+                //設定分頁
                 ViewBag.PreviousArticle = previousArticle;
                 ViewBag.NextArticle = nextArticle;
 
@@ -2365,6 +2371,53 @@ namespace TISS_Web.Controllers
             {
                 throw ex;
             }
+        }
+        #endregion
+
+        #region 留言認證
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostComment(int articleId, string userName, string commentText, string recaptchaResponse)
+        {
+            // 驗證 reCAPTCHA
+            var recaptchaSecret = "6Leybh4qAAAAALxsqfZzSfdosZ4Xp0qnCgcG1CWa";
+            var client = new WebClient();
+            var response = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={recaptchaSecret}&response={recaptchaResponse}");
+            dynamic json = JsonConvert.DeserializeObject(response);
+            bool isCaptchaValid = json.success;
+
+            if (!isCaptchaValid)
+            {
+                // reCAPTCHA 驗證失敗
+                return RedirectToAction("Error");
+            }
+
+            // 檢查留言頻率
+            var lastComment = _db.MessageBoard
+                .Where(c => c.UserName == userName)
+                .OrderByDescending(c => c.CommentDate)
+                .FirstOrDefault();
+
+            if (lastComment != null && (DateTime.Now - lastComment.CommentDate).TotalMinutes < 1)
+            {
+                // 防止頻繁留言
+                return RedirectToAction("Error");
+            }
+
+            // 處理留言
+            var comment = new MessageBoard
+            {
+                ArticleId = articleId,
+                UserName = userName,
+                CommentText = commentText,
+                CommentDate = DateTime.Now,
+                //IsApproved = false // 默認為未批准
+            };
+
+            _db.MessageBoard.Add(comment);
+            _db.SaveChanges();
+
+            return RedirectToAction("ViewArticle", new { encryptedUrl = articleId });
         }
         #endregion
     }
