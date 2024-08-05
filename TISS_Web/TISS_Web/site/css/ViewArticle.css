@@ -45,3 +45,15 @@
     border: none;
     color: #1352e7; /* 更改為所需顏色 */
 }
+
+.infoList {
+    position: relative;
+    max-width: 1016px;
+}
+
+.content .Title {
+    text-align: right;
+}
+.content .Menu {
+    float: right;
+}
