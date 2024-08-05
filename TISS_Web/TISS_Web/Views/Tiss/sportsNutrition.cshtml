@@ -6,6 +6,7 @@
 <html>
 <head>
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -200,12 +201,12 @@ if (isLoggedIn) {
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
+
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
                 }
             });
         });
-//登出按鈕顯示功能
     </script>
 </body>
 </html>

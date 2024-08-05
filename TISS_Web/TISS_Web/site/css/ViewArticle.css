@@ -66,11 +66,13 @@
     color: #1352e7; /* 更改為所需顏色 */
 }
 
+/*文章內文版面*/
 .infoList {
     position: relative;
     max-width: 1016px;
 }
 
+/*左側主題*/
 .content .Title {
     text-align: right;
 }

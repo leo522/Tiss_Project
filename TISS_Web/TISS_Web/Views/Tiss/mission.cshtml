@@ -4,14 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .anchor {
-            display: block;
-            position: relative;
-            top: -160px; /* 根據實際情況調整 */
-            visibility: hidden;
-        }
-    </style>
+    @*<style>
+            .anchor {
+                display: block;
+                position: relative;
+                top: -160px; /* 根據實際情況調整 */
+                visibility: hidden;
+            }
+        </style>*@
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -405,7 +406,19 @@ if (isLoggedIn) {
             }
         });
     }
-    //圖片及文字存檔功能
+        //圖片及文字存檔功能
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>

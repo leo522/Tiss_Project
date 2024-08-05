@@ -6,6 +6,7 @@
 <html>
 <head>
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -197,12 +198,12 @@ if (isLoggedIn) {
         loadContent(); //加載已儲存的內容
 });
 
-        //顯示當前選擇的子項目
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
+
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
                 }

@@ -4,14 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
+    @*<style>
         .anchor {
             display: block;
             position: relative;
             top: -500px; /* 根據實際情況調整 */
             visibility: hidden;
         }
-    </style>
+    </style>*@
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -298,6 +299,18 @@
                 }
             });
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>

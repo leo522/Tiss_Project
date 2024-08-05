@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -81,8 +82,11 @@
                                         <a class="MenuLink" href="/Tiss/download">下載專區</a>
                                     </li>
                                     @*<li span="3">
-                                        <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
-                                    </li>*@
+                                            <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
+                                        </li>*@
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/GenderEquality">性別平等專區</a>
+                                    </li>
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/other">其他</a>
                                     </li>
@@ -138,12 +142,14 @@
                                 </span>
                                 <span id="Purchase" class="anchor">
                                 </span>
+                                <span id="GenderEquality" class="anchor">
+                                </span>
                                 <span id="Other" class="anchor">
                                 </span>
                                 <div class="content">
                                     <div class="subTitle">
-                                        法規
-                                        <span class="primary">Regulation</span>
+                                        性別平等專區
+                                        <span class="primary">GenderEquality</span>
                                     </div>
                                     <div class="infoList">
                                         <div class="d-none d-lg-block" style="height: 550px;">
@@ -392,18 +398,29 @@
         </div>
     </div>
     <script>
-    $(documnet).reday(function () {
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        $(documnet).reday(function () {
+            function toggleDropdown(dropdownId) {
+                var dropdownToggle = document.getElementById(dropdownId);
+                var dropdownMenu = dropdownToggle.nextElementSibling;
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                } else {
+                    dropdownMenu.classList.add('show');
+                }
             }
-        }
-    });
+            document.addEventListener('DOMContentLoaded', function () {
+                var currentUrl = window.location.pathname;
+                var menuLinks = document.querySelectorAll('.MenuLink');
+
+                menuLinks.forEach(function (link) {
+
+                    if (link.getAttribute('href') === currentUrl) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
