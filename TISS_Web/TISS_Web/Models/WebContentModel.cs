@@ -393,4 +393,11 @@ namespace TISS_Web.Models
         public string Lang_zhTW { get; set; }
         public string Lang_enUS { get; set; }
     }
+
+
+    public class ArticleReportModel //生成Excel報表
+    {
+        public string Title { get; set; }
+        public int ClickCount { get; set; }
+    }
 }

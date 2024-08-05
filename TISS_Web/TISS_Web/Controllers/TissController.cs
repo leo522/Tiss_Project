@@ -26,6 +26,7 @@ using System.Net.Mail;
 using System.Data.Entity.Validation;
 using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
+using OfficeOpenXml;
 
 
 namespace TISS_Web.Controllers
@@ -2418,6 +2419,16 @@ namespace TISS_Web.Controllers
             _db.SaveChanges();
 
             return RedirectToAction("ViewArticle", new { encryptedUrl = articleId });
+        }
+        #endregion
+
+        #region 生成文章點閱率報表
+        public ActionResult GenerateArticleClickReport()
+        {
+            var reportService = new ReportService();
+            reportService.GenerateReport();
+
+            return Content("報表產生完成");
         }
         #endregion
     }
