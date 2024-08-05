@@ -126,12 +126,15 @@
                                     <p>發佈日期: @Model.PublishedDate</p>
                                 </div>
                                 <div class="side-info">
-                                    <p>點閱次數: @Model.ClickCount</p>
+                                    @*<p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p>*@
                                     <div class="ShareToolBar">
-                                        <div class="ShareToolBarTitle">分享至:</div>
+                                        <div class="NewsParams">
+                                            <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p> @*點擊率*@
+                                        </div>
+                                        <div class="ShareToolBarTitle">Share On</div>
                                         <ul class="SocialList">
                                             <li>
-                                                <button type="button" class="el-button is-circle" aria-label="分享至 Facebook">
+                                                <button type="button" class="el-button is-circle" aria-label="分享至 Facebook" onclick="shareFacebook()">
                                                     <span>
                                                         <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                                             <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
@@ -141,14 +144,14 @@
                                                 </button>
                                             </li>
                                             <li>
-                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
+                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 LINE" onclick="shareLine()">
                                                     <span class="">
                                                         <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
                                                     </span>
                                                 </button>
                                             </li>
                                             <li>
-                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
+                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 Twitter" onclick="shareTwitter()">
                                                     <span class="">
                                                         <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                             <path class="" fill="currentColor" d="M512 97.2c-19 8.3-39.4 14-60.7 16.5c21.8-13.1 38.4-33.8 46.2-58.5c-20.4 12.1-43 20.9-67.1 25.6c-19.3-20.6-46.6-33.4-76.8-33.4c-58.1 0-105.1 47.1-105.1 105c0 8.2 .9 16.2 2.7 23.8C165.1 180.3 87.7 134.5 36 66.6c-9 15.5-14.1 33.5-14.1 52.7c0 36.3 18.5 68.4 46.6 87.2c-17.2-.5-33.4-5.3-47.6-13.1v1.3c0 50.7 36.1 93 83.8 102.6c-8.8 2.4-18.1 3.6-27.7 3.6c-6.8 0-13.4-.7-19.8-1.9c13.4 41.9 52.3 72.4 98.4 73.3c-36 28.2-81.3 45-130.6 45c-8.5 0-16.8-.5-25-1.5c46.5 29.8 101.6 47.1 160.8 47.1c193 0 298.4-160 298.4-298.4l-.3-13.6C480 136.7 497.7 118.3 512 97.2z">
@@ -346,15 +349,25 @@ if (isLoggedIn) {
                     event.preventDefault(); // 阻止表單提交
                 }
             });
-
-            $('#facebook-share').click(function (e) {
-                e.preventDefault();
-                FB.ui({
-                    method: 'share',
-                    href: window.location.href,
-                }, function (response) { });
-            });
         });
+
+        function shareFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            window.open(fbShareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareLine() {
+            const url = encodeURIComponent(window.location.href);
+            const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${url}`;
+            window.open(lineShareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}`;
+            window.open(twitterShareUrl, '_blank', 'width=600,height=400');
+        }
     </script>
 </body>
 </html>
