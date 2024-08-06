@@ -12,17 +12,32 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="App_GlobalResources/Language.en-US.resx">
       <publishTime>07/20/2024 07:43:33</publishTime>
     </File>
+    <File Include="App_GlobalResources/Language.resx">
+      <publishTime>08/02/2024 11:57:43</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
+    <File Include="bin/en-US/TISS_Web.resources.dll">
+      <publishTime>08/05/2024 16:29:00</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
       <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>07/24/2024 22:13:24</publishTime>
+    </File>
+    <File Include="bin/EPPlus.Interfaces.dll">
+      <publishTime>11/21/2022 20:51:04</publishTime>
+    </File>
+    <File Include="bin/EPPlus.System.Drawing.dll">
+      <publishTime>11/21/2022 20:51:06</publishTime>
     </File>
     <File Include="bin/Google.Apis.Auth.dll">
       <publishTime>04/15/2024 16:03:26</publishTime>
@@ -50,6 +65,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>09/05/2018 16:10:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IO.RecyclableMemoryStream.dll">
+      <publishTime>12/12/2023 05:53:28</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
       <publishTime>04/11/2022 19:09:46</publishTime>
@@ -210,11 +228,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
+    <File Include="bin/System.Buffers.dll">
+      <publishTime>02/19/2020 18:05:18</publishTime>
+    </File>
     <File Include="bin/System.CodeDom.dll">
       <publishTime>10/19/2022 00:33:42</publishTime>
     </File>
+    <File Include="bin/System.ComponentModel.Annotations.dll">
+      <publishTime>05/15/2018 21:29:36</publishTime>
+    </File>
+    <File Include="bin/System.Memory.dll">
+      <publishTime>05/08/2022 11:31:02</publishTime>
+    </File>
+    <File Include="bin/System.Numerics.Vectors.dll">
+      <publishTime>05/15/2018 21:29:44</publishTime>
+    </File>
     <File Include="bin/System.Runtime.CompilerServices.Unsafe.dll">
-      <publishTime>09/19/2018 03:38:10</publishTime>
+      <publishTime>02/19/2020 18:05:16</publishTime>
     </File>
     <File Include="bin/System.Threading.Tasks.Extensions.dll">
       <publishTime>11/29/2018 23:39:20</publishTime>
@@ -241,10 +271,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>07/31/2024 14:34:15</publishTime>
+      <publishTime>08/05/2024 16:29:00</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>07/31/2024 14:34:15</publishTime>
+      <publishTime>08/05/2024 16:29:00</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -7207,7 +7237,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/18/2024 15:07:46</publishTime>
     </File>
     <File Include="site/css/app.5338f982.css">
-      <publishTime>07/18/2024 13:43:54</publishTime>
+      <publishTime>08/05/2024 09:57:01</publishTime>
+    </File>
+    <File Include="site/css/BackTop.css">
+      <publishTime>08/05/2024 10:00:35</publishTime>
     </File>
     <File Include="site/css/chunk-vendors.25d98017.css">
       <publishTime>07/05/2024 10:03:23</publishTime>
@@ -7216,16 +7249,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/30/2024 09:12:40</publishTime>
     </File>
     <File Include="site/css/IndexStyle.css">
-      <publishTime>07/05/2024 11:38:15</publishTime>
+      <publishTime>08/05/2024 15:58:29</publishTime>
     </File>
     <File Include="site/css/MenuLinkStyle.css">
-      <publishTime>07/17/2024 09:14:35</publishTime>
+      <publishTime>08/05/2024 13:50:22</publishTime>
     </File>
     <File Include="site/css/NavMenuStyle.css">
-      <publishTime>07/08/2024 15:55:11</publishTime>
+      <publishTime>08/05/2024 15:59:04</publishTime>
     </File>
     <File Include="site/css/SectionTitleStyle.css">
       <publishTime>07/09/2024 14:37:11</publishTime>
+    </File>
+    <File Include="site/css/ViewArticle.css">
+      <publishTime>08/05/2024 13:51:09</publishTime>
     </File>
     <File Include="site/css/ViewArticleBannerStyle.css">
       <publishTime>07/18/2024 13:56:00</publishTime>
@@ -8671,7 +8707,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/18/2024 15:07:39</publishTime>
     </File>
     <File Include="Views/Home/Navbar.cshtml">
-      <publishTime>07/30/2024 16:49:28</publishTime>
+      <publishTime>08/02/2024 10:36:04</publishTime>
     </File>
     <File Include="Views/Home/OnInit.cshtml">
       <publishTime>07/15/2024 13:20:01</publishTime>
@@ -8692,37 +8728,37 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/31/2024 11:01:53</publishTime>
     </File>
     <File Include="Views/Shared/_TissMaster.cshtml">
-      <publishTime>07/31/2024 12:19:47</publishTime>
+      <publishTime>08/05/2024 16:00:32</publishTime>
     </File>
     <File Include="Views/Tiss/about.cshtml">
-      <publishTime>07/30/2024 15:41:32</publishTime>
+      <publishTime>08/05/2024 14:10:41</publishTime>
     </File>
     <File Include="Views/Tiss/achievement.cshtml">
-      <publishTime>07/30/2024 16:49:56</publishTime>
+      <publishTime>08/05/2024 14:09:27</publishTime>
     </File>
     <File Include="Views/Tiss/activityRecord.cshtml">
-      <publishTime>07/30/2024 16:50:11</publishTime>
+      <publishTime>08/05/2024 14:10:01</publishTime>
     </File>
     <File Include="Views/Tiss/announcement.cshtml">
-      <publishTime>07/30/2024 16:54:42</publishTime>
+      <publishTime>08/05/2024 14:14:47</publishTime>
     </File>
     <File Include="Views/Tiss/ArticleCreate.cshtml">
       <publishTime>07/22/2024 17:15:16</publishTime>
     </File>
     <File Include="Views/Tiss/BOD.cshtml">
-      <publishTime>07/30/2024 16:33:47</publishTime>
+      <publishTime>08/05/2024 14:12:35</publishTime>
     </File>
     <File Include="Views/Tiss/budget.cshtml">
-      <publishTime>07/30/2024 16:39:46</publishTime>
+      <publishTime>08/05/2024 14:26:33</publishTime>
     </File>
     <File Include="Views/Tiss/CEO.cshtml">
-      <publishTime>07/30/2024 16:41:58</publishTime>
+      <publishTime>08/05/2024 14:12:04</publishTime>
     </File>
     <File Include="Views/Tiss/ChangePassword.cshtml">
       <publishTime>07/03/2024 16:09:20</publishTime>
     </File>
     <File Include="Views/Tiss/download.cshtml">
-      <publishTime>07/30/2024 16:43:10</publishTime>
+      <publishTime>08/05/2024 14:26:42</publishTime>
     </File>
     <File Include="Views/Tiss/editPage.cshtml">
       <publishTime>07/12/2024 16:03:43</publishTime>
@@ -8731,70 +8767,70 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/29/2024 08:32:35</publishTime>
     </File>
     <File Include="Views/Tiss/GenderEquality.cshtml">
-      <publishTime>07/31/2024 12:38:12</publishTime>
+      <publishTime>08/05/2024 14:25:08</publishTime>
     </File>
     <File Include="Views/Tiss/GovernmentWebsite.cshtml">
-      <publishTime>07/31/2024 10:51:42</publishTime>
+      <publishTime>08/05/2024 09:25:29</publishTime>
     </File>
     <File Include="Views/Tiss/Home.cshtml">
-      <publishTime>07/31/2024 09:25:25</publishTime>
+      <publishTime>08/05/2024 09:29:49</publishTime>
     </File>
     <File Include="Views/Tiss/institute.cshtml">
-      <publishTime>07/30/2024 16:49:15</publishTime>
+      <publishTime>08/05/2024 14:15:29</publishTime>
     </File>
     <File Include="Views/Tiss/Login.cshtml">
       <publishTime>07/23/2024 07:58:16</publishTime>
     </File>
     <File Include="Views/Tiss/mission.cshtml">
-      <publishTime>07/30/2024 16:57:01</publishTime>
+      <publishTime>08/05/2024 14:11:12</publishTime>
     </File>
     <File Include="Views/Tiss/news.cshtml">
-      <publishTime>07/30/2024 16:54:42</publishTime>
+      <publishTime>08/05/2024 14:12:35</publishTime>
     </File>
     <File Include="Views/Tiss/Objectives.cshtml">
-      <publishTime>07/30/2024 17:02:04</publishTime>
+      <publishTime>08/05/2024 14:13:10</publishTime>
     </File>
     <File Include="Views/Tiss/Organization.cshtml">
-      <publishTime>07/30/2024 17:03:12</publishTime>
+      <publishTime>08/05/2024 14:11:36</publishTime>
     </File>
     <File Include="Views/Tiss/other.cshtml">
-      <publishTime>07/30/2024 17:03:36</publishTime>
+      <publishTime>08/05/2024 14:27:01</publishTime>
     </File>
     <File Include="Views/Tiss/PendingRegistrations.cshtml">
       <publishTime>07/31/2024 11:03:37</publishTime>
     </File>
     <File Include="Views/Tiss/physicalTraining.cshtml">
-      <publishTime>07/30/2024 17:04:22</publishTime>
+      <publishTime>08/05/2024 13:59:06</publishTime>
     </File>
     <File Include="Views/Tiss/plan.cshtml">
-      <publishTime>07/30/2024 17:05:31</publishTime>
+      <publishTime>08/05/2024 14:26:05</publishTime>
     </File>
     <File Include="Views/Tiss/press.cshtml">
-      <publishTime>07/30/2024 17:05:47</publishTime>
+      <publishTime>08/05/2024 14:15:09</publishTime>
     </File>
     <File Include="Views/Tiss/procedure.cshtml">
-      <publishTime>07/30/2024 17:06:42</publishTime>
+      <publishTime>08/05/2024 14:26:20</publishTime>
     </File>
     <File Include="Views/Tiss/public_info.cshtml">
-      <publishTime>07/30/2024 17:08:10</publishTime>
+      <publishTime>08/05/2024 14:03:36</publishTime>
     </File>
     <File Include="Views/Tiss/purchase.cshtml">
-      <publishTime>07/31/2024 12:38:12</publishTime>
+      <publishTime>08/05/2024 09:20:04</publishTime>
     </File>
     <File Include="Views/Tiss/recruit.cshtml">
-      <publishTime>07/30/2024 17:08:32</publishTime>
+      <publishTime>08/05/2024 14:15:46</publishTime>
     </File>
     <File Include="Views/Tiss/Register.cshtml">
       <publishTime>07/29/2024 08:20:42</publishTime>
     </File>
     <File Include="Views/Tiss/regulation.cshtml">
-      <publishTime>07/30/2024 17:16:01</publishTime>
+      <publishTime>08/05/2024 14:25:49</publishTime>
     </File>
     <File Include="Views/Tiss/research.cshtml">
-      <publishTime>07/30/2024 17:10:24</publishTime>
+      <publishTime>08/05/2024 13:59:51</publishTime>
     </File>
     <File Include="Views/Tiss/researchProject.cshtml">
-      <publishTime>07/31/2024 10:53:13</publishTime>
+      <publishTime>08/05/2024 09:18:55</publishTime>
     </File>
     <File Include="Views/Tiss/ResetPassword.cshtml">
       <publishTime>07/23/2024 09:42:22</publishTime>
@@ -8803,31 +8839,31 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/30/2024 17:13:00</publishTime>
     </File>
     <File Include="Views/Tiss/sportScience.cshtml">
-      <publishTime>07/31/2024 08:05:16</publishTime>
+      <publishTime>08/05/2024 13:58:54</publishTime>
     </File>
     <File Include="Views/Tiss/sportsNutrition.cshtml">
-      <publishTime>07/31/2024 08:33:50</publishTime>
+      <publishTime>08/05/2024 13:58:47</publishTime>
     </File>
     <File Include="Views/Tiss/sportsPhysiology.cshtml">
-      <publishTime>07/31/2024 08:42:31</publishTime>
+      <publishTime>08/05/2024 13:58:39</publishTime>
     </File>
     <File Include="Views/Tiss/sportsPsychology.cshtml">
-      <publishTime>07/31/2024 08:44:41</publishTime>
+      <publishTime>08/05/2024 14:00:13</publishTime>
     </File>
     <File Include="Views/Tiss/sportTech.cshtml">
-      <publishTime>07/31/2024 08:45:06</publishTime>
+      <publishTime>08/05/2024 13:59:09</publishTime>
     </File>
     <File Include="Views/Tiss/Units.cshtml">
-      <publishTime>07/31/2024 08:50:18</publishTime>
+      <publishTime>08/05/2024 14:12:29</publishTime>
     </File>
     <File Include="Views/Tiss/UploadDocument.cshtml">
       <publishTime>07/11/2024 08:55:37</publishTime>
     </File>
     <File Include="Views/Tiss/video.cshtml">
-      <publishTime>07/30/2024 16:53:13</publishTime>
+      <publishTime>08/05/2024 14:08:55</publishTime>
     </File>
     <File Include="Views/Tiss/ViewArticle.cshtml">
-      <publishTime>07/31/2024 11:54:39</publishTime>
+      <publishTime>08/05/2024 12:16:59</publishTime>
     </File>
     <File Include="Views/Tiss/webContent.cshtml">
       <publishTime>07/15/2024 07:37:48</publishTime>
@@ -8845,7 +8881,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/18/2024 15:58:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/19/2024 11:04:23</publishTime>
+      <publishTime>08/05/2024 16:29:04</publishTime>
     </File>
     <File Include="zh-TW/sdk.js">
       <publishTime>06/27/2024 13:19:34</publishTime>

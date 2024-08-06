@@ -118,114 +118,114 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="下載專區" xml:space="preserve">
-    <value>Download</value>
-  </data>
-  <data name="中" xml:space="preserve">
-    <value>Ａ</value>
-  </data>
-  <data name="中心介紹" xml:space="preserve">
-    <value>ABOUT TISS</value>
-  </data>
-  <data name="中心任務" xml:space="preserve">
-    <value>Missions</value>
-  </data>
-  <data name="中心公告" xml:space="preserve">
-    <value>Announcements</value>
-  </data>
-  <data name="中心訊息" xml:space="preserve">
-    <value>Press</value>
-  </data>
-  <data name="使命願景" xml:space="preserve">
-    <value>Objectives</value>
-  </data>
-  <data name="全部文章" xml:space="preserve">
-    <value>View All</value>
-  </data>
-  <data name="公開資訊" xml:space="preserve">
-    <value>Public Information</value>
-  </data>
-  <data name="其他" xml:space="preserve">
-    <value>Other</value>
-  </data>
-  <data name="單位介紹" xml:space="preserve">
-    <value>Departments</value>
-  </data>
-  <data name="國家運動科學中心" xml:space="preserve">
-    <value>Taiwan Institute of Sports Science</value>
-  </data>
-  <data name="執行長" xml:space="preserve">
-    <value>CEO</value>
+    <value>下載專區</value>
   </data>
   <data name="大" xml:space="preserve">
-    <value>Ａ+</value>
+    <value>大</value>
   </data>
   <data name="小" xml:space="preserve">
-    <value>A-</value>
+    <value>小</value>
   </data>
-  <data name="影音專區" xml:space="preserve">
-    <value>Video</value>
+  <data name="中" xml:space="preserve">
+    <value>中</value>
   </data>
-  <data name="徵才招募" xml:space="preserve">
-    <value>Recruit</value>
+  <data name="中心介紹" xml:space="preserve">
+    <value>中心介紹</value>
+  </data>
+  <data name="中心公告" xml:space="preserve">
+    <value>中心公告</value>
+  </data>
+  <data name="中心任務" xml:space="preserve">
+    <value>中心任務</value>
+  </data>
+  <data name="中心訊息" xml:space="preserve">
+    <value>中心訊息</value>
+  </data>
+  <data name="公開資訊" xml:space="preserve">
+    <value>公開資訊</value>
+  </data>
+  <data name="全部文章" xml:space="preserve">
+    <value>全部文章</value>
+  </data>
+  <data name="使命願景" xml:space="preserve">
+    <value>使命願景</value>
+  </data>
+  <data name="其他" xml:space="preserve">
+    <value>其他</value>
   </data>
   <data name="性別平等專區" xml:space="preserve">
-    <value>Gender Equality</value>
-  </data>
-  <data name="新聞發佈" xml:space="preserve">
-    <value>Announcement</value>
-  </data>
-  <data name="最新消息" xml:space="preserve">
-    <value>NEWS</value>
+    <value>性別平等專區</value>
   </data>
   <data name="服務信箱" xml:space="preserve">
-    <value>Email</value>
+    <value>服務信箱</value>
   </data>
   <data name="法規" xml:space="preserve">
-    <value>Regulations</value>
+    <value>法規</value>
   </data>
   <data name="科普專欄" xml:space="preserve">
-    <value>Popular Science</value>
-  </data>
-  <data name="第１屆董監事" xml:space="preserve">
-    <value>1st Board of Directors</value>
-  </data>
-  <data name="第２屆董監事" xml:space="preserve">
-    <value>2nd Board of Directors</value>
-  </data>
-  <data name="第３屆董監事" xml:space="preserve">
-    <value>3rd Board of Directors</value>
-  </data>
-  <data name="組織概況" xml:space="preserve">
-    <value>Introduction</value>
+    <value>科普專欄</value>
   </data>
   <data name="計畫" xml:space="preserve">
-    <value>Plan</value>
+    <value>計畫</value>
   </data>
-  <data name="辦法及要點" xml:space="preserve">
-    <value>Procedure</value>
+  <data name="國家運動科學中心" xml:space="preserve">
+    <value>國家運動科學中心</value>
+  </data>
+  <data name="執行長" xml:space="preserve">
+    <value>執行長</value>
+  </data>
+  <data name="第1屆董監事" xml:space="preserve">
+    <value>第1屆董監事</value>
+  </data>
+  <data name="第2屆董監事" xml:space="preserve">
+    <value>第2屆董監事</value>
+  </data>
+  <data name="第3屆董監事" xml:space="preserve">
+    <value>第3屆董監事</value>
+  </data>
+  <data name="組織概況" xml:space="preserve">
+    <value>組織概況</value>
+  </data>
+  <data name="最新消息" xml:space="preserve">
+    <value>最新消息</value>
+  </data>
+  <data name="單位介紹" xml:space="preserve">
+    <value>單位介紹</value>
+  </data>
+  <data name="新聞發佈" xml:space="preserve">
+    <value>新聞發佈</value>
   </data>
   <data name="運動心理" xml:space="preserve">
-    <value>Sport Psychology</value>
-  </data>
-  <data name="運動營養" xml:space="preserve">
-    <value>Sport Nutrition</value>
+    <value>運動心理</value>
   </data>
   <data name="運動生理" xml:space="preserve">
-    <value>Sport Physiology</value>
-  </data>
-  <data name="運動科學" xml:space="preserve">
-    <value>Sport Science</value>
+    <value>運動生理</value>
   </data>
   <data name="運動科技" xml:space="preserve">
-    <value>Sport Technology</value>
+    <value>運動科技</value>
+  </data>
+  <data name="運動科學" xml:space="preserve">
+    <value>運動科學</value>
+  </data>
+  <data name="運動營養" xml:space="preserve">
+    <value>運動營養</value>
   </data>
   <data name="運動醫學" xml:space="preserve">
-    <value>Sport Medicine</value>
+    <value>運動醫學</value>
   </data>
   <data name="預算與決算" xml:space="preserve">
-    <value>Budget</value>
+    <value>預算與決算</value>
+  </data>
+  <data name="影音專區" xml:space="preserve">
+    <value>影音專區</value>
+  </data>
+  <data name="徵才招募" xml:space="preserve">
+    <value>徵才招募</value>
+  </data>
+  <data name="辦法及要點" xml:space="preserve">
+    <value>辦法及要點</value>
   </data>
   <data name="體能訓練" xml:space="preserve">
-    <value>Physical Training</value>
+    <value>體能訓練</value>
   </data>
 </root>

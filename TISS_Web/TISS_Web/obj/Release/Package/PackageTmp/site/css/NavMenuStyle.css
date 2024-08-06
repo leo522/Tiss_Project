@@ -1,7 +1,7 @@
 ﻿.dropdown:hover .dropdown-menu {
     display: block;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /*grid-template-columns: repeat(2, 1fr);*/
 }
 
 .navbar-nav.d-lg-flex {
@@ -11,4 +11,12 @@
 
 .dropdown-item {
     margin-bottom: 10px;
+}
+
+/*Logo圖片位置*/
+.logo-img {
+    display: block;
+    margin-top: 50px; /* 調整這裡的值來控制圖片向下移動的距離 */
+    width: 80%; /* 調整這裡的值來控制圖片的寬度 */
+    max-width: 100%; /* 確保圖片不會超過父容器的寬度 */
 }

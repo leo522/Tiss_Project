@@ -16,6 +16,24 @@
     <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("msg").submit();
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            grecaptcha.enterprise.execute('6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1', { action: 'submit' }).then(function (token) {
+                document.getElementById("g-recaptcha-response").value = token;
+                document.getElementById("msg").submit();
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("msg").addEventListener("submit", handleFormSubmit);
+        });
+    </script>
 </head>
 <body>
     <div id="fb-root"></div>
@@ -164,17 +182,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="navigation-buttons">
+                                @if (ViewBag.PreviousArticle != null)
+                                {
+                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
+                                }
+                                @if (ViewBag.NextArticle != null)
+                                {
+                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
+                                }
+                            </div>
                         </div>
-                        <div class="navigation-buttons">
-                            @if (ViewBag.PreviousArticle != null)
-                            {
-                                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
-                            }
-                            @if (ViewBag.NextArticle != null)
-                            {
-                                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
-                            }
-                        </div>
+                        
                         <div class="comments-section">
                             <h3>留言區</h3>
                             <button id="toggle-comments" class="btn btn-light">
@@ -193,9 +212,10 @@
                                 }
                             </div>
 
-                            <form action="@Url.Action("PostComment", "Tiss")" method="post">
+                            <form action="@Url.Action("PostCommentWithCaptcha", "Tiss")" method="post" id="msg">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
+                                <input type="hidden" id="g-recaptcha-response" name="recaptchaResponse" />
                                 <div class="form-group">
                                     <label for="userName">名稱:</label>
                                     <input type="text" id="userName" class="form-control" name="userName" required />
@@ -204,8 +224,14 @@
                                     <label for="commentText">留言:</label>
                                     <textarea id="commentText" class="form-control" name="commentText" required></textarea>
                                 </div>
-                                <div class="g-recaptcha" data-sitekey="6Leybh4qAAAAALMqvt6e37MflNG-EGgC3O8TQdtn"></div>
+                                @*<div class="g-recaptcha" data-sitekey="6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1"></div>*@
                                 <button type="submit" class="btn btn-primary">提交留言</button>
+                                @*<button class="g-recaptcha btn btn-primary"
+                data-sitekey="6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1"
+                data-callback='onSubmit'
+                data-action='submit'>
+            提交留言
+        </button>*@
                             </form>
                         </div>
                     </main>
@@ -304,7 +330,7 @@ if (isLoggedIn) {
             });
         </script>
     }
-    <script>
+<script>
         $(document).ready(function () {
               var isCommentsVisible = false;
     var commentCount = '@ViewBag.CommentCount';
@@ -367,7 +393,7 @@ if (isLoggedIn) {
             const url = encodeURIComponent(window.location.href);
             const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}`;
             window.open(twitterShareUrl, '_blank', 'width=600,height=400');
-        }
+    }
     </script>
 </body>
 </html>

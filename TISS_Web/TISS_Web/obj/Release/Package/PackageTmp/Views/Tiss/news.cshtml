@@ -6,6 +6,7 @@
 <html>
 <head>
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -148,9 +149,9 @@
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="el-tag el-tag--plain is-round">
+                                                            <div class="el-tag__content">@article.Hashtags</div>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -213,61 +214,17 @@ if (isLoggedIn) {
             });
         });
 
-        ////載入已儲存的內容
-        //function loadContent() {
-        //    $.ajax({
-        //        url: 'aboutGetContent',
-        //        method: 'GET',
-        //        success: function (response) {
-        //            if (response.success) {
-        //                document.getElementById('intro').innerText = response.textContent;
-        //                document.getElementById('mainImage').src = response.imagePath;
-        //            } else {
-        //                console.error('載入失敗: ' + response.error);
-        //            }
-        //        },
-        //        error: function (err) {
-        //            console.error('載入失敗', err);
-        //        }
-        //    });
-        //}
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
 
-        ////圖片及文字存檔功能
-        //function saveContent() {
-        //    /*var textContent = document.getElementById('intro').innerText;*/
-        //    var textContent = document.getElementById('intro').innerHTML;
-        //    var imageSrc = document.getElementById('mainImage').src;
+            menuLinks.forEach(function (link) {
 
-        //    $.ajax({
-        //        url: 'aboutSaveContent',
-        //        method: 'POST',
-        //        data: {
-        //            TextContent: textContent,
-        //            ImageSrc: imageSrc
-        //        },
-        //        success: function (response) {
-        //            document.getElementById('mainImage').src = response.imagePath;
-        //            debugger;
-        //            alert('內容已儲存');
-        //        },
-        //        error: function (err) {
-        //            console.error('儲存失敗', err);
-        //        }
-        //    });
-        //}
-
-        ////導覽列
-        //function toggleDropdown(dropdownId) {
-        //    var dropdownToggle = document.getElementById(dropdownId);
-        //    var dropdownMenu = dropdownToggle.nextElementSibling;
-
-        //    if (dropdownMenu.classList.contains('show')) {
-        //        dropdownMenu.classList.remove('show');
-        //    } else {
-        //        dropdownMenu.classList.add('show');
-        //    }
-        //}
-        ////圖片及文字存檔功能
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>

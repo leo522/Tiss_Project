@@ -6,6 +6,7 @@
 <html>
 <head>
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -149,9 +150,9 @@
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="el-tag el-tag--plain is-round">
+                                                            <div class="el-tag__content">@article.Hashtags</div>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -208,6 +209,7 @@ if (isLoggedIn) {
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
+
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
                 }

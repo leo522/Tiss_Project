@@ -6,6 +6,7 @@
 <html>
 <head>
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -148,9 +149,9 @@
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                        </div>
+                                                        <div class="el-tag el-tag--plain is-round">
+                                                            <div class="el-tag__content">@article.Hashtags</div>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -187,14 +188,6 @@
                     </section>
                 </div>
             </div>
-
-            @*頁面回到上瞄點*@
-            <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
-                <svg data-v-339da53a="" class="svg-inline--fa fa-chevron-up" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                    <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                    </path>
-                </svg>
-            </div>
         </div>
     </div>
     <script>
@@ -217,6 +210,17 @@ if (isLoggedIn) {
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
                 }

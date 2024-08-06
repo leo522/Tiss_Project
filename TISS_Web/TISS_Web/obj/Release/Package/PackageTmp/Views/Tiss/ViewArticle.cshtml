@@ -1,5 +1,4 @@
 ﻿@model TISS_Web.Models.ArticleContent
-
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
     var isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
@@ -16,8 +15,12 @@
     @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
     <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0" nonce="xyz">
+    </script>
     <div data-v-339da53a="" class="layout">
         <div data-v-339da53a="" class="container-fluid px-0 mt-header">
             <div data-v-339da53a-s="" class="BasePageLayout">
@@ -52,24 +55,12 @@
                             {
                                 <div class="Title">@parentDirectory</div>
                                 <ul class="Menu">
-                                    @*@foreach (var item in menuItems[parentDirectory])
-        {
-            var url = ViewBag.MenuUrls.ContainsKey(item) ? ViewBag.MenuUrls[item] : "#"; // 根據 menuUrls 對應的 URL
-            <li span="3">
-                <a class="MenuLink" href="@url">@item</a>
-            </li>
-        }*@
                                     @foreach (var item in ViewBag.MenuUrls)
                                     {
                                         <li span="3">
                                             <a class="MenuLink" href="@item.Value">@item.Key</a>
                                         </li>
                                     }
-                                    <!-- 顯示「全部文章」的連結 -->
-                                    @*<li span="3">
-                                        <a class="MenuLink" href="@ViewBag.AllArticlesUrl">全部文章</a>
-                                    </li>*@
-
                                     @if (isLoggedIn)
                                     {
                                         <li span="3">
@@ -104,44 +95,103 @@
                             </div>
                         </div>
                         <div class="infoList">
-                            <div class="container mt-5 ResearchPage">
-                                @if (isLoggedIn)
-                                {
-                                    <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="Id" value="@Model.Id" />
-                                        <div class="form-group">
-                                            <label for="ContentBody">內容:</label>
-                                            <textarea id="ContentBody" name="ContentBody" class="form-control">@Model.ContentBody</textarea>
+                            <div class="container mt-5 ResearchPage content-container">
+                                <div class="article-content">
+                                    @if (isLoggedIn)
+                                    {
+                                        <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Id" value="@Model.Id" />
+                                            <div class="form-group">
+                                                <label for="ContentBody">內容:</label>
+                                                <textarea id="ContentBody" name="ContentBody" class="form-control">@Model.ContentBody</textarea>
+                                            </div>
+                                            <input type="hidden" name="Id" value="@Model.Id" />
+                                            <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <div class="hashtags-link" style="text-align: left;">
+                                            <p>
+                                                <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+                                                    <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+                                                </a>
+                                            </p>
                                         </div>
-                                        <input type="hidden" name="Id" value="@Model.Id" />
-                                        <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                    </form>
-                                }
-                                else
-                                {
-                                    <div>
-                                        @Html.Raw(Model.ContentBody)
+                                        <div>
+                                            @Html.Raw(Model.ContentBody)
+                                        </div>
+                                    }
+                                    <p>發佈日期: @Model.PublishedDate</p>
+                                </div>
+                                <div class="side-info">
+                                    @*<p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p>*@
+                                    <div class="ShareToolBar">
+                                        <div class="NewsParams">
+                                            <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p> @*點擊率*@
+                                        </div>
+                                        <div class="ShareToolBarTitle">Share On</div>
+                                        <ul class="SocialList">
+                                            <li>
+                                                <button type="button" class="el-button is-circle" aria-label="分享至 Facebook" onclick="shareFacebook()">
+                                                    <span>
+                                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 LINE" onclick="shareLine()">
+                                                    <span class="">
+                                                        <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
+                                                    </span>
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 Twitter" onclick="shareTwitter()">
+                                                    <span class="">
+                                                        <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                            <path class="" fill="currentColor" d="M512 97.2c-19 8.3-39.4 14-60.7 16.5c21.8-13.1 38.4-33.8 46.2-58.5c-20.4 12.1-43 20.9-67.1 25.6c-19.3-20.6-46.6-33.4-76.8-33.4c-58.1 0-105.1 47.1-105.1 105c0 8.2 .9 16.2 2.7 23.8C165.1 180.3 87.7 134.5 36 66.6c-9 15.5-14.1 33.5-14.1 52.7c0 36.3 18.5 68.4 46.6 87.2c-17.2-.5-33.4-5.3-47.6-13.1v1.3c0 50.7 36.1 93 83.8 102.6c-8.8 2.4-18.1 3.6-27.7 3.6c-6.8 0-13.4-.7-19.8-1.9c13.4 41.9 52.3 72.4 98.4 73.3c-36 28.2-81.3 45-130.6 45c-8.5 0-16.8-.5-25-1.5c46.5 29.8 101.6 47.1 160.8 47.1c193 0 298.4-160 298.4-298.4l-.3-13.6C480 136.7 497.7 118.3 512 97.2z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </div>
-                                }
-                                <p>發佈日期: @Model.PublishedDate</p>
-                                @*<p>
-                                        <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
-                                            <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
-                                        </a>
-                                    </p>*@
+                                </div>
                             </div>
+                        </div>
+                        <div class="navigation-buttons">
+                            @if (ViewBag.PreviousArticle != null)
+                            {
+                                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
+                            }
+                            @if (ViewBag.NextArticle != null)
+                            {
+                                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
+                            }
                         </div>
                         <div class="comments-section">
                             <h3>留言區</h3>
-                            @foreach (var comment in ViewBag.Comments)
-                            {
-                                <div class="comment">
-                                    <p><strong>@comment.UserName</strong> 說：</p>
-                                    <p>@comment.CommentText</p>
-                                    <p class="text-muted">@comment.CommentDate</p>
-                                </div>
-                            }
+                            <button id="toggle-comments" class="btn btn-light">
+                                <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
+                            </button>
+                            <div id="comments-container" style="display: none;">
+                                @foreach (var comment in ViewBag.Comments)
+                                {
+                                    <div class="comment">
+                                        <p><strong>@comment.UserName</strong> 說：</p>
+                                        <div class="comment-content">
+                                            <p>@comment.CommentText</p>
+                                        </div>
+                                        <p class="text-muted">@comment.CommentDate</p>
+                                    </div>
+                                }
+                            </div>
 
                             <form action="@Url.Action("PostComment", "Tiss")" method="post">
                                 @Html.AntiForgeryToken()
@@ -154,6 +204,7 @@
                                     <label for="commentText">留言:</label>
                                     <textarea id="commentText" class="form-control" name="commentText" required></textarea>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="6Leybh4qAAAAALMqvt6e37MflNG-EGgC3O8TQdtn"></div>
                                 <button type="submit" class="btn btn-primary">提交留言</button>
                             </form>
                         </div>
@@ -163,36 +214,52 @@
         </div>
     </div>
 
-    <div class="navigation-buttons">
-        @if (ViewBag.PreviousArticle != null)
-        {
-            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
-        }
-        @if (ViewBag.NextArticle != null)
-        {
-            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
-        }
-    </div>
-    <div class="hashtags-link" style="text-align: right;">
-        <p>
-            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
-                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+    
+    @*<p>點閱次數: @Model.ClickCount</p>
+    <div class="ShareToolBar">
+        <div class="ShareToolBarTitle">分享至:</div>
+        <ul class="SocialList">
+            <li>
+                <button type="button" class="el-button is-circle" aria-label="分享至 Facebook">
+                    <span>
+                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
+                            </path>
+                        </svg>
+                    </span>
+                </button>
+            </li>
+            <li>
+                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
+                    <span class="">
+                        <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
+                    </span>
+                </button>
+            </li>
+            <li>
+                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
+                    <span class="">
+                        <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path class="" fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z">
+                            </path>
+                        </svg>
+                    </span>
+                </button>
+            </li>
+        </ul>
+    </div>*@
+    @*<div class="social-share">
+            <h5>分享至:</h5>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
+                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示"/>Facebook
             </a>
-        </p>
-    </div>
-    <p>點閱次數: @Model.ClickCount</p>
-    <div class="social-share">
-        <h5>分享至:</h5>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
-            <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示"/>Facebook
-        </a>
-        <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
-            <img src="~/fontawesome/twitter_icon.ico" width="32" alt="推特圖示"/> Twitter
-        </a>
-        <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
-            <img src="~/fontawesome/line_icon.ico" width="32" alt="line圖示"/> Line
-        </a>
-    </div>
+            <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
+                <img src="~/fontawesome/twitter_icon.ico" width="32" alt="推特圖示"/> Twitter
+            </a>
+            <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
+                <img src="~/fontawesome/line_icon.ico" width="32" alt="line圖示"/> Line
+            </a>
+        </div>*@
     @if (isLoggedIn)
     {
         <script>
@@ -237,5 +304,70 @@ if (isLoggedIn) {
             });
         </script>
     }
+    <script>
+        $(document).ready(function () {
+              var isCommentsVisible = false;
+    var commentCount = '@ViewBag.CommentCount';
+
+    $('#toggle-comments').click(function () {
+        if (isCommentsVisible) {
+            $('#comments-container').slideUp();
+            $(this).find('span').text('檢視留言(' + commentCount +  '則留言)');
+        } else {
+            $('#comments-container').slideDown();
+            $(this).find('span').text( commentCount +  '則留言');
+        }
+        isCommentsVisible = !isCommentsVisible;
+    });
+            document.addEventListener('DOMContentLoaded', function () {
+                const form = document.querySelector('form');
+                let lastSubmission = localStorage.getItem('lastSubmission');
+                const now = new Date().getTime();
+
+                if (lastSubmission && now - lastSubmission < 60000) { // 設置為 1 分鐘
+                    form.querySelector('button').disabled = true;
+                    form.querySelector('button').textContent = '請稍後再提交留言';
+                } else {
+                    form.querySelector('button').disabled = false;
+                }
+
+                form.addEventListener('submit', function () {
+                    localStorage.setItem('lastSubmission', new Date().getTime());
+                });
+            });
+
+            function containsSuspiciousLinks(commentText) {
+                const suspiciousPattern = /(http|https):\/\/[^\s]+/g;
+                return suspiciousPattern.test(commentText);
+            }
+
+            document.querySelector('form').addEventListener('submit', function (event) {
+                const commentText = document.querySelector('#commentText').value;
+
+                if (containsSuspiciousLinks(commentText)) {
+                    alert('留言中包含可疑的連結，請檢查後再提交。');
+                    event.preventDefault(); // 阻止表單提交
+                }
+            });
+        });
+
+        function shareFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            window.open(fbShareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareLine() {
+            const url = encodeURIComponent(window.location.href);
+            const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${url}`;
+            window.open(lineShareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function shareTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}`;
+            window.open(twitterShareUrl, '_blank', 'width=600,height=400');
+        }
+    </script>
 </body>
 </html>

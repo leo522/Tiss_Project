@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
@@ -375,6 +376,18 @@
                 dropdownMenu.classList.add('show');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>

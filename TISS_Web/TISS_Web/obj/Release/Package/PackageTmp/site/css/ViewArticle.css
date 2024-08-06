@@ -1,0 +1,81 @@
+﻿.narrow-container {
+    max-width: 800px; /* 根據需要調整 */
+    margin: 0 auto; /* 讓容器居中 */
+    position: relative; /* 為了讓 .side-info 參考這個容器進行定位 */
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 讓項目對齊到頂部 */
+    position: relative; /* 讓內容容器參考這個容器進行定位 */
+}
+
+.article-content {
+    flex: 1;
+    max-width: 600px; /* 根據需要調整 */
+}
+
+/*社群連結樣式*/
+.side-info {
+    position: absolute;
+    right: 0;
+    top: 100px; /* 根據需要調整 */
+    width: 200px; /* 根據需要調整 */
+}
+    .ShareToolBar {
+        position: absolute;
+        right: 50px;
+        top: 150px;
+        width: 65px;
+        border-left: 1px solid #e3e3e3;
+    }
+.ShareToolBarTitle {
+    font-family: Switzer;
+    font-size: 1.125rem;
+    transform: translateY(calc(50% + 6px)) rotate(90deg);
+    white-space: nowrap;
+}
+.SocialList {
+    padding-top:65px;
+    padding-left:25px;
+    margin:0;
+}
+.NewsParams {
+    position: relative;
+    margin-top: -30px;
+}
+/*社群連結樣式*/
+
+.comments-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    display: flex;
+}
+
+.article-content {
+    flex: 3;
+}
+
+.btn-light {
+    background-color: transparent;
+    border: none;
+    color: #1352e7; /* 更改為所需顏色 */
+}
+
+/*文章內文版面*/
+.infoList {
+    position: relative;
+    max-width: 1016px;
+}
+
+/*左側主題*/
+.content .Title {
+    text-align: right;
+}
+.content .Menu {
+    float: right;
+}

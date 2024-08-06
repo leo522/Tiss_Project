@@ -2378,47 +2378,65 @@ namespace TISS_Web.Controllers
         #region 留言認證
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PostComment(int articleId, string userName, string commentText, string recaptchaResponse)
+        public ActionResult PostCommentWithCaptcha(int articleId, string userName, string commentText, string recaptchaResponse)
         {
-            // 驗證 reCAPTCHA
-            var recaptchaSecret = "6Leybh4qAAAAALxsqfZzSfdosZ4Xp0qnCgcG1CWa";
-            var client = new WebClient();
-            var response = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={recaptchaSecret}&response={recaptchaResponse}");
-            dynamic json = JsonConvert.DeserializeObject(response);
-            bool isCaptchaValid = json.success;
-
-            if (!isCaptchaValid)
+            try
             {
-                // reCAPTCHA 驗證失敗
-                return RedirectToAction("Error");
+                    // 驗證 reCAPTCHA
+                    var recaptchaSecret = "6Lezbh4qAAAAADGP0PVQCGXgPDtujjwPtY-EdyAB";
+                    var client = new WebClient();
+                    var response = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={recaptchaSecret}&response={recaptchaResponse}");
+                    dynamic json = JsonConvert.DeserializeObject(response);
+                    bool isCaptchaValid = json.success;
+
+                    if (!isCaptchaValid)
+                    {
+                        // reCAPTCHA 驗證失敗
+                        return RedirectToAction("Error");
+                    }
+
+                    // 檢查留言頻率
+                    var lastComment = _db.MessageBoard
+                        .Where(c => c.UserName == userName)
+                        .OrderByDescending(c => c.CommentDate)
+                        .FirstOrDefault();
+
+                    if (lastComment != null && (DateTime.Now - lastComment.CommentDate).TotalMinutes < 1)
+                    {
+                        // 防止頻繁留言
+                        return RedirectToAction("Error");
+                    }
+
+                // 防範 XSS 攻擊
+                var encodedCommentText = HttpUtility.HtmlEncode(commentText);
+                var encodedUserName = HttpUtility.HtmlEncode(userName);
+
+                // 處理留言
+                var comment = new MessageBoard
+                {
+                    ArticleId = articleId,
+                    UserName = encodedUserName,
+                    CommentText = encodedCommentText,
+                    CommentDate = DateTime.Now,
+                    IsApproved = true // 默認為批准
+                };
+
+                _db.MessageBoard.Add(comment);
+                _db.SaveChanges();
+
+                var article = _db.ArticleContent.FirstOrDefault(a => a.Id == articleId);
+                if (article != null)
+                {
+                    return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
+                }
+                return RedirectToAction("Home");
+                //return RedirectToAction("ViewArticle", new { encryptedUrl = articleId });
             }
-
-            // 檢查留言頻率
-            var lastComment = _db.MessageBoard
-                .Where(c => c.UserName == userName)
-                .OrderByDescending(c => c.CommentDate)
-                .FirstOrDefault();
-
-            if (lastComment != null && (DateTime.Now - lastComment.CommentDate).TotalMinutes < 1)
+            catch (Exception ex)
             {
-                // 防止頻繁留言
-                return RedirectToAction("Error");
+                throw ex;
             }
-
-            // 處理留言
-            var comment = new MessageBoard
-            {
-                ArticleId = articleId,
-                UserName = userName,
-                CommentText = commentText,
-                CommentDate = DateTime.Now,
-                //IsApproved = false // 默認為未批准
-            };
-
-            _db.MessageBoard.Add(comment);
-            _db.SaveChanges();
-
-            return RedirectToAction("ViewArticle", new { encryptedUrl = articleId });
+            
         }
         #endregion
 
