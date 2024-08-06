@@ -79,46 +79,46 @@
                                 <div class="el-col el-col-24 el-col-sm-24 el-col-md-12">
                                     <div class="Content">
                                         @*<div>
-                                            <div class="Title">
-                                                <div class="SectionTitle">About TISS</div>
-                                                <div class="SectionSubTitle">
-                                                    <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="">中心簡介
+                                                <div class="Title">
+                                                    <div class="SectionTitle">About TISS</div>
+                                                    <div class="SectionSubTitle">
+                                                        <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="">中心簡介
+                                                    </div>
                                                 </div>
+                                                <p>推動運動科學研究及應用，<br>提升國際運動競爭力</p>
+                                                <p class="SubIntro">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</p>
                                             </div>
-                                            <p>推動運動科學研究及應用，<br>提升國際運動競爭力</p>
-                                            <p class="SubIntro">TO PROMOTE OUR RESEARCH ACHIEVEMENTS IN SPORTS SCIENCE AND TO ENHANCE OUR INTERNATIONAL ATHLETIC COMPETITIVENESS</p>
-                                        </div>
-                                        <div style="width: 225px;">
-                                            <a href="/Tiss/about" class="">
-                                                <button aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
-                                                    <span class="">
-                                                        了解更多
-                                                        <span class="right-icon">
-                                                            <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                                <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                                </path>
-                                                            </svg>
+                                            <div style="width: 225px;">
+                                                <a href="/Tiss/about" class="">
+                                                    <button aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
+                                                        <span class="">
+                                                            了解更多
+                                                            <span class="right-icon">
+                                                                <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                                    <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                                                    </path>
+                                                                </svg>
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                </button>
-                                            </a>
-                                        </div>*@
+                                                    </button>
+                                                </a>
+                                            </div>*@
                                     </div>
                                 </div>
 
                                 @*<div class="el-col el-col-24 el-col-sm-24 el-col-md-12 AboutImg">
-                                    <img src="/site/img/about_img_1.3170f29f.jpg" id="HomePic" alt="about tiss">
-                                </div>*@
+                                        <img src="/site/img/about_img_1.3170f29f.jpg" id="HomePic" alt="about tiss">
+                                    </div>*@
                                 @*@{
-                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                    {
-                                        <div class="btn-container">
-                                            <input type="file" id="uploadImageInput" style="display:none;" accept="image/*">
-                                            <button class="btn btn-outline-primary" onclick="changeImg('HomePic')">新增圖片</button>
-                                            <button class="btn btn-outline-success" onclick="saveContent()">儲存</button>
-                                        </div>
-                                    }
-                                }*@
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                        {
+                                            <div class="btn-container">
+                                                <input type="file" id="uploadImageInput" style="display:none;" accept="image/*">
+                                                <button class="btn btn-outline-primary" onclick="changeImg('HomePic')">新增圖片</button>
+                                                <button class="btn btn-outline-success" onclick="saveContent()">儲存</button>
+                                            </div>
+                                        }
+                                    }*@
                             </div>
                         </div>
                     </div>
@@ -252,9 +252,36 @@
                                 </div>
                             </div>
                             <div class="d-none d-lg-block">
-                                <div class="VideoCarousel">                              
+                                <div class="VideoCarousel">
                                     <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
+
+                                            @*影片文字內容*@
+                                            @*<div class="carousel-article-column">
+
+                                                    @foreach (var idt in  Model.OtherArticles)
+                                                    {
+                                                        <div class="carousel-item article-item" style="display: none;">
+                                                            <a href="/video/@Model..idt.EncryptedUrl" class="carousel-article-link">
+                                                                <div class="VideoCarouselContent">
+                                                                    <div class="VideoCarouselContentBox">
+                                                                        <div class="Tag">
+                                                                            <span>中心成果</span>
+                                                                        </div>
+                                                                        <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
+                                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.LatestArticle.BodyContent</span>
+                                                                        <div class="Info">
+                                                                            <span class="el-tag el-tag--plain is-round">
+                                                                                <span class="el-tag__content">人物專訪</span>
+                                                                            </span>
+                                                                            <span>@Model.LatestArticle.PublishedDate</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>*@
                                             <div class="carousel-article-column">
                                                 @for (var i = 0; i < Model.OtherArticles.Count; i++)
                                                 {
@@ -280,6 +307,9 @@
                                                 }
                                             </div>
                                         </div>
+                                        @*影片文字內容*@
+
+                                        @*影片內容*@
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
@@ -287,8 +317,8 @@
                                                         <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
                                                             @foreach (var video in Model.Videos)
                                                             {
-                                                                <div class="video-item" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                                                                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/@video.EncryptedUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                                <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                                                    @Html.Raw(video.VideoIframe)
                                                                 </div>
                                                             }
                                                         </div>
@@ -296,20 +326,21 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @*影片內容*@
                                     </div>
                                 </div>
                                 <div class="BottomRow">
                                     <div style="width: 225px; margin: auto;">
                                         <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
-                                                <span class="">
-                                                    所有影音
-                                                    <span class="right-icon">
-                                                        <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                            <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </span>  
+                                            <span class="">
+                                                所有影音
+                                                <span class="right-icon">
+                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                        <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </span>
                                         </a>
                                     </div>
                                 </div>
@@ -412,7 +443,7 @@
                 document.getElementById("adminUser").style.display = "none";
             }
         });
-   
+
     $('#carouselExample').carousel({
         interval: 5000 // 5秒輪播圖
     });

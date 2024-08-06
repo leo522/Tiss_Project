@@ -297,6 +297,8 @@ namespace TISS_Web.Models
 
         // 新增的導航屬性，用於存儲相關的留言
         public ICollection<Messageboard> messageboards { get; set; }
+
+        public string VideoIframe { get; set; } // 用於儲存 iframe 標籤
     }
 
     public class HashtagModle

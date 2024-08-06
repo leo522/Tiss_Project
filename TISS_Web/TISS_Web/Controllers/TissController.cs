@@ -599,27 +599,51 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer
-            {
-                ApiKey = _apiKey,
-                ApplicationName = "Tiss"
-            });
-            var channelsListRequest = youtubeService.Channels.List("snippet,contentDetails,statistics");
-            channelsListRequest.Id = "UCfpGsfNSwowlOk3eiJeHSWA"; // yt頻道ID
-            var channelResponse = await channelsListRequest.ExecuteAsync();
+            //var youtubeService = new YouTubeService(new BaseClientService.Initializer
+            //{
+            //    ApiKey = _apiKey,
+            //    ApplicationName = "Tiss"
+            //});
+            //var channelsListRequest = youtubeService.Channels.List("snippet,contentDetails,statistics");
+            //channelsListRequest.Id = "UCfpGsfNSwowlOk3eiJeHSWA"; // yt頻道ID
+            //var channelResponse = await channelsListRequest.ExecuteAsync();
 
-            var YTvideo = youtubeService.PlaylistItems.List("snippet,contentDetails");
-            YTvideo.PlaylistId = channelResponse.Items[0].ContentDetails.RelatedPlaylists.Uploads;
-            YTvideo.MaxResults = 20; //要取得的影片數量，上限50
-            var YTvideoResponse = await YTvideo.ExecuteAsync();
+            //var YTvideo = youtubeService.PlaylistItems.List("snippet,contentDetails");
+            //YTvideo.PlaylistId = channelResponse.Items[0].ContentDetails.RelatedPlaylists.Uploads;
+            //YTvideo.MaxResults = 20; //要取得的影片數量，上限50
+            //var YTvideoResponse = await YTvideo.ExecuteAsync();
 
-            //YT影片內容
-            var videos = YTvideoResponse.Items.Select(item => new ArticleContentModel
+            ////YT影片內容
+            //var videos = YTvideoResponse.Items.Select(item => new ArticleContentModel
+            //{
+            //    Title = item.Snippet.Title,
+            //    EncryptedUrl = item.Snippet.ResourceId.VideoId,  //YouTube影片ID
+            //    BodyContent = item.Snippet.Description,
+            //}).ToList();
+
+            // 查詢影片文章內容
+            var relatedHashtags = new List<string>
             {
-                Title = item.Snippet.Title,
-                EncryptedUrl = item.Snippet.ResourceId.VideoId,  //YouTube影片ID
-                BodyContent = item.Snippet.Description,
-            }).ToList();
+                "人物專訪",
+                "中心成果",
+                "運動科技論壇",
+                "影音專區"
+            };
+
+            var videoArticles = _db.ArticleContent
+                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .ToList();
+
+            // 提取影片中的 iframe 標籤
+            var videos = videoArticles.Select(a => new ArticleContentModel
+            {
+                Title = a.Title,
+                VideoIframe = ExtractIframe(a.ContentBody),
+                ImageContent = a.ImageContent,
+                Hashtags = a.Hashtags,
+                PublishedDate = a.PublishedDate.GetValueOrDefault(DateTime.MinValue),
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
+            }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
 
             //文章內容
             var dtos = _db.ArticleContent
@@ -672,6 +696,24 @@ namespace TISS_Web.Controllers
                 }).Take(4).ToList();
 
             return PartialView("_ArticleListPartial", dtos);
+        }
+
+        private string ExtractIframe(string content)
+        {
+            var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>");
+            var match = regex.Match(content);
+
+            if (match.Success)
+            {
+                var iframeHtml = match.Value;
+                // 替換原始的 width 和 height 屬性
+                iframeHtml = Regex.Replace(iframeHtml, @"width=""\d+""", "width=\"100%\"");
+                iframeHtml = Regex.Replace(iframeHtml, @"height=""\d+""", "height=\"100%\"");
+                return iframeHtml;
+            }
+
+            return string.Empty;
+            //return match.Success ? match.Value : string.Empty;
         }
 
         #endregion
@@ -868,13 +910,14 @@ namespace TISS_Web.Controllers
         /// 影音專區
         /// </summary>
         /// <returns></returns>
-        public ActionResult video(int page = 1, int pageSize = 5)
+        public ActionResult video(int page = 1, int pageSize = 9)
         {
             page = Math.Max(1, page); //確保頁碼至少為 1
 
             var relatedHashtags = new List<string>
             {
                 "人物專訪",
+                "中心成果",
                 "運動科技論壇",
                 "影音專區"
             };
@@ -895,11 +938,13 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName,
+                VideoIframe = ExtractIframe(s.ContentBody),
             }).ToList();
 
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = totalPages;
+            ViewBag.Videos = articles;
 
             return View(articles);
         }
@@ -908,13 +953,13 @@ namespace TISS_Web.Controllers
         /// 中心成果
         /// </summary>
         /// <returns></returns>
-        public ActionResult achievement(int page = 1, int pageSize = 5)
+        public ActionResult achievement(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "中心成果" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent.Where(a => a.Hashtags == "中心成果" || a.Hashtags == "人物專訪" && a.IsEnabled).ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -941,7 +986,7 @@ namespace TISS_Web.Controllers
         /// 新聞影音
         /// </summary>
         /// <returns></returns>
-        public ActionResult news(int page = 1, int pageSize = 5)
+        public ActionResult news(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -974,7 +1019,7 @@ namespace TISS_Web.Controllers
         /// 活動紀錄
         /// </summary>
         /// <returns></returns>
-        public ActionResult activityRecord(int page = 1, int pageSize = 5)
+        public ActionResult activityRecord(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
@@ -2229,32 +2274,30 @@ namespace TISS_Web.Controllers
                     { "新聞影音", "/Tiss/news" },
                     { "活動紀錄", "/Tiss/activityRecord" },
                 };
+
                 ViewBag.MenuUrls = menuList;
 
                 var currentParentDirectory = ViewBag.ParentDirectory as string;
                 var menuIdMapping = new Dictionary<string, int>
-        {
-            { "科普專欄", 1 },
-            { "中心公告", 2 },
-            { "影音專區", 3 }
-        };
+                {
+                    { "科普專欄", 1 },
+                    { "中心公告", 2 },
+                    { "影音專區", 3 }
+                };
                 // 根據當前主題獲取對應的 MenuId
                 int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
 
-
-
                 // 根據 MenuId 查找「全部文章」的連結
                 var menuUrls = menuItems
-             .Where(item => item.MenuId == menuId)
-             .GroupBy(item => item.Name)
-             .ToDictionary(
-                 group => group.Key,
-                 group => group.Last().Url // 選擇最後一個 URL
-             );
+                    .Where(item => item.MenuId == menuId)
+                    .GroupBy(item => item.Name)
+                    .ToDictionary(group => group.Key,group => group.Last().Url // 選擇最後一個 URL
+                );
+                
                 var allArticlesUrl = menuItems
-            .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
-            .Select(item => item.Url)
-            .FirstOrDefault();
+                    .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
+                    .Select(item => item.Url)
+                    .FirstOrDefault();
 
                 ViewBag.MenuUrls = menuUrls;
                 ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
@@ -2341,38 +2384,38 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 留言板功能
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult PostComment(int articleId, string userName, string commentText)
-        {
-            try
-            {
-                var comment = new MessageBoard
-                {
-                    ArticleId = articleId,
-                    UserName = userName,
-                    CommentText = commentText,
-                    CommentDate = DateTime.Now,
-                    IsApproved = true
-                };
+        #region 留言板功能-暫時不用
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult PostComment(int articleId, string userName, string commentText)
+        //{
+        //    try
+        //    {
+        //        var comment = new MessageBoard
+        //        {
+        //            ArticleId = articleId,
+        //            UserName = userName,
+        //            CommentText = commentText,
+        //            CommentDate = DateTime.Now,
+        //            IsApproved = true
+        //        };
 
-                _db.MessageBoard.Add(comment);
-                _db.SaveChanges();
+        //        _db.MessageBoard.Add(comment);
+        //        _db.SaveChanges();
 
-                // 只需重新導向到 ViewArticle，無需進行額外更新
-                var article = _db.ArticleContent.FirstOrDefault(a => a.Id == articleId);
-                if (article != null)
-                {
-                    return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
-                }
-                return RedirectToAction("Home");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        // 只需重新導向到 ViewArticle，無需進行額外更新
+        //        var article = _db.ArticleContent.FirstOrDefault(a => a.Id == articleId);
+        //        if (article != null)
+        //        {
+        //            return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
+        //        }
+        //        return RedirectToAction("Home");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         #endregion
 
         #region 留言認證
