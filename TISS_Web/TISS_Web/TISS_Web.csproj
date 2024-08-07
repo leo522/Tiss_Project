@@ -203,7 +203,9 @@
     <Compile Include="CKEditorControl.ascx.designer.cs">
       <DependentUpon>CKEditorControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\TissController.cs" />
     <Compile Include="FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
@@ -2526,6 +2528,7 @@
     <Content Include="Img\0427GOGOSportTech3.jpg" />
     <Content Include="Img\2025_World_Masters_Games_logo.jpg" />
     <Content Include="Img\3E1A5528_0.jpg" />
+    <Content Include="Img\404.jpg" />
     <Content Include="Img\about_banner_1.jpg" />
     <Content Include="Img\links_logo.b6ae967e.svg" />
     <Content Include="Img\logo.1fec0909.svg" />
@@ -2542,6 +2545,7 @@
     <Content Include="Img\中心公告圖片\news_banner.856d4a80.jpg" />
     <Content Include="Img\中心公告圖片\recruit_img.d15a2d7a.jpg" />
     <Content Include="Img\中心公告圖片\S__27959338.jpg" />
+    <Content Include="Img\停機.jpg" />
     <Content Include="Img\公開資訊圖片\banner_public.jpg" />
     <Content Include="Img\公開資訊圖片\banner_public_m.jpg" />
     <Content Include="Img\影音專區\1-項老師.jpg" />
@@ -3008,6 +3012,8 @@
     <Content Include="Views\Tiss\ResetPassword.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
     <Content Include="Views\Tiss\PendingRegistrations.cshtml" />
+    <Content Include="Views\Maintenance\Index.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

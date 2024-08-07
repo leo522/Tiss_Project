@@ -40,5 +40,23 @@ namespace TISS_Web
             //System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
             //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(culture);
         }
+
+        protected void Application_Error()
+        {
+            Exception exception = Server.GetLastError();
+            Server.ClearError();
+
+            // 確認是否為 404 錯誤
+            var httpException = exception as HttpException;
+            if (httpException != null && httpException.GetHttpCode() == 404)
+            {
+                Response.Redirect("~/Error404");
+            }
+            else
+            {
+                // 如果不是 404 錯誤，可以顯示通用的錯誤頁面
+                Response.Redirect("~/Error");
+            }
+        }
     }
 }
