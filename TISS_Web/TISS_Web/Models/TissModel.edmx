@@ -271,8 +271,6 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'TISS_Web.dbo.InternalEmployees' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="InternalEmployees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -920,6 +918,7 @@
           <EntitySet Name="Hashtag" EntityType="Self.Hashtag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
@@ -957,15 +956,6 @@
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [InternalEmployees].[EmployeeID] AS [EmployeeID], 
-    [InternalEmployees].[Name] AS [Name], 
-    [InternalEmployees].[Department] AS [Department], 
-    [InternalEmployees].[IsRegistered] AS [IsRegistered], 
-    [InternalEmployees].[EmailAddress] AS [EmailAddress]
-    FROM [dbo].[InternalEmployees] AS [InternalEmployees]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__MenuItems__MenuI__467D75B8" Association="Self.FK__MenuItems__MenuI__467D75B8">
             <End Role="Menus" EntitySet="Menus" />
             <End Role="MenuItems" EntitySet="MenuItems" />

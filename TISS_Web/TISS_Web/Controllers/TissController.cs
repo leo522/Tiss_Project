@@ -170,11 +170,20 @@ namespace TISS_Web.Controllers
                     IsActive = true,
                     UserAccount = UserName, // 假設 UserAccount 和 UserName 相同
                     changeDate = DateTime.Now,
-                    IsApproved = false // 註冊後需要管理員審核
+                    IsApproved = false // 預設未開通，註冊後需要管理員審核
                 };
+
 
                 _db.Users.Add(newUser);
                 _db.SaveChanges();
+
+                // 發送Email通知管理員
+                var adminEmail = "00048@tiss.org.tw";
+                var emailBody = $"新使用者註冊，請審核：<br/>帳號: {UserName}<br/>Email: {Email}<br/>註冊時間: {DateTime.Now}<br/><a href='{Url.Action("PendingRegistrations", "Tiss", null, Request.Url.Scheme)}'>點擊這裡審核</a>";
+                SendEmail(adminEmail, "新使用者註冊通知", emailBody);
+
+                // 設定訊息給 TempData
+                TempData["RegisterMessage"] = "您的帳號已註冊成功，待管理員審核後將發送通知到您的Email。";
 
                 return RedirectToAction("Login");
             }
@@ -216,12 +225,25 @@ namespace TISS_Web.Controllers
             try
             {
                 var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
+
                 if (user != null)
                 {
                     user.IsApproved = true;
-                    user.IsActive = true; // 審核帳號
+
+                    // 更新 InternalEmployees 表中的 IsRegistered 欄位
+                    var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmailAddress == user.Email);
+                    if (employee != null)
+                    {
+                        employee.IsRegistered = true;
+                    }
+
                     _db.SaveChanges();
+
+                    // 發送Email通知使用者
+                    var emailBody = $"您的帳號 {userName} 已通過審核，現在可以登入使用。";
+                    SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody);
                 }
+
                 return RedirectToAction("PendingRegistrations");
             }
             catch (Exception ex)
