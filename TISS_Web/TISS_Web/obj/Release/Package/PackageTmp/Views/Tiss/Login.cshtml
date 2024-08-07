@@ -31,6 +31,12 @@
 </head>
 <body>
     <div class="login-container">
+        @if (TempData["RegisterMessage"] != null)
+        {
+            <script type="text/javascript">
+                alert('@TempData["RegisterMessage"]');
+            </script>
+        }
         <div class="text-center">
             <img src="~/Img/logo.svg" alt="Logo" style="height: 45px; width: 100%;">
         </div>

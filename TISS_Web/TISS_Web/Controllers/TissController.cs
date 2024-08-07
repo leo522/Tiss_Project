@@ -344,7 +344,7 @@ namespace TISS_Web.Controllers
         }
 
         //郵件發送方法
-        private void SendEmail(string toEmail, string subject, string body)
+        private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
         {
             var fromEmail = "00048@tiss.org.tw";
             var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
@@ -366,7 +366,17 @@ namespace TISS_Web.Controllers
                 IsBodyHtml = true,
             };
 
-            mailMessage.To.Add(toEmail);
+            // 分割以逗號分隔的收件人地址並添加到郵件中
+            foreach (var email in toEmail.Split(','))
+            {
+                mailMessage.To.Add(email.Trim());
+            }
+
+            if (!string.IsNullOrEmpty(attachmentPath))
+            {
+                Attachment attachment = new Attachment(attachmentPath);
+                mailMessage.Attachments.Add(attachment);
+            }
 
             try
             {
@@ -2509,7 +2519,16 @@ namespace TISS_Web.Controllers
         public ActionResult GenerateArticleClickReport()
         {
             var reportService = new ReportService();
-            reportService.GenerateReport();
+
+            string reportPath = reportService.GenerateReport();
+
+            if (!string.IsNullOrEmpty(reportPath))
+            {
+                string toEmail = "00009@tiss.org.tw,00048@tiss.org.tw";
+                string subject = "文章瀏覽率報表";
+                string body = "您好，請參閱附件中的文章瀏覽率報表。";
+                SendEmail(toEmail, subject, body, reportPath);
+            }
 
             return Content("報表產生完成");
         }

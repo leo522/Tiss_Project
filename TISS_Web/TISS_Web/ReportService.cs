@@ -12,7 +12,7 @@ namespace TISS_Web
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
 
-        public void GenerateReport()
+        public string GenerateReport()
         {
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmm");
             string excelPath = $@"D:\文章瀏覽率報表\report_{timestamp}.xlsx";
@@ -31,10 +31,12 @@ namespace TISS_Web
                 }
 
                 Console.WriteLine("報表產生完成");
+                return excelPath;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"發生錯誤: {ex.Message}");
+                return null;
             }
         }
     }
