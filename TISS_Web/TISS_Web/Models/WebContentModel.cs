@@ -283,6 +283,8 @@ namespace TISS_Web.Models
 
         public DateTime CreateDate { get; set; }
 
+        public string FormattedCreateDate { get; set; } // 新增發佈日期屬性
+
         public string Hashtags { get; set; }
 
         public DateTime UpdateDate { get; set; }

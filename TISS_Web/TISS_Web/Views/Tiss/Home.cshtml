@@ -259,29 +259,29 @@
                                             @*影片文字內容*@
                                             @*<div class="carousel-article-column">
 
-                                                    @foreach (var idt in  Model.OtherArticles)
-                                                    {
-                                                        <div class="carousel-item article-item" style="display: none;">
-                                                            <a href="/video/@Model..idt.EncryptedUrl" class="carousel-article-link">
-                                                                <div class="VideoCarouselContent">
-                                                                    <div class="VideoCarouselContentBox">
-                                                                        <div class="Tag">
-                                                                            <span>中心成果</span>
-                                                                        </div>
-                                                                        <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
-                                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.LatestArticle.BodyContent</span>
-                                                                        <div class="Info">
-                                                                            <span class="el-tag el-tag--plain is-round">
-                                                                                <span class="el-tag__content">人物專訪</span>
-                                                                            </span>
-                                                                            <span>@Model.LatestArticle.PublishedDate</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    }
-                                                </div>*@
+                        @foreach (var idt in  Model.OtherArticles)
+                        {
+                            <div class="carousel-item article-item" style="display: none;">
+                                <a href="/video/@Model..idt.EncryptedUrl" class="carousel-article-link">
+                                    <div class="VideoCarouselContent">
+                                        <div class="VideoCarouselContentBox">
+                                            <div class="Tag">
+                                                <span>中心成果</span>
+                                            </div>
+                                            <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
+                                            <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.LatestArticle.BodyContent</span>
+                                            <div class="Info">
+                                                <span class="el-tag el-tag--plain is-round">
+                                                    <span class="el-tag__content">人物專訪</span>
+                                                </span>
+                                                <span>@Model.LatestArticle.PublishedDate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    </div>*@
                                             <div class="carousel-article-column">
                                                 @for (var i = 0; i < Model.OtherArticles.Count; i++)
                                                 {
@@ -310,6 +310,22 @@
                                         @*影片文字內容*@
 
                                         @*影片內容*@
+                                        @*<div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
+                    <div class="VideoCarouselVideo">
+                        <div class="VideoCarouselVideoBox">
+                            <div class="carousel-video-column">
+                                <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                                    @foreach (var video in Model.Videos)
+                                    {
+                                        <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                            @Html.Raw(video.VideoIframe)
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
@@ -326,8 +342,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @*影片內容*@
                                     </div>
+                                </div>
+                                @*影片內容*@
+                            </div>
                                 </div>
                                 <div class="BottomRow">
                                     <div style="width: 225px; margin: auto;">
@@ -422,7 +440,7 @@
         </div>
     </div>
 
-    <script>
+<script>
             $(document).ready(function () {
                 var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
@@ -448,7 +466,7 @@
         interval: 5000 // 5秒輪播圖
     });
 
-        //Partial View控制
+//Partial View控制
 $('.category-button').click(function() {
                 var contentTypeId = $(this).data('content-type-id');
 
@@ -466,17 +484,19 @@ $('.category-button').click(function() {
                 });
 });
 
+//影片輪播
         document.addEventListener('DOMContentLoaded', function () {
             var videoItems = document.querySelectorAll('.carousel-video-column .video-item');
             var articleItems = document.querySelectorAll('.carousel-article-column .article-item');
             var currentIndex = 0;
+            var intervalId;
 
             function showItem(index) {
-                // Hide all items
+                //隱藏所有項目
                 videoItems.forEach(item => item.style.display = 'none');
                 articleItems.forEach(item => item.style.display = 'none');
 
-                // Show current items
+                //顯示當前項目
                 if (videoItems[index]) videoItems[index].style.display = 'block';
                 if (articleItems[index]) articleItems[index].style.display = 'block';
             }
@@ -486,12 +506,28 @@ $('.category-button').click(function() {
                 showItem(currentIndex);
             }
 
-            //初始顯示第一個影片
-            showItem(currentIndex);
+            function startCarousel() {
+                intervalId = setInterval(nextItem, 10000);
+            }
 
-            //影片文章輪播
-            setInterval(nextItem, 10000);
+            function stopCarousel() {
+                clearInterval(intervalId);
+            }
+
+            // 初始顯示第一個影片
+            showItem(currentIndex);
+            startCarousel();
+
+            // 為所有 video 標籤添加事件監聽
+            videoItems.forEach(item => {
+                var videoElement = item.querySelector('video');
+                if (videoElement) {
+                    videoElement.addEventListener('play', stopCarousel);
+                    videoElement.addEventListener('pause', startCarousel);
+                    videoElement.addEventListener('ended', startCarousel); // 當影片結束時重新開始輪播
+                }
+            });
         });
-    </script>
+</script>
 </body>
 </html>

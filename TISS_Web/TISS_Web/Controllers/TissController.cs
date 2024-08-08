@@ -756,7 +756,7 @@ namespace TISS_Web.Controllers
         /// 中心公告
         /// </summary>
         /// <returns></returns>
-        public ActionResult announcement(int page = 1, int pageSize = 5)
+        public ActionResult announcement(int page = 1, int pageSize = 9)
         {
 
             Session["ReturnUrl"] = Request.Url.ToString();
@@ -778,6 +778,7 @@ namespace TISS_Web.Controllers
             // 查詢相關 hashtags 的文章
             var list = _db.ArticleContent
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
             //計算總數和總頁數
@@ -792,6 +793,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -805,13 +807,16 @@ namespace TISS_Web.Controllers
         /// 新聞發布
         /// </summary>
         /// <returns></returns>
-        public ActionResult press(int page = 1, int pageSize = 5)
+        public ActionResult press(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.ContentType == "新聞發佈" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.ContentType == "新聞發佈" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -825,6 +830,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -838,13 +844,16 @@ namespace TISS_Web.Controllers
         /// 中心訊息
         /// </summary>
         /// <returns></returns>
-        public ActionResult institute(int page = 1, int pageSize = 5)
+        public ActionResult institute(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.ContentType == "中心訊息" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.ContentType == "中心訊息" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -858,6 +867,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -871,13 +881,16 @@ namespace TISS_Web.Controllers
         /// 徵才招募
         /// </summary>
         /// <returns></returns>
-        public ActionResult recruit(int page = 1, int pageSize = 5)
+        public ActionResult recruit(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.ContentType == "徵才招募" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.ContentType == "徵才招募" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -891,6 +904,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -904,36 +918,36 @@ namespace TISS_Web.Controllers
         /// 委託研究計劃
         /// </summary>
         /// <returns></returns>
-        public ActionResult researchProject()
-        {
-            Session["ReturnUrl"] = Request.Url.ToString();
+        //public ActionResult researchProject()
+        //{
+        //    Session["ReturnUrl"] = Request.Url.ToString();
 
 
-            int newsItemId = 1;
-            var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == newsItemId);
-            if (item != null)
-            {
-                // 傳遞點擊數給前端
-                ViewBag.ClickCount = item.ClickCount;
-            }
-            else
-            {
-                // 如果找不到對應的新聞項目，點擊數為 0
-                ViewBag.ClickCount = 0;
-            }
+        //    int newsItemId = 1;
+        //    var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == newsItemId);
+        //    if (item != null)
+        //    {
+        //        // 傳遞點擊數給前端
+        //        ViewBag.ClickCount = item.ClickCount;
+        //    }
+        //    else
+        //    {
+        //        // 如果找不到對應的新聞項目，點擊數為 0
+        //        ViewBag.ClickCount = 0;
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         /// <summary>
         /// 政府網站服務管理規範
         /// </summary>
         /// <returns></returns>
-        public ActionResult GovernmentWebsite()
-        {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
-        }
+        //public ActionResult GovernmentWebsite()
+        //{
+        //    Session["ReturnUrl"] = Request.Url.ToString();
+        //    return View();
+        //}
 
         #endregion
 
@@ -956,6 +970,7 @@ namespace TISS_Web.Controllers
             // 查詢相關 hashtags 的文章
             var list = _db.ArticleContent
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
             //計算總數和總頁數
@@ -970,6 +985,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName,
                 VideoIframe = ExtractIframe(s.ContentBody),
             }).ToList();
@@ -991,7 +1007,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "中心成果" || a.Hashtags == "人物專訪" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "中心成果" || a.Hashtags == "人物專訪" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1005,6 +1024,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1024,7 +1044,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "影音專區" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "影音專區" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1038,6 +1061,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1057,7 +1081,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技論壇" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動科技論壇" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1071,6 +1098,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1372,6 +1400,7 @@ namespace TISS_Web.Controllers
             // 查詢相關 hashtags 的文章
             var list = _db.ArticleContent
                 .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
             //計算總數和總頁數
@@ -1386,6 +1415,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1405,7 +1435,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科學" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動科學" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1419,6 +1452,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1438,7 +1472,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動科技" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動科技" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1452,6 +1489,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1471,7 +1509,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動醫學" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動醫學" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1485,6 +1526,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1506,7 +1548,10 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.ArticleContent.Where(a => a.Hashtags == "運動生理" && a.IsEnabled).ToList();
+                var list = _db.ArticleContent.
+                    Where(a => a.Hashtags == "運動生理" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
 
                 //計算總數和總頁數
                 var totalArticles = list.Count();
@@ -1520,6 +1565,7 @@ namespace TISS_Web.Controllers
                     EncryptedUrl = EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                     ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
                 }).ToList();
 
@@ -1544,7 +1590,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動心理" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動心理" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1558,6 +1607,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1577,7 +1627,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "體能訓練" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "體能訓練" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1591,6 +1644,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1610,7 +1664,10 @@ namespace TISS_Web.Controllers
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ArticleContent.Where(a => a.Hashtags == "運動營養" && a.IsEnabled).ToList();
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "運動營養" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
 
             //計算總數和總頁數
             var totalArticles = list.Count();
@@ -1624,6 +1681,7 @@ namespace TISS_Web.Controllers
                 EncryptedUrl = EncryptUrl(s.Title),
                 ImageContent = s.ImageContent,
                 Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
             }).ToList();
 
@@ -1632,6 +1690,44 @@ namespace TISS_Web.Controllers
 
             return View(articles);
         }
+
+        /// <summary>
+        /// 兒少科普
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult childrenScience(int page = 1, int pageSize = 9)
+        {
+            Session["ReturnUrl"] = Request.Url.ToString();
+
+            page = Math.Max(1, page); //確保頁碼至少為 1
+
+            var list = _db.ArticleContent
+                .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
+            
+            //計算總數和總頁數
+            var totalArticles = list.Count();
+            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return View(articles);
+        }
+        
         #endregion
 
         #region 取得文件檔案
@@ -2270,7 +2366,7 @@ namespace TISS_Web.Controllers
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理" } },
+                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普" } },
                     { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
                     { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
@@ -2305,6 +2401,7 @@ namespace TISS_Web.Controllers
                     { "中心成果", "/Tiss/achievement" },
                     { "新聞影音", "/Tiss/news" },
                     { "活動紀錄", "/Tiss/activityRecord" },
+                    { "兒少科普", "/Tiss/childrenScience" },
                 };
 
                 ViewBag.MenuUrls = menuList;

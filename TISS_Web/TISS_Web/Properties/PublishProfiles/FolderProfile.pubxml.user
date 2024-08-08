@@ -22,7 +22,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/10/2013 16:29:20</publishTime>
     </File>
     <File Include="bin/en-US/TISS_Web.resources.dll">
-      <publishTime>08/07/2024 11:19:05</publishTime>
+      <publishTime>08/07/2024 13:01:53</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/23/2017 13:15:18</publishTime>
@@ -271,10 +271,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>08/07/2024 11:19:05</publishTime>
+      <publishTime>08/07/2024 13:01:53</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>08/07/2024 11:19:05</publishTime>
+      <publishTime>08/07/2024 13:01:53</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -6975,6 +6975,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Img/3E1A5528_0.jpg">
       <publishTime>06/21/2024 11:39:01</publishTime>
     </File>
+    <File Include="Img/404.jpg">
+      <publishTime>08/07/2024 12:48:54</publishTime>
+    </File>
     <File Include="Img/about_banner_1.jpg">
       <publishTime>03/15/2024 15:33:54</publishTime>
     </File>
@@ -7052,6 +7055,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Img/中心公告圖片/S__27959338.jpg">
       <publishTime>06/24/2024 16:04:46</publishTime>
+    </File>
+    <File Include="Img/停機.jpg">
+      <publishTime>08/07/2024 11:46:59</publishTime>
     </File>
     <File Include="Img/公開資訊圖片/banner_public.jpg">
       <publishTime>03/15/2024 15:33:54</publishTime>
@@ -8697,6 +8703,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="TinyMCE/vender/tinymce-4/tinymce.min.js">
       <publishTime>07/08/2024 07:40:31</publishTime>
     </File>
+    <File Include="Views/Error/Error404.cshtml">
+      <publishTime>08/07/2024 13:00:43</publishTime>
+    </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>07/09/2024 07:54:30</publishTime>
     </File>
@@ -8714,6 +8723,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Views/Home/ytVideo.cshtml">
       <publishTime>07/19/2024 09:07:28</publishTime>
+    </File>
+    <File Include="Views/Maintenance/Index.cshtml">
+      <publishTime>08/07/2024 13:00:43</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>06/18/2024 15:07:39</publishTime>
@@ -8881,7 +8893,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/18/2024 15:58:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/05/2024 16:29:04</publishTime>
+      <publishTime>08/07/2024 13:01:56</publishTime>
     </File>
     <File Include="zh-TW/sdk.js">
       <publishTime>06/27/2024 13:19:34</publishTime>
