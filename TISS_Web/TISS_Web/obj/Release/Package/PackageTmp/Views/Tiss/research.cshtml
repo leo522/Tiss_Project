@@ -82,6 +82,9 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/sportsNutrition">運動營養</a>
                                     </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/childrenScience">兒少科普</a>
+                                    </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
@@ -143,8 +146,11 @@
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                             </div>
                                                         </div>
-                                                        <div class="el-tag el-tag--plain is-round">
-                                                            <div class="el-tag__content">@article.Hashtags</div>
+                                                        <div class="tag-date-container">
+                                                            <div class="el-tag el-tag--plain is-round">
+                                                                <div class="el-tag__content">@article.Hashtags</div>
+                                                            </div>
+                                                            <div class="date-tag">@article.FormattedCreateDate</div>
                                                         </div>
                                                     </a>
                                                 </div>

@@ -7,7 +7,6 @@
     {
         <div class="col-md-6 mb-4">
             <a href="https://www.youtube.com/watch?v=@article.EncryptedUrl" class="">
-                @*<a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">*@
                 <div class="NewsItemBox">
                     <div class="NewsItemImg">
                         @if (article.ImageContent != null)
@@ -22,11 +21,13 @@
                     <div class="NewsItemContent">
                         <span class="el-text is-line-clamp">@article.BodyContent</span>
                     </div>
-                    <div class="el-tag el-tag--plain is-round">
-                        <div class="el-tag__content">@article.Hashtags</div>
-                    </div>
-                    <div class="el-tag el-tag--plain is-round">
-                        <span class="el-tag__content">@article.PublishedDate</span>
+                    <div class="NewsItemInfo">
+                        <div class="NewsItemTags">
+                            <div class="el-tag el-tag--plain is-round">
+                                <div class="el-tag__content">@article.Hashtags</div>
+                            </div>
+                            <span>@article.PublishedDate.ToString("yyyy-MM-dd")</span>
+                        </div>
                     </div>
                 </div>
             </a>

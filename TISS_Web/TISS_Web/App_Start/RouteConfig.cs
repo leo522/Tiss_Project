@@ -20,11 +20,11 @@ namespace TISS_Web
                 defaults: new { controller = "Tiss", action = "Home", id = UrlParameter.Optional }
             );
 
-        //    routes.MapRoute(
-        //    name: "EditPage",
-        //    url: "EditPage/Edit",
-        //    defaults: new { controller = "Tiss", action = "editPage" }
-        //);
+            //    routes.MapRoute(
+            //    name: "EditPage",
+            //    url: "EditPage/Edit",
+            //    defaults: new { controller = "Tiss", action = "editPage" }
+            //);
         }
     }
 }

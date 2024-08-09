@@ -4,11 +4,17 @@
     font-weight: bold !important; /* 使文字加粗 */
 }
 
-/*.Menu {
-    list-style-type: none;*/ /* 移除默認的項目符號 */
-    /*padding: 0;*/ /* 移除內邊距 */
-/*}*/
+.tag-date-container {
+    display: flex;
+    align-items: center;
+    font-size: 12px; /* 調整標籤和日期的字體大小 */
+}
 
-    /*.Menu li {
-        margin-bottom: 10px;*/ /* 每個項目之間添加一些間距 */
-    /*}*/
+.el-tag {
+    padding: 2px 6px; /* 調整標籤內邊距 */
+    margin-right: 5px; /* 標籤之間的間距 */
+}
+
+.date-tag {
+    color: #888; /* 調整日期字體顏色 */
+}

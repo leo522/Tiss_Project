@@ -2647,6 +2647,7 @@
     <Content Include="bootstrap\js\bootstrap.esm.min.js.map" />
     <Content Include="bootstrap\js\bootstrap.js.map" />
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="site\js\HomeFun.js" />
     <Content Include="storage\media\MOU簽署-合作學校%281%29.jpg" />
     <Content Include="storage\media\ORS%281%29.jpg" />
     <Content Include="storage\media\ORS.jpg" />
@@ -3015,6 +3016,8 @@
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Tiss\childrenScience.cshtml" />
+    <Content Include="Views\Tiss\_PopularScience.cshtml" />
+    <Content Include="Views\Tiss\_VideoArea.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

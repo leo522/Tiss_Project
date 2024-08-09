@@ -631,28 +631,6 @@ namespace TISS_Web.Controllers
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            //var youtubeService = new YouTubeService(new BaseClientService.Initializer
-            //{
-            //    ApiKey = _apiKey,
-            //    ApplicationName = "Tiss"
-            //});
-            //var channelsListRequest = youtubeService.Channels.List("snippet,contentDetails,statistics");
-            //channelsListRequest.Id = "UCfpGsfNSwowlOk3eiJeHSWA"; // yt頻道ID
-            //var channelResponse = await channelsListRequest.ExecuteAsync();
-
-            //var YTvideo = youtubeService.PlaylistItems.List("snippet,contentDetails");
-            //YTvideo.PlaylistId = channelResponse.Items[0].ContentDetails.RelatedPlaylists.Uploads;
-            //YTvideo.MaxResults = 20; //要取得的影片數量，上限50
-            //var YTvideoResponse = await YTvideo.ExecuteAsync();
-
-            ////YT影片內容
-            //var videos = YTvideoResponse.Items.Select(item => new ArticleContentModel
-            //{
-            //    Title = item.Snippet.Title,
-            //    EncryptedUrl = item.Snippet.ResourceId.VideoId,  //YouTube影片ID
-            //    BodyContent = item.Snippet.Description,
-            //}).ToList();
-
             // 查詢影片文章內容
             var relatedHashtags = new List<string>
             {
@@ -688,15 +666,30 @@ namespace TISS_Web.Controllers
                     ContentType = a.ContentType,
                     Hashtags = a.Hashtags,
                     EncryptedUrl = a.EncryptedUrl,
-                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue
+                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
                 }).Take(4).ToList();
+
+            var dto = _db.ArticleContent
+                    .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                    .OrderByDescending(a => a.PublishedDate)
+                    .Select(a => new ArticleContentModel
+                {
+                    Title = a.Title,
+                    ImageContent = a.ImageContent,
+                    ContentType = a.ContentType,
+                    Hashtags = a.Hashtags,
+                    EncryptedUrl = a.EncryptedUrl,
+                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                })
+                    .FirstOrDefault(); // 取得最新的專欄文章
 
             var latestArticle = dtos.FirstOrDefault();
             var otherArticles = dtos.Skip(1).ToList();
 
             var viewModel = new HomeViewModel //首頁的部份視圖
             {
-                LatestArticle = latestArticle,
+                //LatestArticle = latestArticle,
+                LatestArticle = dto,
                 OtherArticles = otherArticles,
                 Videos = videos
             };
@@ -704,7 +697,7 @@ namespace TISS_Web.Controllers
             return View(viewModel);
         }
 
-        //首頁Partial View使用
+        //首頁Partial View 最新消息清單使用
         public ActionResult GetArticles(int? contentTypeId)
         {
             var query = _db.ArticleContent
@@ -724,12 +717,13 @@ namespace TISS_Web.Controllers
                     ContentType = a.ContentType,
                     Hashtags = a.Hashtags,
                     EncryptedUrl = a.EncryptedUrl,
-                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue
+                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
                 }).Take(4).ToList();
 
             return PartialView("_ArticleListPartial", dtos);
         }
 
+        //處理DB影片的尺寸
         private string ExtractIframe(string content)
         {
             var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>");
@@ -2363,23 +2357,30 @@ namespace TISS_Web.Controllers
                 ViewBag.PreviousArticle = previousArticle;
                 ViewBag.NextArticle = nextArticle;
 
+                var menus = _db.Menus.ToList(); //主題目錄
+
+                var menuItems = _db.MenuItems.ToList(); //子主題目錄
+
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普" } },
+                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", } },
                     { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
                     { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
                 };
 
-                //var currentSubDirectory = article.Hashtags; //文章的子目錄可以通過 ContentType 獲得
-                var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
+
+                //var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
+                //var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
+                //ViewBag.ParentDirectory = parentDirectory;
+                var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
                 ViewBag.ParentDirectory = parentDirectory;
+                ViewBag.CurrentSubDirectory = currentSubDirectory;
 
-                var menus = _db.Menus.ToList(); //主題目錄
-                var menuItems = _db.MenuItems.ToList(); //子主題目錄
                 var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
+
                 ViewBag.Menus = menus;
                 ViewBag.ParentMenu = parentMenu;
 
@@ -2430,31 +2431,20 @@ namespace TISS_Web.Controllers
 
                 ViewBag.MenuUrls = menuUrls;
                 ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
-                //ViewBag.MenuUrls = menuItems.ToDictionary(item => item.Name, item => item.Url);
-                //ViewBag.AllArticlesUrl = allArticlesUrl ?? "#"; // 預設連結為 "#"
-                //var allMenuList = new Dictionary<string, string>
-                //{
-                //    { "科普專欄", "/Tiss/research" },
-                //    { "中心公告", "/Tiss/announcement" },
-                //    { "影音專區", "/Tiss/video" },
 
-                //};
-                // 設定當前主題
-
-                // 根據當前主題設置對應的「全部文章」連結
-                //var allArticlesUrl = allMenuList.ContainsKey(currentParentDirectory) ? allMenuList[currentParentDirectory] : "#";
-                //ViewBag.AllArticlesUrl = allArticlesUrl;
+                // 將發佈日期格式化為 "yyyy-MM-dd"
+                string formattedDate = article.PublishedDate.HasValue? article.PublishedDate.Value.ToString("yyyy-MM-dd"): string.Empty;
+                ViewBag.FormattedPublishedDate = formattedDate;
 
                 _db.SaveChanges();
 
                 return View(article);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                return RedirectToAction("Error404", "Error");
             }
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
