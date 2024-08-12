@@ -337,6 +337,9 @@
     <Compile Include="Models\RegulationPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReplyMessage.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ResearchPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>

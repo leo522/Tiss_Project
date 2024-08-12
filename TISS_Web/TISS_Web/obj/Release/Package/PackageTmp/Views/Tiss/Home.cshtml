@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="~/site/js/Carousel.js"></script>
     <link href="~/site/css/SectionTitleStyle.css" rel="stylesheet" />
+    @*<script src="~/site/js/HomeFun.js"></script>*@
 </head>
 <body>
     <div id="fb-root"></div>
@@ -153,7 +153,7 @@
                                                 <span class="el-tag el-tag--plain is-round">
                                                     <span class="el-tag__content">@Model.LatestArticle.Hashtags</span>
                                                 </span>
-                                                <span>@Model.LatestArticle.PublishedDate</span>
+                                                <span>@Model.LatestArticle.PublishedDate.ToString("yyyy-MM-dd")</span>
                                             </div>
                                         </div>
                                     </a>
@@ -226,11 +226,13 @@
                                                         <div class="NewsItemContent">
                                                             <span class="el-text is-line-clamp">@article.BodyContent</span>
                                                         </div>
-                                                        <div class="el-tag el-tag--plain is-round">
-                                                            <div class="el-tag__content">@article.Hashtags</div>
-                                                        </div>
-                                                        <div class="el-tag el-tag--plain is-round">
-                                                            <span>@article.PublishedDate</span>
+                                                        <div class="NewsItemInfo">
+                                                            <div class="NewsItemTags">
+                                                                <div class="el-tag el-tag--plain is-round">
+                                                                    <div class="el-tag__content">@article.Hashtags</div>
+                                                                </div>
+                                                                <span>@article.PublishedDate.ToString("yyyy-MM-dd")</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -259,30 +261,33 @@
                                             @*影片文字內容*@
                                             @*<div class="carousel-article-column">
 
-                        @foreach (var idt in  Model.OtherArticles)
-                        {
-                            <div class="carousel-item article-item" style="display: none;">
-                                <a href="/video/@Model..idt.EncryptedUrl" class="carousel-article-link">
-                                    <div class="VideoCarouselContent">
-                                        <div class="VideoCarouselContentBox">
-                                            <div class="Tag">
-                                                <span>中心成果</span>
-                                            </div>
-                                            <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
-                                            <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.LatestArticle.BodyContent</span>
-                                            <div class="Info">
-                                                <span class="el-tag el-tag--plain is-round">
-                                                    <span class="el-tag__content">人物專訪</span>
-                                                </span>
-                                                <span>@Model.LatestArticle.PublishedDate</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    </div>*@
+                                                    @foreach (var idt in  Model.OtherArticles)
+                                                    {
+                                                        <div class="carousel-item article-item" style="display: none;">
+                                                            <a href="/video/@Model..idt.EncryptedUrl" class="carousel-article-link">
+                                                                <div class="VideoCarouselContent">
+                                                                    <div class="VideoCarouselContentBox">
+                                                                        <div class="Tag">
+                                                                            <span>中心成果</span>
+                                                                        </div>
+                                                                        <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
+                                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.LatestArticle.BodyContent</span>
+                                                                        <div class="Info">
+                                                                            <span class="el-tag el-tag--plain is-round">
+                                                                                <span class="el-tag__content">人物專訪</span>
+                                                                            </span>
+                                                                            <span>@Model.LatestArticle.PublishedDate</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    }
+                                                </div>*@
                                             <div class="carousel-article-column">
+                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="Previous">
+                                                    &lt;
+                                                </button>
                                                 @for (var i = 0; i < Model.OtherArticles.Count; i++)
                                                 {
                                                     <div class="carousel-item article-item" style="display: none;">
@@ -311,21 +316,21 @@
 
                                         @*影片內容*@
                                         @*<div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
-                    <div class="VideoCarouselVideo">
-                        <div class="VideoCarouselVideoBox">
-                            <div class="carousel-video-column">
-                                <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-                                    @foreach (var video in Model.Videos)
-                                    {
-                                        <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                                            @Html.Raw(video.VideoIframe)
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+                                                <div class="VideoCarouselVideo">
+                                                    <div class="VideoCarouselVideoBox">
+                                                        <div class="carousel-video-column">
+                                                            <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                                                                @foreach (var video in Model.Videos)
+                                                                {
+                                                                    <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                                                        @Html.Raw(video.VideoIframe)
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
@@ -340,194 +345,193 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" aria-label="Next">
+                                                    &gt;
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 @*影片內容*@
                             </div>
-                                </div>
-                                <div class="BottomRow">
-                                    <div style="width: 225px; margin: auto;">
-                                        <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
-                                            <span class="">
-                                                所有影音
-                                                <span class="right-icon">
-                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="BottomRow">
+                            <div style="width: 225px; margin: auto;">
+                                <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
+                                    <span class="">
+                                        所有影音
+                                        <span class="right-icon">
+                                            <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div id="links" class="SectionLinks">
-                        <div class="container">
-                            <div class="SectionHeader">
-                                <div class="Title">
-                                    <div class="SectionTitle">Links</div>
-                                    <div class="SectionSubTitle">
-                                        <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="運動科學中心圖標">常用連結
-                                    </div>
-                                </div>
+                </div>
+            </div>
+            <div id="links" class="SectionLinks">
+                <div class="container">
+                    <div class="SectionHeader">
+                        <div class="Title">
+                            <div class="SectionTitle">Links</div>
+                            <div class="SectionSubTitle">
+                                <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="運動科學中心圖標">常用連結
                             </div>
-                            <div class="SectionLinksList">
-                                <div class="el-carousel el-carousel--horizontal d-none d-md-block">
-                                    <div class="el-carousel__container" style="height: 200px; overflow: hidden;">
-                                        <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 200px;">
-                                            <div class="SectionLinksItem">
-                                                <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
-                                                        <a href="https://www.sa.gov.tw/">
-                                                            <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署">
-                                                        </a>
-                                                    </div>
-                                                </div>
+                        </div>
+                    </div>
+                    <div class="SectionLinksList">
+                        <div class="el-carousel el-carousel--horizontal d-none d-md-block">
+                            <div class="el-carousel__container" style="height: 200px; overflow: hidden;">
+                                <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 200px;">
+                                    <div class="SectionLinksItem">
+                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.sa.gov.tw/">
+                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
-                                        <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
-                                            <button class="el-carousel__button" aria-label="btn"></button>
-                                        </li>
-                                    </ul>
                                 </div>
-                                <div class="el-carousel el-carousel--horizontal d-block d-md-none">
-                                    <div class="el-carousel__container" style="height: 0px; overflow: hidden;">
-                                        <button type="button" class="el-carousel__arrow el-carousel__arrow--left" aria-label="btn" style="display: none;">
-                                            <i class="el-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </button>
-                                        <button type="button" class="el-carousel__arrow el-carousel__arrow--right" aria-label="btn" style="display: none;">
-                                            <i class="el-icon">
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                                    <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                    </path>
-                                                </svg>
-                                            </i>
-                                        </button>
-                                        <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 70px;">
-                                            <div class="SectionLinksItem">
-                                                <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
-                                                        <a href="https://www.sa.gov.tw/">
-                                                            <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署">
-                                                        </a>
-                                                    </div>
-                                                </div>
+                            </div>
+                            <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
+                                <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
+                                    <button class="el-carousel__button" aria-label="btn"></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="el-carousel el-carousel--horizontal d-block d-md-none">
+                            <div class="el-carousel__container" style="height: 0px; overflow: hidden;">
+                                <button type="button" class="el-carousel__arrow el-carousel__arrow--left" aria-label="btn" style="display: none;">
+                                    <i class="el-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                            <path fill="currentColor" d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z">
+                                            </path>
+                                        </svg>
+                                    </i>
+                                </button>
+                                <button type="button" class="el-carousel__arrow el-carousel__arrow--right" aria-label="btn" style="display: none;">
+                                    <i class="el-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                                            </path>
+                                        </svg>
+                                    </i>
+                                </button>
+                                <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 70px;">
+                                    <div class="SectionLinksItem">
+                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.sa.gov.tw/">
+                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署">
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
-                                        <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
-                                            <button class="el-carousel__button" aria-label="btn"></button>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
+                            <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
+                                <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
+                                    <button class="el-carousel__button" aria-label="btn"></button>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @*</div>
+    </div>*@
 
 <script>
-            $(document).ready(function () {
-                var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+        $(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
-                if (isLoggedIn) {
-                    $('#logoutBtn').show(); // 顯示登出按鈕
-                } else {
-                    $('#loginBtn').show(); // 顯示登入按鈕
-                }
+    if (isLoggedIn) {
+        $('#logoutBtn').show(); // 顯示登出按鈕
+    } else {
+        $('#loginBtn').show(); // 顯示登入按鈕
+    }
 
-                if (window.location.pathname === '/Tiss/Home') {
-                    $('#adminUser').hide(); // 隱藏管理者按鈕
-                }
-            });
-        document.addEventListener("DOMContentLoaded", function () {
-            // 檢查當前頁面是否為首頁
-            if (window.location.pathname === "/Home") {
-                // 隱藏元素
-                document.getElementById("adminUser").style.display = "none";
-            }
-        });
-
-    $('#carouselExample').carousel({
-        interval: 5000 // 5秒輪播圖
-    });
-
-//Partial View控制
-$('.category-button').click(function() {
-                var contentTypeId = $(this).data('content-type-id');
-
-                $.ajax({
-                    url: '@Url.Action("GetArticles", "Tiss")',
-                    type: 'GET',
-                    data: { contentTypeId: contentTypeId },
-                    success: function (data) {
-                        $('#articleContainer').empty();
-                        $('#articleContainer').append(data);
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("讀取錯誤: " + status + error);
-                    }
-                });
+    if (window.location.pathname === '/Tiss/Home') {
+        $('#adminUser').hide(); // 隱藏管理者按鈕
+    }
 });
 
-//影片輪播
-        document.addEventListener('DOMContentLoaded', function () {
-            var videoItems = document.querySelectorAll('.carousel-video-column .video-item');
-            var articleItems = document.querySelectorAll('.carousel-article-column .article-item');
-            var currentIndex = 0;
-            var intervalId;
+document.addEventListener("DOMContentLoaded", function () {
+    // 檢查當前頁面是否為首頁
+    if (window.location.pathname === "/Home") {
+        // 隱藏元素
+        document.getElementById("adminUser").style.display = "none";
+    }
+});
 
-            function showItem(index) {
-                //隱藏所有項目
-                videoItems.forEach(item => item.style.display = 'none');
-                articleItems.forEach(item => item.style.display = 'none');
+$('#carouselExample').carousel({
+    interval: 5000 // 5秒輪播圖
+});
 
-                //顯示當前項目
-                if (videoItems[index]) videoItems[index].style.display = 'block';
-                if (articleItems[index]) articleItems[index].style.display = 'block';
-            }
+// Partial View控制
+$('.category-button').click(function () {
+    var contentTypeId = $(this).data('content-type-id');
 
-            function nextItem() {
-                currentIndex = (currentIndex + 1) % videoItems.length;
-                showItem(currentIndex);
-            }
+    $.ajax({
+        url: '/Tiss/GetArticles',
+        type: 'GET',
+        data: { contentTypeId: contentTypeId },
+        success: function (data) {
+            $('#articleContainer').empty();
+            $('#articleContainer').append(data);
+        },
+        error: function (xhr, status, error) {
+            console.error("讀取錯誤: " + status + " " + error);
+        }
+    });
+});
 
-            function startCarousel() {
-                intervalId = setInterval(nextItem, 10000);
-            }
+// 影片左右跳轉
+document.addEventListener('DOMContentLoaded', function () {
+    var videoItems = document.querySelectorAll('.carousel-video-column .video-item');
+    var articleItems = document.querySelectorAll('.carousel-article-column .article-item');
+    var currentIndex = 0;
 
-            function stopCarousel() {
-                clearInterval(intervalId);
-            }
+    function showItem(index) {
+        videoItems.forEach(item => item.style.display = 'none');
+        articleItems.forEach(item => item.style.display = 'none');
 
-            // 初始顯示第一個影片
-            showItem(currentIndex);
-            startCarousel();
+        if (videoItems[index]) videoItems[index].style.display = 'block';
+        if (articleItems[index]) articleItems[index].style.display = 'block';
+    }
 
-            // 為所有 video 標籤添加事件監聽
-            videoItems.forEach(item => {
-                var videoElement = item.querySelector('video');
-                if (videoElement) {
-                    videoElement.addEventListener('play', stopCarousel);
-                    videoElement.addEventListener('pause', startCarousel);
-                    videoElement.addEventListener('ended', startCarousel); // 當影片結束時重新開始輪播
-                }
-            });
-        });
+    function showPrevious() {
+        currentIndex = (currentIndex - 1 + videoItems.length) % videoItems.length;
+        showItem(currentIndex);
+    }
+
+    function showNext() {
+        currentIndex = (currentIndex + 1) % videoItems.length;
+        showItem(currentIndex);
+    }
+
+    // 初始顯示第一個影片
+    showItem(currentIndex);
+
+    // 取得按鍵並添加事件處理程序
+    var leftButton = document.querySelector('.ArrowBtn.Left');
+    var rightButton = document.querySelector('.ArrowBtn.Right');
+
+    if (leftButton) {
+        leftButton.addEventListener('click', showPrevious);
+    }
+
+    if (rightButton) {
+        rightButton.addEventListener('click', showNext);
+    }
+});
 </script>
 </body>
 </html>

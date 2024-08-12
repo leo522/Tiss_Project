@@ -614,6 +614,16 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="ReplyMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageBoardId" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ReplyText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReplyDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ResearchPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -852,6 +862,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ReplyMess__Messa__0EF836A4">
+          <End Role="MessageBoard" Type="Self.MessageBoard" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReplyMessage" Type="Self.ReplyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessageBoard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReplyMessage">
+              <PropertyRef Name="MessageBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
           <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -942,6 +966,7 @@
           <EntitySet Name="RecruitPageContent" EntityType="Self.RecruitPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegulationDocument" EntityType="Self.RegulationDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegulationPageContent" EntityType="Self.RegulationPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReplyMessage" EntityType="Self.ReplyMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResearchPageContent" EntityType="Self.ResearchPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResearchProjectPageContent" EntityType="Self.ResearchProjectPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
@@ -963,6 +988,10 @@
           <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="Self.FK__MessageBo__Artic__51EF2864">
             <End Role="ArticleContent" EntitySet="ArticleContent" />
             <End Role="MessageBoard" EntitySet="MessageBoard" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReplyMess__Messa__0EF836A4" Association="Self.FK__ReplyMess__Messa__0EF836A4">
+            <End Role="MessageBoard" EntitySet="MessageBoard" />
+            <End Role="ReplyMessage" EntitySet="ReplyMessage" />
           </AssociationSet>
           <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
             <End Role="Permissions" EntitySet="Permissions" />
@@ -1183,6 +1212,11 @@
             <End Role="MessageBoard" EntitySet="MessageBoard" />
           </AssociationSet>
           <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
+          <EntitySet Name="ReplyMessage" EntityType="TISS_WebModel.ReplyMessage" />
+          <AssociationSet Name="FK__ReplyMess__Messa__0EF836A4" Association="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4">
+            <End Role="MessageBoard" EntitySet="MessageBoard" />
+            <End Role="ReplyMessage" EntitySet="ReplyMessage" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1950,6 +1984,7 @@
           <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsApproved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
+          <NavigationProperty Name="ReplyMessage" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="MessageBoard" ToRole="ReplyMessage" />
         </EntityType>
         <Association Name="FK__MessageBo__Artic__51EF2864">
           <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
@@ -1973,6 +2008,31 @@
           <Property Name="IsRegistered" Type="Boolean" />
           <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ReplyMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageBoardId" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ReplyText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="ReplyMessage" ToRole="MessageBoard" />
+        </EntityType>
+        <Association Name="FK__ReplyMess__Messa__0EF836A4">
+          <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="TISS_WebModel.ReplyMessage" Role="ReplyMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MessageBoard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReplyMessage">
+              <PropertyRef Name="MessageBoardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2854,6 +2914,17 @@
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReplyMessage">
+            <EntityTypeMapping TypeName="TISS_WebModel.ReplyMessage">
+              <MappingFragment StoreEntitySet="ReplyMessage">
+                <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
+                <ScalarProperty Name="ReplyText" ColumnName="ReplyText" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MessageBoardId" ColumnName="MessageBoardId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

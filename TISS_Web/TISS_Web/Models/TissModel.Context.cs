@@ -80,5 +80,6 @@ namespace TISS_Web.Models
         public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
         public virtual DbSet<MessageBoard> MessageBoard { get; set; }
         public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
+        public virtual DbSet<ReplyMessage> ReplyMessage { get; set; }
     }
 }

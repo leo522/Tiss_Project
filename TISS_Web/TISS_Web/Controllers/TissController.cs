@@ -2321,122 +2321,194 @@ namespace TISS_Web.Controllers
         /// 文章內容顯示
         /// </summary>
         /// <returns></returns>
+        //public ActionResult ViewArticle(string encryptedUrl)
+        //{
+        //    try
+        //    {
+        //        //Session["ReturnUrl"] = Request.Url.ToString();
+
+        //        var article = _db.ArticleContent.FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
+        //        if (article == null)
+        //        {
+        //            return HttpNotFound();
+        //        }
+
+        //        article.ClickCount += 1; //增加點閱率次數
+
+        //        // 查找同一標籤下的上一篇和下一篇文章
+        //        var articlesWithSameTag = _db.ArticleContent
+        //            .Where(a => a.Hashtags == article.Hashtags)
+        //            .OrderBy(a => a.PublishedDate)
+        //            .ToList();
+
+        //        int currentIndex = articlesWithSameTag.FindIndex(a => a.Id == article.Id);
+
+        //        // 找到上一篇和下一篇
+        //        var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
+        //        var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
+
+        //        ViewBag.ArticleId = article.Id;
+
+        //        //顯示留言數量
+        //        ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
+        //        ViewBag.CommentCount = ViewBag.Comments.Count;
+
+        //        //設定分頁
+        //        ViewBag.PreviousArticle = previousArticle;
+        //        ViewBag.NextArticle = nextArticle;
+
+        //        var menus = _db.Menus.ToList(); //主題目錄
+
+        //        var menuItems = _db.MenuItems.ToList(); //子主題目錄
+
+        //        // 字典來管理父目錄及其子目錄
+        //        var parentDirectories = new Dictionary<string, List<string>>
+        //        {
+        //            { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", } },
+        //            { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+        //            { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+        //            //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+        //        };
+
+
+        //        //var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
+        //        //var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
+        //        //ViewBag.ParentDirectory = parentDirectory;
+        //        var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
+        //        var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
+        //        ViewBag.ParentDirectory = parentDirectory;
+        //        ViewBag.CurrentSubDirectory = currentSubDirectory;
+
+        //        var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
+
+        //        ViewBag.Menus = menus;
+        //        ViewBag.ParentMenu = parentMenu;
+
+        //        var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
+        //        ViewBag.Comments = comments;
+
+        //        var menuList = new Dictionary<string, string> //子主題連結
+        //        {
+        //            { "運動醫學", "/Tiss/sportMedicine" },
+        //            { "運動科技", "/Tiss/sportTech" },
+        //            { "運動科學", "/Tiss/sportScience" },
+        //            { "運動生理", "/Tiss/sportsPhysiology" },
+        //            { "運動心理", "/Tiss/sportsPsychology" },
+        //            { "體能訓練", "/Tiss/physicalTraining" },
+        //            { "運動營養", "/Tiss/sportsNutrition" },
+        //            { "新聞發佈", "/Tiss/press" },
+        //            { "中心訊息", "/Tiss/institute" },
+        //            { "徵才招募", "/Tiss/recruit" },
+        //            { "中心成果", "/Tiss/achievement" },
+        //            { "新聞影音", "/Tiss/news" },
+        //            { "活動紀錄", "/Tiss/activityRecord" },
+        //            { "兒少科普", "/Tiss/childrenScience" },
+        //        };
+
+        //        ViewBag.MenuUrls = menuList;
+
+        //        var currentParentDirectory = ViewBag.ParentDirectory as string;
+        //        var menuIdMapping = new Dictionary<string, int>
+        //        {
+        //            { "科普專欄", 1 },
+        //            { "中心公告", 2 },
+        //            { "影音專區", 3 }
+        //        };
+        //        // 根據當前主題獲取對應的 MenuId
+        //        int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
+
+        //        // 根據 MenuId 查找「全部文章」的連結
+        //        var menuUrls = menuItems
+        //            .Where(item => item.MenuId == menuId)
+        //            .GroupBy(item => item.Name)
+        //            .ToDictionary(group => group.Key,group => group.Last().Url // 選擇最後一個 URL
+        //        );
+
+        //        var allArticlesUrl = menuItems
+        //            .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
+        //            .Select(item => item.Url)
+        //            .FirstOrDefault();
+
+        //        ViewBag.MenuUrls = menuUrls;
+        //        ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
+
+        //        // 將發佈日期格式化為 "yyyy-MM-dd"
+        //        string formattedDate = article.PublishedDate.HasValue? article.PublishedDate.Value.ToString("yyyy-MM-dd"): string.Empty;
+        //        ViewBag.FormattedPublishedDate = formattedDate;
+
+        //        _db.SaveChanges();
+
+        //        return View(article);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("Error404", "Error");
+        //    }
+        //}
         public ActionResult ViewArticle(string encryptedUrl)
         {
             try
             {
-                //Session["ReturnUrl"] = Request.Url.ToString();
+                var article = _db.ArticleContent
+                    .Include(a => a.MessageBoard) // 預先載入回覆
+                    .FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
 
-                var article = _db.ArticleContent.FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
                 if (article == null)
                 {
                     return HttpNotFound();
                 }
 
-                article.ClickCount += 1; //增加點閱率次數
+                article.ClickCount += 1;
+                _db.SaveChanges(); // 儘早儲存點閱次數，避免其他錯誤影響
 
-                // 查找同一標籤下的上一篇和下一篇文章
                 var articlesWithSameTag = _db.ArticleContent
                     .Where(a => a.Hashtags == article.Hashtags)
                     .OrderBy(a => a.PublishedDate)
                     .ToList();
 
                 int currentIndex = articlesWithSameTag.FindIndex(a => a.Id == article.Id);
-
-                // 找到上一篇和下一篇
                 var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
                 var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
 
-                ViewBag.ArticleId = article.Id;
+                // 確保這些查詢在此處僅執行一次
+                var comments = _db.MessageBoard
+                    .Where(m => m.ArticleId == article.Id && m.IsApproved)
+                    .Include(m => m.ReplyMessage)
+                    .ToList();
 
-                //顯示留言數量
-                ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
-                ViewBag.CommentCount = ViewBag.Comments.Count;
+                var menus = _db.Menus.ToList();
+                var menuItems = _db.MenuItems.ToList();
 
-                //設定分頁
-                ViewBag.PreviousArticle = previousArticle;
-                ViewBag.NextArticle = nextArticle;
-
-                var menus = _db.Menus.ToList(); //主題目錄
-
-                var menuItems = _db.MenuItems.ToList(); //子主題目錄
-
-                // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", } },
-                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-                    //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+                    // 定義你的目錄結構
                 };
 
-
-                //var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
-                //var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
-                //ViewBag.ParentDirectory = parentDirectory;
-                var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
+                var currentSubDirectory = article.ContentType;
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
+
+                ViewBag.ArticleId = article.Id;
+                ViewBag.Comments = comments;
+                ViewBag.CommentCount = comments.Count;
+                ViewBag.PreviousArticle = previousArticle;
+                ViewBag.NextArticle = nextArticle;
                 ViewBag.ParentDirectory = parentDirectory;
                 ViewBag.CurrentSubDirectory = currentSubDirectory;
 
                 var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
-
                 ViewBag.Menus = menus;
                 ViewBag.ParentMenu = parentMenu;
 
-                var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
-                ViewBag.Comments = comments;
-
-                var menuList = new Dictionary<string, string> //子主題連結
+                var menuList = new Dictionary<string, string>
                 {
-                    { "運動醫學", "/Tiss/sportMedicine" },
-                    { "運動科技", "/Tiss/sportTech" },
-                    { "運動科學", "/Tiss/sportScience" },
-                    { "運動生理", "/Tiss/sportsPhysiology" },
-                    { "運動心理", "/Tiss/sportsPsychology" },
-                    { "體能訓練", "/Tiss/physicalTraining" },
-                    { "運動營養", "/Tiss/sportsNutrition" },
-                    { "新聞發佈", "/Tiss/press" },
-                    { "中心訊息", "/Tiss/institute" },
-                    { "徵才招募", "/Tiss/recruit" },
-                    { "中心成果", "/Tiss/achievement" },
-                    { "新聞影音", "/Tiss/news" },
-                    { "活動紀錄", "/Tiss/activityRecord" },
-                    { "兒少科普", "/Tiss/childrenScience" },
+                    // 子主題連結
                 };
 
                 ViewBag.MenuUrls = menuList;
 
-                var currentParentDirectory = ViewBag.ParentDirectory as string;
-                var menuIdMapping = new Dictionary<string, int>
-                {
-                    { "科普專欄", 1 },
-                    { "中心公告", 2 },
-                    { "影音專區", 3 }
-                };
-                // 根據當前主題獲取對應的 MenuId
-                int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
-
-                // 根據 MenuId 查找「全部文章」的連結
-                var menuUrls = menuItems
-                    .Where(item => item.MenuId == menuId)
-                    .GroupBy(item => item.Name)
-                    .ToDictionary(group => group.Key,group => group.Last().Url // 選擇最後一個 URL
-                );
-                
-                var allArticlesUrl = menuItems
-                    .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
-                    .Select(item => item.Url)
-                    .FirstOrDefault();
-
-                ViewBag.MenuUrls = menuUrls;
-                ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
-
-                // 將發佈日期格式化為 "yyyy-MM-dd"
-                string formattedDate = article.PublishedDate.HasValue? article.PublishedDate.Value.ToString("yyyy-MM-dd"): string.Empty;
+                // 儲存發佈日期
+                string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
                 ViewBag.FormattedPublishedDate = formattedDate;
-
-                _db.SaveChanges();
 
                 return View(article);
             }
@@ -2445,7 +2517,6 @@ namespace TISS_Web.Controllers
                 return RedirectToAction("Error404", "Error");
             }
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -2618,6 +2689,32 @@ namespace TISS_Web.Controllers
             }
 
             return Content("報表產生完成");
+        }
+        #endregion
+
+        #region 回覆留言
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PostReply(int parentId, int articleId, string replyText, string replyName)
+        {
+            if (ModelState.IsValid)
+            {
+                var reply = new ReplyMessage
+                {
+                    MessageBoardId = parentId,
+                    UserName = replyName, // 使用者輸入的名稱
+                    ReplyText = replyText,
+                    ReplyDate = DateTime.Now,
+                    Id = articleId
+                };
+
+                _db.ReplyMessage.Add(reply);
+                _db.SaveChanges();
+
+                return RedirectToAction("ViewArticle", new { encryptedUrl = _db.ArticleContent.Find(articleId).EncryptedUrl });
+            }
+
+            return View("Error");
         }
         #endregion
 

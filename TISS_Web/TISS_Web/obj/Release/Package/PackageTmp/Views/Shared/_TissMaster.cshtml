@@ -47,7 +47,6 @@
     @*輪播圖要使用*@
 
     <script src="~/fontawesome/js/all.js"></script>
-
     <link href="/site/css/chunk-vendors.25d98017.css" rel="stylesheet">
     <link href="/site/css/app.5338f982.css" rel="stylesheet">
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
@@ -60,7 +59,7 @@
                 <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
-                <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="主要導航">
+                <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
                     <ul data-v-e61ebf00="" class="ToolList">
                         <li data-v-e61ebf00="">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small">小</button>
@@ -220,7 +219,7 @@
                                 </div>
                             </div>
                         </div>
-                        <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex">
+                        <ul data-v-71bab962="" class="navbar-nav mb-2 mb-lg-0 d-none d-lg-flex" style="margin-left: 250px; width:5000px">
                             <li data-v-71bab962="" class="nav-item dropdown">
                                 @*新修改位置*@
                                 <a data-v-71bab962="" href="/Tiss/announcement" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown1" aria-current="page" role="button" aria-expanded="false">
@@ -657,7 +656,7 @@
 
             // 顯示或隱藏按鈕
             window.addEventListener('scroll', function () {
-                if (window.scrollY > 200) { // 滾動超過200px時顯示按鈕
+                if (window.scrollY > 1500) { // 滾動超過200px時顯示按鈕
                     backTopButton.classList.add('show');
                 } else {
                     backTopButton.classList.remove('show');

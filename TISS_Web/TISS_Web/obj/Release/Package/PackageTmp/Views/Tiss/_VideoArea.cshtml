@@ -12,7 +12,6 @@
     <title>@Model.Title</title>
     <script src="~/bootstrap/js/bootstrap.js"></script>
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
     <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
@@ -63,7 +62,8 @@
                                         </span>
                                     }
                                     <span class="el-breadcrumb__item current-page" aria-current="page">
-                                        <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>
+                                        @*<span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>*@
+                                        <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.CurrentMenuItemUrl</span>
                                     </span>
                                 </div>
                             </div>
@@ -98,34 +98,17 @@
                                             <a class="el-breadcrumb__inner" role="link" style="color:black" href="/Tiss/Home">首頁</a>
                                             <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                         </span>
-                                        @*@if (ViewBag.ParentDirectory != null)
-                        {
-                            <span class="el-breadcrumb__item">
-                                <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
-                                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
-                            </span>
-                        }
-                        <span class="el-breadcrumb__item current-page" aria-current="page">
-                            <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)
-                            </span>
-                        </span>*@
-                                        @if (ViewBag.ParentDirectory != null && ViewBag.CurrentSubDirectory != null)
+                                        @if (ViewBag.ParentDirectory != null)
                                         {
                                             <span class="el-breadcrumb__item">
                                                 <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
                                                 <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                             </span>
-
-                                            <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.CurrentSubDirectory</a>
-                                                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
-                                            </span>
                                         }
-
-                                        @*<span class="el-breadcrumb__item current-page" aria-current="page">
-                            <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)
-                            </span>
-                        </span>*@ @*文章標題名稱*@
+                                        <span class="el-breadcrumb__item current-page" aria-current="page">
+                                            @*<span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>*@
+                                            <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.currentSubDirectory</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -148,11 +131,13 @@
                                     }
                                     else
                                     {
+                                        <p>發佈日期: @Model.PublishedDate</p>
                                         <div class="hashtags-link" style="text-align: left;">
-                                            <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
-                                            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
-                                                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
-                                            </a>
+                                            <p>
+                                                <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+                                                    <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+                                                </a>
+                                            </p>
                                         </div>
                                         <div>
                                             @Html.Raw(Model.ContentBody)
@@ -209,6 +194,7 @@
                                 }
                             </div>
                         </div>
+
                         <div class="comments-section">
                             <h3>留言區</h3>
                             <button id="toggle-comments" class="btn btn-light">
@@ -218,115 +204,35 @@
                                 @foreach (var comment in ViewBag.Comments)
                                 {
                                     <div class="comment">
-                                        <p>
-                                            <strong>@comment.UserName</strong> 說：
-                                            @comment.CommentText
-                                        </p>
+                                        <p><strong>@comment.UserName</strong> 說：</p>
+                                        <div class="comment-content">
+                                            <p>@comment.CommentText</p>
+                                        </div>
                                         <p class="text-muted">@comment.CommentDate</p>
-                                        <!-- 顯示回覆 -->
-                                        <div class="comment">
-                                            @if (comment.ReplyMessage != null && comment.ReplyMessage.Count > 0)
-                                            {
-                                                <div class="replies">
-                                                    @foreach (var reply in comment.ReplyMessage)
-                                                    {
-                                                        <div class="reply">
-                                                            <p><strong>@reply.UserName</strong>: @reply.ReplyText</p>
-                                                            <small>@reply.ReplyDate</small>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            }
-                                        </div>
-
-                                        <!-- 回覆功能 -->
-                                        <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">回覆</button>
-                                        <div class="reply-form" id="reply-form-@comment.Id" style="display:none;">
-                                            <form action="@Url.Action("PostReply", "Tiss")" method="post">
-                                                @Html.AntiForgeryToken()
-                                                <input type="hidden" name="parentId" value="@comment.Id" />
-                                                <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
-                                                <div class="form-group">
-                                                    <label for="replyName">名稱:</label>
-                                                    <input id="replyName" class="form-control" name="replyName" required style="width: 800px;" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="replyText">回覆:</label>
-                                                    <textarea id="replyText" class="form-control" name="replyText" required style="width: 800px;"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">回覆留言</button>
-                                            </form>
-                                        </div>
                                     </div>
                                 }
                             </div>
+
                             <form action="@Url.Action("PostCommentWithCaptcha", "Tiss")" method="post" id="msg">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
                                 <input type="hidden" id="g-recaptcha-response" name="recaptchaResponse" />
                                 <div class="form-group">
                                     <label for="userName">名稱:</label>
-                                    <input type="text" id="userName" class="form-control" name="userName" required style="width: 200px;" />
+                                    <input type="text" id="userName" class="form-control" name="userName" required />
                                 </div>
                                 <div class="form-group">
-                                    <label for="commentText" style="display: inline-block; width: 50px;">留言:</label>
-                                    <textarea id="commentText" class="form-control" name="commentText" required style="width: 800px;"></textarea>
+                                    <label for="commentText">留言:</label>
+                                    <textarea id="commentText" class="form-control" name="commentText" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-success">提交留言</button>
+                                <button type="submit" class="btn btn-primary">提交留言</button>
                             </form>
                         </div>
-                        
                     </main>
                 </section>
             </div>
         </div>
     </div>
-
-    @*<p>點閱次數: @Model.ClickCount</p>
-        <div class="ShareToolBar">
-            <div class="ShareToolBarTitle">分享至:</div>
-            <ul class="SocialList">
-                <li>
-                    <button type="button" class="el-button is-circle" aria-label="分享至 Facebook">
-                        <span>
-                            <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
-                        <span class="">
-                            <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
-                        <span class="">
-                            <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path class="" fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-                </li>
-            </ul>
-        </div>*@
-    @*<div class="social-share">
-            <h5>分享至:</h5>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
-                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示"/>Facebook
-            </a>
-            <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
-                <img src="~/fontawesome/twitter_icon.ico" width="32" alt="推特圖示"/> Twitter
-            </a>
-            <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
-                <img src="~/fontawesome/line_icon.ico" width="32" alt="line圖示"/> Line
-            </a>
-        </div>*@
     @if (isLoggedIn)
     {
         <script>
@@ -434,24 +340,7 @@ if (isLoggedIn) {
             const url = encodeURIComponent(window.location.href);
             const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}`;
             window.open(twitterShareUrl, '_blank', 'width=600,height=400');
-        }
-
-        /*摺疊回覆留言*/
-        document.addEventListener("DOMContentLoaded", function () {
-            var replyButtons = document.querySelectorAll(".reply-btn");
-
-            replyButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    var commentId = button.getAttribute("data-comment-id");
-                    var replyForm = document.getElementById("reply-form-" + commentId);
-                    if (replyForm.style.display === "none") {
-                        replyForm.style.display = "block";
-                    } else {
-                        replyForm.style.display = "none";
-                    }
-                });
-            });
-        });
+    }
     </script>
 </body>
 </html>

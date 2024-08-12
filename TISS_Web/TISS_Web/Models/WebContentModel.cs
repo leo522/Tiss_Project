@@ -389,6 +389,19 @@ namespace TISS_Web.Models
 
         // 導航屬性，用於關聯到文章
         public ArticleContentModel Article { get; set; }
+        public ICollection<ReplyBoardModel> Replies { get; set; }
+    }
+
+    public class ReplyBoardModel
+    {
+        public int Id { get; set; }
+        public int MessageId { get; set; } // 對應留言的外鍵
+        public string ReplyName { get; set; }
+        public string ReplyText { get; set; }
+        public DateTime ReplyDate { get; set; }
+
+        // 導航屬性，用於關聯到留言
+        public Messageboard Message { get; set; }
     }
 
     public class LanguageModel

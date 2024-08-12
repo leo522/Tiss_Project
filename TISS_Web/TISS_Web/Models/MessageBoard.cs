@@ -14,6 +14,12 @@ namespace TISS_Web.Models
     
     public partial class MessageBoard
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MessageBoard()
+        {
+            this.ReplyMessage = new HashSet<ReplyMessage>();
+        }
+    
         public int Id { get; set; }
         public int ArticleId { get; set; }
         public string UserName { get; set; }
@@ -22,5 +28,7 @@ namespace TISS_Web.Models
         public bool IsApproved { get; set; }
     
         public virtual ArticleContent ArticleContent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ReplyMessage> ReplyMessage { get; set; }
     }
 }

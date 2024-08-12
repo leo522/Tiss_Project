@@ -198,6 +198,11 @@
       <End Role="MessageBoard" EntitySet="MessageBoard" />
     </AssociationSet>
     <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
+    <EntitySet Name="ReplyMessage" EntityType="TISS_WebModel.ReplyMessage" />
+    <AssociationSet Name="FK__ReplyMess__Messa__0EF836A4" Association="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4">
+      <End Role="MessageBoard" EntitySet="MessageBoard" />
+      <End Role="ReplyMessage" EntitySet="ReplyMessage" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -965,6 +970,7 @@
     <Property Name="CommentDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IsApproved" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
+    <NavigationProperty Name="ReplyMessage" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="MessageBoard" ToRole="ReplyMessage" />
   </EntityType>
   <Association Name="FK__MessageBo__Artic__51EF2864">
     <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
@@ -988,4 +994,29 @@
     <Property Name="IsRegistered" Type="Boolean" />
     <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="ReplyMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageBoardId" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ReplyText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="ReplyMessage" ToRole="MessageBoard" />
+  </EntityType>
+  <Association Name="FK__ReplyMess__Messa__0EF836A4">
+    <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="TISS_WebModel.ReplyMessage" Role="ReplyMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MessageBoard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReplyMessage">
+        <PropertyRef Name="MessageBoardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
