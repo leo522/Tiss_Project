@@ -55,7 +55,7 @@ namespace TISS_Web
             else
             {
                 // 如果不是 404 錯誤，可以顯示通用的錯誤頁面
-                Response.Redirect("~/Error");
+                Response.Redirect("~/Error404");
             }
         }
     }

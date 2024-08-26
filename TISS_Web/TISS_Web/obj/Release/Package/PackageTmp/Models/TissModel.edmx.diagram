@@ -66,6 +66,8 @@
         <EntityTypeShape EntityType="TISS_WebModel.MessageBoard" Width="1.5" PointX="15.625" PointY="24.875" />
         <AssociationConnector Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864" />
         <EntityTypeShape EntityType="TISS_WebModel.InternalEmployees" Width="1.5" PointX="0.75" PointY="22.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.ReplyMessage" Width="1.5" PointX="17.875" PointY="25" />
+        <AssociationConnector Association="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

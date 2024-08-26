@@ -609,6 +609,16 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="ReplyMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MessageBoardId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ReplyText" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReplyDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="ResearchPageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -847,6 +857,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ReplyMess__Messa__0EF836A4">
+    <End Role="MessageBoard" Type="Self.MessageBoard" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ReplyMessage" Type="Self.ReplyMessage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MessageBoard">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReplyMessage">
+        <PropertyRef Name="MessageBoardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
     <End Role="RolePermissions" Type="Self.RolePermissions" Multiplicity="*" />
@@ -937,6 +961,7 @@
     <EntitySet Name="RecruitPageContent" EntityType="Self.RecruitPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegulationDocument" EntityType="Self.RegulationDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegulationPageContent" EntityType="Self.RegulationPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReplyMessage" EntityType="Self.ReplyMessage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResearchPageContent" EntityType="Self.ResearchPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResearchProjectPageContent" EntityType="Self.ResearchProjectPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolePermissions" EntityType="Self.RolePermissions" Schema="dbo" store:Type="Tables" />
@@ -958,6 +983,10 @@
     <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="Self.FK__MessageBo__Artic__51EF2864">
       <End Role="ArticleContent" EntitySet="ArticleContent" />
       <End Role="MessageBoard" EntitySet="MessageBoard" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReplyMess__Messa__0EF836A4" Association="Self.FK__ReplyMess__Messa__0EF836A4">
+      <End Role="MessageBoard" EntitySet="MessageBoard" />
+      <End Role="ReplyMessage" EntitySet="ReplyMessage" />
     </AssociationSet>
     <AssociationSet Name="FK__RolePermi__Permi__4316F928" Association="Self.FK__RolePermi__Permi__4316F928">
       <End Role="Permissions" EntitySet="Permissions" />

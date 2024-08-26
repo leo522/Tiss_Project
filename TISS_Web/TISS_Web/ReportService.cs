@@ -14,12 +14,21 @@ namespace TISS_Web
 
         public string GenerateReport()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; //設置許可上下文
+
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmm");
             string excelPath = $@"D:\文章瀏覽率報表\report_{timestamp}.xlsx";
 
             try
             {
                 var reportData = _db.Database.SqlQuery<ArticleReportModel>("EXEC GetArticleClickReport").ToList();
+                if (reportData.Count == 0)
+                {
+                    Console.WriteLine("查詢結果為空，無法生成報表。");
+                    return null;
+                }
+
+                //var reportData = _db.Database.SqlQuery<ArticleReportModel>("EXEC GetArticleClickReport").ToList();
 
                 using (var package = new ExcelPackage())
                 {

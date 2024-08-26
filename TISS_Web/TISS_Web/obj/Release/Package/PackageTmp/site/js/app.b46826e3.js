@@ -5050,22 +5050,28 @@
                                 to: "/Tiss/about",
                                 childrenList: [{
                                     textKey: "NAV_OBJECTIVES",
-                                    to: "/about#Objectives"
+                                    //to: "/about#Objectives"
+                                    to: "/about/Objectives"
                                 }, {
                                     textKey: "NAV_MISSION",
-                                    to: "/about#mission"
+                                    //to: "/about#mission"
+                                    to: "/about/mission"
                                 }, {
                                     textKey: "NAV_ORGANIZATION",
-                                    to: "/about#Organization"
+                                    //to: "/about#Organization"
+                                    to: "/about/Organization"
                                 }, {
                                     textKey: "NAV_BOARDOFDIRECTORS",
-                                    to: "/about#BOD"
+                                    //to: "/about#BOD"
+                                    to: "/about/BOD"
                                 }, {
                                     textKey: "NAV_CEO",
-                                    to: "/about#CEO"
+                                    //to: "/about#CEO"
+                                    to: "/about/CEO"
                                 }, {
                                     textKey: "NAV_UNIT",
-                                    to: "/about#Units"
+                                    //to: "/about#Units"
+                                    to: "/about/Units"
                                 }]
                             }, {
                                 textKey: "NAV_RESEARCH",

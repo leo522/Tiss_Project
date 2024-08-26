@@ -2924,7 +2924,6 @@
     <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\2邱永興-首頁圖.jpg" />
     <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\姜雅薰1-首頁圖.jpg" />
     <Content Include="storage\media\科普專欄照片\運動科技與資訊開發\楊清方3-首頁圖.png" />
-    <Content Include="Vue.js\vue.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2982,7 +2981,6 @@
     <Content Include="Views\Tiss\other.cshtml" />
     <Content Include="Views\Tiss\Login.cshtml" />
     <Content Include="Views\Tiss\editPage.cshtml" />
-    <Content Include="Views\Tiss\webContent.cshtml" />
     <Content Include="Views\Tiss\Register.cshtml" />
     <Content Include="Views\Tiss\ChangePassword.cshtml" />
     <Content Include="Views\Tiss\sportsPhysiology.cshtml" />

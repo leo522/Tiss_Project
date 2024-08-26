@@ -1,13 +1,13 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
 
-<html>
+<html lang="zh-Hant">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 - 找不到頁面</title>
     <link rel="icon" href="~/Img/favicon.svg" />
     <style>
@@ -44,7 +44,7 @@
         <h1>404 - 找不到頁面</h1>
         <p>您請求的頁面未找到。</p>
         <p>請檢查網址是否正確，或者返回<a href="@Url.Action("Home", "Tiss")">首頁</a>。</p>
-        <img src="@Url.Content("~/Img/404.jpg")" alt="找不到頁面" class="announcement-img" />
+        <img src="@Url.Content("~/Img/404.jpg")" alt="找不到頁面，所請求的頁面不存在" class="announcement-img" />
     </div>
 </body>
 </html>
