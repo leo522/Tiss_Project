@@ -42,17 +42,17 @@
         </div>
         <form action="/Tiss/Login" method="post">
             <div class="form-group">
-                <label for="Username">帳號</label>
+                <label for="Username" title="帳號">帳號</label>
                 <input type="text" class="form-control" id="Username" name="Username" placeholder="請輸入帳號" required>
             </div>
             <div class="form-group">
-                <label for="Password">密碼</label>
+                <label for="Password" title="密碼">密碼</label>
                 <input type="password" class="form-control" id="pwd" name="pwd" placeholder="請輸入密碼" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">登入</button>
+            <button type="submit" class="btn btn-primary btn-block" title="登入">登入</button>
         </form>
         <div class="text-center mt-3">
-            <a href="/Tiss/Register">註冊帳號</a>
+            <a href="/Tiss/Register" title="註冊帳號">註冊帳號</a>
         </div>
         @if (ViewBag.ErrorMessage != null)
         {
@@ -62,7 +62,7 @@
         }
         <hr>
         <div class="text-center">
-            <a href="/Tiss/ForgotPassword" class="btn btn-link">忘記密碼</a>
+            <a href="/Tiss/ForgotPassword" class="btn btn-link" title="忘記密碼">忘記密碼</a>
         </div>
     </div>
 </body>

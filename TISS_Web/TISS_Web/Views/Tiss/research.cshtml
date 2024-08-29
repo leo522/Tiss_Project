@@ -16,15 +16,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_research.25875290.jpg" alt="科普專欄封面圖片">
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_research.25875290.jpg" alt="科普專欄封面圖片" title="科普專欄封面圖片">
                         @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_research_m.3413fe57.jpg" alt="">*@
                         <div class="container">
                             <div class="Title">
-                                <div class="BannerTitle">
+                                <div class="BannerTitle" title="Popular Science">
                                     Popular Science
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="科普專欄">科普專欄
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="科普專欄" title="科普專欄">科普專欄
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <div class="container">
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                         <span class="el-breadcrumb__item">
-                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
+                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -44,7 +44,7 @@
                                             </i>
                                         </span>
                                         <span class="el-breadcrumb__item" aria-current="page">
-                                            <span class="el-breadcrumb__inner" role="link">科普專欄</span>
+                                            <span class="el-breadcrumb__inner" role="link" title="科普專欄">科普專欄</span>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -56,40 +56,40 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <div class="Title">科普專欄</div>
+                                <div class="Title" title="科普專欄">科普專欄</div>
                                 <ul class="Menu">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/research">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/research" title="全部文章">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportMedicine">運動醫學</a>
+                                        <a class="MenuLink" href="/Tiss/sportMedicine" title="運動醫學">運動醫學</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportTech">運動科技</a>
+                                        <a class="MenuLink" href="/Tiss/sportTech" title="運動科技">運動科技</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportScience">運動科學</a>
+                                        <a class="MenuLink" href="/Tiss/sportScience" title="運動科學">運動科學</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsPhysiology">運動生理</a>
+                                        <a class="MenuLink" href="/Tiss/sportsPhysiology" title="運動生理">運動生理</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsPsychology">運動心理</a>
+                                        <a class="MenuLink" href="/Tiss/sportsPsychology" title="運動心理">運動心理</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/physicalTraining">體能訓練</a>
+                                        <a class="MenuLink" href="/Tiss/physicalTraining" title="體能訓練">體能訓練</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsNutrition">運動營養</a>
+                                        <a class="MenuLink" href="/Tiss/sportsNutrition" title="運動營養">運動營養</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/childrenScience">兒少科普</a>
+                                        <a class="MenuLink" href="/Tiss/childrenScience" title="兒少科普">兒少科普</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
                                             <li span="3">
-                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
                                             </li>
                                         }
                                     }
@@ -102,7 +102,7 @@
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
+                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -111,7 +111,7 @@
                                                 </i>
                                             </span>
                                             <span class="el-breadcrumb__item" aria-current="page">
-                                                <span class="el-breadcrumb__inner" role="link">科普專欄</span>
+                                                <span class="el-breadcrumb__inner" role="link" title="科普專欄">科普專欄</span>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -139,7 +139,7 @@
                                                                     <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
-                                                                <div class="Mask">閱讀更多</div>
+                                                                <div class="Mask" title="閱讀更多">閱讀更多</div>
                                                             </div>
                                                             <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                             <div class="NewsItemContent">

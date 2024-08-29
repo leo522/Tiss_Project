@@ -2959,8 +2959,6 @@
     <Content Include="Views\Tiss\sportScience.cshtml" />
     <Content Include="Views\Tiss\sportTech.cshtml" />
     <Content Include="Views\Tiss\sportMedicine.cshtml" />
-    <Content Include="Views\Tiss\researchProject.cshtml" />
-    <Content Include="Views\Tiss\GovernmentWebsite.cshtml" />
     <Content Include="Views\Tiss\GenderEquality.cshtml" />
     <Content Include="Views\Tiss\procedure.cshtml" />
     <Content Include="Views\Tiss\regulation.cshtml" />
