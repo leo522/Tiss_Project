@@ -17,7 +17,6 @@
                     <div class="BasePageBanner">
                         <div class="Mask"></div>
                         <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt="公開資訊封面圖片" title="公開資訊封面圖片">
-                        @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt="">*@
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle" title="Public Information">
@@ -131,20 +130,13 @@
                                 </div>
                             </div>
                             <div class="PublicInfo">
-                                <span id="Regulation" class="anchor">
-                                </span>
-                                <span id="Methods" class="anchor">
-                                </span>
-                                <span id="Plan" class="anchor">
-                                </span>
-                                <span id="Budget" class="anchor">
-                                </span>
-                                <span id="Download" class="anchor">
-                                </span>
-                                <span id="Purchase" class="anchor">
-                                </span>
-                                <span id="Other" class="anchor">
-                                </span>
+                                <span id="Regulation" class="anchor"></span>
+                                <span id="Methods" class="anchor"></span>
+                                <span id="Plan" class="anchor"></span>
+                                <span id="Budget" class="anchor"></span>
+                                <span id="Download" class="anchor"></span>
+                                <span id="Purchase" class="anchor"></span>
+                                <span id="Other" class="anchor"></span>
                                 <div class="content">
                                     <div class="subTitle" title="法規">
                                         法規
@@ -178,7 +170,7 @@
                                                                 {
                                                                     <div class="el-table-v2__row TableRow" style="margin-bottom: 20px; padding: 5px;">
                                                                         <div class="el-table-v2__row-cell" style="width: 480px;">
-                                                                            <div class="el-table-v2__cell-text">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                                            <div class="el-table-v2__cell-text" title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
                                                                         </div>
                                                                         <div class="el-table-v2__row-cell" style="width: 240px;">
                                                                             <div>@file.UploadTime.ToString("yyyy/MM/dd")</div>
@@ -186,7 +178,7 @@
                                                                         <div class="el-table-v2__row-cell" style="width: 280px;">
                                                                             <div class="BaseTagList download">
                                                                                 <span>
-                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank">
+                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
                                                                                         <span class="el-tag el-tag--light is-round">
                                                                                             <span class="el-tag__content">@file.DocumentType</span>
                                                                                         </span>

@@ -63,9 +63,9 @@
                 <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
                     <ul data-v-e61ebf00="" class="ToolList">
                         <li data-v-e61ebf00="">
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small">小</button>
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium">中</button>
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large">大</button>
+                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small" title="小">小</button>
+                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium" title="中">中</button>
+                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large" title="大">大</button>
                         </li>
                         <li data-v-e61ebf00="">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-round LangBtn" aria-label="更改語言" onclick="location.href='@Url.Action("UpdateLan", "Tiss", new { lang = "en-US" })'">
@@ -186,6 +186,9 @@
                                         </li>
                                         <li data-v-71bab962="">
                                             <a data-v-71bab962="" href="/Tiss/childrenScience" title="兒少科普">兒少科普</a>
+                                        </li>
+                                        <li data-v-71bab962="">
+                                            <a data-v-71bab962="" href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">科普海報下載專區</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -322,42 +325,47 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportMedicine">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動醫學"/>運動醫學
+                                            <img src="~/Img/favicon.svg" alt="" title="運動醫學" />運動醫學
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportTech">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動科技"/>運動科技
+                                            <img src="~/Img/favicon.svg" alt="" title="運動科技" />運動科技
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportScience">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動科學"/>運動科學
+                                            <img src="~/Img/favicon.svg" alt="" title="運動科學" />運動科學
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPhysiology">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動生理"/>運動生理
+                                            <img src="~/Img/favicon.svg" alt="" title="運動生理" />運動生理
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPsychology">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動心理"/>運動心理
+                                            <img src="~/Img/favicon.svg" alt="" title="運動心理" />運動心理
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/physicalTraining">
-                                            <img src="~/Img/favicon.svg" alt="" title="體能訓練"/>體能訓練
+                                            <img src="~/Img/favicon.svg" alt="" title="體能訓練" />體能訓練
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsNutrition">
-                                            <img src="~/Img/favicon.svg" alt="" title="運動營養"/>運動營養
+                                            <img src="~/Img/favicon.svg" alt="" title="運動營養" />運動營養
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/childrenScience">
-                                            <img src="~/Img/favicon.svg" alt="" title="兒少科普"/>兒少科普
+                                            <img src="~/Img/favicon.svg" alt="" title="兒少科普" />兒少科普
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a data-v-71bab962="" class="dropdown-item" href="/Tiss/SciencePosterDownLoad">
+                                            <img src="~/Img/favicon.svg" alt="" title="科普海報下載專區" />科普海報下載專區
                                         </a>
                                     </li>
                                 </ul>
@@ -555,6 +563,9 @@
                                 <li>
                                     <a href="/Tiss/childrenScience" title="兒少科普">兒少科普</a>
                                 </li>
+                                <li>
+                                    <a href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">科普海報下載專區</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
@@ -623,7 +634,7 @@
         </div>
     </footer>
     <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
-        <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;"></i>
+        <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
     <script>
         //網頁字體大小控制function

@@ -17,15 +17,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="中心公告封面圖片">
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="中心公告封面圖片" title="中心公告封面圖片">
                         @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="">*@
                         <div class="container">
                             <div class="Title">
-                                <div class="BannerTitle">
+                                <div class="BannerTitle" title="Announcements">
                                     Announcements
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="中心公告">中心公告
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="中心公告" title="中心公告">中心公告
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                 <div class="container">
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                         <span class="el-breadcrumb__item">
-                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
+                                            <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -45,7 +45,7 @@
                                             </i>
                                         </span>
                                         <span class="el-breadcrumb__item">
-                                            <span class="el-breadcrumb__inner" role="link">最新消息</span>
+                                            <span class="el-breadcrumb__inner" role="link" title="最新消息">最新消息</span>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -54,7 +54,7 @@
                                             </i>
                                         </span>
                                         <span class="el-breadcrumb__item" aria-current="page">
-                                            <span class="el-breadcrumb__inner" role="link">中心公告</span>
+                                            <span class="el-breadcrumb__inner" role="link" title="中心公告">中心公告</span>
                                             <i class="el-icon el-breadcrumb__separator">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -66,25 +66,25 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <div class="Title">中心公告</div>
+                                <div class="Title" title="中心公告">中心公告</div>
                                 <ul class="Menu">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/announcement">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/announcement" title="">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/press">新聞發佈</a>
+                                        <a class="MenuLink" href="/Tiss/press" title="新聞發佈">新聞發佈</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/institute">中心訊息</a>
+                                        <a class="MenuLink" href="/Tiss/institute" title="中心訊息">中心訊息</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/recruit">徵才招募</a>
+                                        <a class="MenuLink" href="/Tiss/recruit" title="徵才招募">徵才招募</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
                                             <li span="3">
-                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
                                             </li>
                                         }
                                     }
@@ -97,7 +97,7 @@
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home">首頁</a>
+                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -106,7 +106,7 @@
                                                 </i>
                                             </span>
                                             <span class="el-breadcrumb__item">
-                                                <span class="el-breadcrumb__inner" role="link">最新消息</span>
+                                                <span class="el-breadcrumb__inner" role="link" title="最新消息">最新消息</span>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -115,7 +115,7 @@
                                                 </i>
                                             </span>
                                             <span class="el-breadcrumb__item" aria-current="page">
-                                                <span class="el-breadcrumb__inner" role="link">中心公告</span>
+                                                <span class="el-breadcrumb__inner" role="link" title="中心公告">中心公告</span>
                                                 <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
@@ -143,7 +143,7 @@
                                                                     <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
-                                                                <div class="Mask">閱讀更多</div>
+                                                                <div class="Mask" title="閱讀更多">閱讀更多</div>
                                                             </div>
                                                             <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                             <div class="NewsItemContent">

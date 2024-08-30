@@ -16,7 +16,7 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_research.25875290.jpg" alt="科普專欄封面圖片" title="科普專欄封面圖片">
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_research.25875290.jpg" alt="科普專欄封面照片" title="科普專欄封面照片">
                         @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_research_m.3413fe57.jpg" alt="">*@
                         <div class="container">
                             <div class="Title">
@@ -84,6 +84,9 @@
                                     </li>
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/childrenScience" title="兒少科普">兒少科普</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">科普海報下載專區</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
@@ -165,16 +168,16 @@
                                                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                 {
                                                     <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                        <a class="page-link" href="@Url.Action("research", "Tiss", new { page = i })">@i</a>
+                                                        <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = i })">@i</a>
                                                     </li>
                                                 }
                                                 <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("research", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                                 <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("research", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -190,7 +193,8 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
+        //登出按鈕顯示功能
+$(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
 if (isLoggedIn) {
@@ -200,7 +204,6 @@ if (isLoggedIn) {
     }
         loadContent(); //加載已儲存的內容
 });
-        //顯示當前選擇的子項目
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');

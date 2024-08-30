@@ -7,6 +7,7 @@
 <html>
 <head>
     <link href="~/site/css/SectionTitleStyle.css" rel="stylesheet" />
+    @*<link href="~/site/css/socialStyle.css" rel="stylesheet" />*@
     @*<script src="~/site/js/HomeFun.js"></script>*@
 </head>
 <body>
@@ -388,52 +389,46 @@
                             <div class="el-carousel__container" style="height: 200px; overflow: hidden;">
                                 <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 200px;">
                                     <div class="SectionLinksItem">
-                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
+                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px; display: flex;">
                                             <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
                                                 <a href="https://www.sa.gov.tw/">
-                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署" title="教育部體育署">
+                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署" title="教育部體育署" style="height: 100px; width: auto;">
+                                                </a>
+                                            </div>
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW">
+                                                    <img src="~/site/img/facebook圖片.jpg" alt="國家運動科學中心FB" title="國家運動科學中心FB" style="height: 100px; width: auto;">
+                                                </a>
+                                            </div>
+
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.instagram.com/tiss_2024/">
+                                                    <img src="~/site/img/IG圖片.png" alt="國家運動科學中心IG" title="國家運動科學中心IG" style="height: 100px; width: auto;">
+                                                </a>
+                                            </div>
+
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.youtube.com/%40TISS_2024">
+                                                    <img src="~/site/img/YT圖片.jpg" alt="國家運動科學中心YouTube" title="國家運動科學中心YouTube" style="height: 100px; width: auto;">
+                                                </a>
+                                            </div>
+
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="https://www.sportscience.com.tw/">
+                                                    <img src="~/site/img/運動科學網.jpg" alt="運動科學網站" title="運動科學網站" style="height: 100px; width: auto;">
+                                                </a>
+                                            </div>
+
+                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
+                                                <a href="http://www.epsport.net/epsport/ep/index.asp">
+                                                    <img src="~/site/img/運動生理學網站圖片.jpg" alt="運動生理學網站" title="運動生理學網站" style="height: 100px; width: auto;">
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
-                                <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
-                                    <button class="el-carousel__button" aria-label="btn"></button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="el-carousel el-carousel--horizontal d-block d-md-none">
-                            <div class="el-carousel__container" style="height: 0px; overflow: hidden;">
-                                <button type="button" class="el-carousel__arrow el-carousel__arrow--left" aria-label="btn" style="display: none;">
-                                    <i class="el-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                            <path fill="currentColor" d="M609.408 149.376 277.76 489.6a32 32 0 0 0 0 44.672l331.648 340.352a29.12 29.12 0 0 0 41.728 0 30.592 30.592 0 0 0 0-42.752L339.264 511.936l311.872-319.872a30.592 30.592 0 0 0 0-42.688 29.12 29.12 0 0 0-41.728 0z">
-                                            </path>
-                                        </svg>
-                                    </i>
-                                </button>
-                                <button type="button" class="el-carousel__arrow el-carousel__arrow--right" aria-label="btn" style="display: none;">
-                                    <i class="el-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                            <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                            </path>
-                                        </svg>
-                                    </i>
-                                </button>
-                                <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 70px;">
-                                    <div class="SectionLinksItem">
-                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
-                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
-                                                <a href="https://www.sa.gov.tw/">
-                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署" title="教育部體育署">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
                                 <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
                                     <button class="el-carousel__button" aria-label="btn"></button>
@@ -442,6 +437,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

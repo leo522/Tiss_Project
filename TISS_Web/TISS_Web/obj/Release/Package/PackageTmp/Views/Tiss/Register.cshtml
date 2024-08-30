@@ -32,26 +32,26 @@
 <body>
     <div class="register-container">
         <div class="text-center">
-            <img src="~/Img/logo.svg" alt="Logo" style="height: 45px; width: 100%;">
+            <img src="~/Img/logo.svg" alt="Logo圖標" style="height: 45px; width: 100%;">
         </div>
         <form action="/Tiss/Register" method="post">
             <div class="form-group">
-                <label for="EmployeeID">職員編號</label>
+                <label for="EmployeeID" title="職員編號">職員編號</label>
                 <input type="text" class="form-control" id="EmployeeID" name="EmployeeID" placeholder="請輸入職員編號" required>
             </div>
             <div class="form-group">
-                <label for="Username">帳號</label>
+                <label for="Username" title="帳號">帳號</label>
                 <input type="text" class="form-control" id="Username" name="UserName" placeholder="請輸入帳號" required>
             </div>
             <div class="form-group">
-                <label for="Password">密碼</label>
+                <label for="Password" title="密碼">密碼</label>
                 <input type="password" class="form-control" id="Password" name="pwd" placeholder="請輸入密碼" required>
             </div>
             <div class="form-group">
-                <label for="Email">電子郵件</label>
+                <label for="Email" title="電子郵件">電子郵件</label>
                 <input type="email" class="form-control" id="Email" name="Email" placeholder="請輸入電子郵件" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">註冊</button>
+            <button type="submit" class="btn btn-primary btn-block" title="註冊">註冊</button>
         </form>
         @if (ViewBag.ErrorMessage != null)
         {

@@ -2600,6 +2600,7 @@
     <Content Include="site\css\MenuLinkStyle.css" />
     <Content Include="site\css\NavMenuStyle.css" />
     <Content Include="site\css\SectionTitleStyle.css" />
+    <Content Include="site\css\socialStyle.css" />
     <Content Include="site\css\ViewArticle.css" />
     <Content Include="site\css\ViewArticleBannerStyle.css" />
     <Content Include="site\css\ViewArticleBtnStyle.css" />
@@ -2650,6 +2651,12 @@
     <Content Include="bootstrap\js\bootstrap.esm.min.js.map" />
     <Content Include="bootstrap\js\bootstrap.js.map" />
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="site\img\facebook圖片.jpg" />
+    <Content Include="site\img\IG圖片.png" />
+    <Content Include="site\img\YT圖片.jpg" />
+    <Content Include="site\img\國家運動科學中心FB封面圖片.jpg" />
+    <Content Include="site\img\運動生理學網站圖片.jpg" />
+    <Content Include="site\img\運動科學網.jpg" />
     <Content Include="site\js\HomeFun.js" />
     <Content Include="storage\media\MOU簽署-合作學校%281%29.jpg" />
     <Content Include="storage\media\ORS%281%29.jpg" />
@@ -3017,6 +3024,7 @@
     <Content Include="Views\Tiss\childrenScience.cshtml" />
     <Content Include="Views\Tiss\_PopularScience.cshtml" />
     <Content Include="Views\Tiss\_VideoArea.cshtml" />
+    <Content Include="Views\Tiss\SciencePosterDownLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
