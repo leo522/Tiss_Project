@@ -755,6 +755,8 @@
     <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="FileSize" Type="Int32" />
     <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsEnabled" Type="Boolean" />
+    <Property Name="FileURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="RegulationDocument">
     <Key>

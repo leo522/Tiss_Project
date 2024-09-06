@@ -29,11 +29,11 @@
             </div>
             <div class="form-group mb-4">
                 <label for="ContentType" style="font-size:25px" title="發佈類型">發佈類型</label>
-                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇發佈類型", new { @class = "form-control"})
+                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇發佈類型", new { @class = "form-control" })
             </div>
             <div class="form-group mb-4">
                 <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
-                @Html.DropDownList("tag", (SelectList)ViewBag.Hashtags, "請選擇標籤", new { @class = "form-control"})
+                @Html.DropDownList("tag", (SelectList)ViewBag.Hashtags, "請選擇標籤", new { @class = "form-control" })
             </div>
             <div class="form-group mb-4">
                 <label for="ImageFile" style="font-size:25px" title="預覽用圖片">預覽用圖片</label>
@@ -46,32 +46,52 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             tinymce.init({
-                selector: '#ContentBody', // 特定的textarea選擇器
+                selector: '#ContentBody',
                 language: 'zh_TW',
                 plugins: [
                     'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
                     'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
                     'media', 'table', 'emoticons', 'help'
                 ],
-                file_picker_callback: function (callback, value, meta) {
-                    if (meta.filetype === 'image') {
-                        var input = document.createElement('input');
-                        input.setAttribute('type', 'file');
-                        input.setAttribute('accept', 'image/*');
-                        input.onchange = function () {
-                            var file = this.files[0];
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                callback(e.target.result, { alt: file.name });
+                toolbar: 'insertfile | undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | customFileButton',
+                setup: function (editor) {
+                    editor.ui.registry.addButton('customFileButton', {
+                        text: '插入檔案',
+                        onAction: function () {
+                            var input = document.createElement('input');
+                            input.setAttribute('type', 'file');
+                            input.setAttribute('accept', '.pdf,.doc,.docx');
+
+                            input.onchange = function () {
+                                var file = this.files[0];
+                                var formData = new FormData();
+                                formData.append('file', file);
+
+                                fetch('/Tiss/UploadPDF', { // 指向你的上傳 API
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.url) {
+                                            var link = `<a href="${data.url}" download>${file.name}</a>`;
+                                            editor.insertContent(link);
+                                        } else {
+                                            alert('檔案上傳失敗！');
+                                        }
+                                    })
+                                    .catch(error => {
+                                        console.error('上傳錯誤:', error);
+                                        alert('檔案上傳失敗！');
+                                    });
                             };
-                            reader.readAsDataURL(file);
-                        };
-                        input.click();
-                    }
+                            input.click();
+                        }
+                    });
                 },
-                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
             });
         });
     </script>
+
 </body>
 </html>

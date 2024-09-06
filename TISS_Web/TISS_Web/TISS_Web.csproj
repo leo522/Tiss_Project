@@ -2953,7 +2953,6 @@
     <Content Include="Views\Shared\_TissMaster.cshtml" />
     <Content Include="Views\Tiss\Home.cshtml" />
     <Content Include="Views\Tiss\public_info.cshtml" />
-    <Content Include="storage\media\attachments\國家運動科學中心人事管理規章_1130513.pdf" />
     <Content Include="Views\Tiss\Objectives.cshtml" />
     <Content Include="Views\Tiss\mission.cshtml" />
     <Content Include="Views\Tiss\Organization.cshtml" />
@@ -3025,6 +3024,7 @@
     <Content Include="Views\Tiss\_PopularScience.cshtml" />
     <Content Include="Views\Tiss\_VideoArea.cshtml" />
     <Content Include="Views\Tiss\SciencePosterDownLoad.cshtml" />
+    <Content Include="storage\media\attachments\國家運動科學中心人事管理規章.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

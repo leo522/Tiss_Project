@@ -1,5 +1,4 @@
-﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
-@{
+﻿@{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
 <!DOCTYPE html>
@@ -169,16 +168,16 @@
                                                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                 {
                                                     <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                        <a class="page-link" href="@Url.Action("sportTech", "Tiss", new { page = i })">@i</a>
+                                                        <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = i })">@i</a>
                                                     </li>
                                                 }
                                                 <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("sportTech", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                                 <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("sportTech", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
@@ -191,7 +190,6 @@
                     </section>
                 </div>
             </div>
-
         </div>
     </div>
     <script>
@@ -206,7 +204,6 @@ if (isLoggedIn) {
     }
         loadContent(); //加載已儲存的內容
 });
-
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');

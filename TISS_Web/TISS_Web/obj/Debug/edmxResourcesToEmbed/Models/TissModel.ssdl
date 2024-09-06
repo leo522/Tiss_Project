@@ -190,6 +190,8 @@
     <Property Name="DocumentType" Type="nvarchar" MaxLength="10" />
     <Property Name="FileSize" Type="int" />
     <Property Name="LastModifiedTime" Type="datetime" />
+    <Property Name="IsEnabled" Type="bit" />
+    <Property Name="FileURL" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="GenderEqualityPageContent">
     <Key>

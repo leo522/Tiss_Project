@@ -13,18 +13,20 @@ namespace TISS_Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // 新增檔案上傳的路由
+            routes.MapRoute(
+                 name: "UploadPDF",
+            url: "Tiss/UploadPDF",
+            defaults: new { controller = "Tiss", action = "UploadPDF" }
+            );
+
+            // 預設路由
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 defaults: new { controller = "Tiss", action = "Home", id = UrlParameter.Optional }
             );
-
-            //    routes.MapRoute(
-            //    name: "EditPage",
-            //    url: "EditPage/Edit",
-            //    defaults: new { controller = "Tiss", action = "editPage" }
-            //);
         }
     }
 }

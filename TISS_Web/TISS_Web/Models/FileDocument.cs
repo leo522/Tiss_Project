@@ -22,5 +22,7 @@ namespace TISS_Web.Models
         public string DocumentType { get; set; }
         public Nullable<int> FileSize { get; set; }
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
+        public Nullable<bool> IsEnabled { get; set; }
+        public string FileURL { get; set; }
     }
 }

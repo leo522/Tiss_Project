@@ -27,6 +27,7 @@ using System.Data.Entity.Validation;
 using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using OfficeOpenXml;
+using System.Windows.Documents;
 
 
 namespace TISS_Web.Controllers
@@ -416,7 +417,7 @@ namespace TISS_Web.Controllers
                 Console.WriteLine("其他錯誤: " + ex.Message);
                 return View("Error");
             }
-            
+
         }
 
         // 處理重置密碼
@@ -655,7 +656,7 @@ namespace TISS_Web.Controllers
                 ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
             }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
 
-            //文章內容
+            //首頁文章內容
             var dtos = _db.ArticleContent
                 .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                 .OrderByDescending(a => a.PublishedDate)
@@ -667,20 +668,21 @@ namespace TISS_Web.Controllers
                     Hashtags = a.Hashtags,
                     EncryptedUrl = a.EncryptedUrl,
                     PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+
                 }).Take(4).ToList();
 
             var dto = _db.ArticleContent
                     .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
-                    .OrderByDescending(a => a.PublishedDate)
+                    .OrderByDescending(a => a.CreateDate)
                     .Select(a => new ArticleContentModel
-                {
-                    Title = a.Title,
-                    ImageContent = a.ImageContent,
-                    ContentType = a.ContentType,
-                    Hashtags = a.Hashtags,
-                    EncryptedUrl = a.EncryptedUrl,
-                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-                })
+                    {
+                        Title = a.Title,
+                        ImageContent = a.ImageContent,
+                        ContentType = a.ContentType,
+                        Hashtags = a.Hashtags,
+                        EncryptedUrl = a.EncryptedUrl,
+                        PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                    })
                     .FirstOrDefault(); // 取得最新的專欄文章
 
             var latestArticle = dtos.FirstOrDefault();
@@ -961,7 +963,9 @@ namespace TISS_Web.Controllers
                 "人物專訪",
                 "中心成果",
                 "運動科技論壇",
-                "影音專區"
+                "影音專區",
+                "運動科學研究處",
+                //"運動科技",
             };
                 // 查詢相關 hashtags 的文章
                 var list = _db.ArticleContent
@@ -1417,7 +1421,9 @@ namespace TISS_Web.Controllers
                 "運動生理",
                 "運動心理",
                 "體能訓練",
-                "運動營養"
+                "運動營養",
+                "兒少科普",
+                "科普海報下載專區"
             };
             // 查詢相關 hashtags 的文章
             var list = _db.ArticleContent
@@ -1727,7 +1733,7 @@ namespace TISS_Web.Controllers
                 .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
                 .OrderByDescending(a => a.CreateDate)
                 .ToList();
-            
+
             //計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
@@ -1795,14 +1801,17 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         private List<string> GetFile()
         {
-            var dt = (from f in _db.FileDocument select f.DocumentName).ToList();
+            var dt = (from f in _db.FileDocument
+                      where f.IsEnabled == true
+                      select f.DocumentName).ToList();
 
             return dt;
         }
+
         public string GetFilePath(string fileName)
         {
             var file = (from f in _db.FileDocument
-                        where f.DocumentName == fileName
+                        where f.DocumentName == fileName && f.IsEnabled == true
                         select f).FirstOrDefault();
 
             if (file != null)
@@ -2386,22 +2395,13 @@ namespace TISS_Web.Controllers
         /// </summary>
         /// <param name="encryptedUrl"></param>
         /// <returns></returns>
-        //private string DecryptUrl(string encryptedUrl)
-        //{
-        //    // 簡單的 Base64 解密示例
-        //    encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
-        //    var bytes = Convert.FromBase64String(encryptedUrl);
-        //    var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
-        //    return decodedString;
-        //}
         private string DecryptUrl(string encryptedUrl)
         {
             try
             {
-                // 替換 Base64 URL 安全字符（如果已被替換）
-                //encryptedUrl = encryptedUrl.Replace("-", "+").Replace("_", "/");
+                // 替換 Base64 URL 安全字符如果已被替換）
                 encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
-                // 补齐 Base64 字符串的填充
+                // 補齊Base64 字符串的填充
                 int mod4 = encryptedUrl.Length % 4;
                 if (mod4 > 0)
                 {
@@ -2485,12 +2485,11 @@ namespace TISS_Web.Controllers
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
                 {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區" } },
+                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
                     { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
                     { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
                 };
-
 
                 //var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
                 //var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
@@ -2625,40 +2624,6 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 留言板功能-暫時不用
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult PostComment(int articleId, string userName, string commentText)
-        //{
-        //    try
-        //    {
-        //        var comment = new MessageBoard
-        //        {
-        //            ArticleId = articleId,
-        //            UserName = userName,
-        //            CommentText = commentText,
-        //            CommentDate = DateTime.Now,
-        //            IsApproved = true
-        //        };
-
-        //        _db.MessageBoard.Add(comment);
-        //        _db.SaveChanges();
-
-        //        // 只需重新導向到 ViewArticle，無需進行額外更新
-        //        var article = _db.ArticleContent.FirstOrDefault(a => a.Id == articleId);
-        //        if (article != null)
-        //        {
-        //            return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
-        //        }
-        //        return RedirectToAction("Home");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-        #endregion
-
         #region 留言認證
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -2666,30 +2631,30 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                    // 驗證 reCAPTCHA
-                    var recaptchaSecret = "6Lezbh4qAAAAADGP0PVQCGXgPDtujjwPtY-EdyAB";
-                    var client = new WebClient();
-                    var response = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={recaptchaSecret}&response={recaptchaResponse}");
-                    dynamic json = JsonConvert.DeserializeObject(response);
-                    bool isCaptchaValid = json.success;
+                // 驗證 reCAPTCHA
+                var recaptchaSecret = "6Lezbh4qAAAAADGP0PVQCGXgPDtujjwPtY-EdyAB";
+                var client = new WebClient();
+                var response = client.DownloadString($"https://www.google.com/recaptcha/api/siteverify?secret={recaptchaSecret}&response={recaptchaResponse}");
+                dynamic json = JsonConvert.DeserializeObject(response);
+                bool isCaptchaValid = json.success;
 
-                    if (!isCaptchaValid)
-                    {
-                        // reCAPTCHA 驗證失敗
-                        return RedirectToAction("Error");
-                    }
+                if (!isCaptchaValid)
+                {
+                    // reCAPTCHA 驗證失敗
+                    return RedirectToAction("Error");
+                }
 
-                    // 檢查留言頻率
-                    var lastComment = _db.MessageBoard
-                        .Where(c => c.UserName == userName)
-                        .OrderByDescending(c => c.CommentDate)
-                        .FirstOrDefault();
+                // 檢查留言頻率
+                var lastComment = _db.MessageBoard
+                    .Where(c => c.UserName == userName)
+                    .OrderByDescending(c => c.CommentDate)
+                    .FirstOrDefault();
 
-                    if (lastComment != null && (DateTime.Now - lastComment.CommentDate).TotalMinutes < 1)
-                    {
-                        // 防止頻繁留言
-                        return RedirectToAction("Error");
-                    }
+                if (lastComment != null && (DateTime.Now - lastComment.CommentDate).TotalMinutes < 1)
+                {
+                    // 防止頻繁留言
+                    return RedirectToAction("Error");
+                }
 
                 // 防範 XSS 攻擊
                 var encodedCommentText = HttpUtility.HtmlEncode(commentText);
@@ -2720,7 +2685,7 @@ namespace TISS_Web.Controllers
             {
                 throw ex;
             }
-            
+
         }
         #endregion
 
@@ -2780,5 +2745,58 @@ namespace TISS_Web.Controllers
             return View("Error");
         }
         #endregion
+
+        [HttpPost]
+        public ActionResult UploadPDF(HttpPostedFileBase file)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
+
+                    // 確保 uploads 目錄存在
+                    var uploadPath = Server.MapPath("~/uploads");
+                    if (!Directory.Exists(uploadPath))
+                    {
+                        Directory.CreateDirectory(uploadPath);
+                    }
+
+                    file.SaveAs(path);
+
+                    var fileDocument = new FileDocument
+                    {
+                        PId = GeneratePId(),
+                        DocumentName = fileName,
+                        UploadTime = DateTime.Now, // 當前時間
+                        Creator = User.Identity.Name, // 假設使用者名稱來自身份驗證
+                        DocumentType = Path.GetExtension(fileName), // 檔案類型
+                        FileSize = file.ContentLength, // 檔案大小
+                        LastModifiedTime = DateTime.Now, // 當前時間
+                        IsEnabled = true, // 根據需求設置
+                        FileURL = Url.Content($"~/uploads/{fileName}")
+                    };
+
+                    _db.FileDocument.Add(fileDocument);
+                    _db.SaveChanges();
+
+                    return Json(new { url = fileDocument.FileURL });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { error = "檔案上傳失敗: " + ex.Message });
+                }
+                
+            }
+
+            return Json(new { error = "檔案上傳失敗" });
+        }
+        private int GeneratePId()
+        {
+            // 根據你的需求生成 PId
+            // 例如：使用當前時間戳、隨機數、或從資料庫中獲取最大值加一
+            return _db.FileDocument.Max(d => (int?)d.PId) + 1 ?? 1; // 確保不會重複
+        }
     }
 }
