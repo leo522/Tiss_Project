@@ -130,3 +130,6 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Numerics.Vectors.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\TISS_Web.App_GlobalResources.Language.en-US.resources
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\TISS_Web.csproj.GenerateResource.cache
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\en-US\TISS_Web.resources.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.xml

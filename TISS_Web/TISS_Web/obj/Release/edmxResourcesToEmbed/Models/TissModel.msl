@@ -642,6 +642,7 @@
     <EntitySetMapping Name="FileDocument">
       <EntityTypeMapping TypeName="TISS_WebModel.FileDocument">
         <MappingFragment StoreEntitySet="FileDocument">
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="FileURL" ColumnName="FileURL" />
           <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
           <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />

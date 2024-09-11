@@ -30,7 +30,7 @@ using OfficeOpenXml;
 using System.Windows.Documents;
 using System.Net.Http;
 using System.Net.Sockets;
-using Google.Apis.Translate.v2;
+
 using System.Web.Caching;
 using System.Runtime.Caching;
 
@@ -40,23 +40,16 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
         private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
-        private readonly string googleApiKey = "AIzaSyA-i_oL7eR2Sz-fjjQC_bSeVlFgqLbNOKo"; // Google 翻譯API
-        private readonly HttpClient _httpClient;
 
 
         #region 檔案上傳共用服務
 
         private readonly FileUploadService _fileUploadService;
 
-        public TissController(HttpClient httpClient)
+        public TissController()
         {
             _fileUploadService = new FileUploadService(new TISS_WebEntities());
             _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
-            _httpClient = new HttpClient();
-        }
-
-        public TissController(): this(new HttpClient()) 
-        {
 
         }
         #endregion
@@ -2820,75 +2813,6 @@ namespace TISS_Web.Controllers
             return _db.FileDocument.Max(d => (int?)d.PId) + 1 ?? 1; // 確保不會重複
         }
 
-        #endregion
-
-        #region 網頁中英文翻譯
-
-        [HttpPost]
-        public async Task<ActionResult> TranslatePage(string lang, string pageHtml)
-        {
-            try
-            {
-                // 調用 Google 翻譯 API 翻譯頁面
-                string translatedHtml = await TranslateText(lang, pageHtml);
-
-                // 返回翻譯後的頁面內容
-                return Content(translatedHtml, "text/html");
-            }
-            catch (Exception ex)
-            {
-                return Content($"翻譯過程發生錯誤：{ex.Message}");
-            }
-        }
-
-        // 翻譯文本的輔助方法
-        public async Task<string> TranslateText(string text, string targetLanguage)
-        {
-            try
-            {
-                var url = $"https://translation.googleapis.com/language/translate/v2?key={googleApiKey}";
-                var requestBody = new
-                {
-                    q = text,
-                    target = targetLanguage
-                };
-
-                var json = JsonConvert.SerializeObject(requestBody);
-                var response = await _httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
-                    dynamic result = JsonConvert.DeserializeObject(jsonResponse);
-                    return result.data.translations[0].translatedText;
-                }
-                else
-                {
-                    return "翻譯失敗: " + response.ReasonPhrase;
-                }
-            }
-            catch (Exception ex)
-            {
-                return "翻譯失敗: " + ex.Message;
-            }
-        }
-
-        // 渲染視圖為 HTML 字符串
-        private string RenderViewToString(string viewName)
-        {
-            var viewEngineResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
-            if (viewEngineResult.View == null)
-            {
-                throw new FileNotFoundException($"找不到視圖 {viewName}");
-            }
-
-            using (var sw = new StringWriter())
-            {
-                var viewContext = new ViewContext(ControllerContext, viewEngineResult.View, ViewData, TempData, sw);
-                viewEngineResult.View.Render(viewContext, sw);
-                return sw.GetStringBuilder().ToString();
-            }
-        }
         #endregion
     }
 }

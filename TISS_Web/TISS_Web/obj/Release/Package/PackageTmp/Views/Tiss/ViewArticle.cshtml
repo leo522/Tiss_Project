@@ -12,7 +12,7 @@
     <title>@Model.Title</title>
     <script src="~/bootstrap/js/bootstrap.js"></script>
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
+    <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
@@ -36,312 +36,123 @@
     </script>
 </head>
 <body>
-    <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0" nonce="xyz">
     </script>
-    <div data-v-339da53a="" class="layout">
-        <div data-v-339da53a="" class="container-fluid px-0 mt-header">
-            <div data-v-339da53a-s="" class="BasePageLayout">
-                <div class="BasePageBanner">
-                    <div class="Mask"></div>
-                    <img class="PageBannerItemBg " src="/site/img/banner_research.25875290.jpg" alt="文章編輯封面圖片">
-                </div>
-                <section class="el-container">
-                    <aside class="el-aside">
-                        <div class="BaseBreadcrumb d-block d-lg-none">
+    <div class="container-fluid px-0 mt-header">
+        <div class="BasePageLayout">
+            <div class="BasePageBanner">
+                <div class="Mask"></div>
+                <img class="PageBannerItemBg" src="/site/img/banner_research.25875290.jpg" alt="文章編輯封面圖片">
+            </div>
+            <section class="el-container">
+                <aside class="el-aside">
+                    <div class="BaseBreadcrumb d-block d-lg-none">
+                        <div class="container">
+                            <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                <span class="el-breadcrumb__item">
+                                    <a class="el-breadcrumb__inner" role="link" style="color:black" href="/Tiss/Home">首頁</a>
+                                    <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
+                                </span>
+                                @if (ViewBag.ParentDirectory != null)
+                                {
+                                    <span class="el-breadcrumb__item">
+                                        <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
+                                        <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
+                                    </span>
+                                }
+                                <span class="el-breadcrumb__item current-page" aria-current="page">
+                                    <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        @if (!string.IsNullOrEmpty(parentDirectory))
+                        {
+                            <div class="Title">@parentDirectory</div>
+                            <ul class="Menu">
+                                @foreach (var item in ViewBag.MenuUrls)
+                                {
+                                    <li span="3">
+                                        <a class="MenuLink" href="@item.Value">@item.Key</a>
+                                    </li>
+                                }
+                                @if (isLoggedIn)
+                                {
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </aside>
+                <main class="el-main bg-defaultO4">
+                    <div class="MainContainer">
+                        <div class="BaseBreadcrumb d-none d-lg-block">
                             <div class="container">
                                 <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                     <span class="el-breadcrumb__item">
                                         <a class="el-breadcrumb__inner" role="link" style="color:black" href="/Tiss/Home">首頁</a>
                                         <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                     </span>
-                                    @if (ViewBag.ParentDirectory != null)
+                                    @if (ViewBag.ParentDirectory != null && ViewBag.CurrentSubDirectory != null)
                                     {
                                         <span class="el-breadcrumb__item">
                                             <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
                                             <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                         </span>
-                                    }
-                                    <span class="el-breadcrumb__item current-page" aria-current="page">
-                                        <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content">
-                            @if (!string.IsNullOrEmpty(parentDirectory))
-                            {
-                                <div class="Title">@parentDirectory</div>
-                                <ul class="Menu">
-                                    @foreach (var item in ViewBag.MenuUrls)
-                                    {
-                                        <li span="3">
-                                            <a class="MenuLink" href="@item.Value">@item.Key</a>
-                                        </li>
-                                    }
-                                    @if (isLoggedIn)
-                                    {
-                                        <li span="3">
-                                            <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                        </div>
-                    </aside>
-                    <main class="el-main bg-defaultO4">
-                        <div class="MainContainer">
-                            <div class="BaseBreadcrumb d-none d-lg-block">
-                                <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                         <span class="el-breadcrumb__item">
-                                            <a class="el-breadcrumb__inner" role="link" style="color:black" href="/Tiss/Home">首頁</a>
+                                            <a class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.CurrentSubDirectory</a>
                                             <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                         </span>
-                                        @*@if (ViewBag.ParentDirectory != null)
-                        {
-                            <span class="el-breadcrumb__item">
-                                <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
-                                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
-                            </span>
-                        }
-                        <span class="el-breadcrumb__item current-page" aria-current="page">
-                            <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)
-                            </span>
-                        </span>*@
-                                        @if (ViewBag.ParentDirectory != null && ViewBag.CurrentSubDirectory != null)
-                                        {
-                                            <span class="el-breadcrumb__item">
-                                                <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
-                                                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
-                                            </span>
-
-                                            <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.CurrentSubDirectory</a>
-                                                <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
-                                            </span>
-                                        }
-
-                                        @*<span class="el-breadcrumb__item current-page" aria-current="page">
-                            <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)
-                            </span>
-                        </span>*@ @*文章標題名稱*@
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="infoList">
-                            <div class="container mt-5 ResearchPage content-container">
-                                <div class="article-content">
-                                    @if (isLoggedIn)
-                                    {
-                                        <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
-                                            @Html.AntiForgeryToken()
-                                            <input type="hidden" name="Id" value="@Model.Id" />
-                                            <div class="form-group">
-                                                <label for="ContentBody">內容:</label>
-                                                <textarea id="ContentBody" name="ContentBody" class="form-control">@Model.ContentBody</textarea>
-                                            </div>
-                                            <input type="hidden" name="Id" value="@Model.Id" />
-                                            <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                        </form>
-                                    }
-                                    else
-                                    {
-                                        <div class="hashtags-link" style="text-align: left;">
-                                            <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
-                                            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
-                                                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
-                                            </a>
-                                        </div>
-                                        <div>
-                                            @Html.Raw(Model.ContentBody)
-                                        </div>
                                     }
                                 </div>
-                                <div class="side-info">
-                                    @*<p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p>*@
-                                    <div class="ShareToolBar">
-                                        <div class="NewsParams">
-                                            <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p> @*點擊率*@
-                                        </div>
-                                        <div class="ShareToolBarTitle">Share On</div>
-                                        <ul class="SocialList">
-                                            <li>
-                                                <button type="button" class="el-button is-circle" aria-label="分享至 Facebook" onclick="shareFacebook()">
-                                                    <span>
-                                                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                            <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 LINE" onclick="shareLine()">
-                                                    <span class="">
-                                                        <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
-                                                    </span>
-                                                </button>
-                                            </li>
-                                            <li>
-                                                <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="分享至 Twitter" onclick="shareTwitter()">
-                                                    <span class="">
-                                                        <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                            <path class="" fill="currentColor" d="M512 97.2c-19 8.3-39.4 14-60.7 16.5c21.8-13.1 38.4-33.8 46.2-58.5c-20.4 12.1-43 20.9-67.1 25.6c-19.3-20.6-46.6-33.4-76.8-33.4c-58.1 0-105.1 47.1-105.1 105c0 8.2 .9 16.2 2.7 23.8C165.1 180.3 87.7 134.5 36 66.6c-9 15.5-14.1 33.5-14.1 52.7c0 36.3 18.5 68.4 46.6 87.2c-17.2-.5-33.4-5.3-47.6-13.1v1.3c0 50.7 36.1 93 83.8 102.6c-8.8 2.4-18.1 3.6-27.7 3.6c-6.8 0-13.4-.7-19.8-1.9c13.4 41.9 52.3 72.4 98.4 73.3c-36 28.2-81.3 45-130.6 45c-8.5 0-16.8-.5-25-1.5c46.5 29.8 101.6 47.1 160.8 47.1c193 0 298.4-160 298.4-298.4l-.3-13.6C480 136.7 497.7 118.3 512 97.2z">
-                                                            </path>
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="navigation-buttons">
-                                @if (ViewBag.PreviousArticle != null)
-                                {
-                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.PreviousArticle.EncryptedUrl })" class="btnStyle">上一篇</a>
-                                }
-                                @if (ViewBag.NextArticle != null)
-                                {
-                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = ViewBag.NextArticle.EncryptedUrl })" class="btnStyle">下一篇</a>
-                                }
                             </div>
                         </div>
-                        <div class="comments-section">
-                            <h3>留言區</h3>
-                            <button id="toggle-comments" class="btn btn-light">
-                                <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
-                            </button>
-                            <div id="comments-container" style="display: none;">
-                                @foreach (var comment in ViewBag.Comments)
-                                {
-                                    <div class="comment">
-                                        <p>
-                                            <strong>@comment.UserName</strong> 說：
-                                            @comment.CommentText
-                                        </p>
-                                        <p class="text-muted">@comment.CommentDate</p>
-                                        <!-- 顯示回覆 -->
-                                        <div class="comment">
-                                            @if (comment.ReplyMessage != null && comment.ReplyMessage.Count > 0)
-                                            {
-                                                <div class="replies">
-                                                    @foreach (var reply in comment.ReplyMessage)
-                                                    {
-                                                        <div class="reply">
-                                                            <p><strong>@reply.UserName</strong>: @reply.ReplyText</p>
-                                                            <small>@reply.ReplyDate</small>
-                                                        </div>
-                                                    }
-                                                </div>
-                                            }
-                                        </div>
+                    </div>
+                    <div class="container mt-5">
+                        <div class="article-content">
+                            @if (isLoggedIn)
+                            {
+                                <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="Id" value="@Model.Id" />
+                                    <div class="form-group">
+                                        <label for="ContentBody">內容:</label>
+                                        @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                    </div>
 
-                                        <!-- 回覆功能 -->
-                                        <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">回覆</button>
-                                        <div class="reply-form" id="reply-form-@comment.Id" style="display:none;">
-                                            <form action="@Url.Action("PostReply", "Tiss")" method="post">
-                                                @Html.AntiForgeryToken()
-                                                <input type="hidden" name="parentId" value="@comment.Id" />
-                                                <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
-                                                <div class="form-group">
-                                                    <label for="replyName">名稱:</label>
-                                                    <input id="replyName" class="form-control" name="replyName" required style="width: 800px;" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="replyText">回覆:</label>
-                                                    <textarea id="replyText" class="form-control" name="replyText" required style="width: 800px;"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">回覆留言</button>
-                                            </form>
-                                        </div>
+                                    <div class="form-group mb-4">
+                                        <label for="ImageFile" style="font-size:25px" title="預覽用圖片">預覽用圖片</label>
+                                        <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
                                     </div>
-                                }
-                            </div>
-                            <form action="@Url.Action("PostCommentWithCaptcha", "Tiss")" method="post" id="msg">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
-                                <input type="hidden" id="g-recaptcha-response" name="recaptchaResponse" />
-                                <div class="form-group">
-                                    <label for="userName">名稱:</label>
-                                    <input type="text" id="userName" class="form-control" name="userName" required style="width: 200px;" />
+                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="hashtags-link" style="text-align: left;">
+                                    <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
+                                    <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+                                        <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
+                                    </a>
                                 </div>
-                                <div class="form-group">
-                                    <label for="commentText" style="display: inline-block; width: 50px;">留言:</label>
-                                    <textarea id="commentText" class="form-control" name="commentText" required style="width: 800px;"></textarea>
+                                <div>
+                                    @Html.Raw(Model.ContentBody)
                                 </div>
-                                <button type="submit" class="btn btn-success">提交留言</button>
-                            </form>
+                            }
                         </div>
-                        
-                    </main>
-                </section>
-            </div>
+                    </div>
+                </main>
+            </section>
         </div>
     </div>
 
-    @*<p>點閱次數: @Model.ClickCount</p>
-        <div class="ShareToolBar">
-            <div class="ShareToolBarTitle">分享至:</div>
-            <ul class="SocialList">
-                <li>
-                    <button type="button" class="el-button is-circle" aria-label="分享至 Facebook">
-                        <span>
-                            <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path fill="currentColor" d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-line">
-                        <span class="">
-                            <img src="/site/img/line_icon_black.2c46b360.svg" alt="line">
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button aria-disabled="false" type="button" class="el-button is-circle" aria-label="share-x">
-                        <span class="">
-                            <svg class="svg-inline--fa fa-x-twitter" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="x-twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                <path class="" fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z">
-                                </path>
-                            </svg>
-                        </span>
-                    </button>
-                </li>
-            </ul>
-        </div>*@
-    @*<div class="social-share">
-            <h5>分享至:</h5>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-primary">
-                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示"/>Facebook
-            </a>
-            <a href="https://twitter.com/intent/tweet?url=@Url.Encode(Request.Url.AbsoluteUri)&text=@Url.Encode(Model.Title)" target="_blank" class="btn btn-info">
-                <img src="~/fontawesome/twitter_icon.ico" width="32" alt="推特圖示"/> Twitter
-            </a>
-            <a href="https://line.me/R/msg/text/?@Url.Encode(Model.Title)%0A@Url.Encode(Request.Url.AbsoluteUri)" target="_blank" class="btn btn-success">
-                <img src="~/fontawesome/line_icon.ico" width="32" alt="line圖示"/> Line
-            </a>
-        </div>*@
     @if (isLoggedIn)
     {
         <script>
             $(document).ready(function () {
-    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
-
-if (isLoggedIn) {
-    $('#logoutBtn').show(); //顯示登出按鈕
-} else {
-    $('#loginBtn').show(); //顯示登入按鈕
-    }
-        loadContent(); //加載已儲存的內容
-            });
-
-            document.addEventListener('DOMContentLoaded', function () {
                 tinymce.init({
                     selector: '#ContentBody',
                     language: 'zh_TW',
@@ -351,6 +162,24 @@ if (isLoggedIn) {
                         'media', 'table', 'emoticons', 'help'
                     ],
                     toolbar: 'insertfile | undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | customFileButton',
+
+                    // 文件和圖片的檔案選擇器
+                    file_picker_callback: function (callback, value, meta) {
+                        if (meta.filetype === 'image') {
+                            var input = document.createElement('input');
+                            input.setAttribute('type', 'file');
+                            input.setAttribute('accept', 'image/*');
+                            input.onchange = function () {
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    callback(e.target.result, { alt: file.name });
+                                };
+                                reader.readAsDataURL(file);
+                            };
+                            input.click();
+                        }
+                    },
                     setup: function (editor) {
                         editor.ui.registry.addButton('customFileButton', {
                             text: '插入檔案',
@@ -364,7 +193,7 @@ if (isLoggedIn) {
                                     var formData = new FormData();
                                     formData.append('file', file);
 
-                                    fetch('/Tiss/UploadPDF', { // 指向你的上傳 API
+                                    fetch('/Tiss/UploadPDF', {
                                         method: 'POST',
                                         body: formData
                                     })
@@ -378,99 +207,17 @@ if (isLoggedIn) {
                                             }
                                         })
                                         .catch(error => {
-                                            console.error('上傳錯誤:', error);
+                                            console.error('檔案上傳錯誤:', error);
                                             alert('檔案上傳失敗！');
                                         });
                                 };
                                 input.click();
                             }
                         });
-                    },
+                    }
                 });
             });
         </script>
     }
-    <script>
-        $(document).ready(function () {
-              var isCommentsVisible = false;
-    var commentCount = '@ViewBag.CommentCount';
-
-    $('#toggle-comments').click(function () {
-        if (isCommentsVisible) {
-            $('#comments-container').slideUp();
-            $(this).find('span').text('檢視留言(' + commentCount +  '則留言)');
-        } else {
-            $('#comments-container').slideDown();
-            $(this).find('span').text( commentCount +  '則留言');
-        }
-        isCommentsVisible = !isCommentsVisible;
-    });
-            document.addEventListener('DOMContentLoaded', function () {
-                const form = document.querySelector('form');
-                let lastSubmission = localStorage.getItem('lastSubmission');
-                const now = new Date().getTime();
-
-                if (lastSubmission && now - lastSubmission < 60000) { // 設置為 1 分鐘
-                    form.querySelector('button').disabled = true;
-                    form.querySelector('button').textContent = '請稍後再提交留言';
-                } else {
-                    form.querySelector('button').disabled = false;
-                }
-
-                form.addEventListener('submit', function () {
-                    localStorage.setItem('lastSubmission', new Date().getTime());
-                });
-            });
-
-            function containsSuspiciousLinks(commentText) {
-                const suspiciousPattern = /(http|https):\/\/[^\s]+/g;
-                return suspiciousPattern.test(commentText);
-            }
-
-            document.querySelector('form').addEventListener('submit', function (event) {
-                const commentText = document.querySelector('#commentText').value;
-
-                if (containsSuspiciousLinks(commentText)) {
-                    alert('留言中包含可疑的連結，請檢查後再提交。');
-                    event.preventDefault(); // 阻止表單提交
-                }
-            });
-        });
-
-        function shareFacebook() {
-            const url = encodeURIComponent(window.location.href);
-            const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-            window.open(fbShareUrl, '_blank', 'width=600,height=400');
-        }
-
-        function shareLine() {
-            const url = encodeURIComponent(window.location.href);
-            const lineShareUrl = `https://social-plugins.line.me/lineit/share?url=${url}`;
-            window.open(lineShareUrl, '_blank', 'width=600,height=400');
-        }
-
-        function shareTwitter() {
-            const url = encodeURIComponent(window.location.href);
-            const twitterShareUrl = `https://twitter.com/intent/tweet?url=${url}`;
-            window.open(twitterShareUrl, '_blank', 'width=600,height=400');
-        }
-
-        /*摺疊回覆留言*/
-        document.addEventListener("DOMContentLoaded", function () {
-            var replyButtons = document.querySelectorAll(".reply-btn");
-
-            replyButtons.forEach(function (button) {
-                button.addEventListener("click", function () {
-                    var commentId = button.getAttribute("data-comment-id");
-                    var replyForm = document.getElementById("reply-form-" + commentId);
-                    if (replyForm.style.display === "none") {
-                        replyForm.style.display = "block";
-                    } else {
-                        replyForm.style.display = "none";
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

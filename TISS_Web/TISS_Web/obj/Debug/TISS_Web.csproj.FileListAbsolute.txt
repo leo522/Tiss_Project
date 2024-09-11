@@ -60,7 +60,6 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\EPPlus.System.Drawing.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.dll
-D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Microsoft.IO.RecyclableMemoryStream.dll
@@ -93,8 +92,6 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.pdb
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Auth.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.pdb
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Core.xml
-D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.pdb
-D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Translate.v2.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.pdb
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.YouTube.v3.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Microsoft.IO.RecyclableMemoryStream.xml

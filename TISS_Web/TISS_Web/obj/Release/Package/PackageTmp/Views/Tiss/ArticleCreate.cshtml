@@ -28,8 +28,8 @@
                 @Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
             </div>
             <div class="form-group mb-4">
-                <label for="ContentType" style="font-size:25px" title="發佈類型">發佈類型</label>
-                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇發佈類型", new { @class = "form-control" })
+                <label for="ContentType" style="font-size:25px" title="發佈類型">文章發佈類別</label>
+                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
             </div>
             <div class="form-group mb-4">
                 <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
@@ -54,7 +54,26 @@
                     'media', 'table', 'emoticons', 'help'
                 ],
                 toolbar: 'insertfile | undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | customFileButton',
+
+                // 文件和圖片的檔案選擇器
+                file_picker_callback: function (callback, value, meta) {
+                    if (meta.filetype === 'image') {
+                        var input = document.createElement('input');
+                        input.setAttribute('type', 'file');
+                        input.setAttribute('accept', 'image/*');
+                        input.onchange = function () {
+                            var file = this.files[0];
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                callback(e.target.result, { alt: file.name });
+                            };
+                            reader.readAsDataURL(file);
+                        };
+                        input.click();
+                    }
+                },
                 setup: function (editor) {
+                    // 自定義按鈕來上傳 .pdf, .doc, .docx 檔案
                     editor.ui.registry.addButton('customFileButton', {
                         text: '插入檔案',
                         onAction: function () {
@@ -67,13 +86,15 @@
                                 var formData = new FormData();
                                 formData.append('file', file);
 
-                                fetch('/Tiss/UploadPDF', { // 指向你的上傳 API
+                                // 上傳 PDF 或 DOC 檔案
+                                fetch('/Tiss/UploadPDF', { // 檔案上傳 API
                                     method: 'POST',
                                     body: formData
                                 })
                                     .then(response => response.json())
                                     .then(data => {
                                         if (data.url) {
+                                            // 插入檔案連結到編輯器中
                                             var link = `<a href="${data.url}" download>${file.name}</a>`;
                                             editor.insertContent(link);
                                         } else {
@@ -81,7 +102,7 @@
                                         }
                                     })
                                     .catch(error => {
-                                        console.error('上傳錯誤:', error);
+                                        console.error('檔案上傳錯誤:', error);
                                         alert('檔案上傳失敗！');
                                     });
                             };
@@ -92,6 +113,5 @@
             });
         });
     </script>
-
 </body>
 </html>

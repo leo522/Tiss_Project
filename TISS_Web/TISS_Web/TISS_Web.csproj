@@ -70,9 +70,6 @@
     <Reference Include="Google.Apis.Core, Version=1.68.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Core.1.68.0\lib\net462\Google.Apis.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Translate.v2, Version=1.68.0.875, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Apis.Translate.v2.1.68.0.875\lib\net462\Google.Apis.Translate.v2.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Apis.YouTube.v3, Version=1.68.0.3421, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.YouTube.v3.1.68.0.3421\lib\net462\Google.Apis.YouTube.v3.dll</HintPath>
     </Reference>
@@ -2604,7 +2601,9 @@
       <LastGenOutput>TissModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\4.5.2.bootstrap.min.js" />
+    <Content Include="site\css\3.3.6_bootstrap.min.css" />
     <Content Include="site\css\BackTop.css" />
+    <Content Include="site\css\bootstrap-select_min.css" />
     <Content Include="site\css\hashTagStyle.css" />
     <Content Include="site\css\MenuLinkStyle.css" />
     <Content Include="site\css\NavMenuStyle.css" />
