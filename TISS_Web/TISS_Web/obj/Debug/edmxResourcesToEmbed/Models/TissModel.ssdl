@@ -192,6 +192,7 @@
     <Property Name="LastModifiedTime" Type="datetime" />
     <Property Name="IsEnabled" Type="bit" />
     <Property Name="FileURL" Type="nvarchar(max)" />
+    <Property Name="ImageData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="GenderEqualityPageContent">
     <Key>

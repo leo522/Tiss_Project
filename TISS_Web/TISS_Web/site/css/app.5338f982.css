@@ -1,5 +1,26 @@
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed 
 under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
+:focus {
+    outline: 0;  /*隱藏預設焦點框 */
+    border: 4px dashed orange;  /*添加橙色虛線邊框 */
+}
+[data-v-e61ebf00]:focus {
+    outline: 0; /* 隱藏預設焦點框 */
+    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+}
+[data-v-71bab962]:focus {
+    outline: 0; /* 隱藏預設焦點框 */
+    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+}
+[data-v-ffd846e6]:focus {
+    outline: 0; /* 隱藏預設焦點框 */
+    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+}
+[data-v-339da53a]:focus {
+    outline: 0; /* 隱藏預設焦點框 */
+    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+}
+
 [data-bs-theme=light][data-v-e61ebf00], [data-v-e61ebf00]:root {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
@@ -14742,6 +14763,10 @@ textarea.form-control-lg[data-v-e61ebf00] {
     height: auto; /* 自動調整高度 */
     transition: max-width 0.3s; /* 增加過渡效果 */
 }
+.logoNav .mainLogo:focus {
+    outline: 0; /* 隱藏預設焦點框 */
+    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+}
 @media screen and (max-width: 1199.9px) {
     .logoNav {
         padding: 10px; /* 減少內邊距 */
@@ -19127,7 +19152,10 @@ textarea.form-control-lg[data-v-71bab962] {
         pointer-events: none;
         background-color: transparent
     }
-
+    .dropdown-item[data-v-71bab962]:focus {
+        outline: 0; /* 隱藏預設焦點框 */
+        border: 4px dashed orange; /* 添加橙色虛線邊框 */
+    }
 .dropdown-menu.show[data-v-71bab962] {
     display: block
 }
@@ -19310,9 +19338,10 @@ textarea.form-control-lg[data-v-71bab962] {
 }
 
 .nav-link[data-v-71bab962]:focus-visible {
-    outline: 0;
-    -webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
-    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
+        outline: 0;
+        border: 4px dashed orange;
+/*    -webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)*/
 }
 
 .nav-link.disabled[data-v-71bab962], .nav-link[data-v-71bab962]:disabled {
@@ -77710,7 +77739,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     --bs-body-line-height: 1.5;
     --bs-body-color: #212529;
     --bs-body-color-rgb: 33,37,41;
-    --bs-body-bg: #fff;
+    /*--bs-body-bg: #fff;*/
     --bs-body-bg-rgb: 255,255,255;
     --bs-emphasis-color: #000;
     --bs-emphasis-color-rgb: 0,0,0;
@@ -77748,7 +77777,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     --bs-box-shadow-inset: inset 0 1px 2px rgba(0,0,0,.075);
     --bs-focus-ring-width: .25rem;
     --bs-focus-ring-opacity: .25;
-    --bs-focus-ring-color: rgba(13,110,253,.25);
+    /*--bs-focus-ring-color: rgba(13,110,253,.25);*/
     --bs-form-valid-color: #198754;
     --bs-form-valid-border-color: #198754;
     --bs-form-invalid-color: #dc3545;
@@ -77761,7 +77790,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     --bs-body-color-rgb: 222,226,230;
     --bs-body-bg: #212529;
     --bs-body-bg-rgb: 33,37,41;
-    --bs-emphasis-color: #fff;
+    /*--bs-emphasis-color: #fff;*/
     --bs-emphasis-color-rgb: 255,255,255;
     --bs-secondary-color: rgba(222,226,230,.75);
     --bs-secondary-color-rgb: 222,226,230;
@@ -78069,7 +78098,7 @@ button {
 }
 
     button:focus:not(:focus-visible) {
-        outline: 0
+        outline: 0;
     }
 
 button, input, optgroup, select, textarea {
@@ -78109,7 +78138,7 @@ select {
 
 ::-moz-focus-inner {
     padding: 0;
-    border-style: none
+    border-style: none;
 }
 
 textarea {
@@ -80635,7 +80664,7 @@ textarea.form-control-lg {
         }
 
     .form-range::-moz-focus-outer {
-        border: 0
+        border: 0;
     }
 
     .form-range::-webkit-slider-thumb {
@@ -82082,20 +82111,18 @@ textarea.form-control-lg {
     }
 }
 
+/*導航列標籤區域*/
 .nav-link:focus, .nav-link:hover {
     color: var(--bs-nav-link-hover-color)
+/*    outline: 0;
+    border: 4px dashed orange;*/
 }
 
-/*.nav-link:focus-visible {
-    outline: 0;
-    -webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
-    box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
-}*/
 .nav-link:focus-visible {
     outline: 0;
+    border: 4px dashed orange; /* 這裡添加邊框樣式，框線粗度 */
     /*-webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
     box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);*/
-    border: 4px dashed orange; /* 這裡添加邊框樣式，框線粗度 */
 }
 
 .nav-link.disabled, .nav-link:disabled {

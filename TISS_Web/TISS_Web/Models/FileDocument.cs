@@ -24,5 +24,6 @@ namespace TISS_Web.Models
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
         public Nullable<bool> IsEnabled { get; set; }
         public string FileURL { get; set; }
+        public byte[] ImageData { get; set; }
     }
 }

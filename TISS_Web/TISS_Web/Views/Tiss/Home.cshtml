@@ -89,7 +89,7 @@
                                                     <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                 }
                                                 <div class="tag">@Model.LatestArticle.ContentType</div>
-                                                <div class="Mask" title="閱讀更多">閱讀更多</div>
+                                                <div class="Mask" title="@Model.LatestArticle.Title">閱讀更多</div>
                                             </div>
                                             <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
                                             <div class="NewsItemContent">
@@ -166,7 +166,7 @@
                                                                 <img src="data:image/png;base64,@base64Image" alt="圖片" />
                                                             }
                                                             <div class="tag">@article.ContentType</div>
-                                                            <div class="Mask" title="閱讀更多">閱讀更多</div>
+                                                            <div class="Mask" title="@article.Title">閱讀更多</div>
                                                         </div>
                                                         <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                         <div class="NewsItemContent">
@@ -204,7 +204,7 @@
                                     <div class="el-row" style="margin-left: -12px; margin-right: -12px;">
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
 
-                                            @*影片文字內容*@            
+                                            @*影片文字內容*@
                                             <div class="carousel-article-column">
                                                 <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="Previous">
                                                     &lt;
@@ -213,46 +213,28 @@
                                                 {
                                                     <div class="carousel-item article-item" style="display: none;">
                                                         @*<a href="/video/@Model.Videos[i].EncryptedUrl" class="carousel-article-link">*@
-                                                            <a  class="carousel-article-link">
-                                                                <div class="VideoCarouselContent">
-                                                                    <div class="VideoCarouselContentBox">
-                                                                        <div class="Tag">
-                                                                            <span title="中心成果">中心成果</span>
-                                                                        </div>
-                                                                        <span class="el-text is-line-clamp Title" style="-webkit-line-clamp: 2;">@Model.Videos[i].Title</span>
-                                                                        <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.Videos[i].BodyContent</span>
-                                                                        <div class="Info">
-                                                                            <span class="el-tag el-tag--plain is-round">
-                                                                                <span class="el-tag__content" title="人物專訪">人物專訪</span>
-                                                                            </span>
-                                                                            <span>@Model.Videos[i].PublishedDate</span>
-                                                                        </div>
+                                                        <a class="carousel-article-link">
+                                                            <div class="VideoCarouselContent">
+                                                                <div class="VideoCarouselContentBox">
+                                                                    <div class="Tag">
+                                                                        <span title="中心成果">中心成果</span>
+                                                                    </div>
+                                                                    <span class="el-text is-line-clamp Title" title="@Model.Videos[i].Title" style="-webkit-line-clamp: 2;">@Model.Videos[i].Title</span>
+                                                                    <span class="el-text is-line-clamp Content" style="-webkit-line-clamp: 3;">@Model.Videos[i].BodyContent</span>
+                                                                    <div class="Info">
+                                                                        <span class="el-tag el-tag--plain is-round">
+                                                                            <span class="el-tag__content" title="人物專訪">人物專訪</span>
+                                                                        </span>
+                                                                        <span>@Model.Videos[i].PublishedDate</span>
                                                                     </div>
                                                                 </div>
-                                                            </a>
-</div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
                                                 }
                                             </div>
                                         </div>
                                         @*影片文字內容*@
-
-                                        @*影片內容*@
-                                        @*<div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
-                                                <div class="VideoCarouselVideo">
-                                                    <div class="VideoCarouselVideoBox">
-                                                        <div class="carousel-video-column">
-                                                            <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
-                                                                @foreach (var video in Model.Videos)
-                                                                {
-                                                                    <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-                                                                        @Html.Raw(video.VideoIframe)
-                                                                    </div>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>*@
                                         <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                             <div class="VideoCarouselVideo">
                                                 <div class="VideoCarouselVideoBox">
@@ -306,25 +288,34 @@
                         </div>
                     </div>
                     <div class="SectionLinksList">
-                        <div class="el-carousel el-carousel--horizontal d-none d-md-block">
-                            <div class="el-carousel__container" style="height: 200px; overflow: hidden;">
-                                <div class="el-carousel__item is-active is-animating" style="transform: translateX(0px) scale(1); height: 200px;">
-                                    <div class="SectionLinksItem">
-                                        <div class="el-row" style="margin-left: -10px; margin-right: -10px;">
-                                            <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered linksItem" style="padding-right: 10px; padding-left: 10px;">
-                                                <a href="https://www.sa.gov.tw/">
-                                                    <img src="/site/img/links_logo.b6ae967e.svg" alt="教育部體育署" title="教育部體育署">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-6 col-md-4 mb-3">
+                                <img src="~/site/img/教育部體育署網站圖片.jpg" alt="教育部體育署" onclick="window.open('https://www.sa.gov.tw/')" title="教育部體育署" />
+
                             </div>
-                            <ul class="el-carousel__indicators el-carousel__indicators--horizontal">
-                                <li class="el-carousel__indicator el-carousel__indicator--horizontal is-active">
-                                    <button class="el-carousel__button" aria-label="btn"></button>
-                                </li>
-                            </ul>
+
+                            <div class="col-6 col-md-4 mb-3">
+                                <a href="https://www.sportscience.com.tw/">
+                                    <img src="~/site/img/運動科學網站.jpg" onclick="window.open('https://www.sportscience.com.tw/')" alt="運動科學網站" title="運動科學網站" />
+                                </a>
+                            </div>
+
+                            <div class="col-6 col-md-4 mb-3">
+                                <img src="~/site/img/運動生理學網站.jpg" alt="運動生理學網站" onclick="window.open('http://www.epsport.net/epsport/ep/index.asp')" title="運動生理學網站" />
+                            </div>
+                            <div class="col-6 col-md-4 mb-3">
+                                <img src="~/Img/facebook2.png" alt="國家運動科學中心FB" onclick="window.open('https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW')" title="國家運動科學中心FB" />
+                            </div>
+
+                            <div class="col-6 col-md-4 mb-3">
+                                <img src="~/Img/IG圖片.png" alt="國家運動科學中心IG" onclick="window.open('https://www.instagram.com/tiss_2024/')" />
+
+                            </div>
+
+                            <div class="col-6 col-md-4 mb-3">
+                                <img src="~/Img/youtube2.png" alt="國家運動科學中心YouTube" onclick="window.open('https://www.youtube.com/%40TISS_2024')" title="國家運動科學中心YouTube" />
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -332,7 +323,7 @@
         </div>
     </div>
 
-<script>
+    <script>
         $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
@@ -416,6 +407,6 @@ document.addEventListener('DOMContentLoaded', function () {
         rightButton.addEventListener('click', showNext);
     }
 });
-</script>
+    </script>
 </body>
 </html>

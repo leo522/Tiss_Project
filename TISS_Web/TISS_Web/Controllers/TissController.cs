@@ -28,7 +28,11 @@ using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using System.Windows.Documents;
-
+using System.Net.Http;
+using System.Net.Sockets;
+using Google.Apis.Translate.v2;
+using System.Web.Caching;
+using System.Runtime.Caching;
 
 namespace TISS_Web.Controllers
 {
@@ -36,14 +40,24 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
         private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
+        private readonly string googleApiKey = "AIzaSyA-i_oL7eR2Sz-fjjQC_bSeVlFgqLbNOKo"; // Google 翻譯API
+        private readonly HttpClient _httpClient;
+
 
         #region 檔案上傳共用服務
 
         private readonly FileUploadService _fileUploadService;
-        public TissController()
+
+        public TissController(HttpClient httpClient)
         {
             _fileUploadService = new FileUploadService(new TISS_WebEntities());
             _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
+            _httpClient = new HttpClient();
+        }
+
+        public TissController(): this(new HttpClient()) 
+        {
+
         }
         #endregion
 
@@ -2103,12 +2117,21 @@ namespace TISS_Web.Controllers
 
             return View(dtos);
         }
-        #endregion
 
-        #region 性平專區
+        /// <summary>
+        /// 性平專區
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GenderEquality()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
+            return View();
+        }
+        #endregion
+
+        #region 贊助專區
+        public ActionResult SponsorArea()
+        { 
             return View();
         }
         #endregion
@@ -2407,16 +2430,6 @@ namespace TISS_Web.Controllers
                 {
                     encryptedUrl += new string('=', 4 - mod4);
                 }
-                // 檢查並補充 Base64 字符串的填充（=）
-                //switch (encryptedUrl.Length % 4)
-                //{
-                //    case 2:
-                //        encryptedUrl += "==";
-                //        break;
-                //    case 3:
-                //        encryptedUrl += "=";
-                //        break;
-                //}
 
                 // 將 Base64 字符串解碼為字節數組
                 var bytes = Convert.FromBase64String(encryptedUrl);
@@ -2446,9 +2459,6 @@ namespace TISS_Web.Controllers
                 var decryptedUrl = DecryptUrl(encryptedUrl);
                 var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl); // 根據解密後的標題查詢
 
-                //var contentBody = article.ContentBody;
-
-                //var article = _db.ArticleContent.FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
                 if (article == null)
                 {
                     return RedirectToAction("Error404", "Error");
@@ -2491,9 +2501,6 @@ namespace TISS_Web.Controllers
                     //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
                 };
 
-                //var currentSubDirectory = article.ContentType; //文章的子目錄可以通過 ContentType 獲得
-                //var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
-                //ViewBag.ParentDirectory = parentDirectory;
                 var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
                 ViewBag.ParentDirectory = parentDirectory;
@@ -2570,7 +2577,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ViewArticle(ArticleContent dto)
+        public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile)
         {
             try
             {
@@ -2746,6 +2753,8 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
+        #region Tiny編輯器上傳文書檔案跟圖片
+
         [HttpPost]
         public ActionResult UploadPDF(HttpPostedFileBase file)
         {
@@ -2754,40 +2763,52 @@ namespace TISS_Web.Controllers
                 try
                 {
                     var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
+                    var extension = Path.GetExtension(fileName).ToLower();
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx" }; // 根據需求設定允許的副檔名
 
-                    // 確保 uploads 目錄存在
+                    // 檢查是否為允許的檔案類型
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        return Json(new { error = "不支持的檔案類型" });
+                    }
+
+                    // 確保 uploads 目錄存在（如果需要存檔案）
                     var uploadPath = Server.MapPath("~/uploads");
                     if (!Directory.Exists(uploadPath))
                     {
                         Directory.CreateDirectory(uploadPath);
                     }
 
-                    file.SaveAs(path);
+                    // 讀取檔案的二進位數據
+                    byte[] fileData;
+                    using (var binaryReader = new BinaryReader(file.InputStream))
+                    {
+                        fileData = binaryReader.ReadBytes(file.ContentLength);
+                    }
 
+                    // 將檔案儲存至資料庫（而不是本地儲存）
                     var fileDocument = new FileDocument
                     {
                         PId = GeneratePId(),
                         DocumentName = fileName,
                         UploadTime = DateTime.Now, // 當前時間
                         Creator = User.Identity.Name, // 假設使用者名稱來自身份驗證
-                        DocumentType = Path.GetExtension(fileName), // 檔案類型
+                        DocumentType = extension, // 檔案類型
                         FileSize = file.ContentLength, // 檔案大小
                         LastModifiedTime = DateTime.Now, // 當前時間
                         IsEnabled = true, // 根據需求設置
-                        FileURL = Url.Content($"~/uploads/{fileName}")
+                        ImageData = fileData // 將二進位數據儲存到資料庫
                     };
 
                     _db.FileDocument.Add(fileDocument);
                     _db.SaveChanges();
 
-                    return Json(new { url = fileDocument.FileURL });
+                    return Json(new { message = "檔案上傳成功", fileId = fileDocument.PId });
                 }
                 catch (Exception ex)
                 {
                     return Json(new { error = "檔案上傳失敗: " + ex.Message });
                 }
-                
             }
 
             return Json(new { error = "檔案上傳失敗" });
@@ -2798,5 +2819,76 @@ namespace TISS_Web.Controllers
             // 例如：使用當前時間戳、隨機數、或從資料庫中獲取最大值加一
             return _db.FileDocument.Max(d => (int?)d.PId) + 1 ?? 1; // 確保不會重複
         }
+
+        #endregion
+
+        #region 網頁中英文翻譯
+
+        [HttpPost]
+        public async Task<ActionResult> TranslatePage(string lang, string pageHtml)
+        {
+            try
+            {
+                // 調用 Google 翻譯 API 翻譯頁面
+                string translatedHtml = await TranslateText(lang, pageHtml);
+
+                // 返回翻譯後的頁面內容
+                return Content(translatedHtml, "text/html");
+            }
+            catch (Exception ex)
+            {
+                return Content($"翻譯過程發生錯誤：{ex.Message}");
+            }
+        }
+
+        // 翻譯文本的輔助方法
+        public async Task<string> TranslateText(string text, string targetLanguage)
+        {
+            try
+            {
+                var url = $"https://translation.googleapis.com/language/translate/v2?key={googleApiKey}";
+                var requestBody = new
+                {
+                    q = text,
+                    target = targetLanguage
+                };
+
+                var json = JsonConvert.SerializeObject(requestBody);
+                var response = await _httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    dynamic result = JsonConvert.DeserializeObject(jsonResponse);
+                    return result.data.translations[0].translatedText;
+                }
+                else
+                {
+                    return "翻譯失敗: " + response.ReasonPhrase;
+                }
+            }
+            catch (Exception ex)
+            {
+                return "翻譯失敗: " + ex.Message;
+            }
+        }
+
+        // 渲染視圖為 HTML 字符串
+        private string RenderViewToString(string viewName)
+        {
+            var viewEngineResult = ViewEngines.Engines.FindView(ControllerContext, viewName, null);
+            if (viewEngineResult.View == null)
+            {
+                throw new FileNotFoundException($"找不到視圖 {viewName}");
+            }
+
+            using (var sw = new StringWriter())
+            {
+                var viewContext = new ViewContext(ControllerContext, viewEngineResult.View, ViewData, TempData, sw);
+                viewEngineResult.View.Render(viewContext, sw);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+        #endregion
     }
 }
