@@ -1360,27 +1360,21 @@ button, input, select, textarea {
 }
 
 a {
-    outline: 0;
     color: #337ab7;
     text-decoration: none
 }
-    /*頁腳文字*/
+
     a:focus, a:hover {
         color: #23527c;
-        outline: 0;
-        /*font-weight: bold;*/
-        /*border: 3px dashed orange;*/
-        /*text-decoration: underline*/
+        text-decoration: underline
     }
 
     a:focus {
-        outline: 0;
         outline: thin dotted;
-        border: 3px dashed orange;
+        outline: 5px auto -webkit-focus-ring-color;
         outline-offset: -2px
-        /*outline: 5px auto -webkit-focus-ring-color;*/
     }
-/*頁腳文字*/
+
 figure {
     margin: 0
 }
@@ -2980,7 +2974,7 @@ output {
     }
 
     .form-control[disabled], fieldset[disabled] .form-control {
-        cursor: not-allowed
+        cursor:not-allowed
     }
 
 textarea.form-control {
@@ -3050,15 +3044,15 @@ input[type=search] {
     }
 
 fieldset[disabled] input[type=checkbox], fieldset[disabled] input[type=radio], input[type=checkbox].disabled, input[type=checkbox][disabled], input[type=radio].disabled, input[type=radio][disabled] {
-    cursor: not-allowed
+    cursor:not-allowed
 }
 
 .checkbox-inline.disabled, .radio-inline.disabled, fieldset[disabled] .checkbox-inline, fieldset[disabled] .radio-inline {
-    cursor: not-allowed
+    cursor:not-allowed
 }
 
 .checkbox.disabled label, .radio.disabled label, fieldset[disabled] .checkbox label, fieldset[disabled] .radio label {
-    cursor: not-allowed
+    cursor:not-allowed
 }
 
 .form-control-static {
@@ -3421,7 +3415,7 @@ select[multiple].input-lg, textarea.input-lg {
     }
 
     .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
-        cursor: not-allowed;
+        cursor:not-allowed;
         filter: alpha(opacity=65);
         -webkit-box-shadow: none;
         box-shadow: none;
@@ -3883,7 +3877,7 @@ tbody.collapse.in {
 
         .dropdown-menu > .disabled > a:focus, .dropdown-menu > .disabled > a:hover {
             text-decoration: none;
-            cursor: not-allowed;
+            cursor:not-allowed;
             background-color: transparent;
             background-image: none;
             filter: progid: DXImageTransform.Microsoft.gradient(enabled=false)
@@ -4308,7 +4302,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
             .nav > li.disabled > a:focus, .nav > li.disabled > a:hover {
                 color: #777;
                 text-decoration: none;
-                cursor: not-allowed;
+                cursor:not-allowed;
                 background-color: transparent
             }
 
@@ -5148,7 +5142,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
     .pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
         color: #777;
-        cursor: not-allowed;
+        cursor:not-allowed;
         background-color: #fff;
         border-color: #ddd
     }
@@ -5219,7 +5213,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
     .pager .disabled > a, .pager .disabled > a:focus, .pager .disabled > a:hover, .pager .disabled > span {
         color: #777;
-        cursor: not-allowed;
+        cursor:not-allowed;
         background-color: #fff
     }
 
@@ -5229,7 +5223,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
     font-size: 75%;
     font-weight: 700;
     line-height: 1;
-    color: #000;
+    color: #fff;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
@@ -5729,7 +5723,7 @@ button.list-group-item {
 
 .list-group-item.disabled, .list-group-item.disabled:focus, .list-group-item.disabled:hover {
     color: #777;
-    cursor: not-allowed;
+    cursor:not-allowed;
     background-color: #eee
 }
 

@@ -1414,11 +1414,56 @@ namespace TISS_Web.Controllers
         /// 科普專欄
         /// </summary>
         /// <returns></returns>
+        //public ActionResult research(int page = 1, int pageSize = 9)
+        //{
+        //    Session["ReturnUrl"] = Request.Url.ToString();
+
+        //    page = Math.Max(1, page); //確保頁碼至少為 1
+
+        //    var relatedHashtags = new List<string>
+        //    {
+        //        "運動醫學",
+        //        "運動科技",
+        //        "運動科學",
+        //        "運動生理",
+        //        "運動心理",
+        //        "體能訓練",
+        //        "運動營養",
+        //        "兒少科普",
+        //        "科普海報下載專區"
+        //    };
+        //    // 查詢相關 hashtags 的文章
+        //    var list = _db.ArticleContent
+        //        .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+        //        .OrderByDescending(a => a.CreateDate)
+        //        .ToList();
+
+        //    //計算總數和總頁數
+        //    var totalArticles = list.Count();
+        //    var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+        //    page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+        //    var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+        //    {
+        //        Title = s.Title,
+        //        EncryptedUrl = EncryptUrl(s.Title),
+        //        ImageContent = s.ImageContent,
+        //        Hashtags = s.Hashtags,
+        //        FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+        //        ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+        //    }).ToList();
+
+        //    ViewBag.CurrentPage = page;
+        //    ViewBag.TotalPages = totalPages;
+
+        //    return View(articles);
+        //}
         public ActionResult research(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
-            page = Math.Max(1, page); //確保頁碼至少為 1
+            page = Math.Max(1, page); // 確保頁碼至少為 1
 
             var relatedHashtags = new List<string>
             {
@@ -1432,17 +1477,20 @@ namespace TISS_Web.Controllers
                 "兒少科普",
                 "科普海報下載專區"
             };
+
             // 查詢相關 hashtags 的文章
             var list = _db.ArticleContent
-                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .Where(a => a.IsEnabled)
+                .ToList()
+                .Where(a => relatedHashtags.Any(tag => a.Hashtags.Split(',').Contains(tag)))
                 .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
-            //計算總數和總頁數
+            // 計算總數和總頁數
             var totalArticles = list.Count();
             var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
 
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+            page = Math.Min(page, totalPages); // 確保頁碼不超過最大頁數
 
             var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
@@ -2303,7 +2351,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string tag, int contentTypeID)
+        public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string[] tags, int contentTypeID)
         {
             if (ModelState.IsValid)
             {
@@ -2322,7 +2370,7 @@ namespace TISS_Web.Controllers
                     dto.EncryptedUrl = EncryptUrl(dto.Title);
                     dto.CreateDate = DateTime.Now;
                     dto.ClickCount = 0;
-                    dto.Hashtags = tag;
+                    //dto.Hashtags = tag;
                     dto.IsEnabled = true;
                     dto.IsPublished = true;
 
@@ -2335,18 +2383,34 @@ namespace TISS_Web.Controllers
                     }
 
                     //處理hashtags
-                    if (!string.IsNullOrEmpty(tag))
-                    {
-                        var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == tag);
+                    //if (!string.IsNullOrEmpty(tag))
+                    //{
+                    //    var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == tag);
 
-                        if (existingHashtag == null)
+                    //    if (existingHashtag == null)
+                    //    {
+                    //        // 如果 hashtag 不存在，則新增
+                    //        var newHashtag = new Hashtag { Name = tag };
+                    //        _db.Hashtag.Add(newHashtag);
+                    //    }
+                    //}
+                    // 處理hashtags，多個標籤存為逗號分隔的字符串
+                    if (tags != null && tags.Length > 0)
+                    {
+                        dto.Hashtags = string.Join(",", tags);
+
+                        foreach (var t in tags)
                         {
-                            // 如果 hashtag 不存在，則新增
-                            var newHashtag = new Hashtag { Name = tag };
-                            _db.Hashtag.Add(newHashtag);
+                            var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == t);
+
+                            if (existingHashtag == null)
+                            {
+                                // 如果 hashtag 不存在，則新增
+                                var newHashtag = new Hashtag { Name = t };
+                                _db.Hashtag.Add(newHashtag);
+                            }
                         }
                     }
-
                     _db.ArticleContent.Add(dto);
                     _db.SaveChanges();
 
@@ -2482,17 +2546,15 @@ namespace TISS_Web.Controllers
                 ViewBag.NextArticle = nextArticle;
 
                 var menus = _db.Menus.ToList(); //主題目錄
-
                 var menuItems = _db.MenuItems.ToList(); //子主題目錄
 
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
-                {
-                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
-                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-                    //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
-                };
+{
+    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
+    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+};
 
                 var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
@@ -2508,33 +2570,33 @@ namespace TISS_Web.Controllers
                 ViewBag.Comments = comments;
 
                 var menuList = new Dictionary<string, string> //子主題連結
-                {
-                    { "運動醫學", "/Tiss/sportMedicine" },
-                    { "運動科技", "/Tiss/sportTech" },
-                    { "運動科學", "/Tiss/sportScience" },
-                    { "運動生理", "/Tiss/sportsPhysiology" },
-                    { "運動心理", "/Tiss/sportsPsychology" },
-                    { "體能訓練", "/Tiss/physicalTraining" },
-                    { "運動營養", "/Tiss/sportsNutrition" },
-                    { "新聞發佈", "/Tiss/press" },
-                    { "中心訊息", "/Tiss/institute" },
-                    { "徵才招募", "/Tiss/recruit" },
-                    { "中心成果", "/Tiss/achievement" },
-                    { "新聞影音", "/Tiss/news" },
-                    { "活動紀錄", "/Tiss/activityRecord" },
-                    { "兒少科普", "/Tiss/childrenScience" },
-                    { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
-                };
+{
+    { "運動醫學", "/Tiss/sportMedicine" },
+    { "運動科技", "/Tiss/sportTech" },
+    { "運動科學", "/Tiss/sportScience" },
+    { "運動生理", "/Tiss/sportsPhysiology" },
+    { "運動心理", "/Tiss/sportsPsychology" },
+    { "體能訓練", "/Tiss/physicalTraining" },
+    { "運動營養", "/Tiss/sportsNutrition" },
+    { "新聞發佈", "/Tiss/press" },
+    { "中心訊息", "/Tiss/institute" },
+    { "徵才招募", "/Tiss/recruit" },
+    { "中心成果", "/Tiss/achievement" },
+    { "新聞影音", "/Tiss/news" },
+    { "活動紀錄", "/Tiss/activityRecord" },
+    { "兒少科普", "/Tiss/childrenScience" },
+    { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
+};
 
                 ViewBag.MenuUrls = menuList;
 
                 var currentParentDirectory = ViewBag.ParentDirectory as string;
                 var menuIdMapping = new Dictionary<string, int>
-                {
-                    { "科普專欄", 1 },
-                    { "中心公告", 2 },
-                    { "影音專區", 3 }
-                };
+{
+    { "科普專欄", 1 },
+    { "中心公告", 2 },
+    { "影音專區", 3 }
+};
                 // 根據當前主題獲取對應的 MenuId
                 int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
 
@@ -2542,8 +2604,7 @@ namespace TISS_Web.Controllers
                 var menuUrls = menuItems
                     .Where(item => item.MenuId == menuId)
                     .GroupBy(item => item.Name)
-                    .ToDictionary(group => group.Key, group => group.Last().Url // 選擇最後一個 URL
-                );
+                    .ToDictionary(group => group.Key, group => group.Last().Url);
 
                 var allArticlesUrl = menuItems
                     .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
@@ -2557,6 +2618,17 @@ namespace TISS_Web.Controllers
                 string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
                 ViewBag.FormattedPublishedDate = formattedDate;
 
+                // 處理多個Hashtags
+                if (!string.IsNullOrEmpty(article.Hashtags))
+                {
+                    var hashtags = article.Hashtags.Split(',').ToList();
+                    ViewBag.Hashtags = hashtags;
+                }
+                else
+                {
+                    ViewBag.Hashtags = new List<string>();
+                }
+
                 _db.SaveChanges();
 
                 return View(article);
@@ -2566,7 +2638,6 @@ namespace TISS_Web.Controllers
                 return RedirectToAction("Error404", "Error");
             }
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -2580,9 +2651,21 @@ namespace TISS_Web.Controllers
 
                     if (exist != null)
                     {
-                        exist.ContentBody = dto.ContentBody; //文章內容
-                        exist.UpdatedDate = DateTime.Now; //更新時間
-                        exist.UpdatedUser = Session["UserName"] as string; //更新人員
+                        // 如果有上傳新圖片，則處理圖片上傳
+                        if (imageFile != null && imageFile.ContentLength > 0)
+                        {
+                            using (var binaryReader = new BinaryReader(imageFile.InputStream))
+                            {
+                                byte[] imageData = binaryReader.ReadBytes(imageFile.ContentLength);
+                                // 將圖片儲存為二進制數據
+                                exist.ImageContent = imageData;
+                            }
+                        }
+
+                        // 更新文章內容和其他欄位
+                        exist.ContentBody = dto.ContentBody;
+                        exist.UpdatedDate = DateTime.Now;
+                        exist.UpdatedUser = Session["UserName"] as string;
 
                         _db.SaveChanges();
 
@@ -2593,9 +2676,163 @@ namespace TISS_Web.Controllers
             }
             catch (Exception ex)
             {
+                // 處理例外情況
                 throw ex;
             }
         }
+        //public ActionResult ViewArticle(string encryptedUrl)
+        //{
+        //    try
+        //    {
+        //        //Session["ReturnUrl"] = Request.Url.ToString();
+
+        //        var decryptedUrl = DecryptUrl(encryptedUrl);
+        //        var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl); // 根據解密後的標題查詢
+
+        //        if (article == null)
+        //        {
+        //            return RedirectToAction("Error404", "Error");
+        //        }
+
+        //        article.ClickCount += 1; //增加點閱率次數
+
+        //        // 查找同一標籤下的上一篇和下一篇文章
+        //        var articlesWithSameTag = _db.ArticleContent
+        //            .Where(a => a.Hashtags == article.Hashtags)
+        //            .OrderBy(a => a.PublishedDate)
+        //            .ToList();
+
+        //        int currentIndex = articlesWithSameTag.FindIndex(a => a.Id == article.Id);
+
+        //        // 找到上一篇和下一篇
+        //        var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
+        //        var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
+
+        //        ViewBag.ArticleId = article.Id;
+
+        //        //顯示留言數量
+        //        ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
+        //        ViewBag.CommentCount = ViewBag.Comments.Count;
+
+        //        //設定分頁
+        //        ViewBag.PreviousArticle = previousArticle;
+        //        ViewBag.NextArticle = nextArticle;
+
+        //        var menus = _db.Menus.ToList(); //主題目錄
+
+        //        var menuItems = _db.MenuItems.ToList(); //子主題目錄
+
+        //        // 字典來管理父目錄及其子目錄
+        //        var parentDirectories = new Dictionary<string, List<string>>
+        //        {
+        //            { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
+        //            { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+        //            { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+        //            //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
+        //        };
+
+        //        var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
+        //        var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
+        //        ViewBag.ParentDirectory = parentDirectory;
+        //        ViewBag.CurrentSubDirectory = currentSubDirectory;
+
+        //        var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
+
+        //        ViewBag.Menus = menus;
+        //        ViewBag.ParentMenu = parentMenu;
+
+        //        var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
+        //        ViewBag.Comments = comments;
+
+        //        var menuList = new Dictionary<string, string> //子主題連結
+        //        {
+        //            { "運動醫學", "/Tiss/sportMedicine" },
+        //            { "運動科技", "/Tiss/sportTech" },
+        //            { "運動科學", "/Tiss/sportScience" },
+        //            { "運動生理", "/Tiss/sportsPhysiology" },
+        //            { "運動心理", "/Tiss/sportsPsychology" },
+        //            { "體能訓練", "/Tiss/physicalTraining" },
+        //            { "運動營養", "/Tiss/sportsNutrition" },
+        //            { "新聞發佈", "/Tiss/press" },
+        //            { "中心訊息", "/Tiss/institute" },
+        //            { "徵才招募", "/Tiss/recruit" },
+        //            { "中心成果", "/Tiss/achievement" },
+        //            { "新聞影音", "/Tiss/news" },
+        //            { "活動紀錄", "/Tiss/activityRecord" },
+        //            { "兒少科普", "/Tiss/childrenScience" },
+        //            { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
+        //        };
+
+        //        ViewBag.MenuUrls = menuList;
+
+        //        var currentParentDirectory = ViewBag.ParentDirectory as string;
+        //        var menuIdMapping = new Dictionary<string, int>
+        //        {
+        //            { "科普專欄", 1 },
+        //            { "中心公告", 2 },
+        //            { "影音專區", 3 }
+        //        };
+        //        // 根據當前主題獲取對應的 MenuId
+        //        int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
+
+        //        // 根據 MenuId 查找「全部文章」的連結
+        //        var menuUrls = menuItems
+        //            .Where(item => item.MenuId == menuId)
+        //            .GroupBy(item => item.Name)
+        //            .ToDictionary(group => group.Key, group => group.Last().Url // 選擇最後一個 URL
+        //        );
+
+        //        var allArticlesUrl = menuItems
+        //            .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
+        //            .Select(item => item.Url)
+        //            .FirstOrDefault();
+
+        //        ViewBag.MenuUrls = menuUrls;
+        //        ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
+
+        //        // 將發佈日期格式化為 "yyyy-MM-dd"
+        //        string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
+        //        ViewBag.FormattedPublishedDate = formattedDate;
+
+        //        _db.SaveChanges();
+
+        //        return View(article);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return RedirectToAction("Error404", "Error");
+        //    }
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[ValidateInput(false)]
+        //public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var exist = _db.ArticleContent.Find(dto.Id);
+
+        //            if (exist != null)
+        //            {
+        //                exist.ContentBody = dto.ContentBody; //文章內容
+        //                exist.UpdatedDate = DateTime.Now; //更新時間
+        //                exist.UpdatedUser = Session["UserName"] as string; //更新人員
+
+        //                _db.SaveChanges();
+
+        //                return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+        //            }
+        //        }
+        //        return View(dto);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
         /// <summary>
         /// 導回對應頁面

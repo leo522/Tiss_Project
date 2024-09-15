@@ -149,11 +149,25 @@
                                                             </div>
                                                         </div>
                                                         <div class="tag-date-container">
-                                                            <div class="el-tag el-tag--plain is-round">
-                                                                <div class="el-tag__content">@article.Hashtags</div>
-                                                            </div>
+                                                            @if (!string.IsNullOrEmpty(article.Hashtags))
+                                                            {
+                                                                var hashtags = article.Hashtags.Split(',');
+
+                                                                foreach (var tag in hashtags)
+                                                                {
+                                                                    <div class="el-tag el-tag--plain is-round">
+                                                                        <div class="el-tag__content">@tag</div>
+                                                                    </div>
+                                                                }
+                                                            }
                                                             <div class="date-tag">@article.FormattedCreateDate</div>
                                                         </div>
+                                                        @*<div class="tag-date-container">
+                                                                <div class="el-tag el-tag--plain is-round">
+                                                                    <div class="el-tag__content">@article.Hashtags</div>
+                                                                </div>
+                                                                <div class="date-tag">@article.FormattedCreateDate</div>
+                                                            </div>*@
                                                     </a>
                                                 </div>
                                             }

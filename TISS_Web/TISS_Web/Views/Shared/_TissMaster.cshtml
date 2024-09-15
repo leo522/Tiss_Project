@@ -43,6 +43,7 @@
 
         .goog-te-gadget {
             color: transparent !important;
+            font-size: 0; /* 確保外觀無影響 */
         }
 
         .goog-te-banner-frame.skiptranslate {
@@ -56,20 +57,28 @@
 </head>
 <body>
     <noscript>您的瀏覽器不支援JavaScript功能，若本網站功能無法正常使用，請開啟瀏覽器JavaScript狀態</noscript>
-    <a href="#main_content" title="移到主要內容" class="sr-only sr-only-focusable">移到主要內容</a>
     <header data-v-ffd846e6="" data-v-339da53a="">
+        <a href="#main_content" title="移到主要內容" class="sr-only sr-only-focusable">移到主要內容</a>
         <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
             <div data-v-e61ebf00="" class="container logoNav">
                 <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
-                <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
-                    <ul data-v-e61ebf00="" class="ToolList">
-                        <li data-v-e61ebf00="">
+                <div data-v-e61ebf00="">
+                    <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: space-around; padding: 0;">
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small" title="小">小</button>
+                        </li>
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium" title="中">中</button>
+                        </li>
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large" title="大">大</button>
                         </li>
+                    </ul>
+                </div>
+                <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
+                    <ul data-v-e61ebf00="" class="ToolList">
                         <li data-v-e61ebf00="">
                             <div id="google_translate_element" style="display: none;"></div>
                             <select class="selectpicker" onchange="goTranslate(this.value)" translate="no">
@@ -91,14 +100,6 @@
                     </ul>
                 </nav>
             </div>
-            @*<div id="google_translate_element" style="display: none;"></div>
-            <select class="selectpicker" onchange="goTranslate(this.value)" translate="no">
-                <option value="">Language</option>
-                <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
-                <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-                <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
-                <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
-            </select>*@
         </div>
         <div data-v-71bab962="" class="menuNav">
             <div data-v-71bab962="" class="container-lg">
@@ -491,21 +492,39 @@
             <span title="本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080">本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
         </div>
     </footer>
+    @*回最上方按鈕*@
     <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
         <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
     <script>
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'zh-TW',
-                autoDisplay: false,
-                includedLanguages: 'zh-TW,en,ja,ko',
-                layout: google.translate.TranslateElement.InlineLayout.VERTICAL
-            }, 'google_translate_element');
+        // 清除 Google 翻譯的相關 cookie
+        function clearGoogleTranslateCookies() {
+            document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            document.cookie = "googtrans=; path=/; domain=" + window.location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         }
 
-        $(window).load(function () {
+        function googleTranslateElementInit() {
+            try {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'zh-TW',
+                    autoDisplay: false,
+                    includedLanguages: 'zh-TW,en,ja,ko',
+                    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+                }, 'google_translate_element');
+            } catch (error) {
+                console.error("Google 翻譯初始化失敗：", error);
+            }
+        }
+
+        $(window).on('load', function () {
             $('.goog-te-gadget').html($('.goog-te-gadget div'));
+
+            // 確保翻譯下拉選單正確初始化
+            if (typeof googleTranslateElementInit === 'function') {
+                googleTranslateElementInit();
+            } else {
+                console.error("Google 翻譯函數未正確加載");
+            }
         });
 
         $(function () {
@@ -513,13 +532,15 @@
         });
 
         function goTranslate(lang) {
-            $('.goog-te-combo').val(lang);
+            const combo = document.querySelector('.goog-te-combo');
 
-            const triggerEvent = (element, eventName) => {
-                const event = new Event(eventName);
-                element.dispatchEvent(event);
-            };
-            triggerEvent(document.querySelector('.goog-te-combo'), 'change');
+            if (combo) {
+                combo.value = lang;
+                const event = new Event('change');
+                combo.dispatchEvent(event);
+            } else {
+                console.error("Google 翻譯組件未加載，請檢查頁面狀態");
+            }
         }
 
         // 網頁字體大小控制function
@@ -551,7 +572,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             var backTopButton = document.querySelector('.el-backtop');
 
-            // 顯示或隱藏按鈕
+            // 顯示或隱藏回到頂部按鈕
             window.addEventListener('scroll', function () {
                 if (window.scrollY > 1500) { // 滾動超過1500px時顯示按鈕
                     backTopButton.classList.add('show');
@@ -570,26 +591,37 @@
 
             // 鍵盤移動展開下拉選單
             const dropdownToggles = document.querySelectorAll('.nav-item.dropdown > a');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarMenu = document.querySelector('.navbar-collapse');
+
+            // 點擊漢堡按鈕時展開或收回導航列
+            navbarToggler.addEventListener('click', function () {
+                navbarMenu.classList.toggle('show');
+            });
 
             dropdownToggles.forEach(dropdownToggle => {
                 const dropdownMenu = dropdownToggle.nextElementSibling;
 
-                // 點擊事件處理
+                // 點擊事件處理 (僅大螢幕啟用)
                 dropdownToggle.addEventListener('click', function (event) {
-                    toggleDropdown(dropdownToggle, dropdownMenu);
+                    if (window.innerWidth >= 992) { // 檢查螢幕寬度
+                        toggleDropdown(dropdownToggle, dropdownMenu);
+                    }
                 });
 
                 // 鍵盤事件處理 (Enter 或 空白鍵 打開/關閉)
                 dropdownToggle.addEventListener('keydown', function (event) {
-                    if (event.key === 'Enter' || event.key === ' ') {
+                    if ((event.key === 'Enter' || event.key === ' ') && window.innerWidth >= 992) {
                         event.preventDefault();
                         toggleDropdown(dropdownToggle, dropdownMenu);
                     }
                 });
 
-                // 當焦點進入下拉選單時自動打開
+                // 當焦點進入下拉選單時自動打開 (大螢幕時觸發)
                 dropdownToggle.addEventListener('focus', function () {
-                    openDropdown(dropdownToggle, dropdownMenu);
+                    if (window.innerWidth >= 992) {
+                        openDropdown(dropdownToggle, dropdownMenu);
+                    }
                 });
 
                 // Tab 鍵在選單上循環時關閉選單
@@ -598,22 +630,33 @@
                         closeDropdown(dropdownToggle, dropdownMenu);
                     }
                 });
+
+                // 新增 focusout 事件監聽，當焦點離開下拉選單時自動關閉
+                dropdownMenu.addEventListener('focusout', function (event) {
+                    if (!dropdownMenu.contains(event.relatedTarget)) {
+                        closeDropdown(dropdownToggle, dropdownMenu);
+                    }
+                });
             });
 
             function toggleDropdown(toggleElement, menuElement) {
-                const isExpanded = toggleElement.getAttribute('aria-expanded') === 'true';
-                closeAllDropdowns();
+                if (window.innerWidth >= 992) {  // 檢查螢幕寬度
+                    const isExpanded = toggleElement.getAttribute('aria-expanded') === 'true';
+                    closeAllDropdowns();
 
-                if (!isExpanded) {
-                    toggleElement.setAttribute('aria-expanded', 'true');
-                    menuElement.style.display = 'block';
+                    if (!isExpanded) {
+                        toggleElement.setAttribute('aria-expanded', 'true');
+                        menuElement.style.display = 'block';
+                    }
                 }
             }
 
             function openDropdown(toggleElement, menuElement) {
-                closeAllDropdowns();  // 打開新選單前先關閉其他選單
-                toggleElement.setAttribute('aria-expanded', 'true');
-                menuElement.style.display = 'block';
+                if (window.innerWidth >= 992) {  // 檢查螢幕寬度
+                    closeAllDropdowns();  // 打開新選單前先關閉其他選單
+                    toggleElement.setAttribute('aria-expanded', 'true');
+                    menuElement.style.display = 'block';
+                }
             }
 
             function closeDropdown(toggleElement, menuElement) {
@@ -628,8 +671,20 @@
                     menu.style.display = 'none';
                 });
             }
+
+            // 語言選單 focus 時自動展開
+            var languageSelect = document.querySelector('.selectpicker');
+
+            // 當語言選單獲得焦點時自動展開選單
+            languageSelect.addEventListener('focus', function () {
+                $(this).selectpicker('toggle'); // 使用 selectpicker 方法展開選單
+            });
+
+            // 當語言選單失去焦點時自動關閉選單
+            languageSelect.addEventListener('blur', function () {
+                $(this).selectpicker('toggle'); // 使用 selectpicker 方法關閉選單
+            });
         });
     </script>
-
 </body>
 </html>

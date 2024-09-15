@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="fb-root"></div>
     <div id="app" data-v-app="">
-        <div data-v-339da53a="" class="layout">           
+        <div data-v-339da53a="" class="layout">
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
                 <div data-v-339da53a-s="" class="BasePageLayout">
                     <div class="BasePageBanner">
@@ -290,104 +291,59 @@
     </div>
 
     <script>
-        //登出按鈕顯示功能
-        $(document).ready(function () {
-            var isLoggedIn = '@Session["LoggedIn"]' == 'True';
-
-        if (isLoggedIn) {
-            $('#logoutBtn').show(); //顯示登出按鈕
-        } else {
-            $('#loginBtn').show(); //顯示登入按鈕
-            }
-                loadContent(); //加載已儲存的內容
-        });
-        //登出按鈕顯示功能
-
-        //載入已儲存的內容
-        function loadContent() {
-            $.ajax({
-                url: 'aboutGetContent',
-                method: 'GET',
-                success: function (response) {
-                    if (response.success) {
-                        document.getElementById('intro').innerText = response.textContent;
-                        document.getElementById('mainImage').src = response.imagePath;
-                    } else {
-                        console.error('載入失敗: ' + response.error);
-                    }
-                },
-                error: function (err) {
-                    console.error('載入失敗', err);
-                }
-            });
-        }
-
-        //增加圖片功能
-        function changeImg() {
-            document.getElementById('uploadImageInput').click();
-        }
-
-        document.getElementById('uploadImageInput').addEventListener('change', function () {
-            var file = this.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (event) {
-                    document.getElementById('mainImage').src = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        //圖片及文字存檔功能
-        function saveContent() {
-            var textContent = document.getElementById('intro').innerHTML;
-            var imageSrc = document.getElementById('mainImage').src;
-
-            $.ajax({
-                url: 'aboutSaveContent',
-                method: 'POST',
-                data: {
-                    TextContent: textContent,
-                    ImageSrc: imageSrc
-                },
-                success: function (response) {
-                    if (response.success) {
-                        document.getElementById('mainImage').src = response.imagePath;
-                        alert('內容已儲存');
-                    } else {
-                        alert('儲存失敗: ' + response.error);
-                    }
-                },
-                error: function (err) {
-                    console.error('儲存失敗', err);
-                }
-            });
-        }
-        //圖片及文字存檔功能
-
-        //導覽列
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
-
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
-            }
-        }
-
+        // 顯示當前選擇的子項目
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
-
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
                 }
             });
         });
+    // 登出按鈕顯示功能
+    $(document).ready(function () {
+        var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+
+        if (isLoggedIn) {
+            $('#logoutBtn').show(); // 顯示登出按鈕
+        } else {
+            $('#loginBtn').show(); // 顯示登入按鈕
+        }
+        loadContent(); // 加載已儲存的內容
+    });
+
+    // 載入已儲存的內容
+    function loadContent() {
+        $.ajax({
+            url: 'aboutGetContent',
+            method: 'GET',
+            success: function (response) {
+                if (response.success) {
+                    document.getElementById('intro').innerText = response.textContent;
+                    document.getElementById('mainImage').src = response.imagePath;
+                } else {
+                    console.error('載入失敗: ' + response.error);
+                }
+            },
+            error: function (err) {
+                console.error('載入失敗', err);
+            }
+        });
+    }
+
+    // 導覽列
+    function toggleDropdown(dropdownId) {
+        var dropdownToggle = document.getElementById(dropdownId);
+        var dropdownMenu = dropdownToggle.nextElementSibling;
+
+        if (dropdownMenu.classList.contains('show')) {
+            dropdownMenu.classList.remove('show');
+        } else {
+            dropdownMenu.classList.add('show');
+        }
+    }
     </script>
 </body>
 </html>

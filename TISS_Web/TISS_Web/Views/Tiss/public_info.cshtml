@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
@@ -81,8 +82,8 @@
                                         <a class="MenuLink" href="/Tiss/download" title="下載專區">下載專區</a>
                                     </li>
                                     @*<li span="3">
-                                        <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
-                                    </li>*@
+                                            <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
+                                        </li>*@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/other" title="其他">其他</a>
                                     </li>
@@ -240,29 +241,30 @@
         </div>
     </div>
     <script>
-    $(documnet).reday(function () {
-        function toggleDropdown(dropdownId) {
-            var dropdownToggle = document.getElementById(dropdownId);
-            var dropdownMenu = dropdownToggle.nextElementSibling;
+        $(document).ready(function () {
+            // 切換下拉菜單的函數
+            function toggleDropdown(dropdownId) {
+                var dropdownToggle = document.getElementById(dropdownId);
+                var dropdownMenu = dropdownToggle.nextElementSibling;
 
-            if (dropdownMenu.classList.contains('show')) {
-                dropdownMenu.classList.remove('show');
-            } else {
-                dropdownMenu.classList.add('show');
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                } else {
+                    dropdownMenu.classList.add('show');
+                }
             }
-        }
-        document.addEventListener('DOMContentLoaded', function () {
+
+            // 顯示當前選擇的子項目
             var currentUrl = window.location.pathname;
-            var menuLinks = document.querySelectorAll('.MenuLink');
+            var menuLinks = $('.MenuLink');
 
-            menuLinks.forEach(function (link) {
-
-                if (link.getAttribute('href') === currentUrl) {
-                    link.classList.add('active');
+            menuLinks.each(function () {
+                var link = $(this);
+                if (link.attr('href') === currentUrl) {
+                    link.addClass('active');
                 }
             });
         });
-    });
     </script>
 </body>
 </html>

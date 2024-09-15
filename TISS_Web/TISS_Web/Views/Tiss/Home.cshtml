@@ -67,128 +67,131 @@
                             </div>
                         </div>
                     </div>
-                    <div id="news" class="SectionNews">
-                        <div class="container" id="main_contnet">
-                            <a href="#C" title="中央內容區塊" accesskey="C" name="C" class="alt-c">:::</a>
-                            <div class="el-row" style="margin-left: -27.5px; margin-right: -27.5px;">
-                                <div class="el-col el-col-12 is-guttered d-none d-lg-block" style="padding-right: 27.5px; padding-left: 27.5px;">
-                                    <div class="SectionHeader">
-                                        <div class="Title">
-                                            <div class="SectionTitle" title="News">News</div>
-                                            <div class="SectionSubTitle">
-                                                <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="最新消息" title="最新消息">最新消息
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <a id="latestArticleLink" href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = Model.LatestArticle.EncryptedUrl })" class="">
-                                        <div class="NewsItemBox headline">
-                                            <div class="NewsItemImg">
-                                                @if (Model.LatestArticle.ImageContent != null)
-                                                {
-                                                    string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
-                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" />
-                                                }
-                                                <div class="tag">@Model.LatestArticle.ContentType</div>
-                                                <div class="Mask" title="@Model.LatestArticle.Title">閱讀更多</div>
-                                            </div>
-                                            <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
-                                            <div class="NewsItemContent">
-                                                <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">@Model.LatestArticle.BodyContent</span>
-                                            </div>
-                                            <div class="NewsItemInfo">
-                                                <span class="el-tag el-tag--plain is-round">
-                                                    <span class="el-tag__content">@Model.LatestArticle.Hashtags</span>
-                                                </span>
-                                                <span>@Model.LatestArticle.PublishedDate.ToString("yyyy-MM-dd")</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="mt-5" style="width: 225px;">
-                                        <a href="/Tiss/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
-                                            <span title="全部文章">
-                                                全部文章
-                                                <span class="right-icon">
-                                                    <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                                        <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
-                                                        </path>
-                                                    </svg>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="el-col el-col-24 el-col-xs-24 el-col-md-12 is-guttered" style="padding-right: 27.5px; padding-left: 27.5px;">
-                                    <div class="SectionHeader">
-                                        <div class="Title">
-                                            <div class="d-block d-lg-none">
+                    <div id="C">
+                        <div id="news" class="SectionNews">
+                            <div class="container" id="main_content">
+                                <a href="#C" title="中央內容區塊" accesskey="C" name="C" class="alt-c">:::</a>
+                                <div class="el-row" style="margin-left: -27.5px; margin-right: -27.5px;">
+                                    <div class="el-col el-col-12 is-guttered d-none d-lg-block" style="padding-right: 27.5px; padding-left: 27.5px;">
+                                        <div class="SectionHeader">
+                                            <div class="Title">
                                                 <div class="SectionTitle" title="News">News</div>
                                                 <div class="SectionSubTitle">
                                                     <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="最新消息" title="最新消息">最新消息
                                                 </div>
                                             </div>
-                                            <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
+                                        </div>
+                                        <a id="latestArticleLink" href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = Model.LatestArticle.EncryptedUrl })" class="">
+                                            <div class="NewsItemBox headline">
+                                                <div class="NewsItemImg">
+                                                    @if (Model.LatestArticle.ImageContent != null)
+                                                    {
+                                                        string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
+                                                        <img src="data:image/png;base64,@base64Image" alt="圖片" />
+                                                    }
+                                                    <div class="tag">@Model.LatestArticle.ContentType</div>
+                                                    <div class="Mask" title="@Model.LatestArticle.Title">閱讀更多</div>
+                                                </div>
+                                                <span class="el-text is-line-clamp NewsItemTitle" style="-webkit-line-clamp: 2;">@Model.LatestArticle.Title</span>
+                                                <div class="NewsItemContent">
+                                                    <span class="el-text is-line-clamp" style="-webkit-line-clamp: 2;">@Model.LatestArticle.BodyContent</span>
+                                                </div>
+                                                <div class="NewsItemInfo">
+                                                    <span class="el-tag el-tag--plain is-round">
+                                                        <span class="el-tag__content">@Model.LatestArticle.Hashtags</span>
+                                                    </span>
+                                                    <span>@Model.LatestArticle.PublishedDate.ToString("yyyy-MM-dd")</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="mt-5" style="width: 225px;">
+                                            <a href="/Tiss/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
+                                                <span title="全部文章">
+                                                    全部文章
+                                                    <span class="right-icon">
+                                                        <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                            <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                                                            </path>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="el-col el-col-24 el-col-xs-24 el-col-md-12 is-guttered" style="padding-right: 27.5px; padding-left: 27.5px;">
+                                        <div class="SectionHeader">
+                                            <div class="Title">
+                                                <div class="d-block d-lg-none">
+                                                    <div class="SectionTitle" title="News">News</div>
+                                                    <div class="SectionSubTitle">
+                                                        <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="最新消息" title="最新消息">最新消息
+                                                    </div>
+                                                </div>
                                                 <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
+                                                    <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
 
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                        <button data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
-                                                            <span class="" title="所有類別">所有類別</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                        <button data-content-type-id="1" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
-                                                            <span class="" title="新聞發佈">新聞發佈</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                        <button data-content-type-id="2" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
-                                                            <span class="" title="中心訊息">中心訊息</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                        <button data-content-type-id="8" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
-                                                            <span class="" title="徵才招募">徵才招募</span>
-                                                        </button>
+                                                        <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
+                                                            <button data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                                <span class="" title="所有類別">所有類別</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
+                                                            <button data-content-type-id="1" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                                <span class="" title="新聞發佈">新聞發佈</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
+                                                            <button data-content-type-id="2" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                                <span class="" title="中心訊息">中心訊息</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
+                                                            <button data-content-type-id="8" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                                <span class="" title="徵才招募">徵才招募</span>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row" id="articleContainer">
-                                        @foreach (var article in Model.OtherArticles)
-                                        {
-                                            <div class="col-md-6 mb-4">
-                                                <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
-                                                    <div class="NewsItemBox">
-                                                        <div class="NewsItemImg">
-                                                            @if (article.ImageContent != null)
-                                                            {
-                                                                string base64Image = Convert.ToBase64String(article.ImageContent);
-                                                                <img src="data:image/png;base64,@base64Image" alt="圖片" />
-                                                            }
-                                                            <div class="tag">@article.ContentType</div>
-                                                            <div class="Mask" title="@article.Title">閱讀更多</div>
-                                                        </div>
-                                                        <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
-                                                        <div class="NewsItemContent">
-                                                            <span class="el-text is-line-clamp">@article.BodyContent</span>
-                                                        </div>
-                                                        <div class="NewsItemInfo">
-                                                            <div class="NewsItemTags">
-                                                                <div class="el-tag el-tag--plain is-round">
-                                                                    <div class="el-tag__content">@article.Hashtags</div>
+                                        <div class="row" id="articleContainer">
+                                            @foreach (var article in Model.OtherArticles)
+                                            {
+                                                <div class="col-md-6 mb-4">
+                                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
+                                                        <div class="NewsItemBox">
+                                                            <div class="NewsItemImg">
+                                                                @if (article.ImageContent != null)
+                                                                {
+                                                                    string base64Image = Convert.ToBase64String(article.ImageContent);
+                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" />
+                                                                }
+                                                                <div class="tag">@article.ContentType</div>
+                                                                <div class="Mask" title="@article.Title">閱讀更多</div>
+                                                            </div>
+                                                            <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                                                            <div class="NewsItemContent">
+                                                                <span class="el-text is-line-clamp">@article.BodyContent</span>
+                                                            </div>
+                                                            <div class="NewsItemInfo">
+                                                                <div class="NewsItemTags">
+                                                                    <div class="el-tag el-tag--plain is-round">
+                                                                        <div class="el-tag__content">@article.Hashtags</div>
+                                                                    </div>
+                                                                    <span>@article.PublishedDate.ToString("yyyy-MM-dd")</span>
                                                                 </div>
-                                                                <span>@article.PublishedDate.ToString("yyyy-MM-dd")</span>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        }
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div id="video" class="SectionVideo">
                         <div class="container">
                             <div class="SectionHeader">
