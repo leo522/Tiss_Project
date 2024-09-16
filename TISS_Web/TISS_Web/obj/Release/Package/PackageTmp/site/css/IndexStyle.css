@@ -819,7 +819,7 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
     color: var(--fa-inverse, #fff);
 }
 
-網頁字體尺寸
+/*網頁字體尺寸*/
 .FontSizeBtn {
     font-size: 14px;
 }
@@ -833,11 +833,11 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
     }
 
 .text-content {
-    font-size: 20px;  預設為中字體 
+    font-size: 20px; /*預設為中字體 */
 }
-網頁字體尺寸
+/*網頁字體尺寸*/
 
-導覽列
+/*導覽列*/
 .nav-item {
     position: relative;
 }
@@ -862,7 +862,8 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
     background: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    width: 200px;  可根據需要調整 
+    width: 200px;
+/*    可根據需要調整*/
 }
 
     .ChildrenList .container-lg {
@@ -873,6 +874,7 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
         .ChildrenList .container-lg .el-col {
             padding: 8px 16px;
         }
+
 .cke_notifications_area {
     display: none;
 }

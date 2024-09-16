@@ -69,6 +69,31 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                var user = _db.Users.FirstOrDefault(u => u.UserName == UserName);
+
+                if (user == null)
+                {
+                    ViewBag.ErrorMessage = "帳號或密碼錯誤";
+                    return View();
+                }
+
+                // 檢查帳號是否被鎖定
+                if (user.IsLocked ?? false)
+                {
+                    if (user.LockoutEndTime.HasValue && DateTime.Now < user.LockoutEndTime.Value)
+                    {
+                        ViewBag.ErrorMessage = "帳號已被鎖住，請稍後再試。";
+                        return View();
+                    }
+                    else
+                    {
+                        // 鎖定時間已過，解鎖帳號
+                        user.IsLocked = false;
+                        user.FailedLoginAttempts = 0;
+                        user.LockoutEndTime = null;
+                        _db.SaveChanges();
+                    }
+                }
                 // 將使用者輸入的密碼進行SHA256加密
                 string hashedPwd = ComputeSha256Hash(pwd);
                 var dto = _db.Users.FirstOrDefault(u => u.UserName == UserName && u.Password == hashedPwd);
@@ -94,8 +119,21 @@ namespace TISS_Web.Controllers
                 }
                 else
                 {
-                    // 驗證失敗
-                    ViewBag.ErrorMessage = "帳號或密碼錯誤";
+                    // 密碼錯誤，增加失敗次數
+                    user.FailedLoginAttempts++;
+                    if (user.FailedLoginAttempts >= 3)
+                    {
+                        user.IsLocked = true;
+                        user.LockoutEndTime = DateTime.Now.AddMinutes(15); // 鎖定 15 分鐘
+                    }
+
+                    _db.SaveChanges();
+
+                    ViewBag.ErrorMessage = (user.IsLocked ?? false)
+                        ? "帳號已被鎖住，請稍後再試。"
+                        : "帳號或密碼錯誤，已經" + user.FailedLoginAttempts + "次錯誤。";
+
+
                     return View();
                 }
             }
@@ -1410,55 +1448,6 @@ namespace TISS_Web.Controllers
 
         #region 科普專欄
 
-        /// <summary>
-        /// 科普專欄
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult research(int page = 1, int pageSize = 9)
-        //{
-        //    Session["ReturnUrl"] = Request.Url.ToString();
-
-        //    page = Math.Max(1, page); //確保頁碼至少為 1
-
-        //    var relatedHashtags = new List<string>
-        //    {
-        //        "運動醫學",
-        //        "運動科技",
-        //        "運動科學",
-        //        "運動生理",
-        //        "運動心理",
-        //        "體能訓練",
-        //        "運動營養",
-        //        "兒少科普",
-        //        "科普海報下載專區"
-        //    };
-        //    // 查詢相關 hashtags 的文章
-        //    var list = _db.ArticleContent
-        //        .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-        //        .OrderByDescending(a => a.CreateDate)
-        //        .ToList();
-
-        //    //計算總數和總頁數
-        //    var totalArticles = list.Count();
-        //    var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-        //    page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-        //    var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-        //    {
-        //        Title = s.Title,
-        //        EncryptedUrl = EncryptUrl(s.Title),
-        //        ImageContent = s.ImageContent,
-        //        Hashtags = s.Hashtags,
-        //        FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-        //        ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-        //    }).ToList();
-
-        //    ViewBag.CurrentPage = page;
-        //    ViewBag.TotalPages = totalPages;
-
-        //    return View(articles);
-        //}
         public ActionResult research(int page = 1, int pageSize = 9)
         {
             Session["ReturnUrl"] = Request.Url.ToString();

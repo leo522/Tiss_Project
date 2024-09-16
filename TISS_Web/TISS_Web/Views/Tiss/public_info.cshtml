@@ -8,7 +8,6 @@
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="fb-root"></div>
     <div id="app" data-v-app="">
         <div data-v-339da53a="" class="layout">
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
@@ -16,7 +15,7 @@
                     <div class="BasePageBanner">
                         <div class="Mask"></div>
                         <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt="公開資訊封面圖片">
-                        @*<img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt="">*@
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt="公開資訊封面圖片">
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle" title="Public Information">
@@ -81,51 +80,13 @@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/download" title="下載專區">下載專區</a>
                                     </li>
-                                    @*<li span="3">
-                                            <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
-                                        </li>*@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/other" title="其他">其他</a>
                                     </li>
                                 </ul>
                             </div>
                         </aside>
-                        <main class="el-main bg-defaultO4">
-                            <div class="MainContainer">
-                                <div class="BaseBreadcrumb d-none d-lg-block">
-                                    <div class="container">
-                                        <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
-                                            <span class="el-breadcrumb__item">
-                                                <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
-                                                <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                                        <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                        </path>
-                                                    </svg>
-                                                </i>
-                                            </span>
-                                            <span class="el-breadcrumb__item">
-                                                <span class="el-breadcrumb__inner" role="link" title="公開資訊">公開資訊</span>
-                                                <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                                        <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                        </path>
-                                                    </svg>
-                                                </i>
-                                            </span>
-                                            <span class="el-breadcrumb__item">
-                                                <span class="el-breadcrumb__inner" role="link" title="法規">法規</span>
-                                                <i class="el-icon el-breadcrumb__separator">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-                                                        <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
-                                                        </path>
-                                                    </svg>
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <main class="el-main bg-white">
                             <div class="PublicInfo">
                                 <span id="Regulation" class="anchor">
                                 </span>
@@ -150,89 +111,96 @@
                                 <div class="infoList">
                                     <div class="d-none d-lg-block">
                                         <div class="el-auto-resizer" style="width: 100%; height: 100%;">
-                                            <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
+                                            <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 100%;">
                                                 <div role="table" class="el-table-v2__table el-table-v2__main">
                                                     <div class="el-vl__wrapper el-table-v2__body" role="rowgroup">
-                                                        <div class="" style="position: relative; overflow: hidden; will-change: transform; direction: ltr; height: 500px; width: 870px;">
+                                                        <div class="" style="position: relative; overflow: hidden; will-change: transform; direction: ltr; height: 500px;">
                                                             <div class="el-table-v2__header-wrapper" role="rowgroup">
                                                                 <div class="el-table-v2__header" style="height: 50px;">
                                                                     <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row" style="height: 50px;">
-                                                                        <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="width: 480px;">
+                                                                        <div class="el-table-v2__header-cell" data-key="title" role="columnheader" style="width: 40%;">
                                                                             <div class="el-table-v2__header-cell-text" title="名稱">名稱</div>
                                                                         </div>
-                                                                        <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="width: 240px;">
+                                                                        <div class="el-table-v2__header-cell" data-key="publish_up" role="columnheader" style="width: 20%;">
                                                                             <div class="el-table-v2__header-cell-text" title="發布日期">發布日期</div>
                                                                         </div>
-                                                                        <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="width: 280px;">
+                                                                        <div class="el-table-v2__header-cell" data-key="params" role="columnheader" style="width: 20%;">
                                                                             <div class="el-table-v2__header-cell-text" title="附件">附件</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group" style="height: 450px; overflow-y: auto; font-size:16px;">
-                                                                @foreach (var file in Model)
-                                                                {
-                                                                    <div class="el-table-v2__row TableRow" style="margin-bottom: 20px; padding: 5px;">
-                                                                        <div class="el-table-v2__row-cell" style="width: 480px;">
-                                                                            <div class="el-table-v2__cell-text" title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" style="width: 240px;">
-                                                                            <div>@file.UploadTime.ToString("yyyy/MM/dd")</div>
-                                                                        </div>
-                                                                        <div class="el-table-v2__row-cell" style="width: 280px;">
-                                                                            <div class="BaseTagList download">
-                                                                                <span>
-                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
-                                                                                        <span class="el-tag el-tag--light is-round">
-                                                                                            <span class="el-tag__content">@file.DocumentType</span>
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                }
-                                                                <nav aria-label="Page navigation">
-                                                                    <ul class="pagination justify-content-center">
-                                                                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                                                                        {
-                                                                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                                                <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = i })">@i</a>
-                                                                            </li>
-                                                                        }
-                                                                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                                            <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
-                                                                                <span aria-hidden="true">&laquo;</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                                            <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
-                                                                                <span aria-hidden="true">&raquo;</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </nav>
-                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @{
-                                                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                                {
-                                                    using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                                    {
-                                                        <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                                        <div class="col-md-10">
-                                                            <input type="file" name="file" />
-                                                            <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
-                                                        </div>
-                                                    }
-                                                }
-                                            }
                                         </div>
                                     </div>
                                 </div>
+                                <div class="MainContainer">
+                                    <div class="NewsVideoList">
+                                        <div class="container">
+                                            <div class="row">
+                                                @foreach (var file in Model)
+                                                {
+                                                    <div class="el-table-v2__row TableRow" style="margin-bottom: 20px; padding: 5px;">
+                                                        <div class="el-table-v2__row-cell" style="width: 480px;">
+                                                            <div class="el-table-v2__cell-text" title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                        </div>
+                                                        <div class="el-table-v2__row-cell" style="width: 240px;">
+                                                            <div>@file.UploadTime.ToString("yyyy/MM/dd")</div>
+                                                        </div>
+                                                        <div class="el-table-v2__row-cell" style="width: 280px;">
+                                                            <div class="BaseTagList download">
+                                                                <span>
+                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
+                                                                        <span class="el-tag el-tag--light is-round">
+                                                                            <span class="el-tag__content">@file.DocumentType</span>
+                                                                        </span>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <nav aria-label="Page navigation">
+                                                    <ul class="pagination justify-content-center">
+                                                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                        {
+                                                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                                                <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = i })">@i</a>
+                                                            </li>
+                                                        }
+                                                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                                                            <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                                                            <a class="page-link" href="@Url.Action("regulation", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @{
+                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                    {
+                                        using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                        {
+                                            <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                            <div class="col-md-10">
+                                                <input type="file" name="file" />
+                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                            </div>
+                                        }
+                                    }
+                                }
                             </div>
                         </main>
                     </section>

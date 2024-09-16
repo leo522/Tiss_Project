@@ -64,7 +64,7 @@
                 <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
-                <div data-v-e61ebf00="">
+                <div data-v-e61ebf00="" style="margin-left: 30px;">
                     <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: space-around; padding: 0;">
                         <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small" title="小">小</button>
@@ -77,11 +77,12 @@
                         </li>
                     </ul>
                 </div>
+
                 <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
                     <ul data-v-e61ebf00="" class="ToolList">
                         <li data-v-e61ebf00="">
                             <div id="google_translate_element" style="display: none;"></div>
-                            <select class="selectpicker" onchange="goTranslate(this.value)" translate="no">
+                            <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
                                 <option value="">Language</option>
                                 <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
                                 <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
@@ -89,14 +90,11 @@
                                 <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
                             </select>
                         </li>
-                        <li id="loginBtn">
-                            <button onclick="location.href='/Tiss/Login'" data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-text FontSizeBtn" aria-label="btn" title="網頁管理者">網頁管理者</button>
-                        </li>
-                        <li id="logoutBtn" style="display: none;">
+                        @*<li id="logoutBtn" style="display: none;">
                             <form id="logoutForm" action="/Tiss/Logout" method="post">
                                 <button type="submit" class="btn btn-outline-danger btn-block" title="登出">登出</button>
                             </form>
-                        </li>
+                        </li>*@
                     </ul>
                 </nav>
             </div>
@@ -127,7 +125,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/announcement" title="中心公告"><img src="~/Img/favicon.svg" alt="中心公告" />中心公告</a></li>
+                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/announcement" title="中心公告"><img src="~/Img/favicon.svg" alt="" />中心公告</a></li>
                                 </ul>
                             </li>
                             <li data-v-71bab962="" class="nav-item dropdown">
@@ -147,32 +145,32 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/Objectives" title="使命、願景">
-                                            <img src="~/Img/favicon.svg" alt="使命、願景" />使命、願景
+                                            <img src="~/Img/favicon.svg" alt="" />使命、願景
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/mission" title="中心任務">
-                                            <img src="~/Img/favicon.svg" alt="中心任務" />中心任務
+                                            <img src="~/Img/favicon.svg" alt="" />中心任務
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/Organization" title="組織概況">
-                                            <img src="~/Img/favicon.svg" alt="組織概況" />組織概況
+                                            <img src="~/Img/favicon.svg" alt="" />組織概況
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/BOD" title="第1屆 董監事">
-                                            <img src="~/Img/favicon.svg" alt="第1屆 董監事" />第1屆 董監事
+                                            <img src="~/Img/favicon.svg" alt="" />第1屆 董監事
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/CEO" title="執行長">
-                                            <img src="~/Img/favicon.svg" alt="執行長" />執行長
+                                            <img src="~/Img/favicon.svg" alt="" />執行長
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/Units" title="單位介紹">
-                                            <img src="~/Img/favicon.svg" alt="單位介紹" />單位介紹
+                                            <img src="~/Img/favicon.svg" alt="" />單位介紹
                                         </a>
                                     </li>
                                 </ul>
@@ -192,7 +190,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/video" title="影音專區"><img src="~/Img/favicon.svg" alt="影音專區" />影音專區</a></li>
+                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/video" title="影音專區"><img src="~/Img/favicon.svg" alt="" />影音專區</a></li>
                                 </ul>
                             </li>
                             <li data-v-71bab962="" class="nav-item dropdown">
@@ -212,47 +210,47 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportMedicine" title="運動醫學">
-                                            <img src="~/Img/favicon.svg" alt="運動醫學" />運動醫學
+                                            <img src="~/Img/favicon.svg" alt="" />運動醫學
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportTech" title="運動科技">
-                                            <img src="~/Img/favicon.svg" alt="運動科技" />運動科技
+                                            <img src="~/Img/favicon.svg" alt="" />運動科技
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportScience" title="運動科學">
-                                            <img src="~/Img/favicon.svg" alt="運動科學" />運動科學
+                                            <img src="~/Img/favicon.svg" alt="" />運動科學
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPhysiology" title="運動生理">
-                                            <img src="~/Img/favicon.svg" alt="運動生理" />運動生理
+                                            <img src="~/Img/favicon.svg" alt="" />運動生理
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsPsychology" title="運動心理">
-                                            <img src="~/Img/favicon.svg" alt="運動心理" />運動心理
+                                            <img src="~/Img/favicon.svg" alt="" />運動心理
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/physicalTraining" title="體能訓練">
-                                            <img src="~/Img/favicon.svg" alt="體能訓練" />體能訓練
+                                            <img src="~/Img/favicon.svg" alt="" />體能訓練
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/sportsNutrition" title="運動營養">
-                                            <img src="~/Img/favicon.svg" alt="運動營養" />運動營養
+                                            <img src="~/Img/favicon.svg" alt="" />運動營養
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/childrenScience" title="兒少科普">
-                                            <img src="~/Img/favicon.svg" alt="兒少科普" />兒少科普
+                                            <img src="~/Img/favicon.svg" alt="" />兒少科普
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">
-                                            <img src="~/Img/favicon.svg" alt="科普海報下載專" />科普海報下載專區
+                                            <img src="~/Img/favicon.svg" alt="" />科普海報下載專區
                                         </a>
                                     </li>
                                 </ul>
@@ -274,37 +272,37 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/regulation" title="法規">
-                                            <img src="~/Img/favicon.svg" alt="法規" />法規
+                                            <img src="~/Img/favicon.svg" alt="" />法規
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/procedure" title="辦法及要點">
-                                            <img src="~/Img/favicon.svg" alt="辦法及要點" />辦法及要點
+                                            <img src="~/Img/favicon.svg" alt="" />辦法及要點
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/plan" title="計畫">
-                                            <img src="~/Img/favicon.svg" alt="計畫" />計畫
+                                            <img src="~/Img/favicon.svg" alt="" />計畫
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/budget" title="預算與決算">
-                                            <img src="~/Img/favicon.svg" alt="預算與決算" />預算與決算
+                                            <img src="~/Img/favicon.svg" alt="" />預算與決算
                                         </a>
                                     </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/download" title="下載專區">
-                                            <img src="~/Img/favicon.svg" alt="下載專區" />下載專區
+                                            <img src="~/Img/favicon.svg" alt="" />下載專區
                                         </a>
                                     </li>
-                                    <li>
+                                    @*<li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality" title="性別平等專區">
-                                            <img src="~/Img/favicon.svg" alt="性別平等專區" />性別平等專區
+                                            <img src="~/Img/favicon.svg" alt="" />性別平等專區
                                         </a>
-                                    </li>
+                                    </li>*@
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/other" title="其他">
-                                            <img src="~/Img/favicon.svg" alt="其他" />其他
+                                            <img src="~/Img/favicon.svg" alt="" />其他
                                         </a>
                                     </li>
                                 </ul>
@@ -324,7 +322,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/" title="贊助專區"><img src="~/Img/favicon.svg" alt="贊助專區" />贊助專區</a></li>
+                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
                                 </ul>
                             </li>
                             <li data-v-71bab962="" class="nav-item">
@@ -365,6 +363,15 @@
                                 <span title="國家運動科學中心服務信箱">
                                     <a href="mailto:service@tiss.org.tw">國家運動科學中心服務信箱</a>
                                 </span>
+                            </li>
+                            <li>
+                                <button onclick="location.href='/Tiss/Login'" type="button" class="el-button is-plain is-text FontSizeBtn" title="網頁管理者">網頁管理者</button>
+
+                            </li>
+                            <li id="logoutBtn" style="display: none;">
+                                <form id="logoutForm" action="/Tiss/Logout" method="post">
+                                    <button type="submit" class="btn btn-outline-danger btn-block" title="登出">登出</button>
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -468,9 +475,9 @@
                                 <li>
                                     <a href="/Tiss/download" title="下載專區">下載專區</a>
                                 </li>
-                                <li>
+                                @*<li>
                                     <a href="/Tiss/GenderEquality" title="性別平等專區">性別平等專區</a>
-                                </li>
+                                </li>*@
                                 <li>
                                     <a href="/Tiss/other" title="其他">其他</a>
                                 </li>
@@ -478,8 +485,7 @@
                         </div>
                         <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
                             <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
-                            <ul class="MenuList">
-                            </ul>
+                            <ul class="MenuList"></ul>
                         </div>
                     </div>
                     <div class="copyright">

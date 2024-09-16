@@ -1,12 +1,12 @@
 ﻿
 .bootstrap-select {
-    width: 120px;
+    width: 130px;
     border: 2px solid #ccc; /* 外框顏色 */
 }
 
     .bootstrap-select > .btn {
-        width: 100%;
-        padding-right: 25px
+        width: 140px;
+        padding-right: 25px;
     }
 
 .error .bootstrap-select .btn {
@@ -26,9 +26,11 @@
 }
 
 .bootstrap-select .btn:focus {
-    outline: thin dotted #333 !important;
-    outline: 5px auto -webkit-focus-ring-color !important;
-    outline-offset: -2px
+    outline: 0;
+    /*outline: thin dotted #333 !important;*/
+    /*outline: 5px auto -webkit-focus-ring-color !important;*/
+    outline-offset: -2px;
+    border: 3px dashed orange;
 }
 
 .bootstrap-select.form-control {
@@ -98,7 +100,7 @@
 
 .bootstrap-select.btn-group .dropdown-menu {
     min-width: 100%;
-/*    z-index: 2000;
+    /*    z-index: 2000;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box*/

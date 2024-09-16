@@ -818,6 +818,9 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
     <Property Name="changeDate" Type="datetime" />
     <Property Name="IsApproved" Type="bit" />
+    <Property Name="FailedLoginAttempts" Type="int" />
+    <Property Name="IsLocked" Type="bit" />
+    <Property Name="LockoutEndTime" Type="datetime" />
   </EntityType>
   <EntityType Name="VideoPageContent">
     <Key>

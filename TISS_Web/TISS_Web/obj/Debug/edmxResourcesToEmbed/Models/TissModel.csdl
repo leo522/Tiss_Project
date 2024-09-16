@@ -69,6 +69,9 @@
     <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="changeDate" Type="DateTime" Precision="3" />
     <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="FailedLoginAttempts" Type="Int32" />
+    <Property Name="IsLocked" Type="Boolean" />
+    <Property Name="LockoutEndTime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />

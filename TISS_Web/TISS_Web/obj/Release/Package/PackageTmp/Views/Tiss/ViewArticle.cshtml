@@ -114,30 +114,68 @@
                     <div class="container mt-5">
                         <div class="article-content">
                             @if (isLoggedIn)
-                            {
-                                <form method="post" action="@Url.Action("ViewArticle", "Tiss")">
+                            {<form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="Id" value="@Model.Id" />
+
                                     <div class="form-group">
                                         <label for="ContentBody">內容:</label>
                                         @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
                                     </div>
 
                                     <div class="form-group mb-4">
+                                        <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
+                                        <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
+                                    </div>
+                                    @* 顯示已經上傳的預覽圖片 *@
+                                    @if (Model.ImageContent != null)
+                                    {
+                                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ImageContent))" alt="預覽圖片" style="width:300px; height:auto;" />
+                                    }
+                                    else
+                                    {
+                                        <p>目前無圖片</p>
+                                    }
+                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                </form>
+
+                                @*<form method="post" action="@Url.Action("ViewArticle", "Tiss")">
+                                                                @Html.AntiForgeryToken()
+                                                                <input type="hidden" name="Id" value="@Model.Id" />
+                                                                <div class="form-group">
+                                                                    <label for="ContentBody">內容:</label>
+                                                                    @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                                                </div>
+
+                                                                <div class="form-group mb-4">
                                         <label for="ImageFile" style="font-size:25px" title="預覽用圖片">預覽用圖片</label>
                                         <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                </form>
+
+                                                                <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                                            </form>*@
                             }
                             else
                             {
                                 <div class="hashtags-link" style="text-align: left;">
                                     <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
-                                    <a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
+
+                                    @if (ViewBag.Hashtags != null && ViewBag.Hashtags.Count > 0)
+                                    {
+                                        foreach (var hashtag in ViewBag.Hashtags)
+                                        {
+                                            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = hashtag })" class="el-tag el-tag--plain is-round tag-link">
+                                                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i> @hashtag</span>
+                                            </a>
+                                        }
+                                    }
+                                </div>
+                                <!--<div class="hashtags-link" style="text-align: left;">
+                                <p>@ViewBag.FormattedPublishedDate</p>--> @*發布時間*@
+                                <!--<a href="@Url.Action("Redirecttag", "Tiss", new { tag = Model.Hashtags })" class="el-tag el-tag--plain is-round tag-link">
                                         <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i>@Model.Hashtags</span>
                                     </a>
-                                </div>
+                                </div>-->
                                 <div>
                                     @Html.Raw(Model.ContentBody)
                                 </div>

@@ -56,6 +56,9 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="TISS_WebModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="LockoutEndTime" ColumnName="LockoutEndTime" />
+          <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+          <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
           <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
           <ScalarProperty Name="changeDate" ColumnName="changeDate" />
           <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />

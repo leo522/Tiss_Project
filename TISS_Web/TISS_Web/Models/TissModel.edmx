@@ -823,6 +823,9 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="10" />
           <Property Name="changeDate" Type="datetime" />
           <Property Name="IsApproved" Type="bit" />
+          <Property Name="FailedLoginAttempts" Type="int" />
+          <Property Name="IsLocked" Type="bit" />
+          <Property Name="LockoutEndTime" Type="datetime" />
         </EntityType>
         <EntityType Name="VideoPageContent">
           <Key>
@@ -1086,6 +1089,9 @@
           <Property Name="UserAccount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="changeDate" Type="DateTime" Precision="3" />
           <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="FailedLoginAttempts" Type="Int32" />
+          <Property Name="IsLocked" Type="Boolean" />
+          <Property Name="LockoutEndTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -2100,6 +2106,9 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TISS_WebModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="LockoutEndTime" ColumnName="LockoutEndTime" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
                 <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="changeDate" ColumnName="changeDate" />
                 <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />

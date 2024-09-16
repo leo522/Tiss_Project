@@ -1,21 +1,32 @@
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed 
 under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
-:focus {
-    outline: 0;  /*隱藏預設焦點框 */
-    border: 4px dashed orange;  /*添加橙色虛線邊框 */
+/*:focus {
+    outline: 0;*/ /*隱藏預設焦點框 */
+/*border: 4px dashed orange;*/ /*添加橙色虛線邊框 */
+/*}*/
+.a {
+    outline: 0;
 }
+
+.span {
+    outline: 0;
+}
+
 [data-v-e61ebf00]:focus {
     outline: 0; /* 隱藏預設焦點框 */
     border: 4px dashed orange; /* 添加橙色虛線邊框 */
 }
+
 [data-v-71bab962]:focus {
     outline: 0; /* 隱藏預設焦點框 */
     border: 4px dashed orange; /* 添加橙色虛線邊框 */
 }
+
 [data-v-ffd846e6]:focus {
     outline: 0; /* 隱藏預設焦點框 */
     border: 4px dashed orange; /* 添加橙色虛線邊框 */
 }
+
 [data-v-339da53a]:focus {
     outline: 0; /* 隱藏預設焦點框 */
     border: 4px dashed orange; /* 添加橙色虛線邊框 */
@@ -305,13 +316,29 @@ address[data-v-e61ebf00] {
 }
 
 ol[data-v-e61ebf00], ul[data-v-e61ebf00] {
-    padding-left: 2rem
+    padding-left: 1rem
 }
 
 dl[data-v-e61ebf00], ol[data-v-e61ebf00], ul[data-v-e61ebf00] {
     margin-top: 0;
     margin-bottom: 1rem
 }
+
+/* 調整字體大小按鈕的樣式，確保各語言下的間距一致 */
+ul.FontSizeList {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+}
+
+    ul.FontSizeList li {
+        margin-right: 50px; /* 統一按鈕之間的間距 */
+    }
+
+        ul.FontSizeList li:last-child {
+            margin-right: 0; /* 最後一個按鈕不需要右邊距 */
+        }
 
 ol ol[data-v-e61ebf00], ol ul[data-v-e61ebf00], ul ol[data-v-e61ebf00], ul ul[data-v-e61ebf00] {
     margin-bottom: 0
@@ -14726,27 +14753,6 @@ textarea.form-control-lg[data-v-e61ebf00] {
 }
 
 .logoNav .mainLogo[data-v-e61ebf00] {
-    /*display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-left: -170px;*/ /*往左移動*/
-    /*-webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-image: url(/site/img/nav_shape.b0b43bc4.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 0 calc(100% - 2px);
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 48px 110px 25px 44px;
-    border-radius: 0 0 24px 0;
-    z-index: 2;
-    height: 100%;
-    min-height: 140px;
-    -webkit-filter: drop-shadow(0 4px 15px rgba(62,104,149,.2));
-    filter: drop-shadow(0 4px 15px rgba(62,104,149,.2))*/
     display: flex;
     align-items: center;
     position: relative; /* 改為相對定位 */
@@ -14754,36 +14760,34 @@ textarea.form-control-lg[data-v-e61ebf00] {
 }
 
 .logoNav .mainLogo img[data-v-e61ebf00] {
-    /* -o-object-fit: fill;
-    object-fit: fill;
-    width: 100%;
-    max-width: 360px;
-    min-height: 66px*/
-    max-width: 100%; /* 使LOGO自適應 */
+    max-width: 100%; /* 使LOGO在所有螢幕寬度下都自適應 */
     height: auto; /* 自動調整高度 */
     transition: max-width 0.3s; /* 增加過渡效果 */
+    transform: translateX(0); /* 移除偏移 */
 }
+
 .logoNav .mainLogo:focus {
     outline: 0; /* 隱藏預設焦點框 */
-    border: 4px dashed orange; /* 添加橙色虛線邊框 */
+    border: 3px dashed orange; /* 添加橙色虛線邊框 */
 }
+
 @media screen and (max-width: 1199.9px) {
     .logoNav {
         padding: 10px; /* 減少內邊距 */
     }
 
     .mainLogo img {
-        max-width: 270px; /* 中螢幕LOGO大小 */
+        max-width: 60%; /* 中螢幕LOGO大小 */
     }
 }
 
 @media screen and (max-width: 991.9px) {
     .mainLogo {
-        padding: 20px 15px; /* 調整內邊距 */
+        padding: 10px 15px; /* 調整內邊距以適應小螢幕 */
     }
 
         .mainLogo img {
-            max-width: 212px; /* 小螢幕LOGO大小 */
+            max-width: 50%; /* 小螢幕LOGO大小，確保比例正確 */
         }
 }
 /*@media screen and (max-width:1199.9px) {
@@ -14793,8 +14797,8 @@ textarea.form-control-lg[data-v-e61ebf00] {
 
     .logoNav .mainLogo img[data-v-e61ebf00] {
         max-width: 270px;*/
-        /*background-image: url(/site/img/nav_shape.b0b43bc4.svg)*/
-    /*}
+/*background-image: url(/site/img/nav_shape.b0b43bc4.svg)*/
+/*}
 }
 
 @media screen and (max-width:991.9px) {
@@ -19152,10 +19156,12 @@ textarea.form-control-lg[data-v-71bab962] {
         pointer-events: none;
         background-color: transparent
     }
+
     .dropdown-item[data-v-71bab962]:focus {
         outline: 0; /* 隱藏預設焦點框 */
         border: 4px dashed orange; /* 添加橙色虛線邊框 */
     }
+
 .dropdown-menu.show[data-v-71bab962] {
     display: block
 }
@@ -19338,9 +19344,9 @@ textarea.form-control-lg[data-v-71bab962] {
 }
 
 .nav-link[data-v-71bab962]:focus-visible {
-        outline: 0;
-        border: 4px dashed orange;
-/*    -webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    outline: 0;
+    border: 4px dashed orange;
+    /*    -webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
     box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)*/
 }
 
@@ -29598,11 +29604,20 @@ textarea.form-control-lg[data-v-71bab962] {
     box-shadow: none
 }
 
-@media screen and (max-width:991.9px) {
-    .menuNav .navbar[data-v-71bab962] {
-        -webkit-box-pack: end;
-        -ms-flex-pack: end;
-        justify-content: flex-end
+@media screen and (max-width: 991.9px) {
+    .menuNav .navbar .navbar-collapse[data-v-71bab962] {
+        display: none; /* 確保一開始是隱藏的 */
+        max-height: 50vh; /* 更小的高度限制，根據需要調整 */
+        padding: 0 18px;
+        overflow-y: auto; /* 垂直滾動條 */
+    }
+
+    /* 當點擊漢堡按鈕時展開漢堡選單 */
+    .menuNav .navbar .navbar-collapse.show[data-v-71bab962] {
+        display: block;
+        max-height: 50vh;
+        -webkit-transition: max-height 0.5s ease;
+        transition: max-height 0.5s ease;
     }
 }
 
@@ -29614,13 +29629,13 @@ textarea.form-control-lg[data-v-71bab962] {
     transition: .5s
 }
 
-@media screen and (max-width: 991.9px) {
+/*@media screen and (max-width: 991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {
-        max-height: 50vh; /* 更小的高度限制，根據需要調整 */
-        padding: 0 18px;
-        overflow-y: auto; /* 垂直滾動條 */
-    }
-}
+        max-height: 50vh;*/ /* 更小的高度限制，根據需要調整 */
+        /*padding: 0 18px;
+        overflow-y: auto;*/ /* 垂直滾動條 */
+    /*}
+}*/
 /*@media screen and (max-width:991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {
         max-height: calc(100vh - 60px);
@@ -44549,7 +44564,7 @@ header[data-v-ffd846e6] {
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 footer {
     background-image: url(/site/img/bg_img.22d9a60c.jpg);
-    font-size: .875rem
+    font-size: 1.2rem
 }
 
     footer .FooterDecoration {
@@ -44671,9 +44686,11 @@ footer .FooterContent .RightFooterContent {
     }
 }
 
+/*頁腳標題文字*/
 footer .FooterContent .RightFooterContent .MenuTitle {
+    outline: 0;
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: bold;
     margin-bottom: 30px;
     color: #1f2733
 }
@@ -44695,7 +44712,8 @@ footer .FooterContent .RightFooterContent .MenuList li {
 }
 
 footer .FooterContent .RightFooterContent .MenuList a {
-    color: #1f2733
+    outline: 0;
+    color: #1f2733;
 }
 
 footer .SocialList {
@@ -75324,8 +75342,9 @@ textarea.form-control-lg[data-v-3f77048f] {
 }
 
 .SectionLinks .SectionHeader .Title .SectionTitle {
+    outline: 0;
     font-size: 3.75rem;
-    color: #004d9f;
+    /*color: #004d9f;*/
     font-weight: 200
 }
 
@@ -75621,7 +75640,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     }
 
     .BasePageLayout .el-aside .Menu .MenuLink.active {
-        background-color: #fff;
+        /*background-color: #fff;*/
         color: #004d9f
     }
 
@@ -77578,7 +77597,8 @@ textarea.form-control-lg[data-v-3f77048f] {
     }
 
 .PublicInfo .content .infoList .el-table {
-    font-size: 1rem
+    font-size: 1rem;
+    width: 100%; /*新增寬度*/
 }
 
 .PublicInfo .content .infoList .TableCell {
@@ -77591,7 +77611,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     font-size: 1rem
 }
 
-.PublicInfo .content .infoList .DataList {
+/*.PublicInfo .content .infoList .DataList {
     padding: 25px 20px;
     margin: 0
 }
@@ -77623,7 +77643,7 @@ textarea.form-control-lg[data-v-3f77048f] {
             font-size: .875rem;
             color: #717171
         }
-
+*/
 .PublicInfo .content .infoList .Pagination {
     padding: 60px 0
 }
@@ -77663,6 +77683,7 @@ textarea.form-control-lg[data-v-3f77048f] {
         top: -70px
     }
 }
+
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 :root, [data-bs-theme=light] {
     --bs-blue: #0d6efd;
@@ -82113,14 +82134,14 @@ textarea.form-control-lg {
 
 /*導航列標籤區域*/
 .nav-link:focus, .nav-link:hover {
-    color: var(--bs-nav-link-hover-color)
-/*    outline: 0;
-    border: 4px dashed orange;*/
+    color: var(--bs-nav-link-hover-color);
+    outline: 0;
+    /*border: 4px dashed orange;*/
 }
 
 .nav-link:focus-visible {
     outline: 0;
-    border: 4px dashed orange; /* 這裡添加邊框樣式，框線粗度 */
+    /*border: 4px dashed orange;*/ /* 這裡添加邊框樣式，框線粗度 */
     /*-webkit-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
     box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);*/
 }
@@ -82154,8 +82175,9 @@ textarea.form-control-lg {
             border-color: var(--bs-nav-tabs-link-hover-border-color)
         }*/
         .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-            border: 2px dashed orange; /* 這裡添加邊框樣式 */
+            /*border: 2px dashed orange;*/ /* 這裡添加邊框樣式 */
         }
+
         .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
             color: var(--bs-nav-tabs-link-active-color);
             background-color: var(--bs-nav-tabs-link-active-bg);
@@ -82189,6 +82211,7 @@ textarea.form-control-lg {
     --bs-nav-underline-link-active-color: var(--bs-emphasis-color);
     gap: var(--bs-nav-underline-gap)
 }
+
     .nav-underline .nav-link {
         padding-right: 0;
         padding-left: 0;
@@ -82204,7 +82227,7 @@ textarea.form-control-lg {
             color: var(--bs-nav-underline-link-active-color);
             border-bottom-color: currentcolor;
         }
-    /*.nav-underline .nav-link {
+/*.nav-underline .nav-link {
         padding-right: 0;
         padding-left: 0;
         border-bottom: var(--bs-nav-underline-border-width) solid transparent

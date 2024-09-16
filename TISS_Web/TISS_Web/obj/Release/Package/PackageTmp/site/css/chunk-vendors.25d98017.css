@@ -1,10 +1,10 @@
 @charset "UTF-8";
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * 
 Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
-:focus {
-    outline: 0; /*隱藏預設焦點框 */
-    border: 4px dashed orange; /*添加橙色虛線邊框 */
-}
+/*:focus {
+    outline: 0;*/ /*隱藏預設焦點框 */
+/*border: 4px dashed orange;*/ /*添加橙色虛線邊框 */
+/*}*/
 :root, [data-bs-theme=light] {
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
@@ -4489,12 +4489,12 @@ textarea.form-control-lg {
     }
 
         .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
-           /* isolation: isolate;
+            /* isolation: isolate;
             border-color: var(--bs-nav-tabs-link-hover-border-color)*/
         }
 
         .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-           /* color: var(--bs-nav-tabs-link-active-color);
+            /* color: var(--bs-nav-tabs-link-active-color);
             background-color: var(--bs-nav-tabs-link-active-bg);
             border-color: var(--bs-nav-tabs-link-active-border-color)*/
         }
@@ -14734,7 +14734,7 @@ textarea.form-control-lg {
     --el-color-primary: #409eff;
     --el-color-primary-light-3: #79bbff;
     --el-color-primary-light-5: #a0cfff;
-/*    --el-color-primary-light-7: #c6e2ff;*/
+    /*    --el-color-primary-light-7: #c6e2ff;*/
     --el-color-primary-light-8: #d9ecff;
     --el-color-primary-light-9: #ecf5ff;
     --el-color-primary-dark-2: #337ecc;
@@ -15600,7 +15600,7 @@ textarea.form-control-lg {
     font-size: var(--el-font-size-base);
     border-radius: var(--el-border-radius-base)
 }
-    
+
     /*中央區塊標籤顏色*/
     .el-button:hover {
         color: var(--el-button-hover-text-color);
@@ -15608,10 +15608,12 @@ textarea.form-control-lg {
         background-color: var(--el-button-hover-bg-color);
         outline: 0
     }
-    .el-button:focus{
+
+    .el-button:focus {
         outline: 0;
         border: 4px dashed orange;
     }
+
     .el-button:active {
         color: var(--el-button-active-text-color);
         border-color: var(--el-button-active-border-color);
