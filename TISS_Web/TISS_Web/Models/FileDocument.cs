@@ -15,15 +15,13 @@ namespace TISS_Web.Models
     public partial class FileDocument
     {
         public int ID { get; set; }
-        public Nullable<int> PId { get; set; }
         public string DocumentName { get; set; }
         public Nullable<System.DateTime> UploadTime { get; set; }
         public string Creator { get; set; }
         public string DocumentType { get; set; }
         public Nullable<int> FileSize { get; set; }
         public Nullable<System.DateTime> LastModifiedTime { get; set; }
-        public Nullable<bool> IsEnabled { get; set; }
         public string FileURL { get; set; }
-        public byte[] ImageData { get; set; }
+        public Nullable<bool> IsEnabled { get; set; }
     }
 }

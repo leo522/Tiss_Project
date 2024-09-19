@@ -175,7 +175,6 @@
     <EntitySet Name="SportsPhysiologyPageContent" EntityType="TISS_WebModel.SportsPhysiologyPageContent" />
     <EntitySet Name="SportsPsychologyPageContent" EntityType="TISS_WebModel.SportsPsychologyPageContent" />
     <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
-    <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
     <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
     <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
     <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
@@ -205,6 +204,13 @@
     <AssociationSet Name="FK__ReplyMess__Messa__0EF836A4" Association="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4">
       <End Role="MessageBoard" EntitySet="MessageBoard" />
       <End Role="ReplyMessage" EntitySet="ReplyMessage" />
+    </AssociationSet>
+    <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
+    <EntitySet Name="GenderEquality" EntityType="TISS_WebModel.GenderEquality" />
+    <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
+    <AssociationSet Name="FK__GenderEqu__Gende__37FA4C37" Association="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37">
+      <End Role="GenderEquality" EntitySet="GenderEquality" />
+      <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AboutPageContent">
@@ -746,22 +752,6 @@
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
     <Property Name="FileNo" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="FileDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsEnabled" Type="Boolean" />
-    <Property Name="FileURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="RegulationDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -1022,6 +1012,63 @@
       </Principal>
       <Dependent Role="ReplyMessage">
         <PropertyRef Name="MessageBoardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FileDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="LastModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="FileURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnabled" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="GenderEquality">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="IsEnabled" Type="Boolean" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GenderEqualityDetails" Relationship="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" FromRole="GenderEquality" ToRole="GenderEqualityDetails" />
+  </EntityType>
+  <EntityType Name="GenderEqualityDetails">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderEqualityId" Type="Int32" />
+    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FilePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="FileName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FileType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageFileName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ImageSize" Type="Int32" />
+    <Property Name="ImageType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalInfo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GenderEquality" Relationship="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" FromRole="GenderEqualityDetails" ToRole="GenderEquality" />
+  </EntityType>
+  <Association Name="FK__GenderEqu__Gende__37FA4C37">
+    <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="0..1" />
+    <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderEquality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GenderEqualityDetails">
+        <PropertyRef Name="GenderEqualityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

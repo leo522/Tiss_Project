@@ -15,6 +15,10 @@ namespace TISS_Web.Controllers
             return View("Index");
         }
 
+        public ActionResult Maintenance() 
+        {
+            return View("Maintenance");
+        }
         #endregion
     }
 }

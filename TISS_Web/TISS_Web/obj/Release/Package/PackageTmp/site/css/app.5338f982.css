@@ -29603,7 +29603,15 @@ textarea.form-control-lg[data-v-71bab962] {
     -webkit-box-shadow: none;
     box-shadow: none
 }
+@media screen and (min-width: 768px) and (max-width: 991.9px) {
+    .navbar-collapse {
+        display: none; /* 在此範圍內隱藏選單 */
+    }
 
+    .navbar-collapse.show {
+        display: block; /* 點擊漢堡按鈕後顯示選單 */
+    }
+}
 @media screen and (max-width: 991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {
         display: none; /* 確保一開始是隱藏的 */

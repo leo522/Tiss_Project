@@ -126,3 +126,10 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Microsoft.IO.RecyclableMemoryS
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Buffers.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Memory.xml
 D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Numerics.Vectors.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Net.Http.Formatting.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Web.Http.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Net.Http.Formatting.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Web.Http.xml

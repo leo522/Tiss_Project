@@ -14,15 +14,13 @@
     <link href="~/fontawesome/css/all.css" rel="stylesheet" />
 
     @*翻譯套件*@
-    <link href="~/site/css/3.3.6_bootstrap.min.css" rel="stylesheet" />
+    @*<link href="~/site/css/3.3.6_bootstrap.min.css" rel="stylesheet" />
     <link href="~/site/css/bootstrap-select_min.css" rel="stylesheet" />
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" />
-    @*<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
     @*google翻譯工具*@
     @*翻譯套件*@
     <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
@@ -64,21 +62,21 @@
                 <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
-                <div data-v-e61ebf00="" style="margin-left: 50px;">
+                <div data-v-e61ebf00="" style="margin-left: 30px;">
                     <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: space-around; padding: 0;">
-                        <li style="margin-right: 50px;">
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small" title="小">小</button>
                         </li>
-                        <li style="margin-right: 50px;">
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="btn" data-size="medium" title="中">中</button>
                         </li>
-                        <li style="margin-right: 50px;">
+                        <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="large" title="大">大</button>
                         </li>
                     </ul>
                 </div>
 
-                <nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
+                @*<nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
                     <ul data-v-e61ebf00="" class="ToolList">
                         <li data-v-e61ebf00="">
                             <div id="google_translate_element" style="display: none;"></div>
@@ -90,13 +88,8 @@
                                 <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
                             </select>
                         </li>
-                        @*<li id="logoutBtn" style="display: none;">
-                            <form id="logoutForm" action="/Tiss/Logout" method="post">
-                                <button type="submit" class="btn btn-outline-danger btn-block" title="登出">登出</button>
-                            </form>
-                        </li>*@
                     </ul>
-                </nav>
+                </nav>*@
             </div>
         </div>
         <div data-v-71bab962="" class="menuNav">
@@ -322,7 +315,7 @@
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
+                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
                                 </ul>
                             </li>
                             <li data-v-71bab962="" class="nav-item">
@@ -494,21 +487,24 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex w-100">
-            <span title="本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080">本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
-        </div>
+        @*<div class="d-flex w-100">
+                <span title="本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080">本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
+            </div>*@
     </footer>
     @*回最上方按鈕*@
-    <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;">
+    <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;" tabindex="0" role="button">
         <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
+
     <script>
+
         // 清除 Google 翻譯的相關 cookie
         function clearGoogleTranslateCookies() {
             document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
             document.cookie = "googtrans=; path=/; domain=" + window.location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         }
 
+        // 初始化 Google 翻譯套件
         function googleTranslateElementInit() {
             try {
                 new google.translate.TranslateElement({
@@ -522,16 +518,71 @@
             }
         }
 
+        // 專業名詞對應表，將「National Sports Science Center」替換為「TISS」
+        const termDictionary = {
+            "National Sports Science Center": "TISS"
+        };
+
+        // 使用 MutationObserver 監控 DOM 變化並進行替換
+        function observeDOMChanges() {
+            const observer = new MutationObserver(() => {
+                const lang = document.querySelector('.goog-te-combo').value;
+
+                // 只在翻譯為英文時進行替換
+                if (lang === 'en') {
+                    replaceTerms();
+                }
+            });
+
+            // 監控整個 body 的 DOM 變化
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+        }
+
+        // 遍歷頁面內容，替換專業名詞
+        function replaceTerms() {
+            document.querySelectorAll('*').forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+                    for (const [incorrectTerm, correctTerm] of Object.entries(termDictionary)) {
+                        if (node.textContent.includes(incorrectTerm)) {
+                            node.textContent = node.textContent.replace(incorrectTerm, correctTerm);
+                        }
+                    }
+                }
+            });
+        }
+
+        // 當頁面載入後，初始化 Google 翻譯並監聽語言選擇
         $(window).on('load', function () {
             $('.goog-te-gadget').html($('.goog-te-gadget div'));
 
             // 確保翻譯下拉選單正確初始化
             if (typeof googleTranslateElementInit === 'function') {
                 googleTranslateElementInit();
+                observeDOMChanges(); // 開始監控 DOM 變化
             } else {
-                console.error("Google 翻譯函數未正確加載");
+                console.error("Google 翻譯功能未正確載入");
             }
         });
+
+        // 更新 goTranslate 函數以觸發替換
+        function goTranslate(lang) {
+            const combo = document.querySelector('.goog-te-combo');
+
+            if (combo) {
+                combo.value = lang;
+                const event = new Event('change');
+                combo.dispatchEvent(event);
+
+                // 語言變更後，檢查翻譯完成
+                setTimeout(onGoogleTranslateComplete, 1000); // 等待翻譯完成
+            } else {
+                console.error("Google 翻譯組件未加載，請檢查頁面狀態");
+            }
+        }
+
 
         $(function () {
             $('.selectpicker').selectpicker();

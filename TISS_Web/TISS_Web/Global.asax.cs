@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Web;
@@ -28,6 +29,19 @@ namespace TISS_Web
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(objMyLanguage.Value);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(objMyLanguage.Value);
+            }
+
+            // 讀取設定檔中的維護模式值
+            string maintenanceModeSetting = ConfigurationManager.AppSettings["MaintenanceMode"];
+            bool isMaintenanceMode = !string.IsNullOrEmpty(maintenanceModeSetting) && bool.Parse(maintenanceModeSetting);
+
+            if (isMaintenanceMode)
+            {
+                // 如果是維護模式，重導向到維護頁面
+                if (!Request.Url.AbsolutePath.StartsWith("/Maintenance", StringComparison.OrdinalIgnoreCase))
+                {
+                    Response.Redirect("/Maintenance/Maintenance");
+                }
             }
             //// 預設為繁體中文
             //string culture = "zh-TW";

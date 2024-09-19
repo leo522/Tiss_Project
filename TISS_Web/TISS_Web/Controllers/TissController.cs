@@ -33,6 +33,7 @@ using System.Net.Sockets;
 
 using System.Web.Caching;
 using System.Runtime.Caching;
+using System.Xml.Linq;
 
 namespace TISS_Web.Controllers
 {
@@ -40,7 +41,7 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities();
         private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
-
+        private readonly EmailService _emailService;
 
         #region 檔案上傳共用服務
 
@@ -50,7 +51,7 @@ namespace TISS_Web.Controllers
         {
             _fileUploadService = new FileUploadService(new TISS_WebEntities());
             _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
-
+            _emailService = new EmailService();
         }
         #endregion
 
@@ -115,7 +116,7 @@ namespace TISS_Web.Controllers
                     Session.Remove("ReturnUrl");
 
                     // 重定向到記錄的返回頁面
-                    return Redirect(returnUrl);
+                    return RedirectToAction("Home", "Tiss");
                 }
                 else
                 {
@@ -389,52 +390,6 @@ namespace TISS_Web.Controllers
             }
         }
 
-        //郵件發送方法
-        private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
-        {
-            var fromEmail = "00048@tiss.org.tw";
-            var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
-            var displayName = "運科中心資訊組"; //顯示的發件人名稱
-
-
-            var smtpClient = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential(fromEmail, fromPassword),
-                EnableSsl = true,
-            };
-
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(fromEmail, displayName),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true,
-            };
-
-            // 分割以逗號分隔的收件人地址並添加到郵件中
-            foreach (var email in toEmail.Split(','))
-            {
-                mailMessage.To.Add(email.Trim());
-            }
-
-            if (!string.IsNullOrEmpty(attachmentPath))
-            {
-                Attachment attachment = new Attachment(attachmentPath);
-                mailMessage.Attachments.Add(attachment);
-            }
-
-            try
-            {
-                smtpClient.Send(mailMessage);
-            }
-            catch (Exception ex)
-            {
-                // 處理發送郵件的錯誤
-                Console.WriteLine("郵件發送失敗: " + ex.Message);
-            }
-        }
-
         //重置密碼頁面
         public ActionResult ResetPassword(string token)
         {
@@ -540,6 +495,56 @@ namespace TISS_Web.Controllers
             ViewBag.Message = "您的密碼已成功重置";
             return RedirectToAction("Login");
         }
+
+        #endregion
+
+        #region 郵件發送方法
+
+        private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
+        {
+            var fromEmail = "00048@tiss.org.tw";
+            var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
+            var displayName = "運科中心資訊組"; //顯示的發件人名稱
+
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromEmail, fromPassword),
+                EnableSsl = true,
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(fromEmail, displayName),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true,
+            };
+
+            // 分割以逗號分隔的收件人地址並添加到郵件中
+            foreach (var email in toEmail.Split(','))
+            {
+                mailMessage.To.Add(email.Trim());
+            }
+
+            if (!string.IsNullOrEmpty(attachmentPath))
+            {
+                Attachment attachment = new Attachment(attachmentPath);
+                mailMessage.Attachments.Add(attachment);
+            }
+
+            try
+            {
+                smtpClient.Send(mailMessage);
+            }
+            catch (Exception ex)
+            {
+                // 處理發送郵件的錯誤
+                Console.WriteLine("郵件發送失敗: " + ex.Message);
+            }
+        }
+
         #endregion
 
         #region 自己上傳圖片和文字使用
@@ -2148,20 +2153,24 @@ namespace TISS_Web.Controllers
             return View(dtos);
         }
 
-        /// <summary>
-        /// 性平專區
-        /// </summary>
-        /// <returns></returns>
+        #endregion
+
+        #region 性別平等專區
+
         public ActionResult GenderEquality()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            
+            var dto = _db.GenderEquality.Include(g => g.GenderEqualityDetails).ToList();
+
+            return View(dto);
         }
+
         #endregion
 
         #region 贊助專區
         public ActionResult SponsorArea()
-        { 
+        {
             return View();
         }
         #endregion
@@ -2539,11 +2548,13 @@ namespace TISS_Web.Controllers
 
                 // 字典來管理父目錄及其子目錄
                 var parentDirectories = new Dictionary<string, List<string>>
-{
-    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
-    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-};
+                {
+                    { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
+
+                    { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
+
+                    { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
+                };
 
                 var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
                 var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
@@ -2559,33 +2570,34 @@ namespace TISS_Web.Controllers
                 ViewBag.Comments = comments;
 
                 var menuList = new Dictionary<string, string> //子主題連結
-{
-    { "運動醫學", "/Tiss/sportMedicine" },
-    { "運動科技", "/Tiss/sportTech" },
-    { "運動科學", "/Tiss/sportScience" },
-    { "運動生理", "/Tiss/sportsPhysiology" },
-    { "運動心理", "/Tiss/sportsPsychology" },
-    { "體能訓練", "/Tiss/physicalTraining" },
-    { "運動營養", "/Tiss/sportsNutrition" },
-    { "新聞發佈", "/Tiss/press" },
-    { "中心訊息", "/Tiss/institute" },
-    { "徵才招募", "/Tiss/recruit" },
-    { "中心成果", "/Tiss/achievement" },
-    { "新聞影音", "/Tiss/news" },
-    { "活動紀錄", "/Tiss/activityRecord" },
-    { "兒少科普", "/Tiss/childrenScience" },
-    { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
-};
+                {
+                    { "運動醫學", "/Tiss/sportMedicine" },
+                    { "運動科技", "/Tiss/sportTech" },
+                    { "運動科學", "/Tiss/sportScience" },
+                    { "運動生理", "/Tiss/sportsPhysiology" },
+                    { "運動心理", "/Tiss/sportsPsychology" },
+                    { "體能訓練", "/Tiss/physicalTraining" },
+                    { "運動營養", "/Tiss/sportsNutrition" },
+                    { "新聞發佈", "/Tiss/press" },
+                    { "中心訊息", "/Tiss/institute" },
+                    { "徵才招募", "/Tiss/recruit" },
+                    { "中心成果", "/Tiss/achievement" },
+                    { "新聞影音", "/Tiss/news" },
+                    { "活動紀錄", "/Tiss/activityRecord" },
+                    { "兒少科普", "/Tiss/childrenScience" },
+                    { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
+                };
 
                 ViewBag.MenuUrls = menuList;
 
                 var currentParentDirectory = ViewBag.ParentDirectory as string;
                 var menuIdMapping = new Dictionary<string, int>
-{
-    { "科普專欄", 1 },
-    { "中心公告", 2 },
-    { "影音專區", 3 }
-};
+                {
+                    { "科普專欄", 1 },
+                    { "中心公告", 2 },
+                    { "影音專區", 3 }
+                };
+
                 // 根據當前主題獲取對應的 MenuId
                 int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
 
@@ -2627,6 +2639,7 @@ namespace TISS_Web.Controllers
                 return RedirectToAction("Error404", "Error");
             }
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -2669,159 +2682,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-        //public ActionResult ViewArticle(string encryptedUrl)
-        //{
-        //    try
-        //    {
-        //        //Session["ReturnUrl"] = Request.Url.ToString();
-
-        //        var decryptedUrl = DecryptUrl(encryptedUrl);
-        //        var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl); // 根據解密後的標題查詢
-
-        //        if (article == null)
-        //        {
-        //            return RedirectToAction("Error404", "Error");
-        //        }
-
-        //        article.ClickCount += 1; //增加點閱率次數
-
-        //        // 查找同一標籤下的上一篇和下一篇文章
-        //        var articlesWithSameTag = _db.ArticleContent
-        //            .Where(a => a.Hashtags == article.Hashtags)
-        //            .OrderBy(a => a.PublishedDate)
-        //            .ToList();
-
-        //        int currentIndex = articlesWithSameTag.FindIndex(a => a.Id == article.Id);
-
-        //        // 找到上一篇和下一篇
-        //        var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
-        //        var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
-
-        //        ViewBag.ArticleId = article.Id;
-
-        //        //顯示留言數量
-        //        ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
-        //        ViewBag.CommentCount = ViewBag.Comments.Count;
-
-        //        //設定分頁
-        //        ViewBag.PreviousArticle = previousArticle;
-        //        ViewBag.NextArticle = nextArticle;
-
-        //        var menus = _db.Menus.ToList(); //主題目錄
-
-        //        var menuItems = _db.MenuItems.ToList(); //子主題目錄
-
-        //        // 字典來管理父目錄及其子目錄
-        //        var parentDirectories = new Dictionary<string, List<string>>
-        //        {
-        //            { "科普專欄", new List<string> { "運動醫學", "運動科技", "運動科學研究", "運動生理研究", "運動心理", "體能訓練研究", "運動營養研究", "運動科技與資訊開發", "運動管理","兒少科普", "運動醫學研究", "科普海報下載專區", "運動心理研究" } },
-        //            { "中心公告", new List<string> { "新聞發佈", "中心訊息", "徵才招募",} },
-        //            { "影音專區", new List<string> { "中心成果", "新聞影音", "活動紀錄", } },
-        //            //{ "最新消息", new List<string> { "中心成果", "新聞發佈", "活動紀錄","影音專區","中心訊息","國家運動科學中心", "徵才招募", "運動資訊" , "行政管理人資組", "MOU簽署", "人物專訪","運動科技論壇",} },
-        //        };
-
-        //        var currentSubDirectory = article.ContentType; // 文章的子目錄可以通過 ContentType 獲得
-        //        var parentDirectory = parentDirectories.FirstOrDefault(pd => pd.Value.Contains(currentSubDirectory)).Key;
-        //        ViewBag.ParentDirectory = parentDirectory;
-        //        ViewBag.CurrentSubDirectory = currentSubDirectory;
-
-        //        var parentMenu = menus.ToDictionary(m => m.Title, m => menuItems.Where(mi => mi.MenuId == m.Id).Select(mi => mi.Name).ToList());
-
-        //        ViewBag.Menus = menus;
-        //        ViewBag.ParentMenu = parentMenu;
-
-        //        var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
-        //        ViewBag.Comments = comments;
-
-        //        var menuList = new Dictionary<string, string> //子主題連結
-        //        {
-        //            { "運動醫學", "/Tiss/sportMedicine" },
-        //            { "運動科技", "/Tiss/sportTech" },
-        //            { "運動科學", "/Tiss/sportScience" },
-        //            { "運動生理", "/Tiss/sportsPhysiology" },
-        //            { "運動心理", "/Tiss/sportsPsychology" },
-        //            { "體能訓練", "/Tiss/physicalTraining" },
-        //            { "運動營養", "/Tiss/sportsNutrition" },
-        //            { "新聞發佈", "/Tiss/press" },
-        //            { "中心訊息", "/Tiss/institute" },
-        //            { "徵才招募", "/Tiss/recruit" },
-        //            { "中心成果", "/Tiss/achievement" },
-        //            { "新聞影音", "/Tiss/news" },
-        //            { "活動紀錄", "/Tiss/activityRecord" },
-        //            { "兒少科普", "/Tiss/childrenScience" },
-        //            { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
-        //        };
-
-        //        ViewBag.MenuUrls = menuList;
-
-        //        var currentParentDirectory = ViewBag.ParentDirectory as string;
-        //        var menuIdMapping = new Dictionary<string, int>
-        //        {
-        //            { "科普專欄", 1 },
-        //            { "中心公告", 2 },
-        //            { "影音專區", 3 }
-        //        };
-        //        // 根據當前主題獲取對應的 MenuId
-        //        int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
-
-        //        // 根據 MenuId 查找「全部文章」的連結
-        //        var menuUrls = menuItems
-        //            .Where(item => item.MenuId == menuId)
-        //            .GroupBy(item => item.Name)
-        //            .ToDictionary(group => group.Key, group => group.Last().Url // 選擇最後一個 URL
-        //        );
-
-        //        var allArticlesUrl = menuItems
-        //            .Where(item => item.Name == "全部文章" && item.MenuId == menuId)
-        //            .Select(item => item.Url)
-        //            .FirstOrDefault();
-
-        //        ViewBag.MenuUrls = menuUrls;
-        //        ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
-
-        //        // 將發佈日期格式化為 "yyyy-MM-dd"
-        //        string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
-        //        ViewBag.FormattedPublishedDate = formattedDate;
-
-        //        _db.SaveChanges();
-
-        //        return View(article);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("Error404", "Error");
-        //    }
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[ValidateInput(false)]
-        //public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var exist = _db.ArticleContent.Find(dto.Id);
-
-        //            if (exist != null)
-        //            {
-        //                exist.ContentBody = dto.ContentBody; //文章內容
-        //                exist.UpdatedDate = DateTime.Now; //更新時間
-        //                exist.UpdatedUser = Session["UserName"] as string; //更新人員
-
-        //                _db.SaveChanges();
-
-        //                return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
-        //            }
-        //        }
-        //        return View(dto);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
 
         /// <summary>
         /// 導回對應頁面
@@ -2988,7 +2848,7 @@ namespace TISS_Web.Controllers
                     // 檢查是否為允許的檔案類型
                     if (!allowedExtensions.Contains(extension))
                     {
-                        return Json(new { error = "不支持的檔案類型" });
+                        return Json(new { error = "不支援的檔案類型" });
                     }
 
                     // 確保 uploads 目錄存在（如果需要存檔案）
@@ -2998,31 +2858,42 @@ namespace TISS_Web.Controllers
                         Directory.CreateDirectory(uploadPath);
                     }
 
+                    // 保存檔案到伺服器的uploads資料夾
+                    var filePath = Path.Combine(uploadPath, fileName);
+                    file.SaveAs(filePath); // 實際保存檔案到伺服器
+
+                    // 生成FileURL，這個URL可以用來在頁面上呈現檔案
+                    var fileUrl = Url.Content("~/uploads/" + fileName);
+
                     // 讀取檔案的二進位數據
                     byte[] fileData;
                     using (var binaryReader = new BinaryReader(file.InputStream))
                     {
                         fileData = binaryReader.ReadBytes(file.ContentLength);
                     }
+                    // 確認檔案大小
+                    var fileSize = fileData.Length;
+                    // 從 Session 中獲取使用者名稱
+                    var creator = Session["UserName"]?.ToString() ?? "未知使用者";
 
                     // 將檔案儲存至資料庫（而不是本地儲存）
                     var fileDocument = new FileDocument
                     {
-                        PId = GeneratePId(),
                         DocumentName = fileName,
                         UploadTime = DateTime.Now, // 當前時間
-                        Creator = User.Identity.Name, // 假設使用者名稱來自身份驗證
+                        Creator = creator, // 假設使用者名稱來自身份驗證
                         DocumentType = extension, // 檔案類型
-                        FileSize = file.ContentLength, // 檔案大小
+                        FileSize = fileSize, // 檔案大小
                         LastModifiedTime = DateTime.Now, // 當前時間
                         IsEnabled = true, // 根據需求設置
-                        ImageData = fileData // 將二進位數據儲存到資料庫
+                        FileURL = fileUrl, // 將生成的FileURL保存到資料庫
                     };
 
                     _db.FileDocument.Add(fileDocument);
-                    _db.SaveChanges();
+                    //_db.SaveChanges();
 
-                    return Json(new { message = "檔案上傳成功", fileId = fileDocument.PId });
+                    // 返回成功消息，並包含新生成的 ID 和 URL
+                    return Json(new { message = "檔案上傳成功", fileId = fileDocument.ID, url = fileUrl });
                 }
                 catch (Exception ex)
                 {
@@ -3032,12 +2903,39 @@ namespace TISS_Web.Controllers
 
             return Json(new { error = "檔案上傳失敗" });
         }
-        private int GeneratePId()
-        {
-            // 根據你的需求生成 PId
-            // 例如：使用當前時間戳、隨機數、或從資料庫中獲取最大值加一
-            return _db.FileDocument.Max(d => (int?)d.PId) + 1 ?? 1; // 確保不會重複
-        }
+
+        #endregion
+
+        #region 測試API寄信
+        //public async Task<ActionResult> GenerateArticleClickReport()
+        //{
+        //    var reportService = new ReportService();
+        //    string reportPath = reportService.GenerateReport();
+
+        //    if (!string.IsNullOrEmpty(reportPath))
+        //    {
+        //        var emailService = new EmailService();
+
+        //        // 使用 Split 將收件人字串分割成單個地址的陣列
+        //        string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
+
+        //        string subject = "運科中心專欄文章瀏覽率報表";
+        //        string body = "您好，請參閱附件中的運科中心專欄文章瀏覽率報表。";
+
+        //        // 迴圈發送郵件給每個收件人
+        //        foreach (string email in toEmail)
+        //        {
+        //            var success = await emailService.SendEmailAsync(email.Trim(), subject, body, reportPath);
+        //            if (!success)
+        //            {
+        //                // 可以在這裡記錄或處理發送失敗的情況
+        //                Console.WriteLine($"郵件發送失敗給: {email}");
+        //            }
+        //        }
+        //    }
+
+        //    return Content("報表產生完成");
+        //}
 
         #endregion
     }

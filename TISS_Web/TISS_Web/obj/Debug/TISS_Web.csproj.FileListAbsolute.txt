@@ -126,3 +126,10 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Debug\TISS_Web.csproj.CoreComp
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Debug\TISS_Web.csproj.Up2Date
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Debug\TISS_Web.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Debug\TISS_Web.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Net.Http.Formatting.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Web.Http.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Newtonsoft.Json.Bson.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Net.Http.Formatting.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\System.Web.Http.xml

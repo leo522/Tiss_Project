@@ -642,23 +642,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FileDocument">
-      <EntityTypeMapping TypeName="TISS_WebModel.FileDocument">
-        <MappingFragment StoreEntitySet="FileDocument">
-          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-          <ScalarProperty Name="FileURL" ColumnName="FileURL" />
-          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
-          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="PId" ColumnName="PId" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="RegulationDocument">
       <EntityTypeMapping TypeName="TISS_WebModel.RegulationDocument">
         <MappingFragment StoreEntitySet="RegulationDocument">
@@ -892,6 +875,52 @@
           <ScalarProperty Name="ReplyText" ColumnName="ReplyText" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="MessageBoardId" ColumnName="MessageBoardId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileDocument">
+      <EntityTypeMapping TypeName="TISS_WebModel.FileDocument">
+        <MappingFragment StoreEntitySet="FileDocument">
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          <ScalarProperty Name="FileURL" ColumnName="FileURL" />
+          <ScalarProperty Name="LastModifiedTime" ColumnName="LastModifiedTime" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenderEquality">
+      <EntityTypeMapping TypeName="TISS_WebModel.GenderEquality">
+        <MappingFragment StoreEntitySet="GenderEquality">
+          <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GenderEqualityDetails">
+      <EntityTypeMapping TypeName="TISS_WebModel.GenderEqualityDetails">
+        <MappingFragment StoreEntitySet="GenderEqualityDetails">
+          <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+          <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+          <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+          <ScalarProperty Name="ImageFileName" ColumnName="ImageFileName" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="GenderEqualityId" ColumnName="GenderEqualityId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

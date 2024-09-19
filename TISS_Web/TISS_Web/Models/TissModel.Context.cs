@@ -62,7 +62,6 @@ namespace TISS_Web.Models
         public virtual DbSet<SportsPhysiologyPageContent> SportsPhysiologyPageContent { get; set; }
         public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
         public virtual DbSet<PressPageContent> PressPageContent { get; set; }
-        public virtual DbSet<FileDocument> FileDocument { get; set; }
         public virtual DbSet<RegulationDocument> RegulationDocument { get; set; }
         public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
         public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
@@ -81,5 +80,8 @@ namespace TISS_Web.Models
         public virtual DbSet<MessageBoard> MessageBoard { get; set; }
         public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
         public virtual DbSet<ReplyMessage> ReplyMessage { get; set; }
+        public virtual DbSet<FileDocument> FileDocument { get; set; }
+        public virtual DbSet<GenderEquality> GenderEquality { get; set; }
+        public virtual DbSet<GenderEqualityDetails> GenderEqualityDetails { get; set; }
     }
 }

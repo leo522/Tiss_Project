@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
+    string userLang = Request.UserLanguages != null ? Request.UserLanguages[0] : "zh-TW";
 }
 <!DOCTYPE html>
 <html>
@@ -145,6 +146,7 @@
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask" title="閱讀更多">閱讀更多</div>
                                                             </div>
+
                                                             <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
@@ -203,7 +205,7 @@ if (isLoggedIn) {
 } else {
     $('#loginBtn').show(); //顯示登入按鈕
     }
-        loadContent(); //加載已儲存的內容
+/*        loadContent(); //加載已儲存的內容*/
 });
 
         //顯示當前選擇的子項目
