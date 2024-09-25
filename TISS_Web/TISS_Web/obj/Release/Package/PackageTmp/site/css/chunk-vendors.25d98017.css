@@ -28148,6 +28148,7 @@ textarea.form-control-lg {
     content: none
 }
 
+/*公開資訊文字尺寸*/
 .el-table-v2 {
     --el-table-border-color: var(--el-border-color-lighter);
     --el-table-border: 1px solid var(--el-table-border-color);
@@ -28163,7 +28164,7 @@ textarea.form-control-lg {
     --el-table-fixed-left-column: inset 10px 0 10px -10px rgba(0,0,0,.15);
     --el-table-fixed-right-column: inset -10px 0 10px -10px rgba(0,0,0,.15);
     --el-table-index: var(--el-index-normal);
-    font-size: 14px
+    font-size: 16px 
 }
 
     .el-table-v2 * {

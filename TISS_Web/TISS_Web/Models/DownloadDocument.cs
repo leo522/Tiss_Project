@@ -17,10 +17,10 @@ namespace TISS_Web.Models
         public int ID { get; set; }
         public int PId { get; set; }
         public string DocumentName { get; set; }
-        public Nullable<System.DateTime> UploadTime { get; set; }
+        public System.DateTime UploadTime { get; set; }
         public string Creator { get; set; }
         public string DocumentType { get; set; }
-        public Nullable<int> FileSize { get; set; }
+        public int FileSize { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
         public bool IsActive { get; set; }
     }

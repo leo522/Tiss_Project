@@ -20,124 +20,149 @@ namespace TISS_Web
         {
             if (file != null && file.ContentLength > 0)
             {
-                string fileName = Path.GetFileName(file.FileName);
-                string fileExtension = Path.GetExtension(fileName).ToLower();
-
-                // 檢查文件類型是否符合要求
-                if (fileExtension == ".pdf" || fileExtension == ".doc" ||
-                    fileExtension == ".docx" || fileExtension == ".odt" ||
-                    fileExtension == ".xls" || fileExtension == ".xlsx")
+                try
                 {
-                    string filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/storage/media/attachments"), fileName);
-                    file.SaveAs(filePath);
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToLower();
 
-                    string userId = HttpContext.Current.Session["UserName"].ToString();
-
-                    switch (tableName)
+                    //檢查文件類型是否符合要求
+                    if (fileExtension == ".pdf" || fileExtension == ".doc" ||
+                        fileExtension == ".docx" || fileExtension == ".odt" ||
+                        fileExtension == ".xls" || fileExtension == ".xlsx")
                     {
-                        case "RegulationDocument":
-                            var regulationDocument = new RegulationDocument
-                            {
-                                PId = GetNextPId("RegulationDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.RegulationDocument.Add(regulationDocument);
-                            break;
+                        //儲存文件到指定路徑
+                        string filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/storage/media/attachments"), fileName);
+                        file.SaveAs(filePath);
 
-                        case "ProcedureDocument":
-                            var procedureDocument = new ProcedureDocument
-                            {
-                                PId = GetNextPId("ProcedureDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.ProcedureDocument.Add(procedureDocument);
-                            break;
-                        case "PlanDocument":
-                            var planDocument = new PlanDocument
-                            {
-                                PId = GetNextPId("PlanDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.PlanDocument.Add(planDocument);
-                            break;
-                        case "BudgetDocument":
-                            var budgetDocument = new BudgetDocument
-                            {
-                                PId = GetNextPId("BudgetDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.BudgetDocument.Add(budgetDocument);
-                            break;
-                        case "DownloadDocument":
-                            var downloadDocument = new DownloadDocument
-                            {
-                                PId = GetNextPId("DownloadDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.DownloadDocument.Add(downloadDocument);
-                            break;
-                        case "PurchaseDocument":
-                            var purchaseDocument = new PurchaseDocument
-                            {
-                                PId = GetNextPId("PurchaseDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.PurchaseDocument.Add(purchaseDocument);
-                            break;
-                        case "OtherDocument":
-                            var otherDocument = new OtherDocument
-                            {
-                                PId = GetNextPId("OtherDocument"),
-                                DocumentName = fileName,
-                                UploadTime = DateTime.Now,
-                                Creator = userId,
-                                DocumentType = fileExtension,
-                                FileSize = file.ContentLength,
-                                IsActive = true
-                            };
-                            _context.OtherDocument.Add(otherDocument);
-                            break;
-                        default:
-                            return ("上傳發生錯誤");
+                        string userId = HttpContext.Current.Session["UserName"].ToString();
+
+                        switch (tableName)
+                        {
+                            case "RegulationDocument":
+                                var regulationDocument = new RegulationDocument
+                                {
+                                    PId = GetNextPId("RegulationDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.RegulationDocument.Add(regulationDocument);
+                                break;
+
+                            case "ProcedureDocument":
+                                var procedureDocument = new ProcedureDocument
+                                {
+                                    PId = GetNextPId("ProcedureDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.ProcedureDocument.Add(procedureDocument);
+                                break;
+                            case "PlanDocument":
+                                var planDocument = new PlanDocument
+                                {
+                                    PId = GetNextPId("PlanDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.PlanDocument.Add(planDocument);
+                                break;
+                            case "BudgetDocument":
+                                var budgetDocument = new BudgetDocument
+                                {
+                                    PId = GetNextPId("BudgetDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.BudgetDocument.Add(budgetDocument);
+                                break;
+                            case "DownloadDocument":
+                                var downloadDocument = new DownloadDocument
+                                {
+                                    PId = GetNextPId("DownloadDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.DownloadDocument.Add(downloadDocument);
+                                break;
+                            case "PurchaseDocument":
+                                var purchaseDocument = new PurchaseDocument
+                                {
+                                    PId = GetNextPId("PurchaseDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.PurchaseDocument.Add(purchaseDocument);
+                                break;
+                            case "OtherDocument":
+                                var otherDocument = new OtherDocument
+                                {
+                                    PId = GetNextPId("OtherDocument"),
+                                    DocumentName = fileName,
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.OtherDocument.Add(otherDocument);
+                                break;
+
+                            case "GenderEqualityDocument":
+                                var genderEqualityDocument = new GenderEqualityDocument
+                                {
+                                    PId = GetNextPId("GenderEqualityDocument"),
+                                    DocumentName = fileName,
+
+                                    UploadTime = DateTime.Now,
+                                    Creator = userId,
+                                    DocumentType = fileExtension,
+                                    FileSize = file.ContentLength,
+                                    IsActive = true
+                                };
+                                _context.GenderEqualityDocument.Add(genderEqualityDocument);
+                                break;
+
+                            default:
+                                return ("上傳發生錯誤");
+                        }
+
+                        _context.SaveChanges();
+                        return "文件上傳成功！";
+                    }
+                    else
+                    {
+                        return ("文件格式不符");
                     }
 
-                    _context.SaveChanges();
-                    return "文件上傳成功！";
                 }
-                else
+                catch (Exception ex)
                 {
-                    return ("文件格式不符");
-                }
+                    throw ex;
+                }          
             }
             else
             {
@@ -147,24 +172,33 @@ namespace TISS_Web
 
         private int GetNextPId(string tableName)
         {
-            switch (tableName)
+            try
             {
-                case "RegulationDocument":
-                    return (_context.RegulationDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "ProcedureDocument":
-                    return (_context.ProcedureDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "PlanDocument":
-                    return (_context.PlanDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "BudgetDocument":
-                    return (_context.BudgetDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "DownloadDocument":
-                    return (_context.DownloadDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "PurchaseDocument":
-                    return (_context.PurchaseDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                case "OtherDocument":
-                    return (_context.OtherDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                default:
-                    throw new ArgumentException("Invalid table name.");
+                switch (tableName)
+                {
+                    case "RegulationDocument":
+                        return (_context.RegulationDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "ProcedureDocument":
+                        return (_context.ProcedureDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "PlanDocument":
+                        return (_context.PlanDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "BudgetDocument":
+                        return (_context.BudgetDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "DownloadDocument":
+                        return (_context.DownloadDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "PurchaseDocument":
+                        return (_context.PurchaseDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "OtherDocument":
+                        return (_context.OtherDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "GenderEqualityDocument":
+                        return (_context.GenderEqualityDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    default:
+                        throw new ArgumentException("Invalid table name.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

@@ -257,6 +257,9 @@
     <Compile Include="Models\GenderEqualityDetails.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenderEqualityDocument.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GenderEqualityPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -2559,6 +2562,7 @@
     <Content Include="Img\中心公告圖片\news_banner.856d4a80.jpg" />
     <Content Include="Img\中心公告圖片\recruit_img.d15a2d7a.jpg" />
     <Content Include="Img\中心公告圖片\S__27959338.jpg" />
+    <Content Include="Img\中心公告圖片\中心的願景和使命圖片.jpg" />
     <Content Include="Img\停機.jpg" />
     <Content Include="Img\公開資訊圖片\banner_public.jpg" />
     <Content Include="Img\公開資訊圖片\banner_public_m.jpg" />
@@ -2585,6 +2589,8 @@
     <Content Include="Img\性別平等圖片\Equality_05.jpg" />
     <Content Include="Img\性別平等圖片\Equality_06.jpg" />
     <Content Include="Img\性別平等圖片\Equality_07.jpg" />
+    <Content Include="Img\性別平等圖片\本中心性騷擾申訴管道.jpg" />
+    <Content Include="Img\性別平等圖片\申訴.jpg" />
     <Content Include="Img\科普專欄圖片\banner_research.jpg" />
     <Content Include="Img\科普專欄圖片\banner_research_m.jpg" />
     <Content Include="Img\科普專欄圖片\保腹感指數%28FSI%29.jpg" />

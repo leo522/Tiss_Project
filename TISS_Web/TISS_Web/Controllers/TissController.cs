@@ -39,7 +39,7 @@ namespace TISS_Web.Controllers
 {
     public class TissController : Controller
     {
-        private TISS_WebEntities _db = new TISS_WebEntities();
+        private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
         private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
         private readonly EmailService _emailService;
 
@@ -49,9 +49,17 @@ namespace TISS_Web.Controllers
 
         public TissController()
         {
-            _fileUploadService = new FileUploadService(new TISS_WebEntities());
-            _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
-            _emailService = new EmailService();
+            try
+            {
+                _fileUploadService = new FileUploadService(new TISS_WebEntities());
+                _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
+                _emailService = new EmailService();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
 
@@ -620,8 +628,15 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult UploadPlanDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "PlanDocument");
-            return RedirectToAction("Plan", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "PlanDocument");
+                return RedirectToAction("Plan", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //上傳法規文件
@@ -670,6 +685,21 @@ namespace TISS_Web.Controllers
         {
             _fileUploadService.UploadFile(file, "PurchaseDocument");
             return RedirectToAction("purchase", new { page });
+        }
+
+        //上傳性別平等專區文件
+        [HttpPost]
+        public ActionResult UploadGenderEqualityDocument(HttpPostedFileBase file)
+        {
+            try
+            {
+                _fileUploadService.UploadFile(file, "GenderEqualityDocument");
+                return RedirectToAction("GenderEquality");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
 
@@ -1885,13 +1915,15 @@ namespace TISS_Web.Controllers
         /// 公開資訊
         /// </summary>
         /// <returns></returns>
-        public ActionResult public_info(int page = 1, int pageSize = 5)
+        public ActionResult public_info(int page = 1, int pageSize = 7)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.RegulationDocument.ToList(); //獲取資料列表
+            var list = _db.RegulationDocument.Where(d => d.IsActive)
+                    .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                    .ToList(); //獲取資料列表
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -1903,9 +1935,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -1919,13 +1951,13 @@ namespace TISS_Web.Controllers
         /// 法規
         /// </summary>
         /// <returns></returns>
-        public ActionResult regulation(int page = 1, int pageSize = 5)
+        public ActionResult regulation(int page = 1, int pageSize = 7)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.RegulationDocument.ToList();
+            var list = _db.RegulationDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -1937,9 +1969,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -1953,13 +1985,13 @@ namespace TISS_Web.Controllers
         /// 辦法及要點
         /// </summary>
         /// <returns></returns>
-        public ActionResult procedure(int page = 1, int pageSize = 5)
+        public ActionResult procedure(int page = 1, int pageSize = 10)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.ProcedureDocument.ToList();
+            var list = _db.ProcedureDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -1971,9 +2003,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -1987,13 +2019,15 @@ namespace TISS_Web.Controllers
         /// 計畫
         /// </summary>
         /// <returns></returns>
-        public ActionResult plan(int page = 1, int pageSize = 5)
+        public ActionResult plan(int page = 1, int pageSize = 10)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.PlanDocument.ToList();
+            var list = _db.PlanDocument
+                               .Where(d => d.IsActive) // 只選取 IsActive 為 true 的檔案
+                               .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                               .ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -2005,9 +2039,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -2021,13 +2055,13 @@ namespace TISS_Web.Controllers
         /// 預算與決算
         /// </summary>
         /// <returns></returns>
-        public ActionResult budget(int page = 1, int pageSize = 5)
+        public ActionResult budget(int page = 1, int pageSize = 10)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.BudgetDocument.ToList();
+            var list = _db.BudgetDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -2039,9 +2073,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -2055,13 +2089,13 @@ namespace TISS_Web.Controllers
         /// 下載專區
         /// </summary>
         /// <returns></returns>
-        public ActionResult download(int page = 1, int pageSize = 5)
+        public ActionResult download(int page = 1, int pageSize = 10)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.DownloadDocument.ToList();
+            var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -2073,9 +2107,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -2123,13 +2157,13 @@ namespace TISS_Web.Controllers
         /// 其他
         /// </summary>
         /// <returns></returns>
-        public ActionResult other(int page = 1, int pageSize = 5)
+        public ActionResult other(int page = 1, int pageSize = 10)
         {
             Session["ReturnUrl"] = Request.Url.ToString();
 
             page = Math.Max(1, page); //確保頁碼至少為 1
 
-            var list = _db.OtherDocument.ToList();
+            var list = _db.OtherDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
             //計算總數和總頁數
             var totalDocuments = list.Count();
@@ -2141,9 +2175,9 @@ namespace TISS_Web.Controllers
             {
                 DocumentName = d.DocumentName,
                 DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                UploadTime = d.UploadTime,
                 Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                FileSize = d.FileSize,
                 IsActive = d.IsActive,
             }).ToList();
 
@@ -2160,8 +2194,10 @@ namespace TISS_Web.Controllers
         public ActionResult GenderEquality()
         {
             Session["ReturnUrl"] = Request.Url.ToString();
-            
-            var dto = _db.GenderEquality.Include(g => g.GenderEqualityDetails).ToList();
+
+            var dto = _db.GenderEqualityDocument.Where(d => d.IsActive)
+                    .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                    .ToList(); //獲取資料列表
 
             return View(dto);
         }

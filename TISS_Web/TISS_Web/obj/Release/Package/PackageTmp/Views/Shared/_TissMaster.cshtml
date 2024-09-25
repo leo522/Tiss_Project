@@ -15,18 +15,19 @@
 
     @*翻譯套件*@
     @*<link href="~/site/css/3.3.6_bootstrap.min.css" rel="stylesheet" />
-    <link href="~/site/css/bootstrap-select_min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
+        <link href="~/site/css/bootstrap-select_min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
     @*google翻譯工具*@
     @*翻譯套件*@
     <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script async defer="defer" crossorigin="anonymous" src="/Kit/loader.min.js"></script>
     <!--<script src="~/Scripts/4.5.2.bootstrap.min.js"></script>-->  @*輪播圖要使用*@
     <script src="~/fontawesome/js/all.js"></script>
+    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <link href="/site/css/chunk-vendors.25d98017.css" rel="stylesheet">
     <link href="/site/css/app.5338f982.css" rel="stylesheet">
@@ -288,11 +289,11 @@
                                             <img src="~/Img/favicon.svg" alt="" />下載專區
                                         </a>
                                     </li>
-                                    @*<li>
+                                    <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/GenderEquality" title="性別平等專區">
                                             <img src="~/Img/favicon.svg" alt="" />性別平等專區
                                         </a>
-                                    </li>*@
+                                    </li>
                                     <li>
                                         <a data-v-71bab962="" class="dropdown-item" href="/Tiss/other" title="其他">
                                             <img src="~/Img/favicon.svg" alt="" />其他
@@ -300,7 +301,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li data-v-71bab962="" class="nav-item dropdown">
+                            @*<li data-v-71bab962="" class="nav-item dropdown">
                                 <a data-v-71bab962="" href="/Tiss/SponsorArea" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown6" aria-current="page" role="button" aria-expanded="false" title="贊助專區" tabindex="0" aria-haspopup="true">
                                     贊助專區
                                     <span data-v-71bab962="">
@@ -317,7 +318,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
                                     <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
                                 </ul>
-                            </li>
+                            </li>*@
                             <li data-v-71bab962="" class="nav-item">
                                 <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link" title="服務信箱">服務信箱</a>
                             </li>
@@ -337,7 +338,7 @@
             <div class="FooterContent">
                 <div class="LeftFooterContent">
                     <div class="Info">
-                        <img class="logo" src="/site/img/logo.1fec0909.svg" alt="國家運動科學中心標誌">
+                        <img class="logo" src="/site/img/logo.1fec0909.svg" alt="">
                         <ul class="InfoList">
                             <li>
                                 <span class="label" title="地址">地址</span>
@@ -371,7 +372,7 @@
                     <ul class="SocialList d-none d-lg-flex">
                         <li>
                             <a class="SocialLink" href="https://www.facebook.com/profile.php?id=61553673834147" title="Facebook">
-                                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="臉書圖示" style="color: #1352e7;" />
+                                <img src="~/fontawesome/facebook_icon.ico" width="32" alt="" style="color: #1352e7;" />
                                 <span class="sr-only" title="Facebook">Facebook</span>
                             </a>
                         </li>
@@ -468,18 +469,18 @@
                                 <li>
                                     <a href="/Tiss/download" title="下載專區">下載專區</a>
                                 </li>
-                                @*<li>
+                                <li>
                                     <a href="/Tiss/GenderEquality" title="性別平等專區">性別平等專區</a>
-                                </li>*@
+                                </li>
                                 <li>
                                     <a href="/Tiss/other" title="其他">其他</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
+                        @*<div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
                             <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
                             <ul class="MenuList"></ul>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="copyright">
                         <div class="container" title="Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>

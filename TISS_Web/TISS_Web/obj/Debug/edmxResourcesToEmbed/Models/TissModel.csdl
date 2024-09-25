@@ -212,6 +212,7 @@
       <End Role="GenderEquality" EntitySet="GenderEquality" />
       <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
     </AssociationSet>
+    <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -759,10 +760,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
     <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -773,10 +774,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
     <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -787,10 +788,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
     <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -800,11 +801,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -815,10 +816,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
     <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -843,10 +844,10 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PId" Type="Int32" Nullable="false" />
     <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
+    <Property Name="UploadTime" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
@@ -1072,4 +1073,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="GenderEqualityDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PId" Type="Int32" Nullable="false" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

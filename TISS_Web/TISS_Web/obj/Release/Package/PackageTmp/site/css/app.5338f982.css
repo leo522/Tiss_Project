@@ -14759,6 +14759,12 @@ textarea.form-control-lg[data-v-e61ebf00] {
     height: auto; /* 自動調整高度 */
 }
 
+/*.logoNav .mainLogo img[data-v-e61ebf00] {
+    max-width: 60%;*/ /* 使LOGO自適應 */
+/*height: auto;*/ /* 自動調整高度 */
+/*transition: max-width 0.3s;*/ /* 增加過渡效果 */
+/*transform: translateX(100px);
+}*/
 .logoNav .mainLogo img[data-v-e61ebf00] {
     max-width: 100%; /* 使LOGO在所有螢幕寬度下都自適應 */
     height: auto; /* 自動調整高度 */
@@ -29603,29 +29609,12 @@ textarea.form-control-lg[data-v-71bab962] {
     -webkit-box-shadow: none;
     box-shadow: none
 }
-@media screen and (min-width: 768px) and (max-width: 991.9px) {
-    .navbar-collapse {
-        display: none; /* 在此範圍內隱藏選單 */
-    }
 
-    .navbar-collapse.show {
-        display: block; /* 點擊漢堡按鈕後顯示選單 */
-    }
-}
-@media screen and (max-width: 991.9px) {
-    .menuNav .navbar .navbar-collapse[data-v-71bab962] {
-        display: none; /* 確保一開始是隱藏的 */
-        max-height: 50vh; /* 更小的高度限制，根據需要調整 */
-        padding: 0 18px;
-        overflow-y: auto; /* 垂直滾動條 */
-    }
-
-    /* 當點擊漢堡按鈕時展開漢堡選單 */
-    .menuNav .navbar .navbar-collapse.show[data-v-71bab962] {
-        display: block;
-        max-height: 50vh;
-        -webkit-transition: max-height 0.5s ease;
-        transition: max-height 0.5s ease;
+@media screen and (max-width:991.9px) {
+    .menuNav .navbar[data-v-71bab962] {
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
+        justify-content: flex-end
     }
 }
 
@@ -29637,13 +29626,13 @@ textarea.form-control-lg[data-v-71bab962] {
     transition: .5s
 }
 
-/*@media screen and (max-width: 991.9px) {
+@media screen and (max-width: 991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {
-        max-height: 50vh;*/ /* 更小的高度限制，根據需要調整 */
-        /*padding: 0 18px;
-        overflow-y: auto;*/ /* 垂直滾動條 */
-    /*}
-}*/
+        max-height: 50vh; /* 更小的高度限制，根據需要調整 */
+        padding: 0 18px;
+        overflow-y: auto; /* 垂直滾動條 */
+    }
+}
 /*@media screen and (max-width:991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {
         max-height: calc(100vh - 60px);
@@ -77605,8 +77594,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     }
 
 .PublicInfo .content .infoList .el-table {
-    font-size: 1rem;
-    width: 100%; /*新增寬度*/
+    font-size: 1rem
 }
 
 .PublicInfo .content .infoList .TableCell {
@@ -77619,7 +77607,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     font-size: 1rem
 }
 
-/*.PublicInfo .content .infoList .DataList {
+.PublicInfo .content .infoList .DataList {
     padding: 25px 20px;
     margin: 0
 }
@@ -77651,7 +77639,7 @@ textarea.form-control-lg[data-v-3f77048f] {
             font-size: .875rem;
             color: #717171
         }
-*/
+
 .PublicInfo .content .infoList .Pagination {
     padding: 60px 0
 }
@@ -77691,7 +77679,6 @@ textarea.form-control-lg[data-v-3f77048f] {
         top: -70px
     }
 }
-
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 :root, [data-bs-theme=light] {
     --bs-blue: #0d6efd;

@@ -10,7 +10,7 @@ namespace TISS_Web.Controllers
     {
         public ActionResult Error404()
         {
-            return View();
+            return View("Error404");
         }
     }
 }
