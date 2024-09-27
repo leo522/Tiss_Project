@@ -12,3 +12,12 @@
         background-color: #5A5AAD;
         color: #fff;
     }
+.resize-image {
+    width: 200px; /* 固定寬度，可根據需要調整 */
+    height: auto; /* 高度自動調整，保持比例 */
+    max-height: 150px; /* 可選，設定最大高度以保持一致 */
+}
+
+.spacing {
+    margin: 10px; /* 可依需要調整間距大小 */
+}

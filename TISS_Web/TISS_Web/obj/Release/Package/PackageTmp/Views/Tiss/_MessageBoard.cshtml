@@ -9,7 +9,7 @@
         @foreach (var Msg in Model)
         {
             <div class="comment">
-                <p><strong>@Msg.UserName</strong> 說：</p>
+                <p><strong>@Msg.UserName @(Msg.IsEditor ? "(小編)" : "")</strong> 說：</p>
                 <p>@Msg.CommentText</p>
                 <p class="text-muted">@Msg.CommentDate</p>
             </div>
@@ -26,6 +26,7 @@
             <div class="form-group">
                 <label for="commentText">留言:</label>
                 <textarea class="form-control" name="commentText" aria-required="true" required></textarea>
+                <input type="hidden" name="isEditor" value="true" /> <!-- 這裡根據需要設置是否為小編 -->
             </div>
             <button type="submit" class="btn btn-primary">提交留言</button>
         </form>

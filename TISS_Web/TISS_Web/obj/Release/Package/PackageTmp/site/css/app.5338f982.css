@@ -14783,19 +14783,27 @@ textarea.form-control-lg[data-v-e61ebf00] {
     }
 
     .mainLogo img {
-        max-width: 60%; /* 中螢幕LOGO大小 */
+        max-width: 70%; /* 中螢幕LOGO大小 */
     }
 }
 
-@media screen and (max-width: 991.9px) {
+/*@media screen and (max-width: 991.9px) {
     .mainLogo {
-        padding: 10px 15px; /* 調整內邊距以適應小螢幕 */
-    }
+        padding: 10px 15px;*/ /* 調整內邊距以適應小螢幕 */
+    /*}
 
         .mainLogo img {
-            max-width: 50%; /* 小螢幕LOGO大小，確保比例正確 */
-        }
+            max-width: 60%;*/ /* 小螢幕 LOGO 大小增大 */
+            /*min-width: 150px;*/ /* 設置最小寬度，避免 LOGO 過小 */
+        /*}
 }
+
+@media screen and (max-width: 575.9px) {
+    .mainLogo img {
+        max-width: 70%;*/ /* 手機螢幕上 LOGO 更大 */
+        /*min-width: 120px;*/ /* 確保最小尺寸 */
+    /*}
+}*/
 /*@media screen and (max-width:1199.9px) {
     .logoNav .mainLogo[data-v-e61ebf00] {
         min-height: 127px
@@ -29617,14 +29625,21 @@ textarea.form-control-lg[data-v-71bab962] {
         justify-content: flex-end
     }
 }
-
 .menuNav .navbar .navbar-collapse[data-v-71bab962] {
+    -webkit-box-pack: start; /* 將 "end" 改成 "start" */
+    -ms-flex-pack: start; /* 將 "end" 改成 "start" */
+    justify-content: flex-start; /* 將 "flex-end" 改成 "flex-start" */
+    -webkit-transition: .5s;
+    transition: .5s;
+    padding-left: 180px;
+}
+/*.menuNav .navbar .navbar-collapse[data-v-71bab962] {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
     -webkit-transition: .5s;
     transition: .5s
-}
+}*/
 
 @media screen and (max-width: 991.9px) {
     .menuNav .navbar .navbar-collapse[data-v-71bab962] {

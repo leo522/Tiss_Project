@@ -204,19 +204,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                @{
-                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                    {
-                                        using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                <div class="upload-section" style="margin-top: 30px;">
+                                    @{
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
-                                            <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                            <div class="col-md-10">
-                                                <input type="file" name="file" />
-                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
-                                            </div>
+                                            using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                                <div class="col-md-10" style="margin-bottom: 20px;">
+                                                    <input type="file" name="file" />
+                                                    <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </main>
                     </section>
@@ -225,27 +227,25 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            // 切換下拉菜單的函數
-            function toggleDropdown(dropdownId) {
-                var dropdownToggle = document.getElementById(dropdownId);
-                var dropdownMenu = dropdownToggle.nextElementSibling;
+       $(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' == 'True';
 
-                if (dropdownMenu.classList.contains('show')) {
-                    dropdownMenu.classList.remove('show');
-                } else {
-                    dropdownMenu.classList.add('show');
-                }
-            }
+if (isLoggedIn) {
+    $('#logoutBtn').show(); //顯示登出按鈕
+} else {
+    $('#loginBtn').show(); //顯示登入按鈕
+    }
+        loadContent(); //加載已儲存的內容
+});
 
-            // 顯示當前選擇的子項目
+        //顯示當前被選擇的子目錄
+        document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
-            var menuLinks = $('.MenuLink');
+            var menuLinks = document.querySelectorAll('.MenuLink');
 
-            menuLinks.each(function () {
-                var link = $(this);
-                if (link.attr('href') === currentUrl) {
-                    link.addClass('active');
+            menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
                 }
             });
         });

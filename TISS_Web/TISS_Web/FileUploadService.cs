@@ -136,7 +136,6 @@ namespace TISS_Web
                                 {
                                     PId = GetNextPId("GenderEqualityDocument"),
                                     DocumentName = fileName,
-
                                     UploadTime = DateTime.Now,
                                     Creator = userId,
                                     DocumentType = fileExtension,
@@ -168,6 +167,34 @@ namespace TISS_Web
             {
                 return ("請選擇要上傳的文件");
             }
+        }
+
+        public string UploadUrl(string url)
+        {
+            if (!string.IsNullOrEmpty(url))
+            {
+                try
+                {
+                    string userId = HttpContext.Current.Session["UserName"].ToString();
+
+                    var genderEqualityDocument = new GenderEqualityDocument
+                    {
+                        PId = GetNextPId("GenderEqualityDocument"),
+                        URL = url,
+                        UploadTime = DateTime.Now,
+                        Creator = userId,
+                        IsActive = true
+                    };
+
+                    _context.GenderEqualityDocument.Add(genderEqualityDocument);
+                    _context.SaveChanges(); // 儲存變更到資料庫
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("URL 上傳失敗: " + ex.Message);
+                }
+            }
+            return "URL 上傳成功";
         }
 
         private int GetNextPId(string tableName)

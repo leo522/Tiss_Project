@@ -56,6 +56,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="TISS_WebModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsEditor" ColumnName="IsEditor" />
           <ScalarProperty Name="LockoutEndTime" ColumnName="LockoutEndTime" />
           <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
           <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
@@ -848,6 +849,7 @@
     <EntitySetMapping Name="MessageBoard">
       <EntityTypeMapping TypeName="TISS_WebModel.MessageBoard">
         <MappingFragment StoreEntitySet="MessageBoard">
+          <ScalarProperty Name="IsEditor" ColumnName="IsEditor" />
           <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
           <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
           <ScalarProperty Name="CommentText" ColumnName="CommentText" />
@@ -871,6 +873,8 @@
     <EntitySetMapping Name="ReplyMessage">
       <EntityTypeMapping TypeName="TISS_WebModel.ReplyMessage">
         <MappingFragment StoreEntitySet="ReplyMessage">
+          <ScalarProperty Name="IsFromEditor" ColumnName="IsFromEditor" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
           <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
           <ScalarProperty Name="ReplyText" ColumnName="ReplyText" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -939,6 +943,17 @@
           <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
           <ScalarProperty Name="PId" ColumnName="PId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UrlDocument">
+      <EntityTypeMapping TypeName="TISS_WebModel.UrlDocument">
+        <MappingFragment StoreEntitySet="UrlDocument">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="URLsite" ColumnName="URLsite" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

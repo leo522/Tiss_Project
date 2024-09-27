@@ -84,5 +84,6 @@ namespace TISS_Web.Models
         public virtual DbSet<GenderEquality> GenderEquality { get; set; }
         public virtual DbSet<GenderEqualityDetails> GenderEqualityDetails { get; set; }
         public virtual DbSet<GenderEqualityDocument> GenderEqualityDocument { get; set; }
+        public virtual DbSet<UrlDocument> UrlDocument { get; set; }
     }
 }

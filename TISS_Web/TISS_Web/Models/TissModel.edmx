@@ -361,6 +361,7 @@
           <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CommentDate" Type="datetime" Nullable="false" />
           <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsEditor" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="MissionPageContent">
           <Key>
@@ -669,6 +670,8 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="ReplyText" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ReplyDate" Type="datetime" Nullable="false" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsFromEditor" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ResearchPageContent">
           <Key>
@@ -844,6 +847,16 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="UrlDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="URLsite" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UploadTime" Type="datetime" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="UserRoleID" />
@@ -869,6 +882,7 @@
           <Property Name="FailedLoginAttempts" Type="int" />
           <Property Name="IsLocked" Type="bit" />
           <Property Name="LockoutEndTime" Type="datetime" />
+          <Property Name="IsEditor" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="VideoPageContent">
           <Key>
@@ -1042,6 +1056,7 @@
           <EntitySet Name="SportsPsychologyPageContent" EntityType="Self.SportsPsychologyPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SportTechPageContent" EntityType="Self.SportTechPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitsPageContent" EntityType="Self.UnitsPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UrlDocument" EntityType="Self.UrlDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
@@ -1154,6 +1169,7 @@
           <Property Name="FailedLoginAttempts" Type="Int32" />
           <Property Name="IsLocked" Type="Boolean" />
           <Property Name="LockoutEndTime" Type="DateTime" Precision="3" />
+          <Property Name="IsEditor" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__RolePermi__Permi__4316F928">
           <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -1290,11 +1306,12 @@
           <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
           <EntitySet Name="GenderEquality" EntityType="TISS_WebModel.GenderEquality" />
           <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
+          <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
           <AssociationSet Name="FK__GenderEqu__Gende__37FA4C37" Association="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37">
             <End Role="GenderEquality" EntitySet="GenderEquality" />
             <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
           </AssociationSet>
-          <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
+          <EntitySet Name="UrlDocument" EntityType="TISS_WebModel.UrlDocument" />
           </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -2050,6 +2067,7 @@
           <Property Name="IsApproved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
           <NavigationProperty Name="ReplyMessage" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="MessageBoard" ToRole="ReplyMessage" />
+          <Property Name="IsEditor" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__MessageBo__Artic__51EF2864">
           <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
@@ -2083,6 +2101,8 @@
           <Property Name="ReplyText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="ReplyMessage" ToRole="MessageBoard" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsFromEditor" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK__ReplyMess__Messa__0EF836A4">
           <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="1">
@@ -2143,18 +2163,6 @@
           <Property Name="AdditionalInfo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GenderEquality" Relationship="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" FromRole="GenderEqualityDetails" ToRole="GenderEquality" />
         </EntityType>
-        <Association Name="FK__GenderEqu__Gende__37FA4C37">
-          <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="0..1" />
-          <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GenderEquality">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="GenderEqualityDetails">
-              <PropertyRef Name="GenderEqualityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="GenderEqualityDocument">
           <Key>
             <PropertyRef Name="ID" />
@@ -2169,6 +2177,28 @@
           <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__GenderEqu__Gende__37FA4C37">
+          <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="0..1" />
+          <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GenderEquality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GenderEqualityDetails">
+              <PropertyRef Name="GenderEqualityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UrlDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="URLsite" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
@@ -2232,6 +2262,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TISS_WebModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsEditor" ColumnName="IsEditor" />
                 <ScalarProperty Name="LockoutEndTime" ColumnName="LockoutEndTime" />
                 <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
                 <ScalarProperty Name="FailedLoginAttempts" ColumnName="FailedLoginAttempts" />
@@ -3024,6 +3055,7 @@
           <EntitySetMapping Name="MessageBoard">
             <EntityTypeMapping TypeName="TISS_WebModel.MessageBoard">
               <MappingFragment StoreEntitySet="MessageBoard">
+                <ScalarProperty Name="IsEditor" ColumnName="IsEditor" />
                 <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="CommentDate" ColumnName="CommentDate" />
                 <ScalarProperty Name="CommentText" ColumnName="CommentText" />
@@ -3047,6 +3079,8 @@
           <EntitySetMapping Name="ReplyMessage">
             <EntityTypeMapping TypeName="TISS_WebModel.ReplyMessage">
               <MappingFragment StoreEntitySet="ReplyMessage">
+                <ScalarProperty Name="IsFromEditor" ColumnName="IsFromEditor" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
                 <ScalarProperty Name="ReplyDate" ColumnName="ReplyDate" />
                 <ScalarProperty Name="ReplyText" ColumnName="ReplyText" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -3118,7 +3152,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="UrlDocument">
+            <EntityTypeMapping TypeName="TISS_WebModel.UrlDocument">
+              <MappingFragment StoreEntitySet="UrlDocument">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="URLsite" ColumnName="URLsite" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

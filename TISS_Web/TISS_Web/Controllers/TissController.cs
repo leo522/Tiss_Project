@@ -235,7 +235,7 @@ namespace TISS_Web.Controllers
                 // 發送Email通知管理員
                 var adminEmail = "00048@tiss.org.tw";
                 var emailBody = $"新使用者註冊，請審核：<br/>帳號: {UserName}<br/>Email: {Email}<br/>註冊時間: {DateTime.Now}<br/><a href='{Url.Action("PendingRegistrations", "Tiss", null, Request.Url.Scheme)}'>點擊這裡審核</a>";
-                SendEmail(adminEmail, "新使用者註冊通知", emailBody);
+                SendEmail(adminEmail, "新使用者註冊通知", emailBody, null);
 
                 // 設定訊息給 TempData
                 TempData["RegisterMessage"] = "您的帳號已註冊成功，待管理員審核後將發送通知到您的Email。";
@@ -296,7 +296,7 @@ namespace TISS_Web.Controllers
 
                     // 發送Email通知使用者
                     var emailBody = $"您的帳號 {userName} 已通過審核，現在可以登入使用。";
-                    SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody);
+                    SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody, null);
                 }
 
                 return RedirectToAction("PendingRegistrations");
@@ -386,7 +386,7 @@ namespace TISS_Web.Controllers
 
                 var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}，連結有效時間為5分鐘";
 
-                SendEmail(Email, "重置密碼", emailBody);
+                SendEmail(Email, "重置密碼", emailBody, null);
 
                 ViewBag.Message = "重置密碼連結已發送至您的郵箱";
                 return View("ForgotPassword");
@@ -507,51 +507,85 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 郵件發送方法
-
-        private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
+        public void SendEmail(string toEmail, string subject, string body, string attachmentPath)
         {
-            var fromEmail = "00048@tiss.org.tw";
-            var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
-            var displayName = "運科中心資訊組"; //顯示的發件人名稱
+            var mail = new MailMessage();
+            mail.From = new MailAddress("00048@tiss.org.tw");
+            mail.To.Add(toEmail);
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.IsBodyHtml = true; // 支援 HTML 格式
 
-
-            var smtpClient = new SmtpClient("smtp.gmail.com")
-            {
-                Port = 587,
-                Credentials = new NetworkCredential(fromEmail, fromPassword),
-                EnableSsl = true,
-            };
-
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(fromEmail, displayName),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true,
-            };
-
-            // 分割以逗號分隔的收件人地址並添加到郵件中
-            foreach (var email in toEmail.Split(','))
-            {
-                mailMessage.To.Add(email.Trim());
-            }
-
+            // 如果有附件，則加入附件
             if (!string.IsNullOrEmpty(attachmentPath))
             {
                 Attachment attachment = new Attachment(attachmentPath);
-                mailMessage.Attachments.Add(attachment);
+                mail.Attachments.Add(attachment);
             }
 
-            try
+            using (var smtpClient = new SmtpClient())
             {
-                smtpClient.Send(mailMessage);
-            }
-            catch (Exception ex)
-            {
-                // 處理發送郵件的錯誤
-                Console.WriteLine("郵件發送失敗: " + ex.Message);
+                smtpClient.Host = "mail.tiss.org.tw"; // MX Mail Server 的主機名稱
+                smtpClient.Port = 25;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
+                smtpClient.EnableSsl = false;            // 根據伺服器要求設置 SSL
+                smtpClient.Credentials = new NetworkCredential("00048@tiss.org.tw", "lctm hhfh bubx lwda");
+
+                try
+                {
+                    smtpClient.Send(mail);
+                    Console.WriteLine("郵件已成功發送");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("發送郵件失敗：" + ex.Message);
+                }
             }
         }
+
+        //private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
+        //{
+        //    var fromEmail = "00048@tiss.org.tw";
+        //    var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
+        //    var displayName = "運科中心資訊組"; //顯示的發件人名稱
+
+
+        //    var smtpClient = new SmtpClient("smtp.gmail.com")
+        //    {
+        //        Port = 587,
+        //        Credentials = new NetworkCredential(fromEmail, fromPassword),
+        //        EnableSsl = true,
+        //    };
+
+        //    var mailMessage = new MailMessage
+        //    {
+        //        From = new MailAddress(fromEmail, displayName),
+        //        Subject = subject,
+        //        Body = body,
+        //        IsBodyHtml = true,
+        //    };
+
+        //    // 分割以逗號分隔的收件人地址並添加到郵件中
+        //    foreach (var email in toEmail.Split(','))
+        //    {
+        //        mailMessage.To.Add(email.Trim());
+        //    }
+
+        //    if (!string.IsNullOrEmpty(attachmentPath))
+        //    {
+        //        Attachment attachment = new Attachment(attachmentPath);
+        //        mailMessage.Attachments.Add(attachment);
+        //    }
+
+        //    try
+        //    {
+        //        smtpClient.Send(mailMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // 處理發送郵件的錯誤
+        //        Console.WriteLine("郵件發送失敗: " + ex.Message);
+        //    }
+        //}
 
         #endregion
 
@@ -689,7 +723,7 @@ namespace TISS_Web.Controllers
 
         //上傳性別平等專區文件
         [HttpPost]
-        public ActionResult UploadGenderEqualityDocument(HttpPostedFileBase file)
+        public ActionResult UploadGenderEqualityDocument(HttpPostedFileBase file, string url)
         {
             try
             {
@@ -701,6 +735,7 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+
         #endregion
 
         #region 首頁
@@ -1846,7 +1881,7 @@ namespace TISS_Web.Controllers
             page = Math.Max(1, page); //確保頁碼至少為 1
 
             var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "科普海報下載專區" && a.IsEnabled)
+                .Where(a => a.Hashtags.Contains("科普海報下載專區") && a.IsEnabled)
                 .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
@@ -2193,13 +2228,21 @@ namespace TISS_Web.Controllers
 
         public ActionResult GenderEquality()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
+            try
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            var dto = _db.GenderEqualityDocument.Where(d => d.IsActive)
-                    .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
-                    .ToList(); //獲取資料列表
+                var dto = _db.GenderEqualityDocument.Where(d => d.IsActive)
+                        .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                        .ToList(); //獲取資料列表
 
-            return View(dto);
+                return View(dto);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         #endregion
@@ -2558,8 +2601,12 @@ namespace TISS_Web.Controllers
                 article.ClickCount += 1; //增加點閱率次數
 
                 // 查找同一標籤下的上一篇和下一篇文章
+                //var articlesWithSameTag = _db.ArticleContent
+                //    .Where(a => a.Hashtags == article.Hashtags)
+                //    .OrderBy(a => a.PublishedDate)
+                //    .ToList();
                 var articlesWithSameTag = _db.ArticleContent
-                    .Where(a => a.Hashtags == article.Hashtags)
+                    .Where(a => a.Hashtags.Contains(article.Hashtags) && a.IsEnabled) // 使用 Contains 來匹配部分標籤
                     .OrderBy(a => a.PublishedDate)
                     .ToList();
 
@@ -2665,6 +2712,7 @@ namespace TISS_Web.Controllers
                 {
                     ViewBag.Hashtags = new List<string>();
                 }
+                //ViewBag.Hashtags = hashtags;
 
                 _db.SaveChanges();
 
@@ -2753,6 +2801,9 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                // 檢查是否為小編
+                var isEditor = _db.Users.Any(u => u.UserName == userName && u.IsEditor);
+
                 // 驗證 reCAPTCHA
                 var recaptchaSecret = "6Lezbh4qAAAAADGP0PVQCGXgPDtujjwPtY-EdyAB";
                 var client = new WebClient();
@@ -2789,7 +2840,8 @@ namespace TISS_Web.Controllers
                     UserName = encodedUserName,
                     CommentText = encodedCommentText,
                     CommentDate = DateTime.Now,
-                    IsApproved = true // 默認為批准
+                    IsApproved = true, // 默認為批准
+                    IsEditor = isEditor // 設置是否為小編
                 };
 
                 _db.MessageBoard.Add(comment);
@@ -2831,11 +2883,6 @@ namespace TISS_Web.Controllers
                 {
                     SendEmail(email.Trim(), subject, body, reportPath); // Trim() 確保去除多餘的空格
                 }
-
-                //string toEmail = "00048@tiss.org.tw";
-                //string subject = "文章瀏覽率報表";
-                //string body = "您好，請參閱附件中的文章瀏覽率報表。";
-                //SendEmail(toEmail, subject, body, reportPath);
             }
 
             return Content("報表產生完成");
@@ -2845,18 +2892,24 @@ namespace TISS_Web.Controllers
         #region 回覆留言
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PostReply(int parentId, int articleId, string replyText, string replyName)
+        public ActionResult PostReply(int parentId, int articleId, string replyText, string replyName, string userAccount)
         {
             if (ModelState.IsValid)
             {
+                // 檢查是否為小編
+                var isEditor = _db.Users.Any(u => u.UserAccount == userAccount && u.IsEditor);
+
                 var reply = new ReplyMessage
                 {
                     MessageBoardId = parentId,
                     UserName = replyName, // 使用者輸入的名稱
                     ReplyText = replyText,
                     ReplyDate = DateTime.Now,
-                    Id = articleId
+                    Id = articleId,
+                    IsApproved = isEditor, // 小編自動批准
+                    IsFromEditor = isEditor // 標記來自小編
                 };
+
 
                 _db.ReplyMessage.Add(reply);
                 _db.SaveChanges();

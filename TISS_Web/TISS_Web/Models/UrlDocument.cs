@@ -12,16 +12,12 @@ namespace TISS_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ReplyMessage
+    public partial class UrlDocument
     {
         public int Id { get; set; }
-        public int MessageBoardId { get; set; }
-        public string UserName { get; set; }
-        public string ReplyText { get; set; }
-        public System.DateTime ReplyDate { get; set; }
-        public bool IsApproved { get; set; }
-        public bool IsFromEditor { get; set; }
-    
-        public virtual MessageBoard MessageBoard { get; set; }
+        public string URLsite { get; set; }
+        public System.DateTime UploadTime { get; set; }
+        public string Creator { get; set; }
+        public bool IsActive { get; set; }
     }
 }

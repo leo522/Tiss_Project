@@ -166,65 +166,37 @@
                                             <div class="el-table-v2 el-table-v2__root"
                                                  style="height: 180px; width: 870px;">
                                                 <div class="el-table-v2__table el-table-v2__main">
-                                                    <div class="el-vl__wrapper el-table-v2__body" role="rowgroup">
-                                                        <div style="font-size:2rem; " title="本中心法規">
-                                                            <strong>本中心法規</strong>
-                                                        </div>
-                                                        <div class="el-table-v2__header-wrapper" role="rowgroup">
-                                                            <div class="el-table-v2__header" style="height: 50px;">
-                                                                <div class="el-table-v2__header-row TableRow el-table-v2__dynamic-header-row"
-                                                                     style="height: 50px;">
-                                                                    <div class="el-table-v2__header-cell"
-                                                                         data-key="title" role="columnheader"
-                                                                         style="width: 480px;">
-                                                                        <div class="el-table-v2__header-cell-text"
-                                                                             title="名稱">名稱</div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__header-cell"
-                                                                         data-key="publish_up" role="columnheader"
-                                                                         style="width: 240px;">
-                                                                        <div class="el-table-v2__header-cell-text"
-                                                                             title="發布日期">發布日期</div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__header-cell"
-                                                                         data-key="params" role="columnheader"
-                                                                         style="width: 280px;">
-                                                                        <div class="el-table-v2__header-cell-text"
-                                                                             title="附件">附件</div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        @foreach (var file in Model)
-                                                        {
-                                                            <div class="el-table-v2__row TableRow"
-                                                                 style="margin-bottom: 20px; padding: 5px;">
-                                                                <div class="el-table-v2__row-cell"
-                                                                     style="width: 480px;">
-                                                                    <a href="~/storage/media/attachments/@file.DocumentName"
-                                                                       target="_blank"
-                                                                       title="@file.DocumentName">
-                                                                        <div class="el-table-v2__cell-text"
-                                                                             title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
+                                                                <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
+                                                                <th scope="col" style="width: 280px; padding: 10px;">附件</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var file in Model)
+                                                            {
+                                                                <tr style="margin-bottom: 20px; padding: 5px;">
+                                                                    <td style="width: 650px; padding: 20px;">
+                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
+                                                                            <div title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
                                                                         </a>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row-cell"
-                                                                         style="width: 240px;">
-                                                                        <div>
-                                                                            @file.UploadTime.ToString("yyyy/MM/dd")
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="el-table-v2__row-cell"
-                                                                         style="width: 280px;">
+                                                                    </td>
+                                                                    <td style="width: 240px; padding: 10px;">
+                                                                        @file.UploadTime.ToString("yyyy/MM/dd")
+                                                                    </td>
+                                                                    <td style="width: 280px; padding: 10px;">
                                                                         <div class="BaseTagList download">
                                                                             <span class="el-tag el-tag--light is-round">
                                                                                 <span class="el-tag__content">@file.DocumentType</span>
                                                                             </span>
                                                                         </div>
-                                                                    </div>
-                                                                </div>
+                                                                    </td>
+                                                                </tr>
                                                             }
-                                                    </div>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
 
@@ -238,7 +210,7 @@
                                                     <li><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074">性騷擾防治法</a></li>
                                                 </ul>
                                             </div>
-                                                
+
                                             <!-- 新增的相關網站區塊 -->
                                             <div class="section related-websites" style="font-size:2rem">
                                                 <strong>相關網站</strong>
@@ -250,22 +222,26 @@
                                                     <li><a href="https://www.sa.gov.tw/PageContent?n=3533">教育部體育署性別主流化專區</a></li>
                                                 </ul>
                                             </div>
-
-                                            @{
-                                                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                                {
-                                                    using (Html.BeginForm("UploadGenderEqualityDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            <div class="upload-section" style="margin-top: 30px;">
+                                                @{
+                                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                                     {
-                                                        <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                                        <div class="col-md-10">
-                                                            <input type="file" name="file" id="file" />
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            <button type="submit" class="btn btn-primary">上傳</button>
-                                                        </div>
+                                                        using (Html.BeginForm("UploadGenderEqualityDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                                            <div class="col-md-10" style="margin-bottom: 20px;">
+                                                                <input type="file" name="file" />
+                                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                            </div>
+                                                            @*<label for="url" class="control-label col-md-2" title="網站 URL">網站 URL</label>
+                                                            <div class="col-md-10" style="margin-bottom: 20px;">
+                                                                <input type="url" name="url" required />
+                                                                <input type="submit" value="上傳 URL" class="btn btn-outline-success" />
+                                                            </div>*@
+                                                        }
                                                     }
                                                 }
-                                            }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

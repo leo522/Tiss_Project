@@ -33,6 +33,7 @@ namespace TISS_Web.Models
         public Nullable<int> FailedLoginAttempts { get; set; }
         public Nullable<bool> IsLocked { get; set; }
         public Nullable<System.DateTime> LockoutEndTime { get; set; }
+        public bool IsEditor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRoles> UserRoles { get; set; }

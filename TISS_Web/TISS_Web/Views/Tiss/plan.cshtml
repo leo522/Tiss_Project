@@ -206,19 +206,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                @{
-                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                    {
-                                        using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                <div class="upload-section" style="margin-top: 30px;">
+                                    @{
+                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
-                                            <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                            <div class="col-md-10">
-                                                <input type="file" name="file" />
-                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
-                                            </div>
+                                            using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                                <div class="col-md-10" style="margin-bottom: 20px;">
+                                                    <input type="file" name="file" />
+                                                    <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                </div>
+                                            }
                                         }
                                     }
-                                }
+                                </div>
                             </div>
                         </main>
                     </section>

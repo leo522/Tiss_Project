@@ -210,7 +210,7 @@
                                                     <li><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074">性騷擾防治法</a></li>
                                                 </ul>
                                             </div>
-                                                
+
                                             <!-- 新增的相關網站區塊 -->
                                             <div class="section related-websites" style="font-size:2rem">
                                                 <strong>相關網站</strong>
@@ -222,22 +222,26 @@
                                                     <li><a href="https://www.sa.gov.tw/PageContent?n=3533">教育部體育署性別主流化專區</a></li>
                                                 </ul>
                                             </div>
-
-                                            @{
-                                                if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                                {
-                                                    using (Html.BeginForm("UploadGenderEqualityDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            <div class="upload-section" style="margin-top: 30px;">
+                                                @{
+                                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                                     {
-                                                        <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                                        <div class="col-md-10">
-                                                            <input type="file" name="file" id="file" />
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            <button type="submit" class="btn btn-primary">上傳</button>
-                                                        </div>
+                                                        using (Html.BeginForm("UploadGenderEqualityDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+                                                            <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                                            <div class="col-md-10" style="margin-bottom: 20px;">
+                                                                <input type="file" name="file" />
+                                                                <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                            </div>
+                                                            @*<label for="url" class="control-label col-md-2" title="網站 URL">網站 URL</label>
+                                                            <div class="col-md-10" style="margin-bottom: 20px;">
+                                                                <input type="url" name="url" required />
+                                                                <input type="submit" value="上傳 URL" class="btn btn-outline-success" />
+                                                            </div>*@
+                                                        }
                                                     }
                                                 }
-                                            }
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

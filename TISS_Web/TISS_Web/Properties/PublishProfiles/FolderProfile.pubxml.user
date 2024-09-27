@@ -289,10 +289,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>09/25/2024 08:38:55</publishTime>
+      <publishTime>09/27/2024 17:13:16</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>09/25/2024 08:38:55</publishTime>
+      <publishTime>09/27/2024 17:13:16</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -7204,13 +7204,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/04/2024 10:12:16</publishTime>
     </File>
     <File Include="Img/運動科學網站.jpg">
-      <publishTime>09/04/2024 10:07:14</publishTime>
+      <publishTime>09/27/2024 09:22:22</publishTime>
     </File>
     <File Include="Kit/loader.min.js">
       <publishTime>06/20/2024 08:23:17</publishTime>
     </File>
     <File Include="Models/TissModel.edmx.diagram">
-      <publishTime>09/24/2024 08:17:51</publishTime>
+      <publishTime>09/27/2024 12:40:42</publishTime>
     </File>
     <File Include="Scripts/4.5.2.bootstrap.min.js">
       <publishTime>07/08/2024 10:45:28</publishTime>
@@ -7288,7 +7288,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/15/2024 11:51:44</publishTime>
     </File>
     <File Include="site/css/app.5338f982.css">
-      <publishTime>09/24/2024 07:50:40</publishTime>
+      <publishTime>09/27/2024 16:04:51</publishTime>
     </File>
     <File Include="site/css/BackTop.css">
       <publishTime>08/05/2024 10:00:35</publishTime>
@@ -7312,7 +7312,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/09/2024 08:13:17</publishTime>
     </File>
     <File Include="site/css/SectionTitleStyle.css">
-      <publishTime>08/06/2024 14:36:39</publishTime>
+      <publishTime>09/27/2024 09:50:36</publishTime>
     </File>
     <File Include="site/css/socialStyle.css">
       <publishTime>08/30/2024 14:43:04</publishTime>
@@ -8827,7 +8827,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/31/2024 11:01:53</publishTime>
     </File>
     <File Include="Views/Shared/_TissMaster.cshtml">
-      <publishTime>09/25/2024 08:03:39</publishTime>
+      <publishTime>09/27/2024 16:12:22</publishTime>
     </File>
     <File Include="Views/Tiss/about.cshtml">
       <publishTime>09/25/2024 08:04:41</publishTime>
@@ -8848,7 +8848,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:06:41</publishTime>
     </File>
     <File Include="Views/Tiss/budget.cshtml">
-      <publishTime>09/25/2024 08:06:41</publishTime>
+      <publishTime>09/27/2024 12:06:17</publishTime>
     </File>
     <File Include="Views/Tiss/CEO.cshtml">
       <publishTime>09/25/2024 08:07:50</publishTime>
@@ -8860,7 +8860,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:07:50</publishTime>
     </File>
     <File Include="Views/Tiss/download.cshtml">
-      <publishTime>09/25/2024 08:07:50</publishTime>
+      <publishTime>09/27/2024 12:06:52</publishTime>
     </File>
     <File Include="Views/Tiss/editPage.cshtml">
       <publishTime>07/12/2024 16:03:43</publishTime>
@@ -8869,13 +8869,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:07:50</publishTime>
     </File>
     <File Include="Views/Tiss/GenderEquality.cshtml">
-      <publishTime>09/25/2024 08:26:23</publishTime>
+      <publishTime>09/27/2024 15:29:09</publishTime>
     </File>
     <File Include="Views/Tiss/GovernmentWebsite.cshtml">
       <publishTime>08/05/2024 09:25:29</publishTime>
     </File>
     <File Include="Views/Tiss/Home.cshtml">
-      <publishTime>09/25/2024 08:10:58</publishTime>
+      <publishTime>09/27/2024 16:02:24</publishTime>
     </File>
     <File Include="Views/Tiss/institute.cshtml">
       <publishTime>09/25/2024 08:12:07</publishTime>
@@ -8896,7 +8896,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:13:37</publishTime>
     </File>
     <File Include="Views/Tiss/other.cshtml">
-      <publishTime>09/25/2024 08:13:37</publishTime>
+      <publishTime>09/27/2024 12:07:12</publishTime>
     </File>
     <File Include="Views/Tiss/PendingRegistrations.cshtml">
       <publishTime>09/10/2024 15:36:50</publishTime>
@@ -8905,16 +8905,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:14:08</publishTime>
     </File>
     <File Include="Views/Tiss/plan.cshtml">
-      <publishTime>09/25/2024 08:14:08</publishTime>
+      <publishTime>09/27/2024 12:05:39</publishTime>
     </File>
     <File Include="Views/Tiss/press.cshtml">
       <publishTime>09/25/2024 08:14:26</publishTime>
     </File>
     <File Include="Views/Tiss/procedure.cshtml">
-      <publishTime>09/23/2024 17:18:16</publishTime>
+      <publishTime>09/27/2024 12:05:26</publishTime>
     </File>
     <File Include="Views/Tiss/public_info.cshtml">
-      <publishTime>09/25/2024 08:17:47</publishTime>
+      <publishTime>09/27/2024 12:04:49</publishTime>
     </File>
     <File Include="Views/Tiss/purchase.cshtml">
       <publishTime>09/25/2024 08:17:47</publishTime>
@@ -8926,7 +8926,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:17:47</publishTime>
     </File>
     <File Include="Views/Tiss/regulation.cshtml">
-      <publishTime>09/25/2024 08:17:47</publishTime>
+      <publishTime>09/27/2024 12:05:02</publishTime>
     </File>
     <File Include="Views/Tiss/research.cshtml">
       <publishTime>09/25/2024 08:17:47</publishTime>
@@ -8971,13 +8971,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:17:45</publishTime>
     </File>
     <File Include="Views/Tiss/ViewArticle.cshtml">
-      <publishTime>09/25/2024 08:19:43</publishTime>
+      <publishTime>09/27/2024 17:12:06</publishTime>
     </File>
     <File Include="Views/Tiss/webContent.cshtml">
       <publishTime>07/15/2024 07:37:48</publishTime>
     </File>
     <File Include="Views/Tiss/_MessageBoard.cshtml">
-      <publishTime>07/31/2024 11:01:13</publishTime>
+      <publishTime>09/27/2024 16:28:06</publishTime>
     </File>
     <File Include="Views/Tiss/_PopularScience.cshtml">
       <publishTime>09/25/2024 08:19:43</publishTime>
@@ -8995,7 +8995,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/18/2024 15:58:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/18/2024 17:14:41</publishTime>
+      <publishTime>09/27/2024 15:40:38</publishTime>
     </File>
     <File Include="zh-TW/sdk.js">
       <publishTime>06/27/2024 13:19:34</publishTime>

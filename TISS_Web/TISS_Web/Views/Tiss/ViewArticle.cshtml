@@ -139,7 +139,6 @@
                                     }
                                     <button type="submit" class="btn btn-primary mt-3">保存修改</button>
                                 </form>
-
                             }
                             else
                             {
@@ -161,6 +160,74 @@
                                 </div>
                             }
                         </div>
+                    </div>
+                    <div class="comments-section">
+                        <h3>留言區</h3>
+                        <button id="toggle-comments" class="btn btn-light">
+                            <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
+                        </button>
+                        <div id="comments-container" style="display: none;">
+                            @foreach (var comment in ViewBag.Comments)
+                            {
+                                <div class="comment">
+                                    <p>
+                                        <strong>@comment.UserName</strong> 說：
+                                        @comment.CommentText
+                                    </p>
+                                    <p class="text-muted">@comment.CommentDate</p>
+                                    <!-- 顯示回覆 -->
+                                    <div class="comment">
+                                        @if (comment.ReplyMessage != null && comment.ReplyMessage.Count > 0)
+                                        {
+                                            <div class="replies">
+                                                @foreach (var reply in comment.ReplyMessage)
+                                                {
+                                                    <div class="reply">
+                                                        <p><strong>@reply.UserName</strong>: @reply.ReplyText</p>
+                                                        <small>@reply.ReplyDate</small>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <!-- 回覆功能 -->
+                                    <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">回覆</button>
+                                    <div class="reply-form" id="reply-form-@comment.Id" style="display:none;">
+                                        <form action="@Url.Action("PostReply", "Tiss")" method="post">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="parentId" value="@comment.Id" />
+                                            <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
+                                            @*<input type="hidden" name="userAccount" value="@Model.UserAccount" />*@ <!-- 隱藏欄位 -->
+                                            <div class="form-group">
+                                                <label for="replyName">名稱:</label>
+                                                <input id="replyName" class="form-control" name="replyName" required style="width: 800px;" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="replyText">回覆:</label>
+                                                <textarea id="replyText" class="form-control" name="replyText" required style="width: 800px;"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">回覆留言</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <form action="@Url.Action("PostCommentWithCaptcha", "Tiss")" method="post" id="msg">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
+                            <input type="hidden" id="g-recaptcha-response" name="recaptchaResponse" />
+                            @*<input type="hidden" name="userAccount" value="@Model.UserAccount" />*@ <!-- 隱藏欄位 -->
+                            <div class="form-group">
+                                <label for="userName">名稱:</label>
+                                <input type="text" id="userName" class="form-control" name="userName" required style="width: 200px;" />
+                            </div>
+                            <div class="form-group">
+                                <label for="commentText" style="display: inline-block; width: 50px;">留言:</label>
+                                <textarea id="commentText" class="form-control" name="commentText" required style="width: 800px;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">提交留言</button>
+                        </form>
                     </div>
                 </main>
             </section>
@@ -238,5 +305,68 @@
             });
         </script>
     }
+<script>
+                        $(document).ready(function () {
+          var isCommentsVisible = false;
+var commentCount = '@ViewBag.CommentCount';
+
+$('#toggle-comments').click(function () {
+    if (isCommentsVisible) {
+        $('#comments-container').slideUp();
+        $(this).find('span').text('檢視留言(' + commentCount +  '則留言)');
+    } else {
+        $('#comments-container').slideDown();
+        $(this).find('span').text( commentCount +  '則留言');
+    }
+    isCommentsVisible = !isCommentsVisible;
+});
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('form');
+            let lastSubmission = localStorage.getItem('lastSubmission');
+            const now = new Date().getTime();
+
+            if (lastSubmission && now - lastSubmission < 60000) { // 設置為 1 分鐘
+                form.querySelector('button').disabled = true;
+                form.querySelector('button').textContent = '請稍後再提交留言';
+            } else {
+                form.querySelector('button').disabled = false;
+            }
+
+            form.addEventListener('submit', function () {
+                localStorage.setItem('lastSubmission', new Date().getTime());
+            });
+        });
+
+        function containsSuspiciousLinks(commentText) {
+            const suspiciousPattern = /(http|https):\/\/[^\s]+/g;
+            return suspiciousPattern.test(commentText);
+        }
+
+        document.querySelector('form').addEventListener('submit', function (event) {
+            const commentText = document.querySelector('#commentText').value;
+
+            if (containsSuspiciousLinks(commentText)) {
+                alert('留言中包含可疑的連結，請檢查後再提交。');
+                event.preventDefault(); // 阻止表單提交
+            }
+        });
+                });
+            /*摺疊回覆留言*/
+            document.addEventListener("DOMContentLoaded", function () {
+                var replyButtons = document.querySelectorAll(".reply-btn");
+
+                replyButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        var commentId = button.getAttribute("data-comment-id");
+                        var replyForm = document.getElementById("reply-form-" + commentId);
+                        if (replyForm.style.display === "none") {
+                            replyForm.style.display = "block";
+                        } else {
+                            replyForm.style.display = "none";
+                        }
+                    });
+                });
+            });
+</script>
 </body>
 </html>

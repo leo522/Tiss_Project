@@ -72,6 +72,7 @@
     <Property Name="FailedLoginAttempts" Type="Int32" />
     <Property Name="IsLocked" Type="Boolean" />
     <Property Name="LockoutEndTime" Type="DateTime" Precision="3" />
+    <Property Name="IsEditor" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK__RolePermi__Permi__4316F928">
     <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
@@ -208,11 +209,12 @@
     <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
     <EntitySet Name="GenderEquality" EntityType="TISS_WebModel.GenderEquality" />
     <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
+    <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
     <AssociationSet Name="FK__GenderEqu__Gende__37FA4C37" Association="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37">
       <End Role="GenderEquality" EntitySet="GenderEquality" />
       <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
     </AssociationSet>
-    <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
+    <EntitySet Name="UrlDocument" EntityType="TISS_WebModel.UrlDocument" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -968,6 +970,7 @@
     <Property Name="IsApproved" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="MessageBoard" ToRole="ArticleContent" />
     <NavigationProperty Name="ReplyMessage" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="MessageBoard" ToRole="ReplyMessage" />
+    <Property Name="IsEditor" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK__MessageBo__Artic__51EF2864">
     <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
@@ -1001,6 +1004,8 @@
     <Property Name="ReplyText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ReplyDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="ReplyMessage" ToRole="MessageBoard" />
+    <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+    <Property Name="IsFromEditor" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK__ReplyMess__Messa__0EF836A4">
     <End Type="TISS_WebModel.MessageBoard" Role="MessageBoard" Multiplicity="1">
@@ -1061,18 +1066,6 @@
     <Property Name="AdditionalInfo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GenderEquality" Relationship="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" FromRole="GenderEqualityDetails" ToRole="GenderEquality" />
   </EntityType>
-  <Association Name="FK__GenderEqu__Gende__37FA4C37">
-    <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="0..1" />
-    <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GenderEquality">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="GenderEqualityDetails">
-        <PropertyRef Name="GenderEqualityId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="GenderEqualityDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -1087,6 +1080,28 @@
     <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__GenderEqu__Gende__37FA4C37">
+    <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="0..1" />
+    <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GenderEquality">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GenderEqualityDetails">
+        <PropertyRef Name="GenderEqualityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UrlDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="URLsite" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>

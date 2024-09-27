@@ -26,6 +26,7 @@ namespace TISS_Web.Models
         public string CommentText { get; set; }
         public System.DateTime CommentDate { get; set; }
         public bool IsApproved { get; set; }
+        public bool IsEditor { get; set; }
     
         public virtual ArticleContent ArticleContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

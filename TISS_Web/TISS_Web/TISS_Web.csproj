@@ -399,6 +399,9 @@
     <Compile Include="Models\UnitsPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UrlDocument.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserRoles.cs">
       <DependentUpon>TissModel.tt</DependentUpon>

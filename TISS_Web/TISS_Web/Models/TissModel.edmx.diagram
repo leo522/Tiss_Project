@@ -70,8 +70,9 @@
         <EntityTypeShape EntityType="TISS_WebModel.FileDocument" Width="1.5" PointX="22.375" PointY="3.75" />
         <EntityTypeShape EntityType="TISS_WebModel.GenderEquality" Width="1.5" PointX="22.375" PointY="8.5" />
         <EntityTypeShape EntityType="TISS_WebModel.GenderEqualityDetails" Width="1.5" PointX="24.625" PointY="8" />
-        <AssociationConnector Association="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" />
         <EntityTypeShape EntityType="TISS_WebModel.GenderEqualityDocument" Width="1.5" PointX="3.375" PointY="22.75" />
+        <AssociationConnector Association="TISS_WebModel.FK__GenderEqu__Gende__37FA4C37" />
+        <EntityTypeShape EntityType="TISS_WebModel.UrlDocument" Width="1.5" PointX="22.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

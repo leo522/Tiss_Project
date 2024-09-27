@@ -356,6 +356,7 @@
     <Property Name="CommentText" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CommentDate" Type="datetime" Nullable="false" />
     <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsEditor" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="MissionPageContent">
     <Key>
@@ -664,6 +665,8 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="ReplyText" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ReplyDate" Type="datetime" Nullable="false" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsFromEditor" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ResearchPageContent">
     <Key>
@@ -839,6 +842,16 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="UrlDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="URLsite" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="UploadTime" Type="datetime" Nullable="false" />
+    <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="UserRoles">
     <Key>
       <PropertyRef Name="UserRoleID" />
@@ -864,6 +877,7 @@
     <Property Name="FailedLoginAttempts" Type="int" />
     <Property Name="IsLocked" Type="bit" />
     <Property Name="LockoutEndTime" Type="datetime" />
+    <Property Name="IsEditor" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="VideoPageContent">
     <Key>
@@ -1037,6 +1051,7 @@
     <EntitySet Name="SportsPsychologyPageContent" EntityType="Self.SportsPsychologyPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SportTechPageContent" EntityType="Self.SportTechPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UnitsPageContent" EntityType="Self.UnitsPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UrlDocument" EntityType="Self.UrlDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
