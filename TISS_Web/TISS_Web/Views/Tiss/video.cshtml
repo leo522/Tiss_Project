@@ -8,7 +8,6 @@
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="fb-root"></div>
     <div id="app" data-v-app="">
         <div data-v-339da53a="" class="layout">
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
@@ -64,31 +63,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="content">
-                                <div class="Title" title="影音專區">影音專區</div>
-                                <ul class="Menu">
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/video" title="全部文章">全部文章</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/achievement" title="中心成果">中心成果</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/news" title="新聞影音">新聞影音</a>
-                                    </li>
-                                    <li span="3">
-                                        <a class="MenuLink" href="/Tiss/activityRecord" title="活動記錄">活動記錄</a>
-                                    </li>
-                                    @{
-                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                        {
-                                            <li span="3">
-                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
-                                            </li>
-                                        }
+
+                        @*左方功能區塊*@
+                        <div class="content">
+                            <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 150px;">:::</a>
+                            <div class="Title" title="影音專區">影音專區</div>
+                            <ul class="Menu" id="L">
+                                <li span="3">
+                                    <a class="MenuLink" href="/Tiss/video" title="全部文章">全部文章</a>
+                                </li>
+                                <li span="3">
+                                    <a class="MenuLink" href="/Tiss/achievement" title="中心成果">中心成果</a>
+                                </li>
+                                <li span="3">
+                                    <a class="MenuLink" href="/Tiss/news" title="新聞影音">新聞影音</a>
+                                </li>
+                                <li span="3">
+                                    <a class="MenuLink" href="/Tiss/activityRecord" title="活動記錄">活動記錄</a>
+                                </li>
+                                @{
+                                    if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                    {
+                                        <li span="3">
+                                            <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
+                                        </li>
                                     }
-                                </ul>
-                            </div>
+                                }
+                            </ul>
+                        </div>
                         </aside>
                         <main class="el-main bg-white">
                             <div class="MainContainer">
@@ -126,8 +128,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="MainContainer">
+
+                            @*中央內容區塊*@
+                            <div class="MainContainer" id="Ca">
                                 <div class="NewsVideoList">
+                                    <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
                                     <div class="container">
                                         <div class="row">
                                             @foreach (var article in Model)
@@ -192,7 +197,7 @@
             </div>
         </div>
     </div>
-    <script>
+<script>
    //登出按鈕顯示功能
 $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' == 'True';
@@ -215,6 +220,18 @@ if (isLoggedIn) {
                 }
             });
         });
-    </script>
+
+        //功能區塊
+        document.querySelector('#jump-to-Ca').addEventListener('click', function (e) {
+            e.preventDefault(); // 阻止預設的跳轉行為
+            var target = document.querySelector('#Ca');
+            var offset = 100; // 偏移量，根據頁首的高度來設置
+            var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth' // 平滑滾動效果
+            });
+        });
+</script>
 </body>
 </html>

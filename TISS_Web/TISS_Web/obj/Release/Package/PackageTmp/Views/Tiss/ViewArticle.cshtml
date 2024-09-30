@@ -131,7 +131,11 @@
                                     @* 顯示已經上傳的預覽圖片 *@
                                     @if (Model.ImageContent != null)
                                     {
-                                        <img src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ImageContent))" alt="預覽圖片" style="width:300px; height:auto;" />
+                                        string base64Image = Convert.ToBase64String(Model.ImageContent);
+                                        string imageSrc = $"data:image/jpeg;base64,{base64Image}";
+
+                                        // 將轉換後的圖片嵌入 img 標籤
+                                        <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
                                     }
                                     else
                                     {
@@ -305,7 +309,7 @@
             });
         </script>
     }
-<script>
+    <script>
                         $(document).ready(function () {
           var isCommentsVisible = false;
 var commentCount = '@ViewBag.CommentCount';
@@ -367,6 +371,6 @@ $('#toggle-comments').click(function () {
                     });
                 });
             });
-</script>
+    </script>
 </body>
 </html>

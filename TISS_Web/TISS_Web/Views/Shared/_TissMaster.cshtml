@@ -497,7 +497,7 @@
         <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
 
-    <script>
+<script>
 
         // 清除 Google 翻譯的相關 cookie
         function clearGoogleTranslateCookies() {
@@ -627,10 +627,10 @@
             element.classList.add('active');
         }
 
+        //顯示或隱藏回到頂部按鈕
         document.addEventListener('DOMContentLoaded', function () {
             var backTopButton = document.querySelector('.el-backtop');
 
-            // 顯示或隱藏回到頂部按鈕
             window.addEventListener('scroll', function () {
                 if (window.scrollY > 1500) { // 滾動超過1500px時顯示按鈕
                     backTopButton.classList.add('show');
@@ -645,6 +645,17 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+
+            // 鍵盤事件監聽，按下Enter或空白鍵時回到頂部
+            backTopButton.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault(); // 阻止預設行為，如按下空白鍵時滾動
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
             });
 
             // 鍵盤移動展開下拉選單
@@ -731,17 +742,17 @@
             }
 
             // 語言選單 focus 時自動展開
-            var languageSelect = document.querySelector('.selectpicker');
+            //var languageSelect = document.querySelector('.selectpicker');
 
-            // 當語言選單獲得焦點時自動展開選單
-            languageSelect.addEventListener('focus', function () {
-                $(this).selectpicker('toggle'); // 使用 selectpicker 方法展開選單
-            });
+            //// 當語言選單獲得焦點時自動展開選單
+            //languageSelect.addEventListener('focus', function () {
+            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法展開選單
+            //});
 
-            // 當語言選單失去焦點時自動關閉選單
-            languageSelect.addEventListener('blur', function () {
-                $(this).selectpicker('toggle'); // 使用 selectpicker 方法關閉選單
-            });
+            //// 當語言選單失去焦點時自動關閉選單
+            //languageSelect.addEventListener('blur', function () {
+            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法關閉選單
+            //});
         });
     </script>
 </body>

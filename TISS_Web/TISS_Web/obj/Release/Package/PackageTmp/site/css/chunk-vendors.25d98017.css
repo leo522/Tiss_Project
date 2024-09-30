@@ -15272,7 +15272,7 @@ textarea.form-control-lg {
 }
 
 .el-backtop {
-    --el-backtop-bg-color: var(--el-bg-color-overlay);
+/*    --el-backtop-bg-color: var(--el-bg-color-overlay);
     --el-backtop-text-color: var(--el-color-primary);
     --el-backtop-hover-bg-color: var(--el-border-color-extra-light);
     position: fixed;
@@ -15287,7 +15287,7 @@ textarea.form-control-lg {
     font-size: 20px;
     box-shadow: var(--el-box-shadow-lighter);
     cursor: pointer;
-    z-index: 5
+    z-index: 5*/
 }
 
     .el-backtop:hover {
