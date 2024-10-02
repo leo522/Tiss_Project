@@ -59438,7 +59438,7 @@ body {
         -o-object-fit: cover;
         object-fit: cover;
         -o-object-position: 50% 50%;
-        object-position: 50% 50%
+        object-position: 50% 50%;
     }
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 .BaseBtn {
@@ -74519,14 +74519,19 @@ textarea.form-control-lg[data-v-3f77048f] {
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 .NewsItemBox .NewsItemImg, .SectionAbout .AboutImg img {
     width: 100%;
-    border-radius: 10px
+    border-radius: 10px;
 }
 
 .NewsItemBox .NewsItemImg {
     position: relative;
     height: 204px;
-    overflow: hidden
+    overflow: hidden;
 }
+.NewsItemBox:focus, .NewsItemImg img:focus {
+    outline: 0;
+    border: 4px dashed orange;
+}
+
 
     .NewsItemBox .NewsItemImg .tag {
         background-color: #202733;
@@ -74557,7 +74562,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 
     .NewsItemBox .NewsItemImg img {
         width: 100%;
-        height: 100%
+        height: 100%;
     }
 
 .NewsItemBox.headline .NewsItemImg {
@@ -74587,7 +74592,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 }
 
 .NewsItemBox .NewsItemContent {
-    display: none
+    display: none;
 }
 
 .NewsItemBox .NewsItemInfo {
@@ -78039,7 +78044,9 @@ sup {
 
 a {
     color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
-    text-decoration: underline
+    text-decoration: underline;
+    /*width: 55px;*/ /* 設定你想要的寬度 */
+   
 }
 
     a:hover {
@@ -83321,7 +83328,7 @@ textarea.form-control-lg {
     --bs-pagination-hover-border-color: var(--bs-border-color);
     --bs-pagination-focus-color: var(--bs-link-hover-color);
     --bs-pagination-focus-bg: var(--bs-secondary-bg);
-    --bs-pagination-focus-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);
+    /*--bs-pagination-focus-box-shadow: 0 0 0 .25rem rgba(13,110,253,.25);*/
     --bs-pagination-active-color: #fff;
     --bs-pagination-active-bg: #0d6efd;
     --bs-pagination-active-border-color: #0d6efd;
@@ -83332,7 +83339,7 @@ textarea.form-control-lg {
     display: -ms-flexbox;
     display: flex;
     padding-left: 0;
-    list-style: none
+    list-style: none;
 }
 
 .page-link {
@@ -83367,9 +83374,9 @@ textarea.form-control-lg {
 .page-link:focus {
     z-index: 3;
     color: var(--bs-pagination-focus-color);
-    background-color: var(--bs-pagination-focus-bg);
+    /*background-color: var(--bs-pagination-focus-bg);*/
     outline: 0;
-    -webkit-box-shadow: var(--bs-pagination-focus-box-shadow);
+    /*-webkit-box-shadow: var(--bs-pagination-focus-box-shadow);*/
     box-shadow: var(--bs-pagination-focus-box-shadow)
 }
 

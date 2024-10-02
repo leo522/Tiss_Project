@@ -163,10 +163,10 @@
                                     性別平等專區
                                     <span class="primary" title="Gender Equality">Gender Equality</span>
                                 </div>
-                                <div style="font-size:1.5rem; " title="本中心性騷擾申訴管道">
+                                <div tabindex="0" style="font-size:1.5rem; " title="本中心性騷擾申訴管道">
                                     <strong>本中心性騷擾申訴管道</strong>
                                 </div>
-                                <img src="~/Img/性別平等圖片/申訴.jpg" title="本中心性騷擾申訴管道圖片" style="margin-top: 20px;" /><hr />
+                                <img tabindex="0" src="~/Img/性別平等圖片/申訴.jpg" title="本中心性騷擾申訴管道圖片" style="margin-top: 20px;" /><hr />
                                 <div class="infoList" style="margin-top: 20px;">
                                     <div class="el-auto-resizer" style="width: 100%; height: 100%;">
                                         <div class="el-table-v2 el-table-v2__root"
@@ -186,7 +186,7 @@
                                                             <tr style="margin-bottom: 20px; padding: 5px;">
                                                                 <td style="width: 650px; padding: 20px;">
                                                                     <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
-                                                                        <div title="@file.DocumentName">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                                        <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
                                                                     </a>
                                                                 </td>
                                                                 <td style="width: 240px; padding: 10px;">
@@ -194,9 +194,13 @@
                                                                 </td>
                                                                 <td style="width: 280px; padding: 10px;">
                                                                     <div class="BaseTagList download">
-                                                                        <span class="el-tag el-tag--light is-round">
-                                                                            <span class="el-tag__content">@file.DocumentType</span>
-                                                                        </span>
+                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" style="width:55px;">
+
+                                                                            <span tabindex="0" class="el-tag" style="display: inline-block; background-color: firebrick; color: white; border-radius: 0; font-size: 16px; padding: 5px 10px; ">
+                                                                                <span class="el-tag__content" title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentType</span>
+                                                                            </span>
+
+                                                                        </a>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -207,25 +211,25 @@
                                         </div>
 
                                         <!-- 新增的相關法規區塊 -->
-                                        <div class="section law-regulation" style="font-size: 1.5rem; margin-top: 20px; margin-bottom: 10px;">
+                                        <div class="section law-regulation" style="font-size: 1.5rem; margin-top: 20px; margin-bottom: 10px;" title="本中心法規">
                                             <strong>本中心法規</strong>
                                         </div>
                                         <div style="font-size: 18px;">
                                             <ul>
-                                                <li style="margin-bottom: 10px;"><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030014">性別平等工作法</a></li>
-                                                <li style="margin-bottom: 10px;"><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074">性騷擾防治法</a></li>
+                                                <li style="margin-bottom: 10px;"><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=N0030014" title="性別平等工作法">性別平等工作法</a></li>
+                                                <li style="margin-bottom: 10px;"><a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050074" title="性騷擾防治法">性騷擾防治法</a></li>
                                             </ul>
                                         </div>
 
                                         <!-- 新增的相關網站區塊 -->
-                                        <div class="section related-websites" style="font-size: 1.5rem; margin-bottom: 10px;">
+                                        <div class="section related-websites" style="font-size: 1.5rem; margin-bottom: 10px;" title="相關網站">
                                             <strong>相關網站</strong>
                                         </div>
                                         <div style="font-size: 18px; ">
                                             <ul>
-                                                <li style="margin-bottom: 10px;"><a href="https://gec.ey.gov.tw/Index.aspx">行政院性別平等會</a></li>
-                                                <li style="margin-bottom: 10px;"><a href="https://depart.moe.edu.tw/gender/Default.aspx">教育部性別平等專區</a></li>
-                                                <li style="margin-bottom: 10px;"><a href="https://www.sa.gov.tw/PageContent?n=3533">教育部體育署性別主流化專區</a></li>
+                                                <li style="margin-bottom: 10px;"><a href="https://gec.ey.gov.tw/Index.aspx" title="行政院性別平等會網站">行政院性別平等會</a></li>
+                                                <li style="margin-bottom: 10px;"><a href="https://depart.moe.edu.tw/gender/Default.aspx" title="教育部性別平等專區網站">教育部性別平等專區</a></li>
+                                                <li style="margin-bottom: 10px;"><a href="https://www.sa.gov.tw/PageContent?n=3533" title="教育部體育署性別主流化專區網站">教育部體育署性別主流化專區</a></li>
                                             </ul>
                                         </div>
                                         <div class="upload-section" style="margin-top: 30px;">

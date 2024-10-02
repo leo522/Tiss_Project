@@ -139,7 +139,7 @@
                                             {
                                                 <div class="col-md-4 mb-4">
                                                     <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
-                                                        <div class="NewsItemBox">
+                                                        <div class="NewsItemBox" tabindex="0">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)
                                                                 {
@@ -173,16 +173,16 @@
                                                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                 {
                                                     <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                        <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = i })">@i</a>
+                                                        <a class="page-link" href="@Url.Action("SciencePosterDownLoad", "Tiss", new { page = i })">@i</a>
                                                     </li>
                                                 }
                                                 <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                    <a class="page-link" href="@Url.Action("SciencePosterDownLoad", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
                                                 <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("sportsPhysiology", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                    <a class="page-link" href="@Url.Action("SciencePosterDownLoad", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
                                                 </li>
