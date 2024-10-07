@@ -146,25 +146,31 @@
                             }
                             else
                             {
-                                <div class="hashtags-link" style="text-align: left;">
-                                    <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
+                        <div class="hashtags-link" style="text-align: left;">
+                            <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
 
-                                    @if (ViewBag.Hashtags != null && ViewBag.Hashtags.Count > 0)
-                                    {
-                                        foreach (var hashtag in ViewBag.Hashtags)
-                                        {
-                                            <a href="@Url.Action("Redirecttag", "Tiss", new { tag = hashtag })" class="el-tag el-tag--plain is-round tag-link">
-                                                <span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i> @hashtag</span>
-                                            </a>
-                                        }
-                                    }
-                                </div>
+                            @if (ViewBag.Hashtags != null && ViewBag.Hashtags.Count > 0)
+                            {
+                                foreach (var hashtag in ViewBag.Hashtags)
+                                {
+                                    <a href="@Url.Action("Redirecttag", "Tiss", new { tag = hashtag })">
+                                        @*<span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i> @hashtag</span>*@
+                                        <span class="el-tag el-tag--light"><span class="el-tag__content"></span>@hashtag</span>
+                                    </a>
+                                }
+                            }
+                            <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p> @*點擊率*@
+                        </div>
+                                <!--<div class="NewsParams">
+                                    <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p>--> @*點擊率*@
+                                <!--</div>-->
                                 <div>
                                     @Html.Raw(Model.ContentBody)
                                 </div>
                             }
                         </div>
                     </div>
+                    
                     <div class="comments-section">
                         <h3>留言區</h3>
                         <button id="toggle-comments" class="btn btn-light">

@@ -585,21 +585,21 @@
         //}
 
 
-        $(function () {
-            $('.selectpicker').selectpicker();
-        });
+        //$(function () {
+        //    $('.selectpicker').selectpicker();
+        //});
 
-        function goTranslate(lang) {
-            const combo = document.querySelector('.goog-te-combo');
+        //function goTranslate(lang) {
+        //    const combo = document.querySelector('.goog-te-combo');
 
-            if (combo) {
-                combo.value = lang;
-                const event = new Event('change');
-                combo.dispatchEvent(event);
-            } else {
-                console.error("Google 翻譯組件未加載，請檢查頁面狀態");
-            }
-        }
+        //    if (combo) {
+        //        combo.value = lang;
+        //        const event = new Event('change');
+        //        combo.dispatchEvent(event);
+        //    } else {
+        //        console.error("Google 翻譯組件未加載，請檢查頁面狀態");
+        //    }
+        //}
 
         // 網頁字體大小控制function
         document.querySelectorAll('.FontSizeBtn').forEach(button => {

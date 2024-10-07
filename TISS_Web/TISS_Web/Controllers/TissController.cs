@@ -1578,7 +1578,7 @@ namespace TISS_Web.Controllers
             page = Math.Max(1, page); //確保頁碼至少為 1
 
             var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動科學" && a.IsEnabled)
+                .Where(a => a.Hashtags == "運動科學" || a.Hashtags == "運動管理" && a.IsEnabled)
                 .OrderByDescending(a => a.CreateDate)
                 .ToList();
 
@@ -2459,18 +2459,6 @@ namespace TISS_Web.Controllers
                         dto.ContentType = category.CategoryName;
                     }
 
-                    //處理hashtags
-                    //if (!string.IsNullOrEmpty(tag))
-                    //{
-                    //    var existingHashtag = _db.Hashtag.FirstOrDefault(h => h.Name == tag);
-
-                    //    if (existingHashtag == null)
-                    //    {
-                    //        // 如果 hashtag 不存在，則新增
-                    //        var newHashtag = new Hashtag { Name = tag };
-                    //        _db.Hashtag.Add(newHashtag);
-                    //    }
-                    //}
                     // 處理hashtags，多個標籤存為逗號分隔的字符串
                     if (tags != null && tags.Length > 0)
                     {
@@ -2548,6 +2536,25 @@ namespace TISS_Web.Controllers
 
         #region 文章內容顯示
         /// <summary>
+        /// 增加alt屬性
+        /// </summary>
+        public string EnsureImageAltAttribute(string content)
+        {
+            // 使用正則表達式找到所有 img 標籤，並檢查是否有 alt 屬性
+            var imgPattern = "<img(?![^>]*\\balt=)[^>]*>";
+            var altAttributePattern = "<img([^>]*?)>";
+
+            // 替換沒有 alt 的 img 標籤，添加具有描述性的 alt 屬性
+            string updatedContent = Regex.Replace(content, imgPattern, match =>
+            {
+                // 根據實際需求決定alt的內容
+                return Regex.Replace(match.Value, altAttributePattern, "<img$1 alt=\"圖片描述\">");
+            });
+
+            return updatedContent;
+        }
+
+        /// <summary>
         /// 文章內容URL解密
         /// </summary>
         /// <param name="encryptedUrl"></param>
@@ -2556,7 +2563,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                // 替換 Base64 URL 安全字符如果已被替換）
+                //替換Base64 URL 安全字符如果已被替換）
                 encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
                 // 補齊Base64 字符串的填充
                 int mod4 = encryptedUrl.Length % 4;
@@ -2565,17 +2572,14 @@ namespace TISS_Web.Controllers
                     encryptedUrl += new string('=', 4 - mod4);
                 }
 
-                // 將 Base64 字符串解碼為字節數組
+                // 將Base64字串解碼為字節數組
                 var bytes = Convert.FromBase64String(encryptedUrl);
-
-                // 將字節數組轉換為原始字符串
                 var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
 
                 return decodedString;
             }
             catch (FormatException)
             {
-                // 處理解碼失敗的情況
                 return string.Empty; // 或者根據需求返回 null 或拋出異常
             }
         }
@@ -2588,35 +2592,37 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                //Session["ReturnUrl"] = Request.Url.ToString();
-
                 var decryptedUrl = DecryptUrl(encryptedUrl);
-                var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl); // 根據解密後的標題查詢
+                if (string.IsNullOrEmpty(decryptedUrl))
+                {
+                    Console.WriteLine("[ERROR] 解密後的URL為空");
+                    return RedirectToAction("Error404", "Error");
+                }
+
+                var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl);
 
                 if (article == null)
                 {
+                    Console.WriteLine($"[ERROR] 找不到文章: {decryptedUrl}");
                     return RedirectToAction("Error404", "Error");
                 }
 
                 article.ClickCount += 1; //增加點閱率次數
+                article.ContentBody = EnsureImageAltAttribute(article.ContentBody); // 在渲染之前，確保img標籤都包含 alt 屬性
 
                 // 查找同一標籤下的上一篇和下一篇文章
-                //var articlesWithSameTag = _db.ArticleContent
-                //    .Where(a => a.Hashtags == article.Hashtags)
-                //    .OrderBy(a => a.PublishedDate)
-                //    .ToList();
                 var articlesWithSameTag = _db.ArticleContent
                     .Where(a => a.Hashtags.Contains(article.Hashtags) && a.IsEnabled) // 使用 Contains 來匹配部分標籤
                     .OrderBy(a => a.PublishedDate)
                     .ToList();
 
                 int currentIndex = articlesWithSameTag.FindIndex(a => a.Id == article.Id);
-
-                // 找到上一篇和下一篇
                 var previousArticle = currentIndex > 0 ? articlesWithSameTag[currentIndex - 1] : null;
                 var nextArticle = currentIndex < articlesWithSameTag.Count - 1 ? articlesWithSameTag[currentIndex + 1] : null;
 
                 ViewBag.ArticleId = article.Id;
+                ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
+                ViewBag.CommentCount = ViewBag.Comments.Count;
 
                 //顯示留言數量
                 ViewBag.Comments = _db.MessageBoard.Where(c => c.ArticleId == article.Id && c.IsApproved).ToList();
@@ -2681,6 +2687,10 @@ namespace TISS_Web.Controllers
                     { "影音專區", 3 }
                 };
 
+                // 將發佈日期格式化為 "yyyy-MM-dd"
+                string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
+                ViewBag.FormattedPublishedDate = formattedDate;
+
                 // 根據當前主題獲取對應的 MenuId
                 int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
 
@@ -2698,9 +2708,6 @@ namespace TISS_Web.Controllers
                 ViewBag.MenuUrls = menuUrls;
                 ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
 
-                // 將發佈日期格式化為 "yyyy-MM-dd"
-                string formattedDate = article.PublishedDate.HasValue ? article.PublishedDate.Value.ToString("yyyy-MM-dd") : string.Empty;
-                ViewBag.FormattedPublishedDate = formattedDate;
 
                 // 處理多個Hashtags
                 if (!string.IsNullOrEmpty(article.Hashtags))
@@ -2712,7 +2719,6 @@ namespace TISS_Web.Controllers
                 {
                     ViewBag.Hashtags = new List<string>();
                 }
-                //ViewBag.Hashtags = hashtags;
 
                 _db.SaveChanges();
 
@@ -2762,7 +2768,6 @@ namespace TISS_Web.Controllers
             }
             catch (Exception ex)
             {
-                // 處理例外情況
                 throw ex;
             }
         }

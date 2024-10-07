@@ -25,7 +25,7 @@
                                     Gender Equality
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" title="性別平等專區">性別平等專區
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="性別平等專區文字標題">性別平等專區
                                 </div>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                                 <div tabindex="0" style="font-size:1.5rem; " title="本中心性騷擾申訴管道">
                                     <strong>本中心性騷擾申訴管道</strong>
                                 </div>
-                                <img tabindex="0" src="~/Img/性別平等圖片/申訴.jpg" title="本中心性騷擾申訴管道圖片" style="margin-top: 20px;" /><hr />
+                                <img tabindex="0" src="~/Img/性別平等圖片/申訴.jpg" title="本中心性騷擾申訴管道圖片" style="margin-top: 20px;" alt="性別平等申訴圖片"/><hr />
                                 <div class="infoList" style="margin-top: 20px;">
                                     <div class="el-auto-resizer" style="width: 100%; height: 100%;">
                                         <div class="el-table-v2 el-table-v2__root"
@@ -175,7 +175,7 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
+                                                            <th scope="col" style="width: 480px; padding: 10px;">本中心法規</th>
                                                             <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
                                                             <th scope="col" style="width: 280px; padding: 10px;">附件</th>
                                                         </tr>
@@ -183,8 +183,8 @@
                                                     <tbody>
                                                         @foreach (var file in Model)
                                                         {
-                                                            <tr style="margin-bottom: 20px; padding: 5px;">
-                                                                <td style="width: 650px; padding: 20px;">
+                                                            <tr style="margin-bottom: 20px; padding: 5px; font-size:18px;">
+                                                                <td style="width: 950px; padding: 20px;">
                                                                     <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
                                                                         <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
                                                                     </a>
@@ -211,8 +211,8 @@
                                         </div>
 
                                         <!-- 新增的相關法規區塊 -->
-                                        <div class="section law-regulation" style="font-size: 1.5rem; margin-top: 20px; margin-bottom: 10px;" title="本中心法規">
-                                            <strong>本中心法規</strong>
+                                        <div class="section law-regulation" style="font-size: 1.5rem; margin-top: 20px; margin-bottom: 10px;" title="相關法規">
+                                            <strong>相關法規</strong>
                                         </div>
                                         <div style="font-size: 18px;">
                                             <ul>

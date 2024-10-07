@@ -59429,11 +59429,14 @@ body {
     body a {
         text-decoration: none
     }
-
-    body ol, body ul {
+    body ul {
         list-style-type: none
     }
-
+    /*影響文章內容的數字清單*/
+    /*body ol, body ul {
+        list-style-type: none
+    }*/
+    /*影響文章內容的數字清單*/
     body img {
         -o-object-fit: cover;
         object-fit: cover;

@@ -58,6 +58,8 @@
 
 .article-content {
     flex: 3;
+    margin-top: 150px;
+    margin-left: 250px;
 }
 
 .btn-light {

@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<TISS_Web.Models.ArticleContentModel>
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
-    string userLang = Request.UserLanguages != null ? Request.UserLanguages[0] : "zh-TW";
 }
 <!DOCTYPE html>
 <html>
@@ -25,7 +24,7 @@
                                     Announcements
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="">中心公告
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="中心公告文字標題"/>中心公告
                                 </div>
                             </div>
                         </div>

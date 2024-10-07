@@ -25,7 +25,8 @@
             </div>
             <div class="form-group mb-4">
                 <label for="Body" style="font-size:25px" title="內容">內容</label>
-                @Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                @*@Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, placeholder = "輸入文章內容" })*@
+                @Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, placeholder = "輸入文章內容", id = "ContentBody" })
             </div>
             <div class="form-group mb-4">
                 <label for="ContentType" style="font-size:25px" title="發佈類型">文章發佈類別</label>
@@ -46,8 +47,33 @@
             <button type="submit" class="btn btn-primary" title="提交">提交</button>
         }
     </div>
+    <div>
+        <ul class="InfoList">
+            <li>
+                <button onclick="location.href='/Tiss/Login'" type="button" class="el-button is-plain is-text FontSizeBtn" title="網頁管理者">網頁管理者</button>
 
+            </li>
+            <li id="logoutBtn" style="display: none;">
+                <form id="logoutForm" action="/Tiss/Logout" method="post">
+                    <button type="submit" class="btn btn-outline-danger btn-block" title="登出">登出</button>
+                </form>
+            </li>
+        </ul>
+    </div>
     <script>
+                $(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' === 'True';
+
+    if (isLoggedIn) {
+        $('#logoutBtn').show(); // 顯示登出按鈕
+    } else {
+        $('#loginBtn').show(); // 顯示登入按鈕
+    }
+
+    if (window.location.pathname === '/Tiss/Home') {
+        $('#adminUser').hide(); // 隱藏管理者按鈕
+    }
+});
         document.addEventListener('DOMContentLoaded', function () {
             tinymce.init({
                 selector: '#ContentBody',
