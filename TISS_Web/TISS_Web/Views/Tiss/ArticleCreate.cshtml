@@ -10,7 +10,8 @@
     <link rel="icon" href="~/Img/favicon.svg" />
     <title title="發佈文章">發佈文章</title>
     <script src="~/bootstrap/js/bootstrap.js"></script>
-    <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="~/tinymce/js/tinymce/langs/zh_TW.js"></script>
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
@@ -45,23 +46,12 @@
                 <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
             </div>
             <button type="submit" class="btn btn-primary" title="提交">提交</button>
+            @*<button type="submit" class="btn btn-warning" title="回上一頁">回上一頁</button>*@
         }
     </div>
-    <div>
-        <ul class="InfoList">
-            <li>
-                <button onclick="location.href='/Tiss/Login'" type="button" class="el-button is-plain is-text FontSizeBtn" title="網頁管理者">網頁管理者</button>
-
-            </li>
-            <li id="logoutBtn" style="display: none;">
-                <form id="logoutForm" action="/Tiss/Logout" method="post">
-                    <button type="submit" class="btn btn-outline-danger btn-block" title="登出">登出</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-    <script>
-                $(document).ready(function () {
+    
+<script>
+@*$(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
     if (isLoggedIn) {
@@ -73,17 +63,16 @@
     if (window.location.pathname === '/Tiss/Home') {
         $('#adminUser').hide(); // 隱藏管理者按鈕
     }
-});
+});*@
         document.addEventListener('DOMContentLoaded', function () {
             tinymce.init({
                 selector: '#ContentBody',
                 language: 'zh_TW',
-                plugins: [
-                    'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-                    'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
-                    'media', 'table', 'emoticons', 'help'
-                ],
-                toolbar: 'insertfile | undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | customFileButton',
+                plugins: 'preview anchor autolink codesample emoticons image link lists media searchreplace table visualblocks wordcount' ,
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | customFileButton |',
+
+                // 字體格式選項
+                font_formats: "微軟黑體=Microsoft JhengHei;",
 
                 // 文件和圖片的檔案選擇器
                 file_picker_callback: function (callback, value, meta) {
@@ -142,6 +131,6 @@
                 },
             });
         });
-    </script>
+</script>
 </body>
 </html>

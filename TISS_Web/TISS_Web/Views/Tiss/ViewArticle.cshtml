@@ -11,12 +11,13 @@
 <head>
     <meta charset="utf-8" />
     <title>@Model.Title</title>
-    <script src="~/bootstrap/js/bootstrap.js"></script>
-    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
+    <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="~/tinymce/js/tinymce/langs/zh_TW.js"></script>
+    <link href="~/site/css/hashTagStyle.css" rel="stylesheet" />
+    <script src="~/bootstrap/js/bootstrap.js"></script>
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1"></script>
     <script>
         function onSubmit(token) {
@@ -112,65 +113,77 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container mt-5">
-                        <div class="article-content">
-                            @if (isLoggedIn)
-                            {<form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="Id" value="@Model.Id" />
-
-                                    <div class="form-group">
-                                        <label for="ContentBody">內容:</label>
-                                        @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
-                                    </div>
-
-                                    <div class="form-group mb-4">
-                                        <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
-                                        <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
-                                    </div>
-                                    @* 顯示已經上傳的預覽圖片 *@
-                                    @if (Model.ImageContent != null)
+                    <div class="ResearchPage">
+                        <div class="HeadInfo">
+                            <div class="HeadInfoItem">@ViewBag.FormattedPublishedDate</div>
+                            <div class="HeadInfoItem">
+                                @if (ViewBag.Hashtags != null && ViewBag.Hashtags.Count > 0)
+                                {
+                                    foreach (var hashtag in ViewBag.Hashtags)
                                     {
-                                        string base64Image = Convert.ToBase64String(Model.ImageContent);
-                                        string imageSrc = $"data:image/jpeg;base64,{base64Image}";
+                                        <span class="el-tag el-tag--light">
+                                            <span class="el-tag__content">@hashtag</span>
+                                        </span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="NewsToolBar">
+                            
+                            <div class="NewsParams">
+                                <div class="NewsParamsItem">
+                                    <span>
+                                        <svg class="svg-inline--fa fa-eye" aria-hidden="true" focusable="false" data-prefix="far" data-icon="eye" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"></path></svg>
+                                    </span>
+                                    <span>@Model.ClickCount</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="NewsContent">
+                            <div class="ContentBox">
+                                <div>
+                                    @if (isLoggedIn)
+                                    {
+                                        <form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Id" value="@Model.Id" />
 
-                                        // 將轉換後的圖片嵌入 img 標籤
-                                        <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
+                                            <div class="form-group">
+                                                <label for="ContentBody">內容:</label>
+                                                @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                            </div>
+
+                                            <div class="form-group mb-4">
+                                                <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
+                                                <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
+                                            </div>
+
+                                            @if (Model.ImageContent != null)
+                                            {
+                                                string base64Image = Convert.ToBase64String(Model.ImageContent);
+                                                string imageSrc = $"data:image/jpeg;base64,{base64Image}";
+
+                                                <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
+                                            }
+                                            else
+                                            {
+                                                <p>目前無圖片</p>
+                                            }
+                                            <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                        </form>
                                     }
                                     else
                                     {
-                                        <p>目前無圖片</p>
+                                        <div>
+                                            @Html.Raw(Model.ContentBody)
+                                        </div>
                                     }
-                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                </form>
-                            }
-                            else
-                            {
-                        <div class="hashtags-link" style="text-align: left;">
-                            <p>@ViewBag.FormattedPublishedDate</p> @*發布時間*@
-
-                            @if (ViewBag.Hashtags != null && ViewBag.Hashtags.Count > 0)
-                            {
-                                foreach (var hashtag in ViewBag.Hashtags)
-                                {
-                                    <a href="@Url.Action("Redirecttag", "Tiss", new { tag = hashtag })">
-                                        @*<span class="el-tag__content"><i class="fa-solid fa-tag" style="color: #d841b7;"></i> @hashtag</span>*@
-                                        <span class="el-tag el-tag--light"><span class="el-tag__content"></span>@hashtag</span>
-                                    </a>
-                                }
-                            }
-                            <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p> @*點擊率*@
-                        </div>
-                                <!--<div class="NewsParams">
-                                    <p><i class="fa-regular fa-eye"></i> @Model.ClickCount</p>--> @*點擊率*@
-                                <!--</div>-->
-                                <div>
-                                    @Html.Raw(Model.ContentBody)
                                 </div>
-                            }
+                            </div>
                         </div>
                     </div>
-                    
+
+
                     <div class="comments-section">
                         <h3>留言區</h3>
                         <button id="toggle-comments" class="btn btn-light">
@@ -244,19 +257,32 @@
         </div>
     </div>
 
-    @if (isLoggedIn)
-    {
-        <script>
-            $(document).ready(function () {
+@if (isLoggedIn)
+{
+<script>
+    $(document).ready(function () {
+    var isLoggedIn = '@Session["LoggedIn"]' === 'True';
+
+    if (isLoggedIn) {
+        $('#logoutBtn').show(); // 顯示登出按鈕
+    } else {
+        $('#loginBtn').show(); // 顯示登入按鈕
+    }
+
+    if (window.location.pathname === '/Tiss/Home') {
+        $('#adminUser').hide(); // 隱藏管理者按鈕
+    }
+    });
+
+    $(document).ready(function () {
                 tinymce.init({
                     selector: '#ContentBody',
                     language: 'zh_TW',
-                    plugins: [
-                        'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
-                        'searchreplace', 'wordcount', 'visualblocks', 'visualchars', 'code', 'fullscreen', 'insertdatetime',
-                        'media', 'table', 'emoticons', 'help'
-                    ],
-                    toolbar: 'insertfile | undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | customFileButton',
+                    plugins: 'preview anchor autolink codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | customFileButton |',
+
+                    // 字體格式選項
+                    font_formats: "微軟黑體=Microsoft JhengHei;",
 
                     // 文件和圖片的檔案選擇器
                     file_picker_callback: function (callback, value, meta) {
@@ -313,12 +339,12 @@
                     }
                 });
             });
-        </script>
-    }
-    <script>
-                        $(document).ready(function () {
+</script>
+}
+<script>
+     $(document).ready(function () {
           var isCommentsVisible = false;
-var commentCount = '@ViewBag.CommentCount';
+    var commentCount = '@ViewBag.CommentCount';
 
 $('#toggle-comments').click(function () {
     if (isCommentsVisible) {

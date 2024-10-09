@@ -7660,8 +7660,15 @@ textarea.form-control-lg {
   margin-top: 1.5rem !important;
 }
 
+/*文章頁面背景色*/
 .mt-5 {
-  margin-top: 3rem !important;
+    /*margin-top: 3rem !important;*/
+    margin-top: 175px;
+    margin-left: -32px;
+    padding: 86px 170px;
+    border-radius: 10px;
+    background-color: #f2f4f7;
+    max-width: 900px;
 }
 
 .mt-auto {
