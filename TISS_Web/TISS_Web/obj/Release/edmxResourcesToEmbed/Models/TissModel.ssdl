@@ -132,6 +132,17 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="DomainsURL">
+    <Key>
+      <PropertyRef Name="DomainID" />
+    </Key>
+    <Property Name="DomainID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DomainName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SiteName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="DownloadDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -163,6 +174,18 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="EmailLogs">
+    <Key>
+      <PropertyRef Name="EmailLogID" />
+    </Key>
+    <Property Name="EmailLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecipientEmail" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SentDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ErrorMessage" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="EID" />
@@ -183,6 +206,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PId" Type="int" />
     <Property Name="DocumentName" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="UploadTime" Type="datetime" />
     <Property Name="Creator" Type="nvarchar" MaxLength="10" />
@@ -209,7 +233,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GenderEqualityId" Type="int" />
+    <Property Name="GenderEqualityId" Type="int" Nullable="false" />
     <Property Name="URL" Type="nvarchar" MaxLength="255" />
     <Property Name="FilePath" Type="nvarchar" MaxLength="255" />
     <Property Name="FileName" Type="nvarchar" MaxLength="20" />
@@ -847,7 +871,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="URLsite" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="URL" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="UploadTime" Type="datetime" Nullable="false" />
     <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
@@ -896,8 +920,8 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
-  <Association Name="FK__GenderEqu__Gende__37FA4C37">
-    <End Role="GenderEquality" Type="Self.GenderEquality" Multiplicity="0..1" />
+  <Association Name="FK__GenderEqu__Gende__3EA749C6">
+    <End Role="GenderEquality" Type="Self.GenderEquality" Multiplicity="1" />
     <End Role="GenderEqualityDetails" Type="Self.GenderEqualityDetails" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GenderEquality">
@@ -1003,8 +1027,10 @@
     <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DomainsURL" EntityType="Self.DomainsURL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadPageContent" EntityType="Self.DownloadPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmailLogs" EntityType="Self.EmailLogs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileDocument" EntityType="Self.FileDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GenderEquality" EntityType="Self.GenderEquality" Schema="dbo" store:Type="Tables" />
@@ -1055,7 +1081,7 @@
     <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VideoPageContent" EntityType="Self.VideoPageContent" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__GenderEqu__Gende__37FA4C37" Association="Self.FK__GenderEqu__Gende__37FA4C37">
+    <AssociationSet Name="FK__GenderEqu__Gende__3EA749C6" Association="Self.FK__GenderEqu__Gende__3EA749C6">
       <End Role="GenderEquality" EntitySet="GenderEquality" />
       <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
     </AssociationSet>

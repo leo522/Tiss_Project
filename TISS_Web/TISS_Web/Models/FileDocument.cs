@@ -15,6 +15,7 @@ namespace TISS_Web.Models
     public partial class FileDocument
     {
         public int ID { get; set; }
+        public Nullable<int> PId { get; set; }
         public string DocumentName { get; set; }
         public Nullable<System.DateTime> UploadTime { get; set; }
         public string Creator { get; set; }

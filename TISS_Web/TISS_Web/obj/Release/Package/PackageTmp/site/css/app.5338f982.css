@@ -75675,6 +75675,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 
     .BasePageLayout .el-main.bg-defaultO4 {
         background-color: rgba(242,244,247,.4)
+        /*background-color: #f2f4f7;*/
     }
 
     .BasePageLayout .el-main .MainContainer {
@@ -77332,7 +77333,7 @@ textarea.form-control-lg[data-v-3f77048f] {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    border-top: 1px solid #c7d2dd;
+    /*border-top: 1px solid #c7d2dd;*/
     padding-top: 24px;
     margin: 50px 0
 }

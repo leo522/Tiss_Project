@@ -227,9 +227,12 @@
                                         </div>
                                         <div style="font-size: 18px; ">
                                             <ul>
-                                                <li style="margin-bottom: 10px;"><a href="https://gec.ey.gov.tw/Index.aspx" title="行政院性別平等會網站">行政院性別平等會</a></li>
-                                                <li style="margin-bottom: 10px;"><a href="https://depart.moe.edu.tw/gender/Default.aspx" title="教育部性別平等專區網站">教育部性別平等專區</a></li>
-                                                <li style="margin-bottom: 10px;"><a href="https://www.sa.gov.tw/PageContent?n=3533" title="教育部體育署性別主流化專區網站">教育部體育署性別主流化專區</a></li>
+                                                @foreach (var website in ViewBag.Websites)
+                                                {
+                                                    <li style="margin-bottom: 10px;">
+                                                        <a href="@website.DomainName" title="@website.SiteName">@website.SiteName</a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </div>
                                         <div class="upload-section" style="margin-top: 30px;">

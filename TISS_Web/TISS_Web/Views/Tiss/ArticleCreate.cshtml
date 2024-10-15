@@ -31,12 +31,8 @@
             </div>
             <div class="form-group mb-4">
                 <label for="ContentType" style="font-size:25px" title="發佈類型">文章發佈類別</label>
-                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
+                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control", multiple = "multiple" })
             </div>
-            @*<div class="form-group mb-4">
-                    <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
-                    @Html.DropDownList("tag", (SelectList)ViewBag.Hashtags, "請選擇標籤", new { @class = "form-control" })
-                </div>*@
             <div class="form-group mb-4">
                 <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
                 @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
@@ -46,24 +42,10 @@
                 <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
             </div>
             <button type="submit" class="btn btn-primary" title="提交">提交</button>
-            @*<button type="submit" class="btn btn-warning" title="回上一頁">回上一頁</button>*@
         }
     </div>
     
 <script>
-@*$(document).ready(function () {
-    var isLoggedIn = '@Session["LoggedIn"]' === 'True';
-
-    if (isLoggedIn) {
-        $('#logoutBtn').show(); // 顯示登出按鈕
-    } else {
-        $('#loginBtn').show(); // 顯示登入按鈕
-    }
-
-    if (window.location.pathname === '/Tiss/Home') {
-        $('#adminUser').hide(); // 隱藏管理者按鈕
-    }
-});*@
         document.addEventListener('DOMContentLoaded', function () {
             tinymce.init({
                 selector: '#ContentBody',

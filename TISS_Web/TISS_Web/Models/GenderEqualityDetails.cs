@@ -15,7 +15,7 @@ namespace TISS_Web.Models
     public partial class GenderEqualityDetails
     {
         public int Id { get; set; }
-        public Nullable<int> GenderEqualityId { get; set; }
+        public int GenderEqualityId { get; set; }
         public string URL { get; set; }
         public string FilePath { get; set; }
         public string FileName { get; set; }

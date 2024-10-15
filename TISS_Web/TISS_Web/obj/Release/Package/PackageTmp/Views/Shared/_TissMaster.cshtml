@@ -12,7 +12,7 @@
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
     <link href="~/site/css/BackTop.css" rel="stylesheet" />
     <link href="~/fontawesome/css/all.css" rel="stylesheet" />
-
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/site/css/3.3.6_bootstrap.min.css" rel="stylesheet" />
     @*翻譯套件*@
     @*<link href="~/site/css/bootstrap-select_min.css" rel="stylesheet" />*@
@@ -23,7 +23,8 @@
     @*<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
     @*google翻譯工具*@
     @*翻譯套件*@
-    <script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
+    @*<script src="https://cdn.tiny.cloud/1/dnrbo5jub3ln0e23awgulturfk1e6nv5h6s4eh16ob30c6jn/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>*@
     <script async defer="defer" crossorigin="anonymous" src="/Kit/loader.min.js"></script>
     <!--<script src="~/Scripts/4.5.2.bootstrap.min.js"></script>-->  @*輪播圖要使用*@
     <script src="~/fontawesome/js/all.js"></script>
@@ -63,7 +64,7 @@
                 <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
-                <div data-v-e61ebf00="" style="margin-left: 130px;" >
+                <div data-v-e61ebf00="" style="margin-left: 130px;">
                     <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: flex-start; padding: 0;">
                         <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="btn" data-size="small" title="小">小</button>
@@ -78,19 +79,19 @@
                 </div>
 
                 @*<nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
-                    <ul data-v-e61ebf00="" class="ToolList">
-                        <li data-v-e61ebf00="">
-                            <div id="google_translate_element" style="display: none;"></div>
-                            <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
-                                <option value="">Language</option>
-                                <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
-                                <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-                                <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
-                                <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
-                            </select>
-                        </li>
-                    </ul>
-                </nav>*@
+                        <ul data-v-e61ebf00="" class="ToolList">
+                            <li data-v-e61ebf00="">
+                                <div id="google_translate_element" style="display: none;"></div>
+                                <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
+                                    <option value="">Language</option>
+                                    <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
+                                    <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+                                    <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
+                                    <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </nav>*@
             </div>
         </div>
         <div data-v-71bab962="" class="menuNav">
@@ -302,23 +303,23 @@
                                 </ul>
                             </li>
                             @*<li data-v-71bab962="" class="nav-item dropdown">
-                                <a data-v-71bab962="" href="/Tiss/SponsorArea" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown6" aria-current="page" role="button" aria-expanded="false" title="贊助專區" tabindex="0" aria-haspopup="true">
-                                    贊助專區
-                                    <span data-v-71bab962="">
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                            </path>
-                                        </svg>
-                                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                            <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-                                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
-                                </ul>
-                            </li>*@
+                                    <a data-v-71bab962="" href="/Tiss/SponsorArea" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown6" aria-current="page" role="button" aria-expanded="false" title="贊助專區" tabindex="0" aria-haspopup="true">
+                                        贊助專區
+                                        <span data-v-71bab962="">
+                                            <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                                                </path>
+                                            </svg>
+                                            <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                                        <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
+                                    </ul>
+                                </li>*@
                             <li data-v-71bab962="" class="nav-item">
                                 <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link" title="服務信箱">服務信箱</a>
                             </li>
@@ -478,9 +479,9 @@
                             </ul>
                         </div>
                         @*<div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                            <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
-                            <ul class="MenuList"></ul>
-                        </div>*@
+                                <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
+                                <ul class="MenuList"></ul>
+                            </div>*@
                     </div>
                     <div class="copyright">
                         <div class="container" title="Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>
@@ -497,7 +498,7 @@
         <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
 
-<script>
+    <script>
 
         // 清除 Google 翻譯的相關 cookie
         function clearGoogleTranslateCookies() {

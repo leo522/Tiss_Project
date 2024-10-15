@@ -239,10 +239,16 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContentService.cs" />
+    <Compile Include="Models\DomainsURL.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DownloadDocument.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DownloadPageContent.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmailLogs.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">

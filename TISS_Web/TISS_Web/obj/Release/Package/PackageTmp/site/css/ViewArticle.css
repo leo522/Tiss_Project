@@ -11,10 +11,9 @@
     position: relative; /* 讓內容容器參考這個容器進行定位 */
 }
 
-.article-content {
-    flex: 1;
-    max-width: 600px; /* 根據需要調整 */
-}
+/*.article-content {
+    flex: 1;*/ /*根據需要調整 */
+/*}*/
 
 /*社群連結樣式*/
 .side-info {
@@ -56,10 +55,13 @@
     display: flex;
 }
 
+/*文章內文背景顏色*/
 .article-content {
     flex: 3;
-    margin-top: 150px;
-    margin-left: 250px;
+    margin-top: 100px;
+    margin-left: 200px;
+    background-color: #fff;
+    max-width: 700px;
 }
 
 .btn-light {

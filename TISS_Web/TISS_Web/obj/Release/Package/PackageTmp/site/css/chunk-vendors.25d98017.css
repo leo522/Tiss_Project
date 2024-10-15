@@ -28994,7 +28994,13 @@ textarea.form-control-lg {
 }
 
 .el-tag {
-    --el-tag-font-size: 12px;
+    font-size: 1rem;
+    color: #fff;
+    height: auto;
+    background-color: #202733;
+    padding: 7px 25px;
+    border-radius: 10px
+    /*--el-tag-font-size: 12px;
     --el-tag-border-radius: 4px;
     --el-tag-border-radius-rounded: 9999px;
     --el-tag-bg-color: var(--el-color-primary-light-9);
@@ -29017,7 +29023,7 @@ textarea.form-control-lg {
     border-radius: var(--el-tag-border-radius);
     box-sizing: border-box;
     white-space: nowrap;
-    --el-icon-size: 14px
+    --el-icon-size: 14px*/
 }
 
     .el-tag.el-tag--primary {

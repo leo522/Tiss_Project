@@ -25,65 +25,67 @@ namespace TISS_Web.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<Permissions> Permissions { get; set; }
-        public virtual DbSet<RolePermissions> RolePermissions { get; set; }
-        public virtual DbSet<Roles> Roles { get; set; }
-        public virtual DbSet<UserRoles> UserRoles { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<AboutPageContent> AboutPageContent { get; set; }
         public virtual DbSet<AnnouncementPageContent> AnnouncementPageContent { get; set; }
-        public virtual DbSet<BODPageContent> BODPageContent { get; set; }
-        public virtual DbSet<BudgetPageContent> BudgetPageContent { get; set; }
-        public virtual DbSet<CEOPageContent> CEOPageContent { get; set; }
-        public virtual DbSet<DownloadPageContent> DownloadPageContent { get; set; }
-        public virtual DbSet<GenderEqualityPageContent> GenderEqualityPageContent { get; set; }
-        public virtual DbSet<GovernmentWebsitePageContent> GovernmentWebsitePageContent { get; set; }
-        public virtual DbSet<HomePageContent> HomePageContent { get; set; }
-        public virtual DbSet<InstitutePageContent> InstitutePageContent { get; set; }
-        public virtual DbSet<MissionPageContent> MissionPageContent { get; set; }
-        public virtual DbSet<ObjectivesPageContent> ObjectivesPageContent { get; set; }
-        public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
-        public virtual DbSet<PlanPageContent> PlanPageContent { get; set; }
-        public virtual DbSet<ProcedurePageContent> ProcedurePageContent { get; set; }
-        public virtual DbSet<Public_InfoPageContent> Public_InfoPageContent { get; set; }
-        public virtual DbSet<PurchasePageContent> PurchasePageContent { get; set; }
-        public virtual DbSet<RecruitPageContent> RecruitPageContent { get; set; }
-        public virtual DbSet<RegulationPageContent> RegulationPageContent { get; set; }
-        public virtual DbSet<ResearchPageContent> ResearchPageContent { get; set; }
-        public virtual DbSet<ResearchProjectPageContent> ResearchProjectPageContent { get; set; }
-        public virtual DbSet<SportMedicinePageContent> SportMedicinePageContent { get; set; }
-        public virtual DbSet<SportSciencePageContent> SportSciencePageContent { get; set; }
-        public virtual DbSet<SportTechPageContent> SportTechPageContent { get; set; }
-        public virtual DbSet<UnitsPageContent> UnitsPageContent { get; set; }
-        public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
-        public virtual DbSet<PhysicalTrainingPageContent> PhysicalTrainingPageContent { get; set; }
-        public virtual DbSet<SportsNutritionPageContent> SportsNutritionPageContent { get; set; }
-        public virtual DbSet<SportsPhysiologyPageContent> SportsPhysiologyPageContent { get; set; }
-        public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
-        public virtual DbSet<PressPageContent> PressPageContent { get; set; }
-        public virtual DbSet<RegulationDocument> RegulationDocument { get; set; }
-        public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
-        public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
-        public virtual DbSet<PlanDocument> PlanDocument { get; set; }
-        public virtual DbSet<ProcedureDocument> ProcedureDocument { get; set; }
-        public virtual DbSet<PurchaseDocument> PurchaseDocument { get; set; }
-        public virtual DbSet<OtherDocument> OtherDocument { get; set; }
-        public virtual DbSet<Language> Language { get; set; }
-        public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
-        public virtual DbSet<Hashtag> Hashtag { get; set; }
         public virtual DbSet<ArticleCategory> ArticleCategory { get; set; }
         public virtual DbSet<ArticleContent> ArticleContent { get; set; }
-        public virtual DbSet<MenuItems> MenuItems { get; set; }
-        public virtual DbSet<Menus> Menus { get; set; }
-        public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
-        public virtual DbSet<MessageBoard> MessageBoard { get; set; }
-        public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
-        public virtual DbSet<ReplyMessage> ReplyMessage { get; set; }
+        public virtual DbSet<BODPageContent> BODPageContent { get; set; }
+        public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
+        public virtual DbSet<BudgetPageContent> BudgetPageContent { get; set; }
+        public virtual DbSet<CEOPageContent> CEOPageContent { get; set; }
+        public virtual DbSet<DomainsURL> DomainsURL { get; set; }
+        public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
+        public virtual DbSet<DownloadPageContent> DownloadPageContent { get; set; }
+        public virtual DbSet<EmailLogs> EmailLogs { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<FileDocument> FileDocument { get; set; }
         public virtual DbSet<GenderEquality> GenderEquality { get; set; }
         public virtual DbSet<GenderEqualityDetails> GenderEqualityDetails { get; set; }
         public virtual DbSet<GenderEqualityDocument> GenderEqualityDocument { get; set; }
+        public virtual DbSet<GenderEqualityPageContent> GenderEqualityPageContent { get; set; }
+        public virtual DbSet<GovernmentWebsitePageContent> GovernmentWebsitePageContent { get; set; }
+        public virtual DbSet<Hashtag> Hashtag { get; set; }
+        public virtual DbSet<HomePageContent> HomePageContent { get; set; }
+        public virtual DbSet<InstitutePageContent> InstitutePageContent { get; set; }
+        public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
+        public virtual DbSet<Language> Language { get; set; }
+        public virtual DbSet<MenuItems> MenuItems { get; set; }
+        public virtual DbSet<Menus> Menus { get; set; }
+        public virtual DbSet<MessageBoard> MessageBoard { get; set; }
+        public virtual DbSet<MissionPageContent> MissionPageContent { get; set; }
+        public virtual DbSet<ObjectivesPageContent> ObjectivesPageContent { get; set; }
+        public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
+        public virtual DbSet<OtherDocument> OtherDocument { get; set; }
+        public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
+        public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
+        public virtual DbSet<Permissions> Permissions { get; set; }
+        public virtual DbSet<PhysicalTrainingPageContent> PhysicalTrainingPageContent { get; set; }
+        public virtual DbSet<PlanDocument> PlanDocument { get; set; }
+        public virtual DbSet<PlanPageContent> PlanPageContent { get; set; }
+        public virtual DbSet<PressPageContent> PressPageContent { get; set; }
+        public virtual DbSet<ProcedureDocument> ProcedureDocument { get; set; }
+        public virtual DbSet<ProcedurePageContent> ProcedurePageContent { get; set; }
+        public virtual DbSet<Public_InfoPageContent> Public_InfoPageContent { get; set; }
+        public virtual DbSet<PurchaseDocument> PurchaseDocument { get; set; }
+        public virtual DbSet<PurchasePageContent> PurchasePageContent { get; set; }
+        public virtual DbSet<RecruitPageContent> RecruitPageContent { get; set; }
+        public virtual DbSet<RegulationDocument> RegulationDocument { get; set; }
+        public virtual DbSet<RegulationPageContent> RegulationPageContent { get; set; }
+        public virtual DbSet<ReplyMessage> ReplyMessage { get; set; }
+        public virtual DbSet<ResearchPageContent> ResearchPageContent { get; set; }
+        public virtual DbSet<ResearchProjectPageContent> ResearchProjectPageContent { get; set; }
+        public virtual DbSet<RolePermissions> RolePermissions { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<SportMedicinePageContent> SportMedicinePageContent { get; set; }
+        public virtual DbSet<SportSciencePageContent> SportSciencePageContent { get; set; }
+        public virtual DbSet<SportsNutritionPageContent> SportsNutritionPageContent { get; set; }
+        public virtual DbSet<SportsPhysiologyPageContent> SportsPhysiologyPageContent { get; set; }
+        public virtual DbSet<SportsPsychologyPageContent> SportsPsychologyPageContent { get; set; }
+        public virtual DbSet<SportTechPageContent> SportTechPageContent { get; set; }
+        public virtual DbSet<UnitsPageContent> UnitsPageContent { get; set; }
         public virtual DbSet<UrlDocument> UrlDocument { get; set; }
+        public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
     }
 }

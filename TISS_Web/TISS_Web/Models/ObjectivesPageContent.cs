@@ -15,6 +15,7 @@ namespace TISS_Web.Models
     public partial class ObjectivesPageContent
     {
         public int ID { get; set; }
+        public int FileNo { get; set; }
         public string TextContent { get; set; }
         public byte[] ImageContent { get; set; }
         public Nullable<System.DateTime> FileUploadTime { get; set; }
@@ -26,6 +27,5 @@ namespace TISS_Web.Models
         public Nullable<System.DateTime> WebsiteURLUpdateTime { get; set; }
         public string UserAccount { get; set; }
         public Nullable<System.DateTime> UserLoginTime { get; set; }
-        public int FileNo { get; set; }
     }
 }

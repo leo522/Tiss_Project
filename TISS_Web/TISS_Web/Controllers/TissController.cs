@@ -138,10 +138,11 @@ namespace TISS_Web.Controllers
 
                     _db.SaveChanges();
 
+                    user = _db.Users.FirstOrDefault(u => u.UserName == UserName); //再次從資料庫中讀取最新的失敗次數
+
                     ViewBag.ErrorMessage = (user.IsLocked ?? false)
                         ? "帳號已被鎖住，請稍後再試。"
-                        : "帳號或密碼錯誤，已經" + user.FailedLoginAttempts + "次錯誤。";
-
+                        : string.Format("帳號或密碼錯誤，已經 {0} 次錯誤。", user.FailedLoginAttempts);
 
                     return View();
                 }
@@ -525,68 +526,49 @@ namespace TISS_Web.Controllers
 
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.Host = "mail.tiss.org.tw"; // MX Mail Server 的主機名稱
-                smtpClient.Port = 25;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
-                smtpClient.EnableSsl = false;            // 根據伺服器要求設置 SSL
+                smtpClient.Host = "smtp.gmail.com"; // MX Mail Server 的主機名稱
+                smtpClient.Port = 587;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
+                smtpClient.EnableSsl = true;            // 根據伺服器要求設置 SSL
                 smtpClient.Credentials = new NetworkCredential("00048@tiss.org.tw", "lctm hhfh bubx lwda");
 
                 try
                 {
                     smtpClient.Send(mail);
                     Console.WriteLine("郵件已成功發送");
+                    LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
+                }
+                catch (SmtpException smtpEx)
+                {
+                    Console.WriteLine($"SMTP 錯誤: {smtpEx.Message}");
+                    Console.WriteLine(smtpEx.ToString());
+                    LogEmail(toEmail, subject, body, "Failed", smtpEx.Message); // 記錄 SMTP 錯誤
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("發送郵件失敗：" + ex.Message);
+                    Console.WriteLine($"其他錯誤: {ex.Message}");
+                    Console.WriteLine(ex.ToString());
+                    LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄其他錯誤
                 }
+
             }
         }
+        private void LogEmail(string recipientEmail, string subject, string body, string status, string errorMessage)
+        {
+            // 使用已經定義的 _db 實例
+            var emailLog = new EmailLogs
+            {
+                RecipientEmail = recipientEmail,
+                Subject = subject,
+                Body = body,
+                SentDate = DateTime.Now,
+                Status = status,
+                ErrorMessage = errorMessage
+            };
 
-        //private void SendEmail(string toEmail, string subject, string body, string attachmentPath = null)
-        //{
-        //    var fromEmail = "00048@tiss.org.tw";
-        //    var fromPassword = "lctm hhfh bubx lwda"; //應用程式密碼
-        //    var displayName = "運科中心資訊組"; //顯示的發件人名稱
-
-
-        //    var smtpClient = new SmtpClient("smtp.gmail.com")
-        //    {
-        //        Port = 587,
-        //        Credentials = new NetworkCredential(fromEmail, fromPassword),
-        //        EnableSsl = true,
-        //    };
-
-        //    var mailMessage = new MailMessage
-        //    {
-        //        From = new MailAddress(fromEmail, displayName),
-        //        Subject = subject,
-        //        Body = body,
-        //        IsBodyHtml = true,
-        //    };
-
-        //    // 分割以逗號分隔的收件人地址並添加到郵件中
-        //    foreach (var email in toEmail.Split(','))
-        //    {
-        //        mailMessage.To.Add(email.Trim());
-        //    }
-
-        //    if (!string.IsNullOrEmpty(attachmentPath))
-        //    {
-        //        Attachment attachment = new Attachment(attachmentPath);
-        //        mailMessage.Attachments.Add(attachment);
-        //    }
-
-        //    try
-        //    {
-        //        smtpClient.Send(mailMessage);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // 處理發送郵件的錯誤
-        //        Console.WriteLine("郵件發送失敗: " + ex.Message);
-        //    }
-        //}
-
+            _db.EmailLogs.Add(emailLog); // 使用 _db 實例
+            _db.SaveChanges(); // 儲存變更
+        }
+        
         #endregion
 
         #region 自己上傳圖片和文字使用
@@ -2236,6 +2218,10 @@ namespace TISS_Web.Controllers
                         .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
                         .ToList(); //獲取資料列表
 
+                var Websites = _db.DomainsURL.Where(d => d.IsActive).ToList(); // 獲取相關網站資料
+
+                ViewBag.Websites = Websites; // 將資料傳遞到視圖
+
                 return View(dto);
             }
             catch (Exception ex)
@@ -2610,6 +2596,8 @@ namespace TISS_Web.Controllers
                 article.ClickCount += 1; //增加點閱率次數
                 article.ContentBody = EnsureImageAltAttribute(article.ContentBody); // 在渲染之前，確保img標籤都包含 alt 屬性
 
+                ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList(); //處理多個Hashtags顯示
+
                 // 查找同一標籤下的上一篇和下一篇文章
                 var articlesWithSameTag = _db.ArticleContent
                     .Where(a => a.Hashtags.Contains(article.Hashtags) && a.IsEnabled) // 使用 Contains 來匹配部分標籤
@@ -2710,15 +2698,22 @@ namespace TISS_Web.Controllers
 
 
                 // 處理多個Hashtags
-                if (!string.IsNullOrEmpty(article.Hashtags))
-                {
-                    var hashtags = article.Hashtags.Split(',').ToList();
-                    ViewBag.Hashtags = hashtags;
-                }
-                else
-                {
-                    ViewBag.Hashtags = new List<string>();
-                }
+                //if (!string.IsNullOrEmpty(article.Hashtags))
+                //{
+                //    var hashtags = article.Hashtags.Split(',').ToList();
+                //    ViewBag.Hashtags = hashtags;
+                //}
+                //else
+                //{
+                //    ViewBag.Hashtags = new List<string>();
+                //}
+
+                //載入文章類型選項(供表單編輯用)
+                ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName", article.ContentTypeId);
+
+                ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList();
+                //載入標籤選項(供表單編輯用)
+                ViewBag.Hashtags = new MultiSelectList(_db.Hashtag.ToList(), "Name", "Name", article.Hashtags?.Split(','));
 
                 _db.SaveChanges();
 
@@ -2878,8 +2873,8 @@ namespace TISS_Web.Controllers
             if (!string.IsNullOrEmpty(reportPath))
             {
                 // 使用 Split 將收件人字串分割成單個地址的陣列
-                //string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
-                string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
+                string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
+                //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
 
                 string subject = "運科中心專欄文章瀏覽率報表";
                 string body = "您好，請參閱附件中的運科中心專欄文章瀏覽率報表。";

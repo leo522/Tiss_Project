@@ -15,6 +15,7 @@ namespace TISS_Web.Models
     public partial class ResearchProjectPageContent
     {
         public int ID { get; set; }
+        public Nullable<int> FileNo { get; set; }
         public string TextContent { get; set; }
         public byte[] ImageContent { get; set; }
         public Nullable<System.DateTime> FileUploadTime { get; set; }
@@ -26,7 +27,6 @@ namespace TISS_Web.Models
         public Nullable<System.DateTime> WebsiteURLUpdateTime { get; set; }
         public string UserAccount { get; set; }
         public Nullable<System.DateTime> UserLoginTime { get; set; }
-        public Nullable<int> FileNo { get; set; }
         public Nullable<int> ClickCount { get; set; }
     }
 }

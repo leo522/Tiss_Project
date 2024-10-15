@@ -15,7 +15,7 @@ namespace TISS_Web.Models
     public partial class UrlDocument
     {
         public int Id { get; set; }
-        public string URLsite { get; set; }
+        public string URL { get; set; }
         public System.DateTime UploadTime { get; set; }
         public string Creator { get; set; }
         public bool IsActive { get; set; }
