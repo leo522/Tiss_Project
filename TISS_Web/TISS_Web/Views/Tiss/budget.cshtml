@@ -16,15 +16,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt="公開資訊背景大圖"/>
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt="公開資訊背景小圖"/>
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt=""/>
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt=""/>
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle" title="Public Information">
                                     Public Information
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="公開資訊文字標題"/>公開資訊
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>公開資訊
                                 </div>
                             </div>
                         </div>
@@ -132,110 +132,112 @@
                             </div>
 
                             @*中央內容區塊*@
-                        <div class="PublicInfo" id="Ca">
-                            <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
-                            <span id="Regulation" class="anchor">
-                            </span>
-                            <span id="Methods" class="anchor">
-                            </span>
-                            <span id="Plan" class="anchor">
-                            </span>
-                            <span id="Budget" class="anchor">
-                            </span>
-                            <span id="Download" class="anchor">
-                            </span>
-                            <span id="Purchase" class="anchor">
-                            </span>
-                            <span id="Other" class="anchor">
-                            </span>
-                            <div class="content">
-                                <div class="subTitle" title="預算及決算">
-                                    預算及決算
-                                    <span class="primary" title="Budget">Budget</span>
-                                </div>
-                                <div class="infoList">
-                                    <div class="el-auto-resizer" style="width: 100%; height: 100%;">
-                                        <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
-                                            <div class="el-table-v2__table el-table-v2__main">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
-                                                            <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
-                                                            <th scope="col" style="width: 280px; padding: 10px;">附件</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach (var file in Model)
-                                                        {
-                                                            <tr style="margin-bottom: 20px; padding: 5px;">
-                                                                <td style="width: 480px; padding: 20px;">
-                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
-                                                                        <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
-                                                                    </a>
-                                                                </td>
-                                                                <td style="width: 240px; padding: 10px;">
-                                                                    @file.UploadTime.ToString("yyyy/MM/dd")
-                                                                </td>
-                                                                <td style="width: 280px; padding: 10px;">
-                                                                    <div class="BaseTagList download">
-                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" style="width:55px;">
-
-                                                                            <span tabindex="0" class="el-tag" style="display: inline-block; background-color: firebrick; color: white; border-radius: 0; font-size: 16px; padding: 5px 10px; ">
-                                                                                <span class="el-tag__content" title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentType</span>
-                                                                            </span>
-
+                        <div id="main_content">
+                            <div class="PublicInfo" id="Ca">
+                                <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
+                                <span id="Regulation" class="anchor">
+                                </span>
+                                <span id="Methods" class="anchor">
+                                </span>
+                                <span id="Plan" class="anchor">
+                                </span>
+                                <span id="Budget" class="anchor">
+                                </span>
+                                <span id="Download" class="anchor">
+                                </span>
+                                <span id="Purchase" class="anchor">
+                                </span>
+                                <span id="Other" class="anchor">
+                                </span>
+                                <div class="content">
+                                    <div class="subTitle" title="預算及決算">
+                                        預算及決算
+                                        <span class="primary" title="Budget">Budget</span>
+                                    </div>
+                                    <div class="infoList">
+                                        <div class="el-auto-resizer" style="width: 100%; height: 100%;">
+                                            <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
+                                                <div class="el-table-v2__table el-table-v2__main">
+                                                    <table>
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
+                                                                <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
+                                                                <th scope="col" style="width: 280px; padding: 10px;">附件</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var file in Model)
+                                                            {
+                                                                <tr style="margin-bottom: 20px; padding: 5px;">
+                                                                    <td style="width: 480px; padding: 20px;">
+                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
+                                                                            <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
                                                                         </a>
-                                                                    </div>
+                                                                    </td>
+                                                                    <td style="width: 240px; padding: 10px;">
+                                                                        @file.UploadTime.ToString("yyyy/MM/dd")
+                                                                    </td>
+                                                                    <td style="width: 280px; padding: 10px;">
+                                                                        <div class="BaseTagList download">
+                                                                            <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" style="width:55px;">
+
+                                                                                <span tabindex="0" class="el-tag" style="display: inline-block; background-color: firebrick; color: white; border-radius: 0; font-size: 16px; padding: 5px 10px; ">
+                                                                                    <span class="el-tag__content" title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentType</span>
+                                                                                </span>
+
+                                                                            </a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="3">
+                                                                    <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 30px;">
+                                                                        <ul class="pagination">
+                                                                            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                                                                                <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
+                                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                                            {
+                                                                                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                                                                    <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = i })">@i</a>
+                                                                                </li>
+                                                                            }
+                                                                            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                                                                                <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
+                                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </nav>
                                                                 </td>
                                                             </tr>
-                                                        }
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td colspan="3">
-                                                                <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 30px;">
-                                                                    <ul class="pagination">
-                                                                        <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                                            <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous">
-                                                                                <span aria-hidden="true">&laquo;</span>
-                                                                            </a>
-                                                                        </li>
-                                                                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                                                                        {
-                                                                            <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                                                <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = i })">@i</a>
-                                                                            </li>
-                                                                        }
-                                                                        <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                                            <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next">
-                                                                                <span aria-hidden="true">&raquo;</span>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </nav>
-                                                            </td>
-                                                        </tr>
-                                                    </tfoot>
-                                                </table>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="upload-section" style="margin-top: 30px;">
-                                    @{
-                                        if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
-                                        {
-                                            using (Html.BeginForm("UploadBudgetDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    <div class="upload-section" style="margin-top: 30px;">
+                                        @{
+                                            if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
-                                                <div class="col-md-10" style="margin-bottom: 20px;">
-                                                    <input type="file" name="file" />
-                                                    <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
-                                                </div>
+                                                using (Html.BeginForm("UploadBudgetDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                {
+                                                    <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
+                                                    <div class="col-md-10" style="margin-bottom: 20px;">
+                                                        <input type="file" name="file" />
+                                                        <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
+                                                    </div>
+                                                }
                                             }
                                         }
-                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
