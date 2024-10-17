@@ -133,3 +133,12 @@ D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\zh-Hant\System.Web.WebPages.Ra
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\TISS_Web.csproj.Up2Date
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\TISS_Web.dll
 D:\運科中心網頁專案\TISS_Web\TISS_Web\obj\Release\TISS_Web.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\BouncyCastle.Cryptography.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Gmail.v1.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\MimeKit.dll
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\BouncyCastle.Cryptography.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Gmail.v1.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\Google.Apis.Gmail.v1.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\MimeKit.pdb
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\MimeKit.xml
+D:\運科中心網頁專案\TISS_Web\TISS_Web\bin\MimeKit.dll.config

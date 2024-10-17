@@ -510,51 +510,75 @@ namespace TISS_Web.Controllers
         #region 郵件發送方法
         public void SendEmail(string toEmail, string subject, string body, string attachmentPath)
         {
-            var mail = new MailMessage();
-            mail.From = new MailAddress("00048@tiss.org.tw");
-            mail.To.Add(toEmail);
-            mail.Subject = subject;
-            mail.Body = body;
-            mail.IsBodyHtml = true; // 支援 HTML 格式
+            var gmailService = new GmailApiService(); //使用 Gmail API 發送郵件
+
+            //string attachmentBase64 = null; //如果有附件，則處理附件
+            //if (!string.IsNullOrEmpty(attachmentPath))
+            //{
+            //    // 轉換附件為 base64 編碼
+            //    byte[] attachmentBytes = System.IO.File.ReadAllBytes(attachmentPath);
+            //    attachmentBase64 = Convert.ToBase64String(attachmentBytes);
+            //}
+
+            //發送郵件
+            try
+            {
+                gmailService.SendEmail(toEmail, subject, body, attachmentPath);
+                Console.WriteLine("郵件已成功發送");
+                LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"錯誤: {ex.Message}");
+                LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄錯誤
+            }
+
+
+
+            //var mail = new MailMessage();
+            //mail.From = new MailAddress("00048@tiss.org.tw");
+            //mail.To.Add(toEmail);
+            //mail.Subject = subject;
+            //mail.Body = body;
+            //mail.IsBodyHtml = true; // 支援 HTML 格式
 
             // 如果有附件，則加入附件
-            if (!string.IsNullOrEmpty(attachmentPath))
-            {
-                Attachment attachment = new Attachment(attachmentPath);
-                mail.Attachments.Add(attachment);
-            }
+            //if (!string.IsNullOrEmpty(attachmentPath))
+            //{
+            //    Attachment attachment = new Attachment(attachmentPath);
+            //    mail.Attachments.Add(attachment);
+            //}
 
-            using (var smtpClient = new SmtpClient())
-            {
-                smtpClient.Host = "smtp.gmail.com"; // MX Mail Server 的主機名稱
-                smtpClient.Port = 587;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
-                smtpClient.EnableSsl = true;            // 根據伺服器要求設置 SSL
-                smtpClient.Credentials = new NetworkCredential("00048@tiss.org.tw", "lctm hhfh bubx lwda");
+            //using (var smtpClient = new SmtpClient())
+            //{
+            //    smtpClient.Host = "smtp.gmail.com"; // MX Mail Server 的主機名稱
+            //    smtpClient.Port = 587;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
+            //    smtpClient.EnableSsl = true;            // 根據伺服器要求設置 SSL
+            //    smtpClient.Credentials = new NetworkCredential("00048@tiss.org.tw", "lctm hhfh bubx lwda");
 
-                try
-                {
-                    smtpClient.Send(mail);
-                    Console.WriteLine("郵件已成功發送");
-                    LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
-                }
-                catch (SmtpException smtpEx)
-                {
-                    Console.WriteLine($"SMTP 錯誤: {smtpEx.Message}");
-                    Console.WriteLine(smtpEx.ToString());
-                    LogEmail(toEmail, subject, body, "Failed", smtpEx.Message); // 記錄 SMTP 錯誤
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"其他錯誤: {ex.Message}");
-                    Console.WriteLine(ex.ToString());
-                    LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄其他錯誤
-                }
+            //    try
+            //    {
+            //        smtpClient.Send(mail);
+            //        Console.WriteLine("郵件已成功發送");
+            //        LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
+            //    }
+            //    catch (SmtpException smtpEx)
+            //    {
+            //        Console.WriteLine($"SMTP 錯誤: {smtpEx.Message}");
+            //        Console.WriteLine(smtpEx.ToString());
+            //        LogEmail(toEmail, subject, body, "Failed", smtpEx.Message); // 記錄 SMTP 錯誤
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine($"其他錯誤: {ex.Message}");
+            //        Console.WriteLine(ex.ToString());
+            //        LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄其他錯誤
+            //    }
 
-            }
+            //}
         }
         private void LogEmail(string recipientEmail, string subject, string body, string status, string errorMessage)
         {
-            // 使用已經定義的 _db 實例
             var emailLog = new EmailLogs
             {
                 RecipientEmail = recipientEmail,
@@ -565,10 +589,10 @@ namespace TISS_Web.Controllers
                 ErrorMessage = errorMessage
             };
 
-            _db.EmailLogs.Add(emailLog); // 使用 _db 實例
-            _db.SaveChanges(); // 儲存變更
+            _db.EmailLogs.Add(emailLog);
+            _db.SaveChanges();
         }
-        
+
         #endregion
 
         #region 自己上傳圖片和文字使用
@@ -2873,15 +2897,15 @@ namespace TISS_Web.Controllers
             if (!string.IsNullOrEmpty(reportPath))
             {
                 // 使用 Split 將收件人字串分割成單個地址的陣列
-                string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
-                //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
+                //string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
+                string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
 
                 string subject = "運科中心專欄文章瀏覽率報表";
                 string body = "您好，請參閱附件中的運科中心專欄文章瀏覽率報表。";
                 // 迴圈發送郵件給每個收件人
                 foreach (string email in toEmail)
                 {
-                    SendEmail(email.Trim(), subject, body, reportPath); // Trim() 確保去除多餘的空格
+                    SendEmail(email.Trim(), subject, body, reportPath); //Trim() 確保去除多餘的空格
                 }
             }
 
