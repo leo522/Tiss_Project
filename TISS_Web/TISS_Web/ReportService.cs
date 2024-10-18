@@ -40,9 +40,8 @@ namespace TISS_Web
                 }
 
                 // 設定固定的日期區間
-                DateTime today = DateTime.Now; //當天的日期
-                DateTime endDate = today.AddDays(-1); // 結束日期為昨天
-                DateTime startDate = today.AddDays(-14); // 起始日期為兩週前
+                DateTime startDate = DateTime.Now; //當天的日期
+                int weeksInterval = 2; //每隔兩週
 
                 // 計算固定的日期區間
                 DateTime firstStartDate = startDate; // 第一個開始日期
