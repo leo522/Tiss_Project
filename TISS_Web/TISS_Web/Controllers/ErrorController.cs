@@ -12,5 +12,10 @@ namespace TISS_Web.Controllers
         {
             return View("Error404");
         }
+
+        public ActionResult WebSiteError()
+        {
+            return View();
+        }
     }
 }

@@ -27,6 +27,13 @@ namespace TISS_Web
                 //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 defaults: new { controller = "Tiss", action = "Home", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+           name: "Error",
+           url: "Error/{action}/{id}",
+           defaults: new { controller = "Error", action = "Error404", id = UrlParameter.Optional }
+       );
+
         }
     }
 }

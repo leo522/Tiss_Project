@@ -58,12 +58,12 @@
                                 @if (ViewBag.ParentDirectory != null)
                                 {
                                     <span class="el-breadcrumb__item">
-                                        <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
+                                        <span class="el-breadcrumb__inner" style="color:black">@ViewBag.ParentDirectory</span>
                                         <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                     </span>
                                 }
                                 <span class="el-breadcrumb__item current-page" aria-current="page">
-                                    <span class="el-breadcrumb__inner" role="link" style="color:black">@Html.Raw(Model.Title)</span>
+                                    <span class="el-breadcrumb__inner" style="color:black">@Html.Raw(Model.Title)</span>
                                 </span>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                     @if (ViewBag.ParentDirectory != null && ViewBag.CurrentSubDirectory != null)
                                     {
                                         <span class="el-breadcrumb__item">
-                                            <span class="el-breadcrumb__inner" role="link" style="color:black">@ViewBag.ParentDirectory</span>
+                                            <span class="el-breadcrumb__inner" style="color:black">@ViewBag.ParentDirectory</span>
                                             <i class="fa-solid el-breadcrumb__separator fa-greater-than fa-xs" style="color: #44afe4;"></i>
                                         </span>
                                         <span class="el-breadcrumb__item">

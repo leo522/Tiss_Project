@@ -214,7 +214,6 @@
       <DependentUpon>CKEditorControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\TissController.cs" />
     <Compile Include="EmailService.cs" />
@@ -2980,12 +2979,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Tiss\announcement.cshtml" />
-    <Content Include="Views\Home\OnInit.cshtml" />
     <Content Include="Views\Tiss\video.cshtml" />
     <Content Include="Views\Tiss\about.cshtml" />
     <Content Include="Views\Tiss\research.cshtml" />
@@ -3030,7 +3024,6 @@
     <Content Include="Views\Tiss\sportsPsychology.cshtml" />
     <Content Include="Views\Tiss\physicalTraining.cshtml" />
     <Content Include="Views\Tiss\sportsNutrition.cshtml" />
-    <Content Include="Views\Home\Navbar.cshtml" />
     <Content Include="Views\Tiss\achievement.cshtml" />
     <Content Include="Views\Tiss\news.cshtml" />
     <Content Include="Views\Tiss\activityRecord.cshtml" />
@@ -3049,7 +3042,6 @@
     <Content Include="Views\Tiss\ViewArticle.cshtml" />
     <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
-    <Content Include="Views\Home\ytVideo.cshtml" />
     <Content Include="Views\Tiss\ForgotPassword.cshtml" />
     <Content Include="Views\Tiss\ResetPassword.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
@@ -3066,10 +3058,10 @@
     <Content Include="tinymce\CHANGELOG.md" />
     <Content Include="tinymce\js\tinymce\langs\README.md" />
     <Content Include="tinymce\js\tinymce\license.md" />
+    <Content Include="Views\Error\WebSiteError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

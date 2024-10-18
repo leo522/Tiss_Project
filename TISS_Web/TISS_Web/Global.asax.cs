@@ -64,12 +64,12 @@ namespace TISS_Web
             var httpException = exception as HttpException;
             if (httpException != null && httpException.GetHttpCode() == 404)
             {
-                Response.Redirect("~/Error404");
+                Response.Redirect("~/Error/Error404");
             }
             else
             {
                 // 如果不是 404 錯誤，可以顯示通用的錯誤頁面
-                Response.Redirect("~/Error404");
+                Response.Redirect("~/Error/WebSiteError");
             }
         }
     }
