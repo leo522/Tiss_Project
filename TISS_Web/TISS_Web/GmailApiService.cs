@@ -27,27 +27,10 @@ namespace TISS_Web
         {
             UserCredential credential;
 
-            //using (var stream =
-            //    new FileStream(@"D:\運科中心網頁專案\client_secret_562908734561-958sofhl9m82q4m0qsq6urcknbtbvaf6.apps.googleusercontent.com.json", FileMode.Open, FileAccess.Read))
-            //{
-            //    string credPath = @"D:\運科中心網頁專案\token.json";
-            //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-            //        GoogleClientSecrets.Load(stream).Secrets,
-            //        Scopes,
-            //        "user",
-            //        CancellationToken.None,
-            //        new FileDataStore(credPath, true)).Result;
-            //    Console.WriteLine("Credential file saved to: " + credPath);
-            //}
-            // 使用 Server.MapPath 將相對路徑轉換為絕對路徑
-            //string clientSecretPath = System.Web.Hosting.HostingEnvironment.MapPath("~/client_secret.json");
-            string clientSecretPath = System.Web.Hosting.HostingEnvironment.MapPath("~/client_secret_562908734561-958sofhl9m82q4m0qsq6urcknbtbvaf6.apps.googleusercontent.com.json");
-
-            using (var stream = new FileStream(clientSecretPath, FileMode.Open, FileAccess.Read))
+            using (var stream =
+                new FileStream(@"C:\運科中心網頁專案\client_secret_562908734561-2ah8nilm2teje23cflss2h79cunhqrri.apps.googleusercontent.com.json", FileMode.Open, FileAccess.Read))
             {
-                //string credPath = "token.json";
-                //string credPath = @"C:\運科中心網站token.json";
-                string credPath = System.Web.Hosting.HostingEnvironment.MapPath("~/token.json");
+                string credPath = @"C:\運科中心網站\token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
@@ -56,6 +39,23 @@ namespace TISS_Web
                     new FileDataStore(credPath, true)).Result;
                 Console.WriteLine("Credential file saved to: " + credPath);
             }
+            // 使用 Server.MapPath 將相對路徑轉換為絕對路徑
+            //string clientSecretPath = System.Web.Hosting.HostingEnvironment.MapPath("~/client_secret.json");
+            //string clientSecretPath = System.Web.Hosting.HostingEnvironment.MapPath("~/client_secret_562908734561-2ah8nilm2teje23cflss2h79cunhqrri.apps.googleusercontent.com.json");
+
+            //using (var stream = new FileStream(clientSecretPath, FileMode.Open, FileAccess.Read))
+            //{
+            //    //string credPath = "token.json";
+            //    //string credPath = @"C:\運科中心網站token.json";
+            //    string credPath = System.Web.Hosting.HostingEnvironment.MapPath("~/token.json");
+            //    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+            //        GoogleClientSecrets.Load(stream).Secrets,
+            //        Scopes,
+            //        "user",
+            //        CancellationToken.None,
+            //        new FileDataStore(credPath, true)).Result;
+            //    Console.WriteLine("Credential file saved to: " + credPath);
+            //}
 
             //創建 Gmail API 服務
             var service = new GmailService(new BaseClientService.Initializer()

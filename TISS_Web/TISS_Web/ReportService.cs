@@ -19,8 +19,8 @@ namespace TISS_Web
 
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmm");
             //string reportDir = $@"D:\文章瀏覽率報表\report_{timestamp}.xlsx";
-            //string reportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
-            string reportDir = Path.Combine("D:\\Reports"); // 使用較短的路徑
+            string reportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
+            //string reportDir = Path.Combine("D:\\Reports"); // 使用較短的路徑
 
             // 確保資料夾存在
             if (!Directory.Exists(reportDir))

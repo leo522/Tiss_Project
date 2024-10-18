@@ -7,7 +7,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="~/Img/favicon.svg" />
-    <title title="國家運動科學中心">國家運動科學中心</title>
+    <title>
+        @if (string.IsNullOrEmpty(ViewBag.Title))
+        {
+            @:國家運動科學中心
+        }
+        else
+        {
+            @:國家運動科學中心_@ViewBag.Title
+        }
+    </title>
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
     <link href="~/site/css/BackTop.css" rel="stylesheet" />
@@ -333,11 +342,11 @@
         @RenderBody()
     </div>
     <footer data-v-339da53a="">
-        <a href="#Z" title="下方功能區塊" accesskey="Z" name="Z" class="alt-c01">:::</a>
         <div class="FooterDecoration"></div>
         <div class="container">
             <div class="FooterContent">
                 <div class="LeftFooterContent">
+                    <a href="#Z" title="下方功能區塊" accesskey="Z" name="Z" class="alt-c01">:::</a>
                     <div class="Info">
                         <img class="logo" src="/site/img/logo.1fec0909.svg" alt="">
                         <ul class="InfoList">
@@ -361,7 +370,6 @@
                             </li>
                             <li>
                                 <button onclick="location.href='/Tiss/Login'" type="button" class="el-button is-plain is-text FontSizeBtn" title="網頁管理者">網頁管理者</button>
-
                             </li>
                             <li id="logoutBtn" style="display: none;">
                                 <form id="logoutForm" action="/Tiss/Logout" method="post">
@@ -479,9 +487,9 @@
                             </ul>
                         </div>
                         @*<div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
-                                <ul class="MenuList"></ul>
-                            </div>*@
+                    <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
+                    <ul class="MenuList"></ul>
+                </div>*@
                     </div>
                     <div class="copyright">
                         <div class="container" title="Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>
@@ -489,9 +497,6 @@
                 </div>
             </div>
         </div>
-        @*<div class="d-flex w-100">
-                <span title="本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080">本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
-            </div>*@
     </footer>
     @*回最上方按鈕*@
     <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;" tabindex="0" role="button">
@@ -669,6 +674,17 @@
                 navbarMenu.classList.toggle('show');
             });
 
+            const dropdownToggles = document.querySelectorAll('.nav-link');
+
+            dropdownToggles.forEach(dropdownToggle => {
+                dropdownToggle.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        // 直接導航到 href
+                        window.location.href = dropdownToggle.getAttribute('href');
+                    }
+                });
+            });
+
             dropdownToggles.forEach(dropdownToggle => {
                 const dropdownMenu = dropdownToggle.nextElementSibling;
 
@@ -741,19 +757,6 @@
                     menu.style.display = 'none';
                 });
             }
-
-            // 語言選單 focus 時自動展開
-            //var languageSelect = document.querySelector('.selectpicker');
-
-            //// 當語言選單獲得焦點時自動展開選單
-            //languageSelect.addEventListener('focus', function () {
-            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法展開選單
-            //});
-
-            //// 當語言選單失去焦點時自動關閉選單
-            //languageSelect.addEventListener('blur', function () {
-            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法關閉選單
-            //});
         });
     </script>
 </body>

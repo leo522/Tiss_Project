@@ -16,15 +16,15 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="中心公告背景大圖"/>
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="中心公告背景小圖"/>
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt=""/>
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt=""/>
                         <div class="container">
                             <div class="Title">
                                 <div class="BannerTitle" title="Announcements">
                                     Announcements
                                 </div>
                                 <div class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="中心公告文字標題"/>中心公告
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>中心公告
                                 </div>
                             </div>
                         </div>
@@ -131,16 +131,16 @@
                             </div>
 
                             @*中央內容區塊*@
-                            <div class="MainContainer" id="Ca">                 
-                                <div class="AnnouncementList" >
+                        <div id="main_content">
+                            <div class="MainContainer" id="Ca">
+                                <div class="AnnouncementList">
                                     <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
                                     <div class="container">
                                         <div class="row">
                                             @foreach (var article in Model)
                                             {
                                                 <div class="col-md-4 mb-4">
-                                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
-                                                        <div class="NewsItemBox" tabindex="0">
+                                                        <div class="NewsItemBox" tabindex="0" onclick="window.location.href='@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })';" role="link">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)
                                                                 {
@@ -162,7 +162,6 @@
                                                             </div>
                                                             <div class="date-tag">@article.FormattedCreateDate</div>
                                                         </div>
-                                                    </a>
                                                 </div>
                                             }
                                         </div>
@@ -193,6 +192,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>        
                         </main>
                     </section>
                 </div>
