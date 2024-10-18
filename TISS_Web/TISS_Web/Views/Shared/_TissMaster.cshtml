@@ -7,7 +7,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="~/Img/favicon.svg" />
-    <title title="國家運動科學中心">國家運動科學中心</title>
+    <title>
+        @if (string.IsNullOrEmpty(ViewBag.Title))
+        {
+            @:國家運動科學中心
+        }
+        else
+        {
+            @:國家運動科學中心_@ViewBag.Title
+        }
+    </title>
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
     <link href="~/site/css/BackTop.css" rel="stylesheet" />

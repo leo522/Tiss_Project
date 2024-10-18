@@ -751,10 +751,12 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Home()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
+            try
+            {
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            // 查詢影片文章內容
-            var relatedHashtags = new List<string>
+                // 查詢影片文章內容
+                var relatedHashtags = new List<string>
             {
                 "人物專訪",
                 "中心成果",
@@ -762,39 +764,25 @@ namespace TISS_Web.Controllers
                 "影音專區"
             };
 
-            var videoArticles = _db.ArticleContent
-                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                .ToList();
+                var videoArticles = _db.ArticleContent
+                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                    .ToList();
 
-            // 提取影片中的 iframe 標籤
-            var videos = videoArticles.Select(a => new ArticleContentModel
-            {
-                Title = a.Title,
-                VideoIframe = ExtractIframe(a.ContentBody),
-                ImageContent = a.ImageContent,
-                Hashtags = a.Hashtags,
-                PublishedDate = a.PublishedDate.GetValueOrDefault(DateTime.MinValue),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
-            }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
-
-            //首頁文章內容
-            var dtos = _db.ArticleContent
-                .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
-                .OrderByDescending(a => a.PublishedDate)
-                .Select(a => new ArticleContentModel
+                // 提取影片中的 iframe 標籤
+                var videos = videoArticles.Select(a => new ArticleContentModel
                 {
                     Title = a.Title,
+                    VideoIframe = ExtractIframe(a.ContentBody),
                     ImageContent = a.ImageContent,
-                    ContentType = a.ContentType,
                     Hashtags = a.Hashtags,
-                    EncryptedUrl = a.EncryptedUrl,
-                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                    PublishedDate = a.PublishedDate.GetValueOrDefault(DateTime.MinValue),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
+                }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
 
-                }).Take(4).ToList();
-
-            var dto = _db.ArticleContent
-                    .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
-                    .OrderByDescending(a => a.CreateDate)
+                //首頁文章內容
+                var dtos = _db.ArticleContent
+                    .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                    .OrderByDescending(a => a.PublishedDate)
                     .Select(a => new ArticleContentModel
                     {
                         Title = a.Title,
@@ -803,66 +791,100 @@ namespace TISS_Web.Controllers
                         Hashtags = a.Hashtags,
                         EncryptedUrl = a.EncryptedUrl,
                         PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-                    })
-                    .FirstOrDefault(); // 取得最新的專欄文章
 
-            var latestArticle = dtos.FirstOrDefault();
-            var otherArticles = dtos.Skip(1).ToList();
+                    }).Take(4).ToList();
 
-            var viewModel = new HomeViewModel //首頁的部份視圖
+                var dto = _db.ArticleContent
+                        .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                        .OrderByDescending(a => a.CreateDate)
+                        .Select(a => new ArticleContentModel
+                        {
+                            Title = a.Title,
+                            ImageContent = a.ImageContent,
+                            ContentType = a.ContentType,
+                            Hashtags = a.Hashtags,
+                            EncryptedUrl = a.EncryptedUrl,
+                            PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                        })
+                        .FirstOrDefault(); // 取得最新的專欄文章
+
+                var latestArticle = dtos.FirstOrDefault();
+                var otherArticles = dtos.Skip(1).ToList();
+
+                var viewModel = new HomeViewModel //首頁的部份視圖
+                {
+                    //LatestArticle = latestArticle,
+                    LatestArticle = dto,
+                    OtherArticles = otherArticles,
+                    Videos = videos
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception ex)
             {
-                //LatestArticle = latestArticle,
-                LatestArticle = dto,
-                OtherArticles = otherArticles,
-                Videos = videos
-            };
-
-            return View(viewModel);
+                throw ex;
+            }
         }
 
         //首頁Partial View 最新消息清單使用
         public ActionResult GetArticles(int? contentTypeId)
         {
-            var query = _db.ArticleContent
-         .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true);
-
-            if (contentTypeId.HasValue && contentTypeId.Value > 0)
+            try
             {
-                query = query.Where(a => a.ContentTypeId == contentTypeId.Value);
-            }
+                var query = _db.ArticleContent
+                .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true);
 
-            var dtos = query
-                .OrderByDescending(a => a.PublishedDate)
-                .Select(a => new ArticleContentModel
+                if (contentTypeId.HasValue && contentTypeId.Value > 0)
                 {
-                    Title = a.Title,
-                    ImageContent = a.ImageContent,
-                    ContentType = a.ContentType,
-                    Hashtags = a.Hashtags,
-                    EncryptedUrl = a.EncryptedUrl,
-                    PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-                }).Take(4).ToList();
+                    query = query.Where(a => a.ContentTypeId == contentTypeId.Value);
+                }
 
-            return PartialView("_ArticleListPartial", dtos);
+                var dtos = query
+                    .OrderByDescending(a => a.PublishedDate)
+                    .Select(a => new ArticleContentModel
+                    {
+                        Title = a.Title,
+                        ImageContent = a.ImageContent,
+                        ContentType = a.ContentType,
+                        Hashtags = a.Hashtags,
+                        EncryptedUrl = a.EncryptedUrl,
+                        PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                    }).Take(4).ToList();
+
+                return PartialView("_ArticleListPartial", dtos);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //處理DB影片的尺寸
         private string ExtractIframe(string content)
         {
-            var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>");
-            var match = regex.Match(content);
-
-            if (match.Success)
+            try
             {
-                var iframeHtml = match.Value;
-                // 替換原始的 width 和 height 屬性
-                iframeHtml = Regex.Replace(iframeHtml, @"width=""\d+""", "width=\"100%\"");
-                iframeHtml = Regex.Replace(iframeHtml, @"height=""\d+""", "height=\"100%\"");
-                return iframeHtml;
-            }
+                var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>");
+                var match = regex.Match(content);
 
-            return string.Empty;
-            //return match.Success ? match.Value : string.Empty;
+                if (match.Success)
+                {
+                    var iframeHtml = match.Value;
+                    // 替換原始的 width 和 height 屬性
+                    iframeHtml = Regex.Replace(iframeHtml, @"width=""\d+""", "width=\"100%\"");
+                    iframeHtml = Regex.Replace(iframeHtml, @"height=""\d+""", "height=\"100%\"");
+                    return iframeHtml;
+                }
+
+                return string.Empty;
+                //return match.Success ? match.Value : string.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -875,12 +897,14 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult announcement(int page = 1, int pageSize = 9)
         {
+            try
+            {
+                ViewBag.Title = "中心公告";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            Session["ReturnUrl"] = Request.Url.ToString();
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var relatedHashtags = new List<string>
+                var relatedHashtags = new List<string>
             {
                 "新聞發佈",
                 "中心訊息",
@@ -892,32 +916,37 @@ namespace TISS_Web.Controllers
                 "行政管理人資組",
                 "運動資訊"
             };
-            // 查詢相關 hashtags 的文章
-            var list = _db.ArticleContent
-                .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
+                // 查詢相關 hashtags 的文章
+                var list = _db.ArticleContent
+                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
 
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
 
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
-
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
-
-            return View(articles);
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -926,35 +955,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult press(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.ContentType == "新聞發佈" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "新聞發佈";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.ContentType == "新聞發佈" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -963,35 +1000,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult institute(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.ContentType == "中心訊息" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "中心訊息";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.ContentType == "中心訊息" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1000,35 +1045,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult recruit(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.ContentType == "徵才招募" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "徵才招募";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.ContentType == "徵才招募" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1077,6 +1130,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "影音專區";
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
                 var relatedHashtags = new List<string>
@@ -1131,6 +1185,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "中心成果";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
@@ -1175,6 +1230,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "新聞影音";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
@@ -1219,6 +1275,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "活動紀錄";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
@@ -1263,8 +1320,16 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult about()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "中心介紹";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1309,9 +1374,18 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult Objectives()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "使命、願景";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult objectivesSaveContent(string textContent, string ImageSrc)
@@ -1340,14 +1414,23 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 任務
+        /// 中心任務
         /// </summary>
         /// <returns></returns>
         public ActionResult mission()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "中心任務";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult missionSaveContent(string textContent, string ImageSrc)
@@ -1381,9 +1464,18 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult Organization()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "組織概況";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult organizationSaveContent(string textContent, string ImageSrc)
@@ -1417,9 +1509,18 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult BOD()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "第1屆 董監事";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult BODSaveContent(string textContent, string ImageSrc)
@@ -1453,9 +1554,18 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult CEO()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "執行長";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CeoSaveContent(string textContent, string ImageSrc)
@@ -1489,8 +1599,16 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult Units()
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-            return View();
+            try
+            {
+                ViewBag.Title = "單位介紹";
+                Session["ReturnUrl"] = Request.Url.ToString();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]
@@ -1526,11 +1644,14 @@ namespace TISS_Web.Controllers
 
         public ActionResult research(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
+            try
+            {
+                ViewBag.Title = "科普專欄";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            page = Math.Max(1, page); // 確保頁碼至少為 1
+                page = Math.Max(1, page); // 確保頁碼至少為 1
 
-            var relatedHashtags = new List<string>
+                var relatedHashtags = new List<string>
             {
                 "運動醫學",
                 "運動科技",
@@ -1543,34 +1664,39 @@ namespace TISS_Web.Controllers
                 "科普海報下載專區"
             };
 
-            // 查詢相關 hashtags 的文章
-            var list = _db.ArticleContent
-                .Where(a => a.IsEnabled)
-                .ToList()
-                .Where(a => relatedHashtags.Any(tag => a.Hashtags.Split(',').Contains(tag)))
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
+                // 查詢相關 hashtags 的文章
+                var list = _db.ArticleContent
+                    .Where(a => a.IsEnabled)
+                    .ToList()
+                    .Where(a => relatedHashtags.Any(tag => a.Hashtags.Split(',').Contains(tag)))
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
 
-            // 計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+                // 計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
 
-            page = Math.Min(page, totalPages); // 確保頁碼不超過最大頁數
+                page = Math.Min(page, totalPages); // 確保頁碼不超過最大頁數
 
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
-
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
-
-            return View(articles);
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1579,35 +1705,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportScience(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動科學" || a.Hashtags == "運動管理" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "運動科學";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "運動科學" || a.Hashtags == "運動管理" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1616,35 +1750,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportTech(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動科技" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "運動科技";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "運動科技" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1653,35 +1795,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportMedicine(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動醫學" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "運動醫學";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "運動醫學" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1692,6 +1842,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "運動生理";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
@@ -1734,35 +1885,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsPsychology(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動心理" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "運動心理"; 
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "運動心理" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1771,35 +1930,44 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult physicalTraining(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "體能訓練" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "體能訓練";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "體能訓練" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -1808,35 +1976,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult sportsNutrition(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "運動營養" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "運動營養";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "運動營養" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1845,35 +2021,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult childrenScience(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "兒少科普";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1882,35 +2066,43 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult SciencePosterDownLoad(int page = 1, int pageSize = 9)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ArticleContent
-                .Where(a => a.Hashtags.Contains("科普海報下載專區") && a.IsEnabled)
-                .OrderByDescending(a => a.CreateDate)
-                .ToList();
-
-            //計算總數和總頁數
-            var totalArticles = list.Count();
-            var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            try
             {
-                Title = s.Title,
-                EncryptedUrl = EncryptUrl(s.Title),
-                ImageContent = s.ImageContent,
-                Hashtags = s.Hashtags,
-                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-            }).ToList();
+                ViewBag.Title = "科普海報下載專區";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(articles);
+                var list = _db.ArticleContent
+                    .Where(a => a.Hashtags.Contains("科普海報下載專區") && a.IsEnabled)
+                    .OrderByDescending(a => a.CreateDate)
+                    .ToList();
+
+                //計算總數和總頁數
+                var totalArticles = list.Count();
+                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+                {
+                    Title = s.Title,
+                    EncryptedUrl = EncryptUrl(s.Title),
+                    ImageContent = s.ImageContent,
+                    Hashtags = s.Hashtags,
+                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(articles);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
 
@@ -1958,34 +2150,42 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult public_info(int page = 1, int pageSize = 7)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.RegulationDocument.Where(d => d.IsActive)
-                    .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
-                    .ToList(); //獲取資料列表
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "公開資訊";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.RegulationDocument.Where(d => d.IsActive)
+                        .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                        .ToList(); //獲取資料列表
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -1994,32 +2194,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult regulation(int page = 1, int pageSize = 7)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.RegulationDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "法規";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.RegulationDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2028,32 +2236,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult procedure(int page = 1, int pageSize = 10)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.ProcedureDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new ProcedureDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "辦法及要點";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.ProcedureDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new ProcedureDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2062,34 +2278,42 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult plan(int page = 1, int pageSize = 10)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-            var list = _db.PlanDocument
-                               .Where(d => d.IsActive) // 只選取 IsActive 為 true 的檔案
-                               .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
-                               .ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PlanDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "計畫";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
+                var list = _db.PlanDocument
+                                   .Where(d => d.IsActive) // 只選取 IsActive 為 true 的檔案
+                                   .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                                   .ToList();
 
-            return View(dtos);
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PlanDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2098,32 +2322,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult budget(int page = 1, int pageSize = 10)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.BudgetDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new BudgetDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "預算與決算";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.BudgetDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new BudgetDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2132,32 +2364,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult download(int page = 1, int pageSize = 10)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DownloadDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "下載專區";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DownloadDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2166,32 +2406,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult purchase(int page = 1, int pageSize = 5)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.PurchaseDocument.ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PurchaseDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
-                Creator = d.Creator,
-                FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "採購作業實施規章";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.PurchaseDocument.ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PurchaseDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                    Creator = d.Creator,
+                    FileSize = d.FileSize ?? 0,  // 處理 Nullable int
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2200,32 +2448,40 @@ namespace TISS_Web.Controllers
         /// <returns></returns>
         public ActionResult other(int page = 1, int pageSize = 10)
         {
-            Session["ReturnUrl"] = Request.Url.ToString();
-
-            page = Math.Max(1, page); //確保頁碼至少為 1
-
-            var list = _db.OtherDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
-            //計算總數和總頁數
-            var totalDocuments = list.Count();
-            var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
-
-            page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-            var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new OtherDocumentModel
+            try
             {
-                DocumentName = d.DocumentName,
-                DocumentType = d.DocumentType,
-                UploadTime = d.UploadTime,
-                Creator = d.Creator,
-                FileSize = d.FileSize,
-                IsActive = d.IsActive,
-            }).ToList();
+                ViewBag.Title = "其他";
+                Session["ReturnUrl"] = Request.Url.ToString();
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
+                page = Math.Max(1, page); //確保頁碼至少為 1
 
-            return View(dtos);
+                var list = _db.OtherDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new OtherDocumentModel
+                {
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion
@@ -2236,6 +2492,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                ViewBag.Title = "性別平等專區";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 var dto = _db.GenderEqualityDocument.Where(d => d.IsActive)
