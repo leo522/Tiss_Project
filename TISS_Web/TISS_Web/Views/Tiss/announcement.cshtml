@@ -140,8 +140,7 @@
                                             @foreach (var article in Model)
                                             {
                                                 <div class="col-md-4 mb-4">
-                                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
-                                                        <div class="NewsItemBox" tabindex="0">
+                                                        <div class="NewsItemBox" tabindex="0" onclick="window.location.href='@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })';" role="link">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)
                                                                 {
@@ -163,7 +162,6 @@
                                                             </div>
                                                             <div class="date-tag">@article.FormattedCreateDate</div>
                                                         </div>
-                                                    </a>
                                                 </div>
                                             }
                                         </div>

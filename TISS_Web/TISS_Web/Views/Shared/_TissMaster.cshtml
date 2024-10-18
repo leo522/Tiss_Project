@@ -498,16 +498,13 @@
                 </div>
             </div>
         </div>
-        @*<div class="d-flex w-100">
-                <span title="本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080">本網站建議使用 Microsoft Edge / Firefox / Chrome 瀏覽器，最佳瀏覽解析 1920×1080</span>
-            </div>*@
     </footer>
     @*回最上方按鈕*@
     <div data-v-339da53a="" class="el-backtop GoTop" style="right: 40px; bottom: 40px;" tabindex="0" role="button">
         <i class="fa-solid fa-angle-up fa-xl" style="color: #fcfcfc;" title="回最上方"></i>
     </div>
 
-    <script>
+<script>
 
         // 清除 Google 翻譯的相關 cookie
         function clearGoogleTranslateCookies() {
@@ -678,6 +675,17 @@
                 navbarMenu.classList.toggle('show');
             });
 
+            const dropdownToggles = document.querySelectorAll('.nav-link');
+
+            dropdownToggles.forEach(dropdownToggle => {
+                dropdownToggle.addEventListener('keydown', function (event) {
+                    if (event.key === 'Enter') {
+                        // 直接導航到 href
+                        window.location.href = dropdownToggle.getAttribute('href');
+                    }
+                });
+            });
+
             dropdownToggles.forEach(dropdownToggle => {
                 const dropdownMenu = dropdownToggle.nextElementSibling;
 
@@ -750,20 +758,7 @@
                     menu.style.display = 'none';
                 });
             }
-
-            // 語言選單 focus 時自動展開
-            //var languageSelect = document.querySelector('.selectpicker');
-
-            //// 當語言選單獲得焦點時自動展開選單
-            //languageSelect.addEventListener('focus', function () {
-            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法展開選單
-            //});
-
-            //// 當語言選單失去焦點時自動關閉選單
-            //languageSelect.addEventListener('blur', function () {
-            //    $(this).selectpicker('toggle'); // 使用 selectpicker 方法關閉選單
-            //});
         });
-    </script>
+</script>
 </body>
 </html>

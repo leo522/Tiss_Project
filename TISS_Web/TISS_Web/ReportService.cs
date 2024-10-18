@@ -18,9 +18,9 @@ namespace TISS_Web
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial; //設置許可上下文
 
             string timestamp = DateTime.Now.ToString("yyyyMMddHHmm");
-            //string excelPath = $@"D:\文章瀏覽率報表\report_{timestamp}.xlsx";
-            string reportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
-            //string reportDir = Path.Combine("D:\\Reports"); // 使用較短的路徑
+            //string reportDir = $@"D:\文章瀏覽率報表\report_{timestamp}.xlsx";
+            //string reportDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reports");
+            string reportDir = Path.Combine("D:\\Reports"); // 使用較短的路徑
 
             // 確保資料夾存在
             if (!Directory.Exists(reportDir))
@@ -39,15 +39,41 @@ namespace TISS_Web
                     return null;
                 }
 
-                //var reportData = _db.Database.SqlQuery<ArticleReportModel>("EXEC GetArticleClickReport").ToList();
+                // 設定固定的日期區間
+                DateTime startDate = DateTime.Now; //當天的日期
+                int weeksInterval = 2; //每隔兩週
+
+                // 計算固定的日期區間
+                DateTime firstStartDate = startDate; // 第一個開始日期
+                DateTime firstEndDate = firstStartDate.AddDays(13); // 第一個結束日期
+
+                for (int i = 0; i < reportData.Count; i++)
+                {
+                    // 每一行使用相同的開始和結束日期
+                    reportData[i].StartDate = firstStartDate.ToString("yyyy/MM/dd");
+                    reportData[i].EndDate = firstEndDate.ToString("yyyy/MM/dd");
+                }
 
                 using (var package = new ExcelPackage())
                 {
                     var worksheet = package.Workbook.Worksheets.Add("Report");
 
-                    worksheet.Cells["A1"].LoadFromCollection(reportData, true);
+                    //worksheet.Cells["A1"].LoadFromCollection(reportData, true); //加載報表資料
+                    // 手動設定中文欄位標題
+                    worksheet.Cells[1, 1].Value = "文章標題";   // Title -> 文章標題
+                    worksheet.Cells[1, 2].Value = "點擊次數";   // ClickCount -> 點擊次數
+                    worksheet.Cells[1, 3].Value = "開始日期";   // StartDate -> 開始日期
+                    worksheet.Cells[1, 4].Value = "結束日期";   // EndDate -> 結束日期
 
-                    package.SaveAs(new FileInfo(excelPath));
+                    // 從第二行開始插入數據
+                    for (int i = 0; i < reportData.Count; i++)
+                    {
+                        worksheet.Cells[i + 2, 1].Value = reportData[i].Title;        // 文章標題
+                        worksheet.Cells[i + 2, 2].Value = reportData[i].ClickCount;   // 點擊次數
+                        worksheet.Cells[i + 2, 3].Value = reportData[i].StartDate;    // 開始日期
+                        worksheet.Cells[i + 2, 4].Value = reportData[i].EndDate;      // 結束日期
+                    }
+                        package.SaveAs(new FileInfo(excelPath));
                 }
 
                 Thread.Sleep(1000); //確保檔案已完全寫入

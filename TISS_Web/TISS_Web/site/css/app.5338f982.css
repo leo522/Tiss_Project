@@ -12,6 +12,10 @@ under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
     outline: 0;
 }
 
+a:focus {
+    outline: 0;
+}
+
 [data-v-e61ebf00]:focus {
     outline: 0; /* 隱藏預設焦點框 */
     border: 4px dashed orange; /* 添加橙色虛線邊框 */
@@ -75674,8 +75678,8 @@ textarea.form-control-lg[data-v-3f77048f] {
 }
 
     .BasePageLayout .el-main.bg-defaultO4 {
-        background-color: rgba(242,244,247,.4)
-        /*background-color: #f2f4f7;*/
+        /*background-color: rgba(242,244,247,.4)*/
+        background-color: #f2f4f7;
     }
 
     .BasePageLayout .el-main .MainContainer {
@@ -77264,12 +77268,17 @@ textarea.form-control-lg[data-v-3f77048f] {
                 border-radius: 5px
             }
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
+
+/*文章專欄內文寬度*/
 .ResearchPage {
     margin-top: 175px;
     margin-left: -32px;
     padding: 86px 170px;
     border-radius: 10px;
-    background-color: #fff
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
 }
 
 @media screen and (max-width:991.9px) {
@@ -77375,11 +77384,12 @@ textarea.form-control-lg[data-v-3f77048f] {
     margin-right: 8px
 }
 
+/*專欄文章內文版面位置*/
 .ResearchPage .NewsContent {
     position: relative;
-    display: -webkit-box;
+   /* display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;
+    display: flex;*/
     padding-right: 205px;
     min-height: 300px
 }

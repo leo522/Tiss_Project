@@ -416,5 +416,7 @@ namespace TISS_Web.Models
     {
         public string Title { get; set; }
         public int ClickCount { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }
