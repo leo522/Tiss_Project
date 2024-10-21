@@ -683,48 +683,91 @@ namespace TISS_Web.Controllers
         [HttpPost]
         public ActionResult UploadRegulationDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "RegulationDocument");
-            return RedirectToAction("Regulation", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "RegulationDocument");
+                return RedirectToAction("Regulation", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //上傳辦法及要點文件
         [HttpPost]
         public ActionResult UploadProcedureDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "ProcedureDocument");
-            return RedirectToAction("Procedure", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "ProcedureDocument");
+                return RedirectToAction("Procedure", new { page });
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         // 上傳下載專區文件
         [HttpPost]
         public ActionResult UploadDownloadDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "DownloadDocument");
-            return RedirectToAction("download", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "DownloadDocument");
+                return RedirectToAction("download", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // 上傳預算與決算文件
         [HttpPost]
         public ActionResult UploadBudgetDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "BudgetDocument");
-            return RedirectToAction("budget", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "BudgetDocument");
+                return RedirectToAction("budget", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // 上傳其他文件
         [HttpPost]
         public ActionResult UploadOtherDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "OtherDocument");
-            return RedirectToAction("other", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "OtherDocument");
+                return RedirectToAction("other", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // 上傳採購作業實施規章文件
         [HttpPost]
         public ActionResult UploadPurchaseDocument(HttpPostedFileBase file, int? page)
         {
-            _fileUploadService.UploadFile(file, "PurchaseDocument");
-            return RedirectToAction("purchase", new { page });
+            try
+            {
+                _fileUploadService.UploadFile(file, "PurchaseDocument");
+                return RedirectToAction("purchase", new { page });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         //上傳性別平等專區文件
@@ -764,9 +807,9 @@ namespace TISS_Web.Controllers
                 "影音專區"
             };
 
-                var videoArticles = _db.ArticleContent
+                var videoArticles = await _db.ArticleContent
                     .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                    .ToList();
+                    .ToListAsync();
 
                 // 提取影片中的 iframe 標籤
                 var videos = videoArticles.Select(a => new ArticleContentModel
@@ -780,7 +823,7 @@ namespace TISS_Web.Controllers
                 }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
 
                 //首頁文章內容
-                var dtos = _db.ArticleContent
+                var dtos = await _db.ArticleContent
                     .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                     .OrderByDescending(a => a.PublishedDate)
                     .Select(a => new ArticleContentModel
@@ -792,9 +835,9 @@ namespace TISS_Web.Controllers
                         EncryptedUrl = a.EncryptedUrl,
                         PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
 
-                    }).Take(4).ToList();
+                    }).Take(4).ToListAsync();
 
-                var dto = _db.ArticleContent
+                var dto = await _db.ArticleContent
                         .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                         .OrderByDescending(a => a.CreateDate)
                         .Select(a => new ArticleContentModel
@@ -806,7 +849,7 @@ namespace TISS_Web.Controllers
                             EncryptedUrl = a.EncryptedUrl,
                             PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
                         })
-                        .FirstOrDefault(); // 取得最新的專欄文章
+                        .FirstOrDefaultAsync(); // 取得最新的專欄文章
 
                 var latestArticle = dtos.FirstOrDefault();
                 var otherArticles = dtos.Skip(1).ToList();
@@ -1887,7 +1930,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                ViewBag.Title = "運動心理"; 
+                ViewBag.Title = "運動心理";
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
@@ -1967,7 +2010,7 @@ namespace TISS_Web.Controllers
             {
                 throw ex;
             }
-            
+
         }
 
         /// <summary>
@@ -2371,8 +2414,11 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-
+                //var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.DownloadDocument
+                        .Where(d => d.IsActive && !d.DocumentType.Equals(".odt"))  // 過濾掉 .odt 檔案
+                        .OrderByDescending(d => d.UploadTime)
+                        .ToList();
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
                 var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
@@ -2807,18 +2853,25 @@ namespace TISS_Web.Controllers
         /// </summary>
         public string EnsureImageAltAttribute(string content)
         {
-            // 使用正則表達式找到所有 img 標籤，並檢查是否有 alt 屬性
-            var imgPattern = "<img(?![^>]*\\balt=)[^>]*>";
-            var altAttributePattern = "<img([^>]*?)>";
-
-            // 替換沒有 alt 的 img 標籤，添加具有描述性的 alt 屬性
-            string updatedContent = Regex.Replace(content, imgPattern, match =>
+            try
             {
-                // 根據實際需求決定alt的內容
-                return Regex.Replace(match.Value, altAttributePattern, "<img$1 alt=\"圖片描述\">");
-            });
+                // 使用正則表達式找到所有 img 標籤，並檢查是否有 alt 屬性
+                var imgPattern = "<img(?![^>]*\\balt=)[^>]*>";
+                var altAttributePattern = "<img([^>]*?)>";
 
-            return updatedContent;
+                // 替換沒有 alt 的 img 標籤，添加具有描述性的 alt 屬性
+                string updatedContent = Regex.Replace(content, imgPattern, match =>
+                {
+                    // 根據實際需求決定alt的內容
+                    return Regex.Replace(match.Value, altAttributePattern, "<img$1 alt=\"圖片描述\">");
+                });
+
+                return updatedContent;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -2852,6 +2905,44 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
+        /// 文章內容附件檔案名稱顯示
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public string AddAccessibilityAttributes(string content)
+        {
+            try
+            {
+                // 添加 `title` 和 `aria-label` 到所有的附件連結（如 .pdf, .docx）
+                string updatedContent = Regex.Replace(content, @"<a\s+[^>]*href=""([^""]+\.(pdf|docx?))""[^>]*>(.*?)<\/a>", match =>
+                {
+                    string href = match.Groups[1].Value;
+                    string fileName = href.Substring(href.LastIndexOf('/') + 1);
+                    string linkText = match.Groups[3].Value;
+                    return $"<a href=\"{href}\" target=\"_blank\" title=\"{fileName} _PDF檔案下載(另開新視窗)\" aria-label=\"下載 {fileName}\">{linkText}</a>";
+
+                }, RegexOptions.IgnoreCase);
+
+                // 添加 `alt` 到所有的圖片
+                updatedContent = Regex.Replace(updatedContent, @"<img\s+([^>]*?)>", match =>
+                {
+                    string imgTag = match.Groups[1].Value;
+                    if (!imgTag.Contains("alt="))
+                    {
+                        return $"<img {imgTag} alt=\"文章插圖\">";
+                    }
+                    return $"<img {imgTag}>";
+                }, RegexOptions.IgnoreCase);
+
+                return updatedContent;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// 文章內容顯示
         /// </summary>
         /// <returns></returns>
@@ -2875,6 +2966,7 @@ namespace TISS_Web.Controllers
                 }
 
                 article.ClickCount += 1; //增加點閱率次數
+                article.ContentBody = AddAccessibilityAttributes(article.ContentBody); //增加無障礙屬性
                 article.ContentBody = EnsureImageAltAttribute(article.ContentBody); // 在渲染之前，確保img標籤都包含 alt 屬性
 
                 ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList(); //處理多個Hashtags顯示
@@ -2961,7 +3053,7 @@ namespace TISS_Web.Controllers
                 ViewBag.FormattedPublishedDate = formattedDate;
 
                 // 根據當前主題獲取對應的 MenuId
-                int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; // 默認值
+                int menuId = menuIdMapping.TryGetValue(currentParentDirectory, out var id) ? id : 0; //默認值
 
                 // 根據 MenuId 查找「全部文章」的連結
                 var menuUrls = menuItems
@@ -2976,18 +3068,6 @@ namespace TISS_Web.Controllers
 
                 ViewBag.MenuUrls = menuUrls;
                 ViewBag.AllArticlesUrl = allArticlesUrl ?? "#";
-
-
-                // 處理多個Hashtags
-                //if (!string.IsNullOrEmpty(article.Hashtags))
-                //{
-                //    var hashtags = article.Hashtags.Split(',').ToList();
-                //    ViewBag.Hashtags = hashtags;
-                //}
-                //else
-                //{
-                //    ViewBag.Hashtags = new List<string>();
-                //}
 
                 //載入文章類型選項(供表單編輯用)
                 ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName", article.ContentTypeId);
@@ -3006,6 +3086,12 @@ namespace TISS_Web.Controllers
             }
         }
 
+        /// <summary>
+        /// 處理上傳圖片
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="imageFile"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -3213,7 +3299,7 @@ namespace TISS_Web.Controllers
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     var extension = Path.GetExtension(fileName).ToLower();
-                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx" }; // 根據需求設定允許的副檔名
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx", "odt" }; // 根據需求設定允許的副檔名
 
                     // 檢查是否為允許的檔案類型
                     if (!allowedExtensions.Contains(extension))
@@ -3276,37 +3362,5 @@ namespace TISS_Web.Controllers
 
         #endregion
 
-        #region 測試API寄信
-        //public async Task<ActionResult> GenerateArticleClickReport()
-        //{
-        //    var reportService = new ReportService();
-        //    string reportPath = reportService.GenerateReport();
-
-        //    if (!string.IsNullOrEmpty(reportPath))
-        //    {
-        //        var emailService = new EmailService();
-
-        //        // 使用 Split 將收件人字串分割成單個地址的陣列
-        //        string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
-
-        //        string subject = "運科中心專欄文章瀏覽率報表";
-        //        string body = "您好，請參閱附件中的運科中心專欄文章瀏覽率報表。";
-
-        //        // 迴圈發送郵件給每個收件人
-        //        foreach (string email in toEmail)
-        //        {
-        //            var success = await emailService.SendEmailAsync(email.Trim(), subject, body, reportPath);
-        //            if (!success)
-        //            {
-        //                // 可以在這裡記錄或處理發送失敗的情況
-        //                Console.WriteLine($"郵件發送失敗給: {email}");
-        //            }
-        //        }
-        //    }
-
-        //    return Content("報表產生完成");
-        //}
-
-        #endregion
     }
 }

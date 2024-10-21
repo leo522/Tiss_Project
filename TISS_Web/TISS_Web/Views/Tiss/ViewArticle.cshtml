@@ -44,7 +44,7 @@
         <div class="BasePageLayout">
             <div class="BasePageBanner">
                 <div class="Mask"></div>
-                <img class="PageBannerItemBg" src="/site/img/banner_research.25875290.jpg" alt="科普專區背景圖片"/>
+                <img class="PageBannerItemBg" src="/site/img/banner_research.25875290.jpg" alt="" />
             </div>
             <section class="el-container">
                 <aside class="el-aside">
@@ -144,47 +144,46 @@
                                     @if (isLoggedIn)
                                     {
                                         <!-- 標題 -->
-                                    <form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
-                                        @Html.AntiForgeryToken()
-                                        <input type="hidden" name="Id" value="@Model.Id" />
+                                        <form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="Id" value="@Model.Id" />
 
-                                        <!-- 內容 -->
-                                        <div class="form-group">
-                                            <label for="ContentBody">內容:</label>
-                                            @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
-                                        </div>
+                                            <!-- 內容 -->
+                                            <div class="form-group">
+                                                <label for="ContentBody">內容:</label>
+                                                @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                            </div>
 
-                                        <div class="form-group mb-4">
-                                            <label for="ContentType" style="font-size:25px">文章發佈類別</label>
-                                            @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
-                                        </div>
+                                            <div class="form-group mb-4">
+                                                <label for="ContentType" style="font-size:25px">文章發佈類別</label>
+                                                @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
+                                            </div>
 
-                                        <div class="form-group mb-4">
-                                            <label for="Tag" style="font-size:25px">文章標籤</label>
-                                            @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
-                                        </div>
+                                            <div class="form-group mb-4">
+                                                <label for="Tag" style="font-size:25px">文章標籤</label>
+                                                @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
+                                            </div>
 
-                                        <div class="form-group mb-4">
-                                            <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
-                                            <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
-                                        </div>
+                                            <div class="form-group mb-4">
+                                                <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
+                                                <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
+                                            </div>
 
-                                        @if (Model.ImageContent != null)
-                                        {
-                                            string base64Image = Convert.ToBase64String(Model.ImageContent);
-                                            string imageSrc = $"data:image/jpeg;base64,{base64Image}";
+                                            @if (Model.ImageContent != null)
+                                            {
+                                                string base64Image = Convert.ToBase64String(Model.ImageContent);
+                                                string imageSrc = $"data:image/jpeg;base64,{base64Image}";
 
-                                            <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
-                                        }
-                                        else
-                                        {
-                                            <p>目前無圖片</p>
-                                        }
-                                    <div style="clear: both; margin-top: 10px;">
-                                        <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                    </div>
-                                    </form> 
-                                    
+                                                <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
+                                            }
+                                            else
+                                            {
+                                                <p>目前無圖片</p>
+                                            }
+                                            <div style="clear: both; margin-top: 10px;">
+                                                <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                            </div>
+                                        </form>
                                     }
                                     else
                                     {
@@ -196,7 +195,9 @@
                             </div>
                         </div>
                     </div>
-
+                    @*<div class="col-md-9 text-center mt-5">
+                            <a href="/News?ModuleID=N1&amp;CateID=60383e4d-0d5d-40e8-8dcf-bee677b0159d" class="button button-border button-border-thin button-blue"><i class="icon-line-corner-down-left"></i>回列表</a>
+                        </div>*@
                     <div class="comments-section">
                         <h3>留言區</h3>
                         <button id="toggle-comments" class="btn btn-light">
@@ -270,9 +271,9 @@
         </div>
     </div>
 
-@if (isLoggedIn)
-{
-<script>
+    @if (isLoggedIn)
+    {
+        <script>
     $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
@@ -352,9 +353,9 @@
                     }
                 });
             });
-</script>
-}
-<script>
+        </script>
+    }
+    <script>
      $(document).ready(function () {
           var isCommentsVisible = false;
     var commentCount = '@ViewBag.CommentCount';

@@ -2692,6 +2692,7 @@
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
     <Content Include="site\img\facebook圖片.jpg" />
     <Content Include="site\img\IG圖片.png" />
+    <Content Include="site\img\WebSiteError.jpg" />
     <Content Include="site\img\YT圖片.jpg" />
     <Content Include="site\img\國家運動科學中心FB封面圖片.jpg" />
     <Content Include="site\img\教育部體育署網站圖片.jpg" />

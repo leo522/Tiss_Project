@@ -15,7 +15,7 @@ namespace TISS_Web.Controllers
 
         public ActionResult WebSiteError()
         {
-            return View();
+            return View("WebSiteError");
         }
     }
 }
