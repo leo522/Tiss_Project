@@ -96,6 +96,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="BudgetPageContent">
     <Key>
@@ -132,6 +133,20 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocumentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DocumentType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="UploadTime" Type="datetime" Nullable="false" />
+    <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileContent" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="DomainsURL">
     <Key>
       <PropertyRef Name="DomainID" />
@@ -156,6 +171,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="DownloadPageContent">
     <Key>
@@ -260,6 +276,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="GenderEqualityPageContent">
     <Key>
@@ -449,6 +466,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="OtherPageContent">
     <Key>
@@ -517,6 +535,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="PlanPageContent">
     <Key>
@@ -566,6 +585,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="ProcedurePageContent">
     <Key>
@@ -614,6 +634,7 @@
     <Property Name="FileSize" Type="int" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="PurchasePageContent">
     <Key>
@@ -662,6 +683,7 @@
     <Property Name="FileSize" Type="int" Nullable="false" />
     <Property Name="ModifiedTime" Type="datetime" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FileData" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="RegulationPageContent">
     <Key>
@@ -1027,6 +1049,7 @@
     <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DomainsURL" EntityType="Self.DomainsURL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadPageContent" EntityType="Self.DownloadPageContent" Schema="dbo" store:Type="Tables" />

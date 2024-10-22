@@ -101,6 +101,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="BudgetPageContent">
           <Key>
@@ -137,6 +138,20 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DocumentType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="UploadTime" Type="datetime" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FileContent" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="DomainsURL">
           <Key>
             <PropertyRef Name="DomainID" />
@@ -161,6 +176,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="DownloadPageContent">
           <Key>
@@ -265,6 +281,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="GenderEqualityPageContent">
           <Key>
@@ -454,6 +471,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="OtherPageContent">
           <Key>
@@ -522,6 +540,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="PlanPageContent">
           <Key>
@@ -571,6 +590,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ProcedurePageContent">
           <Key>
@@ -619,6 +639,7 @@
           <Property Name="FileSize" Type="int" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="PurchasePageContent">
           <Key>
@@ -667,6 +688,7 @@
           <Property Name="FileSize" Type="int" Nullable="false" />
           <Property Name="ModifiedTime" Type="datetime" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="RegulationPageContent">
           <Key>
@@ -1032,6 +1054,7 @@
           <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DomainsURL" EntityType="Self.DomainsURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DownloadPageContent" EntityType="Self.DownloadPageContent" Schema="dbo" store:Type="Tables" />
@@ -1218,6 +1241,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
+          <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
         </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1316,6 +1340,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="BudgetPageContent">
           <Key>
@@ -1376,6 +1401,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="DownloadPageContent">
           <Key>
@@ -1482,6 +1508,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="GenderEqualityPageContent">
           <Key>
@@ -1675,6 +1702,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="OtherPageContent">
           <Key>
@@ -1744,6 +1772,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="PlanPageContent">
           <Key>
@@ -1793,6 +1822,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ProcedurePageContent">
           <Key>
@@ -1841,6 +1871,7 @@
           <Property Name="FileSize" Type="Int32" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="PurchasePageContent">
           <Key>
@@ -1889,6 +1920,7 @@
           <Property Name="FileSize" Type="Int32" Nullable="false" />
           <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="RegulationPageContent">
           <Key>
@@ -2253,6 +2285,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2350,6 +2396,7 @@
           <EntitySetMapping Name="BudgetDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.BudgetDocument">
               <MappingFragment StoreEntitySet="BudgetDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2414,6 +2461,7 @@
           <EntitySetMapping Name="DownloadDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.DownloadDocument">
               <MappingFragment StoreEntitySet="DownloadDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2523,6 +2571,7 @@
           <EntitySetMapping Name="GenderEqualityDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.GenderEqualityDocument">
               <MappingFragment StoreEntitySet="GenderEqualityDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2728,6 +2777,7 @@
           <EntitySetMapping Name="OtherDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.OtherDocument">
               <MappingFragment StoreEntitySet="OtherDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2801,6 +2851,7 @@
           <EntitySetMapping Name="PlanDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.PlanDocument">
               <MappingFragment StoreEntitySet="PlanDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2853,6 +2904,7 @@
           <EntitySetMapping Name="ProcedureDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.ProcedureDocument">
               <MappingFragment StoreEntitySet="ProcedureDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2904,6 +2956,7 @@
           <EntitySetMapping Name="PurchaseDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.PurchaseDocument">
               <MappingFragment StoreEntitySet="PurchaseDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -2955,6 +3008,7 @@
           <EntitySetMapping Name="RegulationDocument">
             <EntityTypeMapping TypeName="TISS_WebModel.RegulationDocument">
               <MappingFragment StoreEntitySet="RegulationDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
                 <ScalarProperty Name="FileSize" ColumnName="FileSize" />
@@ -3238,6 +3292,21 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="TISS_WebModel.Documents">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,17 +12,16 @@ namespace TISS_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RegulationDocument
+    public partial class Documents
     {
-        public int ID { get; set; }
-        public int PId { get; set; }
+        public int DocumentID { get; set; }
         public string DocumentName { get; set; }
+        public string DocumentType { get; set; }
         public System.DateTime UploadTime { get; set; }
         public string Creator { get; set; }
-        public string DocumentType { get; set; }
         public int FileSize { get; set; }
-        public Nullable<System.DateTime> ModifiedTime { get; set; }
         public bool IsActive { get; set; }
-        public byte[] FileData { get; set; }
+        public string Category { get; set; }
+        public byte[] FileContent { get; set; }
     }
 }

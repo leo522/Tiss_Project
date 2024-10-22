@@ -23,7 +23,7 @@ namespace TISS_Web.Models
         public DateTime VideoUpdateTime { get; set; }
         public string WebsiteUrl { get; set; }
         public DateTime WebsiteUpdateTime { get; set; }
-        public int ClickCount {  get; set; }
+        public int ClickCount { get; set; }
     }
 
     public class AboutPageContentModel : WebContentModel
@@ -133,15 +133,15 @@ namespace TISS_Web.Models
     public class SportsPhysiologyPageContentModel : WebContentModel
     {
     }
-    
+
     public class SportsPsychologyPageContentModel : WebContentModel
     {
     }
-    
+
     public class PhysicalTrainingContentModel : WebContentModel
     {
     }
-    
+
     public class SportsNutritionPageContentModel : WebContentModel
     {
     }
@@ -275,9 +275,9 @@ namespace TISS_Web.Models
 
         public int ClickCount { get; set; }
 
-        public int ContentTypeId { get; set; } 
+        public int ContentTypeId { get; set; }
 
-        public string ContentType { get; set; } 
+        public string ContentType { get; set; }
 
         public string CreateUser { get; set; }
 
@@ -310,7 +310,7 @@ namespace TISS_Web.Models
         public string Name { get; set; }
     }
 
-    public class ArticleCategoryModel 
+    public class ArticleCategoryModel
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
@@ -418,5 +418,16 @@ namespace TISS_Web.Models
         public int ClickCount { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+    }
+
+    public class DocumentModel
+    {
+        public int DocumentID { get; set; }       // 文件 ID
+        public string DocumentName { get; set; }  // 文件名稱
+        public string DocumentType { get; set; }  // 文件類型 (PDF, DOC, ODT等)
+        public DateTime UploadTime { get; set; }  // 上傳時間
+        public string Creator { get; set; }       // 上傳者
+        public int FileSize { get; set; }         // 文件大小
+        public bool IsActive { get; set; }        // 是否啟用
     }
 }

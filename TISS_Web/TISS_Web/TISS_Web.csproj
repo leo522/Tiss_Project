@@ -248,6 +248,9 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContentService.cs" />
+    <Compile Include="Models\Documents.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DomainsURL.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>

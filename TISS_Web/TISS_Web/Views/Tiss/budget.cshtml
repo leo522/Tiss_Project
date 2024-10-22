@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TISS_Web.Models.BudgetDocumentModel>
+﻿@model IEnumerable<TISS_Web.Models.DocumentModel>
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
@@ -167,49 +167,63 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach (var file in Model)
+                                                            @if (!Model.Any())
                                                             {
-                                                                <tr style="margin-bottom: 20px; padding: 5px;">
-                                                                    <td style="width: 480px; padding: 20px;">
-                                                                        <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName">
-                                                                            <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
-                                                                        </a>
-                                                                    </td>
-                                                                    <td style="width: 240px; padding: 10px;">
-                                                                        @file.UploadTime.ToString("yyyy/MM/dd")
-                                                                    </td>
-                                                                    <td style="width: 280px; padding: 10px;">
-                                                                        <div class="BaseTagList download">
-                                                                            <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" style="width:55px;">
-
-                                                                                <span tabindex="0" class="el-tag" style="display: inline-block; background-color: firebrick; color: white; border-radius: 0; font-size: 16px; padding: 5px 10px; ">
-                                                                                    <span class="el-tag__content" title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentType</span>
-                                                                                </span>
-
-                                                                            </a>
-                                                                        </div>
+                                                                <tr>
+                                                                    <td colspan="3" style="text-align:center; padding: 20px;">
+                                                                        目前沒有任何文件資料。
                                                                     </td>
                                                                 </tr>
                                                             }
+                                                            else
+                                                            {
+                                                                foreach (var file in Model)
+                                                                {
+                                                                    <tr style="margin-bottom: 20px; padding: 5px;">
+                                                                        <td style="width: 600px; padding: 20px;">
+                                                                            <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                               target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                                <div title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                                    @file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))
+                                                                                </div>
+                                                                            </a>
+                                                                        </td>
+                                                                        <td style="width: 240px; padding: 10px;">
+                                                                            @file.UploadTime.ToString("yyyy/MM/dd")
+                                                                        </td>
+                                                                        <td style="width: 280px; padding: 10px;">
+                                                                            <div class="BaseTagList download">
+                                                                                <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                                   target="_blank" title="下載 @file.DocumentName (@file.DocumentType)">
+                                                                                    <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">
+                                                                                        @file.DocumentType
+                                                                                    </span>
+                                                                                </a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
                                                         </tbody>
+
                                                         <tfoot>
                                                             <tr>
                                                                 <td colspan="3">
                                                                     <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 30px;">
                                                                         <ul class="pagination">
                                                                             <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                                                <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
+                                                                                <a class="page-link" href="@Url.Action("Budget", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
                                                                                     <span aria-hidden="true">&laquo;</span>
                                                                                 </a>
                                                                             </li>
                                                                             @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                                             {
                                                                                 <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                                                    <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = i })">@i</a>
+                                                                                    <a class="page-link" href="@Url.Action("Budget", "Tiss", new { page = i })">@i</a>
                                                                                 </li>
                                                                             }
                                                                             <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                                                <a class="page-link" href="@Url.Action("budget", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
+                                                                                <a class="page-link" href="@Url.Action("Budget", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
                                                                                     <span aria-hidden="true">&raquo;</span>
                                                                                 </a>
                                                                             </li>
@@ -227,8 +241,9 @@
                                         @{
                                             if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                using (Html.BeginForm("UploadBudgetDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                 {
+                                                    <input type="hidden" name="category" value="Budget" /> <!-- 類別標識 -->
                                                     <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                     <div class="col-md-10" style="margin-bottom: 20px;">
                                                         <input type="file" name="file" />

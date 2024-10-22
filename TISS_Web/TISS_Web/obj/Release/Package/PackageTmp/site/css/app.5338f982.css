@@ -13,8 +13,16 @@ under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 }
 
 a:focus {
-    outline: 0;
+    outline: none;
 }
+
+.no-focus {
+    outline: none; /* 移除預設的焦點輪廓 */
+}
+
+    .no-focus:focus {
+        outline: none; /* 確保焦點時不顯示輪廓 */
+    }
 
 [data-v-e61ebf00]:focus {
     outline: 0; /* 隱藏預設焦點框 */
@@ -74567,9 +74575,14 @@ textarea.form-control-lg[data-v-3f77048f] {
         display: none
     }
 
-    .NewsItemBox .NewsItemImg img {
-        width: 100%;
-        height: 100%;
+.NewsItemBox .NewsItemImg img {
+    width: 100%;
+    height: 100%;
+}
+
+    .NewsItemBox .NewsItemImg img:focus {
+        outline:0;
+        border: 2px dashed orange;
     }
 
 .NewsItemBox.headline .NewsItemImg {
@@ -75182,7 +75195,14 @@ textarea.form-control-lg[data-v-3f77048f] {
 .SectionVideo .BottomRow {
     margin-top: 50px
 }
-
+.SectionVideo .VideoList:focus {
+    outline: 0;
+    border: 2px dashed orange;
+}
+    .SectionVideo .BottomRow:focus {
+        outline: 0;
+        border: 2px dashed orange;
+    }
 .SectionVideo .VideoCarouselMobile {
     background-color: #fff;
     border-radius: 10px;

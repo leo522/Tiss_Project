@@ -87,5 +87,6 @@ namespace TISS_Web.Models
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
+        public virtual DbSet<Documents> Documents { get; set; }
     }
 }

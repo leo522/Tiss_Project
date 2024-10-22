@@ -95,6 +95,7 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
+    <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -193,6 +194,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="BudgetPageContent">
     <Key>
@@ -253,6 +255,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="DownloadPageContent">
     <Key>
@@ -359,6 +362,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="GenderEqualityPageContent">
     <Key>
@@ -552,6 +556,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="OtherPageContent">
     <Key>
@@ -621,6 +626,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="PlanPageContent">
     <Key>
@@ -670,6 +676,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="ProcedurePageContent">
     <Key>
@@ -718,6 +725,7 @@
     <Property Name="FileSize" Type="Int32" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="PurchasePageContent">
     <Key>
@@ -766,6 +774,7 @@
     <Property Name="FileSize" Type="Int32" Nullable="false" />
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="RegulationPageContent">
     <Key>
@@ -1130,4 +1139,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

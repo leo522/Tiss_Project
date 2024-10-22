@@ -25,5 +25,6 @@ namespace TISS_Web.Models
         public int FileSize { get; set; }
         public Nullable<System.DateTime> ModifiedTime { get; set; }
         public bool IsActive { get; set; }
+        public byte[] FileData { get; set; }
     }
 }

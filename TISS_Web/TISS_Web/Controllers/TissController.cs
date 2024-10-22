@@ -2154,35 +2154,120 @@ namespace TISS_Web.Controllers
         /// 取得各文件檔案
         /// </summary>
         /// <returns></returns>
-        private List<string> GetFile()
-        {
-            var dt = (from f in _db.FileDocument
-                      where f.IsEnabled == true
-                      select f.DocumentName).ToList();
+        //private List<string> GetFile()
+        //{
+        //    var dt = (from f in _db.FileDocument
+        //              where f.IsEnabled == true
+        //              select f.DocumentName).ToList();
 
-            return dt;
-        }
+        //    return dt;
+        //}
 
-        public string GetFilePath(string fileName)
-        {
-            var file = (from f in _db.FileDocument
-                        where f.DocumentName == fileName && f.IsEnabled == true
-                        select f).FirstOrDefault();
+        //public string GetFilePath(string fileName)
+        //{
+        //    var file = (from f in _db.FileDocument
+        //                where f.DocumentName == fileName && f.IsEnabled == true
+        //                select f).FirstOrDefault();
 
-            if (file != null)
-            {
-                return Url.Content($"~/storage/media/attachments/{file.DocumentName}");
-            }
+        //    if (file != null)
+        //    {
+        //        return Url.Content($"~/storage/media/attachments/{file.DocumentName}");
+        //    }
 
-            return "#";
-        }
-        [HttpGet]
-        public JsonResult GetFilePathApi(string fileName)
-        {
-            var filePath = GetFilePath(fileName);
+        //    return "#";
+        //}
 
-            return Json(filePath, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpGet]
+        //public JsonResult GetFilePathApi(string fileName)
+        //{
+        //    var filePath = GetFilePath(fileName);
+
+        //    return Json(filePath, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public ActionResult DownloadFile(int documentId, string tableName)
+        //{
+        //    try
+        //    {
+        //        switch (tableName)
+        //        {
+        //            case "RegulationDocument":
+        //                var regulationDocument = _db.RegulationDocument.Find(documentId);
+        //                if (regulationDocument != null)
+        //                {
+        //                    var contentType = GetContentType(regulationDocument.DocumentName);
+        //                    return File(regulationDocument.FileData, contentType, regulationDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "ProcedureDocument":
+        //                var procedureDocument = _db.ProcedureDocument.Find(documentId);
+        //                if (procedureDocument != null)
+        //                {
+        //                    var contentType = GetContentType(procedureDocument.DocumentName);
+        //                    return File(procedureDocument.FileData, contentType, procedureDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "PlanDocument":
+        //                var planDocument = _db.PlanDocument.Find(documentId);
+        //                if (planDocument != null)
+        //                {
+        //                    var contentType = GetContentType(planDocument.DocumentName);
+        //                    return File(planDocument.FileData, contentType, planDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "BudgetDocument":
+        //                var budgetDocument = _db.BudgetDocument.Find(documentId);
+        //                if (budgetDocument != null)
+        //                {
+        //                    var contentType = GetContentType(budgetDocument.DocumentName);
+        //                    return File(budgetDocument.FileData, contentType, budgetDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "DownloadDocument":
+        //                var downloadDocument = _db.DownloadDocument.Find(documentId);
+        //                if (downloadDocument != null)
+        //                {
+        //                    var contentType = GetContentType(downloadDocument.DocumentName);
+        //                    return File(downloadDocument.FileData, contentType, downloadDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "OtherDocument":
+        //                var otherDocument = _db.OtherDocument.Find(documentId);
+        //                if (otherDocument != null)
+        //                {
+        //                    var contentType = GetContentType(otherDocument.DocumentName);
+        //                    return File(otherDocument.FileData, contentType, otherDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            case "GenderEqualityDocument":
+        //                var genderEqualityDocument = _db.GenderEqualityDocument.Find(documentId);
+        //                if (genderEqualityDocument != null)
+        //                {
+        //                    return File(genderEqualityDocument.FileData, "application/octet-stream", genderEqualityDocument.DocumentName);
+        //                }
+        //                break;
+
+        //            // 根據需要添加其他表的處理邏輯
+
+        //            default:
+        //                return HttpNotFound();
+        //        }
+
+        //        return HttpNotFound();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+       
         #endregion
 
         #region 公開資訊
@@ -2200,9 +2285,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.RegulationDocument.Where(d => d.IsActive)
-                        .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
-                        .ToList(); //獲取資料列表
+                var list = _db.Documents.Where(d => d.IsActive)
+                        .OrderByDescending(d => d.UploadTime)
+                        .ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2210,8 +2295,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -2244,7 +2330,7 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.RegulationDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2252,8 +2338,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new RegulationDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -2286,7 +2373,8 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.ProcedureDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.Category == "Procedure" && d.IsActive)
+                                        .OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2294,14 +2382,15 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new ProcedureDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
                     Creator = d.Creator,
                     FileSize = d.FileSize,
-                    IsActive = d.IsActive,
+                    IsActive = d.IsActive
                 }).ToList();
 
                 ViewBag.CurrentPage = page;
@@ -2327,9 +2416,7 @@ namespace TISS_Web.Controllers
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
-                var list = _db.PlanDocument
-                                   .Where(d => d.IsActive) // 只選取 IsActive 為 true 的檔案
-                                   .OrderByDescending(d => d.UploadTime) // 按 UploadTime 降序排序
+                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime)
                                    .ToList();
 
                 //計算總數和總頁數
@@ -2338,8 +2425,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PlanDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -2414,19 +2502,18 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                //var list = _db.DownloadDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
-                var list = _db.DownloadDocument
-                        .Where(d => d.IsActive && !d.DocumentType.Equals(".odt"))  // 過濾掉 .odt 檔案
-                        .OrderByDescending(d => d.UploadTime)
-                        .ToList();
+                var list = _db.Documents.Where(d => d.IsActive && d.Category == "Download").OrderByDescending(d => d.UploadTime)
+                    .ToList();
+
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
                 var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
 
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+                page = Math.Min(page, totalPages);
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DownloadDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -2459,7 +2546,8 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.PurchaseDocument.ToList();
+                var list = _db.Documents.Where(d => d.Category == "Procedure" && d.IsActive)
+                                .OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2467,14 +2555,15 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new PurchaseDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
-                    UploadTime = d.UploadTime ?? DateTime.MinValue,  // 處理 Nullable DateTime
+                    UploadTime = d.UploadTime,
                     Creator = d.Creator,
-                    FileSize = d.FileSize ?? 0,  // 處理 Nullable int
-                    IsActive = d.IsActive,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive
                 }).ToList();
 
                 ViewBag.CurrentPage = page;
@@ -2501,7 +2590,7 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.OtherDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2509,8 +2598,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new OtherDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -3362,5 +3452,176 @@ namespace TISS_Web.Controllers
 
         #endregion
 
+
+        #region 上傳文件的通用方法
+        [HttpPost]
+        public ActionResult UploadDocument(HttpPostedFileBase file, string category, int? page)
+        {
+            try
+            {
+                // 上傳文件
+                var uploadResult = _fileUploadService.UploadFile(file, category);
+
+                // 根據文件的 category 決定返回哪一個頁面
+                switch (category)
+                {
+                    case "Public_Info":
+                        return RedirectToAction("Public_Info", new { page });
+                    case "Regulation":
+                        return RedirectToAction("Regulation", new { page });
+                    case "Procedure":
+                        return RedirectToAction("Procedure", new { page });
+                    case "Plan":
+                        return RedirectToAction("Plan", new { page });
+                    case "Budget":
+                        return RedirectToAction("Budget", new { page });
+                    case "Download":
+                        return RedirectToAction("Download", new { page });
+                    case "Other":
+                        return RedirectToAction("Other", new { page });
+                    case "GenderEquality":
+                        return RedirectToAction("GenderEquality", new { page });
+                    default:
+                        // 如果 category 不符合任何條件，則返回到一個默認頁面
+                        return RedirectToAction("Regulation", new { page });
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region 下載文件的通用方法
+        public ActionResult DownloadFile(int documentId)
+        {
+            try
+            {
+                var document = _db.Documents.Find(documentId);
+                if (document != null)
+                {
+                    var contentType = GetContentType(document.DocumentName);
+
+                    // 如果文件是 PDF，則設置為 inline，其他文件保持下載行為
+                    var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
+
+                    Response.AppendHeader("Content-Disposition", $"{disposition}; filename=\"{document.DocumentName}\"");
+
+                    return File(document.FileContent, contentType);
+                }
+                return HttpNotFound();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region 判斷文件類型，回傳適當的MIME類型
+        private string GetContentType(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLower();
+            switch (extension)
+            {
+                case ".pdf":
+                    return "application/pdf";
+                case ".doc":
+                case ".docx":
+                    return "application/msword";
+                case ".odt":
+                    return "application/vnd.oasis.opendocument.text"; // ODT 檔案的 MIME 類型
+                default:
+                    return "application/octet-stream"; // 其他文件類型預設為下載
+            }
+        }
+        #endregion
+
+        #region 文件類別的頁面處理
+
+        // 通用的文件列表處理方法
+        private ActionResult DocumentList(string category, string viewName, int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                page = Math.Max(1, page); // 確保頁碼至少為 1
+
+                var list = _db.Documents.Where(d => d.Category == category && d.IsActive)
+                    .OrderByDescending(d => d.UploadTime).ToList();
+
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                // 即便沒有文件資料，也應該返回空列表，頁面不應該報錯
+                page = Math.Min(page, totalPages > 0 ? totalPages : 1); // 確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
+                {
+                    DocumentID = d.DocumentID,
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(viewName, dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //// 法規文件列表
+        //public ActionResult Regulation(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("Regulation", "Regulation", page, pageSize);
+        //}
+
+        //// 辦法及要點文件列表
+        //public ActionResult Procedure(int page = 1, int pageSize = 10)
+        //{
+        //    //return DocumentList("Procedure", "Procedure", page, pageSize);
+        //    return RedirectToAction("Procedure", new { page });
+        //}
+
+        //// 計畫文件列表
+        //public ActionResult Plan(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("Plan", "Plan", page, pageSize);
+        //}
+
+        //// 預算與決算文件列表
+        //public ActionResult Budget(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("Budget", "Budget", page, pageSize);
+        //}
+
+        //// 下載專區文件列表
+        //public ActionResult Download(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("Download", "Download", page, pageSize);
+        //}
+
+        //// 其他文件列表
+        //public ActionResult Other(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("Other", "Other", page, pageSize);
+        //}
+
+        //// 性別平等專區文件列表
+        //public ActionResult GenderEquality(int page = 1, int pageSize = 10)
+        //{
+        //    return DocumentList("GenderEquality", "GenderEquality", page, pageSize);
+        //}
+
+        #endregion
     }
 }

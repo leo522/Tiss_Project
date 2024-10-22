@@ -1,4 +1,5 @@
-﻿@model IEnumerable<TISS_Web.Models.DownloadDocumentModel>
+﻿@*@model IEnumerable<TISS_Web.Models.DownloadDocumentModel>*@
+@model IEnumerable<TISS_Web.Models.DocumentModel>
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
 }
@@ -167,15 +168,25 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach (var file in Model)
+                                                                @if (!Model.Any())
                                                                 {
-                                                                    // 檢查是否是 .doc 或 .docx 檔案
-                                                                    if (file.DocumentType == ".doc" || file.DocumentType == ".docx")
+                                                                    <tr>
+                                                                        <td colspan="3" style="text-align:center; padding: 20px;">
+                                                                            目前沒有任何文件資料。
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                                else
+                                                                {
+                                                                    foreach (var file in Model)
                                                                     {
                                                                         <tr style="margin-bottom: 20px; padding: 5px;">
                                                                             <td style="width: 600px; padding: 20px;">
-                                                                                <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                    <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
+                                                                                <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                                   target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                                    <div title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                                        @file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))
+                                                                                    </div>
                                                                                 </a>
                                                                             </td>
                                                                             <td style="width: 240px; padding: 10px;">
@@ -183,39 +194,16 @@
                                                                             </td>
                                                                             <td style="width: 280px; padding: 10px;">
                                                                                 <div class="BaseTagList download">
-                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="下載 @file.DocumentName (.doc)">
-                                                                                        <span class="el-tag" style="background-color: blue; color: white; border-radius: 0; padding: 5px;">.doc</span>
-                                                                                    </a>
-                                                                                    @* 檢查是否存在對應的 .odt 檔案 *@
-                                                                                    @{
-                                                                                        var odtFileName = file.DocumentName.Replace(".doc", ".odt").Replace(".docx", ".odt");
-                                                                                        if (System.IO.File.Exists(Server.MapPath("~/storage/media/attachments/" + odtFileName)))
-                                                                                        {
-                                                                                            <a href="~/storage/media/attachments/@odtFileName" target="_blank" title="下載 @odtFileName (.odt)">
-                                                                                                <span class="el-tag" style="background-color: blue; color: white; border-radius: 0; padding: 5px;">.odt</span>
-                                                                                            </a>
-                                                                                        }
-                                                                                    }
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
-                                                                    }
-                                                                    // 如果不是 .doc 或 .docx 檔案，直接顯示
-                                                                    else
-                                                                    {
-                                                                        <tr style="margin-bottom: 20px; padding: 5px;">
-                                                                            <td style="width: 600px; padding: 20px;">
-                                                                                <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                    <div title="@file.DocumentName _檔案下載 (另開新視窗)">@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</div>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td style="width: 240px; padding: 10px;">
-                                                                                @file.UploadTime.ToString("yyyy/MM/dd")
-                                                                            </td>
-                                                                            <td style="width: 280px; padding: 10px;">
-                                                                                <div class="BaseTagList download">
-                                                                                    <a href="~/storage/media/attachments/@file.DocumentName" target="_blank" title="下載 @file.DocumentName (.pdf)">
-                                                                                        <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">@file.DocumentType</span>
+                                                                                    <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                                       target="_blank" title="下載 @file.DocumentName (@file.DocumentType)">
+                                                                                        <!-- 如果是 .doc, .docx 或 .odt 檔案，使用藍色背景 -->
+                                                                                        <span class="el-tag"
+                                                                                              style="background-color: @(file.DocumentType == ".doc" || file.DocumentType == ".docx" || file.DocumentType == ".odt" ? "blue" : "firebrick");
+                                         color: white;
+                                         border-radius: 0;
+                                         padding: 5px;">
+                                                                                            @file.DocumentType
+                                                                                        </span>
                                                                                     </a>
                                                                                 </div>
                                                                             </td>
@@ -224,24 +212,26 @@
                                                                 }
                                                             </tbody>
 
+
+
                                                             <tfoot>
                                                                 <tr>
                                                                     <td colspan="3">
                                                                         <nav aria-label="Page navigation" style="display: flex; justify-content: center; margin-top: 30px;">
                                                                             <ul class="pagination">
                                                                                 <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                                                    <a class="page-link" href="@Url.Action("download", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
+                                                                                    <a class="page-link" href="@Url.Action("Download", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
                                                                                         <span aria-hidden="true">&laquo;</span>
                                                                                     </a>
                                                                                 </li>
                                                                                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                                                 {
                                                                                     <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                                                        <a class="page-link" href="@Url.Action("download", "Tiss", new { page = i })">@i</a>
+                                                                                        <a class="page-link" href="@Url.Action("Download", "Tiss", new { page = i })">@i</a>
                                                                                     </li>
                                                                                 }
                                                                                 <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                                                    <a class="page-link" href="@Url.Action("download", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
+                                                                                    <a class="page-link" href="@Url.Action("Download", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
                                                                                         <span aria-hidden="true">&raquo;</span>
                                                                                     </a>
                                                                                 </li>
@@ -259,8 +249,9 @@
                                             @{
                                                 if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                                 {
-                                                    using (Html.BeginForm("UploadRegulationDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                    using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                     {
+                                                        <input type="hidden" name="category" value="Download" /> <!-- 類別標識 -->
                                                         <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                         <div class="col-md-10" style="margin-bottom: 20px;">
                                                             <input type="file" name="file" />

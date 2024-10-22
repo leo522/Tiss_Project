@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Xml.Linq;
 using TISS_Web.Models;
 
 namespace TISS_Web
@@ -16,7 +17,7 @@ namespace TISS_Web
             _context = context;
         }
 
-        public string UploadFile(HttpPostedFileBase file, string tableName)
+        public string UploadFile(HttpPostedFileBase file, string category)
         {
             if (file != null && file.ContentLength > 0)
             {
@@ -30,133 +31,43 @@ namespace TISS_Web
                         fileExtension == ".docx" || fileExtension == ".odt" ||
                         fileExtension == ".xls" || fileExtension == ".xlsx")
                     {
-                        //儲存文件到指定路徑
-                        string filePath = Path.Combine(HttpContext.Current.Server.MapPath("~/storage/media/attachments"), fileName);
-                        file.SaveAs(filePath);
+
+                        // 檢查 InputStream 的長度
+                        if (file.InputStream.Length == 0)
+                        {
+                            return "上傳文件的內容為空！";
+                        }
+
+                        byte[] fileData = null; //讀取文件二進制數據
+
+                        using (var binaryReader = new BinaryReader(file.InputStream))
+                        {
+                            fileData = binaryReader.ReadBytes(file.ContentLength);
+                        }
 
                         string userId = HttpContext.Current.Session["UserName"].ToString();
 
-                        switch (tableName)
+                        var document = new Documents
                         {
-                            case "RegulationDocument":
-                                var regulationDocument = new RegulationDocument
-                                {
-                                    PId = GetNextPId("RegulationDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.RegulationDocument.Add(regulationDocument);
-                                break;
+                            DocumentName = fileName,
+                            UploadTime = DateTime.Now,
+                            Creator = userId,
+                            DocumentType = fileExtension,
+                            FileSize = fileData.Length,
+                            FileContent = fileData, // 將文件二進制數據存入資料庫
+                            IsActive = true,
+                            Category = category //使用 category來區分文件類型
+                        };
 
-                            case "ProcedureDocument":
-                                var procedureDocument = new ProcedureDocument
-                                {
-                                    PId = GetNextPId("ProcedureDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.ProcedureDocument.Add(procedureDocument);
-                                break;
-                            case "PlanDocument":
-                                var planDocument = new PlanDocument
-                                {
-                                    PId = GetNextPId("PlanDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.PlanDocument.Add(planDocument);
-                                break;
-                            case "BudgetDocument":
-                                var budgetDocument = new BudgetDocument
-                                {
-                                    PId = GetNextPId("BudgetDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.BudgetDocument.Add(budgetDocument);
-                                break;
-                            case "DownloadDocument":
-                                var downloadDocument = new DownloadDocument
-                                {
-                                    PId = GetNextPId("DownloadDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.DownloadDocument.Add(downloadDocument);
-                                break;
-                            case "PurchaseDocument":
-                                var purchaseDocument = new PurchaseDocument
-                                {
-                                    PId = GetNextPId("PurchaseDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.PurchaseDocument.Add(purchaseDocument);
-                                break;
-                            case "OtherDocument":
-                                var otherDocument = new OtherDocument
-                                {
-                                    PId = GetNextPId("OtherDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.OtherDocument.Add(otherDocument);
-                                break;
-
-                            case "GenderEqualityDocument":
-                                var genderEqualityDocument = new GenderEqualityDocument
-                                {
-                                    PId = GetNextPId("GenderEqualityDocument"),
-                                    DocumentName = fileName,
-                                    UploadTime = DateTime.Now,
-                                    Creator = userId,
-                                    DocumentType = fileExtension,
-                                    FileSize = file.ContentLength,
-                                    IsActive = true
-                                };
-                                _context.GenderEqualityDocument.Add(genderEqualityDocument);
-                                break;
-
-                            default:
-                                return ("上傳發生錯誤");
-                        }
-
+                        _context.Documents.Add(document);
                         _context.SaveChanges();
+
                         return "文件上傳成功！";
                     }
                     else
                     {
                         return ("文件格式不符");
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -169,6 +80,7 @@ namespace TISS_Web
             }
         }
 
+        #region 性別平等專區上傳網址
         public string UploadUrl(string url)
         {
             if (!string.IsNullOrEmpty(url))
@@ -196,6 +108,7 @@ namespace TISS_Web
             }
             return "URL 上傳成功";
         }
+        #endregion
 
         private int GetNextPId(string tableName)
         {
@@ -228,5 +141,6 @@ namespace TISS_Web
                 throw ex;
             }
         }
+
     }
 }

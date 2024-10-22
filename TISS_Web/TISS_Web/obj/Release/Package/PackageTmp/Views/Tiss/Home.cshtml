@@ -28,9 +28,6 @@
                                     <div class="d-flex justify-content-center">
                                         <img src="~/storage/media/ORS(1).jpg" alt="選手服務預約系統" />
                                         <div class="carousel-caption d-none d-md-block">
-                                            @*<div>運動科學中心執行長</div>*@
-                                            @*<h1 class="main-title">第二張圖片的副標題</h1>
-                                <p class="content">第二張圖片的描述</p>*@
                                         </div>
                                     </div>
                                 </div>
@@ -38,9 +35,6 @@
                                     <div class="d-flex justify-content-center">
                                         <img src="~/storage/media/MOU簽署-合作學校(1).jpg" alt="MOU簽署" />
                                         <div class="carousel-caption d-none d-md-block">
-                                            @*<div>第三張圖片的標題</div>
-                                <h1 class="main-title">第三張圖片的副標題</h1>
-                                <p class="content">第三張圖片的描述</p>*@
                                         </div>
                                     </div>
                                 </div>
@@ -48,9 +42,6 @@
                                     <div class="d-flex justify-content-center">
                                         <img src="~/storage/media/商品照1.jpg" alt="運科中心的運動補給品" />
                                         <div class="carousel-caption d-none d-md-block">
-                                            @*<div>第四張圖片的標題</div>
-                                <h1 class="main-title">第四張圖片的副標題</h1>
-                                <p class="content">第四張圖片的描述</p>*@
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +70,7 @@
                                             <div class="Title">
                                                 <div class="SectionTitle" title="News">News</div>
                                                 <div class="SectionSubTitle">
-                                                    <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="" title="最新消息" />最新消息
+                                                    <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt=""/>最新消息
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +80,7 @@
                                                     @if (Model.LatestArticle.ImageContent != null)
                                                     {
                                                         string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
-                                                        <img src="data:image/png;base64,@base64Image" alt="圖片" />
+                                                        <img src="data:image/png;base64,@base64Image" alt="圖片" tabindex="0"/>
                                                     }
                                                     <div class="tag">@Model.LatestArticle.ContentType</div>
                                                     <div class="Mask">閱讀更多</div>
@@ -107,7 +98,7 @@
                                             </div>
                                         </a>
                                         <div style="width: 225px; margin-top:30px;">
-                                            <a href="/Tiss/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="btn">
+                                            <a href="/Tiss/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="全部文章">
                                                 <span title="全部文章">
                                                     全部文章
                                                     <span class="right-icon">
@@ -126,29 +117,29 @@
                                                 <div class="d-block d-lg-none">
                                                     <div class="SectionTitle" title="News">News</div>
                                                     <div class="SectionSubTitle">
-                                                        <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="" title="最新消息" />最新消息
+                                                        <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt=""/>最新消息
                                                     </div>
                                                 </div>
                                                 <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
                                                     <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
 
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                            <button data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                            <button data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="所有類別">
                                                                 <span class="" title="所有類別">所有類別</span>
                                                             </button>
                                                         </div>
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                            <button data-content-type-id="1" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                            <button data-content-type-id="1" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="新聞發佈">
                                                                 <span class="" title="新聞發佈">新聞發佈</span>
                                                             </button>
                                                         </div>
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                            <button data-content-type-id="2" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                            <button data-content-type-id="2" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="中心訊息">
                                                                 <span class="" title="中心訊息">中心訊息</span>
                                                             </button>
                                                         </div>
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                            <button data-content-type-id="8" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="btn">
+                                                            <button data-content-type-id="8" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="徵才招募">
                                                                 <span class="" title="徵才招募">徵才招募</span>
                                                             </button>
                                                         </div>
@@ -166,7 +157,7 @@
                                                                 @if (article.ImageContent != null)
                                                                 {
                                                                     string base64Image = Convert.ToBase64String(article.ImageContent);
-                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" />
+                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" tabindex="0"/>
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask" title="@article.Title">閱讀更多</div>
@@ -211,7 +202,7 @@
 
                                             @*影片文字內容*@
                                             <div class="carousel-article-column">
-                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="Previous">
+                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="Previous Page">
                                                     &lt;
                                                 </button>
                                                 @for (var i = 0; i < Model.OtherArticles.Count; i++)
@@ -254,7 +245,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" aria-label="Next">
+                                                <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" aria-label="Next Page">
                                                     &gt;
                                                 </button>
                                             </div>
@@ -266,7 +257,7 @@
                         </div>
                         <div class="BottomRow">
                             <div style="width: 225px; margin: auto;">
-                                <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="btn">
+                                <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="所有影音">
                                     <span class="" title="所有影音">
                                         所有影音
                                         <span class="right-icon">
@@ -307,20 +298,20 @@
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
-                                <a href="http://www.epsport.net/epsport/ep/index.asp" title="運動生理學網站 (另開新視窗)" target="_blank">
+                                <a class="no-focus" href="http://www.epsport.net/epsport/ep/index.asp" title="運動生理學網站 (另開新視窗)" target="_blank">
                                     <img src="~/site/img/運動生理學網站.jpg" alt="運動生理學網站" tabindex="0" class="resize-image spacing" />
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
-                                <a href="https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW" title="國家運動科學中心FB (另開新視窗)" target="_blank">
+                                <a class="no-focus" href="https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW" title="國家運動科學中心FB (另開新視窗)" target="_blank">
                                     <img src="~/Img/facebook2.png" alt="國家運動科學中心FB網站" tabindex="0" class="spacing" />
                                     <span class="d-block mt-2">TISS FACEBOOK</span>
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
-                                <a href="https://www.instagram.com/tiss_2024/" title="國家運動科學中心IG網站 (另開新視窗)" target="_blank">
+                                <a class="no-focus" href="https://www.instagram.com/tiss_2024/" title="國家運動科學中心IG網站 (另開新視窗)" target="_blank">
                                     <img src="~/Img/IG圖片.png" alt="國家運動科學中心IG網站" tabindex="0" class="spacing" />
                                     <span class="d-block mt-2">TISS INSTAGRAM</span>
                                 </a>

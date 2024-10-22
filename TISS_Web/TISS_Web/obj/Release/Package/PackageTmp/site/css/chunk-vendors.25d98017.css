@@ -25615,7 +25615,10 @@ textarea.form-control-lg {
     position: relative;
     box-sizing: border-box
 }
-
+    .el-row:focus {
+        outline: 0;
+        border: 2px dashed orange;
+    }
     .el-row.is-justify-center {
         justify-content: center
     }
