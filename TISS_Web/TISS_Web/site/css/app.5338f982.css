@@ -14,15 +14,20 @@ under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
 
 a:focus {
     outline: none;
+    border: 2px dashed orange; /*添加橙色虛線邊框 */
 }
 
-.no-focus {
-    outline: none; /* 移除預設的焦點輪廓 */
+/*常用連結鍵盤焦點*/
+.SectionUrl {
+    padding: 10px; /* 增加內邊距 */
+    display: inline-block; /* 確保可以設置邊距 */
 }
 
-    .no-focus:focus {
-        outline: none; /* 確保焦點時不顯示輪廓 */
-    }
+.el-button:focus {
+    outline: 2px dashed orange; /* 明顯的焦點樣式 */
+    background-color: rgba(255, 255, 255, 0.1); /* 可以添加背景顏色 */
+}
+
 
 [data-v-e61ebf00]:focus {
     outline: 0; /* 隱藏預設焦點框 */
@@ -59439,8 +59444,10 @@ body {
 }
 
     body a {
-        text-decoration: none
+        text-decoration: none;
+            outline:0;
     }
+
     body ul {
         list-style-type: none
     }
