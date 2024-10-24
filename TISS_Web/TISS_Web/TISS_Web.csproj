@@ -3021,7 +3021,6 @@
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
     <Content Include="Views\Tiss\other.cshtml" />
     <Content Include="Views\Tiss\Login.cshtml" />
-    <Content Include="Views\Tiss\editPage.cshtml" />
     <Content Include="Views\Tiss\Register.cshtml" />
     <Content Include="Views\Tiss\ChangePassword.cshtml" />
     <Content Include="Views\Tiss\sportsPhysiology.cshtml" />
@@ -3063,6 +3062,7 @@
     <Content Include="tinymce\js\tinymce\langs\README.md" />
     <Content Include="tinymce\js\tinymce\license.md" />
     <Content Include="Views\Error\WebSiteError.cshtml" />
+    <Content Include="Views\Tiss\_VideoSection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,6 +34,7 @@ using System.Net.Sockets;
 using System.Web.Caching;
 using System.Runtime.Caching;
 using System.Xml.Linq;
+using Microsoft.Ajax.Utilities;
 
 namespace TISS_Web.Controllers
 {
@@ -595,73 +596,6 @@ namespace TISS_Web.Controllers
 
         #endregion
 
-        #region 自己上傳圖片和文字使用
-
-        public ActionResult editPage()
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public JsonResult SavePageData(string textContent, string imagePath)
-        {
-            try
-            {
-                var userName = Session["UserName"] as string;
-
-                byte[] imageData = null;
-
-                if (!string.IsNullOrEmpty(imagePath))
-                {
-                    // 解析圖片數據
-                    byte[] binaryData = Convert.FromBase64String(imagePath);
-                    imageData = binaryData;
-                }
-
-                // 計算新的 FileNo
-                int newFileNo = 1;
-                var lastNo = _db.PressPageContent.OrderByDescending(f => f.FileNo).FirstOrDefault();
-                if (lastNo != null)
-                {
-                    //newFileNo = lastNo.FileNo.GetValueOrDefault() + 1;
-                    newFileNo = lastNo.FileNo + 1;
-                }
-
-                // 創建新的 db 物件並設置屬性值
-                var newContent = new PressPageContent
-                {
-                    //UserAccount = userName,
-                    UserAccount = "00048",
-                    TextContent = textContent,
-                    TextUpdateTime = DateTime.Now,
-                    ImageContent = imageData,
-                    ImageUpdateTime = DateTime.Now,
-                    FileNo = newFileNo
-                };
-
-                // 將新的 AnnouncementPageContent 物件添加到資料庫並保存變更
-                _db.PressPageContent.Add(newContent);
-                _db.SaveChanges();
-
-                // 返回成功的 JSON 響應並包含圖片數據（可選）
-                string imageBase64 = imageData != null ? $"data:image/jpeg;base64,{Convert.ToBase64String(imageData)}" : null;
-                return Json(new { success = true, image = imageBase64 });
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, error = ex.Message });
-            }
-        }
-        #endregion
-
         #region 上傳文件檔案
 
         // 上傳計畫文件
@@ -792,38 +726,14 @@ namespace TISS_Web.Controllers
         /// 首頁
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Home()
+        public ActionResult Home()
         {
             try
             {
                 Session["ReturnUrl"] = Request.Url.ToString();
 
-                // 查詢影片文章內容
-                var relatedHashtags = new List<string>
-            {
-                "人物專訪",
-                "中心成果",
-                "運動科技論壇",
-                "影音專區"
-            };
-
-                var videoArticles = await _db.ArticleContent
-                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                    .ToListAsync();
-
-                // 提取影片中的 iframe 標籤
-                var videos = videoArticles.Select(a => new ArticleContentModel
-                {
-                    Title = a.Title,
-                    VideoIframe = ExtractIframe(a.ContentBody),
-                    ImageContent = a.ImageContent,
-                    Hashtags = a.Hashtags,
-                    PublishedDate = a.PublishedDate.GetValueOrDefault(DateTime.MinValue),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
-                }).Where(a => !string.IsNullOrEmpty(a.VideoIframe)).ToList();
-
                 //首頁文章內容
-                var dtos = await _db.ArticleContent
+                var dtos = _db.ArticleContent
                     .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                     .OrderByDescending(a => a.PublishedDate)
                     .Select(a => new ArticleContentModel
@@ -835,9 +745,9 @@ namespace TISS_Web.Controllers
                         EncryptedUrl = a.EncryptedUrl,
                         PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
 
-                    }).Take(4).ToListAsync();
+                    }).Take(4).ToList();
 
-                var dto = await _db.ArticleContent
+                var dto =  _db.ArticleContent
                         .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                         .OrderByDescending(a => a.CreateDate)
                         .Select(a => new ArticleContentModel
@@ -849,17 +759,16 @@ namespace TISS_Web.Controllers
                             EncryptedUrl = a.EncryptedUrl,
                             PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
                         })
-                        .FirstOrDefaultAsync(); // 取得最新的專欄文章
+                        .FirstOrDefault(); // 取得最新的專欄文章
 
                 var latestArticle = dtos.FirstOrDefault();
                 var otherArticles = dtos.Skip(1).ToList();
 
                 var viewModel = new HomeViewModel //首頁的部份視圖
                 {
-                    //LatestArticle = latestArticle,
                     LatestArticle = dto,
                     OtherArticles = otherArticles,
-                    Videos = videos
+                    Videos = null // 不需要再從這裡獲取影片數據
                 };
 
                 return View(viewModel);
@@ -909,12 +818,16 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>");
+                // 過濾空白段落，防止它們影響顯示
+                content = Regex.Replace(content, @"<p>(&nbsp;|\s*)<\/p>", string.Empty, RegexOptions.IgnoreCase);
+
+                var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>"); //正則表達式提取 iframe
                 var match = regex.Match(content);
 
                 if (match.Success)
                 {
                     var iframeHtml = match.Value;
+
                     // 替換原始的 width 和 height 屬性
                     iframeHtml = Regex.Replace(iframeHtml, @"width=""\d+""", "width=\"100%\"");
                     iframeHtml = Regex.Replace(iframeHtml, @"height=""\d+""", "height=\"100%\"");
@@ -929,6 +842,7 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+
 
         #endregion
 
@@ -1354,6 +1268,47 @@ namespace TISS_Web.Controllers
                 return RedirectToAction("Error404", "Error");
             }
         }
+        #endregion
+
+        #region 獲取首頁影片區塊的資料
+        public ActionResult GetHomeVideos()
+        {
+            try
+            {
+                var relatedHashtags = new List<string>
+                {
+                    "人物專訪","中心成果","運動科技論壇", "影音專區"
+                };
+
+                // 先查詢文章內容
+                var videoArticles =  _db.ArticleContent
+                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
+                    .ToList();
+
+                // 查詢所有類別
+                var articleCategories = _db.ArticleCategory.ToList();
+
+                // 提取影片中的 iframe 並賦值 ContentType
+                var videos = videoArticles.Select(a => new ArticleContentModel
+                {
+                    Title = a.Title,
+                    VideoIframe = ExtractIframe(a.ContentBody),
+                    ImageContent = a.ImageContent,
+                    Hashtags = a.Hashtags,
+                    PublishedDate = a.PublishedDate.GetValueOrDefault(DateTime.MinValue),
+                    ContentType = articleCategories.FirstOrDefault(c => c.Id == a.ContentTypeId)?.CategoryName
+                })
+                .Where(a => !string.IsNullOrEmpty(a.VideoIframe))
+                .ToList();
+
+                return PartialView("_VideoSection", videos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         #region 中心介紹
@@ -2267,7 +2222,7 @@ namespace TISS_Web.Controllers
         //    }
         //}
 
-       
+
         #endregion
 
         #region 公開資訊
@@ -2285,9 +2240,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.Documents.Where(d => d.IsActive)
-                        .OrderByDescending(d => d.UploadTime)
-                        .ToList();
+                var list = _db.Documents.Where(d => d.IsActive && d.Category == "Regulation")
+                                .OrderByDescending(d => d.UploadTime)
+                                .ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2330,7 +2285,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.IsActive && d.Category == "Regulation")
+                                .OrderByDescending(d => d.UploadTime)
+                                .ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2416,8 +2373,10 @@ namespace TISS_Web.Controllers
                 Session["ReturnUrl"] = Request.Url.ToString();
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
-                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime)
-                                   .ToList();
+
+                var list = _db.Documents.Where(d => d.IsActive && d.Category == "Plan")
+                                .OrderByDescending(d => d.UploadTime)
+                                .ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2460,7 +2419,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.BudgetDocument.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.IsActive && d.Category == "Budget")
+                                .OrderByDescending(d => d.UploadTime)
+                                .ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -2468,8 +2429,9 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
-                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new BudgetDocumentModel
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
                 {
+                    DocumentID = d.DocumentID,
                     DocumentName = d.DocumentName,
                     DocumentType = d.DocumentType,
                     UploadTime = d.UploadTime,
@@ -2546,7 +2508,7 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.Documents.Where(d => d.Category == "Procedure" && d.IsActive)
+                var list = _db.Documents.Where(d => d.Category == "Purchase" && d.IsActive)
                                 .OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
@@ -2590,7 +2552,8 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
-                var list = _db.Documents.Where(d => d.IsActive).OrderByDescending(d => d.UploadTime).ToList();
+                var list = _db.Documents.Where(d => d.Category == "Other" && d.IsActive)
+                                .OrderByDescending(d => d.UploadTime).ToList();
 
                 //計算總數和總頁數
                 var totalDocuments = list.Count();
@@ -3109,6 +3072,8 @@ namespace TISS_Web.Controllers
                 var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
                 ViewBag.Comments = comments;
 
+                ViewBag.Title = $"{article.Title}";// 設定網頁描述性的標題
+
                 var menuList = new Dictionary<string, string> //子主題連結
                 {
                     { "運動醫學", "/Tiss/sportMedicine" },
@@ -3452,7 +3417,6 @@ namespace TISS_Web.Controllers
 
         #endregion
 
-
         #region 上傳文件的通用方法
         [HttpPost]
         public ActionResult UploadDocument(HttpPostedFileBase file, string category, int? page)
@@ -3541,7 +3505,6 @@ namespace TISS_Web.Controllers
 
         #region 文件類別的頁面處理
 
-        // 通用的文件列表處理方法
         private ActionResult DocumentList(string category, string viewName, int page = 1, int pageSize = 10)
         {
             try
@@ -3578,49 +3541,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
-        //// 法規文件列表
-        //public ActionResult Regulation(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("Regulation", "Regulation", page, pageSize);
-        //}
-
-        //// 辦法及要點文件列表
-        //public ActionResult Procedure(int page = 1, int pageSize = 10)
-        //{
-        //    //return DocumentList("Procedure", "Procedure", page, pageSize);
-        //    return RedirectToAction("Procedure", new { page });
-        //}
-
-        //// 計畫文件列表
-        //public ActionResult Plan(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("Plan", "Plan", page, pageSize);
-        //}
-
-        //// 預算與決算文件列表
-        //public ActionResult Budget(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("Budget", "Budget", page, pageSize);
-        //}
-
-        //// 下載專區文件列表
-        //public ActionResult Download(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("Download", "Download", page, pageSize);
-        //}
-
-        //// 其他文件列表
-        //public ActionResult Other(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("Other", "Other", page, pageSize);
-        //}
-
-        //// 性別平等專區文件列表
-        //public ActionResult GenderEquality(int page = 1, int pageSize = 10)
-        //{
-        //    return DocumentList("GenderEquality", "GenderEquality", page, pageSize);
-        //}
 
         #endregion
     }

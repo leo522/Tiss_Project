@@ -420,7 +420,7 @@ namespace TISS_Web.Models
         public string EndDate { get; set; }
     }
 
-    public class DocumentModel
+    public class DocumentModel //法規文件
     {
         public int DocumentID { get; set; }       // 文件 ID
         public string DocumentName { get; set; }  // 文件名稱
