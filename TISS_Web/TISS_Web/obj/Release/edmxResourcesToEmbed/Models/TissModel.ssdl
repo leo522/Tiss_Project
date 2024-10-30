@@ -146,6 +146,7 @@
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FileContent" Type="varbinary(max)" />
+    <Property Name="ArticleId" Type="int" />
   </EntityType>
   <EntityType Name="DomainsURL">
     <Key>
@@ -1040,6 +1041,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Documents_ArticleContent">
+    <End Role="ArticleContent" Type="Self.ArticleContent" Multiplicity="0..1" />
+    <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="TISS_WebModelStoreContainer">
     <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
@@ -1135,6 +1148,10 @@
     <AssociationSet Name="FK__UserRoles__UserI__3E52440B" Association="Self.FK__UserRoles__UserI__3E52440B">
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documents_ArticleContent" Association="Self.FK_Documents_ArticleContent">
+      <End Role="ArticleContent" EntitySet="ArticleContent" />
+      <End Role="Documents" EntitySet="Documents" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

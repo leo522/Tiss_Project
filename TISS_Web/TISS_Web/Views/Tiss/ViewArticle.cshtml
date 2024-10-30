@@ -1,4 +1,5 @@
-﻿@model TISS_Web.Models.ArticleContent
+﻿@*﻿@model TISS_Web.Models.ArticleContent*@
+@model TISS_Web.Models.ArticleViewModel
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
     var isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
@@ -10,7 +11,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.DocumentName</title>
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -63,7 +64,7 @@
                                     </span>
                                 }
                                 <span class="el-breadcrumb__item current-page" aria-current="page">
-                                    <span class="el-breadcrumb__inner" style="color:black">@Html.Raw(Model.Title)</span>
+                                    <span class="el-breadcrumb__inner" style="color:black">@Html.Raw(Model.Article.Title)</span>
                                 </span>
                             </div>
                         </div>
@@ -134,7 +135,7 @@
                                     <span>
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
-                                    <span>@Model.ClickCount</span>
+                                    <span>@Model.Article.ClickCount</span>
                                 </div>
                             </div>
                         </div>
@@ -146,12 +147,12 @@
                                         <!-- 標題 -->
                                         <form method="post" action="@Url.Action("ViewArticle", "Tiss")" enctype="multipart/form-data">
                                             @Html.AntiForgeryToken()
-                                            <input type="hidden" name="Id" value="@Model.Id" />
+                                            <input type="hidden" name="Id" value="@Model.Article.Id" />
 
                                             <!-- 內容 -->
                                             <div class="form-group">
                                                 <label for="ContentBody">內容:</label>
-                                                @Html.TextAreaFor(model => model.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                                @Html.TextAreaFor(model => model.Article.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
                                             </div>
 
                                             <div class="form-group mb-4">
@@ -169,9 +170,9 @@
                                                 <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
                                             </div>
 
-                                            @if (Model.ImageContent != null)
+                                            @if (Model.Article.ImageContent != null)
                                             {
-                                                string base64Image = Convert.ToBase64String(Model.ImageContent);
+                                                string base64Image = Convert.ToBase64String(Model.Article.ImageContent);
                                                 string imageSrc = $"data:image/jpeg;base64,{base64Image}";
 
                                                 <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
@@ -188,8 +189,27 @@
                                     else
                                     {
                                         <div>
-                                            @Html.Raw(Model.ContentBody)
+                                            @Html.Raw(Model.Article.ContentBody)
                                         </div>
+                                        if (Model.AssociatedDocuments?.Any() == true)
+                                        {
+                                            <div class="AssociatedDocuments mt-4">
+                                                <h3>相關文件檔案</h3>
+                                                @{
+                                                    foreach (var file in Model.AssociatedDocuments)
+                                                    {
+                                                        <div class="DocumentItem" style="margin-bottom: 10px;">
+                                                            <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                               target="_blank" title="下載 @file.DocumentName">
+                                                                <strong>@(file.DocumentName.Contains('.') ? file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.')) : file.DocumentName)</strong>
+
+                                                            </a>
+                                                            <span style="color: gray; font-size: 0.9em;">(@file.UploadTime.ToString("yyyy/MM/dd") - @file.DocumentType)</span>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        }
                                     }
                                 </div>
                             </div>

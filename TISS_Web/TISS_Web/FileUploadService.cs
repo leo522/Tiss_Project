@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Linq;
 using TISS_Web.Models;
+using static TISS_Web.Models.ArticleModel;
 
 namespace TISS_Web
 {
@@ -17,7 +18,7 @@ namespace TISS_Web
             _context = context;
         }
 
-        public string UploadFile(HttpPostedFileBase file, string category)
+        public string UploadFile(HttpPostedFileBase file, string category, int? articleId = null)
         {
             if (file != null && file.ContentLength > 0)
             {
@@ -54,9 +55,10 @@ namespace TISS_Web
                             Creator = userId,
                             DocumentType = fileExtension,
                             FileSize = fileData.Length,
-                            FileContent = fileData, // 將文件二進制數據存入資料庫
+                            FileContent = fileData, //將文件二進制數據存入資料庫
                             IsActive = true,
-                            Category = category //使用 category來區分文件類型
+                            Category = category, //使用category來區分文件類型
+                            ArticleId = articleId, //關聯文章ID
                         };
 
                         _context.Documents.Add(document);

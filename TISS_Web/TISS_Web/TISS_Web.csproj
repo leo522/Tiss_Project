@@ -251,6 +251,7 @@
     <Compile Include="Models\Documents.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DocumentViewModel.cs" />
     <Compile Include="Models\DomainsURL.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -2644,6 +2645,7 @@
     <Content Include="site\css\MenuLinkStyle.css" />
     <Content Include="site\css\NavMenuStyle.css" />
     <Content Include="site\css\SectionTitleStyle.css" />
+    <Content Include="site\css\siteMapStyle.css" />
     <Content Include="site\css\socialStyle.css" />
     <Content Include="site\css\ViewArticle.css" />
     <Content Include="site\css\ViewArticleBannerStyle.css" />
@@ -3063,6 +3065,7 @@
     <Content Include="tinymce\js\tinymce\license.md" />
     <Content Include="Views\Error\WebSiteError.cshtml" />
     <Content Include="Views\Tiss\_VideoSection.cshtml" />
+    <Content Include="Views\Tiss\SiteMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

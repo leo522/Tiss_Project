@@ -994,6 +994,7 @@
     <EntitySetMapping Name="Documents">
       <EntityTypeMapping TypeName="TISS_WebModel.Documents">
         <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
           <ScalarProperty Name="FileContent" ColumnName="FileContent" />
           <ScalarProperty Name="Category" ColumnName="Category" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />

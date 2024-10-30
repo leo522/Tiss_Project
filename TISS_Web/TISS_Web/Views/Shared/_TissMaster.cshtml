@@ -74,7 +74,7 @@
                     <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
                 </a>
                 <div data-v-e61ebf00="" style="margin-left: 130px;">
-                    <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: flex-start; padding: 0;">
+                    <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: flex-start; align-items: center; padding: 0;">
                         <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="小" data-size="small" title="小">小</button>
                         </li>
@@ -84,23 +84,27 @@
                         <li style="margin-right: 20px;">
                             <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="大" data-size="large" title="大">大</button>
                         </li>
+                        <li class="WebSitemap" style="margin-right: 20px;">
+                            <a href="/Tiss/SiteMap" id="aLinkSitemap" style="display: inline; white-space: nowrap;">網站導覽</a>
+                        </li>
                     </ul>
                 </div>
 
+
                 @*<nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
-                        <ul data-v-e61ebf00="" class="ToolList">
-                            <li data-v-e61ebf00="">
-                                <div id="google_translate_element" style="display: none;"></div>
-                                <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
-                                    <option value="">Language</option>
-                                    <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
-                                    <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-                                    <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
-                                    <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </nav>*@
+            <ul data-v-e61ebf00="" class="ToolList">
+                <li data-v-e61ebf00="">
+                    <div id="google_translate_element" style="display: none;"></div>
+                    <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
+                        <option value="">Language</option>
+                        <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
+                        <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+                        <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
+                        <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
+                    </select>
+                </li>
+            </ul>
+        </nav>*@
             </div>
         </div>
         <div data-v-71bab962="" class="menuNav">
@@ -342,6 +346,9 @@
         @RenderBody()
     </div>
     <footer data-v-339da53a="">
+        <div class="sr-only">
+            <a href="/sitemap" accesskey="Z" title="網站導覽（快捷鍵：Alt + Z）">網站導覽</a>
+        </div>
         <div class="FooterDecoration"></div>
         <div class="container">
             <div class="FooterContent">
@@ -487,9 +494,9 @@
                             </ul>
                         </div>
                         @*<div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                    <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
-                    <ul class="MenuList"></ul>
-                </div>*@
+                            <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
+                            <ul class="MenuList"></ul>
+                        </div>*@
                     </div>
                     <div class="copyright">
                         <div class="container" title="Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>

@@ -18,6 +18,7 @@ namespace TISS_Web.Models
         public ArticleContent()
         {
             this.MessageBoard = new HashSet<MessageBoard>();
+            this.Documents = new HashSet<Documents>();
         }
     
         public int Id { get; set; }
@@ -41,5 +42,7 @@ namespace TISS_Web.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MessageBoard> MessageBoard { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Documents> Documents { get; set; }
     }
 }

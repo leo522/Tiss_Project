@@ -23,5 +23,8 @@ namespace TISS_Web.Models
         public bool IsActive { get; set; }
         public string Category { get; set; }
         public byte[] FileContent { get; set; }
+        public Nullable<int> ArticleId { get; set; }
+    
+        public virtual ArticleContent ArticleContent { get; set; }
     }
 }

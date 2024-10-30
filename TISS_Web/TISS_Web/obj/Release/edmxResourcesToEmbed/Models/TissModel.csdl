@@ -96,6 +96,10 @@
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
     <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
+    <AssociationSet Name="FK_Documents_ArticleContent" Association="TISS_WebModel.FK_Documents_ArticleContent">
+      <End Role="ArticleContent" EntitySet="ArticleContent" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -163,6 +167,7 @@
     <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
+    <NavigationProperty Name="Documents" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="ArticleContent" ToRole="Documents" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>
@@ -1152,5 +1157,19 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ArticleId" Type="Int32" />
+    <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="Documents" ToRole="ArticleContent" />
   </EntityType>
+  <Association Name="FK_Documents_ArticleContent">
+    <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="0..1" />
+    <End Type="TISS_WebModel.Documents" Role="Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

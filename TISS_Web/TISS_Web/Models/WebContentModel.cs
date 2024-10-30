@@ -420,11 +420,11 @@ namespace TISS_Web.Models
         public string EndDate { get; set; }
     }
 
-    public class DocumentModel //法規文件
+    public class DocumentModel //PDF文件
     {
-        public int DocumentID { get; set; }       // 文件 ID
+        public int DocumentID { get; set; }       // 文件ID
         public string DocumentName { get; set; }  // 文件名稱
-        public string DocumentType { get; set; }  // 文件類型 (PDF, DOC, ODT等)
+        public string DocumentType { get; set; }  // 文件類型
         public DateTime UploadTime { get; set; }  // 上傳時間
         public string Creator { get; set; }       // 上傳者
         public int FileSize { get; set; }         // 文件大小
