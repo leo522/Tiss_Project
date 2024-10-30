@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>D:\中心網頁</_PublishTargetUrl>
-    <History>True|2024-10-30T08:17:51.3287535Z||;True|2024-10-30T12:45:20.7215918+08:00||;True|2024-10-28T07:33:17.5544933+08:00||;True|2024-10-23T12:34:17.7689587+08:00||;True|2024-10-22T13:47:01.3622763+08:00||;True|2024-10-22T13:40:16.1522070+08:00||;True|2024-10-22T12:33:04.2765298+08:00||;True|2024-10-22T10:58:48.8059322+08:00||;True|2024-10-22T10:54:20.8001292+08:00||;True|2024-10-22T10:50:38.1651911+08:00||;True|2024-10-22T10:38:23.9874323+08:00||;True|2024-10-22T10:20:15.0413197+08:00||;True|2024-10-21T14:36:49.0992128+08:00||;True|2024-10-21T13:47:04.9547731+08:00||;True|2024-10-21T13:19:06.5191320+08:00||;True|2024-10-21T13:13:17.7090481+08:00||;True|2024-10-21T12:33:24.3258466+08:00||;True|2024-10-18T13:14:38.1629185+08:00||;True|2024-10-18T13:10:52.6753425+08:00||;True|2024-10-18T13:00:28.0392153+08:00||;True|2024-10-18T12:56:26.9450392+08:00||;True|2024-10-18T12:44:36.8392161+08:00||;True|2024-10-18T12:34:02.6339806+08:00||;True|2024-10-14T17:59:19.9604783+08:00||;True|2024-10-14T17:52:07.5775044+08:00||;True|2024-10-14T17:39:47.8587775+08:00||;True|2024-10-14T17:15:03.9772144+08:00||;True|2024-10-14T13:00:35.5987903+08:00||;True|2024-10-14T12:01:24.7120808+08:00||;True|2024-10-14T10:14:22.7829561+08:00||;True|2024-10-14T10:13:23.2890534+08:00||;True|2024-10-14T08:50:11.4114893+08:00||;True|2024-10-11T16:40:28.3401797+08:00||;True|2024-10-08T07:57:21.0527698+08:00||;True|2024-09-30T07:44:05.6974808+08:00||;True|2024-09-25T08:38:59.0465497+08:00||;True|2024-09-23T07:50:08.8079302+08:00||;True|2024-09-16T07:47:30.3104326+08:00||;True|2024-09-15T16:40:48.1225043+08:00||;True|2024-09-15T15:46:06.8759894+08:00||;True|2024-09-15T12:01:59.8115795+08:00||;True|2024-09-05T16:17:30.2890486+08:00||;True|2024-08-25T15:36:50.8881582+08:00||;True|2024-08-25T15:34:59.6374854+08:00||;True|2024-08-25T15:28:31.3437332+08:00||;True|2024-08-25T14:42:41.0015003+08:00||;True|2024-08-22T15:45:06.3250087+08:00||;True|2024-08-16T10:42:32.4734058+08:00||;True|2024-07-31T09:25:45.6135672+08:00||;True|2024-07-12T14:01:05.7276623+08:00||;True|2024-07-03T16:54:53.6771976+08:00||;True|2024-07-01T13:42:57.6989307+08:00||;True|2024-07-01T13:41:52.4684489+08:00||;True|2024-07-01T13:29:35.1155429+08:00||;True|2024-07-01T13:24:42.1148503+08:00||;True|2024-07-01T13:23:02.0834164+08:00||;True|2024-07-01T13:14:42.7147000+08:00||;True|2024-07-01T12:34:00.4972793+08:00||;</History>
+    <History>True|2024-10-30T09:27:42.4717150Z||;True|2024-10-30T16:17:51.3287535+08:00||;True|2024-10-30T12:45:20.7215918+08:00||;True|2024-10-28T07:33:17.5544933+08:00||;True|2024-10-23T12:34:17.7689587+08:00||;True|2024-10-22T13:47:01.3622763+08:00||;True|2024-10-22T13:40:16.1522070+08:00||;True|2024-10-22T12:33:04.2765298+08:00||;True|2024-10-22T10:58:48.8059322+08:00||;True|2024-10-22T10:54:20.8001292+08:00||;True|2024-10-22T10:50:38.1651911+08:00||;True|2024-10-22T10:38:23.9874323+08:00||;True|2024-10-22T10:20:15.0413197+08:00||;True|2024-10-21T14:36:49.0992128+08:00||;True|2024-10-21T13:47:04.9547731+08:00||;True|2024-10-21T13:19:06.5191320+08:00||;True|2024-10-21T13:13:17.7090481+08:00||;True|2024-10-21T12:33:24.3258466+08:00||;True|2024-10-18T13:14:38.1629185+08:00||;True|2024-10-18T13:10:52.6753425+08:00||;True|2024-10-18T13:00:28.0392153+08:00||;True|2024-10-18T12:56:26.9450392+08:00||;True|2024-10-18T12:44:36.8392161+08:00||;True|2024-10-18T12:34:02.6339806+08:00||;True|2024-10-14T17:59:19.9604783+08:00||;True|2024-10-14T17:52:07.5775044+08:00||;True|2024-10-14T17:39:47.8587775+08:00||;True|2024-10-14T17:15:03.9772144+08:00||;True|2024-10-14T13:00:35.5987903+08:00||;True|2024-10-14T12:01:24.7120808+08:00||;True|2024-10-14T10:14:22.7829561+08:00||;True|2024-10-14T10:13:23.2890534+08:00||;True|2024-10-14T08:50:11.4114893+08:00||;True|2024-10-11T16:40:28.3401797+08:00||;True|2024-10-08T07:57:21.0527698+08:00||;True|2024-09-30T07:44:05.6974808+08:00||;True|2024-09-25T08:38:59.0465497+08:00||;True|2024-09-23T07:50:08.8079302+08:00||;True|2024-09-16T07:47:30.3104326+08:00||;True|2024-09-15T16:40:48.1225043+08:00||;True|2024-09-15T15:46:06.8759894+08:00||;True|2024-09-15T12:01:59.8115795+08:00||;True|2024-09-05T16:17:30.2890486+08:00||;True|2024-08-25T15:36:50.8881582+08:00||;True|2024-08-25T15:34:59.6374854+08:00||;True|2024-08-25T15:28:31.3437332+08:00||;True|2024-08-25T14:42:41.0015003+08:00||;True|2024-08-22T15:45:06.3250087+08:00||;True|2024-08-16T10:42:32.4734058+08:00||;True|2024-07-31T09:25:45.6135672+08:00||;True|2024-07-12T14:01:05.7276623+08:00||;True|2024-07-03T16:54:53.6771976+08:00||;True|2024-07-01T13:42:57.6989307+08:00||;True|2024-07-01T13:41:52.4684489+08:00||;True|2024-07-01T13:29:35.1155429+08:00||;True|2024-07-01T13:24:42.1148503+08:00||;True|2024-07-01T13:23:02.0834164+08:00||;True|2024-07-01T13:14:42.7147000+08:00||;True|2024-07-01T12:34:00.4972793+08:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -307,10 +307,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/TISS_Web.dll">
-      <publishTime>10/30/2024 14:09:38</publishTime>
+      <publishTime>10/30/2024 16:58:47</publishTime>
     </File>
     <File Include="bin/TISS_Web.pdb">
-      <publishTime>10/30/2024 14:09:38</publishTime>
+      <publishTime>10/30/2024 16:58:47</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>10/05/2016 21:11:52</publishTime>
@@ -7306,7 +7306,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/18/2024 08:49:31</publishTime>
     </File>
     <File Include="site/css/app.5338f982.css">
-      <publishTime>10/30/2024 16:13:09</publishTime>
+      <publishTime>10/30/2024 16:45:51</publishTime>
     </File>
     <File Include="site/css/BackTop.css">
       <publishTime>08/05/2024 10:00:35</publishTime>
@@ -8863,7 +8863,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 16:17:14</publishTime>
     </File>
     <File Include="Views/Tiss/about.cshtml">
-      <publishTime>10/21/2024 08:39:29</publishTime>
+      <publishTime>10/30/2024 17:21:27</publishTime>
     </File>
     <File Include="Views/Tiss/achievement.cshtml">
       <publishTime>10/21/2024 08:41:15</publishTime>
@@ -8878,13 +8878,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 09:13:57</publishTime>
     </File>
     <File Include="Views/Tiss/BOD.cshtml">
-      <publishTime>10/21/2024 08:50:59</publishTime>
+      <publishTime>10/30/2024 17:22:02</publishTime>
     </File>
     <File Include="Views/Tiss/budget.cshtml">
       <publishTime>10/30/2024 15:04:46</publishTime>
     </File>
     <File Include="Views/Tiss/CEO.cshtml">
-      <publishTime>10/21/2024 08:58:31</publishTime>
+      <publishTime>10/30/2024 17:22:35</publishTime>
     </File>
     <File Include="Views/Tiss/ChangePassword.cshtml">
       <publishTime>08/29/2024 08:28:43</publishTime>
@@ -8917,16 +8917,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>09/25/2024 08:12:07</publishTime>
     </File>
     <File Include="Views/Tiss/mission.cshtml">
-      <publishTime>10/21/2024 09:14:35</publishTime>
+      <publishTime>10/30/2024 17:24:04</publishTime>
     </File>
     <File Include="Views/Tiss/news.cshtml">
       <publishTime>10/30/2024 15:05:40</publishTime>
     </File>
     <File Include="Views/Tiss/Objectives.cshtml">
-      <publishTime>10/21/2024 09:15:55</publishTime>
+      <publishTime>10/30/2024 17:24:48</publishTime>
     </File>
     <File Include="Views/Tiss/Organization.cshtml">
-      <publishTime>10/21/2024 09:16:46</publishTime>
+      <publishTime>10/30/2024 17:25:16</publishTime>
     </File>
     <File Include="Views/Tiss/other.cshtml">
       <publishTime>10/30/2024 15:05:48</publishTime>
@@ -8950,7 +8950,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:07:28</publishTime>
     </File>
     <File Include="Views/Tiss/purchase.cshtml">
-      <publishTime>10/21/2024 09:48:59</publishTime>
+      <publishTime>10/30/2024 17:26:02</publishTime>
     </File>
     <File Include="Views/Tiss/recruit.cshtml">
       <publishTime>10/30/2024 15:07:38</publishTime>
@@ -8998,7 +8998,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:09:35</publishTime>
     </File>
     <File Include="Views/Tiss/Units.cshtml">
-      <publishTime>10/21/2024 10:28:00</publishTime>
+      <publishTime>10/30/2024 17:26:46</publishTime>
     </File>
     <File Include="Views/Tiss/UploadDocument.cshtml">
       <publishTime>07/11/2024 08:55:37</publishTime>
@@ -9007,7 +9007,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/30/2024 15:09:35</publishTime>
     </File>
     <File Include="Views/Tiss/ViewArticle.cshtml">
-      <publishTime>10/30/2024 15:15:15</publishTime>
+      <publishTime>10/30/2024 17:05:25</publishTime>
     </File>
     <File Include="Views/Tiss/webContent.cshtml">
       <publishTime>07/15/2024 07:37:48</publishTime>

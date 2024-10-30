@@ -1,5 +1,4 @@
-﻿@*﻿@model TISS_Web.Models.ArticleContent*@
-@model TISS_Web.Models.ArticleViewModel
+﻿@model TISS_Web.Models.ArticleViewModel
 @{
     Layout = "~/Views/Shared/_TissMaster.cshtml";
     var isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
@@ -239,11 +238,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <a href="/Tiss/research" class="button button-border button-border-thin button-blue"><i class="icon-line-corner-down-left"></i>回列表</a>
                                     </div>
-                                    @*<div class="col-md-9 text-center mt-5">
-                <a href="/News?ModuleID=N1&amp;CateID=60383e4d-0d5d-40e8-8dcf-bee677b0159d" class="button button-border button-border-thin button-blue"><i class="icon-line-corner-down-left"></i>回列表</a>
-            </div>*@
                                     </div>
+                                    
                                 </div>
                                     <div class="comments-section">
                                         <h3>留言區</h3>
@@ -336,17 +334,82 @@
     }
     });
 
-    $(document).ready(function () {
+    //$(document).ready(function () {
+    //            tinymce.init({
+    //                selector: '#ContentBody',
+    //                language: 'zh_TW',
+    //                plugins: 'preview anchor autolink codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+    //                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | customFileButton |',
+
+    //                // 字體格式選項
+    //                font_formats: "微軟黑體=Microsoft JhengHei;",
+
+    //                // 文件和圖片的檔案選擇器
+    //                file_picker_callback: function (callback, value, meta) {
+    //                    if (meta.filetype === 'image') {
+    //                        var input = document.createElement('input');
+    //                        input.setAttribute('type', 'file');
+    //                        input.setAttribute('accept', 'image/*');
+    //                        input.onchange = function () {
+    //                            var file = this.files[0];
+    //                            var reader = new FileReader();
+    //                            reader.onload = function (e) {
+    //                                callback(e.target.result, { alt: file.name });
+    //                            };
+    //                            reader.readAsDataURL(file);
+    //                        };
+    //                        input.click();
+    //                    }
+    //                },
+    //                setup: function (editor) {
+    //                    editor.ui.registry.addButton('customFileButton', {
+    //                        text: '插入檔案',
+    //                        onAction: function () {
+    //                            var input = document.createElement('input');
+    //                            input.setAttribute('type', 'file');
+    //                            input.setAttribute('accept', '.pdf,.doc,.docx');
+
+    //                            input.onchange = function () {
+    //                                var file = this.files[0];
+    //                                var formData = new FormData();
+    //                                formData.append('file', file);
+
+    //                                fetch('/Tiss/UploadPDF', {
+    //                                    method: 'POST',
+    //                                    body: formData
+    //                                })
+    //                                    .then(response => response.json())
+    //                                    .then(data => {
+    //                                        if (data.url) {
+    //                                            var link = `<a href="${data.url}" download>${file.name}</a>`;
+    //                                            editor.insertContent(link);
+    //                                            debugger;
+    //                                        } else {
+    //                                            alert('檔案上傳失敗！');
+    //                                        }
+    //                                    })
+    //                                    .catch(error => {
+    //                                        console.error('檔案上傳錯誤:', error);
+    //                                        alert('檔案上傳失敗！');
+    //                                    });
+    //                            };
+    //                            input.click();
+    //                        }
+    //                    });
+    //                }
+    //            });
+            //        });
+            document.addEventListener('DOMContentLoaded', function () {
                 tinymce.init({
                     selector: '#ContentBody',
                     language: 'zh_TW',
                     plugins: 'preview anchor autolink codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | customFileButton |',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent',
 
                     // 字體格式選項
                     font_formats: "微軟黑體=Microsoft JhengHei;",
 
-                    // 文件和圖片的檔案選擇器
+                    // 圖片的檔案選擇器
                     file_picker_callback: function (callback, value, meta) {
                         if (meta.filetype === 'image') {
                             var input = document.createElement('input');
@@ -362,42 +425,6 @@
                             };
                             input.click();
                         }
-                    },
-                    setup: function (editor) {
-                        editor.ui.registry.addButton('customFileButton', {
-                            text: '插入檔案',
-                            onAction: function () {
-                                var input = document.createElement('input');
-                                input.setAttribute('type', 'file');
-                                input.setAttribute('accept', '.pdf,.doc,.docx');
-
-                                input.onchange = function () {
-                                    var file = this.files[0];
-                                    var formData = new FormData();
-                                    formData.append('file', file);
-
-                                    fetch('/Tiss/UploadPDF', {
-                                        method: 'POST',
-                                        body: formData
-                                    })
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            if (data.url) {
-                                                var link = `<a href="${data.url}" download>${file.name}</a>`;
-                                                editor.insertContent(link);
-                                                debugger;
-                                            } else {
-                                                alert('檔案上傳失敗！');
-                                            }
-                                        })
-                                        .catch(error => {
-                                            console.error('檔案上傳錯誤:', error);
-                                            alert('檔案上傳失敗！');
-                                        });
-                                };
-                                input.click();
-                            }
-                        });
                     }
                 });
             });
