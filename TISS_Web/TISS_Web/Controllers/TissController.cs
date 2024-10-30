@@ -3094,8 +3094,8 @@ namespace TISS_Web.Controllers
                 }
 
                 article.ClickCount += 1; //增加點閱率次數
-                article.ContentBody = AddAccessibilityAttributes(article.ContentBody); //增加無障礙屬性
-                article.ContentBody = EnsureImageAltAttribute(article.ContentBody); // 在渲染之前，確保img標籤都包含 alt 屬性
+                //article.ContentBody = AddAccessibilityAttributes(article.ContentBody); //增加無障礙屬性
+                //article.ContentBody = EnsureImageAltAttribute(article.ContentBody); // 在渲染之前，確保img標籤都包含 alt 屬性
 
                 //查詢並取得關聯的文件檔案
                 var associatedDocuments = _db.Documents
@@ -3233,9 +3233,10 @@ namespace TISS_Web.Controllers
                 return View(model);
                 //return View(article);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return RedirectToAction("Error404", "Error");
+                throw ex;
+                //return RedirectToAction("Error404", "Error");
             }
         }
 
@@ -3248,7 +3249,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile)
+        public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory)
         {
             try
             {
@@ -3266,6 +3267,16 @@ namespace TISS_Web.Controllers
                                 byte[] imageData = binaryReader.ReadBytes(imageFile.ContentLength);
                                 // 將圖片儲存為二進制數據
                                 exist.ImageContent = imageData;
+                            }
+                        }
+
+                        // 新增文件上傳功能
+                        if (documentFile != null && documentFile.ContentLength > 0)
+                        {
+                            var fileUploadResult = SaveDocumentFile(documentFile, dto.Id, documentCategory);
+                            if (!fileUploadResult)
+                            {
+                                ModelState.AddModelError("", "文件上傳失敗。");
                             }
                         }
 
@@ -3443,90 +3454,90 @@ namespace TISS_Web.Controllers
 
         #region Tiny編輯器上傳文書檔案跟圖片
 
-        //[HttpPost]
-        //public ActionResult UploadPDF(HttpPostedFileBase file, int? articleId)
-        //{
-        //    if (file != null && file.ContentLength > 0)
-        //    {
-        //        try
-        //        {
-        //            var fileName = Path.GetFileName(file.FileName);
-        //            var extension = Path.GetExtension(fileName).ToLower();
-        //            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx", "odt" }; // 根據需求設定允許的副檔名
+        [HttpPost]
+        public ActionResult UploadPDF(HttpPostedFileBase file, int? articleId)
+        {
+            if (file != null && file.ContentLength > 0)
+            {
+                try
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var extension = Path.GetExtension(fileName).ToLower();
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx", "odt" }; // 根據需求設定允許的副檔名
 
-        //            // 檢查是否為允許的檔案類型
-        //            if (!allowedExtensions.Contains(extension))
-        //            {
-        //                return Json(new { error = "不支援的檔案類型" });
-        //            }
+                    // 檢查是否為允許的檔案類型
+                    //if (!allowedExtensions.Contains(extension))
+                    //{
+                    //    return Json(new { error = "不支援的檔案類型" });
+                    //}
 
-        //            // 確保 uploads 目錄存在（如果需要存檔案）
-        //            var uploadPath = Server.MapPath("~/uploads");
-        //            if (!Directory.Exists(uploadPath))
-        //            {
-        //                Directory.CreateDirectory(uploadPath);
-        //            }
+                    //// 確保 uploads 目錄存在（如果需要存檔案）
+                    //var uploadPath = Server.MapPath("~/uploads");
+                    //if (!Directory.Exists(uploadPath))
+                    //{
+                    //    Directory.CreateDirectory(uploadPath);
+                    //}
 
-        //            // 讀取檔案的二進位數據
-        //            byte[] fileData;
-        //            using (var binaryReader = new BinaryReader(file.InputStream))
-        //            {
-        //                fileData = binaryReader.ReadBytes(file.ContentLength);
-        //            }
-        //            // 確認檔案大小
-        //            var fileSize = fileData.Length;
-        //            // 從 Session 中獲取使用者名稱
-        //            var creator = Session["UserName"]?.ToString() ?? "未知使用者";
+                    // 讀取檔案的二進位數據
+                    byte[] fileData;
+                    using (var binaryReader = new BinaryReader(file.InputStream))
+                    {
+                        fileData = binaryReader.ReadBytes(file.ContentLength);
+                    }
+                    // 確認檔案大小
+                    var fileSize = fileData.Length;
+                    // 從 Session 中獲取使用者名稱
+                    var creator = Session["UserName"]?.ToString() ?? "未知使用者";
 
-        //            // 儲存至資料庫
-        //            var document = new Documents
-        //            {
-        //                DocumentName = fileName,
-        //                UploadTime = DateTime.Now,
-        //                Creator = creator,
-        //                DocumentType = extension,
-        //                FileSize = fileSize,
-        //                FileContent = fileData,
-        //                IsActive = true,
-        //                ArticleId = articleId,
+                    // 儲存至資料庫
+                    var document = new Documents
+                    {
+                        DocumentName = fileName,
+                        UploadTime = DateTime.Now,
+                        Creator = creator,
+                        DocumentType = extension,
+                        FileSize = fileSize,
+                        FileContent = fileData,
+                        IsActive = true,
+                        ArticleId = articleId,
 
-        //                Category = "TinyMCEFileUpload"  // 標示檔案類型
-        //            };
-        //            _db.Documents.Add(document);
-        //            _db.SaveChanges();
+                        Category = "TinyMCEFileUpload"  // 標示檔案類型
+                    };
+                    _db.Documents.Add(document);
+                    _db.SaveChanges();
 
-        //            // 創建 URL 來顯示檔案，這個 URL 可以是從資料庫取得的檔案連結
-        //            var fileUrl = Url.Action("DownloadFile", "Tiss", new { id = document.DocumentID });
+                    // 創建 URL 來顯示檔案，這個 URL 可以是從資料庫取得的檔案連結
+                    var fileUrl = Url.Action("DownloadFile", "Tiss", new { id = document.DocumentID });
 
-        //            // 返回成功消息，包含新生成的 ID 和 URL
-        //            return Json(new { message = "檔案上傳成功", fileId = document.DocumentID, url = fileUrl });
-        //            // 將檔案儲存至資料庫（而不是本地儲存）
-        //            //var fileDocument = new FileDocument
-        //            //{
-        //            //    DocumentName = fileName,
-        //            //    UploadTime = DateTime.Now, // 當前時間
-        //            //    Creator = creator, // 假設使用者名稱來自身份驗證
-        //            //    DocumentType = extension, // 檔案類型
-        //            //    FileSize = fileSize, // 檔案大小
-        //            //    LastModifiedTime = DateTime.Now, // 當前時間
-        //            //    IsEnabled = true, // 根據需求設置
-        //            //    FileURL = fileUrl, // 將生成的FileURL保存到資料庫
-        //            //};
+                    // 返回成功消息，包含新生成的 ID 和 URL
+                    return Json(new { message = "檔案上傳成功", fileId = document.DocumentID, url = fileUrl });
+                    // 將檔案儲存至資料庫（而不是本地儲存）
+                    //var fileDocument = new FileDocument
+                    //{
+                    //    DocumentName = fileName,
+                    //    UploadTime = DateTime.Now, // 當前時間
+                    //    Creator = creator, // 假設使用者名稱來自身份驗證
+                    //    DocumentType = extension, // 檔案類型
+                    //    FileSize = fileSize, // 檔案大小
+                    //    LastModifiedTime = DateTime.Now, // 當前時間
+                    //    IsEnabled = true, // 根據需求設置
+                    //    FileURL = fileUrl, // 將生成的FileURL保存到資料庫
+                    //};
 
-        //            //_db.FileDocument.Add(fileDocument);
-        //            ////_db.SaveChanges();
+                    //_db.FileDocument.Add(fileDocument);
+                    ////_db.SaveChanges();
 
-        //            //// 返回成功消息，並包含新生成的 ID 和 URL
-        //            //return Json(new { message = "檔案上傳成功", fileId = fileDocument.ID, url = fileUrl });
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return Json(new { error = "檔案上傳失敗: " + ex.Message });
-        //        }
-        //    }
+                    //// 返回成功消息，並包含新生成的 ID 和 URL
+                    //return Json(new { message = "檔案上傳成功", fileId = fileDocument.ID, url = fileUrl });
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { error = "檔案上傳失敗: " + ex.Message });
+                }
+            }
 
-        //    return Json(new { error = "檔案上傳失敗" });
-        //}
+            return Json(new { error = "檔案上傳失敗" });
+        }
 
         #endregion
 

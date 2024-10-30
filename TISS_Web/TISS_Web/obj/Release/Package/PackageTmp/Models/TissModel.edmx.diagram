@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ea3f1c725a9e4b1295a916cf2acd5b4f" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="TISS_WebModel.AboutPageContent" Width="1.5" PointX="2.75" PointY="11.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.AnnouncementPageContent" Width="1.5" PointX="4.75" PointY="11.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ArticleCategory" Width="1.5" PointX="6.75" PointY="11.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ArticleContent" Width="1.5" PointX="5.75" PointY="2.375" />
+        <EntityTypeShape EntityType="TISS_WebModel.BODPageContent" Width="1.5" PointX="8.75" PointY="12.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.BudgetDocument" Width="1.5" PointX="10.75" PointY="12.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.BudgetPageContent" Width="1.5" PointX="12.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.CEOPageContent" Width="1.5" PointX="12.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.DomainsURL" Width="1.5" PointX="12.75" PointY="11.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.DownloadDocument" Width="1.5" PointX="12.75" PointY="14.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.DownloadPageContent" Width="1.5" PointX="14.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.EmailLogs" Width="1.5" PointX="0.75" PointY="16.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.Employee" Width="1.5" PointX="2.75" PointY="16.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.FileDocument" Width="1.5" PointX="14.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.GenderEquality" Width="1.5" PointX="7.75" PointY="7.875" />
+        <EntityTypeShape EntityType="TISS_WebModel.GenderEqualityDetails" Width="1.5" PointX="10" PointY="7.375" />
+        <EntityTypeShape EntityType="TISS_WebModel.GenderEqualityDocument" Width="1.5" PointX="4.75" PointY="16.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.GenderEqualityPageContent" Width="1.5" PointX="6.75" PointY="16.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.GovernmentWebsitePageContent" Width="1.5" PointX="14.75" PointY="10.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.Hashtag" Width="1.5" PointX="8.75" PointY="16.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.HomePageContent" Width="1.5" PointX="14.75" PointY="14.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.InstitutePageContent" Width="1.5" PointX="16.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.InternalEmployees" Width="1.5" PointX="16.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.Language" Width="1.5" PointX="16.75" PointY="9.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.MenuItems" Width="1.5" PointX="5" PointY="8.25" />
+        <EntityTypeShape EntityType="TISS_WebModel.Menus" Width="1.5" PointX="2.75" PointY="8.5" />
+        <EntityTypeShape EntityType="TISS_WebModel.MessageBoard" Width="1.5" PointX="8" PointY="3.375" />
+        <EntityTypeShape EntityType="TISS_WebModel.MissionPageContent" Width="1.5" PointX="16.75" PointY="12.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ObjectivesPageContent" Width="1.5" PointX="10.75" PointY="18.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.OrganizationPageContent" Width="1.5" PointX="12.75" PointY="18.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.OtherDocument" Width="1.5" PointX="14.75" PointY="18.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.OtherPageContent" Width="1.5" PointX="16.75" PointY="17.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PasswordResetRequests" Width="1.5" PointX="18.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.Permissions" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="TISS_WebModel.PhysicalTrainingPageContent" Width="1.5" PointX="0.75" PointY="20.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PlanDocument" Width="1.5" PointX="2.75" PointY="20.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PlanPageContent" Width="1.5" PointX="18.75" PointY="5.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PressPageContent" Width="1.5" PointX="4.75" PointY="20.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ProcedureDocument" Width="1.5" PointX="6.75" PointY="20.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ProcedurePageContent" Width="1.5" PointX="18.75" PointY="9.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.Public_InfoPageContent" Width="1.5" PointX="18.75" PointY="13.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PurchaseDocument" Width="1.5" PointX="18.75" PointY="17.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.PurchasePageContent" Width="1.5" PointX="16.75" PointY="21.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.RecruitPageContent" Width="1.5" PointX="18.75" PointY="21.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.RegulationDocument" Width="1.5" PointX="20.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.RegulationPageContent" Width="1.5" PointX="20.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ReplyMessage" Width="1.5" PointX="10.25" PointY="3.375" />
+        <EntityTypeShape EntityType="TISS_WebModel.ResearchPageContent" Width="1.5" PointX="20.75" PointY="10.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.ResearchProjectPageContent" Width="1.5" PointX="20.75" PointY="14.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.RolePermissions" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.Roles" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportMedicinePageContent" Width="1.5" PointX="20.75" PointY="19.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportSciencePageContent" Width="1.5" PointX="8.75" PointY="23.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportsNutritionPageContent" Width="1.5" PointX="10.75" PointY="23.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportsPhysiologyPageContent" Width="1.5" PointX="12.75" PointY="23.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportsPsychologyPageContent" Width="1.5" PointX="20.75" PointY="23.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.SportTechPageContent" Width="1.5" PointX="22.75" PointY="2.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.UnitsPageContent" Width="1.5" PointX="22.75" PointY="6.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.UrlDocument" Width="1.5" PointX="22.75" PointY="10.125" />
+        <EntityTypeShape EntityType="TISS_WebModel.UserRoles" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.Users" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="TISS_WebModel.VideoPageContent" Width="1.5" PointX="22.75" PointY="13.125" />
+        <AssociationConnector Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864" />
+        <AssociationConnector Association="TISS_WebModel.FK__GenderEqu__Gende__3EA749C6" />
+        <AssociationConnector Association="TISS_WebModel.FK__MenuItems__MenuI__467D75B8" />
+        <AssociationConnector Association="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" />
+        <AssociationConnector Association="TISS_WebModel.FK__RolePermi__Permi__4316F928" />
+        <AssociationConnector Association="TISS_WebModel.FK__RolePermi__RoleI__4222D4EF" />
+        <AssociationConnector Association="TISS_WebModel.FK__UserRoles__RoleI__3F466844" />
+        <AssociationConnector Association="TISS_WebModel.FK__UserRoles__UserI__3E52440B" />
+        <EntityTypeShape EntityType="TISS_WebModel.Documents" Width="1.5" PointX="23.375" PointY="17.75" />
+        <AssociationConnector Association="TISS_WebModel.FK_Documents_ArticleContent" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

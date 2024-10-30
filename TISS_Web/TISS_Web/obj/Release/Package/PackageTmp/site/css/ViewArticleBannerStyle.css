@@ -1,0 +1,42 @@
+﻿/*橫幅圖片*/
+/*.BasePageBanner {
+        position: relative;
+        width: 100%;
+        height: 300px;*/ /* 調整橫幅高度 */
+        /*overflow: hidden;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .BasePageBanner .Mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);*/ /* 可選的背景遮罩 */
+    /*}
+
+    .PageBannerItemBg {
+        width: 100%;
+        height: auto;*/ /* 確保圖片自適應 */
+        /*object-fit: cover;*/ /* 確保圖片覆蓋整個區域 */
+    /*}*/
+/*橫幅圖片*/
+
+/*.ResearchPage {
+    margin: 175px auto 0;*/ /* 上邊距175px，左右自動調整以置中 */
+    /*padding: 86px 170px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: fit-content;
+}
+.TitleTag {
+    margin-right: 400px;*/ /* 與 ResearchPage 的內邊距一致 */
+    /*margin-top: 50px;
+}
+
+.current-page .el-breadcrumb__inner {
+    background-color: #dea134;*/ /* 設定你想要的顏色 */
+    /*font-weight: bold;*/ /* 可選：讓文字更醒目 */
+/*}*/
