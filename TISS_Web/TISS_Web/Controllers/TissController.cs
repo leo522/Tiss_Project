@@ -2921,58 +2921,7 @@ namespace TISS_Web.Controllers
             return base64;
         }
 
-        //儲存文件檔案
-        private bool SaveDocumentFile(HttpPostedFileBase file, int articleId, string documentCategory)
-        {
-            try
-            {
-                if (file != null && file.ContentLength > 0)
-                {
-                    string fileName = Path.GetFileName(file.FileName);
-                    string fileExtension = Path.GetExtension(fileName).ToLower();
-
-                    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt")
-                    {
-                        byte[] fileData;
-                        using (var binaryReader = new BinaryReader(file.InputStream))
-                        {
-                            fileData = binaryReader.ReadBytes(file.ContentLength);
-                        }
-
-                        // 使用 this.HttpContext 取得 Session
-                        var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
-
-                        var document = new Documents
-                        {
-                            DocumentName = fileName,
-                            UploadTime = DateTime.Now,
-                            Creator = userName,
-                            DocumentType = fileExtension,
-                            FileSize = fileData.Length,
-                            FileContent = fileData,
-                            IsActive = true,
-                            Category = documentCategory,
-                            ArticleId = articleId // 關聯文章ID
-                        };
-
-                        _db.Documents.Add(document);
-                        _db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // 可以記錄錯誤日志
-                Console.WriteLine("文件上傳錯誤：" + ex.Message);
-            }
-
-            return false;
-        }
+        
         #endregion
 
         #region 文章內容顯示
@@ -3310,6 +3259,61 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
+        #region 儲存文件檔案
+
+        private bool SaveDocumentFile(HttpPostedFileBase file, int articleId, string documentCategory)
+        {
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(file.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToLower();
+
+                    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt")
+                    {
+                        byte[] fileData;
+                        using (var binaryReader = new BinaryReader(file.InputStream))
+                        {
+                            fileData = binaryReader.ReadBytes(file.ContentLength);
+                        }
+
+                        // 使用 this.HttpContext 取得 Session
+                        var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
+
+                        var document = new Documents
+                        {
+                            DocumentName = fileName,
+                            UploadTime = DateTime.Now,
+                            Creator = userName,
+                            DocumentType = fileExtension,
+                            FileSize = fileData.Length,
+                            FileContent = fileData,
+                            IsActive = true,
+                            Category = documentCategory,
+                            ArticleId = articleId // 關聯文章ID
+                        };
+
+                        _db.Documents.Add(document);
+                        _db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // 可以記錄錯誤日志
+                Console.WriteLine("文件上傳錯誤：" + ex.Message);
+            }
+
+            return false;
+        }
+        #endregion
+        
         #region 切換語言
         public ActionResult ChangeLanguage(string lang)
         {
