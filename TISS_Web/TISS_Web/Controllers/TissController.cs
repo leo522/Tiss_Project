@@ -3589,7 +3589,6 @@ namespace TISS_Web.Controllers
 
                     Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"";
                     ViewBag.Title = document.DocumentName;
-                    //Response.AppendHeader("Content-Disposition", $"{disposition}; filename=\"{document.DocumentName}\"");
 
                     return File(document.FileContent, contentType);
                 }

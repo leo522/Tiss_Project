@@ -200,11 +200,12 @@
                                                     {
                                                         <div class="DocumentItem" style="margin-bottom: 10px;">
                                                             <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                               target="_blank" title="下載 @file.DocumentName">
-                                                                <strong>@(file.DocumentName.Contains('.') ? file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.')) : file.DocumentName)</strong>
-
+                                                               target="_blank" title="@file.DocumentName _檔案下載 (另開視窗)">
+                                                                <strong>@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</strong>
                                                             </a>
-                                                            <span style="color: gray; font-size: 0.9em;">(@file.UploadTime.ToString("yyyy/MM/dd") - @file.DocumentType)</span>
+                                                            <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">
+                                                                @file.DocumentType
+                                                            </span>
                                                         </div>
                                                     }
                                                 }
