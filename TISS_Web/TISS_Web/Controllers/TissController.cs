@@ -3190,7 +3190,13 @@ namespace TISS_Web.Controllers
         }
 
         /// <summary>
-        /// 處理上傳圖片
+        /// 處理修改編輯文章
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <param name="imageFile"></param>
+        /// <returns></returns>
+        /// <summary>
+        /// 處理修改編輯文章
         /// </summary>
         /// <param name="dto"></param>
         /// <param name="imageFile"></param>
@@ -3198,13 +3204,13 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ViewArticle(ArticleContent dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory)
+        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var exist = _db.ArticleContent.Find(dto.Id);
+                    var exist = _db.ArticleContent.Find(dto.Article.Id);
 
                     if (exist != null)
                     {
@@ -3222,7 +3228,7 @@ namespace TISS_Web.Controllers
                         // 新增文件上傳功能
                         if (documentFile != null && documentFile.ContentLength > 0)
                         {
-                            var fileUploadResult = SaveDocumentFile(documentFile, dto.Id, documentCategory);
+                            var fileUploadResult = SaveDocumentFile(documentFile, dto.Article.Id, documentCategory);
                             if (!fileUploadResult)
                             {
                                 ModelState.AddModelError("", "文件上傳失敗。");
@@ -3230,13 +3236,16 @@ namespace TISS_Web.Controllers
                         }
 
                         // 更新文章內容和其他欄位
-                        exist.ContentBody = dto.ContentBody;
+                        exist.ContentBody = dto.Article.ContentBody;
                         exist.UpdatedDate = DateTime.Now;
                         exist.UpdatedUser = Session["UserName"] as string;
 
                         _db.SaveChanges();
+                        //根據ContentType進行重定向
+                        string redirectAction = GetRedirectAction(dto.Article.ContentType);
 
-                        return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+                        return RedirectToAction(redirectAction, "Tiss");
+                        //return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
                     }
                 }
                 return View(dto);
