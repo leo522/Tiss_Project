@@ -3244,8 +3244,10 @@ namespace TISS_Web.Controllers
                         //根據ContentType進行重定向
                         string redirectAction = GetRedirectAction(dto.Article.ContentType);
 
+                        ViewBag.SuccessMessage = "文章保存成功！";
+                        return View("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
                         //return RedirectToAction(redirectAction, "Tiss");
-                        return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl, saved = true });
+                        //return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl, saved = true });
                     }
                 }
                 return View(dto);

@@ -38,9 +38,9 @@
                             </div>
                         </div>
                         @*<div class="banner-text">
-            <h1 class="main-title">國家運動科學中心</h1>
-            <p class="content">推動運動科學研究及應用<br>提升國際競技水準與運動產業競爭力</p>
-        </div>*@
+                                <h1 class="main-title">國家運動科學中心</h1>
+                                <p class="content">推動運動科學研究及應用<br>提升國際競技水準與運動產業競爭力</p>
+                            </div>*@
                     </header>
                     <section id="about" class="SectionAbout" aria-labelledby="about-title">
                         <div class="container">
@@ -119,7 +119,7 @@
                                                     <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
 
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
-                                                            <button data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="所有類別">
+                                                            <button role="tab" data-content-type-id="0" aria-disabled="false" type="button" class="category-button el-button is-round w-100 news-category all-category-btn" aria-label="所有類別">
                                                                 <span class="" title="所有類別">所有類別</span>
                                                             </button>
                                                         </div>
@@ -142,7 +142,8 @@
                                                 </div>
                                             </div>
                                         </header>
-                                        <div class="row" id="articleContainer">
+
+                                        <div class="row" id="articleContainer" aria-live="polite">
                                             @foreach (var article in Model.OtherArticles)
                                             {
                                                 <div class="col-md-6 mb-4">
@@ -260,7 +261,7 @@
         </div>
     </div>
 
-<script>
+    <script>
         $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
@@ -291,6 +292,10 @@ document.addEventListener("DOMContentLoaded", function () {
 $('.category-button').click(function () {
     var contentTypeId = $(this).data('content-type-id');
 
+    // 更新被選取的按鈕的 aria-selected 屬性
+    $('.category-button').attr('aria-selected', 'false');
+    $(this).attr('aria-selected', 'true');
+
     $.ajax({
         url: '/Tiss/GetArticles',
         type: 'GET',
@@ -298,6 +303,7 @@ $('.category-button').click(function () {
         success: function (data) {
             $('#articleContainer').empty();
             $('#articleContainer').append(data);
+            $('#articleContainer').focus(); // 將焦點移到更新後的內容
         },
         error: function (xhr, status, error) {
             console.error("讀取錯誤: " + status + " " + error);
@@ -344,6 +350,6 @@ document.addEventListener('DOMContentLoaded', function () {
         rightButton.addEventListener('click', showNext);
     }
 });
-</script>
+    </script>
 </body>
 </html>

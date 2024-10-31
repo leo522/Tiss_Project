@@ -13,25 +13,25 @@
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
                 <div data-v-339da53a-s="" class="BasePageLayout">
                     <div class="BasePageBanner">
-                        <div class="Mask">
-                        </div>
-                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt=""/>
+                        <div class="Mask"></div>
+                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt="" />
                         <div class="container">
                             <div class="Title">
                                 <h1 class="BannerTitle" title="About TISS">
                                     About TISS
                                 </h1>
                                 <h2 class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>中心介紹
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="" />中心介紹
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <section class="el-container">
-                        <aside class="el-aside">
+                        <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
@@ -55,7 +55,7 @@
                             </div>
 
                             @*左方功能區塊*@
-                            <div class="content">
+                            <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="中心介紹">中心介紹</h2>
                                 <ul class="Menu">
@@ -81,7 +81,7 @@
                             </div>
                         </aside>
                         <main class="el-main bg-defaultO4">
-                            <div class="MainContainer">
+                            <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -271,7 +271,7 @@
             </div>
         </div>
     </div>
-<script>
+    <script>
     $(document).ready(function () {
         // 登出按鈕顯示功能
         var isLoggedIn = '@Session["LoggedIn"]' == 'True';
@@ -289,6 +289,7 @@
         menuLinks.forEach(function (link) {
             if (link.getAttribute('href') === currentUrl) {
                 link.classList.add('active');
+                link.focus();  // 修改: 焦點移至當前選項
             }
         });
 
@@ -313,6 +314,6 @@
         var dropdownMenu = dropdownToggle.nextElementSibling;
         dropdownMenu.classList.toggle('show');
     }
-</script>
+    </script>
 </body>
 </html>

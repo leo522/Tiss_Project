@@ -40,6 +40,10 @@
 <body>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0" nonce="xyz">
     </script>
+    <!-- 隱藏的訊息元素，用於顯示保存成功訊息 -->
+    <div id="successMessage" style="display: none; color: green; font-size: 18px; text-align: center; margin-top: 20px;">
+        文章修改成功！
+    </div>
     <div class="container-fluid px-0 mt-header">
         <div class="BasePageLayout">
             <div class="BasePageBanner">
@@ -47,7 +51,8 @@
                 <img class="PageBannerItemBg" src="/site/img/banner_research.25875290.jpg" alt="" />
             </div>
             <section class="el-container">
-                <aside class="el-aside">
+                <aside class="el-aside" aria-labelledby="sidebar-title">
+                    <h1 id="sidebar-title" class="sr-only">功能區塊</h1>
                     <div class="BaseBreadcrumb d-block d-lg-none">
                         <div class="container">
                             <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -68,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
+                    <div class="content" aria-live="polite">
                         <a href="#L" title="左方功能區塊" accesskey="L" name="L" class="alt-c" style="margin-left: 100px;">:::</a>
                         @if (!string.IsNullOrEmpty(parentDirectory))
                         {
@@ -92,7 +97,7 @@
                 </aside>
 
                 <main class="el-main bg-defaultO4">
-                    <div class="MainContainer">
+                    <div class="MainContainer" aria-live="polite">
                         <div id="main_content">
                             <div class="ArticleContent" id="Ca">
                                 <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
@@ -218,7 +223,7 @@
                                                 if (Model.AssociatedDocuments?.Any() == true)
                                                 {
                                                     <div class="AssociatedDocuments mt-4">
-                                                        <h3>相關文件檔案</h3>
+                                                        <span>相關文件檔案</span>
                                                         @{
                                                             foreach (var file in Model.AssociatedDocuments)
                                                             {
@@ -250,7 +255,7 @@
 
                     @*留言板*@
                     <div class="comments-section">
-                        <h3>留言區</h3>
+                        <h2>留言區</h2>
                         <button id="toggle-comments" class="btn btn-light">
                             <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
                         </button>
@@ -338,6 +343,13 @@
         $('#adminUser').hide(); // 隱藏管理者按鈕
     }
     });
+    // 檢查 ViewBag.SuccessMessage 並顯示提示訊息
+        document.addEventListener("DOMContentLoaded", function () {
+            var successMessage = '@ViewBag.SuccessMessage';
+            if (successMessage) {
+                document.getElementById("successMessage").style.display = "block";
+            }
+        });
             document.addEventListener('DOMContentLoaded', function () {
                 tinymce.init({
                     selector: '#ContentBody',
@@ -366,12 +378,6 @@
                         }
                     }
                 });
-            });
-            document.addEventListener("DOMContentLoaded", function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.has('saved') && urlParams.get('saved') === 'true') {
-                    alert("文章保存成功！");
-                }
             });
         </script>
     }
