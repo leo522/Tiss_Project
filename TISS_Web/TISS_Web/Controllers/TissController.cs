@@ -3244,8 +3244,8 @@ namespace TISS_Web.Controllers
                         //根據ContentType進行重定向
                         string redirectAction = GetRedirectAction(dto.Article.ContentType);
 
-                        return RedirectToAction(redirectAction, "Tiss");
-                        //return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+                        //return RedirectToAction(redirectAction, "Tiss");
+                        return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl, saved = true });
                     }
                 }
                 return View(dto);
@@ -3612,7 +3612,7 @@ namespace TISS_Web.Controllers
                     var encodedFileName = Uri.EscapeDataString(document.DocumentName);
 
                     Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"";
-                    ViewBag.Title = document.DocumentName;
+                    ViewBag.DocumentName = document.DocumentName;
 
                     return File(document.FileContent, contentType);
                 }
