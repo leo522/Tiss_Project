@@ -30,11 +30,14 @@ using OfficeOpenXml;
 using System.Windows.Documents;
 using System.Net.Http;
 using System.Net.Sockets;
-
 using System.Web.Caching;
 using System.Runtime.Caching;
 using System.Xml.Linq;
 using Microsoft.Ajax.Utilities;
+using iText.Kernel.Pdf;
+using iText.Kernel.XMP;
+using iText.Kernel.XMP.Options;
+using iText.Kernel.XMP.Properties;
 
 namespace TISS_Web.Controllers
 {
@@ -2884,33 +2887,6 @@ namespace TISS_Web.Controllers
             return View(dto);
         }
 
-        //重定向邏輯
-        private string GetRedirectAction(string contentType)
-        {
-            switch (contentType)
-            {
-                case "運動醫學": return "sportMedicine";
-                case "運動科學": return "sportScience";
-                case "運動科技": return "sportTech";
-                case "運動營養": return "sportsNutrition";
-                case "運動生理": return "sportsPhysiology";
-                case "運動心理": return "sportsPsychology";
-                case "行政管理處人資組": return "recruit";
-                case "委託研究計劃": return "announcement";
-                case "MOU簽署": return "announcement";
-                case "運動資訊": return "sportsInfo";
-                case "全部文章": return "announcement";
-                case "新聞發佈": return "press";
-                case "中心訊息": return "institute";
-                case "徵才招募": return "recruit";
-                case "中心成果": return "achievement";
-                case "新聞影音": return "news";
-                case "活動紀錄": return "activityRecord";
-                case "兒少科普": return "childrenScience";
-                default: return "Home";
-            }
-        }
-
         //URL加密
         private string EncryptUrl(string input)
         {
@@ -3238,14 +3214,17 @@ namespace TISS_Web.Controllers
                         // 更新文章內容和其他欄位
                         exist.ContentBody = dto.Article.ContentBody;
                         exist.UpdatedDate = DateTime.Now;
+                        exist.ContentType = dto.Article.ContentType;
                         exist.UpdatedUser = Session["UserName"] as string;
 
                         _db.SaveChanges();
                         //根據ContentType進行重定向
                         string redirectAction = GetRedirectAction(dto.Article.ContentType);
+                        // 設定成功訊息
 
                         ViewBag.SuccessMessage = "文章保存成功！";
-                        return View("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+                        //return View("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
+                        return RedirectToAction(redirectAction);
                         //return RedirectToAction(redirectAction, "Tiss");
                         //return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl, saved = true });
                     }
@@ -3267,6 +3246,34 @@ namespace TISS_Web.Controllers
         {
             string actionName = GetRedirectAction(tag);
             return RedirectToAction(actionName, "Tiss");
+        }
+        #endregion
+
+        #region 導回對應文章主題頁
+        private string GetRedirectAction(string contentType)
+        {
+            // 定義每個 ContentType 對應的 Action 名稱
+            var contentTypeRoutes = new Dictionary<string, string>
+{
+    { "運動醫學", "sportMedicine" },
+    { "運動科技", "sportTech" },
+    { "運動科學", "sportScience" },
+    { "運動生理", "sportsPhysiology" },
+    { "運動心理", "sportsPsychology" },
+    { "體能訓練", "physicalTraining" },
+    { "運動營養", "sportsNutrition" },
+    { "新聞發佈", "press" },
+    { "中心訊息", "institute" },
+    { "徵才招募", "recruit" },
+    { "中心成果", "achievement" },
+    { "新聞影音", "news" },
+    { "活動紀錄", "activityRecord" },
+    { "兒少科普", "childrenScience" },
+    { "科普海報下載專區", "SciencePosterDownLoad" }
+};
+
+            // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁
+            return contentTypeRoutes.TryGetValue(contentType, out var actionName) ? actionName : "Index";
         }
         #endregion
 
@@ -3606,17 +3613,14 @@ namespace TISS_Web.Controllers
                 if (document != null)
                 {
                     var contentType = GetContentType(document.DocumentName);
-
-                    // 如果文件是 PDF，則設置為 inline，其他文件保持下載行為
                     var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
-
-                    // 編碼文件名稱為 UTF-8，確保特殊字符正確顯示
                     var encodedFileName = Uri.EscapeDataString(document.DocumentName);
 
-                    Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"";
-                    ViewBag.DocumentName = document.DocumentName;
+                    Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
 
-                    return File(document.FileContent, contentType);
+                    byte[] updatedPdf = UpdatePdfTitle(document.FileContent, document.DocumentName);
+                    var stream = new MemoryStream(updatedPdf);
+                    return new FileStreamResult(stream, contentType);
                 }
                 return HttpNotFound();
             }
@@ -3625,24 +3629,58 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+        //public ActionResult DownloadFile(int documentId)
+        //{
+        //    try
+        //    {
+        //        var document = _db.Documents.Find(documentId);
+        //        if (document != null)
+        //        {
+        //            var contentType = GetContentType(document.DocumentName);
+
+        //            //判斷顯示方式為內嵌或下載
+        //            var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
+
+        //            // 設置文件名稱
+        //            var encodedFileName = Uri.EscapeDataString(document.DocumentName);
+
+        //            Response.Headers["Content-Disposition"] = $"{disposition}; filename*=UTF-8''{encodedFileName}";
+
+        //            return File(document.FileContent, contentType);
+        //        }
+        //        return HttpNotFound();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         #endregion
 
         #region 判斷文件類型，回傳適當的MIME類型
         private string GetContentType(string fileName)
         {
-            var extension = Path.GetExtension(fileName).ToLower();
-            switch (extension)
+            try
             {
-                case ".pdf":
-                    return "application/pdf";
-                case ".doc":
-                case ".docx":
-                    return "application/msword";
-                case ".odt":
-                    return "application/vnd.oasis.opendocument.text"; // ODT 檔案的 MIME 類型
-                default:
-                    return "application/octet-stream"; // 其他文件類型預設為下載
+                var extension = Path.GetExtension(fileName).ToLower();
+                switch (extension)
+                {
+                    case ".pdf":
+                        return "application/pdf";
+                    case ".doc":
+                    case ".docx":
+                        return "application/msword";
+                    case ".odt":
+                        return "application/vnd.oasis.opendocument.text"; // ODT 檔案的 MIME 類型
+                    default:
+                        return "application/octet-stream"; // 其他文件類型預設為下載
+                }
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
         #endregion
 
@@ -3685,6 +3723,37 @@ namespace TISS_Web.Controllers
             }
         }
 
+        #endregion
+
+        #region 修改PDF標題名稱
+        public byte[] UpdatePdfTitle(byte[] pdfBytes, string newTitle)
+        {
+            try
+            {
+                using (var inputMs = new MemoryStream(pdfBytes)) //原始 PDF 數據
+                using (var outputMs = new MemoryStream()) //用於寫入修改後的 PDF 數據
+                {
+                   
+                    using (var reader = new PdfReader(inputMs)) //使用 PdfReader 讀取原始 PDF
+                    using (var writer = new PdfWriter(outputMs))
+                    {
+                        // 創建 PdfDocument 以便修改 PDF 文件
+                        using (var pdfDoc = new PdfDocument(reader, writer))
+                        {
+                            pdfDoc.GetDocumentInfo().SetTitle(newTitle); //設定 PDF 文件的 metadata
+
+                            pdfDoc.Close();
+                        }
+                    }
+                    // 返回修改後的 byte[]
+                    return outputMs.ToArray(); // 返回新的 PDF 數據
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
     }
 }

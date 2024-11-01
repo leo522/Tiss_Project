@@ -17,24 +17,25 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt=""/>
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt=""/>
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/banner_public.db4e1f02.jpg" alt="" />
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_public_m.8febbec3.jpg" alt="" />
                         <div class="container">
                             <div class="Title">
                                 <h1 class="BannerTitle" title="Public Information">
                                     Public Information
                                 </h1>
                                 <h2 class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>公開資訊
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="" />公開資訊
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <section class="el-container">
-                        <aside class="el-aside" style="">
+                        <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
@@ -67,7 +68,7 @@
                             </div>
 
                             @*左方功能區塊*@
-                            <div class="content">
+                            <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="公開資訊">公開資訊</h2>
                                 <ul class="Menu">
@@ -87,8 +88,8 @@
                                         <a class="MenuLink" href="/Tiss/download" title="下載專區">下載專區</a>
                                     </li>
                                     @*<li span="3">
-                    <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
-                </li>*@
+                                            <a class="MenuLink" href="/Tiss/purchase">採購作業實施規章</a>
+                                        </li>*@
                                     <li span="3">
                                         <a class="MenuLink" href="/Tiss/other" title="其他">其他</a>
                                     </li>
@@ -96,7 +97,7 @@
                             </div>
                         </aside>
                         <main class="el-main bg-defaultO4">
-                            <div class="MainContainer">
+                            <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -267,6 +268,7 @@ if (isLoggedIn) {
             menuLinks.forEach(function (link) {
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
+                    link.focus();  // 修改: 焦點移至當前選項
                 }
             });
         });

@@ -8,13 +8,17 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="~/Img/favicon.svg" />
     <title>
-        @if (string.IsNullOrEmpty(ViewBag.Title))
+        @if (!string.IsNullOrEmpty(ViewBag.DocumentName))
         {
-            @:國家運動科學中心
+            @ViewBag.DocumentName
+        }
+        else if (!string.IsNullOrEmpty(ViewBag.Title))
+        {
+            @:國家運動科學中心_@ViewBag.Title
         }
         else
         {
-            @:國家運動科學中心_@ViewBag.Title
+            @:國家運動科學中心
         }
     </title>
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />

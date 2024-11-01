@@ -16,24 +16,25 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt=""/>
-                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt=""/>
+                        <img class="PageBannerItemBg d-none d-lg-block" src="/site/img/news_banner.856d4a80.jpg" alt="" />
+                        <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="" />
                         <div class="container">
                             <div class="Title">
                                 <h1 class="BannerTitle" title="Announcements">
                                     Announcements
                                 </h1>
                                 <h2 class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>中心公告
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="" />中心公告
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <section class="el-container">
-                        <aside class="el-aside">
+                        <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
@@ -66,7 +67,7 @@
                             </div>
 
                             @*左方功能區塊*@
-                            <div class="content">
+                            <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="中心公告">中心公告</h2>
                                 <ul class="Menu">
@@ -93,8 +94,10 @@
                                 </ul>
                             </div>
                         </aside>
+
+                        <!-- 主內容區塊 -->
                         <main class="el-main bg-white">
-                            <div class="MainContainer" >
+                            <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -131,15 +134,15 @@
                             </div>
 
                             @*中央內容區塊*@
-                        <div id="main_content">
-                            <div class="MainContainer" id="Ca">
-                                <div class="AnnouncementList">
-                                    <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
-                                    <div class="container">
-                                        <div class="row">
-                                            @foreach (var article in Model)
-                                            {
-                                                <div class="col-md-4 mb-4">
+                            <div id="main_content">
+                                <div class="MainContainer" id="Ca">
+                                    <div class="AnnouncementList">
+                                        <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
+                                        <div class="container">
+                                            <div class="row">
+                                                @foreach (var article in Model)
+                                                {
+                                                    <div class="col-md-4 mb-4">
                                                         <div class="NewsItemBox" tabindex="0" onclick="window.location.href='@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })';" role="link">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)
@@ -162,44 +165,44 @@
                                                             </div>
                                                             <div class="date-tag">@article.FormattedCreateDate</div>
                                                         </div>
-                                                </div>
-                                            }
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Pagination">
+                                        <div class="container">
+                                            <nav aria-label="Page navigation">
+                                                <ul class="pagination justify-content-center">
+                                                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                                    {
+                                                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = i })">@i</a>
+                                                        </li>
+                                                    }
+                                                    <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                                                        <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                                                        <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="Pagination">
-                                    <div class="container">
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center">
-                                                @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                                                {
-                                                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                        <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = i })">@i</a>
-                                                    </li>
-                                                }
-                                                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                    <a class="page-link" href="@Url.Action("announcement", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
                             </div>
-                        </div>        
                         </main>
                     </section>
                 </div>
             </div>
         </div>
     </div>
-<script>
+    <script>
     //登出按鈕顯示功能
 $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' == 'True';
@@ -221,6 +224,7 @@ if (isLoggedIn) {
 
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
+                    link.focus(); // 修改: 焦點移到當前選項
                 }
             });
         });
@@ -235,6 +239,6 @@ if (isLoggedIn) {
             behavior: 'smooth' // 平滑滾動效果
         });
     });
-</script>
+    </script>
 </body>
 </html>

@@ -15,23 +15,24 @@
                     <div class="BasePageBanner">
                         <div class="Mask">
                         </div>
-                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt=""/>
+                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt="" />
                         <div class="container">
                             <div class="Title">
                                 <h1 class="BannerTitle" title="About TISS">
                                     About TISS
                                 </h1>
                                 <h2 class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt=""/>中心介紹
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="" />中心介紹
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <section class="el-container">
-                        <aside class="el-aside">
+                        <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
-                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
+                                    <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
                                             <i class="el-icon el-breadcrumb__separator">
@@ -55,35 +56,35 @@
                             </div>
 
                             @*左方功能區塊*@
-                        <div class="content">
-                            <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
-                            <h2 class="Title" title="中心介紹">中心介紹</h2>
-                            <ul class="Menu">
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/Objectives" title="使命、願景">使命、願景</a>
-                                </li>
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/mission" title="中心任務">中心任務</a>
-                                </li>
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/Organization" title="組織概況">組織概況</a>
-                                </li>
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/BOD" title="第1屆 董監事">第1屆 董監事</a>
-                                </li>
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/CEO" title="執行長">執行長</a>
-                                </li>
-                                <li span="3">
-                                    <a class="MenuLink" href="/Tiss/Units" title="單位介紹">單位介紹</a>
-                                </li>
-                            </ul>
-                        </div>
+                            <div class="content" aria-live="polite">
+                                <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
+                                <h2 class="Title" title="中心介紹">中心介紹</h2>
+                                <ul class="Menu">
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/Objectives" title="使命、願景">使命、願景</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/mission" title="中心任務">中心任務</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/Organization" title="組織概況">組織概況</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/BOD" title="第1屆 董監事">第1屆 董監事</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/CEO" title="執行長">執行長</a>
+                                    </li>
+                                    <li span="3">
+                                        <a class="MenuLink" href="/Tiss/Units" title="單位介紹">單位介紹</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </aside>
 
                         @*中央內容區塊*@
                         <main class="el-main bg-defaultO4">
-                            <div class="MainContainer" id="main_content" >
+                            <div class="MainContainer" id="main_content" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -213,10 +214,10 @@
                                                                                     </div>
                                                                                 </td>
                                                                                 @*<td class="el-table_1_column_2 TablePadding el-table__cell">
-            <div class="cell">
-                <span title="林騰蛟">林騰蛟</span>
-            </div>
-        </td>*@
+                                                                                        <div class="cell">
+                                                                                            <span title="林騰蛟">林騰蛟</span>
+                                                                                        </div>
+                                                                                    </td>*@
                                                                                 <td class="el-table_1_column_2 TablePadding el-table__cell">
                                                                                     <div class="cell">
                                                                                         <span title="張廖萬堅">張廖萬堅</span>
@@ -230,13 +231,13 @@
                                                                                     </div>
                                                                                 </td>
                                                                                 @*<td class="el-table_1_column_3 TablePadding el-table__cell">
-            <div class="cell">
-                <p>
-                    1.教育部常務次長
-                    <br>2.國家運動訓練中心董事長
-                </p>
-            </div>
-        </td>*@
+                                                                                        <div class="cell">
+                                                                                            <p>
+                                                                                                1.教育部常務次長
+                                                                                                <br>2.國家運動訓練中心董事長
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </td>*@
                                                                             </tr>
                                                                             <tr class="el-table__row">
                                                                                 <td class="el-table_1_column_1 TablePadding el-table__cell">
@@ -676,6 +677,7 @@
 
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
+                    link.focus(); // 修改: 焦點移到當前選項
                 }
             });
         });

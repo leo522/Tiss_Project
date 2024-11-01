@@ -30,7 +30,8 @@
                         </div>
                     </div>
                     <section class="el-container">
-                        <aside class="el-aside" style="">
+                        <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -66,7 +67,7 @@
                             </div>
 
                             @*左方功能區塊*@
-                            <div class="content">
+                            <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="公開資訊">公開資訊</h2>
                                 <ul class="Menu">
@@ -95,7 +96,7 @@
                             </div>
                         </aside>
                         <main class="el-main bg-defaultO4">
-                            <div class="MainContainer">
+                            <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
                                     <div class="container">
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -276,6 +277,7 @@ if (isLoggedIn) {
 
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
+                    link.focus();  // 修改: 焦點移至當前選項
                 }
             });
         });

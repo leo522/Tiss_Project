@@ -40,6 +40,10 @@
 <body>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0" nonce="xyz">
     </script>
+    <!-- 隱藏的訊息元素，用於顯示保存成功訊息 -->
+    <div id="successMessage" style="display: none; color: green; font-size: 18px; text-align: center; margin-top: 20px;">
+        文章修改成功！
+    </div>
     <div class="container-fluid px-0 mt-header">
         <div class="BasePageLayout">
             <div class="BasePageBanner">
@@ -47,7 +51,8 @@
                 <img class="PageBannerItemBg" src="/site/img/banner_research.25875290.jpg" alt="" />
             </div>
             <section class="el-container">
-                <aside class="el-aside">
+                <aside class="el-aside" aria-labelledby="sidebar-title">
+                    <h1 id="sidebar-title" class="sr-only">功能區塊</h1>
                     <div class="BaseBreadcrumb d-block d-lg-none">
                         <div class="container">
                             <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
@@ -68,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content">
+                    <div class="content" aria-live="polite">
                         <a href="#L" title="左方功能區塊" accesskey="L" name="L" class="alt-c" style="margin-left: 100px;">:::</a>
                         @if (!string.IsNullOrEmpty(parentDirectory))
                         {
@@ -92,7 +97,7 @@
                 </aside>
 
                 <main class="el-main bg-defaultO4">
-                    <div class="MainContainer">
+                    <div class="MainContainer" aria-live="polite">
                         <div id="main_content">
                             <div class="ArticleContent" id="Ca">
                                 <a href="#Ca" title="中央內容區塊" accesskey="C" name="C" id="jump-to-Ca" class="alt-c">:::</a>
@@ -149,66 +154,66 @@
                                             @if (isLoggedIn)
                                             {
                                                 <!-- 標題 -->
-                                                <form method="post" action="@Url.Action("EditArticle", "Tiss")" enctype="multipart/form-data">
-                                                    @Html.AntiForgeryToken()
-                                                    @Html.HiddenFor(model => model.Article.Id)
+                                            <form method="post" action="@Url.Action("EditArticle", "Tiss")" enctype="multipart/form-data">
+                                                @Html.AntiForgeryToken()
+                                                @Html.HiddenFor(model => model.Article.Id)
+                                                @Html.HiddenFor(model => model.Article.ContentType)
+                                                <!-- 內容 -->
+                                                <div class="form-group">
+                                                    <label for="ContentBody">內容:</label>
+                                                    @Html.TextAreaFor(model => model.Article.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                                </div>
 
-                                                    <!-- 內容 -->
-                                                    <div class="form-group">
-                                                        <label for="ContentBody">內容:</label>
-                                                        @Html.TextAreaFor(model => model.Article.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
-                                                    </div>
+                                                <div class="form-group mb-4">
+                                                    <label for="ContentType" style="font-size:25px">文章發佈類別</label>
+                                                    @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
+                                                </div>
 
-                                                    <div class="form-group mb-4">
-                                                        <label for="ContentType" style="font-size:25px">文章發佈類別</label>
-                                                        @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
-                                                    </div>
+                                                <div class="form-group mb-4">
+                                                    <label for="Tag" style="font-size:25px">文章標籤</label>
+                                                    @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
+                                                </div>
+                                                <!-- 類別下拉選單 -->
+                                                <div class="form-group mb-4">
+                                                    <label for="categorySelector" style="font-size: 25px">文件檔案分類</label>
+                                                    <select id="categorySelector" name="documentCategory" class="form-control">
+                                                        <option value="">請選擇文件檔案上傳分類</option>
+                                                        <option value="CommissionedResearchProject">委託研究計畫</option>
+                                                        <option value="SportScience">運動科學</option>
+                                                        <option value="SportTech">運動科技</option>
+                                                        <option value="SportMedicine">運動醫學</option>
+                                                        <option value="SportsPhysiology">運動生理</option>
+                                                        <option value="SportsPsychology">運動心理</option>
+                                                        <option value="PhysicalTraining">體能訓練</option>
+                                                        <option value="SportsNutrition">運動營養</option>
+                                                        <option value="ChildrenScience">兒少科普</option>
+                                                        <option value="SciencePosterDownLoad">科普海報下載專區</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-4">
+                                                    <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
+                                                    <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
+                                                </div>
 
-                                                    <div class="form-group mb-4">
-                                                        <label for="Tag" style="font-size:25px">文章標籤</label>
-                                                        @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
-                                                    </div>
-                                                    <!-- 類別下拉選單 -->
-                                                    <div class="form-group mb-4">
-                                                        <label for="categorySelector" style="font-size: 25px">文件檔案分類</label>
-                                                        <select id="categorySelector" name="documentCategory" class="form-control">
-                                                            <option value="">請選擇文件檔案上傳分類</option>
-                                                            <option value="CommissionedResearchProject">委託研究計畫</option>
-                                                            <option value="SportScience">運動科學</option>
-                                                            <option value="SportTech">運動科技</option>
-                                                            <option value="SportMedicine">運動醫學</option>
-                                                            <option value="SportsPhysiology">運動生理</option>
-                                                            <option value="SportsPsychology">運動心理</option>
-                                                            <option value="PhysicalTraining">體能訓練</option>
-                                                            <option value="SportsNutrition">運動營養</option>
-                                                            <option value="ChildrenScience">兒少科普</option>
-                                                            <option value="SciencePosterDownLoad">科普海報下載專區</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-4">
-                                                        <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
-                                                        <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
-                                                    </div>
+                                                @if (Model.Article.ImageContent != null)
+                                                {
+                                                    string base64Image = Convert.ToBase64String(Model.Article.ImageContent);
+                                                    string imageSrc = $"data:image/jpeg;base64,{base64Image}";
 
-                                                    @if (Model.Article.ImageContent != null)
-                                                    {
-                                                        string base64Image = Convert.ToBase64String(Model.Article.ImageContent);
-                                                        string imageSrc = $"data:image/jpeg;base64,{base64Image}";
-
-                                                        <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <p>目前無圖片</p>
-                                                    }
-                                                    <div class="form-group mb-4">
-                                                        <label for="DocumentFile" style="font-size:25px" title="附加文件">附加文件：</label>
-                                                        <input type="file" name="documentFile" id="documentFile" class="form-control-file" aria-label="附加文件" />
-                                                    </div>
-                                                    <div style="clear: both; margin-top: 10px;">
-                                                        <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                                    </div>
-                                                </form>
+                                                    <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
+                                                }
+                                                else
+                                                {
+                                                    <p>目前無圖片</p>
+                                                }
+                                                <div class="form-group mb-4">
+                                                    <label for="DocumentFile" style="font-size:25px" title="附加文件">附加文件：</label>
+                                                    <input type="file" name="documentFile" id="documentFile" class="form-control-file" aria-label="附加文件" />
+                                                </div>
+                                                <div style="clear: both; margin-top: 10px;">
+                                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                                </div>
+                                            </form>
                                             }
                                             else
                                             {
@@ -218,7 +223,7 @@
                                                 if (Model.AssociatedDocuments?.Any() == true)
                                                 {
                                                     <div class="AssociatedDocuments mt-4">
-                                                        <h3>相關文件檔案</h3>
+                                                        <span>相關文件檔案</span>
                                                         @{
                                                             foreach (var file in Model.AssociatedDocuments)
                                                             {
@@ -250,7 +255,7 @@
 
                     @*留言板*@
                     <div class="comments-section">
-                        <h3>留言區</h3>
+                        <h2>留言區</h2>
                         <button id="toggle-comments" class="btn btn-light">
                             <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
                         </button>
@@ -338,6 +343,13 @@
         $('#adminUser').hide(); // 隱藏管理者按鈕
     }
     });
+    // 檢查 ViewBag.SuccessMessage 並顯示提示訊息
+        document.addEventListener("DOMContentLoaded", function () {
+            var successMessage = '@ViewBag.SuccessMessage';
+            if (successMessage) {
+                document.getElementById("successMessage").style.display = "block";
+            }
+        });
             document.addEventListener('DOMContentLoaded', function () {
                 tinymce.init({
                     selector: '#ContentBody',
@@ -366,12 +378,6 @@
                         }
                     }
                 });
-            });
-            document.addEventListener("DOMContentLoaded", function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.has('saved') && urlParams.get('saved') === 'true') {
-                    alert("文章保存成功！");
-                }
             });
         </script>
     }
