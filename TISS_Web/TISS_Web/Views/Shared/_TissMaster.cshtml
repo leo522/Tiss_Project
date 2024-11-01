@@ -16,7 +16,7 @@
         {
             @:國家運動科學中心_@ViewBag.Title
         }
-        @ViewBag.DocumentName
+
     </title>
     <link href="~/site/css/IndexStyle.css" rel="stylesheet" />
     <link href="~/site/css/NavMenuStyle.css" rel="stylesheet" />
@@ -63,6 +63,20 @@
         a[href="https://translate.google.com"] {
             display: none !important;
         }
+        .logo-img {
+            width: 300px;
+            transition: width 0.3s ease;
+        }
+
+        /* 當滾動時縮小 */
+        .shrink .logo-img {
+            width: 250px;
+        }
+        /* 隱藏 logoNav */
+        .hidden {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -70,45 +84,33 @@
     <header data-v-ffd846e6="" data-v-339da53a="">
         <a href="#main_content" title="移到主要內容" class="sr-only sr-only-focusable">移到主要內容</a>
         <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
-            <div data-v-e61ebf00="" class="container logoNav">
-                <a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
-                    <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img">
-                </a>
-                <div data-v-e61ebf00="" style="margin-left: 130px; display: flex; " >
-                    <a href="#U" accesskey="U" name="U" class="alt-u d-none d-lg-block" title="上方功能區塊" style="margin-right: 20px;">:::</a>
-                    <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: flex-start; align-items: center; padding: 0;">
-                        <li style="margin-right: 20px;">
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="小" data-size="small" title="小">小</button>
-                        </li>
-                        <li style="margin-right: 20px;">
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="中" data-size="medium" title="中">中</button>
-                        </li>
-                        <li style="margin-right: 20px;">
-                            <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="大" data-size="large" title="大">大</button>
-                        </li>
-                        <li class="WebSitemap" style="margin-right: 20px;">
-                            <a href="/Tiss/SiteMap" id="aLinkSitemap" style="display: inline; white-space: nowrap;">網站導覽</a>
-                        </li>
-                    </ul>
+            <div data-v-e61ebf00="" data-v-ffd846e6="" class="logoNav">
+                <div data-v-e61ebf00="" class="container logoNav">
+                    @*<a data-v-e61ebf00="" href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
+                    <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img" />
+                </a>*@
+
+                    <div data-v-e61ebf00="" style="display: flex; justify-content: flex-end;">
+                        <a id="U" href="#U" accesskey="U" name="U" class="alt-u d-none d-lg-block" title="上方功能區塊" style="margin-right: 20px;" >:::</a>
+                        <ul data-v-e61ebf00="" style="list-style-type: none; display: flex; justify-content: flex-start; align-items: center; padding: 0;">
+                            <li style="margin-right: 20px;">
+                                <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="小" data-size="small" title="小">小</button>
+                            </li>
+                            <li style="margin-right: 20px;">
+                                <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn active" aria-label="中" data-size="medium" title="中">中</button>
+                            </li>
+                            <li style="margin-right: 20px;">
+                                <button data-v-e61ebf00="" aria-disabled="false" type="button" class="el-button is-plain is-circle is-text FontSizeBtn" aria-label="大" data-size="large" title="大">大</button>
+                            </li>
+                            <li class="WebSitemap" style="margin-right: 20px;">
+                                <a href="/Tiss/SiteMap" id="aLinkSitemap" style="display: inline; white-space: nowrap;">網站導覽</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-
-                @*<nav data-v-e61ebf00="" class="d-lg-flex d-none" aria-label="多語系按鈕">
-            <ul data-v-e61ebf00="" class="ToolList">
-                <li data-v-e61ebf00="">
-                    <div id="google_translate_element" style="display: none;"></div>
-                    <select aria-label="選擇語言" class="selectpicker" onchange="goTranslate(this.value)" translate="no">
-                        <option value="">Language</option>
-                        <option value="zh-TW" data-content='<span class="flag-icon flag-icon-tw"></span> 繁體中文'>繁體中文</option>
-                        <option value="en" data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-                        <option value="ja" data-content='<span class="flag-icon flag-icon-jp"></span> 日本語'>日本語</option>
-                        <option value="ko" data-content='<span class="flag-icon flag-icon-kr"></span> 한국어'>한국어</option>
-                    </select>
-                </li>
-            </ul>
-        </nav>*@
             </div>
         </div>
+        @*</div>*@
         <div data-v-71bab962="" class="menuNav">
             <div data-v-71bab962="" class="container-lg">
                 <nav data-v-71bab962="" class="navbar navbar-expand-lg navbar-light p-0">
@@ -118,6 +120,11 @@
                         </svg>
                     </button>
                     <div data-v-71bab962="" class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div style="margin-left: -350px; margin-right: 200px;" >
+                            <a href="/" class="router-link-active router-link-exact-active mainLogo" aria-current="page">
+                                <img data-v-e61ebf00="" src="/site/img/logo.1fec0909.svg" alt="TISS logo" role="img" class="logo-img" />
+                            </a>
+                        </div>
                         @*新修改位置*@
                         <ul data-v-71bab962="" class="navbar-nav" role="tablist">
                             <li data-v-71bab962="" class="nav-item dropdown" role="presentation">
@@ -318,23 +325,23 @@
                                 </ul>
                             </li>
                             @*<li data-v-71bab962="" class="nav-item dropdown">
-                                    <a data-v-71bab962="" href="/Tiss/SponsorArea" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown6" aria-current="page" role="button" aria-expanded="false" title="贊助專區" tabindex="0" aria-haspopup="true">
-                                        贊助專區
-                                        <span data-v-71bab962="">
-                                            <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
-                                                </path>
-                                            </svg>
-                                            <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
-                                        <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
-                                    </ul>
-                                </li>*@
+                <a data-v-71bab962="" href="/Tiss/SponsorArea" class="router-link-active router-link-exact-active nav-link " id="navbarDropdown6" aria-current="page" role="button" aria-expanded="false" title="贊助專區" tabindex="0" aria-haspopup="true">
+                    贊助專區
+                    <span data-v-71bab962="">
+                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-down HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path class="" fill="currentColor" d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z">
+                            </path>
+                        </svg>
+                        <svg data-v-71bab962="" class="svg-inline--fa fa-chevron-up HoverIcon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path class="" fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z">
+                            </path>
+                        </svg>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown6">
+                    <li><a data-v-71bab962="" class="dropdown-item" href="/Tiss/SponsorArea" title="贊助專區"><img src="~/Img/favicon.svg" alt="" />贊助專區</a></li>
+                </ul>
+            </li>*@
                             <li data-v-71bab962="" class="nav-item">
                                 <a data-v-71bab962="" href="mailto:service@tiss.org.tw" class="nav-link" title="服務信箱">服務信箱</a>
                             </li>
@@ -349,7 +356,7 @@
     </div>
     <footer data-v-339da53a="">
         <div class="sr-only">
-            <a href="/sitemap" accesskey="Z" title="網站導覽（快捷鍵：Alt + Z）">網站導覽</a>
+            <a href="/sitemap" accesskey="Z" title="下方功能區塊（快捷鍵：Alt + Z）"></a>
         </div>
         <div class="FooterDecoration"></div>
         <div class="container">
@@ -513,6 +520,33 @@
     </div>
 
 <script>
+    // 監聽滾動事件
+    window.addEventListener("scroll", function () {
+        var logoNav = document.querySelector(".logoNav");
+        if (window.scrollY > 50) {  // 假設滾動超過 50px 時隱藏
+            logoNav.classList.add("hidden");
+        } else {
+            logoNav.classList.remove("hidden");
+        }
+    });
+    document.addEventListener('keydown', function (event) {
+        // 偵測是否同時按下 Alt 和 U
+        if (event.altKey && event.key.toLowerCase() === 'u') {
+            event.preventDefault();  // 阻止預設行為
+
+            // 將頁面滾動到頂部
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // 設置焦點
+            const functionBlock = document.getElementById('U');
+            if (functionBlock) {
+                functionBlock.focus();
+            }
+        }
+    });
 
         // 清除 Google 翻譯的相關 cookie
         function clearGoogleTranslateCookies() {

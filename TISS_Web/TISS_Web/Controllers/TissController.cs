@@ -3629,32 +3629,7 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-        //public ActionResult DownloadFile(int documentId)
-        //{
-        //    try
-        //    {
-        //        var document = _db.Documents.Find(documentId);
-        //        if (document != null)
-        //        {
-        //            var contentType = GetContentType(document.DocumentName);
 
-        //            //判斷顯示方式為內嵌或下載
-        //            var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
-
-        //            // 設置文件名稱
-        //            var encodedFileName = Uri.EscapeDataString(document.DocumentName);
-
-        //            Response.Headers["Content-Disposition"] = $"{disposition}; filename*=UTF-8''{encodedFileName}";
-
-        //            return File(document.FileContent, contentType);
-        //        }
-        //        return HttpNotFound();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
         #endregion
 
         #region 判斷文件類型，回傳適當的MIME類型

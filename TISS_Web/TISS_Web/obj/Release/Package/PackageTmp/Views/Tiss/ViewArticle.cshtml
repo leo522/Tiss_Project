@@ -4,13 +4,13 @@
     var isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
     var parentDirectory = ViewBag.ParentDirectory as string;
     var menuItems = ViewBag.ParentMenu as Dictionary<string, List<string>>;
-
+    ViewBag.Title = ViewBag.DocumentName;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@ViewBag.DocumentName</title>
+    @*<title>@ViewBag.DocumentName</title>*@
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -229,7 +229,7 @@
                                                             {
                                                                 <div class="DocumentItem" style="margin-bottom: 10px;">
                                                                     <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                       target="_blank" title="@file.DocumentName _檔案下載 (另開視窗)">
+                                                                    target="_blank"   title="@file.DocumentName _檔案下載 (另開視窗)">
                                                                         <strong>@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</strong>
                                                                     </a>
                                                                     <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">
@@ -327,9 +327,9 @@
         </div>
     </div>
 
-    @if (isLoggedIn)
+@if (isLoggedIn)
     {
-        <script>
+<script>
     $(document).ready(function () {
     var isLoggedIn = '@Session["LoggedIn"]' === 'True';
 
@@ -381,11 +381,7 @@
             });
         </script>
     }
-    <script>
-     $(document).ready(function () {
-          var isCommentsVisible = false;
-    var commentCount = '@ViewBag.CommentCount';
-
+<script>
 $('#toggle-comments').click(function () {
     if (isCommentsVisible) {
         $('#comments-container').slideUp();
@@ -443,6 +439,6 @@ $('#toggle-comments').click(function () {
                     });
                 });
             });
-    </script>
+</script>
 </body>
 </html>

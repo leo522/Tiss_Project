@@ -5,7 +5,7 @@ under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
     border: 2px dashed orange; /*添加橙色虛線邊框 */
 }
 .a {
-    outline: 0;
+    outline: none;
 }
 
 .span {
@@ -27,7 +27,10 @@ a:focus {
     outline: 2px dashed orange; /* 明顯的焦點樣式 */
     background-color: rgba(255, 255, 255, 0.1); /* 可以添加背景顏色 */
 }
-
+/*U:focus {
+    outline: none;
+    border: 2px dashed orange;
+}*/
 
 [data-v-e61ebf00]:focus {
     outline: 0; /* 隱藏預設焦點框 */
@@ -14760,8 +14763,12 @@ textarea.form-control-lg[data-v-e61ebf00] {
     z-index: 2;
     display: flex; /* 使用flexbox */
     align-items: center; /* 垂直置中 */
-    padding: 0 20px; /* 增加左右內邊距 */
+    padding: 0 450px; /* 增加左右內邊距 */
 }
+    .logoNav[data-v-e61ebf00]:focus {
+        outline: 3px dashed orange; /* 添加橙色虛線框顯示聚焦 */
+        outline-offset: 5px; /* 調整聚焦框距離 */
+    }
 
 @media screen and (max-width:991.9px) {
     .logoNav[data-v-e61ebf00] {
