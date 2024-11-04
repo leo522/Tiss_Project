@@ -40,18 +40,16 @@ namespace TISS_Web
                 }
 
                 // 設定固定的日期區間
-                DateTime startDate = DateTime.Now; //當天的日期
-                int weeksInterval = 2; //每隔兩週
+                DateTime endDate = DateTime.Now; //當天的日期
+                DateTime startDate = endDate.AddDays(-14); // 往前推算兩週
+                //int weeksInterval = 2; //每隔兩週
 
-                // 計算固定的日期區間
-                DateTime firstStartDate = startDate; // 第一個開始日期
-                DateTime firstEndDate = firstStartDate.AddDays(13); // 第一個結束日期
 
                 for (int i = 0; i < reportData.Count; i++)
                 {
                     // 每一行使用相同的開始和結束日期
-                    reportData[i].StartDate = firstStartDate.ToString("yyyy/MM/dd");
-                    reportData[i].EndDate = firstEndDate.ToString("yyyy/MM/dd");
+                    reportData[i].StartDate = startDate.ToString("yyyy/MM/dd");
+                    reportData[i].EndDate = endDate.ToString("yyyy/MM/dd");
                 }
 
                 using (var package = new ExcelPackage())
