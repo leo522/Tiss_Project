@@ -4,18 +4,6 @@ under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
     outline: 0; /*隱藏預設焦點框 */
     border: 2px dashed orange; /*添加橙色虛線邊框 */
 }
-.a {
-    outline: none;
-}
-
-.span {
-    outline: 0;
-}
-
-a:focus {
-    outline: none;
-    border: 2px dashed orange; /*添加橙色虛線邊框 */
-}
 
 /*常用連結鍵盤焦點*/
 .SectionUrl {
@@ -14765,6 +14753,7 @@ textarea.form-control-lg[data-v-e61ebf00] {
     align-items: center; /* 垂直置中 */
     padding: 0 450px; /* 增加左右內邊距 */
 }
+
     .logoNav[data-v-e61ebf00]:focus {
         outline: 3px dashed orange; /* 添加橙色虛線框顯示聚焦 */
         outline-offset: 5px; /* 調整聚焦框距離 */
@@ -14814,19 +14803,19 @@ textarea.form-control-lg[data-v-e61ebf00] {
 /*@media screen and (max-width: 991.9px) {
     .mainLogo {
         padding: 10px 15px;*/ /* 調整內邊距以適應小螢幕 */
-    /*}
+/*}
 
         .mainLogo img {
             max-width: 60%;*/ /* 小螢幕 LOGO 大小增大 */
-            /*min-width: 150px;*/ /* 設置最小寬度，避免 LOGO 過小 */
-        /*}
+/*min-width: 150px;*/ /* 設置最小寬度，避免 LOGO 過小 */
+/*}
 }
 
 @media screen and (max-width: 575.9px) {
     .mainLogo img {
         max-width: 70%;*/ /* 手機螢幕上 LOGO 更大 */
-        /*min-width: 120px;*/ /* 確保最小尺寸 */
-    /*}
+/*min-width: 120px;*/ /* 確保最小尺寸 */
+/*}
 }*/
 /*@media screen and (max-width:1199.9px) {
     .logoNav .mainLogo[data-v-e61ebf00] {
@@ -29649,6 +29638,7 @@ textarea.form-control-lg[data-v-71bab962] {
         justify-content: flex-end
     }
 }
+
 .menuNav .navbar .navbar-collapse[data-v-71bab962] {
     -webkit-box-pack: start; /* 將 "end" 改成 "start" */
     -ms-flex-pack: start; /* 將 "end" 改成 "start" */
@@ -59452,7 +59442,7 @@ body {
 
     body a {
         text-decoration: none;
-            outline:0;
+        outline: none;
     }
 
     body ul {
@@ -74556,38 +74546,39 @@ textarea.form-control-lg[data-v-3f77048f] {
     height: 204px;
     overflow: hidden;
 }
+
 .NewsItemBox:focus, .NewsItemImg img:focus {
     outline: 0;
     border: 4px dashed orange;
 }
 
 
-    .NewsItemBox .NewsItemImg .tag {
-        background-color: #202733;
+.NewsItemBox .NewsItemImg .tag {
+    background-color: #202733;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px 22px;
+    font-size: 1rem;
+    color: #fff;
+    z-index: 3;
+    border-radius: 10px 0 10px 0
+}
+
+    .NewsItemBox .NewsItemImg .tag:before {
+        content: "";
+        display: block;
         position: absolute;
-        right: 0;
-        bottom: 0;
-        padding: 10px 22px;
-        font-size: 1rem;
-        color: #fff;
-        z-index: 3;
-        border-radius: 10px 0 10px 0
+        height: 1px;
+        width: 1px;
+        border-right: 12px solid #202733;
+        border-top: 40px solid transparent;
+        right: 100%
     }
 
-        .NewsItemBox .NewsItemImg .tag:before {
-            content: "";
-            display: block;
-            position: absolute;
-            height: 1px;
-            width: 1px;
-            border-right: 12px solid #202733;
-            border-top: 40px solid transparent;
-            right: 100%
-        }
-
-    .NewsItemBox .NewsItemImg .Mask {
-        display: none
-    }
+.NewsItemBox .NewsItemImg .Mask {
+    display: none
+}
 
 .NewsItemBox .NewsItemImg img {
     width: 100%;
@@ -74595,7 +74586,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 }
 
     .NewsItemBox .NewsItemImg img:focus {
-        outline:0;
+        outline: 0;
         border: 2px dashed orange;
     }
 
@@ -75209,14 +75200,17 @@ textarea.form-control-lg[data-v-3f77048f] {
 .SectionVideo .BottomRow {
     margin-top: 50px
 }
+
 .SectionVideo .VideoList:focus {
     outline: 0;
     border: 2px dashed orange;
 }
-    .SectionVideo .BottomRow:focus {
-        outline: 0;
-        border: 2px dashed orange;
-    }
+
+.SectionVideo .BottomRow:focus {
+    outline: 0;
+    border: 2px dashed orange;
+}
+
 .SectionVideo .VideoCarouselMobile {
     background-color: #fff;
     border-radius: 10px;
@@ -75641,6 +75635,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 #L {
     scroll-margin-top: 50px; /* 左方功能區塊 */
 }
+
     #L:focus {
         outline: 0; /*隱藏預設焦點框 */
         border: 2px dashed orange; /*添加橙色虛線邊框 */
@@ -75655,7 +75650,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 
 .BasePageLayout .el-aside .Title {
     color: #1f2733;
-/*    margin-bottom: 20px;*/
+    /*    margin-bottom: 20px;*/
     font-size: 1.25rem;
     font-weight: 700
 }
@@ -77425,7 +77420,7 @@ textarea.form-control-lg[data-v-3f77048f] {
 /*專欄文章內文版面位置*/
 .ResearchPage .NewsContent {
     position: relative;
-   /* display: -webkit-box;
+    /* display: -webkit-box;
     display: -ms-flexbox;
     display: flex;*/
     /*padding-right: 205px;*/
@@ -78098,17 +78093,30 @@ a {
     color: rgba(var(--bs-link-color-rgb),var(--bs-link-opacity,1));
     text-decoration: underline;
     /*width: 55px;*/ /* 設定你想要的寬度 */
-   
 }
 
-    a:hover {
-        --bs-link-color-rgb: var(--bs-link-hover-color-rgb)
-    }
+.a {
+    outline: none blue;
+}
 
-    a:not([href]):not([class]), a:not([href]):not([class]):hover {
-        color: inherit;
-        text-decoration: none
-    }
+a:hover {
+    --bs-link-color-rgb: var(--bs-link-hover-color-rgb)
+}
+
+
+.span {
+    outline: 0;
+}
+
+a:focus {
+    outline: none;
+    border: 2px dashed orange; /*添加橙色虛線邊框 */
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none
+}
 
 code, kbd, pre, samp {
     font-family: var(--bs-font-monospace);
