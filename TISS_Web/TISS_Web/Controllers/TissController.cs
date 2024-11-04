@@ -3426,8 +3426,8 @@ namespace TISS_Web.Controllers
             if (!string.IsNullOrEmpty(reportPath))
             {
                 // 使用 Split 將收件人字串分割成單個地址的陣列
-                //string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
-                string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
+                string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
+                //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
 
                 string subject = "運科中心專欄文章瀏覽率報表";
                 string body = "您好，請參閱附件中的運科中心專欄文章瀏覽率報表。";

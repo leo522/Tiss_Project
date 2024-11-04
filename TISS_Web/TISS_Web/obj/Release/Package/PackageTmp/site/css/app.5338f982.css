@@ -14751,7 +14751,7 @@ textarea.form-control-lg[data-v-e61ebf00] {
     z-index: 2;
     display: flex; /* 使用flexbox */
     align-items: center; /* 垂直置中 */
-    padding: 0 450px; /* 增加左右內邊距 */
+    padding: 0 750px; /* 增加左右內邊距 */
 }
 
     .logoNav[data-v-e61ebf00]:focus {
@@ -30240,11 +30240,11 @@ a[data-v-ffd846e6] {
     text-decoration: underline
 }
 
-    a[data-v-ffd846e6]:hover {
+a[data-v-ffd846e6]:hover {
         --bs-link-color-rgb: var(--bs-link-hover-color-rgb)
     }
 
-    a[data-v-ffd846e6]:not([href]):not([class]), a[data-v-ffd846e6]:not([href]):not([class]):hover {
+a[data-v-ffd846e6]:not([href]):not([class]), a[data-v-ffd846e6]:not([href]):not([class]):hover {
         color: inherit;
         text-decoration: none
     }
@@ -78109,7 +78109,7 @@ a:hover {
 }
 
 a:focus {
-    outline: none;
+    /*outline: none;*/
     border: 2px dashed orange; /*添加橙色虛線邊框 */
 }
 

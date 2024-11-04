@@ -41,7 +41,7 @@ namespace TISS_Web
 
                 // 設定固定的日期區間
                 DateTime endDate = DateTime.Now; //當天的日期
-                DateTime startDate = endDate.AddDays(-14); // 往前推算兩週
+                DateTime startDate = endDate.AddDays(-14); //往前推算兩週
                 //int weeksInterval = 2; //每隔兩週
 
 
