@@ -2807,6 +2807,11 @@ namespace TISS_Web.Controllers
         [ValidateInput(false)]
         public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string[] tags, int contentTypeID, HttpPostedFileBase documentFile, string documentCategory)
         {
+            if (string.IsNullOrEmpty(documentCategory))
+            {
+                ModelState.AddModelError("documentCategory", "請選擇文件檔案分類。");
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -2827,7 +2832,7 @@ namespace TISS_Web.Controllers
                     dto.EncryptedUrl = EncryptUrl(dto.Title);
                     dto.CreateDate = DateTime.Now;
                     dto.ClickCount = 0;
-                    //dto.Hashtags = tag;
+                    dto.Hashtags = string.Join(",", tags);
                     dto.IsEnabled = true;
                     dto.IsPublished = true;
 
@@ -3180,7 +3185,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory)
+        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory, string[] tags)
         {
             try
             {
@@ -3216,6 +3221,7 @@ namespace TISS_Web.Controllers
                         exist.UpdatedDate = DateTime.Now;
                         exist.ContentType = dto.Article.ContentType;
                         exist.UpdatedUser = Session["UserName"] as string;
+                        exist.Hashtags =  string.Join(",", tags);
 
                         _db.SaveChanges();
                         //根據ContentType進行重定向
@@ -3252,28 +3258,35 @@ namespace TISS_Web.Controllers
         #region 導回對應文章主題頁
         private string GetRedirectAction(string contentType)
         {
-            // 定義每個 ContentType 對應的 Action 名稱
-            var contentTypeRoutes = new Dictionary<string, string>
-{
-    { "運動醫學", "sportMedicine" },
-    { "運動科技", "sportTech" },
-    { "運動科學", "sportScience" },
-    { "運動生理", "sportsPhysiology" },
-    { "運動心理", "sportsPsychology" },
-    { "體能訓練", "physicalTraining" },
-    { "運動營養", "sportsNutrition" },
-    { "新聞發佈", "press" },
-    { "中心訊息", "institute" },
-    { "徵才招募", "recruit" },
-    { "中心成果", "achievement" },
-    { "新聞影音", "news" },
-    { "活動紀錄", "activityRecord" },
-    { "兒少科普", "childrenScience" },
-    { "科普海報下載專區", "SciencePosterDownLoad" }
-};
+            try
+            {
+                // 定義每個 ContentType 對應的 Action 名稱
+                var contentTypeRoutes = new Dictionary<string, string>
+            {
+                { "新聞發佈", "press" },
+                { "中心訊息", "institute" },
+                { "徵才招募", "recruit" },
+                { "中心成果", "achievement" },
+                { "新聞影音", "news" },
+                { "活動紀錄", "activityRecord" },
+                { "運動醫學", "sportMedicine" },
+                { "運動科技", "sportTech" },
+                { "運動科學", "sportScience" },
+                { "運動生理", "sportsPhysiology" },
+                { "運動心理", "sportsPsychology" },
+                { "體能訓練", "physicalTraining" },
+                { "運動營養", "sportsNutrition" },
+                { "兒少科普", "childrenScience" },
+                { "科普海報下載專區", "SciencePosterDownLoad" }
+            };
 
-            // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁
-            return contentTypeRoutes.TryGetValue(contentType, out var actionName) ? actionName : "Index";
+                // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁
+                return contentTypeRoutes.TryGetValue(contentType, out var actionName) ? actionName : "Home";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         #endregion
 
