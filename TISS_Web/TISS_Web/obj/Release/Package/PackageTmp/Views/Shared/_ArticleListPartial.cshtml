@@ -6,7 +6,7 @@
     @foreach (var article in Model)
     {
         <div class="col-md-6 mb-4">
-            <a href="https://www.youtube.com/watch?v=@article.EncryptedUrl" class="">
+            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
                 <div class="NewsItemBox">
                     <div class="NewsItemImg">
                         @if (article.ImageContent != null)

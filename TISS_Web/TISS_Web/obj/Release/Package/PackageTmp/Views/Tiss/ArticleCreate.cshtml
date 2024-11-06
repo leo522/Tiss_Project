@@ -42,6 +42,8 @@
                 <label for="categorySelector" style="font-size: 25px">文件檔案分類</label>
                 <select id="categorySelector" name="documentCategory" class="form-control">
                     <option value="">請選擇文件檔案上傳分類</option>
+                    <option value="Recruitment">徵才招募</option>
+                    <option value="CommissionedResearchProject">委託研究計畫</option>
                     <option value="SportScience">運動科學</option>
                     <option value="SportTech">運動科技</option>
                     <option value="SportMedicine">運動醫學</option>
@@ -92,6 +94,17 @@
                         };
                         input.click();
                     }
+                }
+            });
+
+            // 表單提交時檢查「文件檔案分類」是否已選擇
+            document.querySelector("form").addEventListener("submit", function (event) {
+                const categorySelector = document.getElementById("categorySelector");
+
+                // 檢查是否選擇了分類
+                if (categorySelector.value === "") {
+                    alert("請選擇文件檔案分類");
+                    event.preventDefault(); // 阻止表單提交
                 }
             });
         });

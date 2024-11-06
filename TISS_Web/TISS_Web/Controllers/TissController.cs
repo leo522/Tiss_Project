@@ -748,7 +748,7 @@ namespace TISS_Web.Controllers
                         EncryptedUrl = a.EncryptedUrl,
                         PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
 
-                    }).Take(4).ToList();
+                    }).Take(5).ToList();
 
                 var dto = _db.ArticleContent
                         .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
@@ -805,7 +805,7 @@ namespace TISS_Web.Controllers
                         Hashtags = a.Hashtags,
                         EncryptedUrl = a.EncryptedUrl,
                         PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-                    }).Take(4).ToList();
+                    }).Take(5).ToList();
 
                 return PartialView("_ArticleListPartial", dtos);
 
@@ -845,7 +845,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
 
         #endregion
 
@@ -2901,7 +2900,6 @@ namespace TISS_Web.Controllers
 
             return base64;
         }
-
         
         #endregion
 
@@ -3280,7 +3278,7 @@ namespace TISS_Web.Controllers
                 { "科普海報下載專區", "SciencePosterDownLoad" }
             };
 
-                // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁
+                // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁，這行有問題要修正
                 return contentTypeRoutes.TryGetValue(contentType, out var actionName) ? actionName : "Home";
             }
             catch (Exception ex)
@@ -3620,27 +3618,72 @@ namespace TISS_Web.Controllers
         #region 下載文件的通用方法
         public ActionResult DownloadFile(int documentId)
         {
+
             try
             {
                 var document = _db.Documents.Find(documentId);
                 if (document != null)
                 {
                     var contentType = GetContentType(document.DocumentName);
-                    var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
+                    var disposition = "attachment";
                     var encodedFileName = Uri.EscapeDataString(document.DocumentName);
+                    byte[] fileContent;
 
+                    // 檢查文件類型
+                    var fileExtension = System.IO.Path.GetExtension(document.DocumentName).ToLower();
+
+                    if (fileExtension == ".pdf")
+                    {
+                        // PDF 文件，更新 PDF 標題
+                        fileContent = UpdatePdfTitle(document.FileContent, document.DocumentName);
+                        disposition = "inline"; // PDF 檔案可以 inline 顯示
+                    }
+                    else if (fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt")
+                    {
+                        // DOC, DOCX, ODT 文件，直接提供下載
+                        fileContent = document.FileContent;
+                    }
+                    else
+                    {
+                        // 若文件格式不支援，則返回 404
+                        return HttpNotFound();
+                    }
+
+                    // 設定 Content-Disposition 標頭
                     Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
 
-                    byte[] updatedPdf = UpdatePdfTitle(document.FileContent, document.DocumentName);
-                    var stream = new MemoryStream(updatedPdf);
+                    // 建立 MemoryStream 來傳送檔案
+                    var stream = new MemoryStream(fileContent);
                     return new FileStreamResult(stream, contentType);
                 }
+
                 return HttpNotFound();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            //try
+            //{
+            //    var document = _db.Documents.Find(documentId);
+            //    if (document != null)
+            //    {
+            //        var contentType = GetContentType(document.DocumentName);
+            //        var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
+            //        var encodedFileName = Uri.EscapeDataString(document.DocumentName);
+
+            //        Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
+
+            //        byte[] updatedPdf = UpdatePdfTitle(document.FileContent, document.DocumentName);
+            //        var stream = new MemoryStream(updatedPdf);
+            //        return new FileStreamResult(stream, contentType);
+            //    }
+            //    return HttpNotFound();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         }
 
         #endregion
