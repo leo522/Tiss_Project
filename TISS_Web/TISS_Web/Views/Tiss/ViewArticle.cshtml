@@ -4,13 +4,13 @@
     var isLoggedIn = Session["LoggedIn"] != null && (bool)Session["LoggedIn"];
     var parentDirectory = ViewBag.ParentDirectory as string;
     var menuItems = ViewBag.ParentMenu as Dictionary<string, List<string>>;
-    ViewBag.Title = ViewBag.DocumentName;
+    //ViewBag.Title = ViewBag.DocumentName;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    @*<title>@ViewBag.DocumentName</title>*@
+    <title>@ViewBag.Article</title>
     <link href="~/site/css/ViewArticleBtnStyle.css" rel="stylesheet" />
     <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
     <link href="~/bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -427,7 +427,7 @@ padding: 5px;">
                 event.preventDefault(); // 阻止表單提交
             }
         });
-                    });
+
         /*摺疊回覆留言*/
         document.addEventListener("DOMContentLoaded", function () {
             var replyButtons = document.querySelectorAll(".reply-btn");

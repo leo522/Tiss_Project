@@ -3155,6 +3155,7 @@ namespace TISS_Web.Controllers
                 ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList();
                 //載入標籤選項(供表單編輯用)
                 ViewBag.Hashtags = new MultiSelectList(_db.Hashtag.ToList(), "Name", "Name", article.Hashtags?.Split(','));
+                ViewBag.Article = $"國家運動科學中心_{article.Title}";
 
                 _db.SaveChanges();
 
