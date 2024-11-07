@@ -751,7 +751,7 @@ namespace TISS_Web.Controllers
                     }).Take(5).ToList();
 
                 var dto = _db.ArticleContent
-                        .Where(a => a.ContentType == "中心訊息" && a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                        .Where(a =>  a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
                         .OrderByDescending(a => a.CreateDate)
                         .Select(a => new ArticleContentModel
                         {

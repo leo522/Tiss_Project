@@ -230,21 +230,21 @@
                                                             {
                                                                 <div class="DocumentItem" style="margin-bottom: 10px;">
                                                                     <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                       target="_blank" title="@file.DocumentName _檔案下載 (另開視窗)">
+                                                                       target="_blank" title="@file.DocumentName _檔案下載 @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")">
                                                                         <strong>@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</strong>
                                                                     </a>
                                                                     <span class="el-tag"
                                                                           style="background-color: @(file.DocumentType == ".doc" || file.DocumentType == ".docx" || file.DocumentType == ".odt" ? "blue" : "firebrick");
-color: white;
-border-radius: 0;
-padding: 5px;">
+                          color: white; border-radius: 0; padding: 5px;">
                                                                         @file.DocumentType
                                                                     </span>
+                                                                    @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")
                                                                 </div>
                                                             }
                                                         }
                                                     </div>
                                                 }
+
                                             }
                                         </div>
                                     </div>
