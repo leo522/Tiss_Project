@@ -184,8 +184,8 @@
                                                                         <tr style="margin-bottom: 20px; padding: 5px;">
                                                                             <td style="width: 600px; padding: 20px;">
                                                                                 <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                                   target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                    <div title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                                   target="_blank" title="@file.DocumentName 檔案下載 @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")">
+                                                                                    <div title="@file.DocumentName 檔案下載 @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")">
                                                                                         @file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))
                                                                                     </div>
                                                                                 </a>
@@ -196,13 +196,11 @@
                                                                             <td style="width: 280px; padding: 10px;">
                                                                                 <div class="BaseTagList download">
                                                                                     <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                                       target="_blank" title="下載 @file.DocumentName (@file.DocumentType)">
+                                                                                       target="_blank" title="下載 @file.DocumentName 檔案下載 @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")">
                                                                                         <!-- 如果是 .doc, .docx 或 .odt 檔案，使用藍色背景 -->
                                                                                         <span class="el-tag"
                                                                                               style="background-color: @(file.DocumentType == ".doc" || file.DocumentType == ".docx" || file.DocumentType == ".odt" ? "blue" : "firebrick");
-                                         color: white;
-                                         border-radius: 0;
-                                         padding: 5px;">
+                          color: white; border-radius: 0; padding: 5px;">
                                                                                             @file.DocumentType
                                                                                         </span>
                                                                                     </a>
@@ -210,6 +208,7 @@
                                                                             </td>
                                                                         </tr>
                                                                     }
+
                                                                 }
                                                             </tbody>
 
