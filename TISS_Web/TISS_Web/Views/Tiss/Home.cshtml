@@ -304,6 +304,7 @@ $('.category-button').click(function () {
             $('#articleContainer').empty();
             $('#articleContainer').append(data);
             $('#articleContainer').focus(); // 將焦點移到更新後的內容
+            alert("內容已成功更新！"); // 提供操作回饋
         },
         error: function (xhr, status, error) {
             console.error("讀取錯誤: " + status + " " + error);
