@@ -63,7 +63,7 @@
                                 <div class="el-row" style="margin-left: -27.5px; margin-right: -27.5px;">
                                     <div class="el-col el-col-12 is-guttered d-none d-lg-block" style="padding-right: 27.5px; padding-left: 27.5px;">
                                         <header class="SectionHeader">
-                                            <h2 id="news-title" class="SectionTitle" title="News">News</h2>
+                                            <h2 id="news-title" class="SectionTitle" aria-labelledby="news-title" title="News">News</h2>
                                             <div class="SectionSubTitle">
                                                 <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="" />最新消息
                                             </div>
@@ -115,7 +115,7 @@
                                                         <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="" />最新消息
                                                     </div>
                                                 </div>
-                                                <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
+                                                <div class="el-row" role="tablist" aria-labelledby="news-title" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
                                                     <div class="el-row" style="margin-left: -10px; margin-right: -10px; margin-top: 30px;">
 
                                                         <div class="el-col el-col-24 el-col-xs-12 el-col-md-6 is-guttered" style="padding-right: 10px; padding-left: 10px;">
@@ -218,39 +218,39 @@
                         <div class="row">
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.sa.gov.tw/" title="教育部體育署網站 (另開新視窗)" target="_blank">
-                                    <img src="~/site/img/教育部體育署網站圖片.jpg" alt="教育部體育署網站" tabindex="-1" class="resize-image spacing" />
+                                    <img src="~/site/img/教育部體育署網站圖片.jpg" alt="連結至教育部體育署網站" tabindex="-1" class="resize-image spacing" />
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.sportscience.com.tw/" title="運動科學網站 (另開新視窗)" target="_blank">
-                                    <img src="~/site/img/運動科學網站.jpg" alt="運動科學網站" tabindex="-1" class="resize-image spacing" />
+                                    <img src="~/site/img/運動科學網站.jpg" alt="連結至運動科學網站" tabindex="-1" class="resize-image spacing" />
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="http://www.epsport.net/epsport/ep/index.asp" title="運動生理學網站 (另開新視窗)" target="_blank">
-                                    <img src="~/site/img/運動生理學網站.jpg" alt="運動生理學網站" tabindex="-1" class="resize-image spacing" />
+                                    <img src="~/site/img/運動生理學網站.jpg" alt="連結至運動生理學網站" tabindex="-1" class="resize-image spacing" />
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW" title="國家運動科學中心FB (另開新視窗)" target="_blank">
-                                    <img src="~/Img/facebook2.png" alt="國家運動科學中心FB網站" tabindex="-1" class="spacing" />
+                                    <img src="~/Img/facebook2.png" alt="連結至國家運動科學中心的 Instagram FB網站頁面" tabindex="-1" class="spacing" />
                                     <span class="d-block mt-2">TISS FACEBOOK</span>
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.instagram.com/tiss_2024/" title="國家運動科學中心IG網站 (另開新視窗)" target="_blank">
-                                    <img src="~/Img/IG圖片.png" alt="國家運動科學中心IG網站" tabindex="-1" class="spacing" />
+                                    <img src="~/Img/IG圖片.png" alt="連結至國家運動科學中心的 Instagram 頁面" tabindex="-1" class="spacing" />
                                     <span class="d-block mt-2">TISS INSTAGRAM</span>
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.youtube.com/%40TISS_2024" title="國家運動科學中心YouTube (另開新視窗)" target="_blank">
-                                    <img src="~/Img/youtube2.png" alt="國家運動科學中心YouTube網站" tabindex="-1" class="spacing" />
+                                    <img src="~/Img/youtube2.png" alt="連結至國家運動科學中心的YouTube網站" tabindex="-1" class="spacing" />
                                     <span class="d-block mt-2">TISS YOUTUBE</span>
                                 </a>
                             </div>
@@ -289,28 +289,25 @@ document.addEventListener("DOMContentLoaded", function () {
 //});
 
 // Partial View控制
-$('.category-button').click(function () {
-    var contentTypeId = $(this).data('content-type-id');
+        $('.category-button').click(function () {
+            var contentTypeId = $(this).data('content-type-id');
 
-    // 更新被選取的按鈕的 aria-selected 屬性
-    $('.category-button').attr('aria-selected', 'false');
-    $(this).attr('aria-selected', 'true');
+            $('.category-button').attr('aria-selected', 'false');
+            $(this).attr('aria-selected', 'true');
 
-    $.ajax({
-        url: '/Tiss/GetArticles',
-        type: 'GET',
-        data: { contentTypeId: contentTypeId },
-        success: function (data) {
-            $('#articleContainer').empty();
-            $('#articleContainer').append(data);
-            $('#articleContainer').focus(); // 將焦點移到更新後的內容
-            alert("內容已成功更新！"); // 提供操作回饋
-        },
-        error: function (xhr, status, error) {
-            console.error("讀取錯誤: " + status + " " + error);
-        }
-    });
-});
+            $.ajax({
+                url: '/Tiss/GetArticles',
+                type: 'GET',
+                data: { contentTypeId: contentTypeId },
+                success: function (data) {
+                    $('#articleContainer').empty().append(data).focus(); // 更新內容並聚焦
+                    alert("內容已成功更新！"); // 提供操作回饋
+                },
+                error: function (xhr, status, error) {
+                    console.error("讀取錯誤: " + status + " " + error);
+                }
+            });
+        });
 
 // 影片左右跳轉
 document.addEventListener('DOMContentLoaded', function () {
