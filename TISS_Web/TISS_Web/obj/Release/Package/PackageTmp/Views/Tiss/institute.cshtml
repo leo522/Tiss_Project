@@ -70,18 +70,18 @@
                             <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="中心公告">中心公告</h2>
-                                <ul class="Menu">
+                                <ul class="Menu" aria-labelledby="sidebar-title">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/announcement" title="全部文章">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/announcement" title="全部文章" aria-label="查看全部文章">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/press" title="新聞發佈">新聞發佈</a>
+                                        <a class="MenuLink" href="/Tiss/press" title="新聞發佈" aria-label="查看運科中心的新聞發佈">新聞發佈</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/institute" title="中心訊息">中心訊息</a>
+                                        <a class="MenuLink" href="/Tiss/institute" title="中心訊息" aria-label="查看運科中心的中心訊息">中心訊息</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/recruit" title="徵才招募">徵才招募</a>
+                                        <a class="MenuLink" href="/Tiss/recruit" title="徵才招募" aria-label="查看運科中心的徵才招募">徵才招募</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
@@ -101,7 +101,7 @@
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
                                                 <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
-                                                <i class="el-icon el-breadcrumb__separator">
+                                                <i class="el-icon el-breadcrumb__separator" aria-hidden="true">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
@@ -174,16 +174,16 @@
                                                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                     {
                                                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                            <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = i })">@i</a>
+                                                            <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
                                                         </li>
                                                     }
                                                     <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
+                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                     </li>
                                                     <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
+                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>

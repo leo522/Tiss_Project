@@ -61,36 +61,36 @@
                             <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
                                 <h2 class="Title" title="科普專欄">科普專欄</h2>
-                                <ul class="Menu">
+                                <ul class="Menu" aria-labelledby="sidebar-title">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/research" title="全部文章">全部文章</a>
+                                        <a class="MenuLink" href="/Tiss/research" title="全部文章" aria-label="查看全部文章">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportMedicine" title="運動醫學">運動醫學</a>
+                                        <a class="MenuLink" href="/Tiss/sportMedicine" title="運動醫學" aria-label="查看運動醫學">運動醫學</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportTech" title="運動科技">運動科技</a>
+                                        <a class="MenuLink" href="/Tiss/sportTech" title="運動科技" aria-label="查看運動科技">運動科技</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportScience" title="運動科學">運動科學</a>
+                                        <a class="MenuLink" href="/Tiss/sportScience" title="運動科學" aria-label="查看運動科學">運動科學</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsPhysiology" title="運動生理">運動生理</a>
+                                        <a class="MenuLink" href="/Tiss/sportsPhysiology" title="運動生理" aria-label="查看運動生理">運動生理</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsPsychology" title="運動心理">運動心理</a>
+                                        <a class="MenuLink" href="/Tiss/sportsPsychology" title="運動心理" aria-label="查看運動心理">運動心理</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/physicalTraining" title="體能訓練">體能訓練</a>
+                                        <a class="MenuLink" href="/Tiss/physicalTraining" title="體能訓練" aria-label="查看體能訓練">體能訓練</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/sportsNutrition" title="運動營養">運動營養</a>
+                                        <a class="MenuLink" href="/Tiss/sportsNutrition" title="運動營養" aria-label="查看運動營養">運動營養</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/childrenScience" title="兒少科普">兒少科普</a>
+                                        <a class="MenuLink" href="/Tiss/childrenScience" title="兒少科普" aria-label="查看兒少科普">兒少科普</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">科普海報下載專區</a>
+                                        <a class="MenuLink" href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區" aria-label="查看科普海報下載專區">科普海報下載專區</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
@@ -110,7 +110,7 @@
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
                                                 <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
-                                                <i class="el-icon el-breadcrumb__separator">
+                                                <i class="el-icon el-breadcrumb__separator" aria-hidden="true">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
@@ -174,16 +174,16 @@
                                                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                     {
                                                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                            <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = i })">@i</a>
+                                                            <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
                                                         </li>
                                                     }
                                                     <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="Previous Page">
+                                                        <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                     </li>
                                                     <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="Next Page">
+                                                        <a class="page-link" href="@Url.Action("sportsNutrition", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>

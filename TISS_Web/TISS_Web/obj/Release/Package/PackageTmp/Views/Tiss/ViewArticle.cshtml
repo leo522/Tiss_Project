@@ -211,6 +211,10 @@
                                                         <label for="DocumentFile" style="font-size:25px" title="附加文件">附加文件：</label>
                                                         <input type="file" name="documentFile" id="documentFile" class="form-control-file" aria-label="附加文件" />
                                                     </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="DocumentFilePic" style="font-size:25px" title="附加文件">附加圖片：</label>
+                                                        <input type="file" name="documentFilePic" id="documentFilePic" class="form-control-file" aria-label="附加圖片" />
+                                                    </div>
                                                     <div style="clear: both; margin-top: 10px;">
                                                         <button type="submit" class="btn btn-primary mt-3">保存修改</button>
                                                     </div>
@@ -234,10 +238,12 @@
                                                                         <strong>@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</strong>
                                                                     </a>
                                                                     <span class="el-tag"
-                                                                          style="background-color: @(file.DocumentType == ".doc" || file.DocumentType == ".docx" || file.DocumentType == ".odt" ? "blue" : "firebrick");
-                          color: white; border-radius: 0; padding: 5px;">
+                                                                          style="background-color: @(file.DocumentType == ".doc" || file.DocumentType == ".docx" || file.DocumentType == ".odt" ? "blue" :
+                                 (file.DocumentType == ".jpg" || file.DocumentType == ".jpeg" || file.DocumentType == ".png" ? "green" : "firebrick"));
+            color: white; border-radius: 0; padding: 5px;">
                                                                         @file.DocumentType
                                                                     </span>
+
                                                                     @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")
                                                                 </div>
                                                             }
@@ -443,6 +449,17 @@
                     }
                 });
             });
+        });
+
+        // 表單提交時檢查「文件檔案分類」是否已選擇
+        document.querySelector("form").addEventListener("submit", function (event) {
+            const categorySelector = document.getElementById("categorySelector");
+
+            // 檢查是否選擇了分類
+            if (categorySelector.value === "") {
+                alert("請選擇文件/圖片檔案分類");
+                event.preventDefault(); // 阻止表單提交
+            }
         });
     </script>
 </body>
