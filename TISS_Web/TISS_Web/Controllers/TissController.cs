@@ -3184,7 +3184,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory, string[] tags)
+        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory, string[] tags, HttpPostedFileBase documentFilePic)
         {
             try
             {
@@ -3212,6 +3212,14 @@ namespace TISS_Web.Controllers
                             if (!fileUploadResult)
                             {
                                 ModelState.AddModelError("", "文件上傳失敗。");
+                            }
+                        }
+                        else if (documentFilePic != null && documentFilePic.ContentLength > 0)
+                        {
+                            var fileUploadResult = SaveDocumentFile(documentFilePic, dto.Article.Id, documentCategory);
+                            if (!fileUploadResult)
+                            {
+                                ModelState.AddModelError("", "圖片上傳失敗。");
                             }
                         }
 
@@ -3300,7 +3308,8 @@ namespace TISS_Web.Controllers
                     string fileName = Path.GetFileName(file.FileName);
                     string fileExtension = Path.GetExtension(fileName).ToLower();
 
-                    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt")
+                    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".jpeg" ||
+                fileExtension == ".jpg" || fileExtension == ".png")
                     {
                         byte[] fileData;
                         using (var binaryReader = new BinaryReader(file.InputStream))
@@ -3619,72 +3628,40 @@ namespace TISS_Web.Controllers
         #region 下載文件的通用方法
         public ActionResult DownloadFile(int documentId)
         {
-
             try
             {
                 var document = _db.Documents.Find(documentId);
                 if (document != null)
                 {
                     var contentType = GetContentType(document.DocumentName);
-                    var disposition = "attachment";
+                    var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
                     var encodedFileName = Uri.EscapeDataString(document.DocumentName);
-                    byte[] fileContent;
 
-                    // 檢查文件類型
-                    var fileExtension = System.IO.Path.GetExtension(document.DocumentName).ToLower();
+                    Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
 
-                    if (fileExtension == ".pdf")
+                    // 如果是 PDF 文件，則更新標題；如果是圖片，則直接使用原始內容
+                    byte[] fileData;
+                    if (document.DocumentType == ".pdf")
                     {
-                        // PDF 文件，更新 PDF 標題
-                        fileContent = UpdatePdfTitle(document.FileContent, document.DocumentName);
-                        disposition = "inline"; // PDF 檔案可以 inline 顯示
-                    }
-                    else if (fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt")
-                    {
-                        // DOC, DOCX, ODT 文件，直接提供下載
-                        fileContent = document.FileContent;
+                        fileData = UpdatePdfTitle(document.FileContent, document.DocumentName);
                     }
                     else
                     {
-                        // 若文件格式不支援，則返回 404
-                        return HttpNotFound();
+                        fileData = document.FileContent; // 直接使用圖片的二進制數據
                     }
 
-                    // 設定 Content-Disposition 標頭
-                    Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
-
-                    // 建立 MemoryStream 來傳送檔案
-                    var stream = new MemoryStream(fileContent);
+                    var stream = new MemoryStream(fileData);
                     return new FileStreamResult(stream, contentType);
+                    //byte[] updatedPdf = UpdatePdfTitle(document.FileContent, document.DocumentName);
+                    //var stream = new MemoryStream(updatedPdf);
+                    //return new FileStreamResult(stream, contentType);
                 }
-
                 return HttpNotFound();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            //try
-            //{
-            //    var document = _db.Documents.Find(documentId);
-            //    if (document != null)
-            //    {
-            //        var contentType = GetContentType(document.DocumentName);
-            //        var disposition = document.DocumentType == ".pdf" ? "inline" : "attachment";
-            //        var encodedFileName = Uri.EscapeDataString(document.DocumentName);
-
-            //        Response.Headers["Content-Disposition"] = $"{disposition}; filename=\"{document.DocumentName}\"; filename*=UTF-8''{encodedFileName}";
-
-            //        byte[] updatedPdf = UpdatePdfTitle(document.FileContent, document.DocumentName);
-            //        var stream = new MemoryStream(updatedPdf);
-            //        return new FileStreamResult(stream, contentType);
-            //    }
-            //    return HttpNotFound();
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
         }
 
         #endregion
@@ -3704,6 +3681,11 @@ namespace TISS_Web.Controllers
                         return "application/msword";
                     case ".odt":
                         return "application/vnd.oasis.opendocument.text"; // ODT 檔案的 MIME 類型
+                    case ".jpeg":
+                    case ".jpg":
+                        return "image/jpeg"; // JPG 和 JPEG 的 MIME 類型
+                    case ".png":
+                        return "image/png"; // PNG 的 MIME 類型
                     default:
                         return "application/octet-stream"; // 其他文件類型預設為下載
                 }
@@ -3777,7 +3759,7 @@ namespace TISS_Web.Controllers
                             pdfDoc.Close();
                         }
                     }
-                    // 返回修改後的 byte[]
+
                     return outputMs.ToArray(); // 返回新的 PDF 數據
                 }
             }
