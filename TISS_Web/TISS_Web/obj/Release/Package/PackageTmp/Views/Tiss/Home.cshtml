@@ -74,7 +74,7 @@
                                                     @if (Model.LatestArticle.ImageContent != null)
                                                     {
                                                         string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
-                                                        <img src="data:image/png;base64,@base64Image" alt="圖片" tabindex="0" />
+                                                        <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
                                                     }
                                                     <div class="tag">@Model.LatestArticle.ContentType</div>
                                                     <div class="Mask">閱讀更多</div>
@@ -153,7 +153,7 @@
                                                                 @if (article.ImageContent != null)
                                                                 {
                                                                     string base64Image = Convert.ToBase64String(article.ImageContent);
-                                                                    <img src="data:image/png;base64,@base64Image" alt="圖片" tabindex="0" />
+                                                                    <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
                                                                 }
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask" title="@article.Title">閱讀更多</div>
@@ -195,8 +195,15 @@
                             <div class="d-none d-lg-block">
                                 <div class="VideoCarousel">
                                     <!-- 這裡調用 TissController.GetHomeVideos 的部分視圖 -->
+                                    <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" title="播放前一部影片" aria-label="播放前一部影片">
+                                        &lt;
+                                    </button>
                                     @Html.Action("GetHomeVideos", "Tiss")
+                                    <button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" title="播放下一部影片" aria-label="播放下一部影片">
+                                        &gt;
+                                    </button>
                                 </div>
+                                
                             </div>
                         </div>
                     </section>
@@ -236,14 +243,14 @@
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.facebook.com/p/%E5%9C%8B%E5%AE%B6%E9%81%8B%E5%8B%95%E7%A7%91%E5%AD%B8%E4%B8%AD%E5%BF%83Taiwan-Institute-of-Sports-Science-61553673834147/?locale=zh_TW" title="國家運動科學中心FB (另開新視窗)" target="_blank">
-                                    <img src="~/Img/facebook2.png" alt="連結至國家運動科學中心的 Instagram FB網站頁面" tabindex="-1" class="spacing" />
+                                    <img src="~/Img/facebook2.png" alt="連結至國家運動科學中心的FB網站" tabindex="-1" class="spacing" />
                                     <span class="d-block mt-2">TISS FACEBOOK</span>
                                 </a>
                             </div>
 
                             <div class="col-6 col-md-4 mb-3 text-center">
                                 <a class="SectionUrl" href="https://www.instagram.com/tiss_2024/" title="國家運動科學中心IG網站 (另開新視窗)" target="_blank">
-                                    <img src="~/Img/IG圖片.png" alt="連結至國家運動科學中心的 Instagram 頁面" tabindex="-1" class="spacing" />
+                                    <img src="~/Img/IG圖片.png" alt="連結至國家運動科學中心的Instagram網站" tabindex="-1" class="spacing" />
                                     <span class="d-block mt-2">TISS INSTAGRAM</span>
                                 </a>
                             </div>
