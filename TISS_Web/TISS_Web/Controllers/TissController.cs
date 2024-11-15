@@ -1720,10 +1720,21 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
+                //var list = _db.ArticleContent
+                //    .Where(a => a.Hashtags == "運動科學" || a.Hashtags == "運動管理" && a.IsEnabled)
+                //    .OrderByDescending(a => a.CreateDate)
+                //    .ToList();
+
+                // 修改篩選邏輯以處理多個 Hashtags
+                var targetHashtags = new List<string> { "運動科學", "運動管理" };
+
                 var list = _db.ArticleContent
-                    .Where(a => a.Hashtags == "運動科學" || a.Hashtags == "運動管理" && a.IsEnabled)
+                    .Where(a => a.IsEnabled && a.Hashtags != null)
+                    .AsEnumerable() // 將資料拉至記憶體中處理
+                    .Where(a => a.Hashtags.Split(',').Select(tag => tag.Trim()).Any(tag => targetHashtags.Contains(tag)))
                     .OrderByDescending(a => a.CreateDate)
                     .ToList();
+
 
                 //計算總數和總頁數
                 var totalArticles = list.Count();
@@ -1731,6 +1742,7 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
+                // 分頁處理
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
@@ -2036,8 +2048,16 @@ namespace TISS_Web.Controllers
 
                 page = Math.Max(1, page); //確保頁碼至少為 1
 
+                //var list = _db.ArticleContent
+                //    .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
+                //    .OrderByDescending(a => a.CreateDate)
+                //    .ToList();
+
+                // 修改篩選邏輯以處理多個 Hashtags
                 var list = _db.ArticleContent
-                    .Where(a => a.Hashtags == "兒少科普" && a.IsEnabled)
+                    .Where(a => a.IsEnabled && a.Hashtags != null)
+                    .AsEnumerable() // 將資料拉至記憶體中處理
+                    .Where(a => a.Hashtags.Split(',').Select(tag => tag.Trim()).Contains("兒少科普")) // 檢查是否包含目標標籤
                     .OrderByDescending(a => a.CreateDate)
                     .ToList();
 
@@ -2047,6 +2067,7 @@ namespace TISS_Web.Controllers
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
 
+                // 分頁處理
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
@@ -3047,11 +3068,21 @@ namespace TISS_Web.Controllers
                 //// 將關聯文件資料存入 ViewBag，以供 View 中使用
                 //ViewBag.AssociatedDocuments = associatedDocuments;
 
-                ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList(); //處理多個Hashtags顯示
+                //ViewBag.DisplayHashtags = article.Hashtags?.Split(',').ToList(); //處理多個Hashtags顯示
+                ViewBag.DisplayHashtags = article.Hashtags?.Split(',').Select(tag => tag.Trim()).ToList();
 
                 // 查找同一標籤下的上一篇和下一篇文章
+                //var articlesWithSameTag = _db.ArticleContent
+                //    .Where(a => a.Hashtags.Contains(article.Hashtags) && a.IsEnabled) // 使用 Contains 來匹配部分標籤
+                //    .OrderBy(a => a.PublishedDate)
+                //    .ToList();
+
+                // 查找同一標籤下的上一篇和下一篇文章
+                var targetHashtags = article.Hashtags.Split(',').Select(tag => tag.Trim()).ToList();
                 var articlesWithSameTag = _db.ArticleContent
-                    .Where(a => a.Hashtags.Contains(article.Hashtags) && a.IsEnabled) // 使用 Contains 來匹配部分標籤
+                    .Where(a => a.IsEnabled && a.Hashtags != null)
+                    .AsEnumerable() // 將資料拉至記憶體中處理 Hashtags
+                    .Where(a => a.Hashtags.Split(',').Any(tag => targetHashtags.Contains(tag.Trim())))
                     .OrderBy(a => a.PublishedDate)
                     .ToList();
 
