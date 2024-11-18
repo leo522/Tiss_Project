@@ -399,7 +399,7 @@
     <div>
         @RenderBody()
     </div>
-    <footer data-v-339da53a="">
+    <footer data-v-339da53a="" style="position: relative;">
         <div class="sr-only">
             <a href="/sitemap" accesskey="Z" title="下方功能區塊（快捷鍵：Alt + Z）"></a>
         </div>
@@ -549,16 +549,22 @@
                                 </li>
                             </ul>
                         </div>
+
                         @*<div class="el-col el-col-24 el-col-xs-8 el-col-sm-4 is-guttered" style="padding-right: 7.5px; padding-left: 7.5px;">
-                                <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
-                                <ul class="MenuList"></ul>
-                            </div>*@
+                            <a href="/Tiss/SponsorArea" class="MenuTitle" title="贊助專區">贊助專區</a>
+                            <ul class="MenuList"></ul>
+                        </div>*@
                     </div>
                     <div class="copyright">
                         <div class="container" title="Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.">Copyright © @DateTime.Now.Year 國家運動科學中心 All Rights Reserved.</div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div style="position: absolute; right: 20px; bottom: 20px; z-index: 10;">
+            <a href="https://accessibility.moda.gov.tw/Applications/Detail?category=20241021135043" title="無障礙網站">
+                <img src="~/Img/網站無障礙標章A等級圖示.png" border="0" width="88" height="31" alt="通過A無障礙網頁檢測" />
+            </a>
         </div>
     </footer>
     @*回最上方按鈕*@

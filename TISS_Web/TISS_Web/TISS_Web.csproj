@@ -2689,6 +2689,7 @@
     <Content Include="Img\科普專欄圖片\淺談運動大數據.jpg" />
     <Content Include="Img\科普專欄圖片\睡覺也是一種訓練.jpg" />
     <Content Include="Img\科普專欄圖片\運動科學短評.jpg" />
+    <Content Include="Img\網站無障礙標章A等級圖示.png" />
     <Content Include="Img\運動生理學網站.jpg" />
     <Content Include="Img\運動科學網站.jpg" />
     <Content Include="Models\TissModel.Context.tt">
