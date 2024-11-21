@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 data: { contentTypeId: contentTypeId },
                 success: function (data) {
                     $('#articleContainer').empty().append(data).focus(); // 更新內容並聚焦
-                    alert("內容已成功更新！"); // 提供操作回饋
+                    //alert("內容已成功更新！"); // 提供操作回饋
                 },
                 error: function (xhr, status, error) {
                     console.error("讀取錯誤: " + status + " " + error);
