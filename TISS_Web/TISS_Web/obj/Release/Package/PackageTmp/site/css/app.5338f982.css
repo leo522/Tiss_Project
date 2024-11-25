@@ -1,5 +1,16 @@
 /*! * Bootstrap v5.3.2 (https://getbootstrap.com/) * Copyright 2011-2023 The Bootstrap Authors * Licensed 
 under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) */
+@media (max-width: 768px) {
+    .logo-img {
+        max-width: 80%; /* 較小螢幕時縮小圖片 */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        max-width: 60%; /* 非常小螢幕時進一步縮小 */
+    }
+}
 :focus {
     outline: 0; /*隱藏預設焦點框 */
     border: 2px dashed orange; /*添加橙色虛線邊框 */
@@ -29638,15 +29649,23 @@ textarea.form-control-lg[data-v-71bab962] {
         justify-content: flex-end
     }
 }
-
 .menuNav .navbar .navbar-collapse[data-v-71bab962] {
-    -webkit-box-pack: start; /* 將 "end" 改成 "start" */
-    -ms-flex-pack: start; /* 將 "end" 改成 "start" */
-    justify-content: flex-start; /* 將 "flex-end" 改成 "flex-start" */
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     -webkit-transition: .5s;
     transition: .5s;
-    padding-left: 180px;
+    padding-left: 0; /* 移除影響圖片靠左的間距 */
 }
+
+/*.menuNav .navbar .navbar-collapse[data-v-71bab962] {
+    -webkit-box-pack: start;*/ /* 將 "end" 改成 "start" */
+    /*-ms-flex-pack: start;*/ /* 將 "end" 改成 "start" */
+    /*justify-content: flex-start;*/ /* 將 "flex-end" 改成 "flex-start" */
+    /*-webkit-transition: .5s;
+    transition: .5s;
+    padding-left: 180px;
+}*/
 /*.menuNav .navbar .navbar-collapse[data-v-71bab962] {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
