@@ -570,14 +570,16 @@
 
     <script>
         window.addEventListener('scroll', function () {
-            const header = document.getElementById('logoTop');
-            if (window.scrollY > 100) {  // 當滾動超過 100px
-                header.style.opacity = '0';  // 隱藏標籤區塊
-                header.style.pointerEvents = 'none'; // 防止隱藏狀態下點擊
-            } else {
-                header.style.opacity = '1';  // 顯示標籤區塊
-                header.style.pointerEvents = 'auto';
-            }
+            const header = document.getElementById('logoTop'); // 每次滾動都重新取得元素
+            if (header) { // 確保 header 存在
+                if (window.scrollY > 100) { // 當滾動超過 100px
+                    header.style.opacity = '0';  // 隱藏標籤區塊
+                    header.style.pointerEvents = 'none'; // 防止隱藏狀態下點擊
+                } else {
+                    header.style.opacity = '1';  // 顯示標籤區塊
+                    header.style.pointerEvents = 'auto';
+                }
+            } 
         });
 
         // 清除 Google 翻譯的相關 cookie
