@@ -2925,9 +2925,7 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 文章內容顯示
-        /// <summary>
         /// 增加alt屬性
-        /// </summary>
         public string EnsureImageAltAttribute(string content)
         {
             try
@@ -2951,11 +2949,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 文章內容URL解密
-        /// </summary>
-        /// <param name="encryptedUrl"></param>
-        /// <returns></returns>
         private string DecryptUrl(string encryptedUrl)
         {
             try
@@ -2981,11 +2975,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 文章內容附件檔案名稱顯示
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
         public string AddAccessibilityAttributes(string content)
         {
             try
@@ -3019,10 +3009,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 文章內容顯示
-        /// </summary>
-        /// <returns></returns>
         public ActionResult ViewArticle(string encryptedUrl)
         {
             try
@@ -3200,18 +3187,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 處理修改編輯文章
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <param name="imageFile"></param>
-        /// <returns></returns>
-        /// <summary>
-        /// 處理修改編輯文章
-        /// </summary>
-        /// <param name="dto"></param>
-        /// <param name="imageFile"></param>
-        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -3254,7 +3230,8 @@ namespace TISS_Web.Controllers
                             }
                         }
 
-                        // 更新文章內容和其他欄位
+                        //更新文章內容和其他欄位
+                        exist.Title = dto.Article.Title;
                         exist.ContentBody = dto.Article.ContentBody;
                         exist.UpdatedDate = DateTime.Now;
                         exist.ContentType = dto.Article.ContentType;
@@ -3281,11 +3258,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 導回對應頁面
-        /// </summary>
-        /// <param name="tag"></param>
-        /// <returns></returns>
         public ActionResult Redirecttag(string tag)
         {
             string actionName = GetRedirectAction(tag);
