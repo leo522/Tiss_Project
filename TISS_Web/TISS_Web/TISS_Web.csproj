@@ -3133,6 +3133,7 @@
     <Content Include="Views\Error\WebSiteError.cshtml" />
     <Content Include="Views\Tiss\_VideoSection.cshtml" />
     <Content Include="Views\Tiss\SiteMap.cshtml" />
+    <Content Include="Views\Tiss\overseawork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

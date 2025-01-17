@@ -2257,11 +2257,7 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 公開資訊
-
-        /// <summary>
         /// 公開資訊
-        /// </summary>
-        /// <returns></returns>
         public ActionResult public_info(int page = 1, int pageSize = 7)
         {
             try
@@ -2303,10 +2299,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 法規
-        /// </summary>
-        /// <returns></returns>
         public ActionResult regulation(int page = 1, int pageSize = 7)
         {
             try
@@ -2348,10 +2341,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 辦法及要點
-        /// </summary>
-        /// <returns></returns>
         public ActionResult procedure(int page = 1, int pageSize = 10)
         {
             try
@@ -2392,10 +2382,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 計畫
-        /// </summary>
-        /// <returns></returns>
         public ActionResult plan(int page = 1, int pageSize = 10)
         {
             try
@@ -2437,10 +2424,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 預算與決算
-        /// </summary>
-        /// <returns></returns>
         public ActionResult budget(int page = 1, int pageSize = 10)
         {
             try
@@ -2482,10 +2466,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 下載專區
-        /// </summary>
-        /// <returns></returns>
         public ActionResult download(int page = 1, int pageSize = 10)
         {
             try
@@ -2526,10 +2507,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 採購作業實施規章
-        /// </summary>
-        /// <returns></returns>
         public ActionResult purchase(int page = 1, int pageSize = 5)
         {
             try
@@ -2570,10 +2548,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 其他
-        /// </summary>
-        /// <returns></returns>
         public ActionResult other(int page = 1, int pageSize = 10)
         {
             try
@@ -2614,6 +2589,46 @@ namespace TISS_Web.Controllers
             }
         }
 
+        ///國外參訪及工作報告
+        public ActionResult overseawork(int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                ViewBag.Title = "國外參訪及工作報告";
+                Session["ReturnUrl"] = Request.Url.ToString();
+
+                page = Math.Max(1, page); //確保頁碼至少為 1
+
+                var list = _db.Documents.Where(d => d.Category == "OverseaWork" && d.IsActive)
+                                .OrderByDescending(d => d.UploadTime).ToList();
+
+                //計算總數和總頁數
+                var totalDocuments = list.Count();
+                var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
+
+                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
+
+                var dtos = list.Skip((page - 1) * pageSize).Take(pageSize).Select(d => new DocumentModel
+                {
+                    DocumentID = d.DocumentID,
+                    DocumentName = d.DocumentName,
+                    DocumentType = d.DocumentType,
+                    UploadTime = d.UploadTime,
+                    Creator = d.Creator,
+                    FileSize = d.FileSize,
+                    IsActive = d.IsActive,
+                }).ToList();
+
+                ViewBag.CurrentPage = page;
+                ViewBag.TotalPages = totalPages;
+
+                return View(dtos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region 性別平等專區
