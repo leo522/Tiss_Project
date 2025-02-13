@@ -53,7 +53,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="ContentBody" Type="nvarchar(max)" />
           <Property Name="ContentType" Type="nvarchar" MaxLength="10" />
           <Property Name="ImageContent" Type="varbinary(max)" />
@@ -64,7 +64,7 @@
           <Property Name="Hashtags" Type="nvarchar" MaxLength="20" />
           <Property Name="IsNew" Type="bit" />
           <Property Name="TargetView" Type="nvarchar" MaxLength="50" />
-          <Property Name="EncryptedUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EncryptedUrl" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ClickCount" Type="int" />
           <Property Name="ContentTypeId" Type="int" />
           <Property Name="UpdatedDate" Type="datetime" />
@@ -490,6 +490,23 @@
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OverseaWorkDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PId" Type="int" Nullable="false" />
+          <Property Name="DocumentName" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="UploadTime" Type="datetime" Nullable="false" />
+          <Property Name="Creator" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="DocumentType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="ModifiedTime" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileData" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="PasswordResetRequests">
           <Key>
@@ -1092,6 +1109,7 @@
           <EntitySet Name="OrganizationPageContent" EntityType="Self.OrganizationPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherDocument" EntityType="Self.OtherDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OtherPageContent" EntityType="Self.OtherPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OverseaWorkDocument" EntityType="Self.OverseaWorkDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PasswordResetRequests" EntityType="Self.PasswordResetRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhysicalTrainingPageContent" EntityType="Self.PhysicalTrainingPageContent" Schema="dbo" store:Type="Tables" />
@@ -1263,6 +1281,7 @@
             <End Role="ArticleContent" EntitySet="ArticleContent" />
             <End Role="Documents" EntitySet="Documents" />
           </AssociationSet>
+          <EntitySet Name="OverseaWorkDocument" EntityType="TISS_WebModel.OverseaWorkDocument" />
         </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1312,7 +1331,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ContentBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ContentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
@@ -1323,7 +1342,7 @@
           <Property Name="Hashtags" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IsNew" Type="Boolean" />
           <Property Name="TargetView" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClickCount" Type="Int32" />
           <Property Name="ContentTypeId" Type="Int32" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
@@ -2335,6 +2354,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OverseaWorkDocument">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3344,6 +3380,24 @@
                 <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
                 <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
                 <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OverseaWorkDocument">
+            <EntityTypeMapping TypeName="TISS_WebModel.OverseaWorkDocument">
+              <MappingFragment StoreEntitySet="OverseaWorkDocument">
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

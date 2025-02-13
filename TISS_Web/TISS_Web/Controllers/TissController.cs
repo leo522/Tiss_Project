@@ -238,7 +238,7 @@ namespace TISS_Web.Controllers
                 _db.SaveChanges();
 
                 // 發送Email通知管理員
-                var adminEmail = "00048@tiss.org.tw";
+                var adminEmail = "chiachi.pan@tiss.org.tw";
                 var emailBody = $"新使用者註冊，請審核：<br/>帳號: {UserName}<br/>Email: {Email}<br/>註冊時間: {DateTime.Now}<br/><a href='{Url.Action("PendingRegistrations", "Tiss", null, Request.Url.Scheme)}'>點擊這裡審核</a>";
                 SendEmail(adminEmail, "新使用者註冊通知", emailBody, null);
 
@@ -2827,6 +2827,14 @@ namespace TISS_Web.Controllers
                     }
                 }
 
+                if (!ModelState.IsValid)
+                {
+                    foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                    { 
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
+
                 ViewBag.Hashtags = new SelectList(_db.Hashtag.ToList(), "Name", "Name");
                 ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName");
                 return View(article);
@@ -2870,6 +2878,8 @@ namespace TISS_Web.Controllers
                     dto.Hashtags = string.Join(",", tags);
                     dto.IsEnabled = true;
                     dto.IsPublished = true;
+                    dto.UpdatedDate = DateTime.Now;
+                    dto.UpdatedUser = userName;
 
                     //設定文章類型
                     var category = _db.ArticleCategory.FirstOrDefault(c => c.Id == contentTypeID);
@@ -3322,6 +3332,7 @@ namespace TISS_Web.Controllers
         {
             try
             {
+
                 if (file != null && file.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(file.FileName);
@@ -3466,7 +3477,7 @@ namespace TISS_Web.Controllers
             if (!string.IsNullOrEmpty(reportPath))
             {
                 // 使用 Split 將收件人字串分割成單個地址的陣列
-                string[] toEmail = "00009@tiss.org.tw,00048@tiss.org.tw".Split(',');
+                string[] toEmail = "edithsu@tiss.org.tw,chiachi.pan@tiss.org.tw".Split(',');
                 //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
 
                 string subject = "運科中心專欄文章瀏覽率報表";
@@ -3631,6 +3642,8 @@ namespace TISS_Web.Controllers
                         return RedirectToAction("Other", new { page });
                     case "GenderEquality":
                         return RedirectToAction("GenderEquality", new { page });
+                    case "OverseaWork":
+                        return RedirectToAction("OverseaWork", new { page });
                     default:
                         // 如果 category 不符合任何條件，則返回到一個默認頁面
                         return RedirectToAction("Regulation", new { page });
@@ -3780,6 +3793,55 @@ namespace TISS_Web.Controllers
                     }
 
                     return outputMs.ToArray(); // 返回新的 PDF 數據
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region 撤銷文件下架
+        [HttpPost]
+        public ActionResult RevokeDocument(int documentId, int? page)
+        {
+            try
+            {
+                var document = _db.Documents.FirstOrDefault(d => d.DocumentID == documentId);
+                if (document == null)
+                {
+                    return HttpNotFound("找不到指定的文件");
+                }
+
+                document.IsActive = false; // 設定文件為「非啟用」，即下架狀態
+                _db.SaveChanges();
+
+                //TempData["SuccessMessage"] = "文件已成功撤銷下架！";
+
+                // 依據文件的分類回到對應的頁面
+                switch (document.Category)
+                {
+                    case "Public_Info":
+                        return RedirectToAction("Public_Info", new { page });
+                    case "Regulation":
+                        return RedirectToAction("Regulation", new { page });
+                    case "Procedure":
+                        return RedirectToAction("Procedure", new { page });
+                    case "Plan":
+                        return RedirectToAction("Plan", new { page });
+                    case "Budget":
+                        return RedirectToAction("Budget", new { page });
+                    case "Download":
+                        return RedirectToAction("Download", new { page });
+                    case "Other":
+                        return RedirectToAction("Other", new { page });
+                    case "GenderEquality":
+                        return RedirectToAction("GenderEquality", new { page });
+                    case "OverseaWork":
+                        return RedirectToAction("OverseaWork", new { page });
+                    default:
+                        return RedirectToAction("Public_Info", new { page });
                 }
             }
             catch (Exception ex)

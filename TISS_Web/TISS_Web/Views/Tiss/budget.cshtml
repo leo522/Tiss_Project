@@ -162,6 +162,7 @@
                                                                     <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
                                                                     <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
                                                                     <th scope="col" style="width: 280px; padding: 10px;">附件</th>
+                                                                    <th scope="col" style="width: 150px; padding: 10px;">操作</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -177,29 +178,34 @@
                                                                 {
                                                                     foreach (var file in Model)
                                                                     {
-                                                                        <tr style="margin-bottom: 20px; padding: 5px;">
-                                                                            <td style="width: 600px; padding: 20px;">
-                                                                                <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                                   target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                    <div title="@file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                        @file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))
-                                                                                    </div>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td style="width: 240px; padding: 10px;">
-                                                                                @file.UploadTime.ToString("yyyy/MM/dd")
-                                                                            </td>
-                                                                            <td style="width: 280px; padding: 10px;">
-                                                                                <div class="BaseTagList download">
-                                                                                    <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
-                                                                                       target="_blank" title="下載 @file.DocumentName 檔案下載 (另開新視窗)">
-                                                                                        <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">
-                                                                                            @file.DocumentType
-                                                                                        </span>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </td>
-                                                                        </tr>
+                                                            <tr style="margin-bottom: 20px; padding: 5px;">
+                                                                <td style="width: 600px; padding: 20px;">
+                                                                    <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                       target="_blank" title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                        <div title="@file.DocumentName 檔案下載 (另開新視窗)">
+                                                                            @file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))
+                                                                        </div>
+                                                                    </a>
+                                                                </td>
+                                                                <td style="width: 240px; padding: 10px;">
+                                                                    @file.UploadTime.ToString("yyyy/MM/dd")
+                                                                </td>
+                                                                <td style="width: 280px; padding: 10px;">
+                                                                    <div class="BaseTagList download">
+                                                                        <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                           target="_blank" title="下載 @file.DocumentName 檔案下載 (另開新視窗)">
+                                                                            <span class="el-tag" style="background-color: firebrick; color: white; border-radius: 0; padding: 5px;">
+                                                                                @file.DocumentType
+                                                                            </span>
+                                                                        </a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-danger btn-sm revoke-btn" data-id="@file.DocumentID">
+                                                                        撤銷下架
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
                                                                     }
                                                                 }
                                                             </tbody>
@@ -295,6 +301,42 @@ if (isLoggedIn) {
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth' // 平滑滾動效果
+            });
+        });
+
+        // 文件 "撤銷下架" 按鈕
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".revoke-btn").forEach(function (button) {
+                button.addEventListener("click", function () {
+                    var documentId = this.getAttribute("data-id"); // 獲取文件 ID
+
+                    Swal.fire({
+                        title: "確定要撤銷下架這份文件嗎？",
+                        text: "撤銷後，該文件將無法再顯示！",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "確定",
+                        cancelButtonText: "取消"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // 使用隱藏表單來提交 POST 請求
+                            var form = document.createElement("form");
+                            form.method = "POST";
+                            form.action = "/Tiss/RevokeDocument";
+
+                            var input = document.createElement("input");
+                            input.type = "hidden";
+                            input.name = "documentId";
+                            input.value = documentId;
+
+                            form.appendChild(input);
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    });
+                });
             });
         });
     </script>

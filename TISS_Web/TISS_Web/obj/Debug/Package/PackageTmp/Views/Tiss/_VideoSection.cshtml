@@ -1,0 +1,76 @@
+﻿@model List<TISS_Web.Models.ArticleContentModel>
+
+<div class="el-row" style="margin-left: -12px; margin-right: -12px;">
+    <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
+        @if (Model != null && Model.Any())
+        {
+            <!-- 影片文字內容 -->
+            <div class="carousel-article-column" aria-live="polite">
+                @*<button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Left" aria-label="播放前一部影片">
+                    &lt;
+                </button>*@
+                @foreach (var video in Model)
+                {
+                    <div class="carousel-item article-item">
+                        <a class="carousel-article-link">
+                            <div class="VideoCarouselContent">
+                                <div class="VideoCarouselContentBox">
+                                    <div class="Tag">
+                                        <span title="@video.ContentType">@video.ContentType</span>
+                                    </div>
+                                    <span class="el-text is-line-clamp Title" title="@video.Title">@video.Title</span>
+                                    <div class="Info">
+                                        <span class="el-tag el-tag--plain is-round">
+                                            <span class="el-tag__content">@video.Hashtags</span>
+                                        </span>
+                                        <span>@video.PublishedDate.ToString("yyyy-MM-dd")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>目前沒有可顯示的影片。</p>
+        }
+    </div>
+
+    <!-- 影片內容 -->
+    <div class="el-col el-col-12 is-guttered" style="padding-right: 12px; padding-left: 12px;">
+        <div class="VideoCarouselVideo">
+            <div class="VideoCarouselVideoBox">
+                <div class="carousel-video-column">
+                    <div id="video-container" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        @foreach (var video in Model)
+                        {
+                            <div class="video-item" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                @Html.Raw(video.VideoIframe)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*<button aria-disabled="false" type="button" class="el-button is-circle ArrowBtn Right" aria-label="播放下一部影片">
+                &gt;
+            </button>*@
+        </div>
+    </div>
+    <div class="BottomRow">
+        <div style="width: 225px; margin: auto;">
+            <a href="/Tiss/video" aria-disabled="false" type="button" class="el-button BaseBtn w-100 white" aria-label="所有影音" tabindex="0">
+                <span class="" title="所有影音">
+                    所有影音
+                    <span class="right-icon">
+                        <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path class="" fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                            </path>
+                        </svg>
+                    </span>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

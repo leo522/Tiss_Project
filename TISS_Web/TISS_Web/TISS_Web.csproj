@@ -391,6 +391,9 @@
     <Compile Include="Models\OtherPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OverseaWorkDocument.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PasswordResetRequests.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -2776,6 +2779,9 @@
     <Content Include="storage\media\ORS.jpg" />
     <Content Include="storage\media\商品照.jpg" />
     <Content Include="storage\media\商品照1.jpg" />
+    <Content Include="SweetAlert2\sweetalert.min.js" />
+    <Content Include="SweetAlert2\sweetalert2%4011.js" />
+    <Content Include="SweetAlert2\sweetalert2.all.min.js" />
     <Content Include="tinymce\js\tinymce\icons\default\icons.min.js" />
     <Content Include="tinymce\js\tinymce\langs\zh_TW.js" />
     <Content Include="tinymce\js\tinymce\models\dom\model.min.js" />

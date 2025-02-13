@@ -1,0 +1,14 @@
+﻿/*標籤*/
+.tag-link {
+    font-size: 1.2em; /* 字體放大 */
+    border: 2px solid; /* 外框加粗 */
+    padding: 5px 10px; /* 增加內邊距使外觀更美觀 */
+    border-radius: 10px; /* 圓角 */
+    text-decoration: none; /* 移除超連結下劃線 */
+}
+
+.tag-link:hover {
+    border-color: #d841b7; /* 滑鼠懸停時變換外框顏色 */
+}
+
+/*標籤*/

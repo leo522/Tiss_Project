@@ -100,6 +100,7 @@
       <End Role="ArticleContent" EntitySet="ArticleContent" />
       <End Role="Documents" EntitySet="Documents" />
     </AssociationSet>
+    <EntitySet Name="OverseaWorkDocument" EntityType="TISS_WebModel.OverseaWorkDocument" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -149,7 +150,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="ContentBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ContentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
@@ -1172,4 +1173,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="OverseaWorkDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PId" Type="Int32" Nullable="false" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

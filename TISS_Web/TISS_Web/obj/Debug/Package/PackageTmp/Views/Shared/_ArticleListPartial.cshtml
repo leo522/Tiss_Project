@@ -1,0 +1,38 @@
+﻿@*首頁Partial View 最新消息清單使用*@
+@model IEnumerable<TISS_Web.Models.ArticleContentModel>
+<html>
+<head>
+</head>
+<body>
+    @foreach (var article in Model)
+    {
+        <div class="col-md-6 mb-4">
+            <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
+                <div class="NewsItemBox">
+                    <div class="NewsItemImg">
+                        @if (article.ImageContent != null)
+                        {
+                            string base64Image = Convert.ToBase64String(article.ImageContent);
+                            <img src="data:image/png;base64,@base64Image" alt="圖片" />
+                        }
+                        <div class="tag">@article.ContentType</div>
+                        <div class="Mask">閱讀更多</div>
+                    </div>
+                    <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
+                    <div class="NewsItemContent">
+                        <span class="el-text is-line-clamp">@article.BodyContent</span>
+                    </div>
+                    <div class="NewsItemInfo">
+                        <div class="NewsItemTags">
+                            <div class="el-tag el-tag--plain is-round">
+                                <div class="el-tag__content">@article.Hashtags</div>
+                            </div>
+                            <span>@article.PublishedDate.ToString("yyyy-MM-dd")</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</body>
+</html>

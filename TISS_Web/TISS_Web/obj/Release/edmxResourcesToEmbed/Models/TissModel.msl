@@ -1007,5 +1007,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OverseaWorkDocument">
+      <EntityTypeMapping TypeName="TISS_WebModel.OverseaWorkDocument">
+        <MappingFragment StoreEntitySet="OverseaWorkDocument">
+          <ScalarProperty Name="FileData" ColumnName="FileData" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

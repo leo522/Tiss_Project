@@ -134,6 +134,8 @@ namespace TISS_Web
                         return (_context.OtherDocument.Max(d => (int?)d.PId) ?? 0) + 1;
                     case "GenderEqualityDocument":
                         return (_context.GenderEqualityDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    case "OverseaWorkDocument":
+                        return (_context.OverseaWorkDocument.Max(d => (int?)d.PId) ?? 0) + 1;
                     default:
                         throw new ArgumentException("Invalid table name.");
                 }
@@ -144,5 +146,27 @@ namespace TISS_Web
             }
         }
 
+        #region 文件下架
+        public bool RevokeDocument(int documentId)
+        {
+            try
+            {
+                var document = _context.Documents.FirstOrDefault(d => d.DocumentID == documentId);
+                if (document == null)
+                {
+                    return false; // 找不到文件
+                }
+
+                document.IsActive = false; // 設定為下架
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

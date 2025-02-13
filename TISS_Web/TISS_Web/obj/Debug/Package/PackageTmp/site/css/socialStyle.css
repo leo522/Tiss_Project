@@ -1,0 +1,11 @@
+﻿.SectionLinksList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.SectionLinksItem {
+    flex: 1;
+    max-width: 50%; /* 根據需要調整寬度 */
+    box-sizing: border-box;
+}

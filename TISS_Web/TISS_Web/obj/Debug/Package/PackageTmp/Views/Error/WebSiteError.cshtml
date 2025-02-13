@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>網站發生錯誤</title>
+    <link rel="icon" href="~/Img/favicon.svg" title="國家運動科學中心圖標" />
+    <style>
+        body {
+            text-align: center;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #d9534f;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .announcement-img {
+            max-width: 100%; /* 確保圖片不會超出容器的寬度 */
+            height: auto; /* 自動調整高度以保持比例 */
+            margin-top: 20px; /* 調整圖片和文字之間的距離 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Error - 網站發生錯誤</h1>
+        <p>網站發生錯誤。請等待修復完成。</p>
+        <img src="@Url.Content("~/site/img/WebSiteError.jpg")" alt="網站發生錯誤。請等待修復完成" class="announcement-img" />
+    </div>
+</body>
+</html>
