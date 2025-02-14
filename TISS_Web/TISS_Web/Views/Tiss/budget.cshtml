@@ -162,7 +162,7 @@
                                                                     <th scope="col" style="width: 480px; padding: 10px;">名稱</th>
                                                                     <th scope="col" style="width: 240px; padding: 10px;">發布日期</th>
                                                                     <th scope="col" style="width: 280px; padding: 10px;">附件</th>
-                                                                    <th scope="col" style="width: 150px; padding: 10px;">操作</th>
+                                                                    @*<th scope="col" style="width: 150px; padding: 10px;">操作</th>*@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -201,9 +201,12 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <button type="button" class="btn btn-danger btn-sm revoke-btn" data-id="@file.DocumentID">
-                                                                        撤銷下架
-                                                                    </button>
+                                                                    @if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                                                    {
+                                                                        <button type="button" class="btn btn-danger btn-sm revoke-btn" data-id="@file.DocumentID">
+                                                                            撤銷下架
+                                                                        </button>
+                                                                    }
                                                                 </td>
                                                             </tr>
                                                                     }
@@ -305,40 +308,43 @@ if (isLoggedIn) {
         });
 
         // 文件 "撤銷下架" 按鈕
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelectorAll(".revoke-btn").forEach(function (button) {
-                button.addEventListener("click", function () {
-                    var documentId = this.getAttribute("data-id"); // 獲取文件 ID
+           document.addEventListener("DOMContentLoaded", function () {
+    let isLoggedIn = "@Session["LoggedIn"]" === "True";
 
-                    Swal.fire({
-                        title: "確定要撤銷下架這份文件嗎？",
-                        text: "撤銷後，該文件將無法再顯示！",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "確定",
-                        cancelButtonText: "取消"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // 使用隱藏表單來提交 POST 請求
-                            var form = document.createElement("form");
-                            form.method = "POST";
-                            form.action = "/Tiss/RevokeDocument";
+    if (isLoggedIn) {
+        document.querySelectorAll(".revoke-btn").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var documentId = this.getAttribute("data-id");
 
-                            var input = document.createElement("input");
-                            input.type = "hidden";
-                            input.name = "documentId";
-                            input.value = documentId;
+                Swal.fire({
+                    title: "確定要撤銷下架這份文件嗎？",
+                    text: "撤銷後，該文件將無法再顯示！",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "確定",
+                    cancelButtonText: "取消"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = document.createElement("form");
+                        form.method = "POST";
+                        form.action = "/Tiss/RevokeDocument";
 
-                            form.appendChild(input);
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                    });
+                        var input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "documentId";
+                        input.value = documentId;
+
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
                 });
             });
         });
+    }
+});
     </script>
 </body>
 </html>

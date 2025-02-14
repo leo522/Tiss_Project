@@ -2951,7 +2951,7 @@ namespace TISS_Web.Controllers
             {
                 var bytes = System.Text.Encoding.UTF8.GetBytes(title);
                 var base64string = Convert.ToBase64String(bytes);
-                return base64string.Replace("/", ".").Replace("+", "_").TrimEnd('=');
+                return base64string.Replace("/", ".").Replace("+", "_");
             }
             catch (Exception)
             {
@@ -2992,22 +2992,21 @@ namespace TISS_Web.Controllers
             {
                 //替換Base64 URL 安全字符如果已被替換）
                 encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
-                // 補齊Base64 字符串的填充
-                int mod4 = encryptedUrl.Length % 4;
+                
+                int mod4 = encryptedUrl.Length % 4; //補齊Base64 字符串的填充
                 if (mod4 > 0)
                 {
                     encryptedUrl += new string('=', 4 - mod4);
                 }
-
-                // 將Base64字串解碼為字節數組
-                var bytes = Convert.FromBase64String(encryptedUrl);
-                var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
-
-                return decodedString;
+                
+                var bytes = Convert.FromBase64String(encryptedUrl); //將Base64字串解碼為字節數組
+                //var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
+                return System.Text.Encoding.UTF8.GetString(bytes);
+                //return decodedString;
             }
             catch (FormatException)
             {
-                return string.Empty; // 或者根據需求返回 null 或拋出異常
+                return string.Empty; //或者根據需求返回 null 或拋出異常
             }
         }
 
@@ -3063,6 +3062,14 @@ namespace TISS_Web.Controllers
                 if (article == null)
                 {
                     Console.WriteLine($"[ERROR] 找不到文章: {decryptedUrl}");
+                    article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl);
+                    //return RedirectToAction("Error404", "Error");
+                }
+
+                // 如果仍然找不到
+                if (article == null)
+                {
+                    Console.WriteLine($"[ERROR] 找不到文章 Title: {decryptedUrl}");
                     return RedirectToAction("Error404", "Error");
                 }
 
@@ -3238,19 +3245,23 @@ namespace TISS_Web.Controllers
 
                     if (exist != null)
                     {
-                        // 如果有上傳新圖片，則處理圖片上傳
-                        if (imageFile != null && imageFile.ContentLength > 0)
+                        if (imageFile != null && imageFile.ContentLength > 0) //如果有上傳新圖片，則處理圖片上傳
                         {
                             using (var binaryReader = new BinaryReader(imageFile.InputStream))
                             {
                                 byte[] imageData = binaryReader.ReadBytes(imageFile.ContentLength);
-                                // 將圖片儲存為二進制數據
-                                exist.ImageContent = imageData;
+                                
+                                exist.ImageContent = imageData; //將圖片儲存為二進制數據
                             }
                         }
 
-                        // 新增文件上傳功能
-                        if (documentFile != null && documentFile.ContentLength > 0)
+                        if (exist.Title != dto.Article.Title) //更新 `Title` 並同步 `EncryptedUrl`
+                        {
+                            exist.Title = dto.Article.Title;
+                            exist.EncryptedUrl = EncryptUrl(dto.Article.Title); //確保 EncryptedUrl 更新
+                        }
+
+                        if (documentFile != null && documentFile.ContentLength > 0) //新增文件上傳功能
                         {
                             var fileUploadResult = SaveDocumentFile(documentFile, dto.Article.Id, documentCategory);
                             if (!fileUploadResult)
@@ -3276,9 +3287,8 @@ namespace TISS_Web.Controllers
                         exist.Hashtags =  string.Join(",", tags);
 
                         _db.SaveChanges();
-                        //根據ContentType進行重定向
-                        string redirectAction = GetRedirectAction(dto.Article.ContentType);
-                        // 設定成功訊息
+                        
+                        string redirectAction = GetRedirectAction(dto.Article.ContentType); //根據ContentType進行重定向
 
                         ViewBag.SuccessMessage = "文章保存成功！";
                         //return View("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
@@ -3820,6 +3830,12 @@ namespace TISS_Web.Controllers
         {
             try
             {
+                // 檢查是否已登入
+                if (Session["LoggedIn"] == null || !(bool)Session["LoggedIn"])
+                {
+                    return new HttpStatusCodeResult(403, "未授權的存取");
+                }
+
                 var document = _db.Documents.FirstOrDefault(d => d.DocumentID == documentId);
                 if (document == null)
                 {
