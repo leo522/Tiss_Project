@@ -2900,8 +2900,7 @@ namespace TISS_Web.Controllers
 
                             if (existingHashtag == null)
                             {
-                                // 如果 hashtag 不存在，則新增
-                                var newHashtag = new Hashtag { Name = t };
+                                var newHashtag = new Hashtag { Name = t }; // 如果 hashtag 不存在，則新增
                                 _db.Hashtag.Add(newHashtag);
                             }
                         }
@@ -2919,8 +2918,7 @@ namespace TISS_Web.Controllers
                         }
                     }
 
-                    //根據ContentType進行重定向
-                    string redirectAction = GetRedirectAction(dto.Hashtags);
+                    string redirectAction = GetRedirectAction(dto.Hashtags); //根據ContentType進行重定向
 
                     return RedirectToAction(redirectAction, "Tiss");
                 }
@@ -2938,15 +2936,28 @@ namespace TISS_Web.Controllers
         }
 
         //URL加密
-        private string EncryptUrl(string input)
-        {
-            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-            var base64 = Convert.ToBase64String(bytes);
-            base64 = base64.Replace("/", "-").Replace("+", "_").Replace("=", "");
+        //private string EncryptUrl(string input)
+        //{
+        //    var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+        //    var base64 = Convert.ToBase64String(bytes);
+        //    base64 = base64.Replace("/", "-").Replace("+", "_").Replace("=", "");
 
-            return base64;
+        //    return base64;
+        //}
+
+        private string EncryptUrl(string title)
+        {
+            try
+            {
+                var bytes = System.Text.Encoding.UTF8.GetBytes(title);
+                var base64string = Convert.ToBase64String(bytes);
+                return base64string.Replace("/", ".").Replace("+", "_").TrimEnd('=');
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
         }
-        
         #endregion
 
         #region 文章內容顯示
@@ -3046,7 +3057,8 @@ namespace TISS_Web.Controllers
                     return RedirectToAction("Error404", "Error");
                 }
 
-                var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl);
+                //var article = _db.ArticleContent.FirstOrDefault(a => a.Title == decryptedUrl);
+                var article = _db.ArticleContent.FirstOrDefault(a => a.EncryptedUrl == encryptedUrl);
 
                 if (article == null)
                 {
