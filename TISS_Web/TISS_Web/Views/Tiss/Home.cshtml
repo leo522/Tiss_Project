@@ -18,7 +18,7 @@
                         <div id="carouselExample" class="carousel slide" data-ride="carousel" style="margin-top: -50px; height: auto;">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="/site/img/about_banner_1.cb027849.jpg" class="d-block w-100" alt="" style="height: auto; object-fit: cover;" />
+                                    <img src="/site/img/about_banner_1.cb027849.jpg" class="d-block w-100" alt="" style="height: auto; object-fit: cover;" loading="lazy"/>
                                 </div>
                             </div>
                         </div>
@@ -52,11 +52,17 @@
                                         <a id="latestArticleLink" href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = Model.LatestArticle.EncryptedUrl })" title="閱讀更多關於 @Model.LatestArticle.Title">
                                             <div class="NewsItemBox headline">
                                                 <div class="NewsItemImg">
-                                                    @if (Model.LatestArticle.ImageContent != null)
+                                                    @if (Model.LatestArticle.ImageContent != null && Model.LatestArticle.ImageContent.Length > 0)
                                                     {
                                                         string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
                                                         <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
                                                     }
+
+                                                    @*@if (Model.LatestArticle.ImageContent != null)
+        {
+            string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
+            <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
+        }*@
                                                     <div class="tag">@Model.LatestArticle.ContentType</div>
                                                     <div class="Mask">閱讀更多</div>
                                                 </div>
@@ -271,10 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("adminUser").style.display = "none";
     }
 });
-
-//$('#carouselExample').carousel({
-//    interval: 10000 // 10秒輪播圖
-//});
 
 // Partial View控制
         $('.category-button').click(function () {

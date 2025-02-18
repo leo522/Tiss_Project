@@ -162,24 +162,18 @@ namespace TISS_Web.Controllers
         #region 登出
         public ActionResult Logout()
         {
-            // 清除所有的 Session 資訊
-            //Session.Clear();
-            //Session.Abandon();
-            Session.Remove("LoggedIn");
-            // 清除所有的 Forms 認證 Cookies
-            FormsAuthentication.SignOut();
+            Session.Remove("LoggedIn"); //清除所有的 Session 資訊
+            
+            FormsAuthentication.SignOut(); //清除所有的 Forms 認證 Cookies
 
             // 取得登出前的頁面路徑，如果沒有則預設為首頁
             string returnUrl = Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : Url.Action("Home", "Tiss");
 
-            // 重定向到記錄的返回頁面
-            return Redirect(returnUrl);
-            // 重定向到 Home 頁面
+            return Redirect(returnUrl);  //重定向到 Home 頁面
         }
         #endregion
 
         #region 註冊帳號
-
         public ActionResult Register()
         {
             return View();
@@ -430,7 +424,6 @@ namespace TISS_Web.Controllers
                 Console.WriteLine("其他錯誤: " + ex.Message);
                 return View("Error");
             }
-
         }
 
         // 處理重置密碼
@@ -508,21 +501,12 @@ namespace TISS_Web.Controllers
             ViewBag.Message = "您的密碼已成功重置";
             return RedirectToAction("Login");
         }
-
         #endregion
 
         #region 郵件發送方法
         public void SendEmail(string toEmail, string subject, string body, string attachmentPath)
         {
             var gmailService = new GmailApiService(); //使用 Gmail API 發送郵件
-
-            //string attachmentBase64 = null; //如果有附件，則處理附件
-            //if (!string.IsNullOrEmpty(attachmentPath))
-            //{
-            //    // 轉換附件為 base64 編碼
-            //    byte[] attachmentBytes = System.IO.File.ReadAllBytes(attachmentPath);
-            //    attachmentBase64 = Convert.ToBase64String(attachmentBytes);
-            //}
 
             //發送郵件
             try
@@ -536,50 +520,6 @@ namespace TISS_Web.Controllers
                 Console.WriteLine($"錯誤: {ex.Message}");
                 LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄錯誤
             }
-
-
-
-            //var mail = new MailMessage();
-            //mail.From = new MailAddress("00048@tiss.org.tw");
-            //mail.To.Add(toEmail);
-            //mail.Subject = subject;
-            //mail.Body = body;
-            //mail.IsBodyHtml = true; // 支援 HTML 格式
-
-            // 如果有附件，則加入附件
-            //if (!string.IsNullOrEmpty(attachmentPath))
-            //{
-            //    Attachment attachment = new Attachment(attachmentPath);
-            //    mail.Attachments.Add(attachment);
-            //}
-
-            //using (var smtpClient = new SmtpClient())
-            //{
-            //    smtpClient.Host = "smtp.gmail.com"; // MX Mail Server 的主機名稱
-            //    smtpClient.Port = 587;                    // MX Mail Server 使用的端口，通常為 25 或特定端口
-            //    smtpClient.EnableSsl = true;            // 根據伺服器要求設置 SSL
-            //    smtpClient.Credentials = new NetworkCredential("00048@tiss.org.tw", "lctm hhfh bubx lwda");
-
-            //    try
-            //    {
-            //        smtpClient.Send(mail);
-            //        Console.WriteLine("郵件已成功發送");
-            //        LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
-            //    }
-            //    catch (SmtpException smtpEx)
-            //    {
-            //        Console.WriteLine($"SMTP 錯誤: {smtpEx.Message}");
-            //        Console.WriteLine(smtpEx.ToString());
-            //        LogEmail(toEmail, subject, body, "Failed", smtpEx.Message); // 記錄 SMTP 錯誤
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine($"其他錯誤: {ex.Message}");
-            //        Console.WriteLine(ex.ToString());
-            //        LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄其他錯誤
-            //    }
-
-            //}
         }
         private void LogEmail(string recipientEmail, string subject, string body, string status, string errorMessage)
         {
@@ -596,11 +536,9 @@ namespace TISS_Web.Controllers
             _db.EmailLogs.Add(emailLog);
             _db.SaveChanges();
         }
-
         #endregion
 
         #region 公開資訊_上傳文件檔案
-
         // 上傳計畫文件
         [HttpPost]
         public ActionResult UploadPlanDocument(HttpPostedFileBase file, int? page)
@@ -721,23 +659,18 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
         #endregion
 
         #region 首頁
-        /// <summary>
-        /// 首頁
-        /// </summary>
-        /// <returns></returns>
         public ActionResult Home()
         {
             try
             {
                 Session["ReturnUrl"] = Request.Url.ToString();
 
-                //首頁文章內容
-                var dtos = _db.ArticleContent
-                    .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                // **合併查詢**
+                var articles = _db.ArticleContent
+                    .Where(a => a.IsPublished == true && a.IsEnabled == true)
                     .OrderByDescending(a => a.PublishedDate)
                     .Select(a => new ArticleContentModel
                     {
@@ -746,34 +679,53 @@ namespace TISS_Web.Controllers
                         ContentType = a.ContentType,
                         Hashtags = a.Hashtags,
                         EncryptedUrl = a.EncryptedUrl,
-                        PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-
+                        PublishedDate = a.PublishedDate ?? DateTime.MinValue,
                     }).Take(5).ToList();
 
-                var dto = _db.ArticleContent
-                        .Where(a =>  a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
-                        .OrderByDescending(a => a.CreateDate)
-                        .Select(a => new ArticleContentModel
-                        {
-                            Title = a.Title,
-                            ImageContent = a.ImageContent,
-                            ContentType = a.ContentType,
-                            Hashtags = a.Hashtags,
-                            EncryptedUrl = a.EncryptedUrl,
-                            PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
-                        })
-                        .FirstOrDefault(); // 取得最新的專欄文章
+                ////首頁文章內容
+                //var dtos = _db.ArticleContent
+                //    .Where(a => a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                //    .OrderByDescending(a => a.PublishedDate)
+                //    .Select(a => new ArticleContentModel
+                //    {
+                //        Title = a.Title,
+                //        ImageContent = a.ImageContent,
+                //        ContentType = a.ContentType,
+                //        Hashtags = a.Hashtags,
+                //        EncryptedUrl = a.EncryptedUrl,
+                //        PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
 
-                var latestArticle = dtos.FirstOrDefault();
-                var otherArticles = dtos.Skip(1).ToList();
+                //    }).Take(5).ToList();
 
-                var viewModel = new HomeViewModel //首頁的部份視圖
+                //var dto = _db.ArticleContent
+                //        .Where(a =>  a.IsPublished.HasValue && a.IsPublished.Value && a.IsEnabled == true)
+                //        .OrderByDescending(a => a.CreateDate)
+                //        .Select(a => new ArticleContentModel
+                //        {
+                //            Title = a.Title,
+                //            ImageContent = a.ImageContent,
+                //            ContentType = a.ContentType,
+                //            Hashtags = a.Hashtags,
+                //            EncryptedUrl = a.EncryptedUrl,
+                //            PublishedDate = a.PublishedDate.HasValue ? a.PublishedDate.Value : DateTime.MinValue,
+                //        })
+                //        .FirstOrDefault(); // 取得最新的專欄文章
+
+                //var latestArticle = dtos.FirstOrDefault();
+                //var otherArticles = dtos.Skip(1).ToList();
+
+                //var viewModel = new HomeViewModel //首頁的部份視圖
+                //{
+                //    LatestArticle = dto,
+                //    OtherArticles = otherArticles,
+                //    Videos = null // 不需要再從這裡獲取影片數據
+                //};
+                var viewModel = new HomeViewModel
                 {
-                    LatestArticle = dto,
-                    OtherArticles = otherArticles,
-                    Videos = null // 不需要再從這裡獲取影片數據
+                    LatestArticle = articles.FirstOrDefault(),  // **避免額外查詢**
+                    OtherArticles = articles.Skip(1).ToList(),
+                    Videos = null  // 影片部分可改 AJAX 動態載入
                 };
-
                 return View(viewModel);
             }
             catch (Exception ex)
@@ -838,7 +790,6 @@ namespace TISS_Web.Controllers
                 }
 
                 return string.Empty;
-                //return match.Success ? match.Value : string.Empty;
             }
             catch (Exception ex)
             {
@@ -857,11 +808,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 最新消息-中心公告
-
-        /// <summary>
-        /// 中心公告
-        /// </summary>
-        /// <returns></returns>
         public ActionResult announcement(int page = 1, int pageSize = 9)
         {
             try
@@ -916,10 +862,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 新聞發布
-        /// </summary>
-        /// <returns></returns>
         public ActionResult press(int page = 1, int pageSize = 9)
         {
             try
@@ -961,10 +904,7 @@ namespace TISS_Web.Controllers
             }
         }
 
-        /// <summary>
         /// 中心訊息
-        /// </summary>
-        /// <returns></returns>
         public ActionResult institute(int page = 1, int pageSize = 9)
         {
             try
@@ -1089,10 +1029,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 影音專區
-        /// <summary>
-        /// 影音專區
-        /// </summary>
-        /// <returns></returns>
         public ActionResult video(int page = 1, int pageSize = 9)
         {
             try
@@ -1322,10 +1258,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 中心介紹
-        /// <summary>
-        /// 中心介紹
-        /// </summary>
-        /// <returns></returns>
         public ActionResult about()
         {
             try
@@ -2133,127 +2065,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-        #endregion
-
-        #region 取得文件檔案
-        /// <summary>
-        /// 取得各文件檔案
-        /// </summary>
-        /// <returns></returns>
-        //private List<string> GetFile()
-        //{
-        //    var dt = (from f in _db.FileDocument
-        //              where f.IsEnabled == true
-        //              select f.DocumentName).ToList();
-
-        //    return dt;
-        //}
-
-        //public string GetFilePath(string fileName)
-        //{
-        //    var file = (from f in _db.FileDocument
-        //                where f.DocumentName == fileName && f.IsEnabled == true
-        //                select f).FirstOrDefault();
-
-        //    if (file != null)
-        //    {
-        //        return Url.Content($"~/storage/media/attachments/{file.DocumentName}");
-        //    }
-
-        //    return "#";
-        //}
-
-        //[HttpGet]
-        //public JsonResult GetFilePathApi(string fileName)
-        //{
-        //    var filePath = GetFilePath(fileName);
-
-        //    return Json(filePath, JsonRequestBehavior.AllowGet);
-        //}
-
-        //public ActionResult DownloadFile(int documentId, string tableName)
-        //{
-        //    try
-        //    {
-        //        switch (tableName)
-        //        {
-        //            case "RegulationDocument":
-        //                var regulationDocument = _db.RegulationDocument.Find(documentId);
-        //                if (regulationDocument != null)
-        //                {
-        //                    var contentType = GetContentType(regulationDocument.DocumentName);
-        //                    return File(regulationDocument.FileData, contentType, regulationDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "ProcedureDocument":
-        //                var procedureDocument = _db.ProcedureDocument.Find(documentId);
-        //                if (procedureDocument != null)
-        //                {
-        //                    var contentType = GetContentType(procedureDocument.DocumentName);
-        //                    return File(procedureDocument.FileData, contentType, procedureDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "PlanDocument":
-        //                var planDocument = _db.PlanDocument.Find(documentId);
-        //                if (planDocument != null)
-        //                {
-        //                    var contentType = GetContentType(planDocument.DocumentName);
-        //                    return File(planDocument.FileData, contentType, planDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "BudgetDocument":
-        //                var budgetDocument = _db.BudgetDocument.Find(documentId);
-        //                if (budgetDocument != null)
-        //                {
-        //                    var contentType = GetContentType(budgetDocument.DocumentName);
-        //                    return File(budgetDocument.FileData, contentType, budgetDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "DownloadDocument":
-        //                var downloadDocument = _db.DownloadDocument.Find(documentId);
-        //                if (downloadDocument != null)
-        //                {
-        //                    var contentType = GetContentType(downloadDocument.DocumentName);
-        //                    return File(downloadDocument.FileData, contentType, downloadDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "OtherDocument":
-        //                var otherDocument = _db.OtherDocument.Find(documentId);
-        //                if (otherDocument != null)
-        //                {
-        //                    var contentType = GetContentType(otherDocument.DocumentName);
-        //                    return File(otherDocument.FileData, contentType, otherDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            case "GenderEqualityDocument":
-        //                var genderEqualityDocument = _db.GenderEqualityDocument.Find(documentId);
-        //                if (genderEqualityDocument != null)
-        //                {
-        //                    return File(genderEqualityDocument.FileData, "application/octet-stream", genderEqualityDocument.DocumentName);
-        //                }
-        //                break;
-
-        //            // 根據需要添加其他表的處理邏輯
-
-        //            default:
-        //                return HttpNotFound();
-        //        }
-
-        //        return HttpNotFound();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
-
         #endregion
 
         #region 公開資訊
