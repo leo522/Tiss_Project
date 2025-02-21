@@ -2621,7 +2621,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 發佈文章
-
         public ActionResult ArticleCreate(int? id)
         {
             try
@@ -2746,23 +2745,14 @@ namespace TISS_Web.Controllers
             return View(dto);
         }
 
-        //URL加密
-        //private string EncryptUrl(string input)
-        //{
-        //    var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-        //    var base64 = Convert.ToBase64String(bytes);
-        //    base64 = base64.Replace("/", "-").Replace("+", "_").Replace("=", "");
-
-        //    return base64;
-        //}
-
         private string EncryptUrl(string title)
         {
             try
             {
                 var bytes = System.Text.Encoding.UTF8.GetBytes(title);
                 var base64string = Convert.ToBase64String(bytes);
-                return base64string.Replace("/", ".").Replace("+", "_");
+                return base64string.Replace("/", "_").Replace("+", "-"); // 保持標準 Base64 URL Safe 編碼
+                //return base64string.Replace("/", ".").Replace("+", "_");
             }
             catch (Exception)
             {
@@ -2801,24 +2791,49 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                //替換Base64 URL 安全字符如果已被替換）
-                encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
-                
-                int mod4 = encryptedUrl.Length % 4; //補齊Base64 字符串的填充
+                encryptedUrl = encryptedUrl.Replace("-", "+").Replace("_", "/");
+
+                // Base64 字串長度補齊
+                int mod4 = encryptedUrl.Length % 4;
                 if (mod4 > 0)
                 {
                     encryptedUrl += new string('=', 4 - mod4);
                 }
-                
-                var bytes = Convert.FromBase64String(encryptedUrl); //將Base64字串解碼為字節數組
-                //var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
+
+                // Base64 解碼
+                var bytes = Convert.FromBase64String(encryptedUrl);
                 return System.Text.Encoding.UTF8.GetString(bytes);
-                //return decodedString;
             }
-            catch (FormatException)
+            catch (FormatException ex)
             {
-                return string.Empty; //或者根據需求返回 null 或拋出異常
+                Console.WriteLine($"[ERROR] Base64 解碼失敗: {ex.Message}");
+                return string.Empty;
             }
+            //try
+            //{
+            //    //替換Base64 URL 安全字符如果已被替換）
+            //    encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
+
+            //    int mod4 = encryptedUrl.Length % 4; //補齊Base64 字符串的填充
+            //    if (mod4 > 0)
+            //    {
+            //        encryptedUrl += new string('=', 4 - mod4);
+            //    }
+            //    // 使用正則表達式檢查是否為合法 Base64
+            //    if (!Regex.IsMatch(encryptedUrl, @"^[A-Za-z0-9+/]*={0,2}$"))
+            //    {
+            //        throw new FormatException("輸入字串不是有效的 Base64 格式");
+            //    }
+
+            //    var bytes = Convert.FromBase64String(encryptedUrl); //將Base64字串解碼為字節數組
+            //    //var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
+            //    return System.Text.Encoding.UTF8.GetString(bytes);
+            //    //return decodedString;
+            //}
+            //catch (FormatException)
+            //{
+            //    return string.Empty; //或者根據需求返回 null 或拋出異常
+            //}
         }
 
         /// 文章內容附件檔案名稱顯示
