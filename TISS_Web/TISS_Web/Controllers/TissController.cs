@@ -48,7 +48,6 @@ namespace TISS_Web.Controllers
         private readonly EmailService _emailService;
 
         #region 檔案上傳共用服務
-
         private readonly FileUploadService _fileUploadService;
 
         public TissController()
@@ -990,42 +989,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
-        /// <summary>
-        /// 委託研究計劃
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult researchProject()
-        //{
-        //    Session["ReturnUrl"] = Request.Url.ToString();
-
-
-        //    int newsItemId = 1;
-        //    var item = _db.ResearchProjectPageContent.FirstOrDefault(i => i.ID == newsItemId);
-        //    if (item != null)
-        //    {
-        //        // 傳遞點擊數給前端
-        //        ViewBag.ClickCount = item.ClickCount;
-        //    }
-        //    else
-        //    {
-        //        // 如果找不到對應的新聞項目，點擊數為 0
-        //        ViewBag.ClickCount = 0;
-        //    }
-
-        //    return View();
-        //}
-
-        /// <summary>
-        /// 政府網站服務管理規範
-        /// </summary>
-        /// <returns></returns>
-        //public ActionResult GovernmentWebsite()
-        //{
-        //    Session["ReturnUrl"] = Request.Url.ToString();
-        //    return View();
-        //}
-
         #endregion
 
         #region 影音專區
@@ -1254,7 +1217,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
         #endregion
 
         #region 中心介紹
@@ -1581,7 +1543,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 科普專欄
-
         public ActionResult research(int page = 1, int pageSize = 9)
         {
             try
@@ -2068,7 +2029,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 公開資訊
-        /// 公開資訊
         public ActionResult public_info(int page = 1, int pageSize = 7)
         {
             try
@@ -2082,8 +2042,8 @@ namespace TISS_Web.Controllers
                                 .OrderByDescending(d => d.UploadTime)
                                 .ToList();
 
-                //計算總數和總頁數
-                var totalDocuments = list.Count();
+                var totalDocuments = list.Count(); //計算總數和總頁數
+
                 var totalPages = (int)Math.Ceiling(totalDocuments / (double)pageSize);
 
                 page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
@@ -2443,7 +2403,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 性別平等專區
-
         public ActionResult GenderEquality()
         {
             try
@@ -2467,7 +2426,6 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
         #endregion
 
         #region 贊助專區
@@ -2519,105 +2477,7 @@ namespace TISS_Web.Controllers
                 return RedirectToAction("WebContent");
             }
             return View("WebContent", model);
-
         }
-        #endregion
-
-        #region 通用_好像沒用處
-        //public TissController()
-        //{
-        //    //var db = new TISS_WebEntities();
-        //    _db = new TISS_WebEntities();
-        //    _contentService = new ContentService(_db);
-        //}
-
-        /// <summary>
-        /// 中心介紹_存檔
-        /// </summary>
-        /// <param name="textContent"></param>
-        /// <param name="imageSrc"></param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult SaveAboutPageContent(string textContent, string imageSrc)
-        //{
-        //    return _contentService.SaveContent<AboutPageContentModel>(textContent, imageSrc, () => new AboutPageContentModel());
-        //}
-
-        /// <summary>
-        /// 使命願景_存檔
-        /// </summary>
-        /// <param name="textContent"></param>
-        /// <param name="imageSrc"></param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult SaveObjectivesPageContent(string textContent, string imageSrc)
-        //{
-        //    return _contentService.SaveContent<ObjectivesPageContentModel>(textContent, imageSrc, () => new ObjectivesPageContentModel());
-        //}
-
-        /// <summary>
-        /// 中心任務_存檔
-        /// </summary>
-        /// <param name="textContent"></param>
-        /// <param name="imageSrc"></param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult SaveMissionPageContent(string textContent, string imageSrc)
-        //{
-        //    return _contentService.SaveContent<MissionPageContentModel>(textContent, imageSrc, () => new MissionPageContentModel());
-        //}
-
-        /// <summary>
-        /// 中心介紹
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //public ActionResult GetAboutPageContent()
-        //{
-        //    return _contentService.GetContent<AboutPageContentModel>();
-        //}
-
-        /// <summary>
-        /// 使命願景
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //public ActionResult GetObjectivesPageContent()
-        //{
-        //    return _contentService.GetContent<ObjectivesPageContentModel>();
-        //}
-
-        /// <summary>
-        /// 中心任務
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //public ActionResult GetMissionPageContent()
-        //{
-        //    return _contentService.GetContent<MissionPageContentModel>();
-        //}
-
-
-        /// <summary>
-        /// CEO
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //public ActionResult GetCEOPageContent()
-        //{
-        //    return _contentService.GetContent<CEOPageContentModel>();
-        //}
-
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult SaveCEOPageContent(string textContent, string imageSrc)
-        //{
-        //    return _contentService.SaveContent<CEOPageContentModel>(textContent, imageSrc ,() => new CEOPageContentModel());
-        //}
-
         #endregion
 
         #region 發佈文章
@@ -2658,7 +2518,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string[] tags, int contentTypeID, HttpPostedFileBase documentFile, string documentCategory)
+        public ActionResult ArticleCreate(ArticleContent dto, HttpPostedFileBase imageFile, string[] tags, int contentTypeID, HttpPostedFileBase[] documentFiles, string documentCategory)
         {
             if (string.IsNullOrEmpty(documentCategory))
             {
@@ -2719,14 +2579,22 @@ namespace TISS_Web.Controllers
                     _db.SaveChanges();
 
                     // 6. 儲存文件至 documents 表並關聯文章ID
-                    if (documentFile != null && documentFile.ContentLength > 0)
+                    if (documentFiles != null && documentFiles.Length > 0)
                     {
-                        var fileUploadResult = SaveDocumentFile(documentFile, dto.Id, documentCategory);
+                        var fileUploadResult = SaveDocumentFile(documentFiles, dto.Id, documentCategory);
                         if (!fileUploadResult)
                         {
                             ModelState.AddModelError("", "文件上傳失敗。");
                         }
                     }
+                    //if (documentFile != null && documentFile.ContentLength > 0)
+                    //{
+                    //    var fileUploadResult = SaveDocumentFile(documentFile, dto.Id, documentCategory);
+                    //    if (!fileUploadResult)
+                    //    {
+                    //        ModelState.AddModelError("", "文件上傳失敗。");
+                    //    }
+                    //}
 
                     string redirectAction = GetRedirectAction(dto.Hashtags); //根據ContentType進行重定向
 
@@ -2752,7 +2620,6 @@ namespace TISS_Web.Controllers
                 var bytes = System.Text.Encoding.UTF8.GetBytes(title);
                 var base64string = Convert.ToBase64String(bytes);
                 return base64string.Replace("/", "_").Replace("+", "-"); // 保持標準 Base64 URL Safe 編碼
-                //return base64string.Replace("/", ".").Replace("+", "_");
             }
             catch (Exception)
             {
@@ -2762,7 +2629,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 文章內容顯示
-        /// 增加alt屬性
         public string EnsureImageAltAttribute(string content)
         {
             try
@@ -3061,7 +2927,7 @@ namespace TISS_Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase documentFile, string documentCategory, string[] tags, HttpPostedFileBase documentFilePic)
+        public ActionResult EditArticle(ArticleViewModel dto, HttpPostedFileBase imageFile, HttpPostedFileBase[] documentFiles, string documentCategory, string[] tags, HttpPostedFileBase[] documentFilePics)
         {
             try
             {
@@ -3087,17 +2953,17 @@ namespace TISS_Web.Controllers
                             exist.EncryptedUrl = EncryptUrl(dto.Article.Title); //確保 EncryptedUrl 更新
                         }
 
-                        if (documentFile != null && documentFile.ContentLength > 0) //新增文件上傳功能
+                        if (documentFiles != null && documentFiles.Length > 0) //新增文件上傳功能
                         {
-                            var fileUploadResult = SaveDocumentFile(documentFile, dto.Article.Id, documentCategory);
+                            var fileUploadResult = SaveDocumentFile(documentFiles, dto.Article.Id, documentCategory);
                             if (!fileUploadResult)
                             {
                                 ModelState.AddModelError("", "文件上傳失敗。");
                             }
                         }
-                        else if (documentFilePic != null && documentFilePic.ContentLength > 0)
+                        else if (documentFilePics != null && documentFilePics.Length > 0)
                         {
-                            var fileUploadResult = SaveDocumentFile(documentFilePic, dto.Article.Id, documentCategory);
+                            var fileUploadResult = SaveDocumentFile(documentFilePics, dto.Article.Id, documentCategory);
                             if (!fileUploadResult)
                             {
                                 ModelState.AddModelError("", "圖片上傳失敗。");
@@ -3117,10 +2983,7 @@ namespace TISS_Web.Controllers
                         string redirectAction = GetRedirectAction(dto.Article.ContentType); //根據ContentType進行重定向
 
                         ViewBag.SuccessMessage = "文章保存成功！";
-                        //return View("ViewArticle", new { encryptedUrl = exist.EncryptedUrl });
                         return RedirectToAction(redirectAction);
-                        //return RedirectToAction(redirectAction, "Tiss");
-                        //return RedirectToAction("ViewArticle", new { encryptedUrl = exist.EncryptedUrl, saved = true });
                     }
                 }
                 return View(dto);
@@ -3130,9 +2993,8 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
-
-        /// 導回對應頁面
-        public ActionResult Redirecttag(string tag)
+        
+        public ActionResult Redirecttag(string tag) //導回對應頁面
         {
             string actionName = GetRedirectAction(tag);
             return RedirectToAction(actionName, "Tiss");
@@ -3175,74 +3037,100 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region 儲存文件檔案
-
-        private bool SaveDocumentFile(HttpPostedFileBase file, int articleId, string documentCategory)
+        private bool SaveDocumentFile(HttpPostedFileBase[] files, int articleId, string documentCategory)
         {
             try
             {
-
-                if (file != null && file.ContentLength > 0)
+                if (files == null || files.Length == 0)
                 {
-                    string fileName = Path.GetFileName(file.FileName);
-                    string fileExtension = Path.GetExtension(fileName).ToLower();
+                    return false;
+                }
 
-                    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".jpeg" ||
-                fileExtension == ".jpg" || fileExtension == ".png")
+                foreach (var file in files)
+                {
+                    if (file != null && file.ContentLength > 0)
                     {
-                        byte[] fileData;
-                        using (var binaryReader = new BinaryReader(file.InputStream))
+                        string fileName = Path.GetFileName(file.FileName);
+                        string fileExtension = Path.GetExtension(fileName).ToLower();
+
+                        if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt" ||
+                    fileExtension == ".jpeg" || fileExtension == ".jpg" || fileExtension == ".png")
                         {
-                            fileData = binaryReader.ReadBytes(file.ContentLength);
+                            byte[] fileData;
+
+                            using (var binaryReader = new BinaryReader(file.InputStream))
+                            {
+                                fileData = binaryReader.ReadBytes(file.ContentLength);
+                            }
+
+                            var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
+
+                            var document = new Documents
+                            {
+                                DocumentName = fileName,
+                                UploadTime = DateTime.Now,
+                                Creator = userName,
+                                DocumentType = fileExtension,
+                                FileSize = fileData.Length,
+                                FileContent = fileData,
+                                IsActive = true,
+                                Category = documentCategory,
+                                ArticleId = articleId // 關聯文章ID
+                            };
+
+                            _db.Documents.Add(document);
                         }
-
-                        // 使用 this.HttpContext 取得 Session
-                        var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
-
-                        var document = new Documents
-                        {
-                            DocumentName = fileName,
-                            UploadTime = DateTime.Now,
-                            Creator = userName,
-                            DocumentType = fileExtension,
-                            FileSize = fileData.Length,
-                            FileContent = fileData,
-                            IsActive = true,
-                            Category = documentCategory,
-                            ArticleId = articleId // 關聯文章ID
-                        };
-
-                        _db.Documents.Add(document);
-                        _db.SaveChanges();
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
                     }
                 }
+
+                _db.SaveChanges();
+                return true;
+                //if (file != null && file.ContentLength > 0)
+                //{
+                //    string fileName = Path.GetFileName(file.FileName);
+                //    string fileExtension = Path.GetExtension(fileName).ToLower();
+
+                //    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".jpeg" ||
+                //fileExtension == ".jpg" || fileExtension == ".png")
+                //    {
+                //        byte[] fileData;
+                //        using (var binaryReader = new BinaryReader(file.InputStream))
+                //        {
+                //            fileData = binaryReader.ReadBytes(file.ContentLength);
+                //        }
+
+                //        // 使用 this.HttpContext 取得 Session
+                //        var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
+
+                //        var document = new Documents
+                //        {
+                //            DocumentName = fileName,
+                //            UploadTime = DateTime.Now,
+                //            Creator = userName,
+                //            DocumentType = fileExtension,
+                //            FileSize = fileData.Length,
+                //            FileContent = fileData,
+                //            IsActive = true,
+                //            Category = documentCategory,
+                //            ArticleId = articleId // 關聯文章ID
+                //        };
+
+                //        _db.Documents.Add(document);
+                //        _db.SaveChanges();
+                //        return true;
+                //    }
+                //    else
+                //    {
+                //        return false;
+                //    }
+                //}
             }
             catch (Exception ex)
             {
                 // 可以記錄錯誤日志
                 Console.WriteLine("文件上傳錯誤：" + ex.Message);
+                return false;
             }
-
-            return false;
-        }
-        #endregion
-        
-        #region 切換語言
-        public ActionResult ChangeLanguage(string lang)
-        {
-            if (!string.IsNullOrEmpty(lang))
-            {
-                var langCookie = new HttpCookie("lang", lang)
-                {
-                    Expires = DateTime.Now.AddYears(1)
-                };
-                Response.Cookies.Add(langCookie);
-            }
-            return Redirect(Request.UrlReferrer.ToString());
         }
         #endregion
 
@@ -3384,31 +3272,19 @@ namespace TISS_Web.Controllers
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     var extension = Path.GetExtension(fileName).ToLower();
-                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx", "odt" }; // 根據需求設定允許的副檔名
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".pdf", ".doc", ".docx", "odt" }; //根據需求設定允許的副檔名
 
-                    // 檢查是否為允許的檔案類型
-                    //if (!allowedExtensions.Contains(extension))
-                    //{
-                    //    return Json(new { error = "不支援的檔案類型" });
-                    //}
+                    
+                    byte[] fileData; //讀取檔案的二進位數據
 
-                    //// 確保 uploads 目錄存在（如果需要存檔案）
-                    //var uploadPath = Server.MapPath("~/uploads");
-                    //if (!Directory.Exists(uploadPath))
-                    //{
-                    //    Directory.CreateDirectory(uploadPath);
-                    //}
-
-                    // 讀取檔案的二進位數據
-                    byte[] fileData;
                     using (var binaryReader = new BinaryReader(file.InputStream))
                     {
                         fileData = binaryReader.ReadBytes(file.ContentLength);
                     }
-                    // 確認檔案大小
-                    var fileSize = fileData.Length;
-                    // 從 Session 中獲取使用者名稱
-                    var creator = Session["UserName"]?.ToString() ?? "未知使用者";
+                    
+                    var fileSize = fileData.Length; //確認檔案大小
+   
+                    var creator = Session["UserName"]?.ToString() ?? "未知使用者"; //從 Session 中獲取使用者名稱
 
                     // 儲存至資料庫
                     var document = new Documents
@@ -3422,7 +3298,7 @@ namespace TISS_Web.Controllers
                         IsActive = true,
                         ArticleId = articleId,
 
-                        Category = "TinyMCEFileUpload"  // 標示檔案類型
+                        Category = "TinyMCEFileUpload" //標示檔案類型
                     };
                     _db.Documents.Add(document);
                     _db.SaveChanges();
@@ -3432,24 +3308,6 @@ namespace TISS_Web.Controllers
 
                     // 返回成功消息，包含新生成的 ID 和 URL
                     return Json(new { message = "檔案上傳成功", fileId = document.DocumentID, url = fileUrl });
-                    // 將檔案儲存至資料庫（而不是本地儲存）
-                    //var fileDocument = new FileDocument
-                    //{
-                    //    DocumentName = fileName,
-                    //    UploadTime = DateTime.Now, // 當前時間
-                    //    Creator = creator, // 假設使用者名稱來自身份驗證
-                    //    DocumentType = extension, // 檔案類型
-                    //    FileSize = fileSize, // 檔案大小
-                    //    LastModifiedTime = DateTime.Now, // 當前時間
-                    //    IsEnabled = true, // 根據需求設置
-                    //    FileURL = fileUrl, // 將生成的FileURL保存到資料庫
-                    //};
-
-                    //_db.FileDocument.Add(fileDocument);
-                    ////_db.SaveChanges();
-
-                    //// 返回成功消息，並包含新生成的 ID 和 URL
-                    //return Json(new { message = "檔案上傳成功", fileId = fileDocument.ID, url = fileUrl });
                 }
                 catch (Exception ex)
                 {
@@ -3459,7 +3317,6 @@ namespace TISS_Web.Controllers
 
             return Json(new { error = "檔案上傳失敗" });
         }
-
         #endregion
 
         #region 公開資訊_上傳文件的通用方法
@@ -3702,6 +3559,21 @@ namespace TISS_Web.Controllers
             {
                 throw ex;
             }
+        }
+        #endregion
+
+        #region 切換語言
+        public ActionResult ChangeLanguage(string lang)
+        {
+            if (!string.IsNullOrEmpty(lang))
+            {
+                var langCookie = new HttpCookie("lang", lang)
+                {
+                    Expires = DateTime.Now.AddYears(1)
+                };
+                Response.Cookies.Add(langCookie);
+            }
+            return Redirect(Request.UrlReferrer.ToString());
         }
         #endregion
     }

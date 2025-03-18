@@ -1,0 +1,20 @@
+﻿.MenuLink.active {
+    background-color: #007bff !important; /* 修改背景顏色 */
+    color: white !important; /* 修改文字顏色 */
+    font-weight: bold !important; /* 使文字加粗 */
+}
+
+.tag-date-container {
+    display: flex;
+    align-items: center;
+    font-size: 12px; /* 調整標籤和日期的字體大小 */
+}
+
+.el-tag {
+    padding: 2px 6px; /* 調整標籤內邊距 */
+    margin-right: 5px; /* 標籤之間的間距 */
+}
+
+.date-tag {
+    color: #888; /* 調整日期字體顏色 */
+}

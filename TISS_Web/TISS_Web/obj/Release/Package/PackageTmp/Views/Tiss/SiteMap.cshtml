@@ -1,0 +1,121 @@
+﻿@{
+    Layout = "~/Views/Shared/_TissMaster.cshtml";
+}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <link href="~/site/css/siteMapStyle.css" rel="stylesheet" />
+</head>
+<body class="stretched">
+    <noscript>您的瀏覽器不支援JavaScript功能，若網頁功能無法正常使用時，請開啟瀏覽器JavaScript狀態</noscript>
+    <a href="#main_content" title="移到主要內容" class="sr-only sr-only-focusable">移到主要內容</a>
+    <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt="">
+
+    <section id="content">
+        <div class="content-wrap">
+            <div class="container">
+                <!-- 導覽工具和快速鍵說明 -->
+                <div class="row">
+                    <div class="col-md-12 text-end breadbox">
+                        <a href="/Tiss/Home">首頁</a><span>/</span>網站導覽
+                    </div>
+                </div>
+                <div class="clear mb-5" id="main_content"></div>
+                <a href="#C" title="中央內容區塊" accesskey="C" name="C" class="alt-c">:::</a>
+
+                <div class="pb-3">
+                    <h1>網站導覽</h1>
+                    <p>
+                        本網站依無障礙網頁設計原則建置，網站的主要內容分為四大區塊：<br />
+                        1. 上方功能區塊、2. 左方功能區塊、3. 中央內容區塊、4. 下方功能區塊。<br /><br />
+                        快速鍵（Accesskey）設定如下：<br />
+                        Alt+U：上方功能區塊（包含回首頁、網站導覽）。<br />
+                        Alt+L：左方功能區塊（本網站次選單連結）。<br />
+                        Alt+C：中央內容區塊（主要內容區）。<br />
+                        Alt+Z：下方功能區塊。<br />
+                        如果您的瀏覽器是Firefox，快速鍵的使用方法是 Shift+Alt+(快速鍵字母)，例如 Shift+Alt+C會跳至網頁中央區塊，以此類推。
+                    </p>
+                    <h2 class="font-weight-bold mt-3">
+                        ※當本網站項目頁籤無法以滑鼠點選時，您可利用以下鍵盤操作方式瀏覽資料← → 或 ↑↓：按左右鍵或上下鍵移動標籤順序。
+                    </h2>
+                    <p>
+                        Tab：跳至下一筆資料。
+                    </p>
+                    <p>
+                        Tab：停留於該標籤後,可利用Tab鍵跳至內容瀏覽該筆資料，遇到radio按鈕時請配合使← → 或↑↓鍵移動項目順序。
+                    </p>
+                    <p>
+                        Tab + Shift：按Tab + Shift可往回跳至上一筆資料；當跳回至標籤項目時您可繼續利用← → 或↑↓鍵移動標籤順序。
+                    </p>
+                    <!-- 使用巢狀標題呈現內容結構 -->
+                    <div class="row">
+                        <!-- 最新消息 -->
+                        <div class="col-12 col-lg-4">
+                            <div class="site_titit"><a href="/Tiss/announcement" title="最新消息">1. 最新消息</a></div>
+                            <ul class="ulsitemap">
+                                <li><a href="/Tiss/press" title="新聞發布">1-1. 新聞發布</a></li>
+                                <li><a href="/Tiss/institute" title="中心訊息">1-2. 中心訊息</a></li>
+                                <li><a href="/Tiss/recruit" title="徵才招募">1-3. 徵才招募</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 中心介紹 -->
+                        <div class="col-12 col-lg-4">
+                            <div class="site_titit"><a href="/Tiss/about" title="中心介紹">2. 中心介紹</a></div>
+                            <ul class="ulsitemap">
+                                <li><a href="/Tiss/Objectives" title="使命、願景">2-1. 使命、願景</a></li>
+                                <li><a href="/Tiss/mission" title="中心任務">2-2. 中心任務</a></li>
+                                <li><a href="/Tiss/Organization" title="組織概況">2-3. 組織概況</a></li>
+                                <li><a href="/Tiss/BOD" title="第1屆 董監事">2-4. 第1屆 董監事</a></li>
+                                <li><a href="/Tiss/CEO" title="執行長">2-5. 執行長</a></li>
+                                <li><a href="/Tiss/Units" title="單位介紹">2-6. 單位介紹</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 影音專區 -->
+                        <div class="col-12 col-lg-4">
+                            <div class="site_titit"><a href="/Tiss/video" title="影音專區">3. 影音專區</a></div>
+                            <ul class="ulsitemap">
+                                <li><a href="/Tiss/achievement" title="使命、願景">3-1. 中心成果</a></li>
+                                <li><a href="/Tiss/news" title="新聞影音">3-2. 新聞影音</a></li>
+                                <li><a href="/Tiss/activityRecord" title="活動記錄">3-3. 活動記錄</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 科普專欄 -->
+                        <div class="col-12 col-lg-4">
+                            <div class="site_titit"><a href="/Tiss/research" title="科普專欄">4. 科普專欄</a></div>
+                            <ul class="ulsitemap">
+                                <li><a href="/Tiss/sportMedicine" title="運動醫學">4-1. 運動醫學</a></li>
+                                <li><a href="/Tiss/sportTech" title="運動科技">4-2. 運動科技</a></li>
+                                <li><a href="/Tiss/sportScience" title="運動科學">4-3. 運動科學</a></li>
+                                <li><a href="/Tiss/sportsPhysiology" title="運動生理">4-4. 運動生理</a></li>
+                                <li><a href="/Tiss/sportsPsychology" title="運動心理">4-5. 運動心理</a></li>
+                                <li><a href="/Tiss/physicalTraining" title="體能訓練">4-6. 體能訓練</a></li>
+                                <li><a href="/Tiss/sportsNutrition" title="運動營養">4-7. 運動營養</a></li>
+                                <li><a href="/Tiss/childrenScience" title="兒少科普">4-8. 兒少科普</a></li>
+                                <li><a href="/Tiss/SciencePosterDownLoad" title="科普海報下載專區">4-9. 科普海報下載專區</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 公開資訊 -->
+                        <div class="col-12 col-lg-4">
+                            <div class="site_titit"><a href="/Tiss/public_info" title="公開資訊">5. 公開資訊</a></div>
+                            <ul class="ulsitemap">
+                                <li><a href="/Tiss/regulation" title="法規">5-1. 法規</a></li>
+                                <li><a href="/Tiss/procedure" title="辦法及要點">5-2. 辦法及要點</a></li>
+                                <li><a href="/Tiss/plan" title="計畫">5-3. 計畫</a></li>
+                                <li><a href="/Tiss/budget" title="預算與決算">5-4. 預算與決算</a></li>
+                                <li><a href="/Tiss/download" title="下載專區">5-5. 下載專區</a></li>
+                                <li><a href="/Tiss/GenderEquality" title="性別平等專區">5-6. 性別平等專區</a></li>
+                                <li><a href="/Tiss/other" title="其他">5-7. 其他</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
