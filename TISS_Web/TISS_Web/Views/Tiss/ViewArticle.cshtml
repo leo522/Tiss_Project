@@ -478,21 +478,28 @@
         });
     });
 
+    document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".remove-file").forEach(button => {
-            button.addEventListener("click", function () {
-                const fileId = this.getAttribute("data-id");
-                if (confirm("確定要刪除此文件嗎？")) {
-                    fetch(`@Url.Action("DeleteFile", "Tiss")?documentId=${fileId}`, { method: "DELETE" })
-                        .then(response => {
-                            if (response.ok) {
-                                this.closest("li").remove();
-                            } else {
-                                alert("刪除失敗");
-                            }
-                        });
-                }
-            });
+        button.addEventListener("click", function () {
+            const fileId = this.getAttribute("data-id");
+            if (confirm("確定要刪除此文件嗎？")) {
+                fetch(`@Url.Action("DeleteFile", "Tiss")?documentId=${fileId}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        this.closest("li").remove();
+                    } else {
+                        alert("刪除失敗：" + data.message);
+                    }
+                })
+                .catch(error => console.error("刪除文件時發生錯誤：", error));
+            }
+        });
     });
+});
 
     // 表單提交時檢查「文件檔案分類」是否已選擇
     document.querySelector("form").addEventListener("submit", function (event) {

@@ -9,11 +9,11 @@
     <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
     <EntitySet Name="BudgetPageContent" EntityType="TISS_WebModel.BudgetPageContent" />
     <EntitySet Name="CEOPageContent" EntityType="TISS_WebModel.CEOPageContent" />
+    <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
     <EntitySet Name="DomainsURL" EntityType="TISS_WebModel.DomainsURL" />
     <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
     <EntitySet Name="DownloadPageContent" EntityType="TISS_WebModel.DownloadPageContent" />
     <EntitySet Name="EmailLogs" EntityType="TISS_WebModel.EmailLogs" />
-    <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
     <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
     <EntitySet Name="GenderEquality" EntityType="TISS_WebModel.GenderEquality" />
     <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
@@ -33,6 +33,7 @@
     <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
     <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
     <EntitySet Name="OtherPageContent" EntityType="TISS_WebModel.OtherPageContent" />
+    <EntitySet Name="OverseaWorkDocument" EntityType="TISS_WebModel.OverseaWorkDocument" />
     <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
     <EntitySet Name="Permissions" EntityType="TISS_WebModel.Permissions" />
     <EntitySet Name="PhysicalTrainingPageContent" EntityType="TISS_WebModel.PhysicalTrainingPageContent" />
@@ -67,6 +68,10 @@
       <End Role="ArticleContent" EntitySet="ArticleContent" />
       <End Role="MessageBoard" EntitySet="MessageBoard" />
     </AssociationSet>
+    <AssociationSet Name="FK_Documents_ArticleContent" Association="TISS_WebModel.FK_Documents_ArticleContent">
+      <End Role="ArticleContent" EntitySet="ArticleContent" />
+      <End Role="Documents" EntitySet="Documents" />
+    </AssociationSet>
     <AssociationSet Name="FK__GenderEqu__Gende__3EA749C6" Association="TISS_WebModel.FK__GenderEqu__Gende__3EA749C6">
       <End Role="GenderEquality" EntitySet="GenderEquality" />
       <End Role="GenderEqualityDetails" EntitySet="GenderEqualityDetails" />
@@ -95,12 +100,6 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
-    <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
-    <AssociationSet Name="FK_Documents_ArticleContent" Association="TISS_WebModel.FK_Documents_ArticleContent">
-      <End Role="ArticleContent" EntitySet="ArticleContent" />
-      <End Role="Documents" EntitySet="Documents" />
-    </AssociationSet>
-    <EntitySet Name="OverseaWorkDocument" EntityType="TISS_WebModel.OverseaWorkDocument" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -237,6 +236,22 @@
     <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="DocumentID" />
+    </Key>
+    <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ArticleId" Type="Int32" />
+    <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="Documents" ToRole="ArticleContent" />
+  </EntityType>
   <EntityType Name="DomainsURL">
     <Key>
       <PropertyRef Name="DomainID" />
@@ -291,21 +306,6 @@
     <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="EID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EID" Type="Int32" Nullable="false" />
-    <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="Emp_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="Emp_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Emp_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="RegisterTime" Type="DateTime" Precision="3" />
-    <Property Name="updateTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="FileDocument">
     <Key>
@@ -580,6 +580,23 @@
     <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
     <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OverseaWorkDocument">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PId" Type="Int32" Nullable="false" />
+    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="PasswordResetRequests">
     <Key>
@@ -1059,6 +1076,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Documents_ArticleContent">
+    <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="0..1" />
+    <End Type="TISS_WebModel.Documents" Role="Documents" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleContent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Documents">
+        <PropertyRef Name="ArticleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__GenderEqu__Gende__3EA749C6">
     <End Type="TISS_WebModel.GenderEquality" Role="GenderEquality" Multiplicity="1" />
     <End Type="TISS_WebModel.GenderEqualityDetails" Role="GenderEqualityDetails" Multiplicity="*" />
@@ -1145,49 +1174,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Documents">
-    <Key>
-      <PropertyRef Name="DocumentID" />
-    </Key>
-    <Property Name="DocumentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" Nullable="false" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="ArticleId" Type="Int32" />
-    <NavigationProperty Name="ArticleContent" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="Documents" ToRole="ArticleContent" />
-  </EntityType>
-  <Association Name="FK_Documents_ArticleContent">
-    <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="0..1" />
-    <End Type="TISS_WebModel.Documents" Role="Documents" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ArticleContent">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Documents">
-        <PropertyRef Name="ArticleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="OverseaWorkDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" Nullable="false" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
 </Schema>

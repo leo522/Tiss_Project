@@ -330,9 +330,6 @@
     <Compile Include="Models\EmailLogs.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\FileDocument.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>

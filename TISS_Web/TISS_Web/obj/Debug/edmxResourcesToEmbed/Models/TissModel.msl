@@ -142,6 +142,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="TISS_WebModel.Documents">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="DomainsURL">
       <EntityTypeMapping TypeName="TISS_WebModel.DomainsURL">
         <MappingFragment StoreEntitySet="DomainsURL">
@@ -198,22 +214,6 @@
           <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
           <ScalarProperty Name="EmailLogID" ColumnName="EmailLogID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employee">
-      <EntityTypeMapping TypeName="TISS_WebModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="updateTime" ColumnName="updateTime" />
-          <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
-          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-          <ScalarProperty Name="Dept" ColumnName="Dept" />
-          <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
-          <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
-          <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
-          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
-          <ScalarProperty Name="EID" ColumnName="EID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -500,6 +500,24 @@
           <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="TextContent" ColumnName="TextContent" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OverseaWorkDocument">
+      <EntityTypeMapping TypeName="TISS_WebModel.OverseaWorkDocument">
+        <MappingFragment StoreEntitySet="OverseaWorkDocument">
+          <ScalarProperty Name="FileData" ColumnName="FileData" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="Creator" ColumnName="Creator" />
+          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="PId" ColumnName="PId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -987,40 +1005,6 @@
           <ScalarProperty Name="FileUploadTime" ColumnName="FileUploadTime" />
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="TextContent" ColumnName="TextContent" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Documents">
-      <EntityTypeMapping TypeName="TISS_WebModel.Documents">
-        <MappingFragment StoreEntitySet="Documents">
-          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
-          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
-          <ScalarProperty Name="Category" ColumnName="Category" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="OverseaWorkDocument">
-      <EntityTypeMapping TypeName="TISS_WebModel.OverseaWorkDocument">
-        <MappingFragment StoreEntitySet="OverseaWorkDocument">
-          <ScalarProperty Name="FileData" ColumnName="FileData" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
-          <ScalarProperty Name="Creator" ColumnName="Creator" />
-          <ScalarProperty Name="UploadTime" ColumnName="UploadTime" />
-          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
-          <ScalarProperty Name="PId" ColumnName="PId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

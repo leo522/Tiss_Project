@@ -33,11 +33,11 @@ namespace TISS_Web.Models
         public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
         public virtual DbSet<BudgetPageContent> BudgetPageContent { get; set; }
         public virtual DbSet<CEOPageContent> CEOPageContent { get; set; }
+        public virtual DbSet<Documents> Documents { get; set; }
         public virtual DbSet<DomainsURL> DomainsURL { get; set; }
         public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
         public virtual DbSet<DownloadPageContent> DownloadPageContent { get; set; }
         public virtual DbSet<EmailLogs> EmailLogs { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<FileDocument> FileDocument { get; set; }
         public virtual DbSet<GenderEquality> GenderEquality { get; set; }
         public virtual DbSet<GenderEqualityDetails> GenderEqualityDetails { get; set; }
@@ -57,6 +57,7 @@ namespace TISS_Web.Models
         public virtual DbSet<OrganizationPageContent> OrganizationPageContent { get; set; }
         public virtual DbSet<OtherDocument> OtherDocument { get; set; }
         public virtual DbSet<OtherPageContent> OtherPageContent { get; set; }
+        public virtual DbSet<OverseaWorkDocument> OverseaWorkDocument { get; set; }
         public virtual DbSet<PasswordResetRequests> PasswordResetRequests { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<PhysicalTrainingPageContent> PhysicalTrainingPageContent { get; set; }
@@ -87,7 +88,5 @@ namespace TISS_Web.Models
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
-        public virtual DbSet<Documents> Documents { get; set; }
-        public virtual DbSet<OverseaWorkDocument> OverseaWorkDocument { get; set; }
     }
 }

@@ -203,21 +203,6 @@
     <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ErrorMessage" Type="nvarchar(max)" />
   </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="EID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EID" Type="int" Nullable="false" />
-    <Property Name="Emp_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
-    <Property Name="Emp_Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Emp_Tel" Type="nvarchar" MaxLength="20" />
-    <Property Name="Emp_Pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Dept" Type="nvarchar" MaxLength="20" />
-    <Property Name="JobTitle" Type="nvarchar" MaxLength="20" />
-    <Property Name="RegisterTime" Type="datetime" />
-    <Property Name="updateTime" Type="datetime" />
-  </EntityType>
   <EntityType Name="FileDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -1084,7 +1069,6 @@
     <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadPageContent" EntityType="Self.DownloadPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmailLogs" EntityType="Self.EmailLogs" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileDocument" EntityType="Self.FileDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GenderEquality" EntityType="Self.GenderEquality" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GenderEqualityDetails" EntityType="Self.GenderEqualityDetails" Schema="dbo" store:Type="Tables" />

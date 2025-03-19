@@ -226,7 +226,6 @@ namespace TISS_Web.Controllers
                     IsApproved = false // 預設未開通，註冊後需要管理員審核
                 };
 
-
                 _db.Users.Add(newUser);
                 _db.SaveChanges();
 
@@ -253,15 +252,16 @@ namespace TISS_Web.Controllers
         {
             try
             {
-                var pendingUsers = _db.Users
-                        .Where(u => !(u.IsApproved ?? false))
+                var pendingUsers = _db.Users.Where(u => !(u.IsApproved ?? false))
                         .Select(u => new UserModel
                         {
                             UserName = u.UserName,
                             Email = u.Email,
                             CreatedDate = DateTime.Now
-                        })
-                        .ToList();
+                        }).ToList();
+
+                // **提供所有角色給前端**
+                ViewBag.Roles = _db.Roles.ToList();
 
                 return View(pendingUsers);
             }
@@ -273,36 +273,49 @@ namespace TISS_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult ApproveUser(string userName)
+        public JsonResult ApproveUser(string userName, List<int> roleIds)
         {
             try
             {
                 var user = _db.Users.SingleOrDefault(u => u.UserName == userName);
-
-                if (user != null)
+                if (user == null)
                 {
-                    user.IsApproved = true;
-
-                    // 更新 InternalEmployees 表中的 IsRegistered 欄位
-                    var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmailAddress == user.Email);
-                    if (employee != null)
-                    {
-                        employee.IsRegistered = true;
-                    }
-
-                    _db.SaveChanges();
-
-                    // 發送Email通知使用者
-                    var emailBody = $"您的帳號 {userName} 已通過審核，現在可以登入使用。";
-                    SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody, null);
+                    return Json(new { success = false, error = "用戶不存在" });
                 }
 
-                return RedirectToAction("PendingRegistrations");
+                user.IsApproved = true;
+
+                // **更新 InternalEmployees 註冊狀態**
+                var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmailAddress == user.Email);
+                if (employee != null)
+                {
+                    employee.IsRegistered = true;
+                }
+
+                // **清除舊的角色，然後重新分配**
+                var existingRoles = _db.UserRoles.Where(ur => ur.UserID == user.UserID).ToList();
+                _db.UserRoles.RemoveRange(existingRoles);
+
+                if (roleIds != null && roleIds.Count > 0)  // ✅ 修正 `null` 檢查
+                {
+                    foreach (var roleId in roleIds)
+                    {
+                        _db.UserRoles.Add(new UserRoles { UserID = user.UserID, RoleID = roleId });
+                    }
+                }
+
+                _db.SaveChanges();
+
+                // **發送通知**
+                var emailBody = $"您的帳號 {user.UserName} 已通過審核，現在可以登入系統！";
+                SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody, null);
+
+                return Json(new { success = true, message = "審核成功" });
             }
             catch (Exception ex)
             {
                 Console.WriteLine("其他錯誤: " + ex.Message);
-                return View("Error");
+                return Json(new { success = false, error = "伺服器錯誤：" + ex.Message });
             }
         }
 
@@ -2995,6 +3008,31 @@ namespace TISS_Web.Controllers
             string actionName = GetRedirectAction(tag);
             return RedirectToAction(actionName, "Tiss");
         }
+        #endregion
+
+        #region 刪除Tiny附件檔案
+        [HttpPost]
+        public JsonResult DeleteFile(int documentId)
+        {
+            try
+            {
+                var document = _db.Documents.FirstOrDefault(d => d.DocumentID == documentId);
+                if (document == null)
+                {
+                    return Json(new { success = false, message = "找不到該文件" });
+                }
+
+                _db.Documents.Remove(document);
+                _db.SaveChanges();
+
+                return Json(new { success = true, message = "文件刪除成功" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "刪除失敗：" + ex.Message });
+            }
+        }
+
         #endregion
 
         #region 導回對應文章主題頁
