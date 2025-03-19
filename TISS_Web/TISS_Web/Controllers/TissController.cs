@@ -2587,15 +2587,11 @@ namespace TISS_Web.Controllers
                             ModelState.AddModelError("", "文件上傳失敗。");
                         }
                     }
-                    //if (documentFile != null && documentFile.ContentLength > 0)
-                    //{
-                    //    var fileUploadResult = SaveDocumentFile(documentFile, dto.Id, documentCategory);
-                    //    if (!fileUploadResult)
-                    //    {
-                    //        ModelState.AddModelError("", "文件上傳失敗。");
-                    //    }
-                    //}
 
+                    if (documentFiles != null)
+                    {
+                        Console.WriteLine($"收到的檔案數量: {documentFiles.Length}");
+                    }
                     string redirectAction = GetRedirectAction(dto.Hashtags); //根據ContentType進行重定向
 
                     return RedirectToAction(redirectAction, "Tiss");
@@ -3085,45 +3081,6 @@ namespace TISS_Web.Controllers
 
                 _db.SaveChanges();
                 return true;
-                //if (file != null && file.ContentLength > 0)
-                //{
-                //    string fileName = Path.GetFileName(file.FileName);
-                //    string fileExtension = Path.GetExtension(fileName).ToLower();
-
-                //    if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx" || fileExtension == ".odt" || fileExtension == ".jpeg" ||
-                //fileExtension == ".jpg" || fileExtension == ".png")
-                //    {
-                //        byte[] fileData;
-                //        using (var binaryReader = new BinaryReader(file.InputStream))
-                //        {
-                //            fileData = binaryReader.ReadBytes(file.ContentLength);
-                //        }
-
-                //        // 使用 this.HttpContext 取得 Session
-                //        var userName = this.HttpContext.Session["UserName"]?.ToString() ?? "Unknown";
-
-                //        var document = new Documents
-                //        {
-                //            DocumentName = fileName,
-                //            UploadTime = DateTime.Now,
-                //            Creator = userName,
-                //            DocumentType = fileExtension,
-                //            FileSize = fileData.Length,
-                //            FileContent = fileData,
-                //            IsActive = true,
-                //            Category = documentCategory,
-                //            ArticleId = articleId // 關聯文章ID
-                //        };
-
-                //        _db.Documents.Add(document);
-                //        _db.SaveChanges();
-                //        return true;
-                //    }
-                //    else
-                //    {
-                //        return false;
-                //    }
-                //}
             }
             catch (Exception ex)
             {
@@ -3262,7 +3219,6 @@ namespace TISS_Web.Controllers
         #endregion
 
         #region Tiny編輯器上傳文書檔案跟圖片
-
         [HttpPost]
         public ActionResult UploadPDF(HttpPostedFileBase file, int? articleId)
         {

@@ -144,8 +144,12 @@
 
             // 表單提交時檢查「文件檔案分類」是否已選擇
             document.querySelector("form").addEventListener("submit", function (event) {
+                let fileInput = document.getElementById('documentFiles');
+                let dataTransfer = new DataTransfer();
                 const categorySelector = document.getElementById("categorySelector");
+                selectedFiles.forEach(file => dataTransfer.items.add(file));
 
+                fileInput.files = dataTransfer.files;
                 // 檢查是否選擇了分類
                 if (categorySelector.value === "") {
                     alert("請選擇文件/圖片檔案分類");

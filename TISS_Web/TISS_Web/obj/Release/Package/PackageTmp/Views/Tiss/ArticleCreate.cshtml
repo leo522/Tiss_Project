@@ -21,57 +21,64 @@
         {
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
-        @Html.AntiForgeryToken()
-        <div class="form-group mb-4">
-            <label for="Title" style="font-size:25px" title="標題">標題</label>
-            @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "Title", placeholder = "輸入文章標題", required = "required", aria_label = "文章標題" })
-        </div>
-        <div class="form-group mb-4">
-            <label for="Body" style="font-size:25px" title="內容">內容</label>
-            @*@Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, placeholder = "輸入文章內容" })*@
-            @Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, id = "ContentBody", placeholder = "輸入文章內容", aria_label = "文章內容" })
-        </div>
-        <div class="form-group mb-4">
-            <label for="contentTypeID" style="font-size:25px" title="發佈類型">文章發佈類別</label>
-            @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control", id = "contentTypeID", aria_label = "發佈類別" })
-        </div>
-        <div class="form-group mb-4">
-            <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
-            @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", id = "tags", multiple = "multiple", size = "10", aria_label = "文章標籤" })
-        </div>
-        <!-- 類別下拉選單 -->
-        <div class="form-group mb-4">
-            <label for="categorySelector" style="font-size: 25px">文件檔案分類(檔案歸檔分類)</label>
-            <select id="categorySelector" name="documentCategory" class="form-control">
-                <option value="">請選擇文件檔案上傳分類</option>
-                <option value="Press">新聞發佈</option>
-                <option value="Institute">中心訊息</option>
-                <option value="Recruitment">徵才招募</option>
-                <option value="Achievement">中心成果</option>
-                <option value="News">新聞影音</option>
-                <option value="Video">活動紀錄</option>
-                <option value="CommissionedResearchProject">委託研究計畫</option>
-                <option value="SportScience">運動科學</option>
-                <option value="SportTech">運動科技</option>
-                <option value="SportMedicine">運動醫學</option>
-                <option value="SportsPhysiology">運動生理</option>
-                <option value="SportsPsychology">運動心理</option>
-                <option value="PhysicalTraining">體能訓練</option>
-                <option value="SportsNutrition">運動營養</option>
-                <option value="ChildrenScience">兒少科普</option>
-                <option value="SciencePosterDownLoad">科普海報下載專區</option>
-            </select>
-        </div>
-        <div class="form-group mb-4">
-            <label for="ImageFile" style="font-size:25px" title="預覽用圖片">預覽用圖片：</label>
-            <input type="file" name="imageFile" id="imageFile" class="form-control-file" aria-label="預覽用圖片" />
-        </div>
-        <div class="form-group mb-4">
-            <label for="DocumentFile" style="font-size:25px" title="附加文件">附加文件：</label>
-            <input type="file" name="documentFile" id="documentFile" class="form-control-file" aria-label="附加文件" />
-        </div>
-        <button type="submit" class="btn btn-primary" title="提交">提交</button>
-    }
+            @Html.AntiForgeryToken()
+            <div class="form-group mb-4">
+                <label for="Title" style="font-size:25px" title="標題">標題</label>
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", id = "Title", placeholder = "輸入文章標題", required = "required", aria_label = "文章標題" })
+            </div>
+            <div class="form-group mb-4">
+                <label for="Body" style="font-size:25px" title="內容">內容</label>
+                @Html.TextAreaFor(model => model.ContentBody, new { @class = "form-control", rows = 5, id = "ContentBody", placeholder = "輸入文章內容", aria_label = "文章內容" })
+            </div>
+            <div class="form-group mb-4">
+                <label for="contentTypeID" style="font-size:25px" title="發佈類型">文章發佈類別</label>
+                @Html.DropDownList("contentTypeID", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control", id = "contentTypeID", aria_label = "發佈類別" })
+            </div>
+            <div class="form-group mb-4">
+                <label for="Tag" style="font-size:25px" title="文章標籤">文章標籤</label>
+                @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", id = "tags", multiple = "multiple", size = "10", aria_label = "文章標籤" })
+            </div>
+            <!-- 類別下拉選單 -->
+            <div class="form-group mb-4">
+                <label for="categorySelector" style="font-size: 25px">文件檔案分類(檔案歸檔分類)</label>
+                <select id="categorySelector" name="documentCategory" class="form-control">
+                    <option value="">請選擇文件檔案上傳分類</option>
+                    <option value="Press">新聞發佈</option>
+                    <option value="Institute">中心訊息</option>
+                    <option value="Recruitment">徵才招募</option>
+                    <option value="Achievement">中心成果</option>
+                    <option value="News">新聞影音</option>
+                    <option value="Video">活動紀錄</option>
+                    <option value="CommissionedResearchProject">委託研究計畫</option>
+                    <option value="SportScience">運動科學</option>
+                    <option value="SportTech">運動科技</option>
+                    <option value="SportMedicine">運動醫學</option>
+                    <option value="SportsPhysiology">運動生理</option>
+                    <option value="SportsPsychology">運動心理</option>
+                    <option value="PhysicalTraining">體能訓練</option>
+                    <option value="SportsNutrition">運動營養</option>
+                    <option value="ChildrenScience">兒少科普</option>
+                    <option value="SciencePosterDownLoad">科普海報下載專區</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="ImageFile" style="font-size:25px" title="預覽用圖片">預覽用圖片：</label>
+                <input type="file" name="imageFile" id="imageFile" class="form-control-file" aria-label="預覽用圖片" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="DocumentFiles" style="font-size:25px" title="附加文件">附加文件：</label>
+                <input type="file" name="documentFiles" id="documentFiles" class="form-control-file" aria-label="附加文件" multiple />
+            </div>
+
+            <!-- 顯示使用者選擇的檔案 -->
+            <div class="form-group mb-4">
+                <label style="font-size:25px">已選擇的附加文件：</label>
+                <ul id="selectedFilesList" class="list-group"></ul>
+            </div>
+            <button type="submit" class="btn btn-primary" title="提交">提交</button>
+        }
     </div>
 
     <script>
@@ -104,10 +111,45 @@
                 }
             });
 
+            //修正夾帶檔案事件
+            let fileInput = document.getElementById('documentFiles');
+            let fileList = document.getElementById('selectedFilesList');
+            let selectedFiles = [];
+
+            fileInput.addEventListener('change', function (event) {
+                let newFiles = Array.from(event.target.files);
+                selectedFiles = selectedFiles.concat(newFiles);  //確保新檔案會「追加」進列表，而不是覆蓋
+                updateFileList();
+            });
+
+            function updateFileList() {
+                fileList.innerHTML = ''; //清空列表
+                selectedFiles.forEach((file, index) => {
+                    let listItem = document.createElement('li');
+                    listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+                    listItem.textContent = file.name;
+
+                    let removeButton = document.createElement('button');
+                    removeButton.className = "btn btn-danger btn-sm";
+                    removeButton.textContent = "移除";
+                    removeButton.onclick = function () {
+                        selectedFiles.splice(index, 1);
+                        updateFileList();
+                    };
+
+                    listItem.appendChild(removeButton);
+                    fileList.appendChild(listItem);
+                });
+            }
+
             // 表單提交時檢查「文件檔案分類」是否已選擇
             document.querySelector("form").addEventListener("submit", function (event) {
+                let fileInput = document.getElementById('documentFiles');
+                let dataTransfer = new DataTransfer();
                 const categorySelector = document.getElementById("categorySelector");
+                selectedFiles.forEach(file => dataTransfer.items.add(file));
 
+                fileInput.files = dataTransfer.files;
                 // 檢查是否選擇了分類
                 if (categorySelector.value === "") {
                     alert("請選擇文件/圖片檔案分類");
