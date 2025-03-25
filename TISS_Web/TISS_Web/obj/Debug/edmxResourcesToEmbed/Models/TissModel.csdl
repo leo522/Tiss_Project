@@ -100,6 +100,8 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
+    <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
+    <EntitySet Name="DocumentLog" EntityType="TISS_WebModel.DocumentLog" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -1174,4 +1176,29 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EID" Type="Int32" Nullable="false" />
+    <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Emp_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Emp_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Emp_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="RegisterTime" Type="DateTime" Precision="3" />
+    <Property Name="updateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="DocumentLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentID" Type="Int32" />
+    <Property Name="OperateAction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

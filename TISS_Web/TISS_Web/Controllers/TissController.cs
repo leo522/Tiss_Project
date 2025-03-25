@@ -3017,19 +3017,38 @@ namespace TISS_Web.Controllers
             try
             {
                 var document = _db.Documents.FirstOrDefault(d => d.DocumentID == documentId);
-                if (document == null)
+                if (document != null)
                 {
-                    return Json(new { success = false, message = "找不到該文件" });
+                    // 取消啟用文件
+                    document.IsActive = false;
+
+                    // 取得目前使用者帳號
+                    string userAccount = Session["UserName"] as string ?? "Unknown";
+
+                    // 寫入紀錄 (可選：更新 Creator 為異動者)
+                    document.UploadTime = DateTime.Now;
+                    document.Creator = userAccount;
+
+                    // 寫入 Log 紀錄表
+                    var log = new DocumentLog
+                    {
+                        DocumentID = document.DocumentID,
+                        OperateAction = "Disable",
+                        ModifiedBy = userAccount,
+                        ModifiedTime = DateTime.Now
+                    };
+                    _db.DocumentLog.Add(log);
+
+                    _db.SaveChanges();
+
+                    return Json(new { success = true });
                 }
 
-                _db.Documents.Remove(document);
-                _db.SaveChanges();
-
-                return Json(new { success = true, message = "文件刪除成功" });
+                return Json(new { success = false, message = "找不到對應的文件。" });
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = "刪除失敗：" + ex.Message });
+                return Json(new { success = false, message = "伺服器錯誤：" + ex.Message });
             }
         }
 

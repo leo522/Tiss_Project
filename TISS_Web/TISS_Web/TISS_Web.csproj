@@ -314,6 +314,9 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContentService.cs" />
+    <Compile Include="Models\DocumentLog.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Documents.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -328,6 +331,9 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmailLogs.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FileDocument.cs">

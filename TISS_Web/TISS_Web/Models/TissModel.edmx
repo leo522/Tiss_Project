@@ -138,6 +138,16 @@
           <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
           <Property Name="UserLoginTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="DocumentLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentID" Type="int" />
+          <Property Name="OperateAction" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifiedTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="Documents">
           <Key>
             <PropertyRef Name="DocumentID" />
@@ -207,6 +217,21 @@
           <Property Name="SentDate" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ErrorMessage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EID" Type="int" Nullable="false" />
+          <Property Name="Emp_Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Emp_Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Emp_Tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="Emp_Pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Dept" Type="nvarchar" MaxLength="20" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="20" />
+          <Property Name="RegisterTime" Type="datetime" />
+          <Property Name="updateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="FileDocument">
           <Key>
@@ -1069,11 +1094,13 @@
           <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentLog" EntityType="Self.DocumentLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DomainsURL" EntityType="Self.DomainsURL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DownloadPageContent" EntityType="Self.DownloadPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailLogs" EntityType="Self.EmailLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileDocument" EntityType="Self.FileDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenderEquality" EntityType="Self.GenderEquality" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenderEqualityDetails" EntityType="Self.GenderEqualityDetails" Schema="dbo" store:Type="Tables" />
@@ -1265,6 +1292,8 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
+          <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
+          <EntitySet Name="DocumentLog" EntityType="TISS_WebModel.DocumentLog" />
         </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -2339,6 +2368,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EID" Type="Int32" Nullable="false" />
+          <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterTime" Type="DateTime" Precision="3" />
+          <Property Name="updateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DocumentLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentID" Type="Int32" />
+          <Property Name="OperateAction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3350,6 +3404,33 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="TISS_WebModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+                <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
+                <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
+                <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="EID" ColumnName="EID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentLog">
+            <EntityTypeMapping TypeName="TISS_WebModel.DocumentLog">
+              <MappingFragment StoreEntitySet="DocumentLog">
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="OperateAction" ColumnName="OperateAction" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
