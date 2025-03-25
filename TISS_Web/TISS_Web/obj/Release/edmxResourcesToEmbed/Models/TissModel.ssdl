@@ -133,6 +133,16 @@
     <Property Name="UserAccount" Type="nvarchar" MaxLength="50" />
     <Property Name="UserLoginTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="DocumentLog">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="OperateAction" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModifiedTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="Documents">
     <Key>
       <PropertyRef Name="DocumentID" />
@@ -1079,6 +1089,7 @@
     <EntitySet Name="BudgetDocument" EntityType="Self.BudgetDocument" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BudgetPageContent" EntityType="Self.BudgetPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CEOPageContent" EntityType="Self.CEOPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentLog" EntityType="Self.DocumentLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DomainsURL" EntityType="Self.DomainsURL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DownloadDocument" EntityType="Self.DownloadDocument" Schema="dbo" store:Type="Tables" />

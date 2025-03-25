@@ -33,7 +33,25 @@
         }
 
         document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("msg").addEventListener("submit", handleFormSubmit);
+            const form = document.getElementById("msg");
+
+            form.addEventListener("submit", function (event) {
+                const commentText = document.querySelector('#commentText').value;
+                const suspiciousPattern = /<script|<\/script|iframe|onerror|onload|%3C/i;
+
+                if (suspiciousPattern.test(commentText)) {
+                    alert("留言中包含可疑內容，請重新檢查。");
+                    event.preventDefault();
+                    return;
+                }
+
+                // reCAPTCHA 驗證處理
+                event.preventDefault(); // 先攔下預設送出
+                grecaptcha.enterprise.execute('6Lezbh4qAAAAADX1XDuddC9SwZpc1KsA5MMVE2O1', { action: 'submit' }).then(function (token) {
+                    document.getElementById("g-recaptcha-response").value = token;
+                    form.submit(); // 驗證成功再送出
+                });
+            });
         });
     </script>
 </head>

@@ -3184,8 +3184,15 @@ namespace TISS_Web.Controllers
                 }
 
                 // 防範 XSS 攻擊
-                var encodedCommentText = HttpUtility.HtmlEncode(commentText);
-                var encodedUserName = HttpUtility.HtmlEncode(userName);
+                var encodedCommentText = SanitizeComment(commentText);
+                var encodedUserName = SanitizeComment(userName);
+
+                string[] blackList = new[] { "script", "iframe", "src=", "onerror", "onload", "<", ">" };
+
+                if (blackList.Any(bad => commentText.IndexOf(bad, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    return RedirectToAction("Error");
+                }
 
                 // 處理留言
                 var comment = new MessageBoard
@@ -3587,6 +3594,21 @@ namespace TISS_Web.Controllers
                 Response.Cookies.Add(langCookie);
             }
             return Redirect(Request.UrlReferrer.ToString());
+        }
+        #endregion
+
+        #region 在留言儲存前進行內容白名單過濾
+        public static string SanitizeComment(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
+
+            // 移除 script/style/iframe 相關標籤（避免未來使用者繞過編碼）
+            string sanitized = Regex.Replace(input, @"<script[\s\S]*?>[\s\S]*?</script>", "", RegexOptions.IgnoreCase);
+            sanitized = Regex.Replace(sanitized, @"<iframe[\s\S]*?>[\s\S]*?</iframe>", "", RegexOptions.IgnoreCase);
+            sanitized = Regex.Replace(sanitized, @"<style[\s\S]*?>[\s\S]*?</style>", "", RegexOptions.IgnoreCase);
+            sanitized = Regex.Replace(sanitized, @"on\w+\s*=\s*(['""]?).*?\1", "", RegexOptions.IgnoreCase); // 事件屬性移除，如 onclick="..."
+
+            return HttpUtility.HtmlEncode(sanitized);
         }
         #endregion
     }

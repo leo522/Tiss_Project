@@ -78,6 +78,7 @@
         <AssociationConnector Association="TISS_WebModel.FK__UserRoles__RoleI__3F466844" />
         <AssociationConnector Association="TISS_WebModel.FK__UserRoles__UserI__3E52440B" />
         <EntityTypeShape EntityType="TISS_WebModel.Employee" Width="1.5" PointX="23.375" PointY="17.75" />
+        <EntityTypeShape EntityType="TISS_WebModel.DocumentLog" Width="1.5" PointX="23.375" PointY="21.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
