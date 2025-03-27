@@ -41,7 +41,7 @@
         <div class="text-center">
             <img src="~/Img/logo.svg" style="height: 45px; width: 100%;">
         </div>
-        <form action="/Tiss/Login" method="post">
+        <form action="/WebAccount/Login" method="post">
             <div class="form-group">
                 <label for="Username" title="帳號">帳號</label>
                 <input type="text" class="form-control" id="Username" name="Username" placeholder="請輸入帳號" required>
@@ -53,7 +53,7 @@
             <button type="submit" class="btn btn-primary btn-block" title="登入">登入</button>
         </form>
         <div class="text-center mt-3">
-            <a href="/Tiss/Register" title="註冊帳號">註冊帳號</a>
+            <a href="/WebAccount/Register" title="註冊帳號">註冊帳號</a>
         </div>
         @if (ViewBag.ErrorMessage != null)
         {
@@ -63,7 +63,7 @@
         }
         <hr>
         <div class="text-center">
-            <a href="/Tiss/ForgotPassword" class="btn btn-link" title="忘記密碼">忘記密碼</a>
+            <a href="/WebAccount/ForgotPassword" class="btn btn-link" title="忘記密碼">忘記密碼</a>
         </div>
     </div>
 </body>

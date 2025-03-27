@@ -70,6 +70,7 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="ExpireDate" Type="datetime" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -1362,6 +1363,7 @@
           <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
           <NavigationProperty Name="Documents" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="ArticleContent" ToRole="Documents" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -2448,6 +2450,7 @@
           <EntitySetMapping Name="ArticleContent">
             <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
               <MappingFragment StoreEntitySet="ArticleContent">
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
                 <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
                 <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
                 <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />

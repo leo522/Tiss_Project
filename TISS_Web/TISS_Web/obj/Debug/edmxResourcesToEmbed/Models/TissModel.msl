@@ -50,6 +50,7 @@
     <EntitySetMapping Name="ArticleContent">
       <EntityTypeMapping TypeName="TISS_WebModel.ArticleContent">
         <MappingFragment StoreEntitySet="ArticleContent">
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
           <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
           <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
           <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />

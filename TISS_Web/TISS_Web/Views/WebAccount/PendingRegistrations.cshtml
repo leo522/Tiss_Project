@@ -21,7 +21,7 @@
                     <th>電子郵件</th>
                     <th>註冊日期</th>
                     <th>角色權限</th>
-                    <th>操作</th> <!-- ✅ 修正這裡，避免表格對不齊 -->
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                         <td>@user.Email</td>
                         <td>@user.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
                         <td>
-                            <!-- ✅ 修正 `ViewBag.Roles` 的錯誤，確保 `RoleID` 存在 -->
+                            <!--修正 `ViewBag.Roles` 的錯誤，確保 `RoleID` 存在 -->
                             <select class="form-control role-select" id="role-@user.UserName" multiple>
                                 @if (ViewBag.Roles != null)
                                 {
@@ -45,7 +45,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-success approve-btn" data-username="@user.UserName">批准</button>
-                            <form action="@Url.Action("RejectUser", "Tiss")" method="post" style="display:inline;">
+                            <form action="@Url.Action("RejectUser", "WebAccount")" method="post" style="display:inline;">
                                 <input type="hidden" name="userName" value="@user.UserName" />
                                 <button type="submit" class="btn btn-danger">拒絕</button>
                             </form>
@@ -68,7 +68,7 @@
                     return;
                 }
 
-                fetch("@Url.Action("ApproveUser", "Tiss")", {
+                fetch("@Url.Action("ApproveUser", "WebAccount")", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ userName: userName, roleIds: selectedRoles })

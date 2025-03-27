@@ -282,6 +282,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\TissController.cs" />
+    <Compile Include="Controllers\WebAccountController.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
@@ -3098,8 +3099,6 @@
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
     <Content Include="Views\Tiss\other.cshtml" />
-    <Content Include="Views\Tiss\Login.cshtml" />
-    <Content Include="Views\Tiss\Register.cshtml" />
     <Content Include="Views\Tiss\ChangePassword.cshtml" />
     <Content Include="Views\Tiss\sportsPhysiology.cshtml" />
     <Content Include="Views\Tiss\sportsPsychology.cshtml" />
@@ -3126,7 +3125,6 @@
     <Content Include="Views\Tiss\ForgotPassword.cshtml" />
     <Content Include="Views\Tiss\ResetPassword.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
-    <Content Include="Views\Tiss\PendingRegistrations.cshtml" />
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
     <Content Include="Views\Tiss\childrenScience.cshtml" />
@@ -3143,6 +3141,9 @@
     <Content Include="Views\Tiss\_VideoSection.cshtml" />
     <Content Include="Views\Tiss\SiteMap.cshtml" />
     <Content Include="Views\Tiss\overseawork.cshtml" />
+    <Content Include="Views\WebAccount\Register.cshtml" />
+    <Content Include="Views\WebAccount\PendingRegistrations.cshtml" />
+    <Content Include="Views\WebAccount\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
