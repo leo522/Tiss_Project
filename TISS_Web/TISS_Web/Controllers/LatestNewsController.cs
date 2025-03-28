@@ -13,188 +13,78 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
 
+        #region 方法整合
+        private List<ArticleContentModel> GetArticles(Func<ArticleContent, bool> predicate, int page, int pageSize)
+        {
+            var list = _db.ArticleContent
+                .Where(predicate)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
+
+            ViewBag.TotalPages = (int)Math.Ceiling(list.Count / (double)pageSize);
+            ViewBag.CurrentPage = page;
+
+            return list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
+            {
+                Title = s.Title,
+                EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
+            }).ToList();
+        }
+
+        private ActionResult HandlePage(string title, Func<ArticleContent, bool> filter, int page, int pageSize, string viewName)
+        {
+            try
+            {
+                ViewBag.Title = title;
+                Session["ReturnUrl"] = Request.Url?.ToString();
+                page = Math.Max(1, page);
+
+                var articles = GetArticles(filter, page, pageSize);
+                return View(viewName, articles);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteAduioVideoLog(viewName, $"取得 {title} 失敗", ex);
+                return RedirectToAction("Error404", "Error");
+            }
+        }
+        #endregion
+
         #region 中心公告
         public ActionResult announcement(int page = 1, int pageSize = 9)
         {
-            try
+            var hashtags = new List<string>
             {
-                ViewBag.Title = "中心公告";
-                Session["ReturnUrl"] = Request.Url.ToString();
-
-                page = Math.Max(1, page); //確保頁碼至少為 1
-
-                var relatedHashtags = new List<string>
-            {
-                "新聞發佈",
-                "中心訊息",
-                "徵才招募",
-                "國家運動科學中心",
-                "委託研究計畫",
-                "運動科學研究處",
-                "MOU簽署",
-                "行政管理人資組",
-                "運動資訊"
+                "新聞發佈", "中心訊息", "徵才招募", "國家運動科學中心",
+                "委託研究計畫", "運動科學研究處", "MOU簽署", "行政管理人資組", "運動資訊"
             };
-                // 查詢相關 hashtags 的文章
-                var list = _db.ArticleContent
-                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
-
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return HandlePage("中心公告", a => hashtags.Contains(a.Hashtags) && a.IsEnabled, page, pageSize, "Announcement");
         }
+
         #endregion
 
-        #region 新聞發布
+        #region 新聞發佈
         public ActionResult press(int page = 1, int pageSize = 9)
         {
-            try
-            {
-                ViewBag.Title = "新聞發佈";
-                Session["ReturnUrl"] = Request.Url.ToString();
-
-                page = Math.Max(1, page); //確保頁碼至少為 1
-
-                var list = _db.ArticleContent
-                    .Where(a => a.ContentType == "新聞發佈" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
-
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return HandlePage("新聞發佈", a => a.ContentType == "新聞發佈" && a.IsEnabled, page, pageSize, "Press");
         }
         #endregion
 
-        #region 中心訊息       
+        #region 中心訊息
         public ActionResult institute(int page = 1, int pageSize = 9)
         {
-            try
-            {
-                ViewBag.Title = "中心訊息";
-                Session["ReturnUrl"] = Request.Url.ToString();
-
-                page = Math.Max(1, page); //確保頁碼至少為 1
-
-                var list = _db.ArticleContent
-                    .Where(a => a.ContentType == "中心訊息" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
-
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return HandlePage("中心訊息", a => a.ContentType == "中心訊息" && a.IsEnabled, page, pageSize, "Institute");
         }
         #endregion
 
         #region 徵才招募
         public ActionResult recruit(int page = 1, int pageSize = 9)
         {
-            try
-            {
-                ViewBag.Title = "徵才招募";
-                Session["ReturnUrl"] = Request.Url.ToString();
-
-                page = Math.Max(1, page); //確保頁碼至少為 1
-
-                var list = _db.ArticleContent
-                    .Where(a => a.ContentType == "徵才招募" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
-
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return HandlePage("徵才招募", a => a.ContentType == "徵才招募" && a.IsEnabled, page, pageSize, "Recruit");
         }
         #endregion
     }
