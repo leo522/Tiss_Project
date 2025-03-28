@@ -18,6 +18,17 @@
     <Property Name="VideoUpdateTime" Type="datetime" />
     <Property Name="WebsiteURLUpdateTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="AduioVideoAreaLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LogTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="LogMessage" Type="nvarchar(max)" />
+    <Property Name="StackTrace" Type="nvarchar(max)" />
+    <Property Name="LogTime" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="AnnouncementPageContent">
     <Key>
       <PropertyRef Name="ID" />
@@ -374,14 +385,6 @@
     <Property Name="Department" Type="nvarchar" MaxLength="30" />
     <Property Name="IsRegistered" Type="bit" />
     <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
-  </EntityType>
-  <EntityType Name="Language">
-    <Key>
-      <PropertyRef Name="Lang_Key" />
-    </Key>
-    <Property Name="Lang_Key" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Lang_zhTW" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Lang_enUS" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="MenuItems">
     <Key>
@@ -1083,6 +1086,7 @@
   </Association>
   <EntityContainer Name="TISS_WebModelStoreContainer">
     <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AduioVideoAreaLog" EntityType="Self.AduioVideoAreaLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArticleCategory" EntityType="Self.ArticleCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArticleContent" EntityType="Self.ArticleContent" Schema="dbo" store:Type="Tables" />
@@ -1107,7 +1111,6 @@
     <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />

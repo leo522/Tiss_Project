@@ -12,10 +12,13 @@ namespace TISS_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Language
+    public partial class AduioVideoAreaLog
     {
-        public string Lang_Key { get; set; }
-        public string Lang_zhTW { get; set; }
-        public string Lang_enUS { get; set; }
+        public int ID { get; set; }
+        public string ActionName { get; set; }
+        public string LogTitle { get; set; }
+        public string LogMessage { get; set; }
+        public string StackTrace { get; set; }
+        public System.DateTime LogTime { get; set; }
     }
 }

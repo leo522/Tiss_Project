@@ -26,6 +26,7 @@ namespace TISS_Web.Models
         }
     
         public virtual DbSet<AboutPageContent> AboutPageContent { get; set; }
+        public virtual DbSet<AduioVideoAreaLog> AduioVideoAreaLog { get; set; }
         public virtual DbSet<AnnouncementPageContent> AnnouncementPageContent { get; set; }
         public virtual DbSet<ArticleCategory> ArticleCategory { get; set; }
         public virtual DbSet<ArticleContent> ArticleContent { get; set; }
@@ -33,11 +34,13 @@ namespace TISS_Web.Models
         public virtual DbSet<BudgetDocument> BudgetDocument { get; set; }
         public virtual DbSet<BudgetPageContent> BudgetPageContent { get; set; }
         public virtual DbSet<CEOPageContent> CEOPageContent { get; set; }
+        public virtual DbSet<DocumentLog> DocumentLog { get; set; }
         public virtual DbSet<Documents> Documents { get; set; }
         public virtual DbSet<DomainsURL> DomainsURL { get; set; }
         public virtual DbSet<DownloadDocument> DownloadDocument { get; set; }
         public virtual DbSet<DownloadPageContent> DownloadPageContent { get; set; }
         public virtual DbSet<EmailLogs> EmailLogs { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<FileDocument> FileDocument { get; set; }
         public virtual DbSet<GenderEquality> GenderEquality { get; set; }
         public virtual DbSet<GenderEqualityDetails> GenderEqualityDetails { get; set; }
@@ -48,7 +51,6 @@ namespace TISS_Web.Models
         public virtual DbSet<HomePageContent> HomePageContent { get; set; }
         public virtual DbSet<InstitutePageContent> InstitutePageContent { get; set; }
         public virtual DbSet<InternalEmployees> InternalEmployees { get; set; }
-        public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<MenuItems> MenuItems { get; set; }
         public virtual DbSet<Menus> Menus { get; set; }
         public virtual DbSet<MessageBoard> MessageBoard { get; set; }
@@ -88,7 +90,5 @@ namespace TISS_Web.Models
         public virtual DbSet<UserRoles> UserRoles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<VideoPageContent> VideoPageContent { get; set; }
-        public virtual DbSet<Employee> Employee { get; set; }
-        public virtual DbSet<DocumentLog> DocumentLog { get; set; }
     }
 }

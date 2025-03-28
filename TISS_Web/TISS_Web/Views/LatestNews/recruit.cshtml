@@ -20,7 +20,7 @@
                         <img class="PageBannerItemBg d-block d-lg-none" src="/site/img/banner_announcement.1b73bdab.jpg" alt="" />
                         <div class="container">
                             <div class="Title">
-                                <h1 class="BannerTitle" title="nnouncements">
+                                <h1 class="BannerTitle" title="Announcements">
                                     Announcements
                                 </h1>
                                 <h2 class="BannerSubTitle">
@@ -31,7 +31,7 @@
                     </div>
                     <section class="el-container">
                         <aside class="el-aside" role="navigation" aria-labelledby="sidebar-title">
-                            <h2 id="sidebar-title" class="sr-only">左方功能區塊</h2>
+                            <h2 id="sidebar-title" class="sr-only">功能區塊</h2>
                             <div class="BaseBreadcrumb d-block d-lg-none">
                                 <div class="container">
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
@@ -72,16 +72,16 @@
                                 <h2 class="Title" title="中心公告">中心公告</h2>
                                 <ul class="Menu" aria-labelledby="sidebar-title">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/announcement" title="全部文章" aria-label="查看全部文章">全部文章</a>
+                                        <a class="MenuLink" href="/LatestNews/announcement" title="全部文章" aria-label="查看全部文章">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/press" title="新聞發佈" aria-label="查看運科中心的新聞發佈">新聞發佈</a>
+                                        <a class="MenuLink" href="/LatestNews/press" title="新聞發佈" aria-label="查看運科中心的新聞發佈">新聞發佈</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/institute" title="中心訊息" aria-label="查看運科中心的中心訊息">中心訊息</a>
+                                        <a class="MenuLink" href="/LatestNews/institute" title="中心訊息" aria-label="查看運科中心的中心訊息">中心訊息</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/recruit" title="徵才招募" aria-label="查看運科中心的徵才招募">徵才招募</a>
+                                        <a class="MenuLink" href="/LatestNews/recruit" title="徵才招募" aria-label="查看運科中心的徵才招募">徵才招募</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
@@ -174,16 +174,16 @@
                                                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                     {
                                                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                            <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
+                                                            <a class="page-link" href="@Url.Action("recruit", "LatestNews", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
                                                         </li>
                                                     }
                                                     <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
+                                                        <a class="page-link" href="@Url.Action("recruit", "LatestNews", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                     </li>
                                                     <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("institute", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
+                                                        <a class="page-link" href="@Url.Action("recruit", "LatestNews", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>
@@ -211,8 +211,20 @@ if (isLoggedIn) {
     }
         loadContent(); //加載已儲存的內容
 });
+        //登出按鈕顯示功能
 
         //顯示當前選擇的子項目
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentUrl = window.location.pathname;
+            var menuLinks = document.querySelectorAll('.MenuLink');
+
+            menuLinks.forEach(function (link) {
+                if (link.getAttribute('href') === currentUrl) {
+                    link.classList.add('active');
+                    link.focus();  // 修改: 焦點移至當前選項
+                }
+            });
+        });
         document.addEventListener('DOMContentLoaded', function () {
             var currentUrl = window.location.pathname;
             var menuLinks = document.querySelectorAll('.MenuLink');
@@ -221,11 +233,11 @@ if (isLoggedIn) {
 
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
-                    link.focus();  // 修改: 焦點移至當前選項
                 }
             });
         });
 
+    //功能區塊
     document.querySelector('#jump-to-Ca').addEventListener('click', function (e) {
         e.preventDefault(); // 阻止預設的跳轉行為
         var target = document.querySelector('#Ca');

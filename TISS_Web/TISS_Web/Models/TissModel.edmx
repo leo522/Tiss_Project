@@ -23,6 +23,17 @@
           <Property Name="VideoUpdateTime" Type="datetime" />
           <Property Name="WebsiteURLUpdateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="AduioVideoAreaLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LogTitle" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="LogMessage" Type="nvarchar(max)" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+          <Property Name="LogTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="AnnouncementPageContent">
           <Key>
             <PropertyRef Name="ID" />
@@ -379,14 +390,6 @@
           <Property Name="Department" Type="nvarchar" MaxLength="30" />
           <Property Name="IsRegistered" Type="bit" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
-        </EntityType>
-        <EntityType Name="Language">
-          <Key>
-            <PropertyRef Name="Lang_Key" />
-          </Key>
-          <Property Name="Lang_Key" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Lang_zhTW" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Lang_enUS" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="MenuItems">
           <Key>
@@ -1088,6 +1091,7 @@
         </Association>
         <EntityContainer Name="TISS_WebModelStoreContainer">
           <EntitySet Name="AboutPageContent" EntityType="Self.AboutPageContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AduioVideoAreaLog" EntityType="Self.AduioVideoAreaLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementPageContent" EntityType="Self.AnnouncementPageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArticleCategory" EntityType="Self.ArticleCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArticleContent" EntityType="Self.ArticleContent" Schema="dbo" store:Type="Tables" />
@@ -1112,7 +1116,6 @@
           <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />
@@ -1195,6 +1198,7 @@
       <Schema Namespace="TISS_WebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="TISS_WebEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AboutPageContent" EntityType="TISS_WebModel.AboutPageContent" />
+          <EntitySet Name="AduioVideoAreaLog" EntityType="TISS_WebModel.AduioVideoAreaLog" />
           <EntitySet Name="AnnouncementPageContent" EntityType="TISS_WebModel.AnnouncementPageContent" />
           <EntitySet Name="ArticleCategory" EntityType="TISS_WebModel.ArticleCategory" />
           <EntitySet Name="ArticleContent" EntityType="TISS_WebModel.ArticleContent" />
@@ -1202,11 +1206,13 @@
           <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
           <EntitySet Name="BudgetPageContent" EntityType="TISS_WebModel.BudgetPageContent" />
           <EntitySet Name="CEOPageContent" EntityType="TISS_WebModel.CEOPageContent" />
+          <EntitySet Name="DocumentLog" EntityType="TISS_WebModel.DocumentLog" />
           <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
           <EntitySet Name="DomainsURL" EntityType="TISS_WebModel.DomainsURL" />
           <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
           <EntitySet Name="DownloadPageContent" EntityType="TISS_WebModel.DownloadPageContent" />
           <EntitySet Name="EmailLogs" EntityType="TISS_WebModel.EmailLogs" />
+          <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
           <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
           <EntitySet Name="GenderEquality" EntityType="TISS_WebModel.GenderEquality" />
           <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
@@ -1217,7 +1223,6 @@
           <EntitySet Name="HomePageContent" EntityType="TISS_WebModel.HomePageContent" />
           <EntitySet Name="InstitutePageContent" EntityType="TISS_WebModel.InstitutePageContent" />
           <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
-          <EntitySet Name="Language" EntityType="TISS_WebModel.Language" />
           <EntitySet Name="MenuItems" EntityType="TISS_WebModel.MenuItems" />
           <EntitySet Name="Menus" EntityType="TISS_WebModel.Menus" />
           <EntitySet Name="MessageBoard" EntityType="TISS_WebModel.MessageBoard" />
@@ -1293,8 +1298,6 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
-          <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
-          <EntitySet Name="DocumentLog" EntityType="TISS_WebModel.DocumentLog" />
         </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -1313,6 +1316,17 @@
           <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AduioVideoAreaLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogTitle" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="AnnouncementPageContent">
           <Key>
@@ -1361,9 +1375,9 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
           <NavigationProperty Name="Documents" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="ArticleContent" ToRole="Documents" />
-          <Property Name="ExpireDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="BODPageContent">
           <Key>
@@ -1431,6 +1445,16 @@
           <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
           <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DocumentLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentID" Type="Int32" />
+          <Property Name="OperateAction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Documents">
           <Key>
@@ -1502,6 +1526,21 @@
           <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EID" Type="Int32" Nullable="false" />
+          <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RegisterTime" Type="DateTime" Precision="3" />
+          <Property Name="updateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="FileDocument">
           <Key>
@@ -1650,14 +1689,6 @@
           <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="IsRegistered" Type="Boolean" />
           <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Language">
-          <Key>
-            <PropertyRef Name="Lang_Key" />
-          </Key>
-          <Property Name="Lang_Key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Lang_zhTW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Lang_enUS" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="MenuItems">
           <Key>
@@ -2370,31 +2401,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="EID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EID" Type="Int32" Nullable="false" />
-          <Property Name="Emp_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Emp_Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Emp_Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Emp_Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dept" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="RegisterTime" Type="DateTime" Precision="3" />
-          <Property Name="updateTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="DocumentLog">
-          <Key>
-            <PropertyRef Name="LogID" />
-          </Key>
-          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DocumentID" Type="Int32" />
-          <Property Name="OperateAction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2416,6 +2422,18 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="FileNo" ColumnName="FileNo" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AduioVideoAreaLog">
+            <EntityTypeMapping TypeName="TISS_WebModel.AduioVideoAreaLog">
+              <MappingFragment StoreEntitySet="AduioVideoAreaLog">
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+                <ScalarProperty Name="LogTitle" ColumnName="LogTitle" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2543,6 +2561,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DocumentLog">
+            <EntityTypeMapping TypeName="TISS_WebModel.DocumentLog">
+              <MappingFragment StoreEntitySet="DocumentLog">
+                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="OperateAction" ColumnName="OperateAction" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Documents">
             <EntityTypeMapping TypeName="TISS_WebModel.Documents">
               <MappingFragment StoreEntitySet="Documents">
@@ -2615,6 +2644,22 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
                 <ScalarProperty Name="EmailLogID" ColumnName="EmailLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="TISS_WebModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+                <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Dept" ColumnName="Dept" />
+                <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
+                <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
+                <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
+                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+                <ScalarProperty Name="EID" ColumnName="EID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2771,15 +2816,6 @@
                 <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Language">
-            <EntityTypeMapping TypeName="TISS_WebModel.Language">
-              <MappingFragment StoreEntitySet="Language">
-                <ScalarProperty Name="Lang_enUS" ColumnName="Lang_enUS" />
-                <ScalarProperty Name="Lang_zhTW" ColumnName="Lang_zhTW" />
-                <ScalarProperty Name="Lang_Key" ColumnName="Lang_Key" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3407,33 +3443,6 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="TISS_WebModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="updateTime" ColumnName="updateTime" />
-                <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
-                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="Dept" ColumnName="Dept" />
-                <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
-                <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
-                <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
-                <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
-                <ScalarProperty Name="EID" ColumnName="EID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DocumentLog">
-            <EntityTypeMapping TypeName="TISS_WebModel.DocumentLog">
-              <MappingFragment StoreEntitySet="DocumentLog">
-                <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="OperateAction" ColumnName="OperateAction" />
-                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
-                <ScalarProperty Name="LogID" ColumnName="LogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

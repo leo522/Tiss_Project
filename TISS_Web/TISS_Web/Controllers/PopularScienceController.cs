@@ -4,26 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TISS_Web.Models;
+using TISS_Web.Utility;
 
 namespace TISS_Web.Controllers
 {
     public class PopularScienceController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
-
-        private string EncryptUrl(string title)
-        {
-            try
-            {
-                var bytes = System.Text.Encoding.UTF8.GetBytes(title);
-                var base64string = Convert.ToBase64String(bytes);
-                return base64string.Replace("/", "_").Replace("+", "-"); // 保持標準 Base64 URL Safe 編碼
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
-        }
 
         #region 科普專欄
         public ActionResult research(int page = 1, int pageSize = 9)
@@ -65,7 +52,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -115,7 +102,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -158,7 +145,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -201,7 +188,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -244,7 +231,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -287,7 +274,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -330,7 +317,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -374,7 +361,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -421,7 +408,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
@@ -464,7 +451,7 @@ namespace TISS_Web.Controllers
                 var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
                 {
                     Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
+                    EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
                     ImageContent = s.ImageContent,
                     Hashtags = s.Hashtags,
                     FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),

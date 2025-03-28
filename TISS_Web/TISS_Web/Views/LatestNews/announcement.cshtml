@@ -11,7 +11,7 @@
 <body>
     <div id="app" data-v-app="">
         <div data-v-339da53a="" class="layout">
-            <div data-v-339da53a="" class="container-fluid px-0 mt-header">
+            <div data-v-339da53a="" class="container-fluid px-0 mt-header" id="pageContent">
                 <div data-v-339da53a-s="" class="BasePageLayout">
                     <div class="BasePageBanner">
                         <div class="Mask">
@@ -37,7 +37,7 @@
                                     <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation" aria-current="page">
                                         <span class="el-breadcrumb__item">
                                             <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
-                                            <i class="el-icon el-breadcrumb__separator">
+                                            <i class="el-icon el-breadcrumb__separator" aria-hidden="true">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                     <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                     </path>
@@ -72,16 +72,16 @@
                                 <h2 class="Title" title="中心公告">中心公告</h2>
                                 <ul class="Menu" aria-labelledby="sidebar-title">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/video" title="全部文章" aria-label="查看全部文章">全部文章</a>
+                                        <a class="MenuLink" href="/LatestNews/announcement" title="全部文章">全部文章</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/press" title="新聞發佈" aria-label="查看運科中心的新聞發佈">新聞發佈</a>
+                                        <a class="MenuLink" href="/LatestNews/press" title="新聞發佈">新聞發佈</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/institute" title="中心訊息" aria-label="查看運科中心的中心訊息">中心訊息</a>
+                                        <a class="MenuLink" href="/LatestNews/institute" title="中心訊息">中心訊息</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/recruit" title="徵才招募" aria-label="查看運科中心的徵才招募">徵才招募</a>
+                                        <a class="MenuLink" href="/LatestNews/recruit" title="徵才招募">徵才招募</a>
                                     </li>
                                     @{
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
@@ -94,6 +94,8 @@
                                 </ul>
                             </div>
                         </aside>
+
+                        <!-- 主內容區塊 -->
                         <main class="el-main bg-white">
                             <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
@@ -151,6 +153,7 @@
                                                                 <div class="tag">@article.ContentType</div>
                                                                 <div class="Mask" title="閱讀更多">閱讀更多</div>
                                                             </div>
+
                                                             <span class="el-text is-line-clamp NewsItemTitle">@article.Title</span>
                                                             <div class="NewsItemContent">
                                                                 <span class="el-text is-line-clamp">@article.BodyContent</span>
@@ -174,16 +177,16 @@
                                                     @for (int i = 1; i <= ViewBag.TotalPages; i++)
                                                     {
                                                         <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                                            <a class="page-link" href="@Url.Action("recruit", "Tiss", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
+                                                            <a class="page-link" href="@Url.Action("announcement", "LatestNews", new { page = i })" aria-label="跳到第 @i 頁">@i</a>
                                                         </li>
                                                     }
                                                     <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("recruit", "Tiss", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
+                                                        <a class="page-link" href="@Url.Action("announcement", "LatestNews", new { page = ViewBag.CurrentPage - 1 })" aria-label="前一頁">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                     </li>
                                                     <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                                        <a class="page-link" href="@Url.Action("recruit", "Tiss", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
+                                                        <a class="page-link" href="@Url.Action("announcement", "LatestNews", new { page = ViewBag.CurrentPage + 1 })" aria-label="下一頁">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>
@@ -209,9 +212,8 @@ if (isLoggedIn) {
 } else {
     $('#loginBtn').show(); //顯示登入按鈕
     }
-        loadContent(); //加載已儲存的內容
+/*        loadContent(); //加載已儲存的內容*/
 });
-        //登出按鈕顯示功能
 
         //顯示當前選擇的子項目
         document.addEventListener('DOMContentLoaded', function () {
@@ -219,35 +221,25 @@ if (isLoggedIn) {
             var menuLinks = document.querySelectorAll('.MenuLink');
 
             menuLinks.forEach(function (link) {
-                if (link.getAttribute('href') === currentUrl) {
-                    link.classList.add('active');
-                    link.focus();  // 修改: 焦點移至當前選項
-                }
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            var currentUrl = window.location.pathname;
-            var menuLinks = document.querySelectorAll('.MenuLink');
-
-            menuLinks.forEach(function (link) {
 
                 if (link.getAttribute('href') === currentUrl) {
                     link.classList.add('active');
+                    link.focus(); // 修改: 焦點移到當前選項
                 }
             });
         });
 
-    //功能區塊
-    document.querySelector('#jump-to-Ca').addEventListener('click', function (e) {
-        e.preventDefault(); // 阻止預設的跳轉行為
-        var target = document.querySelector('#Ca');
-        var offset = 100; // 偏移量，根據頁首的高度來設置
-        var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-        window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth' // 平滑滾動效果
+        document.querySelector('#jump-to-Ca').addEventListener('click', function (e) {
+            e.preventDefault();
+            var target = document.querySelector('#Ca');
+            var offset = 100;
+            var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+            target.focus(); // 新增這行以確保滾動後聚焦
         });
-    });
     </script>
 </body>
 </html>

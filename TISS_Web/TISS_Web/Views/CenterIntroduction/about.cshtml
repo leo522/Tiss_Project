@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
     <link href="~/site/css/MenuLinkStyle.css" rel="stylesheet" />
+    <link href="~/site/css/ViewArticle.css" rel="stylesheet" />
 </head>
 <body>
     <div id="app" data-v-app="">
@@ -13,15 +13,16 @@
             <div data-v-339da53a="" class="container-fluid px-0 mt-header">
                 <div data-v-339da53a-s="" class="BasePageLayout">
                     <div class="BasePageBanner">
-                        <div class="Mask"></div>
-                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt="" />
+                        <div class="Mask">
+                        </div>
+                        <img class="PageBannerItemBg" src="/site/img/about_banner_1.cb027849.jpg" alt="">
                         <div class="container">
                             <div class="Title">
                                 <h1 class="BannerTitle" title="About TISS">
                                     About TISS
                                 </h1>
                                 <h2 class="BannerSubTitle">
-                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="" />中心介紹
+                                    <img class="icon" src="/site/img/title_icon_white.5e98ec4e.svg" alt="">中心介紹
                                 </h2>
                             </div>
                         </div>
@@ -57,29 +58,31 @@
                             @*左方功能區塊*@
                             <div class="content" aria-live="polite">
                                 <a href="#L" title="左方功能區塊" accesskey="L" class="alt-c" style="margin-left: 100px;">:::</a>
-                                <h2 class="Title" title="中心介紹">中心介紹</h2>
+                                <div class="Title" title="中心介紹">中心介紹</div>
                                 <ul class="Menu" aria-labelledby="sidebar-title">
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/Objectives" title="使命、願景" aria-label="了解使命與願景">使命、願景</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/Objectives" title="使命、願景" aria-label="了解使命與願景">使命、願景</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/mission" title="中心任務" aria-label="查看中心任務">中心任務</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/mission" title="中心任務" aria-label="查看中心任務">中心任務</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/Organization" title="組織概況" aria-label="查看組織概況">組織概況</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/Organization" title="組織概況" aria-label="查看組織概況">組織概況</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/BOD" title="第1屆 董監事" aria-label="查看第1屆 董監事">第1屆 董監事</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/BOD" title="第1屆 董監事" aria-label="查看第1屆 董監事">第1屆 董監事</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/CEO" title="執行長" aria-label="查看執行長">執行長</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/CEO" title="執行長" aria-label="查看執行長">執行長</a>
                                     </li>
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/Units" title="單位介紹" aria-label="查看單位介紹">單位介紹</a>
+                                        <a class="MenuLink" href="/CenterIntroduction/Units" title="單位介紹" aria-label="查看單位介紹">單位介紹</a>
                                     </li>
                                 </ul>
                             </div>
                         </aside>
+
+                        @*主要內容區塊*@
                         <main class="el-main bg-defaultO4">
                             <div class="MainContainer" aria-live="polite">
                                 <div class="BaseBreadcrumb d-none d-lg-block">
@@ -87,7 +90,7 @@
                                         <div class="el-breadcrumb" aria-label="Breadcrumb" role="navigation">
                                             <span class="el-breadcrumb__item">
                                                 <a class="el-breadcrumb__inner is-link" role="link" href="/Tiss/Home" title="首頁">首頁</a>
-                                                <i class="el-icon el-breadcrumb__separator" aria-hidden="true">
+                                                <i class="el-icon el-breadcrumb__separator">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                                                         <path fill="currentColor" d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
                                                         </path>
@@ -111,7 +114,8 @@
                             @*中央區塊內容*@
                             <div id="main_content">
                                 <div class="Objectives">
-                                    <span id="Objectives" class="anchor"></span>
+                                    <span id="Objectives" class="anchor">
+                                    </span>
                                     <div class="content">
                                         <div class="contentBox">
                                             <div class="SubTitle">
@@ -127,7 +131,6 @@
                                         <img src="~/Img/中心公告圖片/中心的願景和使命圖片.jpg" alt="運動科學化和使命的願景理念" />
                                     </div>
                                 </div>
-
                                 <div class="Mission">
                                     <span id="Mission" class="anchor">
                                     </span>
@@ -192,7 +195,7 @@
                                         <div class="content">
                                             <div class="el-row">
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-8">
-                                                    <a href="#BOD" class="OrganizationItem">
+                                                    <a href="/Tiss/BOD" class="OrganizationItem">
                                                         <div class="ItemTitle" title="董事會">董事會</div>
                                                         <div class="ItemSubTitle" title="Board of Directors">Board of Directors</div>
                                                     </a>
@@ -200,7 +203,7 @@
                                             </div>
                                             <div class="el-row">
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-8">
-                                                    <a href="#BOD" class="OrganizationItem">
+                                                    <a href="/Tiss/BOD" class="OrganizationItem">
                                                         <div class="ItemTitle" title="董事長">董事長</div>
                                                         <div class="ItemSubTitle" title="Chairman">Chairman</div>
                                                     </a>
@@ -208,7 +211,7 @@
                                             </div>
                                             <div class="el-row">
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-8">
-                                                    <a href="#CEO" class="OrganizationItem">
+                                                    <a href="/Tiss/CEO" class="OrganizationItem">
                                                         <div class="ItemTitle" title="執行長">執行長</div>
                                                         <div class="ItemSubTitle" title="CEO">CEO</div>
                                                     </a>
@@ -232,7 +235,7 @@
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-8 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                                     <div class="OrganizationItem">
                                                         <div class="ItemTitle" title="主任秘書">主任秘書</div>
-                                                        <div class="ItemSubTitle" title=" Chief Secretary">Chief Secretary</div>
+                                                        <div class="ItemSubTitle" title="Chief Secretary">Chief Secretary</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,7 +243,7 @@
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered" style="padding-right: 12px; padding-left: 12px;">
                                                     <div class="OrganizationItem">
                                                         <div class="ItemTitle" title="運動科學研究處">運動科學研究處</div>
-                                                        <div class="ItemSubTitle" title="Department of Sport Science Research">Department of Sport Science Research</div>
+                                                        <div class="ItemSubTitle" title="Department of Sport Science Researc">Department of Sport Science Research</div>
                                                     </div>
                                                 </div>
                                                 <div class="el-col el-col-24 el-col-xs-12 el-col-sm-6 is-guttered" style="padding-right: 12px; padding-left: 12px;">
@@ -272,49 +275,43 @@
             </div>
         </div>
     </div>
+
     <script>
+    // 顯示當前選擇的子項目
+    document.addEventListener('DOMContentLoaded', function () {
+        var currentUrl = window.location.pathname;
+        var menuLinks = document.querySelectorAll('.MenuLink');
+
+        menuLinks.forEach(function (link) {
+            if (link.getAttribute('href') === currentUrl) {
+                link.classList.add('active');
+                link.focus();  // 修改: 焦點移至當前選項
+                link.setAttribute("aria-current", "page"); // 為當前頁面選項設置 aria-current
+            }
+        });
+    });
+    // 登出按鈕顯示功能
     $(document).ready(function () {
-        // 登出按鈕顯示功能
         var isLoggedIn = '@Session["LoggedIn"]' == 'True';
+
         if (isLoggedIn) {
             $('#logoutBtn').show(); // 顯示登出按鈕
         } else {
             $('#loginBtn').show(); // 顯示登入按鈕
         }
-
         loadContent(); // 加載已儲存的內容
+    });
 
-        // 當前 URL 檢查並標記菜單項目
-        var currentUrl = window.location.pathname;
-        var menuLinks = document.querySelectorAll('.MenuLink');
-        menuLinks.forEach(function (link) {
-            if (link.getAttribute('href') === currentUrl) {
-                link.classList.add('active');
-                link.focus();  // 修改: 焦點移至當前選項
-            }
-        });
-
-        // 滾動到特定元素
-        const links = document.querySelectorAll('a[href^="#"]');
-        for (const link of links) {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const targetID = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetID);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.getBoundingClientRect().top + window.scrollY,
-                        behavior: 'smooth'
-                    });
-                    targetElement.focus();
-                }
-            });
-        }
-    // 切換下拉菜單
+    // 導覽列
     function toggleDropdown(dropdownId) {
         var dropdownToggle = document.getElementById(dropdownId);
         var dropdownMenu = dropdownToggle.nextElementSibling;
-        dropdownMenu.classList.toggle('show');
+
+        if (dropdownMenu.classList.contains('show')) {
+            dropdownMenu.classList.remove('show');
+        } else {
+            dropdownMenu.classList.add('show');
+        }
     }
     </script>
 </body>

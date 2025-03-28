@@ -281,18 +281,23 @@
     </Compile>
     <Compile Include="Controllers\AduioVideoAreaController.cs" />
     <Compile Include="Controllers\ArticleReportController.cs" />
+    <Compile Include="Controllers\CenterIntroductionController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\LatestNewsController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\PopularScienceController.cs" />
     <Compile Include="Controllers\PublicInfoController.cs" />
     <Compile Include="Controllers\TissController.cs" />
     <Compile Include="Controllers\WebAccountController.cs" />
-    <Compile Include="EmailService.cs" />
-    <Compile Include="FileUploadService.cs" />
+    <Compile Include="Models\AduioVideoAreaLog.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\EmailService.cs" />
+    <Compile Include="Utility\FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="GmailApiService.cs" />
+    <Compile Include="Utility\GmailApiService.cs" />
     <Compile Include="Models\AboutPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -372,9 +377,6 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IWebContent.cs" />
-    <Compile Include="Models\Language.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MenuItems.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -510,8 +512,10 @@
     </Compile>
     <Compile Include="Models\WebContentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportService.cs" />
-    <Compile Include="WebContentService.cs" />
+    <Compile Include="Utility\LogHelper.cs" />
+    <Compile Include="Utility\ReportService.cs" />
+    <Compile Include="Utility\UrlEncoderHelper.cs" />
+    <Compile Include="Utility\WebContentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap-grid.css" />
@@ -2911,7 +2915,6 @@
     <Content Include="tinymce\js\tinymce\skins\ui\tinymce-5\skin.shadowdom.min.css" />
     <Content Include="tinymce\js\tinymce\themes\silver\theme.min.js" />
     <Content Include="tinymce\js\tinymce\tinymce.min.js" />
-    <Content Include="Views\Tiss\purchase.cshtml" />
     <EntityDeploy Include="Models\TissModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TissModel.Designer.cs</LastGenOutput>
@@ -3066,20 +3069,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Tiss\announcement.cshtml" />
-    <Content Include="Views\Tiss\about.cshtml" />
     <Content Include="Views\Shared\_TissMaster.cshtml" />
     <Content Include="Views\Tiss\Home.cshtml" />
-    <Content Include="Views\Tiss\Objectives.cshtml" />
-    <Content Include="Views\Tiss\mission.cshtml" />
-    <Content Include="Views\Tiss\Organization.cshtml" />
-    <Content Include="Views\Tiss\BOD.cshtml" />
-    <Content Include="Views\Tiss\Units.cshtml" />
-    <Content Include="Views\Tiss\CEO.cshtml" />
-    <Content Include="Views\Tiss\press.cshtml" />
-    <Content Include="Views\Tiss\institute.cshtml" />
-    <Content Include="Views\Tiss\recruit.cshtml" />
-    <Content Include="Views\Tiss\regulation.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫作業要點.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫研究人力約用注意事項.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心112年業務計畫.pdf" />
@@ -3091,8 +3082,6 @@
     <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
-    <Content Include="Views\Tiss\ChangePassword.cshtml" />
-    <Content Include="Views\Tiss\news.cshtml" />
     <Content Include="Views\Tiss\activityRecord.cshtml" />
     <Content Include="Views\Tiss\UploadDocument.cshtml" />
     <Content Include="storage\media\attachments\行政法人國家運動科學中心發展目標及計畫%28112-116年%29.pdf" />
@@ -3109,8 +3098,6 @@
     <Content Include="Views\Tiss\ViewArticle.cshtml" />
     <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
-    <Content Include="Views\Tiss\ForgotPassword.cshtml" />
-    <Content Include="Views\Tiss\ResetPassword.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
@@ -3124,7 +3111,6 @@
     <Content Include="Views\Error\WebSiteError.cshtml" />
     <Content Include="Views\Tiss\_VideoSection.cshtml" />
     <Content Include="Views\Tiss\SiteMap.cshtml" />
-    <Content Include="Views\Tiss\overseawork.cshtml" />
     <Content Include="Views\WebAccount\Register.cshtml" />
     <Content Include="Views\WebAccount\PendingRegistrations.cshtml" />
     <Content Include="Views\WebAccount\Login.cshtml" />
@@ -3152,6 +3138,19 @@
     <Content Include="Views\PopularScience\sportsNutrition.cshtml" />
     <Content Include="Views\PopularScience\childrenScience.cshtml" />
     <Content Include="Views\PopularScience\SciencePosterDownLoad.cshtml" />
+    <Content Include="Views\LatestNews\announcement.cshtml" />
+    <Content Include="Views\LatestNews\press.cshtml" />
+    <Content Include="Views\LatestNews\institute.cshtml" />
+    <Content Include="Views\LatestNews\recruit.cshtml" />
+    <Content Include="Views\CenterIntroduction\Units.cshtml" />
+    <Content Include="Views\CenterIntroduction\Organization.cshtml" />
+    <Content Include="Views\CenterIntroduction\BOD.cshtml" />
+    <Content Include="Views\CenterIntroduction\CEO.cshtml" />
+    <Content Include="Views\CenterIntroduction\mission.cshtml" />
+    <Content Include="Views\CenterIntroduction\Objectives.cshtml" />
+    <Content Include="Views\CenterIntroduction\about.cshtml" />
+    <Content Include="Views\WebAccount\ResetPassword.cshtml" />
+    <Content Include="Views\WebAccount\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

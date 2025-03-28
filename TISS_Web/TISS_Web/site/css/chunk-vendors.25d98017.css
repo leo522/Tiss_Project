@@ -23726,7 +23726,7 @@ textarea.form-control-lg {
     display: block;
     flex: 1;
     flex-basis: auto;
-    overflow: auto;
+    /*overflow: auto;*/
     box-sizing: border-box;
     padding: var(--el-main-padding)
 }

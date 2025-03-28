@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TISS_Web.Models;
+using TISS_Web.Utility;
 
 namespace TISS_Web.Controllers
 {
@@ -12,49 +13,57 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
 
-        #region 處理DB影片的尺寸
-        private string ExtractIframe(string content)
+        #region 共用方法：文章查詢
+        private List<ArticleContentModel> GetArticlesByHashtags(List<string> hashtags, int page, int pageSize, bool extractIframe = false)
         {
-            try
+            var list = _db.ArticleContent
+                .Where(a => hashtags.Contains(a.Hashtags) && a.IsEnabled)
+                .OrderByDescending(a => a.CreateDate)
+                .ToList();
+
+            return list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
             {
-                // 過濾空白段落，防止它們影響顯示
-                content = Regex.Replace(content, @"<p>(&nbsp;|\s*)<\/p>", string.Empty, RegexOptions.IgnoreCase);
-
-                var regex = new Regex(@"<iframe[^>]*src=""([^""]*)""[^>]*><\/iframe>"); //正則表達式提取 iframe
-                var match = regex.Match(content);
-
-                if (match.Success)
-                {
-                    var iframeHtml = match.Value;
-
-                    // 替換原始的 width 和 height 屬性
-                    iframeHtml = Regex.Replace(iframeHtml, @"width=""\d+""", "width=\"100%\"");
-                    iframeHtml = Regex.Replace(iframeHtml, @"height=""\d+""", "height=\"100%\"");
-                    return iframeHtml;
-                }
-
-                return string.Empty;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+                Title = s.Title,
+                EncryptedUrl = UrlEncoderHelper.EncryptUrl(s.Title),
+                ImageContent = s.ImageContent,
+                Hashtags = s.Hashtags,
+                FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
+                ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName,
+                VideoIframe = extractIframe ? ExtractIframe(s.ContentBody) : null
+            }).ToList();
         }
         #endregion
 
-        private string EncryptUrl(string title)
+        #region 共用方法：iframe 調整
+        private string ExtractIframe(string content)
         {
-            try
-            {
-                var bytes = System.Text.Encoding.UTF8.GetBytes(title);
-                var base64string = Convert.ToBase64String(bytes);
-                return base64string.Replace("/", "_").Replace("+", "-"); // 保持標準 Base64 URL Safe 編碼
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(content)) return string.Empty;
+
+            // 移除空白段落
+            content = Regex.Replace(content, @"<p>(&nbsp;|\s*)<\/p>", string.Empty, RegexOptions.IgnoreCase);
+
+            // 擷取 <iframe> 內容
+            var match = Regex.Match(content, @"<iframe[^>]*src=\""([^\""]*)\""[^>]*><\/iframe>", RegexOptions.IgnoreCase);
+            if (!match.Success) return string.Empty;
+
+            var iframeHtml = match.Value;
+
+            // 調整寬高為 100%
+            iframeHtml = Regex.Replace(iframeHtml, @"width=\""(\d+)%?\""", "width=\"100%\"");
+            iframeHtml = Regex.Replace(iframeHtml, @"height=\""(\d+)%?\""", "height=\"100%\"");
+
+            return iframeHtml;
         }
+        #endregion
+
+        #region 共用方法：分頁資料設定
+        private void SetPaging(int page, int totalItems, int pageSize)
+        {
+            int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+        }
+        #endregion
 
         #region 影音專區
         public ActionResult videoArea(int page = 1, int pageSize = 9)
@@ -62,48 +71,20 @@ namespace TISS_Web.Controllers
             try
             {
                 ViewBag.Title = "影音專區";
-                page = Math.Max(1, page); //確保頁碼至少為 1
+                page = Math.Max(1, page);
 
-                var relatedHashtags = new List<string>
-            {
-                "人物專訪",
-                "中心成果",
-                "運動科技論壇",
-                "影音專區",
-                "運動科學研究處",
-                //"運動科技",
-            };
-                // 查詢相關 hashtags 的文章
-                var list = _db.ArticleContent
-                    .Where(a => relatedHashtags.Contains(a.Hashtags) && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
+                var hashtags = new List<string> { "人物專訪", "中心成果", "運動科技論壇", "影音專區", "運動科學研究處" };
+                var list = _db.ArticleContent.Where(a => hashtags.Contains(a.Hashtags) && a.IsEnabled).ToList();
 
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
+                SetPaging(page, list.Count, pageSize);
+                var articles = GetArticlesByHashtags(hashtags, page, pageSize, extractIframe: true);
 
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName,
-                    VideoIframe = ExtractIframe(s.ContentBody),
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
                 ViewBag.Videos = articles;
-
-                return View(articles);
+                return View("videoArea", articles);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogHelper.WriteAduioVideoLog("videoArea", "影音專區錯誤", ex);
                 return RedirectToAction("Error404", "Error");
             }
         }
@@ -116,37 +97,19 @@ namespace TISS_Web.Controllers
             {
                 ViewBag.Title = "中心成果";
                 Session["ReturnUrl"] = Request.Url.ToString();
+                page = Math.Max(1, page);
 
-                page = Math.Max(1, page); //確保頁碼至少為 1
+                var hashtags = new List<string> { "中心成果", "人物專訪" };
+                var list = _db.ArticleContent.Where(a => hashtags.Contains(a.Hashtags) && a.IsEnabled).ToList();
 
-                var list = _db.ArticleContent
-                    .Where(a => a.Hashtags == "中心成果" || a.Hashtags == "人物專訪" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
+                SetPaging(page, list.Count, pageSize);
+                var articles = GetArticlesByHashtags(hashtags, page, pageSize);
 
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
+                return View("achievement", articles);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogHelper.WriteAduioVideoLog("achievement", "中心成果錯誤", ex);
                 return RedirectToAction("Error404", "Error");
             }
         }
@@ -159,37 +122,19 @@ namespace TISS_Web.Controllers
             {
                 ViewBag.Title = "新聞影音";
                 Session["ReturnUrl"] = Request.Url.ToString();
+                page = Math.Max(1, page);
 
-                page = Math.Max(1, page); //確保頁碼至少為 1
+                var hashtags = new List<string> { "影音專區" };
+                var list = _db.ArticleContent.Where(a => hashtags.Contains(a.Hashtags) && a.IsEnabled).ToList();
 
-                var list = _db.ArticleContent
-                    .Where(a => a.Hashtags == "影音專區" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
+                SetPaging(page, list.Count, pageSize);
+                var articles = GetArticlesByHashtags(hashtags, page, pageSize);
 
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
+                return View("news", articles);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogHelper.WriteAduioVideoLog("news", "新聞影音錯誤", ex);
                 return RedirectToAction("Error404", "Error");
             }
         }
@@ -202,37 +147,19 @@ namespace TISS_Web.Controllers
             {
                 ViewBag.Title = "活動紀錄";
                 Session["ReturnUrl"] = Request.Url.ToString();
+                page = Math.Max(1, page);
 
-                page = Math.Max(1, page); //確保頁碼至少為 1
+                var hashtags = new List<string> { "運動科技論壇" };
+                var list = _db.ArticleContent.Where(a => hashtags.Contains(a.Hashtags) && a.IsEnabled).ToList();
 
-                var list = _db.ArticleContent
-                    .Where(a => a.Hashtags == "運動科技論壇" && a.IsEnabled)
-                    .OrderByDescending(a => a.CreateDate)
-                    .ToList();
+                SetPaging(page, list.Count, pageSize);
+                var articles = GetArticlesByHashtags(hashtags, page, pageSize);
 
-                //計算總數和總頁數
-                var totalArticles = list.Count();
-                var totalPages = (int)Math.Ceiling(totalArticles / (double)pageSize);
-
-                page = Math.Min(page, totalPages); //確保頁碼不超過最大頁數
-
-                var articles = list.Skip((page - 1) * pageSize).Take(pageSize).Select(s => new ArticleContentModel
-                {
-                    Title = s.Title,
-                    EncryptedUrl = EncryptUrl(s.Title),
-                    ImageContent = s.ImageContent,
-                    Hashtags = s.Hashtags,
-                    FormattedCreateDate = (s.CreateDate ?? DateTime.MinValue).ToString("yyyy-MM-dd"),
-                    ContentType = _db.ArticleCategory.FirstOrDefault(c => c.Id == s.ContentTypeId)?.CategoryName
-                }).ToList();
-
-                ViewBag.CurrentPage = page;
-                ViewBag.TotalPages = totalPages;
-
-                return View(articles);
+                return View("activityRecord", articles);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                LogHelper.WriteAduioVideoLog("activityRecord", "活動紀錄錯誤", ex);
                 return RedirectToAction("Error404", "Error");
             }
         }

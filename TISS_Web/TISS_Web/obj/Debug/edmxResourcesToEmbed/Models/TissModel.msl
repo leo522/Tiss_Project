@@ -20,6 +20,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AduioVideoAreaLog">
+      <EntityTypeMapping TypeName="TISS_WebModel.AduioVideoAreaLog">
+        <MappingFragment StoreEntitySet="AduioVideoAreaLog">
+          <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+          <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+          <ScalarProperty Name="LogTitle" ColumnName="LogTitle" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="AnnouncementPageContent">
       <EntityTypeMapping TypeName="TISS_WebModel.AnnouncementPageContent">
         <MappingFragment StoreEntitySet="AnnouncementPageContent">
@@ -143,6 +155,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DocumentLog">
+      <EntityTypeMapping TypeName="TISS_WebModel.DocumentLog">
+        <MappingFragment StoreEntitySet="DocumentLog">
+          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="OperateAction" ColumnName="OperateAction" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="LogID" ColumnName="LogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Documents">
       <EntityTypeMapping TypeName="TISS_WebModel.Documents">
         <MappingFragment StoreEntitySet="Documents">
@@ -215,6 +238,22 @@
           <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
           <ScalarProperty Name="EmailLogID" ColumnName="EmailLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employee">
+      <EntityTypeMapping TypeName="TISS_WebModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="updateTime" ColumnName="updateTime" />
+          <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="Dept" ColumnName="Dept" />
+          <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
+          <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
+          <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
+          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
+          <ScalarProperty Name="EID" ColumnName="EID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -371,15 +410,6 @@
           <ScalarProperty Name="Department" ColumnName="Department" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Language">
-      <EntityTypeMapping TypeName="TISS_WebModel.Language">
-        <MappingFragment StoreEntitySet="Language">
-          <ScalarProperty Name="Lang_enUS" ColumnName="Lang_enUS" />
-          <ScalarProperty Name="Lang_zhTW" ColumnName="Lang_zhTW" />
-          <ScalarProperty Name="Lang_Key" ColumnName="Lang_Key" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1007,33 +1037,6 @@
           <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
           <ScalarProperty Name="TextContent" ColumnName="TextContent" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employee">
-      <EntityTypeMapping TypeName="TISS_WebModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
-          <ScalarProperty Name="updateTime" ColumnName="updateTime" />
-          <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
-          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-          <ScalarProperty Name="Dept" ColumnName="Dept" />
-          <ScalarProperty Name="Emp_Pwd" ColumnName="Emp_Pwd" />
-          <ScalarProperty Name="Emp_Tel" ColumnName="Emp_Tel" />
-          <ScalarProperty Name="Emp_Email" ColumnName="Emp_Email" />
-          <ScalarProperty Name="Emp_Name" ColumnName="Emp_Name" />
-          <ScalarProperty Name="EID" ColumnName="EID" />
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DocumentLog">
-      <EntityTypeMapping TypeName="TISS_WebModel.DocumentLog">
-        <MappingFragment StoreEntitySet="DocumentLog">
-          <ScalarProperty Name="ModifiedTime" ColumnName="ModifiedTime" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="OperateAction" ColumnName="OperateAction" />
-          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
-          <ScalarProperty Name="LogID" ColumnName="LogID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -14,7 +14,7 @@
                 <div data-v-339da53a-s="" class="Home">
                     <header class="SectionBanner">
                         <h1 class="sr-only" style="color:red">國家運動科學中心</h1>
-                        @*輪播圖*@
+                        @*輪播圖*@W
                         <div id="carouselExample" class="carousel slide" data-ride="carousel" style="margin-top: -50px; height: auto;">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
@@ -57,12 +57,6 @@
                                                         string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
                                                         <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
                                                     }
-
-                                                    @*@if (Model.LatestArticle.ImageContent != null)
-        {
-            string base64Image = Convert.ToBase64String(Model.LatestArticle.ImageContent);
-            <img src="data:image/png;base64,@base64Image" alt="預覽圖" tabindex="0" />
-        }*@
                                                     <div class="tag">@Model.LatestArticle.ContentType</div>
                                                     <div class="Mask">閱讀更多</div>
                                                 </div>
