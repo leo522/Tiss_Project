@@ -279,8 +279,12 @@
     <Compile Include="CKEditorControl.ascx.designer.cs">
       <DependentUpon>CKEditorControl.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AduioVideoAreaController.cs" />
+    <Compile Include="Controllers\ArticleReportController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\PopularScienceController.cs" />
+    <Compile Include="Controllers\PublicInfoController.cs" />
     <Compile Include="Controllers\TissController.cs" />
     <Compile Include="Controllers\WebAccountController.cs" />
     <Compile Include="EmailService.cs" />
@@ -3063,12 +3067,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Tiss\announcement.cshtml" />
-    <Content Include="Views\Tiss\video.cshtml" />
     <Content Include="Views\Tiss\about.cshtml" />
-    <Content Include="Views\Tiss\research.cshtml" />
     <Content Include="Views\Shared\_TissMaster.cshtml" />
     <Content Include="Views\Tiss\Home.cshtml" />
-    <Content Include="Views\Tiss\public_info.cshtml" />
     <Content Include="Views\Tiss\Objectives.cshtml" />
     <Content Include="Views\Tiss\mission.cshtml" />
     <Content Include="Views\Tiss\Organization.cshtml" />
@@ -3078,33 +3079,19 @@
     <Content Include="Views\Tiss\press.cshtml" />
     <Content Include="Views\Tiss\institute.cshtml" />
     <Content Include="Views\Tiss\recruit.cshtml" />
-    <Content Include="Views\Tiss\sportScience.cshtml" />
-    <Content Include="Views\Tiss\sportTech.cshtml" />
-    <Content Include="Views\Tiss\sportMedicine.cshtml" />
-    <Content Include="Views\Tiss\GenderEquality.cshtml" />
-    <Content Include="Views\Tiss\procedure.cshtml" />
     <Content Include="Views\Tiss\regulation.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫作業要點.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫研究人力約用注意事項.pdf" />
-    <Content Include="Views\Tiss\plan.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心112年業務計畫.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心113年業務計畫.pdf" />
     <Content Include="storage\media\attachments\行政法人國家運動科學中心設置規劃報告.pdf" />
-    <Content Include="Views\Tiss\budget.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心112年度決算.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心112年度預算.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心113年度預算.pdf" />
-    <Content Include="Views\Tiss\download.cshtml" />
     <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
-    <Content Include="Views\Tiss\other.cshtml" />
     <Content Include="Views\Tiss\ChangePassword.cshtml" />
-    <Content Include="Views\Tiss\sportsPhysiology.cshtml" />
-    <Content Include="Views\Tiss\sportsPsychology.cshtml" />
-    <Content Include="Views\Tiss\physicalTraining.cshtml" />
-    <Content Include="Views\Tiss\sportsNutrition.cshtml" />
-    <Content Include="Views\Tiss\achievement.cshtml" />
     <Content Include="Views\Tiss\news.cshtml" />
     <Content Include="Views\Tiss\activityRecord.cshtml" />
     <Content Include="Views\Tiss\UploadDocument.cshtml" />
@@ -3127,12 +3114,9 @@
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
     <Content Include="Views\Maintenance\Index.cshtml" />
     <Content Include="Views\Error\Error404.cshtml" />
-    <Content Include="Views\Tiss\childrenScience.cshtml" />
     <Content Include="Views\Tiss\_PopularScience.cshtml" />
     <Content Include="Views\Tiss\_VideoArea.cshtml" />
-    <Content Include="Views\Tiss\SciencePosterDownLoad.cshtml" />
     <Content Include="storage\media\attachments\國家運動科學中心人事管理規章.pdf" />
-    <Content Include="Views\Tiss\SponsorArea.cshtml" />
     <Content Include="Views\Maintenance\Maintenance.cshtml" />
     <Content Include="tinymce\CHANGELOG.md" />
     <Content Include="tinymce\js\tinymce\langs\README.md" />
@@ -3144,9 +3128,34 @@
     <Content Include="Views\WebAccount\Register.cshtml" />
     <Content Include="Views\WebAccount\PendingRegistrations.cshtml" />
     <Content Include="Views\WebAccount\Login.cshtml" />
+    <Content Include="Views\AduioVideoArea\videoArea.cshtml" />
+    <Content Include="Views\AduioVideoArea\achievement.cshtml" />
+    <Content Include="Views\AduioVideoArea\news.cshtml" />
+    <Content Include="Views\AduioVideoArea\activityRecord.cshtml" />
+    <Content Include="Views\VideoArea\videoArea.cshtml" />
+    <Content Include="Views\PublicInfo\Public_Info.cshtml" />
+    <Content Include="Views\PublicInfo\regulation.cshtml" />
+    <Content Include="Views\PublicInfo\procedure.cshtml" />
+    <Content Include="Views\PublicInfo\plan.cshtml" />
+    <Content Include="Views\PublicInfo\budget.cshtml" />
+    <Content Include="Views\PublicInfo\download.cshtml" />
+    <Content Include="Views\PublicInfo\other.cshtml" />
+    <Content Include="Views\PublicInfo\overseawork.cshtml" />
+    <Content Include="Views\PublicInfo\GenderEquality.cshtml" />
+    <Content Include="Views\PopularScience\research.cshtml" />
+    <Content Include="Views\PopularScience\sportScience.cshtml" />
+    <Content Include="Views\PopularScience\sportTech.cshtml" />
+    <Content Include="Views\PopularScience\sportMedicine.cshtml" />
+    <Content Include="Views\PopularScience\sportsPhysiology.cshtml" />
+    <Content Include="Views\PopularScience\sportsPsychology.cshtml" />
+    <Content Include="Views\PopularScience\physicalTraining.cshtml" />
+    <Content Include="Views\PopularScience\sportsNutrition.cshtml" />
+    <Content Include="Views\PopularScience\childrenScience.cshtml" />
+    <Content Include="Views\PopularScience\SciencePosterDownLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ArticleReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

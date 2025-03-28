@@ -45,7 +45,6 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
         private readonly string _apiKey = "AIzaSyCHWwoGD3o2uuHOQp4ejbi9wZ7yuDfLOQg"; //yt Data API KEY
-        private readonly EmailService _emailService;
 
         #region 檔案上傳共用服務
         private readonly FileUploadService _fileUploadService;
@@ -56,7 +55,6 @@ namespace TISS_Web.Controllers
             {
                 _fileUploadService = new FileUploadService(new TISS_WebEntities());
                 _contentService = new WebContentService(new TISS_WebEntities()); //網頁內容存檔共用服務
-                _emailService = new EmailService();
             }
             catch (Exception ex)
             {
@@ -69,7 +67,6 @@ namespace TISS_Web.Controllers
         #region 網頁內容存檔共用服務
         private readonly WebContentService _contentService;
         #endregion
-
 
         #region 公開資訊_上傳文件檔案
         // 上傳計畫文件
@@ -1962,13 +1959,6 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 贊助專區
-        public ActionResult SponsorArea()
-        {
-            return View();
-        }
-        #endregion
-
         #region 寫入文字和圖片
         public ActionResult webContent()
         {
@@ -3062,21 +3052,6 @@ namespace TISS_Web.Controllers
             {
                 throw ex;
             }
-        }
-        #endregion
-
-        #region 切換語言
-        public ActionResult ChangeLanguage(string lang)
-        {
-            if (!string.IsNullOrEmpty(lang))
-            {
-                var langCookie = new HttpCookie("lang", lang)
-                {
-                    Expires = DateTime.Now.AddYears(1)
-                };
-                Response.Cookies.Add(langCookie);
-            }
-            return Redirect(Request.UrlReferrer.ToString());
         }
         #endregion
 

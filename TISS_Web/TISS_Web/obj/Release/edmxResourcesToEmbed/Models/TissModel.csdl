@@ -170,6 +170,7 @@
     <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
     <NavigationProperty Name="Documents" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="ArticleContent" ToRole="Documents" />
+    <Property Name="ExpireDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>

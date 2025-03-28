@@ -4,6 +4,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -14,6 +15,7 @@ namespace TISS_Web.Controllers
     public class WebAccountController : Controller
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
+        private readonly EmailService _emailService = new EmailService();
 
         #region 註冊帳號
         public ActionResult Register()
@@ -75,9 +77,8 @@ namespace TISS_Web.Controllers
                 // 發送Email通知管理員
                 var adminEmail = "chiachi.pan@tiss.org.tw";
                 var emailBody = $"新使用者註冊，請審核：<br/>帳號: {UserName}<br/>Email: {Email}<br/>註冊時間: {DateTime.Now}<br/><a href='{Url.Action("PendingRegistrations", "Tiss", null, Request.Url.Scheme)}'>點擊這裡審核</a>";
-                SendEmail(adminEmail, "新使用者註冊通知", emailBody, null);
+                _emailService.SendEmail(adminEmail, "新使用者註冊通知", emailBody, null);
 
-                // 設定訊息給 TempData
                 TempData["RegisterMessage"] = "您的帳號已註冊成功，待管理員審核後將發送通知到您的Email。";
 
                 return RedirectToAction("Login");
@@ -103,7 +104,6 @@ namespace TISS_Web.Controllers
                             CreatedDate = DateTime.Now
                         }).ToList();
 
-                // **提供所有角色給前端**
                 ViewBag.Roles = _db.Roles.ToList();
 
                 return View(pendingUsers);
@@ -128,7 +128,6 @@ namespace TISS_Web.Controllers
 
                 user.IsApproved = true;
 
-                // **更新 InternalEmployees 註冊狀態**
                 var employee = _db.InternalEmployees.FirstOrDefault(e => e.EmailAddress == user.Email);
                 if (employee != null)
                 {
@@ -139,7 +138,7 @@ namespace TISS_Web.Controllers
                 var existingRoles = _db.UserRoles.Where(ur => ur.UserID == user.UserID).ToList();
                 _db.UserRoles.RemoveRange(existingRoles);
 
-                if (roleIds != null && roleIds.Count > 0)  // ✅ 修正 `null` 檢查
+                if (roleIds != null && roleIds.Count > 0)
                 {
                     foreach (var roleId in roleIds)
                     {
@@ -151,7 +150,7 @@ namespace TISS_Web.Controllers
 
                 // **發送通知**
                 var emailBody = $"您的帳號 {user.UserName} 已通過審核，現在可以登入系統！";
-                SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody, null);
+                _emailService.SendEmail(user.Email, "國家運動科學中心，網頁管理者帳號審核通過通知", emailBody, null);
 
                 return Json(new { success = true, message = "審核成功" });
             }
@@ -161,7 +160,9 @@ namespace TISS_Web.Controllers
                 return Json(new { success = false, error = "伺服器錯誤：" + ex.Message });
             }
         }
+        #endregion
 
+        #region 拒絕申請註冊
         [HttpPost]
         public ActionResult RejectUser(string userName)
         {
@@ -278,7 +279,6 @@ namespace TISS_Web.Controllers
 
             FormsAuthentication.SignOut(); //清除所有的 Forms 認證 Cookies
 
-            // 取得登出前的頁面路徑，如果沒有則預設為首頁
             string returnUrl = Request.UrlReferrer != null ? Request.UrlReferrer.ToString() : Url.Action("Home", "Tiss");
 
             return Redirect(returnUrl);  //重定向到 Home 頁面
@@ -307,8 +307,9 @@ namespace TISS_Web.Controllers
         {
             return View();
         }
+        #endregion
 
-        // 發送重置密碼鏈接
+        #region 發送重置密碼
         [HttpPost]
         public ActionResult SendResetLink(string Email)
         {
@@ -342,9 +343,9 @@ namespace TISS_Web.Controllers
 
                 var emailBody = $"請點擊以下連結重置您的密碼：{resetLink}，連結有效時間為5分鐘";
 
-                SendEmail(Email, "重置密碼", emailBody, null);
+                _emailService.SendEmail(Email, "重置密碼", emailBody, null);
 
-                ViewBag.Message = "重置密碼連結已發送至您的郵箱";
+                ViewBag.Message = "重置密碼連結已發送至您的信箱";
                 return View("ForgotPassword");
             }
             catch (Exception ex)
@@ -353,13 +354,13 @@ namespace TISS_Web.Controllers
                 return View("Error");
             }
         }
+        #endregion
 
-        //重置密碼頁面
+        #region 重置密碼頁面
         public ActionResult ResetPassword(string token)
         {
             try
             {
-                // 查找重置請求
                 var resetRequest = _db.PasswordResetRequests.SingleOrDefault(r => r.Token == token && r.ExpiryDate > DateTime.Now);
 
                 if (resetRequest == null)
@@ -368,7 +369,6 @@ namespace TISS_Web.Controllers
                     return View("Error");
                 }
 
-                // 初始化 ResetPasswordViewModel 並傳遞到視圖
                 var model = new ResetPasswordViewModel
                 {
                     Token = token
@@ -382,8 +382,9 @@ namespace TISS_Web.Controllers
                 return View("Error");
             }
         }
+        #endregion
 
-        // 處理重置密碼
+        #region 處理重置密碼
         [HttpPost]
         public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
@@ -422,13 +423,11 @@ namespace TISS_Web.Controllers
 
                 // 更新用戶的密碼
                 user.Password = ComputeSha256Hash(model.NewPassword);
-                //user.changeDate = DateTime.Now;
 
                 // 更新 PasswordResetRequest 表中的 UserAccount 和 ChangeDate
                 resetRequest.UserAccount = user.UserName;
                 resetRequest.changeDate = DateTime.Now;
 
-                // 刪除重置請求
                 _db.PasswordResetRequests.Remove(resetRequest);
             }
             catch (Exception ex)
@@ -439,7 +438,6 @@ namespace TISS_Web.Controllers
 
             try
             {
-                // 儲存變更到資料庫
                 _db.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -448,7 +446,6 @@ namespace TISS_Web.Controllers
                 {
                     foreach (var validationError in validationErrors.ValidationErrors)
                     {
-                        // 記錄錯誤信息
                         Console.WriteLine($"Property: {validationError.PropertyName}, Error: {validationError.ErrorMessage}");
                     }
                 }
@@ -457,67 +454,6 @@ namespace TISS_Web.Controllers
 
             ViewBag.Message = "您的密碼已成功重置";
             return RedirectToAction("Login");
-        }
-        #endregion
-
-        #region 郵件發送方法
-        public void SendEmail(string toEmail, string subject, string body, string attachmentPath)
-        {
-            var gmailService = new GmailApiService(); //使用 Gmail API 發送郵件
-
-            //發送郵件
-            try
-            {
-                gmailService.SendEmail(toEmail, subject, body, attachmentPath);
-                Console.WriteLine("郵件已成功發送");
-                LogEmail(toEmail, subject, body, "Sent", null); // 記錄成功發送的郵件
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"錯誤: {ex.Message}");
-                LogEmail(toEmail, subject, body, "Failed", ex.Message); // 記錄錯誤
-            }
-        }
-        private void LogEmail(string recipientEmail, string subject, string body, string status, string errorMessage)
-        {
-            var emailLog = new EmailLogs
-            {
-                RecipientEmail = recipientEmail,
-                Subject = subject,
-                Body = body,
-                SentDate = DateTime.Now,
-                Status = status,
-                ErrorMessage = errorMessage
-            };
-
-            _db.EmailLogs.Add(emailLog);
-            _db.SaveChanges();
-        }
-        #endregion
-
-        #region 生成文章點閱率報表
-        public ActionResult GenerateArticleClickReport()
-        {
-            var reportService = new ReportService();
-
-            string reportPath = reportService.GenerateReport();
-
-            if (!string.IsNullOrEmpty(reportPath))
-            {
-                // 使用 Split 將收件人字串分割成單個地址的陣列
-                string[] toEmail = "edithsu@tiss.org.tw,chiachi.pan@tiss.org.tw".Split(',');
-                //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
-
-                string subject = "運科中心專欄文章點閱量報表";
-                string body = "您好，請參閱附件中的運科中心專欄文章點閱量報表。";
-                // 迴圈發送郵件給每個收件人
-                foreach (string email in toEmail)
-                {
-                    SendEmail(email.Trim(), subject, body, reportPath); //Trim() 確保去除多餘的空格
-                }
-            }
-
-            return Content("報表產生完成");
         }
         #endregion
     }

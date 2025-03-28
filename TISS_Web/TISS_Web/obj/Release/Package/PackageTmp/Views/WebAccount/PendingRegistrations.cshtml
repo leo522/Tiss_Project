@@ -1,0 +1,97 @@
+﻿@model List<TISS_Web.Models.UserModel>
+@{
+    Layout = "~/Views/Shared/_TissMaster.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            margin-top: 100px; /* 增加表格與其他元素之間的間距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>待審核的註冊用戶</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>用戶名</th>
+                    <th>電子郵件</th>
+                    <th>註冊日期</th>
+                    <th>角色權限</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>@user.Email</td>
+                        <td>@user.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>
+                            <!--修正 `ViewBag.Roles` 的錯誤，確保 `RoleID` 存在 -->
+                            <select class="form-control role-select" id="role-@user.UserName" multiple>
+                                @if (ViewBag.Roles != null)
+                                {
+                                    foreach (var role in (List<TISS_Web.Models.Roles>)ViewBag.Roles)
+                                    {
+                                        <option value="@role.RoleID">@role.RoleName</option>
+                                    }
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success approve-btn" data-username="@user.UserName">批准</button>
+                            <form action="@Url.Action("RejectUser", "WebAccount")" method="post" style="display:inline;">
+                                <input type="hidden" name="userName" value="@user.UserName" />
+                                <button type="submit" class="btn btn-danger">拒絕</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.querySelectorAll(".approve-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                const userName = this.getAttribute("data-username");
+                const selectedRoles = Array.from(document.querySelector(`#role-${userName}`).selectedOptions)
+                                          .map(option => option.value);
+
+                if (selectedRoles.length === 0) {
+                    alert("請選擇至少一個角色！");
+                    return;
+                }
+
+                fetch("@Url.Action("ApproveUser", "WebAccount")", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userName: userName, roleIds: selectedRoles })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("伺服器回應錯誤");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert("使用者已批准！");
+                        location.reload(); // 重新載入頁面
+                    } else {
+                        alert("批准失敗：" + data.error);
+                    }
+                })
+                .catch(error => {
+                    alert("請求錯誤：" + error.message);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

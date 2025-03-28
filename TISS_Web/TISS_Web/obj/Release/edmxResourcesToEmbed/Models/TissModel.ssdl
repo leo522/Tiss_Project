@@ -65,6 +65,7 @@
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedUser" Type="nvarchar" MaxLength="10" />
     <Property Name="IsEnabled" Type="bit" Nullable="false" />
+    <Property Name="ExpireDate" Type="datetime" />
   </EntityType>
   <EntityType Name="BODPageContent">
     <Key>
