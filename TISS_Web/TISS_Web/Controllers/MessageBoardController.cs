@@ -59,6 +59,11 @@ namespace TISS_Web.Controllers
                 {
                     return RedirectToAction("Error404", "Error");
                 }
+                if (blackList.Any(bad => userName.IndexOf(bad, StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    return RedirectToAction("Error404", "Error");
+                }
+               
 
                 // 處理留言
                 var comment = new MessageBoard
@@ -79,13 +84,18 @@ namespace TISS_Web.Controllers
                 {
                     return RedirectToAction("ViewArticle", new { encryptedUrl = article.EncryptedUrl });
                 }
+
                 return RedirectToAction("Home","Tiss");
             }
             catch (Exception ex)
             {
+                // Log 攻擊 IP + 留言內容
+                var ip = Request.UserHostAddress;
+                System.IO.File.AppendAllText(Server.MapPath("~/App_Data/CommentAttackLog.txt"),
+                    $"[{DateTime.Now}] IP: {ip}, UserName: {userName}, Content: {commentText}, Error: {ex.Message}\n");
+
                 throw ex;
             }
-
         }
         #endregion
 
@@ -131,6 +141,7 @@ namespace TISS_Web.Controllers
             sanitized = Regex.Replace(sanitized, @"<iframe[\s\S]*?>[\s\S]*?</iframe>", "", RegexOptions.IgnoreCase);
             sanitized = Regex.Replace(sanitized, @"<style[\s\S]*?>[\s\S]*?</style>", "", RegexOptions.IgnoreCase);
             sanitized = Regex.Replace(sanitized, @"on\w+\s*=\s*(['""]?).*?\1", "", RegexOptions.IgnoreCase); // 事件屬性移除，如 onclick="..."
+            sanitized = Regex.Replace(sanitized, @"<.*?>", ""); // 移除所有 HTML 標籤
 
             return HttpUtility.HtmlEncode(sanitized);
         }

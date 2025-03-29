@@ -351,6 +351,7 @@ namespace TISS_Web.Controllers
 
                 var comments = _db.MessageBoard.Where(m => m.ArticleId == article.Id && m.IsApproved).ToList();
                 ViewBag.Comments = comments;
+                ViewBag.CommentCount = comments.Count;
 
                 ViewBag.Title = $"{article.Title}";// 設定網頁描述性的標題
 
@@ -587,6 +588,7 @@ namespace TISS_Web.Controllers
 
         #region 刪除Tiny附件檔案
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult DeleteFile(int documentId)
         {
             try
@@ -604,15 +606,14 @@ namespace TISS_Web.Controllers
                     document.UploadTime = DateTime.Now;
                     document.Creator = userAccount;
 
-                    // 寫入 Log 紀錄表
-                    var log = new DocumentLog
+                    // 寫入 log
+                    _db.DocumentLog.Add(new DocumentLog
                     {
                         DocumentID = document.DocumentID,
                         OperateAction = "Disable",
                         ModifiedBy = userAccount,
                         ModifiedTime = DateTime.Now
-                    };
-                    _db.DocumentLog.Add(log);
+                    });
 
                     _db.SaveChanges();
 

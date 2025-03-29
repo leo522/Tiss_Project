@@ -312,7 +312,7 @@
                     </div>
 
                     @*留言板*@
-                    <div class="comments-section">
+                    @*<div class="comments-section">
                         <h2>留言區</h2>
                         <button id="toggle-comments" class="btn btn-light">
                             <i class="fa-regular fa-comment-dots fa-2xl" style="color: #1352e7;"></i><span>檢視留言(@ViewBag.CommentCount 則留言)</span>
@@ -379,7 +379,7 @@
                             </div>
                             <button type="submit" class="btn btn-success">提交留言</button>
                         </form>
-                    </div>
+                    </div>*@
                 </main>
             </section>
         </div>
@@ -501,24 +501,38 @@
     });
 
     document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".remove-file").forEach(button => {
-        button.addEventListener("click", function () {
-            const fileId = this.getAttribute("data-id");
-            if (confirm("確定要刪除此文件嗎？")) {
-                fetch(`@Url.Action("DeleteFile", "Article")?documentId=${fileId}`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        this.closest("li").remove();
-                    } else {
-                        alert("刪除失敗：" + data.message);
-                    }
-                })
-                .catch(error => console.error("刪除文件時發生錯誤：", error));
-            }
+     document.addEventListener("DOMContentLoaded", function () {
+        // 取得 Anti-Forgery Token
+        const tokenInput = document.querySelector('input[name="__RequestVerificationToken"]');
+        const antiForgeryToken = tokenInput ? tokenInput.value : "";
+
+        document.querySelectorAll(".remove-file").forEach(button => {
+            button.addEventListener("click", function () {
+                const fileId = this.getAttribute("data-id");
+
+                if (confirm("確定要刪除此文件嗎？")) {
+                    fetch('@Url.Action("DeleteFile", "Article")', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": antiForgeryToken
+                        },
+                        body: JSON.stringify({ documentId: parseInt(fileId) })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            this.closest("li").remove();
+                        } else {
+                            alert("刪除失敗：" + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("刪除文件時發生錯誤：", error);
+                        alert("刪除時發生錯誤，請稍後再試。");
+                    });
+                }
+            });
         });
     });
 });
