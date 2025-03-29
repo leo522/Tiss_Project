@@ -13,6 +13,7 @@ namespace TISS_Web.Models
         public DateTime UploadTime { get; set; }
         public int FileSize { get; set; }
         public int? ArticleId { get; set; }
+        public string Category { get; set; }
     }
 
     public class ArticleViewModel

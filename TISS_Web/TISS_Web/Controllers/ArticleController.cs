@@ -16,34 +16,6 @@ namespace TISS_Web.Controllers
     {
         private TISS_WebEntities _db = new TISS_WebEntities(); //資料庫
 
-        #region 自動隱藏過期文章
-        private void AutoExpireArticles()
-        {
-            try
-            {
-                var now = DateTime.Now;
-                var expiredArticles = _db.ArticleContent
-                    .Where(a => a.ExpireDate != null && a.ExpireDate <= now && a.IsEnabled).ToList();
-
-                foreach (var article in expiredArticles)
-                {
-                    article.IsEnabled = false;
-                    article.UpdatedDate = DateTime.Now;
-                    article.UpdatedUser = "SystemAutoExpire";
-                }
-
-                if (expiredArticles.Any())
-                {
-                    _db.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        #endregion
-
         #region 發佈文章
         public ActionResult ArticleCreate(int? id)
         {
@@ -158,7 +130,6 @@ namespace TISS_Web.Controllers
                         Console.WriteLine($"收到的檔案數量: {documentFiles.Length}");
                     }
 
-                    //var route = GetRedirectTarget(dto.Hashtags);
                     var route = GetRedirectTarget(dto.ContentType);
                     return RedirectToAction(route.Item2, route.Item1);
                 }
@@ -320,6 +291,7 @@ namespace TISS_Web.Controllers
                         ArticleId = d.ArticleId ?? 0// 可用於下載鏈接
                     }).ToList();
 
+
                 var model = new ArticleViewModel
                 {
                     Article = article,
@@ -451,7 +423,69 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
+        #region 自動隱藏過期文章
+        private void AutoExpireArticles()
+        {
+            try
+            {
+                var now = DateTime.Now;
+                var expiredArticles = _db.ArticleContent
+                    .Where(a => a.ExpireDate != null && a.ExpireDate <= now && a.IsEnabled).ToList();
+
+                foreach (var article in expiredArticles)
+                {
+                    article.IsEnabled = false;
+                    article.UpdatedDate = DateTime.Now;
+                    article.UpdatedUser = "SystemAutoExpire";
+                }
+
+                if (expiredArticles.Any())
+                {
+                    _db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
         #region 處理修改編輯文章
+        public ActionResult EditArticle(int id)
+        {
+            var article = _db.ArticleContent.Find(id);
+            if (article == null) return HttpNotFound();
+
+            var documents = _db.Documents
+                .Where(d => d.ArticleId == article.Id && d.IsActive)
+                .ToList();
+
+            var documentViewModels = documents.Select(d => new DocumentViewModel
+            {
+                DocumentID = d.DocumentID,
+                DocumentName = d.DocumentName,
+                DocumentType = d.DocumentType,
+                UploadTime = d.UploadTime,
+                FileSize = d.FileSize,
+                ArticleId = d.ArticleId ?? 0,
+                Category = d.Category
+            }).ToList();
+
+            var viewModel = new ArticleViewModel
+            {
+                Article = article,
+                AssociatedDocuments = documentViewModels
+            };
+
+            ViewBag.Categories = new SelectList(_db.ArticleCategory.ToList(), "Id", "CategoryName", article.ContentTypeId);
+            ViewBag.Hashtags = new MultiSelectList(_db.Hashtag.ToList(), "Name", "Name", article.Hashtags?.Split(','));
+            ViewBag.SelectedCategory = documentViewModels.FirstOrDefault()?.Category; // ✅ 加這行
+
+            return View(viewModel);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
