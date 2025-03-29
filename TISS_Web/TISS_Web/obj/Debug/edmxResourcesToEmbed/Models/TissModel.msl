@@ -1040,5 +1040,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="InternalPolicyLog">
+      <EntityTypeMapping TypeName="TISS_WebModel.InternalPolicyLog">
+        <MappingFragment StoreEntitySet="InternalPolicyLog">
+          <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+          <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+          <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+          <ScalarProperty Name="LogTitle" ColumnName="LogTitle" />
+          <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

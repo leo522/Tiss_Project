@@ -386,6 +386,17 @@
     <Property Name="IsRegistered" Type="bit" />
     <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
   </EntityType>
+  <EntityType Name="InternalPolicyLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActionName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LogTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="LogMessage" Type="nvarchar(max)" />
+    <Property Name="StackTrace" Type="nvarchar(max)" />
+    <Property Name="LogTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="MenuItems">
     <Key>
       <PropertyRef Name="Id" />
@@ -1111,6 +1122,7 @@
     <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InternalPolicyLog" EntityType="Self.InternalPolicyLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />

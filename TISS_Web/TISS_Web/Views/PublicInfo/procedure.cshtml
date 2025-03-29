@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="infoList">
                                         <div class="el-auto-resizer" style="width: 100%; height: 100%;">
-                                            <div class="el-table-v2 el-table-v2__root" style="height: 650px; width: 870px;">
+                                            <div class="el-table-v2 el-table-v2__root" style="height: 750px; width: 870px;">
                                                 <div class="el-table-v2__table el-table-v2__main">
                                                     <table>
                                                         <thead>
@@ -249,9 +249,10 @@
                                         @{
                                             if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                using (Html.BeginForm("UploadDocument", "PublicInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                 {
-                                                    <input type="hidden" name="category" value="Procedure" /> <!-- 類別標識 -->
+                                                    <input type="hidden" name="category" value="Procedure" />
+                                                    <input type="hidden" name="redirectAction" value="procedure" />
                                                     <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                     <div class="col-md-10" style="margin-bottom: 20px;">
                                                         <input type="file" name="file" />
@@ -329,7 +330,7 @@ if (isLoggedIn) {
                     if (result.isConfirmed) {
                         var form = document.createElement("form");
                         form.method = "POST";
-                        form.action = "/Tiss/RevokeDocument";
+                        form.action = "/PublicInfo/RevokeDocument";
 
                         var input = document.createElement("input");
                         input.type = "hidden";

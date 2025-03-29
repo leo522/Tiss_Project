@@ -246,18 +246,13 @@
                                                     @{
                                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                                         {
-                                                            using (Html.BeginForm("UploadGenderEqualityDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                            using (Html.BeginForm("UploadGenderEqualityDocument", "PublicInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                             {
                                                                 <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                                 <div class="col-md-10" style="margin-bottom: 20px;">
                                                                     <input type="file" name="file" />
                                                                     <input type="submit" value="上傳檔案" class="btn btn-outline-success" />
                                                                 </div>
-                                                                @*<label for="url" class="control-label col-md-2" title="網站 URL">網站 URL</label>
-                                                                    <div class="col-md-10" style="margin-bottom: 20px;">
-                                                                        <input type="url" name="url" required />
-                                                                        <input type="submit" value="上傳 URL" class="btn btn-outline-success" />
-                                                                    </div>*@
                                                             }
                                                         }
                                                     }
@@ -333,7 +328,7 @@
                     if (result.isConfirmed) {
                         var form = document.createElement("form");
                         form.method = "POST";
-                        form.action = "/Tiss/RevokeDocument";
+                        form.action = "/PublicInfo/RevokeDocument";
 
                         var input = document.createElement("input");
                         input.type = "hidden";

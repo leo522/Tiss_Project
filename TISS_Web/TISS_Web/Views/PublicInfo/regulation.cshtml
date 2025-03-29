@@ -154,7 +154,7 @@
                                     </div>
                                     <div class="infoList">
                                         <div class="el-auto-resizer" style="width: 100%; height: 100%;">
-                                            <div class="el-table-v2 el-table-v2__root" style="height: 550px; width: 870px;">
+                                            <div class="el-table-v2 el-table-v2__root" style="height: 850px; width: 870px;">
                                                 <div class="el-table-v2__table el-table-v2__main">
                                                     <table>
                                                         <thead>
@@ -199,6 +199,14 @@
                                                                                 </a>
                                                                             </div>
                                                                         </td>
+                                                                        <td>
+                                                                            @if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
+                                                                            {
+                                                                                <button type="button" class="btn btn-danger btn-sm revoke-btn" data-id="@file.DocumentID">
+                                                                                    撤銷下架
+                                                                                </button>
+                                                                            }
+                                                                        </td>
                                                                     </tr>
                                                                 }
                                                             }
@@ -238,9 +246,10 @@
                                         @{
                                             if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                using (Html.BeginForm("UploadDocument", "PublicInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                 {
-                                                    <input type="hidden" name="category" value="Regulation" /> <!-- 類別標識 -->
+                                                    <input type="hidden" name="category" value="Regulation" />
+                                                    <input type="hidden" name="redirectAction" value="regulation" />
                                                     <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                     <div class="col-md-10" style="margin-bottom: 20px;">
                                                         <input type="file" name="file" />
@@ -295,6 +304,44 @@ if (isLoggedIn) {
             behavior: 'smooth' // 平滑滾動效果
         });
     });
+        // 文件 "撤銷下架" 按鈕
+    document.addEventListener("DOMContentLoaded", function () {
+    let isLoggedIn = "@Session["LoggedIn"]" === "True";
+
+    if (isLoggedIn) {
+        document.querySelectorAll(".revoke-btn").forEach(function (button) {
+            button.addEventListener("click", function () {
+                var documentId = this.getAttribute("data-id");
+
+                Swal.fire({
+                    title: "確定要撤銷下架這份文件嗎？",
+                    text: "撤銷後，該文件將無法再顯示！",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "確定",
+                    cancelButtonText: "取消"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = document.createElement("form");
+                        form.method = "POST";
+                        form.action = "/PublicInfo/RevokeDocument";
+
+                        var input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "documentId";
+                        input.value = documentId;
+
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
+            });
+        });
+    }
+});
     </script>
 </body>
 </html>

@@ -236,9 +236,10 @@
                                         @{
                                             if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                using (Html.BeginForm("UploadDocument", "PublicInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                 {
-                                                    <input type="hidden" name="category" value="Other" /> <!-- 類別標識 -->
+                                                    <input type="hidden" name="category" value="Other" />
+                                                    <input type="hidden" name="redirectAction" value="other" />
                                                     <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                     <div class="col-md-10" style="margin-bottom: 20px;">
                                                         <input type="file" name="file" />

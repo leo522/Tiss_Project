@@ -79,6 +79,7 @@
         <AssociationConnector Association="TISS_WebModel.FK__RolePermi__RoleI__4222D4EF" />
         <AssociationConnector Association="TISS_WebModel.FK__UserRoles__RoleI__3F466844" />
         <AssociationConnector Association="TISS_WebModel.FK__UserRoles__UserI__3E52440B" />
+        <EntityTypeShape EntityType="TISS_WebModel.InternalPolicyLog" Width="1.5" PointX="9.375" PointY="24.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

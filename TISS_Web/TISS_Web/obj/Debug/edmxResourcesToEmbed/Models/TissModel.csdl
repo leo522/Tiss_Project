@@ -102,6 +102,7 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
+    <EntitySet Name="InternalPolicyLog" EntityType="TISS_WebModel.InternalPolicyLog" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -1205,4 +1206,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="InternalPolicyLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LogTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogTime" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

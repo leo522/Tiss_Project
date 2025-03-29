@@ -250,9 +250,10 @@
                                         @{
                                             if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                             {
-                                                using (Html.BeginForm("UploadDocument", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                using (Html.BeginForm("UploadDocument", "PublicInfo", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                                 {
-                                                    <input type="hidden" name="category" value="OverseaWork" /> <!-- 類別標識 -->
+                                                    <input type="hidden" name="category" value="OverseaWork" />
+                                                    <input type="hidden" name="redirectAction" value="overseawork" />
                                                     <label for="file" class="control-label col-md-2" title="選擇檔案">選擇檔案</label>
                                                     <div class="col-md-10" style="margin-bottom: 20px;">
                                                         <input type="file" name="file" />
@@ -329,7 +330,7 @@ if (isLoggedIn) {
                     if (result.isConfirmed) {
                         var form = document.createElement("form");
                         form.method = "POST";
-                        form.action = "/Tiss/RevokeDocument";
+                        form.action = "/PublicInfo/RevokeDocument";
 
                         var input = document.createElement("input");
                         input.type = "hidden";

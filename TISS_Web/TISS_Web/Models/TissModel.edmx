@@ -391,6 +391,17 @@
           <Property Name="IsRegistered" Type="bit" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="InternalPolicyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LogTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="LogMessage" Type="nvarchar(max)" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+          <Property Name="LogTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="MenuItems">
           <Key>
             <PropertyRef Name="Id" />
@@ -1116,6 +1127,7 @@
           <EntitySet Name="HomePageContent" EntityType="Self.HomePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InstitutePageContent" EntityType="Self.InstitutePageContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InternalEmployees" EntityType="Self.InternalEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InternalPolicyLog" EntityType="Self.InternalPolicyLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MessageBoard" EntityType="Self.MessageBoard" Schema="dbo" store:Type="Tables" />
@@ -1298,6 +1310,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserRoles" EntitySet="UserRoles" />
           </AssociationSet>
+          <EntitySet Name="InternalPolicyLog" EntityType="TISS_WebModel.InternalPolicyLog" />
         </EntityContainer>
         <EntityType Name="AboutPageContent">
           <Key>
@@ -2401,6 +2414,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="InternalPolicyLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LogTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3443,6 +3467,18 @@
                 <ScalarProperty Name="ImageContent" ColumnName="ImageContent" />
                 <ScalarProperty Name="TextContent" ColumnName="TextContent" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InternalPolicyLog">
+            <EntityTypeMapping TypeName="TISS_WebModel.InternalPolicyLog">
+              <MappingFragment StoreEntitySet="InternalPolicyLog">
+                <ScalarProperty Name="LogTime" ColumnName="LogTime" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="LogMessage" ColumnName="LogMessage" />
+                <ScalarProperty Name="LogTitle" ColumnName="LogTitle" />
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

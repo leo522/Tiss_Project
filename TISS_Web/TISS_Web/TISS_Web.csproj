@@ -292,6 +292,9 @@
     <Compile Include="Models\AduioVideoAreaLog.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InternalPolicyLog.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\EmailService.cs" />
     <Compile Include="Utility\FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
