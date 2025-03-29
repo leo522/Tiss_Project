@@ -22,13 +22,12 @@ namespace TISS_Web.Controllers
             if (!string.IsNullOrEmpty(reportPath))
             {
                 // 使用 Split 將收件人字串分割成單個地址的陣列
-                //string[] toEmail = "edithsu@tiss.org.tw,chiachi.pan@tiss.org.tw".Split(',');
-                string[] toEmail = "chiachi.pan@tiss.org.tw".Split(',');
-                //string[] toEmail = "chiachi.pan522@gmail.com,00048@tiss.org.tw".Split(',');
+                string[] toEmail = "edithsu@tiss.org.tw,chiachi.pan@tiss.org.tw".Split(',');
+                //string[] toEmail = "chiachi.pan@tiss.org.tw".Split(',');
 
                 string subject = "運科中心專欄文章點閱量報表";
                 string body = "您好，請參閱附件中的運科中心專欄文章點閱量報表。";
-                // 迴圈發送郵件給每個收件人
+                
                 foreach (string email in toEmail)
                 {
                     emailService.SendEmail(email.Trim(), subject, body, reportPath); //Trim() 確保去除多餘的空格

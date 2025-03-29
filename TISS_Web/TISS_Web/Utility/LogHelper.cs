@@ -60,5 +60,31 @@ namespace TISS_Web.Utility
             }
         }
         #endregion
+
+        #region 專欄文章Log檔
+        public static void WritePopularScienceLog(string action, string title, Exception ex)
+        {
+            try
+            {
+                using (var db = new TISS_WebEntities())
+                {
+                    var log = new PopularScienceLog
+                    {
+                        ActionName = action,
+                        LogTitle = title,
+                        LogMessage = ex.Message,
+                        StackTrace = ex.StackTrace,
+                        LogTime = DateTime.Now
+                    };
+
+                    db.PopularScienceLog.Add(log);
+                    db.SaveChanges();
+                }
+            }
+            catch
+            {
+            }
+        }
+        #endregion
     }
 }

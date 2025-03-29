@@ -295,6 +295,9 @@
     <Compile Include="Models\InternalPolicyLog.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PopularScienceLog.cs">
+      <DependentUpon>TissModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utility\EmailService.cs" />
     <Compile Include="Utility\FileUploadService.cs" />
     <Compile Include="Global.asax.cs">
@@ -314,13 +317,7 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ArticleModel.cs" />
-    <Compile Include="Models\BODPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\BudgetDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BudgetPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CEOPageContent.cs">
@@ -338,9 +335,6 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DownloadDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DownloadPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmailLogs.cs">
@@ -364,16 +358,7 @@
     <Compile Include="Models\GenderEqualityPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GovernmentWebsitePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Hashtag.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\HomePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\InstitutePageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InternalEmployees.cs">
@@ -398,28 +383,13 @@
     <Compile Include="Models\OrganizationPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OtherDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OtherPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OverseaWorkDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PasswordResetRequests.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Permissions.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhysicalTrainingPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PlanDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PlanPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PressPageContent.cs">
@@ -428,58 +398,16 @@
     <Compile Include="Models\ProcedureDocument.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProcedurePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Public_InfoPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PurchaseDocument.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PurchasePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RecruitPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\RegulationDocument.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RegulationPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ReplyMessage.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ResearchPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ResearchProjectPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolePermissions.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportMedicinePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportSciencePageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportsNutritionPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportsPhysiologyPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportsPsychologyPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SportTechPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TissModel.Context.cs">
@@ -497,9 +425,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TissModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\UnitsPageContent.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UrlDocument.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
@@ -508,9 +433,6 @@
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Users.cs">
-      <DependentUpon>TissModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VideoPageContent.cs">
       <DependentUpon>TissModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WebContentModel.cs" />

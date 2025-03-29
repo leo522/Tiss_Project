@@ -52,32 +52,18 @@ namespace TISS_Web.Controllers
 
         #region 各區塊頁面
         public ActionResult about() => LoadView("中心介紹");
-        [HttpPost, ValidateInput(false)] public ActionResult AboutSaveContent(string textContent, string ImageSrc) => SavePageContent<AboutPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult AboutGetContent() => GetPageContent<AboutPageContent>();
 
         public ActionResult Objectives() => LoadView("使命、願景");
-        [HttpPost, ValidateInput(false)] public ActionResult ObjectivesSaveContent(string textContent, string ImageSrc) => SavePageContent<ObjectivesPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult ObjectivesGetContent() => GetPageContent<ObjectivesPageContent>();
 
         public ActionResult Mission() => LoadView("中心任務");
-        [HttpPost, ValidateInput(false)] public ActionResult MissionSaveContent(string textContent, string ImageSrc) => SavePageContent<MissionPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult MissionGetContent() => GetPageContent<MissionPageContent>();
 
         public ActionResult Organization() => LoadView("組織概況");
-        [HttpPost, ValidateInput(false)] public ActionResult OrganizationSaveContent(string textContent, string ImageSrc) => SavePageContent<OrganizationPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult OrganizationGetContent() => GetPageContent<OrganizationPageContent>();
 
         public ActionResult BOD() => LoadView("第1屆 董監事");
-        [HttpPost, ValidateInput(false)] public ActionResult BODSaveContent(string textContent, string ImageSrc) => SavePageContent<BODPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult BODGetContent() => GetPageContent<BODPageContent>();
 
         public ActionResult CEO() => LoadView("執行長");
-        [HttpPost, ValidateInput(false)] public ActionResult CEOSaveContent(string textContent, string ImageSrc) => SavePageContent<CEOPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult CEOGetContent() => GetPageContent<CEOPageContent>();
 
         public ActionResult Units() => LoadView("單位介紹");
-        [HttpPost, ValidateInput(false)] public ActionResult UnitsSaveContent(string textContent, string ImageSrc) => SavePageContent<UnitsPageContent>(textContent, ImageSrc);
-        [HttpGet] public ActionResult UnitsGetContent() => GetPageContent<UnitsPageContent>();
         #endregion
 
         #region 共用 View 載入

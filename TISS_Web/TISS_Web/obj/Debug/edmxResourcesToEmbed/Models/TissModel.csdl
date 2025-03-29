@@ -6,15 +6,12 @@
     <EntitySet Name="AnnouncementPageContent" EntityType="TISS_WebModel.AnnouncementPageContent" />
     <EntitySet Name="ArticleCategory" EntityType="TISS_WebModel.ArticleCategory" />
     <EntitySet Name="ArticleContent" EntityType="TISS_WebModel.ArticleContent" />
-    <EntitySet Name="BODPageContent" EntityType="TISS_WebModel.BODPageContent" />
     <EntitySet Name="BudgetDocument" EntityType="TISS_WebModel.BudgetDocument" />
-    <EntitySet Name="BudgetPageContent" EntityType="TISS_WebModel.BudgetPageContent" />
     <EntitySet Name="CEOPageContent" EntityType="TISS_WebModel.CEOPageContent" />
     <EntitySet Name="DocumentLog" EntityType="TISS_WebModel.DocumentLog" />
     <EntitySet Name="Documents" EntityType="TISS_WebModel.Documents" />
     <EntitySet Name="DomainsURL" EntityType="TISS_WebModel.DomainsURL" />
     <EntitySet Name="DownloadDocument" EntityType="TISS_WebModel.DownloadDocument" />
-    <EntitySet Name="DownloadPageContent" EntityType="TISS_WebModel.DownloadPageContent" />
     <EntitySet Name="EmailLogs" EntityType="TISS_WebModel.EmailLogs" />
     <EntitySet Name="Employee" EntityType="TISS_WebModel.Employee" />
     <EntitySet Name="FileDocument" EntityType="TISS_WebModel.FileDocument" />
@@ -22,50 +19,28 @@
     <EntitySet Name="GenderEqualityDetails" EntityType="TISS_WebModel.GenderEqualityDetails" />
     <EntitySet Name="GenderEqualityDocument" EntityType="TISS_WebModel.GenderEqualityDocument" />
     <EntitySet Name="GenderEqualityPageContent" EntityType="TISS_WebModel.GenderEqualityPageContent" />
-    <EntitySet Name="GovernmentWebsitePageContent" EntityType="TISS_WebModel.GovernmentWebsitePageContent" />
     <EntitySet Name="Hashtag" EntityType="TISS_WebModel.Hashtag" />
-    <EntitySet Name="HomePageContent" EntityType="TISS_WebModel.HomePageContent" />
-    <EntitySet Name="InstitutePageContent" EntityType="TISS_WebModel.InstitutePageContent" />
     <EntitySet Name="InternalEmployees" EntityType="TISS_WebModel.InternalEmployees" />
+    <EntitySet Name="InternalPolicyLog" EntityType="TISS_WebModel.InternalPolicyLog" />
     <EntitySet Name="MenuItems" EntityType="TISS_WebModel.MenuItems" />
     <EntitySet Name="Menus" EntityType="TISS_WebModel.Menus" />
     <EntitySet Name="MessageBoard" EntityType="TISS_WebModel.MessageBoard" />
     <EntitySet Name="MissionPageContent" EntityType="TISS_WebModel.MissionPageContent" />
     <EntitySet Name="ObjectivesPageContent" EntityType="TISS_WebModel.ObjectivesPageContent" />
     <EntitySet Name="OrganizationPageContent" EntityType="TISS_WebModel.OrganizationPageContent" />
-    <EntitySet Name="OtherDocument" EntityType="TISS_WebModel.OtherDocument" />
-    <EntitySet Name="OtherPageContent" EntityType="TISS_WebModel.OtherPageContent" />
-    <EntitySet Name="OverseaWorkDocument" EntityType="TISS_WebModel.OverseaWorkDocument" />
     <EntitySet Name="PasswordResetRequests" EntityType="TISS_WebModel.PasswordResetRequests" />
     <EntitySet Name="Permissions" EntityType="TISS_WebModel.Permissions" />
-    <EntitySet Name="PhysicalTrainingPageContent" EntityType="TISS_WebModel.PhysicalTrainingPageContent" />
     <EntitySet Name="PlanDocument" EntityType="TISS_WebModel.PlanDocument" />
-    <EntitySet Name="PlanPageContent" EntityType="TISS_WebModel.PlanPageContent" />
+    <EntitySet Name="PopularScienceLog" EntityType="TISS_WebModel.PopularScienceLog" />
     <EntitySet Name="PressPageContent" EntityType="TISS_WebModel.PressPageContent" />
     <EntitySet Name="ProcedureDocument" EntityType="TISS_WebModel.ProcedureDocument" />
-    <EntitySet Name="ProcedurePageContent" EntityType="TISS_WebModel.ProcedurePageContent" />
-    <EntitySet Name="Public_InfoPageContent" EntityType="TISS_WebModel.Public_InfoPageContent" />
-    <EntitySet Name="PurchaseDocument" EntityType="TISS_WebModel.PurchaseDocument" />
-    <EntitySet Name="PurchasePageContent" EntityType="TISS_WebModel.PurchasePageContent" />
-    <EntitySet Name="RecruitPageContent" EntityType="TISS_WebModel.RecruitPageContent" />
     <EntitySet Name="RegulationDocument" EntityType="TISS_WebModel.RegulationDocument" />
-    <EntitySet Name="RegulationPageContent" EntityType="TISS_WebModel.RegulationPageContent" />
     <EntitySet Name="ReplyMessage" EntityType="TISS_WebModel.ReplyMessage" />
-    <EntitySet Name="ResearchPageContent" EntityType="TISS_WebModel.ResearchPageContent" />
-    <EntitySet Name="ResearchProjectPageContent" EntityType="TISS_WebModel.ResearchProjectPageContent" />
     <EntitySet Name="RolePermissions" EntityType="TISS_WebModel.RolePermissions" />
     <EntitySet Name="Roles" EntityType="TISS_WebModel.Roles" />
-    <EntitySet Name="SportMedicinePageContent" EntityType="TISS_WebModel.SportMedicinePageContent" />
-    <EntitySet Name="SportSciencePageContent" EntityType="TISS_WebModel.SportSciencePageContent" />
-    <EntitySet Name="SportsNutritionPageContent" EntityType="TISS_WebModel.SportsNutritionPageContent" />
-    <EntitySet Name="SportsPhysiologyPageContent" EntityType="TISS_WebModel.SportsPhysiologyPageContent" />
-    <EntitySet Name="SportsPsychologyPageContent" EntityType="TISS_WebModel.SportsPsychologyPageContent" />
-    <EntitySet Name="SportTechPageContent" EntityType="TISS_WebModel.SportTechPageContent" />
-    <EntitySet Name="UnitsPageContent" EntityType="TISS_WebModel.UnitsPageContent" />
     <EntitySet Name="UrlDocument" EntityType="TISS_WebModel.UrlDocument" />
     <EntitySet Name="UserRoles" EntityType="TISS_WebModel.UserRoles" />
     <EntitySet Name="Users" EntityType="TISS_WebModel.Users" />
-    <EntitySet Name="VideoPageContent" EntityType="TISS_WebModel.VideoPageContent" />
     <AssociationSet Name="FK__MessageBo__Artic__51EF2864" Association="TISS_WebModel.FK__MessageBo__Artic__51EF2864">
       <End Role="ArticleContent" EntitySet="ArticleContent" />
       <End Role="MessageBoard" EntitySet="MessageBoard" />
@@ -102,7 +77,6 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="UserRoles" EntitySet="UserRoles" />
     </AssociationSet>
-    <EntitySet Name="InternalPolicyLog" EntityType="TISS_WebModel.InternalPolicyLog" />
   </EntityContainer>
   <EntityType Name="AboutPageContent">
     <Key>
@@ -184,23 +158,6 @@
     <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__MessageBo__Artic__51EF2864" FromRole="ArticleContent" ToRole="MessageBoard" />
     <NavigationProperty Name="Documents" Relationship="TISS_WebModel.FK_Documents_ArticleContent" FromRole="ArticleContent" ToRole="Documents" />
   </EntityType>
-  <EntityType Name="BODPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="BudgetDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -215,23 +172,6 @@
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="BudgetPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="CEOPageContent">
     <Key>
@@ -302,23 +242,6 @@
     <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="DownloadPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="EmailLogs">
     <Key>
@@ -427,63 +350,12 @@
     <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
-  <EntityType Name="GovernmentWebsitePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="Hashtag">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="HomePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="InstitutePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="InternalEmployees">
     <Key>
@@ -494,6 +366,17 @@
     <Property Name="Department" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="IsRegistered" Type="Boolean" />
     <Property Name="EmailAddress" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="InternalPolicyLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LogTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="MenuItems">
     <Key>
@@ -581,55 +464,6 @@
     <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
     <Property Name="FileNo" Type="Int32" />
   </EntityType>
-  <EntityType Name="OtherDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" Nullable="false" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="OtherPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="OverseaWorkDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-    <Property Name="URL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="UploadTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="Creator" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" Nullable="false" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <EntityType Name="PasswordResetRequests">
     <Key>
       <PropertyRef Name="Id" />
@@ -650,24 +484,6 @@
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="RolePermissions" Relationship="TISS_WebModel.FK__RolePermi__Permi__4316F928" FromRole="Permissions" ToRole="RolePermissions" />
   </EntityType>
-  <EntityType Name="PhysicalTrainingPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FileNo" Type="Int32" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="PlanDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -683,22 +499,16 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="PlanPageContent">
+  <EntityType Name="PopularScienceLog">
     <Key>
-      <PropertyRef Name="ID" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LogTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LogTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="PressPageContent">
     <Key>
@@ -733,89 +543,6 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="ProcedurePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="Public_InfoPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="PurchaseDocument">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PId" Type="Int32" Nullable="false" />
-    <Property Name="DocumentName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UploadTime" Type="DateTime" Precision="3" />
-    <Property Name="Creator" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="DocumentType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="FileSize" Type="Int32" />
-    <Property Name="ModifiedTime" Type="DateTime" Precision="3" />
-    <Property Name="IsActive" Type="Boolean" Nullable="false" />
-    <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="PurchasePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="RecruitPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="RegulationDocument">
     <Key>
       <PropertyRef Name="ID" />
@@ -831,23 +558,6 @@
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
     <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
-  <EntityType Name="RegulationPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
   <EntityType Name="ReplyMessage">
     <Key>
       <PropertyRef Name="Id" />
@@ -860,42 +570,6 @@
     <Property Name="IsApproved" Type="Boolean" Nullable="false" />
     <Property Name="IsFromEditor" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="MessageBoard" Relationship="TISS_WebModel.FK__ReplyMess__Messa__0EF836A4" FromRole="ReplyMessage" ToRole="MessageBoard" />
-  </EntityType>
-  <EntityType Name="ResearchPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="ResearchProjectPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FileNo" Type="Int32" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-    <Property Name="ClickCount" Type="Int32" />
   </EntityType>
   <EntityType Name="RolePermissions">
     <Key>
@@ -916,128 +590,6 @@
     <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="RolePermissions" Relationship="TISS_WebModel.FK__RolePermi__RoleI__4222D4EF" FromRole="Roles" ToRole="RolePermissions" />
     <NavigationProperty Name="UserRoles" Relationship="TISS_WebModel.FK__UserRoles__RoleI__3F466844" FromRole="Roles" ToRole="UserRoles" />
-  </EntityType>
-  <EntityType Name="SportMedicinePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="SportSciencePageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="SportsNutritionPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FileNo" Type="Int32" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="SportsPhysiologyPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FileNo" Type="Int32" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="SportsPsychologyPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="FileNo" Type="Int32" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="SportTechPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="UnitsPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="UrlDocument">
     <Key>
@@ -1078,23 +630,6 @@
     <Property Name="LockoutEndTime" Type="DateTime" Precision="3" />
     <Property Name="IsEditor" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="UserRoles" Relationship="TISS_WebModel.FK__UserRoles__UserI__3E52440B" FromRole="Users" ToRole="UserRoles" />
-  </EntityType>
-  <EntityType Name="VideoPageContent">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TextContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ImageContent" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="FileUploadTime" Type="DateTime" Precision="3" />
-    <Property Name="TextUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="VideoURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="VideoUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="WebsiteURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="WebsiteURLUpdateTime" Type="DateTime" Precision="3" />
-    <Property Name="UserAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="UserLoginTime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK__MessageBo__Artic__51EF2864">
     <End Type="TISS_WebModel.ArticleContent" Role="ArticleContent" Multiplicity="1" />
@@ -1206,15 +741,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="InternalPolicyLog">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ActionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="LogTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="LogMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LogTime" Type="DateTime" Precision="3" />
-  </EntityType>
 </Schema>

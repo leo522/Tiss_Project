@@ -128,14 +128,12 @@ namespace TISS_Web
                         return (_context.BudgetDocument.Max(d => (int?)d.PId) ?? 0) + 1;
                     case "DownloadDocument":
                         return (_context.DownloadDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                    case "PurchaseDocument":
-                        return (_context.PurchaseDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                    case "OtherDocument":
-                        return (_context.OtherDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                    case "GenderEqualityDocument":
-                        return (_context.GenderEqualityDocument.Max(d => (int?)d.PId) ?? 0) + 1;
-                    case "OverseaWorkDocument":
-                        return (_context.OverseaWorkDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    //case "OtherDocument":
+                    //    return (_context.OtherDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    //case "GenderEqualityDocument":
+                    //    return (_context.GenderEqualityDocument.Max(d => (int?)d.PId) ?? 0) + 1;
+                    //case "OverseaWorkDocument":
+                    //    return (_context.OverseaWorkDocument.Max(d => (int?)d.PId) ?? 0) + 1;
                     default:
                         throw new ArgumentException("Invalid table name.");
                 }

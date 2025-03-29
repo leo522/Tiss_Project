@@ -406,7 +406,9 @@ namespace TISS_Web.Controllers
 
             return View(dto);
         }
+        #endregion
 
+        #region URL加密
         private string EncryptUrl(string title)
         {
             try
@@ -422,7 +424,7 @@ namespace TISS_Web.Controllers
         }
         #endregion
 
-        #region 文章內容顯示
+        #region 文章內容正則表達式處理
         public string EnsureImageAltAttribute(string content)
         {
             try
@@ -445,23 +447,22 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+        #endregion
 
-        /// 文章內容URL解密
+        #region 文章內容URL解密
         private string DecryptUrl(string encryptedUrl)
         {
             try
             {
                 encryptedUrl = encryptedUrl.Replace("-", "+").Replace("_", "/");
 
-                // Base64 字串長度補齊
-                int mod4 = encryptedUrl.Length % 4;
+                int mod4 = encryptedUrl.Length % 4; // Base64 字串長度補齊
                 if (mod4 > 0)
                 {
                     encryptedUrl += new string('=', 4 - mod4);
                 }
 
-                // Base64 解碼
-                var bytes = Convert.FromBase64String(encryptedUrl);
+                var bytes = Convert.FromBase64String(encryptedUrl); // Base64 解碼
                 return System.Text.Encoding.UTF8.GetString(bytes);
             }
             catch (FormatException ex)
@@ -469,34 +470,10 @@ namespace TISS_Web.Controllers
                 Console.WriteLine($"[ERROR] Base64 解碼失敗: {ex.Message}");
                 return string.Empty;
             }
-            //try
-            //{
-            //    //替換Base64 URL 安全字符如果已被替換）
-            //    encryptedUrl = encryptedUrl.Replace("-", "/").Replace("_", "+");
-
-            //    int mod4 = encryptedUrl.Length % 4; //補齊Base64 字符串的填充
-            //    if (mod4 > 0)
-            //    {
-            //        encryptedUrl += new string('=', 4 - mod4);
-            //    }
-            //    // 使用正則表達式檢查是否為合法 Base64
-            //    if (!Regex.IsMatch(encryptedUrl, @"^[A-Za-z0-9+/]*={0,2}$"))
-            //    {
-            //        throw new FormatException("輸入字串不是有效的 Base64 格式");
-            //    }
-
-            //    var bytes = Convert.FromBase64String(encryptedUrl); //將Base64字串解碼為字節數組
-            //    //var decodedString = System.Text.Encoding.UTF8.GetString(bytes);
-            //    return System.Text.Encoding.UTF8.GetString(bytes);
-            //    //return decodedString;
-            //}
-            //catch (FormatException)
-            //{
-            //    return string.Empty; //或者根據需求返回 null 或拋出異常
-            //}
         }
+        #endregion
 
-        /// 文章內容附件檔案名稱顯示
+        #region 文章內容附件檔案名稱顯示
         public string AddAccessibilityAttributes(string content)
         {
             try
@@ -529,8 +506,9 @@ namespace TISS_Web.Controllers
                 throw ex;
             }
         }
+        #endregion
 
-        /// 文章內容顯示
+        #region 文章內容顯示
         public ActionResult ViewArticle(string encryptedUrl)
         {
             try
@@ -636,21 +614,21 @@ namespace TISS_Web.Controllers
 
                 var menuList = new Dictionary<string, string> //子主題連結
                 {
-                    { "運動醫學", "/Tiss/sportMedicine" },
-                    { "運動科技", "/Tiss/sportTech" },
-                    { "運動科學", "/Tiss/sportScience" },
-                    { "運動生理", "/Tiss/sportsPhysiology" },
-                    { "運動心理", "/Tiss/sportsPsychology" },
-                    { "體能訓練", "/Tiss/physicalTraining" },
-                    { "運動營養", "/Tiss/sportsNutrition" },
-                    { "新聞發佈", "/Tiss/press" },
-                    { "中心訊息", "/Tiss/institute" },
-                    { "徵才招募", "/Tiss/recruit" },
-                    { "中心成果", "/Tiss/achievement" },
-                    { "新聞影音", "/Tiss/news" },
-                    { "活動紀錄", "/Tiss/activityRecord" },
-                    { "兒少科普", "/Tiss/childrenScience" },
-                    { "科普海報下載專區", "/Tiss/SciencePosterDownLoad" },
+                    { "運動醫學", "/PopularScience/sportMedicine" },
+                    { "運動科技", "/PopularScience/sportTech" },
+                    { "運動科學", "/PopularScience/sportScience" },
+                    { "運動生理", "/PopularScience/sportsPhysiology" },
+                    { "運動心理", "/PopularScience/sportsPsychology" },
+                    { "體能訓練", "/PopularScience/physicalTraining" },
+                    { "運動營養", "/PopularScience/sportsNutrition" },
+                    { "新聞發佈", "/CenterIntroduction/press" },
+                    { "中心訊息", "/CenterIntroduction/institute" },
+                    { "徵才招募", "/CenterIntroduction/recruit" },
+                    { "中心成果", "/AduioVideoArea/achievement" },
+                    { "新聞影音", "/AduioVideoArea/news" },
+                    { "活動紀錄", "/AduioVideoArea/activityRecord" },
+                    { "兒少科普", "/PopularScience/childrenScience" },
+                    { "科普海報下載專區", "/PopularScience/SciencePosterDownLoad" },
                 };
 
                 ViewBag.MenuUrls = menuList;
@@ -695,15 +673,16 @@ namespace TISS_Web.Controllers
                 _db.SaveChanges();
 
                 return View(model);
-                //return View(article);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+        #endregion
 
-        /// 處理修改編輯文章
+        #region 處理修改編輯文章
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -851,7 +830,6 @@ namespace TISS_Web.Controllers
                 { "科普海報下載專區", "SciencePosterDownLoad" }
             };
 
-                // 根據 contentType 獲取對應的 action 名稱，找不到則回傳首頁，這行有問題要修正
                 return contentTypeRoutes.TryGetValue(contentType, out var actionName) ? actionName : "Home";
             }
             catch (Exception ex)
