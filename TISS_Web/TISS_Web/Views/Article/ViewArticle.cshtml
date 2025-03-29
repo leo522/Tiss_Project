@@ -5,7 +5,6 @@
     var parentDirectory = ViewBag.ParentDirectory as string;
     var menuItems = ViewBag.ParentMenu as Dictionary<string, List<string>>;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,7 +105,7 @@
                                 @if (isLoggedIn)
                                 {
                                     <li span="3">
-                                        <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange">新增文章</a>
+                                        <a class="MenuLink" href="/Article/ArticleCreate" style="color:orange">新增文章</a>
                                     </li>
                                 }
                             </ul>
@@ -172,102 +171,102 @@
                                             @if (isLoggedIn)
                                             {
                                                 <!-- 標題 -->
-                                            <form method="post" action="@Url.Action("EditArticle", "Tiss")" enctype="multipart/form-data">
-                                                @Html.AntiForgeryToken()
-                                                @Html.HiddenFor(model => model.Article.Id)
-                                                @Html.HiddenFor(model => model.Article.ContentType)
-                                                <div class="form-group mb-4">
-                                                    <label for="ArticleTitle" style="font-size:25px">文章標題</label>
-                                                    @Html.TextBoxFor(model => model.Article.Title, new { @id = "ArticleTitle", @class = "form-control", placeholder = "輸入文章標題" })
-                                                </div>
-                                                <!-- 內容 -->
-                                                <div class="form-group">
-                                                    <label for="ContentBody">內容:</label>
-                                                    @Html.TextAreaFor(model => model.Article.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
-                                                </div>
+                                                <form method="post" action="@Url.Action("EditArticle", "Article")" enctype="multipart/form-data">
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.HiddenFor(model => model.Article.Id)
+                                                    @Html.HiddenFor(model => model.Article.ContentType)
+                                                    <div class="form-group mb-4">
+                                                        <label for="ArticleTitle" style="font-size:25px">文章標題</label>
+                                                        @Html.TextBoxFor(model => model.Article.Title, new { @id = "ArticleTitle", @class = "form-control", placeholder = "輸入文章標題" })
+                                                    </div>
+                                                    <!-- 內容 -->
+                                                    <div class="form-group">
+                                                        <label for="ContentBody">內容:</label>
+                                                        @Html.TextAreaFor(model => model.Article.ContentBody, new { @id = "ContentBody", @class = "form-control", rows = 5, placeholder = "輸入文章內容" })
+                                                    </div>
 
-                                                <div class="form-group mb-4">
-                                                    <label for="ContentType" style="font-size:25px">文章發佈類別</label>
-                                                    @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
-                                                </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="ContentType" style="font-size:25px">文章發佈類別</label>
+                                                        @Html.DropDownList("ContentTypeId", (SelectList)ViewBag.Categories, "請選擇文章發佈類別", new { @class = "form-control" })
+                                                    </div>
 
-                                                <div class="form-group mb-4">
-                                                    <label for="Tag" style="font-size:25px">文章標籤</label>
-                                                    @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
-                                                </div>
-                                                <!-- 類別下拉選單 -->
-                                                <div class="form-group mb-4">
-                                                    <label for="categorySelector" style="font-size: 25px">文件檔案分類(檔案歸檔分類)</label>
-                                                    <select id="categorySelector" name="documentCategory" class="form-control">
-                                                        <option value="">請選擇文件檔案上傳分類</option>
-                                                        <option value="Press">新聞發佈</option>
-                                                        <option value="Institute">中心訊息</option>
-                                                        <option value="Recruitment">徵才招募</option>
-                                                        <option value="Achievement">中心成果</option>
-                                                        <option value="News">新聞影音</option>
-                                                        <option value="Video">活動紀錄</option>
-                                                        <option value="CommissionedResearchProject">委託研究計畫</option>
-                                                        <option value="SportScience">運動科學</option>
-                                                        <option value="SportTech">運動科技</option>
-                                                        <option value="SportMedicine">運動醫學</option>
-                                                        <option value="SportsPhysiology">運動生理</option>
-                                                        <option value="SportsPsychology">運動心理</option>
-                                                        <option value="PhysicalTraining">體能訓練</option>
-                                                        <option value="SportsNutrition">運動營養</option>
-                                                        <option value="ChildrenScience">兒少科普</option>
-                                                        <option value="SciencePosterDownLoad">科普海報下載專區</option>
-                                                    </select>
-                                                </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="Tag" style="font-size:25px">文章標籤</label>
+                                                        @Html.ListBox("tags", (MultiSelectList)ViewBag.Hashtags, new { @class = "form-control", multiple = "multiple" })
+                                                    </div>
+                                                    <!-- 類別下拉選單 -->
+                                                    <div class="form-group mb-4">
+                                                        <label for="categorySelector" style="font-size: 25px">文件檔案分類(檔案歸檔分類)</label>
+                                                        <select id="categorySelector" name="documentCategory" class="form-control">
+                                                            <option value="">請選擇文件檔案上傳分類</option>
+                                                            <option value="Press">新聞發佈</option>
+                                                            <option value="Institute">中心訊息</option>
+                                                            <option value="Recruitment">徵才招募</option>
+                                                            <option value="Achievement">中心成果</option>
+                                                            <option value="News">新聞影音</option>
+                                                            <option value="Video">活動紀錄</option>
+                                                            <option value="CommissionedResearchProject">委託研究計畫</option>
+                                                            <option value="SportScience">運動科學</option>
+                                                            <option value="SportTech">運動科技</option>
+                                                            <option value="SportMedicine">運動醫學</option>
+                                                            <option value="SportsPhysiology">運動生理</option>
+                                                            <option value="SportsPsychology">運動心理</option>
+                                                            <option value="PhysicalTraining">體能訓練</option>
+                                                            <option value="SportsNutrition">運動營養</option>
+                                                            <option value="ChildrenScience">兒少科普</option>
+                                                            <option value="SciencePosterDownLoad">科普海報下載專區</option>
+                                                        </select>
+                                                    </div>
 
-                                                <div class="form-group mb-4">
-                                                    <label for="ExpireDate" style="font-size:25px">下架日期 (選填)</label>
-                                                    @Html.TextBoxFor(model => model.Article.ExpireDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-                                                </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="ExpireDate" style="font-size:25px">下架日期 (選填)</label>
+                                                        @Html.TextBoxFor(model => model.Article.ExpireDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                                    </div>
 
-                                                <div class="form-group mb-4">
-                                                    <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
-                                                    <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
-                                                </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="ImageFile" style="font-size:25px">預覽用圖片</label>
+                                                        <input type="file" name="imageFile" id="imageFile" class="form-control-file" />
+                                                    </div>
 
-                                                @if (Model.Article.ImageContent != null)
-                                                {
-                                                    string base64Image = Convert.ToBase64String(Model.Article.ImageContent);
-                                                    string imageSrc = $"data:image/jpeg;base64,{base64Image}";
+                                                    @if (Model.Article.ImageContent != null)
+                                                    {
+                                                        string base64Image = Convert.ToBase64String(Model.Article.ImageContent);
+                                                        string imageSrc = $"data:image/jpeg;base64,{base64Image}";
 
-                                                    <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
-                                                }
-                                                else
-                                                {
-                                                    <p>目前無圖片</p>
-                                                }
-                                                <div class="form-group mb-4">
-                                                    <label for="documentFiles" style="font-size:25px" title="附加文件">附加文件：</label>
-                                                    <input type="file" name="documentFiles" id="documentFiles" class="form-control-file" multiple />
-                                                </div>
-                                                <!-- 顯示使用者選擇的檔案 -->
-                                                <div class="form-group mb-4">
-                                                    <label style="font-size:25px">已選擇的附加文件：</label>
-                                                    <ul id="selectedFilesList" class="list-group">
-                                                        @if (Model.AssociatedDocuments?.Any() == true)
-                                                        {
-                                                            foreach (var file in Model.AssociatedDocuments)
+                                                        <img src="@imageSrc" alt="預覽圖片" style="width:300px; height:auto;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>目前無圖片</p>
+                                                    }
+                                                    <div class="form-group mb-4">
+                                                        <label for="documentFiles" style="font-size:25px" title="附加文件">附加文件：</label>
+                                                        <input type="file" name="documentFiles" id="documentFiles" class="form-control-file" multiple />
+                                                    </div>
+                                                    <!-- 顯示使用者選擇的檔案 -->
+                                                    <div class="form-group mb-4">
+                                                        <label style="font-size:25px">已選擇的附加文件：</label>
+                                                        <ul id="selectedFilesList" class="list-group">
+                                                            @if (Model.AssociatedDocuments?.Any() == true)
                                                             {
-                                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                                    <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })" target="_blank">@file.DocumentName</a>
-                                                                    <button type="button" class="btn btn-danger btn-sm remove-file" data-id="@file.DocumentID">刪除</button>
-                                                                </li>
+                                                                foreach (var file in Model.AssociatedDocuments)
+                                                                {
+                                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                                        <a href="@Url.Action("DownloadFile", "Article", new { documentId = file.DocumentID })" target="_blank">@file.DocumentName</a>
+                                                                        <button type="button" class="btn btn-danger btn-sm remove-file" data-id="@file.DocumentID">刪除</button>
+                                                                    </li>
+                                                                }
                                                             }
-                                                        }
-                                                    </ul>
-                                                </div>
-                                                <div class="form-group mb-4">
-                                                    <label for="DocumentFilePic" style="font-size:25px" title="附加文件">附加圖片：</label>
-                                                    <input type="file" name="documentFilePic" id="documentFilePic" class="form-control-file" aria-label="附加圖片" />
-                                                </div>
-                                                <div style="clear: both; margin-top: 10px;">
-                                                    <button type="submit" class="btn btn-primary mt-3">保存修改</button>
-                                                </div>
-                                            </form>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="form-group mb-4">
+                                                        <label for="DocumentFilePic" style="font-size:25px" title="附加文件">附加圖片：</label>
+                                                        <input type="file" name="documentFilePic" id="documentFilePic" class="form-control-file" aria-label="附加圖片" />
+                                                    </div>
+                                                    <div style="clear: both; margin-top: 10px;">
+                                                        <button type="submit" class="btn btn-primary mt-3">保存修改</button>
+                                                    </div>
+                                                </form>
                                             }
                                             else
                                             {
@@ -282,7 +281,7 @@
                                                             foreach (var file in Model.AssociatedDocuments)
                                                             {
                                                                 <div class="DocumentItem" style="margin-bottom: 10px;">
-                                                                    <a href="@Url.Action("DownloadFile", "Tiss", new { documentId = file.DocumentID })"
+                                                                    <a href="@Url.Action("DownloadFile", "Article", new { documentId = file.DocumentID })"
                                                                        target="_blank" title="@file.DocumentName _檔案下載 @(file.DocumentType == ".pdf" ? "(另開新視窗)" : "")">
                                                                         <strong>@file.DocumentName.Substring(0, file.DocumentName.LastIndexOf('.'))</strong>
                                                                     </a>
@@ -348,7 +347,7 @@
                                     <!-- 回覆功能 -->
                                     <button class="btn btn-link reply-btn" data-comment-id="@comment.Id">回覆</button>
                                     <div class="reply-form" id="reply-form-@comment.Id" style="display:none;">
-                                        <form action="@Url.Action("PostReply", "Tiss")" method="post">
+                                        <form action="@Url.Action("PostReply", "MessageBoard")" method="post">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="parentId" value="@comment.Id" />
                                             <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
@@ -366,7 +365,7 @@
                                 </div>
                             }
                         </div>
-                        <form action="@Url.Action("PostCommentWithCaptcha", "Tiss")" method="post" id="msg">
+                        <form action="@Url.Action("PostCommentWithCaptcha", "MessageBoard")" method="post" id="msg">
                             @Html.AntiForgeryToken()
                             <input type="hidden" name="articleId" value="@ViewBag.ArticleId" />
                             <input type="hidden" id="g-recaptcha-response" name="recaptchaResponse" />
@@ -459,7 +458,7 @@
         let lastSubmission = localStorage.getItem('lastSubmission');
         const now = new Date().getTime();
 
-        if (lastSubmission && now - lastSubmission < 60000) { // 設置為 1 分鐘
+        if (lastSubmission && now - lastSubmission < 10000) { // 設置為 10秒
             form.querySelector('button').disabled = true;
             form.querySelector('button').textContent = '請稍後再提交留言';
         } else {
@@ -507,7 +506,7 @@
         button.addEventListener("click", function () {
             const fileId = this.getAttribute("data-id");
             if (confirm("確定要刪除此文件嗎？")) {
-                fetch(`@Url.Action("DeleteFile", "Tiss")?documentId=${fileId}`, {
+                fetch(`@Url.Action("DeleteFile", "Article")?documentId=${fileId}`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" }
                 })
@@ -533,6 +532,19 @@
         if (categorySelector.value === "") {
             alert("請選擇文件/圖片檔案分類");
             event.preventDefault(); // 阻止表單提交
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var successMessage = '@TempData["SuccessMessage"]';
+
+        if (successMessage && successMessage !== '') {
+            Swal.fire({
+                icon: 'success',
+                title: '成功',
+                text: successMessage,
+                confirmButtonText: '確定'
+            });
         }
     });
 </script>

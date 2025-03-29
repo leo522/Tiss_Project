@@ -280,11 +280,13 @@
       <DependentUpon>CKEditorControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AduioVideoAreaController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ArticleReportController.cs" />
     <Compile Include="Controllers\CenterIntroductionController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LatestNewsController.cs" />
     <Compile Include="Controllers\MaintenanceController.cs" />
+    <Compile Include="Controllers\MessageBoardController.cs" />
     <Compile Include="Controllers\PopularScienceController.cs" />
     <Compile Include="Controllers\PublicInfoController.cs" />
     <Compile Include="Controllers\TissController.cs" />
@@ -3007,7 +3009,6 @@
     <Content Include="storage\media\attachments\114年國家運動科學中心委託研究計畫主題說明.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫申請書.doc" />
     <Content Include="storage\media\attachments\國家運動科學中心採購作業實施規章.pdf" />
-    <Content Include="Views\Tiss\activityRecord.cshtml" />
     <Content Include="Views\Tiss\UploadDocument.cshtml" />
     <Content Include="storage\media\attachments\行政法人國家運動科學中心發展目標及計畫%28112-116年%29.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心委託研究計畫主持人資格說明.pdf" />
@@ -3019,8 +3020,6 @@
     <Content Include="storage\media\attachments\國家運動科學中心組織章程.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心董事會議事規範.pdf" />
     <Content Include="storage\media\attachments\國家運動科學中心設置條例.pdf" />
-    <Content Include="Views\Tiss\ArticleCreate.cshtml" />
-    <Content Include="Views\Tiss\ViewArticle.cshtml" />
     <Content Include="Views\Shared\_ArticleListPartial.cshtml" />
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Tiss\_MessageBoard.cshtml" />
@@ -3076,10 +3075,13 @@
     <Content Include="Views\CenterIntroduction\about.cshtml" />
     <Content Include="Views\WebAccount\ResetPassword.cshtml" />
     <Content Include="Views\WebAccount\ForgotPassword.cshtml" />
+    <Content Include="Views\Article\ArticleCreate.cshtml" />
+    <Content Include="Views\Article\ViewArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ArticleReport\" />
+    <Folder Include="Views\MessageBoard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

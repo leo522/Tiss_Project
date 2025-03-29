@@ -64,7 +64,6 @@ namespace TISS_Web.Controllers
             };
             return HandlePage("中心公告", a => hashtags.Contains(a.Hashtags) && a.IsEnabled, page, pageSize, "Announcement");
         }
-
         #endregion
 
         #region 新聞發佈

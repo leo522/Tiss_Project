@@ -87,7 +87,7 @@
                                         if (Session["LoggedIn"] != null && (bool)Session["LoggedIn"])
                                         {
                                             <li span="3">
-                                                <a class="MenuLink" href="/Tiss/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
+                                                <a class="MenuLink" href="/Article/ArticleCreate" style="color:orange" title="新增文章">新增文章</a>
                                             </li>
                                         }
                                     }
@@ -143,7 +143,7 @@
                                                 @foreach (var article in Model)
                                                 {
                                                     <div class="col-md-4 mb-4">
-                                                        <div class="NewsItemBox" tabindex="0" onclick="window.location.href='@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })';" role="link">
+                                                        <div class="NewsItemBox" tabindex="0" onclick="window.location.href='@Url.Action("ViewArticle", "Article", new { encryptedUrl = article.EncryptedUrl })';" role="link">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)
                                                                 {

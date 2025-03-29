@@ -49,7 +49,7 @@
                                                 <img class="icon" src="/site/img/title_icon.64a1ea61.svg" alt="" />最新消息
                                             </div>
                                         </header>
-                                        <a id="latestArticleLink" href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = Model.LatestArticle.EncryptedUrl })" title="閱讀更多關於 @Model.LatestArticle.Title">
+                                        <a id="latestArticleLink" href="@Url.Action("ViewArticle", "Article", new { encryptedUrl = Model.LatestArticle.EncryptedUrl })" title="閱讀更多關於 @Model.LatestArticle.Title">
                                             <div class="NewsItemBox headline">
                                                 <div class="NewsItemImg">
                                                     @if (Model.LatestArticle.ImageContent != null && Model.LatestArticle.ImageContent.Length > 0)
@@ -73,7 +73,7 @@
                                             </div>
                                         </a>
                                         <div style="width: 225px; margin-top:30px;">
-                                            <a href="/Tiss/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="全部文章">
+                                            <a href="/LatestNews/announcement" aria-disabled="false" type="button" class="el-button BaseBtn w-100 black" aria-label="全部文章">
                                                 <span title="全部文章">
                                                     全部文章
                                                     <span class="right-icon">
@@ -128,7 +128,7 @@
                                             @foreach (var article in Model.OtherArticles)
                                             {
                                                 <div class="col-md-6 mb-4">
-                                                    <a href="@Url.Action("ViewArticle", "Tiss", new { encryptedUrl = article.EncryptedUrl })" class="">
+                                                    <a href="@Url.Action("ViewArticle", "Article", new { encryptedUrl = article.EncryptedUrl })" class="">
                                                         <div class="NewsItemBox">
                                                             <div class="NewsItemImg">
                                                                 @if (article.ImageContent != null)

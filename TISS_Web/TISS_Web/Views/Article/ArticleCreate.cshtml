@@ -17,7 +17,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4" title="發佈文章">發佈文章</h1>
-        @using (Html.BeginForm("ArticleCreate", "Tiss", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("ArticleCreate", "Article", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
